@@ -1,6 +1,6 @@
 # Liferay Faces Util
 
-This is a library that contains general purpose utilities to support several sub-projects of
+This is a library that contains general purpose JSF utilities to support many of the sub-projects that comprise
 [Liferay Faces](http://www.liferay.com/community/liferay-projects/liferay-faces/overview).
 
 ## License
