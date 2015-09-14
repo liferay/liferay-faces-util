@@ -55,6 +55,7 @@ public class RequestScope extends AbstractPropertyMap<Object> {
 		httpServletRequest.setAttribute(name, value);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected Enumeration<String> getPropertyNames() {
 		return (Enumeration<String>) httpServletRequest.getAttributeNames();

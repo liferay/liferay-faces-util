@@ -55,6 +55,7 @@ public class ApplicationScope extends AbstractPropertyMap<Object> {
 		servletContext.setAttribute(name, value);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected Enumeration<String> getPropertyNames() {
 		return (Enumeration<String>) servletContext.getAttributeNames();
