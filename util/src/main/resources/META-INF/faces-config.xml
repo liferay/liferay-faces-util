@@ -1,27 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+<faces-config version="1.2" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
 	xmlns:util="http://www.liferay.com/xml/ns/liferay-faces-util-extension">
-	<name>LiferayFacesUtil</name>
-	<ordering>
-		<before>
-			<others/>
-		</before>
-	</ordering>
+	<faces-config-extension>
+		<name>LiferayFacesUtil</name>
+		<ordering>
+			<before>
+				<others />
+			</before>
+		</ordering>
+	</faces-config-extension>
 	<application>
 		<el-resolver>com.liferay.faces.util.el.ExtELResolver</el-resolver>
-		<system-event-listener>
-			<system-event-listener-class>com.liferay.faces.util.event.internal.ApplicationStartupListener</system-event-listener-class>
-			<system-event-class>javax.faces.event.PostConstructApplicationEvent</system-event-class>
-		</system-event-listener>
 	</application>
 	<factory>
-		<faces-context-factory>com.liferay.faces.util.context.internal.FacesContextFactoryUtilImpl</faces-context-factory>
+		<application-factory>com.liferay.faces.util.application.internal.ApplicationFactoryImpl</application-factory>
 		<factory-extension>
 			<util:browser-sniffer-factory>com.liferay.faces.util.client.internal.BrowserSnifferFactoryImpl</util:browser-sniffer-factory>
-			<util:component-resource-factory>com.liferay.faces.util.application.internal.ComponentResourceFactoryImpl</util:component-resource-factory>
-			<util:faces-request-context-factory>com.liferay.faces.util.context.internal.FacesRequestContextFactoryImpl</util:faces-request-context-factory>
-			<util:faces-url-encoder-factory>com.liferay.faces.util.render.internal.FacesURLEncoderFactoryImpl</util:faces-url-encoder-factory>
 			<util:jsp-adapter-factory>com.liferay.faces.util.jsp.internal.JspAdapterFactoryImpl</util:jsp-adapter-factory>
 			<util:message-context-factory>com.liferay.faces.util.context.internal.MessageContextFactoryImpl</util:message-context-factory>
 			<util:resource-validator-factory>com.liferay.faces.util.application.internal.ResourceValidatorFactoryImpl</util:resource-validator-factory>
