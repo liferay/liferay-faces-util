@@ -15,19 +15,19 @@
  */
 package com.liferay.faces.util.text;
 
-import javax.faces.FacesWrapper;
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class RichTextWrapper implements RichText, FacesWrapper<RichText> {
+public abstract class RichTextWrapper implements RichText, Wrapper<RichText> {
 
-	@Override
+	// Java 1.6+ @Override
 	public int getPlainTextLength() {
 		return getWrapped().getPlainTextLength();
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public abstract RichText getWrapped();
 }

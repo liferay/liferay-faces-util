@@ -15,13 +15,13 @@
  */
 package com.liferay.faces.util.application;
 
-import javax.faces.FacesWrapper;
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class ResourceValidatorFactory implements FacesWrapper<ResourceValidatorFactory> {
+public abstract class ResourceValidatorFactory implements Wrapper<ResourceValidatorFactory> {
 
 	public abstract ResourceValidator getResourceValidator();
 }

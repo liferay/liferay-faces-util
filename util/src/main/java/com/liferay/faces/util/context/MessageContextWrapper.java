@@ -17,16 +17,17 @@ package com.liferay.faces.util.context;
 
 import java.util.Locale;
 
-import javax.faces.FacesWrapper;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
 import javax.faces.context.FacesContext;
+
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class MessageContextWrapper implements MessageContext, FacesWrapper<MessageContext> {
+public abstract class MessageContextWrapper implements MessageContext, Wrapper<MessageContext> {
 
 	@Override
 	public FacesMessage newFacesMessage(Locale locale, Severity severity, String messageId) {

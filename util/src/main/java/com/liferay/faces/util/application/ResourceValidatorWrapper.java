@@ -15,14 +15,15 @@
  */
 package com.liferay.faces.util.application;
 
-import javax.faces.FacesWrapper;
 import javax.faces.context.FacesContext;
+
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class ResourceValidatorWrapper implements ResourceValidator, FacesWrapper<ResourceValidator> {
+public abstract class ResourceValidatorWrapper implements ResourceValidator, Wrapper<ResourceValidator> {
 
 	@Override
 	public boolean containsBannedPath(String resourceId) {

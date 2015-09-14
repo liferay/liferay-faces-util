@@ -15,13 +15,13 @@
  */
 package com.liferay.faces.util.render;
 
-import javax.faces.FacesWrapper;
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class FacesURLEncoderWrapper implements FacesURLEncoder, FacesWrapper<FacesURLEncoder> {
+public abstract class FacesURLEncoderWrapper implements FacesURLEncoder, Wrapper<FacesURLEncoder> {
 
 	@Override
 	public String encode(String url, String encoding) {

@@ -15,13 +15,13 @@
  */
 package com.liferay.faces.util.text;
 
-import javax.faces.FacesWrapper;
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class RichTextFactory implements FacesWrapper<RichTextFactory> {
+public abstract class RichTextFactory implements Wrapper<RichTextFactory> {
 
 	public abstract RichText getRichText(RichText.Type type, String value);
 }

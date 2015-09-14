@@ -15,13 +15,13 @@
  */
 package com.liferay.faces.util.client;
 
-import javax.faces.FacesWrapper;
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
  * @author  Kyle Stiemann
  */
-public abstract class ScriptFactory implements FacesWrapper<ScriptFactory> {
+public abstract class ScriptFactory implements Wrapper<ScriptFactory> {
 
 	public abstract AlloyScript getAlloyScript(String content, String[] modules);
 
