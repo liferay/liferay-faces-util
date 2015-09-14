@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import javax.faces.application.ResourceHandler;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
@@ -50,10 +49,10 @@ public class ResourceValidatorFactoryImpl extends ResourceValidatorFactory {
 
 			ExternalContext externalContext = startupFacesContext.getExternalContext();
 
-			String resourceExcludes = externalContext.getInitParameter(ResourceHandler.RESOURCE_EXCLUDES_PARAM_NAME);
+			String resourceExcludes = externalContext.getInitParameter("javax.faces.RESOURCE_EXCLUDES");
 
 			if ((resourceExcludes == null) || (resourceExcludes.trim().length() == 0)) {
-				excludeResourceExtensions = ResourceHandler.RESOURCE_EXCLUDES_DEFAULT_VALUE;
+				excludeResourceExtensions = ".class .jsp .jspx .properties .xhtml .groovy";
 			}
 		}
 

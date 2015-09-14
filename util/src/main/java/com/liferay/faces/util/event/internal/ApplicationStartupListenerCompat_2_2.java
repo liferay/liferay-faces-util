@@ -15,9 +15,6 @@
  */
 package com.liferay.faces.util.event.internal;
 
-import javax.faces.context.ExternalContext;
-
-
 /**
  * This class provides a compatibility layer that isolates differences related to JSF 2.2.
  *
@@ -25,10 +22,4 @@ import javax.faces.context.ExternalContext;
  */
 public abstract class ApplicationStartupListenerCompat_2_2 extends ApplicationStartupListenerCompat {
 
-	@Override
-	protected String getApplicationContextPath(ExternalContext externalContext) {
-
-		// TODO return externalContext.getApplicationContextPath();
-		return super.getApplicationContextPath(externalContext);
-	}
 }

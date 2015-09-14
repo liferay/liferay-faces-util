@@ -17,6 +17,7 @@ package com.liferay.faces.util.context;
 
 import javax.faces.context.FacesContext;
 
+import com.liferay.faces.util.context.internal.ExtFacesContextImpl;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -30,7 +31,7 @@ public abstract class ExtFacesContext extends FacesContext implements FacesConte
 	private static final Logger logger = LoggerFactory.getLogger(ExtFacesContext.class);
 
 	// Singleton Instance
-	private static transient ExtFacesContext instance;
+	private static transient ExtFacesContext instance = new ExtFacesContextImpl();
 
 	/**
 	 * Returns the implementation singleton instance.

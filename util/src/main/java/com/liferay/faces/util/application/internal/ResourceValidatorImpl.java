@@ -21,12 +21,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.faces.FactoryFinder;
-import javax.faces.application.ViewHandler;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewDeclarationLanguage;
-import javax.faces.view.ViewDeclarationLanguageFactory;
 
 import com.liferay.faces.util.application.ResourceValidator;
 import com.liferay.faces.util.logging.Logger;
@@ -47,10 +43,10 @@ public class ResourceValidatorImpl implements ResourceValidator {
 	private static final String[] BANNED_SEQUENCES = new String[] {
 			"//", "\\\\", "/\\", "\\/", "..", "./", ".\\", "%"
 		};
-	protected static final String DEFAULT_FACELETS_SUFFIX = ViewHandler.DEFAULT_FACELETS_SUFFIX;
-	protected static final String FACELETS_SUFFIX_PARAM_NAME = ViewHandler.FACELETS_SUFFIX_PARAM_NAME;
+	protected static final String DEFAULT_FACELETS_SUFFIX = ".xhtml";
+	protected static final String FACELETS_SUFFIX_PARAM_NAME = "javax.faces.FACELETS_SUFFIX";
 	protected static final String[] VIEW_MAPPINGS_PARAM_NAMES = new String[] {
-			ViewHandler.FACELETS_VIEW_MAPPINGS_PARAM_NAME, "facelets.VIEW_MAPPINGS"
+			"javax.faces.FACELETS_VIEW_MAPPINGS", "facelets.VIEW_MAPPINGS"
 		};
 
 	// Private Data Members
@@ -151,24 +147,7 @@ public class ResourceValidatorImpl implements ResourceValidator {
 	}
 
 	protected boolean isFaceletsVDL(String viewId) {
-
-		boolean faceletsVDL = false;
-		ViewDeclarationLanguageFactory viewDeclarationLanguageFactory = (ViewDeclarationLanguageFactory) FactoryFinder
-			.getFactory(FactoryFinder.VIEW_DECLARATION_LANGUAGE_FACTORY);
-		ViewDeclarationLanguage viewDeclarationLanguage = viewDeclarationLanguageFactory.getViewDeclarationLanguage(
-				viewId);
-
-		if (viewDeclarationLanguage != null) {
-
-			faceletsVDL = viewDeclarationLanguage.getId().equals(
-					ViewDeclarationLanguage.FACELETS_VIEW_DECLARATION_LANGUAGE_ID);
-
-			if (faceletsVDL) {
-				logger.trace("MATCHED FACELETS VDL viewId=[{0}]", viewId);
-			}
-		}
-
-		return faceletsVDL;
+		return false;
 	}
 
 	@Override

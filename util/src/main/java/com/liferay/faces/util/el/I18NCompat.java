@@ -17,9 +17,6 @@ package com.liferay.faces.util.el;
 
 import java.util.ResourceBundle;
 
-import javax.faces.application.ProjectStage;
-import javax.faces.context.FacesContext;
-
 
 /**
  * This class provides a compatibility layer that isolates differences between JSF1 and JSF2.
@@ -32,14 +29,6 @@ public abstract class I18NCompat extends ResourceBundle {
 	protected boolean cacheEnabled;
 
 	public I18NCompat() {
-
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-
-		if (facesContext == null) {
-			this.cacheEnabled = true;
-		}
-		else {
-			this.cacheEnabled = !facesContext.isProjectStage(ProjectStage.Development);
-		}
+		this.cacheEnabled = true;
 	}
 }
