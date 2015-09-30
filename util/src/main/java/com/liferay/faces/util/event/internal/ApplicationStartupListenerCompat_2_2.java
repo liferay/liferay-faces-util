@@ -27,8 +27,6 @@ public abstract class ApplicationStartupListenerCompat_2_2 extends ApplicationSt
 
 	@Override
 	protected String getApplicationContextPath(ExternalContext externalContext) {
-
-		// TODO return externalContext.getApplicationContextPath();
-		return super.getApplicationContextPath(externalContext);
+		return externalContext.getApplicationContextPath();
 	}
 }
