@@ -28,7 +28,7 @@ public class ProductLiferayFacesAlloyImpl extends ProductBaseImpl {
 		try {
 			this.title = ProductConstants.LIFERAY_FACES_ALLOY;
 
-			Class<?> clazz = Class.forName("com.liferay.faces.alloy.component.accordion.Accordion");
+			Class<?> clazz = Class.forName("com.liferay.faces.alloy.component.column.Column");
 			init(clazz, ProductConstants.LIFERAY_FACES_ALLOY);
 		}
 		catch (Exception e) {
