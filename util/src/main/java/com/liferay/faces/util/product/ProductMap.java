@@ -22,6 +22,7 @@ import com.liferay.faces.util.product.internal.ProductICEfacesImpl;
 import com.liferay.faces.util.product.internal.ProductJSFImpl;
 import com.liferay.faces.util.product.internal.ProductLiferayFacesAlloyImpl;
 import com.liferay.faces.util.product.internal.ProductLiferayFacesBridgeImpl;
+import com.liferay.faces.util.product.internal.ProductLiferayFacesCrystalImpl;
 import com.liferay.faces.util.product.internal.ProductLiferayFacesPortalImpl;
 import com.liferay.faces.util.product.internal.ProductLiferayFacesUtilImpl;
 import com.liferay.faces.util.product.internal.ProductLiferayPortalImpl;
@@ -50,6 +51,7 @@ public class ProductMap extends HashMap<String, Product> {
 		instance.put(ProductConstants.JSF, new ProductJSFImpl());
 		instance.put(ProductConstants.LIFERAY_FACES_ALLOY, new ProductLiferayFacesAlloyImpl());
 		instance.put(ProductConstants.LIFERAY_FACES_BRIDGE, new ProductLiferayFacesBridgeImpl());
+		instance.put(ProductConstants.LIFERAY_FACES_CRYSTAL, new ProductLiferayFacesCrystalImpl());
 		instance.put(ProductConstants.LIFERAY_FACES_PORTAL, new ProductLiferayFacesPortalImpl());
 		instance.put(ProductConstants.LIFERAY_FACES_UTIL, new ProductLiferayFacesUtilImpl());
 		instance.put(ProductConstants.LIFERAY_PORTAL, new ProductLiferayPortalImpl());
