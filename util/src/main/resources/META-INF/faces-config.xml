@@ -16,6 +16,7 @@
 		</system-event-listener>
 	</application>
 	<factory>
+		<partial-view-context-factory>com.liferay.faces.util.context.internal.PartialViewContextFactoryImpl</partial-view-context-factory>
 		<faces-context-factory>com.liferay.faces.util.context.internal.FacesContextFactoryUtilImpl</faces-context-factory>
 		<factory-extension>
 			<util:browser-sniffer-factory>com.liferay.faces.util.client.internal.BrowserSnifferFactoryImpl</util:browser-sniffer-factory>
@@ -26,8 +27,13 @@
 			<util:message-context-factory>com.liferay.faces.util.context.internal.MessageContextFactoryImpl</util:message-context-factory>
 			<util:resource-validator-factory>com.liferay.faces.util.application.internal.ResourceValidatorFactoryImpl</util:resource-validator-factory>
 			<util:rich-text-factory>com.liferay.faces.util.text.internal.RichTextFactoryImpl</util:rich-text-factory>
+			<util:script-encoder-factory>com.liferay.faces.util.client.internal.ScriptEncoderFactoryImpl</util:script-encoder-factory>
 			<util:script-factory>com.liferay.faces.util.client.internal.ScriptFactoryImpl</util:script-factory>
 			<util:uploaded-file-factory>com.liferay.faces.util.model.internal.UploadedFileFactoryImpl</util:uploaded-file-factory>
 		</factory-extension>
 	</factory>
+	<render-kit>
+		<render-kit-id>HTML_BASIC</render-kit-id>
+		<render-kit-class>com.liferay.faces.util.render.internal.RenderKitImpl</render-kit-class>
+	</render-kit>
 </faces-config>
