@@ -25,7 +25,7 @@ import javax.faces.render.Renderer;
 import com.liferay.faces.util.client.ScriptEncoder;
 import com.liferay.faces.util.client.ScriptEncoderFactory;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
-import javax.faces.render.RendererWrapper;
+import com.liferay.faces.util.render.RendererWrapper;
 
 
 /**
