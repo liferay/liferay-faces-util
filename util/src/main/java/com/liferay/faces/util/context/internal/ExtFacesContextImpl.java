@@ -338,10 +338,6 @@ public class ExtFacesContextImpl extends ExtFacesContext {
 		return FacesContext.getCurrentInstance();
 	}
 
-	public Map<String, String> getJavaScriptMap() {
-		return facesContextHelper.getJavaScriptMap();
-	}
-
 	/**
 	 * @see  FacesContextHelper#getLocale()
 	 */
