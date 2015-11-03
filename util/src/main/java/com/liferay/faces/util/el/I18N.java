@@ -22,7 +22,13 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.liferay.faces.util.context.ExtFacesContext;
+import javax.faces.application.Application;
+import javax.faces.component.UIViewRoot;
+import javax.faces.context.FacesContext;
+
+import com.liferay.faces.util.context.MessageContext;
+import com.liferay.faces.util.context.MessageContextFactory;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
 
 /**
@@ -52,10 +58,21 @@ public class I18N extends I18NCompat {
 	 * @return  The internationalized message.
 	 */
 	public String replace(String messageId, String arg1) {
-		ExtFacesContext extFacesContext = ExtFacesContext.getInstance();
-		Locale locale = extFacesContext.getLocale();
 
-		return extFacesContext.getMessage(locale, messageId, arg1);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		UIViewRoot viewRoot = facesContext.getViewRoot();
+		Locale locale = viewRoot.getLocale();
+
+		if (locale == null) {
+			Application application = facesContext.getApplication();
+			locale = application.getDefaultLocale();
+		}
+
+		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
+				MessageContextFactory.class);
+		MessageContext messageContext = messageContextFactory.getMessageContext();
+
+		return messageContext.getMessage(locale, messageId, arg1);
 	}
 
 	/**
@@ -70,10 +87,21 @@ public class I18N extends I18NCompat {
 	 * @return  The internationalized message.
 	 */
 	public String replace(String messageId, String arg1, String arg2) {
-		ExtFacesContext extFacesContext = ExtFacesContext.getInstance();
-		Locale locale = extFacesContext.getLocale();
 
-		return extFacesContext.getMessage(locale, messageId, arg1, arg2);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		UIViewRoot viewRoot = facesContext.getViewRoot();
+		Locale locale = viewRoot.getLocale();
+
+		if (locale == null) {
+			Application application = facesContext.getApplication();
+			locale = application.getDefaultLocale();
+		}
+
+		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
+				MessageContextFactory.class);
+		MessageContext messageContext = messageContextFactory.getMessageContext();
+
+		return messageContext.getMessage(locale, messageId, arg1, arg2);
 	}
 
 	/**
@@ -89,10 +117,21 @@ public class I18N extends I18NCompat {
 	 * @return  The internationalized message.
 	 */
 	public String replace(String messageId, String arg1, String arg2, String arg3) {
-		ExtFacesContext extFacesContext = ExtFacesContext.getInstance();
-		Locale locale = extFacesContext.getLocale();
 
-		return extFacesContext.getMessage(locale, messageId, arg1, arg2, arg3);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		UIViewRoot viewRoot = facesContext.getViewRoot();
+		Locale locale = viewRoot.getLocale();
+
+		if (locale == null) {
+			Application application = facesContext.getApplication();
+			locale = application.getDefaultLocale();
+		}
+
+		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
+				MessageContextFactory.class);
+		MessageContext messageContext = messageContextFactory.getMessageContext();
+
+		return messageContext.getMessage(locale, messageId, arg1, arg2, arg3);
 	}
 
 	/**
@@ -109,10 +148,21 @@ public class I18N extends I18NCompat {
 	 * @return  The internationalized message.
 	 */
 	public String replace(String messageId, String arg1, String arg2, String arg3, String arg4) {
-		ExtFacesContext extFacesContext = ExtFacesContext.getInstance();
-		Locale locale = extFacesContext.getLocale();
 
-		return extFacesContext.getMessage(locale, messageId, arg1, arg2, arg3, arg4);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		UIViewRoot viewRoot = facesContext.getViewRoot();
+		Locale locale = viewRoot.getLocale();
+
+		if (locale == null) {
+			Application application = facesContext.getApplication();
+			locale = application.getDefaultLocale();
+		}
+
+		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
+				MessageContextFactory.class);
+		MessageContext messageContext = messageContextFactory.getMessageContext();
+
+		return messageContext.getMessage(locale, messageId, arg1, arg2, arg3, arg4);
 	}
 
 	@Override
@@ -122,8 +172,18 @@ public class I18N extends I18NCompat {
 
 		if (key != null) {
 
-			ExtFacesContext extFacesContext = ExtFacesContext.getInstance();
-			Locale locale = extFacesContext.getLocale();
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			UIViewRoot viewRoot = facesContext.getViewRoot();
+			Locale locale = viewRoot.getLocale();
+
+			if (locale == null) {
+				Application application = facesContext.getApplication();
+				locale = application.getDefaultLocale();
+			}
+
+			MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
+					MessageContextFactory.class);
+			MessageContext messageContext = messageContextFactory.getMessageContext();
 
 			if (cacheEnabled) {
 
@@ -136,7 +196,7 @@ public class I18N extends I18NCompat {
 				message = cache.get(messageKey);
 
 				if (message == null) {
-					message = extFacesContext.getMessage(locale, key);
+					message = messageContext.getMessage(locale, key);
 
 					if (message != null) {
 						cache.put(messageKey, message);
@@ -144,7 +204,7 @@ public class I18N extends I18NCompat {
 				}
 			}
 			else {
-				message = extFacesContext.getMessage(locale, key);
+				message = messageContext.getMessage(locale, key);
 			}
 		}
 
