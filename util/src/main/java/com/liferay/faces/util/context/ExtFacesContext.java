@@ -16,7 +16,6 @@
 package com.liferay.faces.util.context;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -30,14 +29,12 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseStream;
 import javax.faces.context.ResponseWriter;
-import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
 import javax.faces.render.RenderKit;
 
 import com.liferay.faces.util.context.internal.ExtFacesContextImpl;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.sun.corba.se.impl.presentation.rmi.ExceptionHandler;
 
 
 /**
