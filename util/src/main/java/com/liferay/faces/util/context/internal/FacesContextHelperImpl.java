@@ -15,15 +15,18 @@
  */
 package com.liferay.faces.util.context.internal;
 
-import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.el.ELContext;
+import javax.el.ELResolver;
 import javax.faces.FactoryFinder;
+import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
+import javax.faces.application.NavigationHandler;
 import javax.faces.application.ViewHandler;
 import javax.faces.component.ActionSource;
 import javax.faces.component.EditableValueHolder;
@@ -35,7 +38,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseListener;
 import javax.faces.lifecycle.LifecycleFactory;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.context.FacesContextHelper;
@@ -50,42 +52,33 @@ import com.liferay.faces.util.helper.LongHelper;
 /**
  * @author  Neil Griffin
  */
-public class FacesContextHelperImpl implements FacesContextHelper, Serializable {
-
-	// serialVersionUID
-	private static final long serialVersionUID = 1336108097295590097L;
+public class FacesContextHelperImpl implements FacesContextHelper {
 
 	// Private Constants
 	private static final String UNEXPECTED_ERROR_MSG_ID = "an-unexpected-error-occurred";
 	private static final String SUCCESS_INFO_MSG_ID = "your-request-processed-successfully";
 
 	public void addComponentErrorMessage(String clientId, String messageId) {
-
 		addMessage(clientId, FacesMessage.SEVERITY_ERROR, messageId);
 	}
 
 	public void addComponentErrorMessage(String clientId, String messageId, Object argument) {
-
 		addMessage(clientId, FacesMessage.SEVERITY_ERROR, messageId, argument);
 	}
 
 	public void addComponentErrorMessage(String clientId, String messageId, Object... arguments) {
-
 		addMessage(clientId, FacesMessage.SEVERITY_ERROR, messageId, arguments);
 	}
 
 	public void addComponentInfoMessage(String clientId, String messageId) {
-
 		addMessage(clientId, FacesMessage.SEVERITY_INFO, messageId);
 	}
 
 	public void addComponentInfoMessage(String clientId, String messageId, Object argument) {
-
 		addMessage(clientId, FacesMessage.SEVERITY_INFO, messageId, argument);
 	}
 
 	public void addComponentInfoMessage(String clientId, String messageId, Object... arguments) {
-
 		addMessage(clientId, FacesMessage.SEVERITY_INFO, messageId, arguments);
 	}
 
@@ -94,12 +87,10 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 	}
 
 	public void addGlobalErrorMessage(String messageId, Object argument) {
-
 		addComponentErrorMessage(null, messageId, argument);
 	}
 
 	public void addGlobalErrorMessage(String messageId, Object... arguments) {
-
 		addComponentErrorMessage(null, messageId, arguments);
 	}
 
@@ -108,12 +99,10 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 	}
 
 	public void addGlobalInfoMessage(String messageId, Object argument) {
-
 		addComponentInfoMessage(null, messageId, argument);
 	}
 
 	public void addGlobalInfoMessage(String messageId, Object... arguments) {
-
 		addComponentInfoMessage(null, messageId, arguments);
 	}
 
@@ -134,35 +123,50 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 	public void addMessage(String clientId, Severity severity, String messageId) {
 
 		Locale locale = getLocale();
-		FacesMessage facesMessage = getMessageContext().newFacesMessage(locale, severity, messageId);
-		FacesContext.getCurrentInstance().addMessage(clientId, facesMessage);
+		MessageContext messageContext = getMessageContext();
+		FacesMessage facesMessage = messageContext.newFacesMessage(locale, severity, messageId);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		facesContext.addMessage(clientId, facesMessage);
 	}
 
 	public void addMessage(String clientId, Severity severity, String messageId, Object argument) {
 
 		Locale locale = getLocale();
-		FacesMessage facesMessage = getMessageContext().newFacesMessage(locale, severity, messageId, argument);
-		FacesContext.getCurrentInstance().addMessage(clientId, facesMessage);
+		MessageContext messageContext = getMessageContext();
+		FacesMessage facesMessage = messageContext.newFacesMessage(locale, severity, messageId, argument);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		facesContext.addMessage(clientId, facesMessage);
 	}
 
 	public void addMessage(String clientId, Severity severity, String messageId, Object... arguments) {
 
 		Locale locale = getLocale();
-		FacesMessage facesMessage = getMessageContext().newFacesMessage(locale, severity, messageId, arguments);
+		MessageContext messageContext = getMessageContext();
+		FacesMessage facesMessage = messageContext.newFacesMessage(locale, severity, messageId, arguments);
 		FacesContext.getCurrentInstance().addMessage(clientId, facesMessage);
 	}
 
 	public UIComponent matchComponentInHierarchy(UIComponent parent, String partialClientId) {
-		return ComponentUtil.matchComponentInHierarchy(FacesContext.getCurrentInstance(), parent, partialClientId);
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+
+		return ComponentUtil.matchComponentInHierarchy(facesContext, parent, partialClientId);
 	}
 
 	public UIComponent matchComponentInViewRoot(String partialClientId) {
-		return matchComponentInHierarchy(FacesContext.getCurrentInstance().getViewRoot(), partialClientId);
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		UIViewRoot viewRoot = facesContext.getViewRoot();
+
+		return matchComponentInHierarchy(viewRoot, partialClientId);
 	}
 
 	public void navigate(String fromAction, String outcome) {
+
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		facesContext.getApplication().getNavigationHandler().handleNavigation(facesContext, fromAction, outcome);
+		Application application = facesContext.getApplication();
+		NavigationHandler navigationHandler = application.getNavigationHandler();
+		navigationHandler.handleNavigation(facesContext, fromAction, outcome);
 	}
 
 	public void navigateTo(String outcome) {
@@ -170,14 +174,18 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 	}
 
 	public void recreateComponentTree() {
+
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		ViewHandler viewHandler = facesContext.getApplication().getViewHandler();
-		UIViewRoot viewRoot = viewHandler.createView(facesContext, facesContext.getViewRoot().getViewId());
+		Application application = facesContext.getApplication();
+		ViewHandler viewHandler = application.getViewHandler();
+		UIViewRoot oldViewRoot = facesContext.getViewRoot();
+		UIViewRoot viewRoot = viewHandler.createView(facesContext, oldViewRoot.getViewId());
 		facesContext.setViewRoot(viewRoot);
 		facesContext.renderResponse();
 	}
 
 	public void registerPhaseListener(PhaseListener phaseListener) throws IllegalStateException {
+
 		LifecycleFactory lifecycleFactory = (LifecycleFactory) FactoryFinder.getFactory(
 				FactoryFinder.LIFECYCLE_FACTORY);
 
@@ -188,20 +196,22 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 	}
 
 	public void removeChildrenFromComponentTree(String clientId) {
-		UIComponent comp = FacesContext.getCurrentInstance().getViewRoot().findComponent(clientId);
 
-		if (comp != null) {
-			comp.getChildren().clear();
-			comp.getFacets().clear();
+		UIComponent uiComponent = FacesContext.getCurrentInstance().getViewRoot().findComponent(clientId);
+
+		if (uiComponent != null) {
+			uiComponent.getChildren().clear();
+			uiComponent.getFacets().clear();
 		}
 	}
 
 	public void removeMessages(String clientId) {
-		Iterator<FacesMessage> facesMessags = FacesContext.getCurrentInstance().getMessages(clientId);
 
-		while (facesMessags.hasNext()) {
-			facesMessags.next();
-			facesMessags.remove();
+		Iterator<FacesMessage> facesMessages = FacesContext.getCurrentInstance().getMessages(clientId);
+
+		while (facesMessages.hasNext()) {
+			facesMessages.next();
+			facesMessages.remove();
 		}
 	}
 
@@ -214,6 +224,7 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 
 		if (uiComponent instanceof ActionSource) {
+
 			ActionSource actionSource = (ActionSource) uiComponent;
 
 			if (actionSource.isImmediate()) {
@@ -221,6 +232,7 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 			}
 		}
 		else if (uiComponent instanceof EditableValueHolder) {
+
 			EditableValueHolder editableValueHolder = (EditableValueHolder) uiComponent;
 
 			if (editableValueHolder.isImmediate()) {
@@ -236,6 +248,7 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 	}
 
 	public void removeParentFormFromComponentTree(final UIComponent uiComponent) {
+
 		UIComponent form = getParentForm(uiComponent);
 
 		if (form != null) {
@@ -249,9 +262,12 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 	}
 
 	public void resetView(boolean renderResponse) {
+
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		ViewHandler viewHandler = facesContext.getApplication().getViewHandler();
-		UIViewRoot emptyView = viewHandler.createView(facesContext, facesContext.getViewRoot().getViewId());
+		Application application = facesContext.getApplication();
+		ViewHandler viewHandler = application.getViewHandler();
+		UIViewRoot viewRoot = facesContext.getViewRoot();
+		UIViewRoot emptyView = viewHandler.createView(facesContext, viewRoot.getViewId());
 		facesContext.setViewRoot(emptyView);
 
 		if (renderResponse) {
@@ -260,9 +276,13 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 	}
 
 	public Object resolveExpression(String elExpression) {
-		FacesContext facesContext = FacesContext.getCurrentInstance();
 
-		return facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null, elExpression);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		Application application = facesContext.getApplication();
+		ELResolver elResolver = application.getELResolver();
+		ELContext elContext = facesContext.getELContext();
+
+		return elResolver.getValue(elContext, null, elExpression);
 	}
 
 	public FacesContext getFacesContext() {
@@ -270,14 +290,23 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 	}
 
 	public Locale getLocale() {
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		Locale locale = facesContext.getViewRoot().getLocale();
 
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		UIViewRoot viewRoot = facesContext.getViewRoot();
+		Locale locale = viewRoot.getLocale();
+
+		// If the JSF ViewRoot didn't return a locale, then try and get it from the JSF Application.
 		if (locale == null) {
-			locale = facesContext.getApplication().getDefaultLocale();
+			Application application = facesContext.getApplication();
+			locale = application.getDefaultLocale();
 		}
 
-		return (locale);
+		// Otherwise, if we couldn't determine the locale, just use the server's default value.
+		if (locale == null) {
+			locale = Locale.getDefault();
+		}
+
+		return locale;
 	}
 
 	public String getMessage(String messageId) {
@@ -286,18 +315,27 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 
 	public String getMessage(String messageId, Object... arguments) {
 
-		return getMessageContext().getMessage(getLocale(), messageId, arguments);
+		MessageContext messageContext = getMessageContext();
+
+		return messageContext.getMessage(getLocale(), messageId, arguments);
 	}
 
 	public String getMessage(Locale locale, String messageId) {
-		return getMessageContext().getMessage(locale, messageId);
+
+		MessageContext messageContext = getMessageContext();
+
+		return messageContext.getMessage(locale, messageId);
 	}
 
 	public String getMessage(Locale locale, String messageId, Object... arguments) {
-		return getMessageContext().getMessage(locale, messageId, arguments);
+
+		MessageContext messageContext = getMessageContext();
+
+		return messageContext.getMessage(locale, messageId, arguments);
 	}
 
 	protected MessageContext getMessageContext() {
+
 		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
 				MessageContextFactory.class);
 
@@ -309,6 +347,7 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 	}
 
 	public UIForm getParentForm(final UIComponent uiComponent) {
+
 		UIComponent parent = uiComponent;
 
 		while ((parent != null) && !(parent instanceof UIForm)) {
@@ -319,6 +358,7 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 	}
 
 	public Object getRequestAttribute(String name) {
+
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 		HttpServletRequest httpServletRequest = (HttpServletRequest) externalContext.getRequest();
 
@@ -326,20 +366,27 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 	}
 
 	public void setRequestAttribute(String name, Object value) {
+
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 		HttpServletRequest httpServletRequest = (HttpServletRequest) externalContext.getRequest();
 		httpServletRequest.setAttribute(name, value);
 	}
 
 	public String getRequestContextPath() {
-		return FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+
+		return externalContext.getRequestContextPath();
 	}
 
 	public String getRequestParameter(String name) {
-		HttpServletRequest httpServletRequest = (HttpServletRequest) FacesContext.getCurrentInstance()
-			.getExternalContext().getRequest();
 
-		return httpServletRequest.getParameter(name);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		Map<String, String> requestParameterMap = externalContext.getRequestParameterMap();
+
+		return requestParameterMap.get(name);
 	}
 
 	public boolean getRequestParameterAsBool(String name, boolean defaultValue) {
@@ -355,11 +402,19 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 	}
 
 	public String getRequestParameterFromMap(String name) {
-		return FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get(name);
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+
+		return externalContext.getRequestParameterMap().get(name);
 	}
 
 	public Map<String, String> getRequestParameterMap() {
-		return FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+
+		return externalContext.getRequestParameterMap();
 	}
 
 	public String getRequestQueryString() {
@@ -367,6 +422,7 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 	}
 
 	public String getRequestQueryStringParameter(String name) {
+
 		String value = null;
 		String queryString = getRequestQueryString();
 
@@ -389,25 +445,27 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 	}
 
 	public Object getSession(boolean create) {
-		return FacesContext.getCurrentInstance().getExternalContext().getSession(create);
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+
+		return externalContext.getSession(create);
 	}
 
 	public Object getSessionAttribute(String name) {
-		Object value = null;
-		HttpSession httpSession = (HttpSession) getSession(false);
 
-		if (httpSession != null) {
-			value = httpSession.getAttribute(name);
-		}
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		Map<String, Object> sessionMap = externalContext.getSessionMap();
 
-		return value;
+		return sessionMap.get(name);
 	}
 
 	public void setSessionAttribute(String name, Object value) {
-		HttpSession httpSession = (HttpSession) getSession(true);
 
-		if (httpSession != null) {
-			httpSession.setAttribute(name, value);
-		}
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		Map<String, Object> sessionMap = externalContext.getSessionMap();
+		sessionMap.put(name, value);
 	}
 }

@@ -17,6 +17,7 @@
 		<application-factory>com.liferay.faces.util.application.internal.ApplicationFactoryImpl</application-factory>
 		<factory-extension>
 			<util:browser-sniffer-factory>com.liferay.faces.util.client.internal.BrowserSnifferFactoryImpl</util:browser-sniffer-factory>
+			<util:faces-context-helper-factory>com.liferay.faces.util.context.internal.FacesContextHelperFactoryImpl</util:faces-context-helper-factory>
 			<util:faces-url-encoder-factory>com.liferay.faces.util.render.internal.FacesURLEncoderFactoryImpl</util:faces-url-encoder-factory>
 			<util:jsp-adapter-factory>com.liferay.faces.util.jsp.internal.JspAdapterFactoryImpl</util:jsp-adapter-factory>
 			<util:message-context-factory>com.liferay.faces.util.context.internal.MessageContextFactoryImpl</util:message-context-factory>

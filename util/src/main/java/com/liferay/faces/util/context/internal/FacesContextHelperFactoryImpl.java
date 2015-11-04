@@ -13,30 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.liferay.faces.util.context.map;
+package com.liferay.faces.util.context.internal;
 
-import com.liferay.faces.util.map.AbstractPropertyMapEntry;
+import com.liferay.faces.util.context.FacesContextHelper;
+import com.liferay.faces.util.context.FacesContextHelperFactory;
 
 
 /**
  * @author  Neil Griffin
  */
-public class JavaScriptMapEntry extends AbstractPropertyMapEntry<String> {
+public class FacesContextHelperFactoryImpl extends FacesContextHelperFactory {
 
 	// Private Data Members
-	private JavaScriptMap javaScriptMap;
+	private FacesContextHelper facesContextHelper;
 
-	public JavaScriptMapEntry(JavaScriptMap javaScriptMap, String key) {
-		super(key);
-		this.javaScriptMap = javaScriptMap;
+	public FacesContextHelperFactoryImpl() {
+		facesContextHelper = new FacesContextHelperImpl();
 	}
 
-	public String getValue() {
-		return javaScriptMap.get(getKey());
+	@Override
+	public FacesContextHelper getFacesContextHelper() {
+		return facesContextHelper;
 	}
 
-	public String setValue(String value) {
-		return javaScriptMap.put(getKey(), value);
-	}
+	@Override
+	public FacesContextHelperFactory getWrapped() {
 
+		// Since this is the default factory instance, it will never wrap another factory.
+		return null;
+	}
 }
