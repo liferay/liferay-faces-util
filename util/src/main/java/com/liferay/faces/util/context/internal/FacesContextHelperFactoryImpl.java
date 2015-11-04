@@ -15,22 +15,29 @@
  */
 package com.liferay.faces.util.context.internal;
 
-import com.liferay.faces.util.context.FacesRequestContext;
-import com.liferay.faces.util.context.FacesRequestContextFactory;
+import com.liferay.faces.util.context.FacesContextHelper;
+import com.liferay.faces.util.context.FacesContextHelperFactory;
 
 
 /**
- * @author  Kyle Stiemann
+ * @author  Neil Griffin
  */
-public class FacesRequestContextFactoryImpl extends FacesRequestContextFactory {
+public class FacesContextHelperFactoryImpl extends FacesContextHelperFactory {
 
-	@Override
-	public FacesRequestContext getFacesRequestContext() {
-		return new FacesRequestContextImpl();
+	// Private Data Members
+	private FacesContextHelper facesContextHelper;
+
+	public FacesContextHelperFactoryImpl() {
+		facesContextHelper = new FacesContextHelperImpl();
 	}
 
 	@Override
-	public FacesRequestContextFactory getWrapped() {
+	public FacesContextHelper getFacesContextHelper() {
+		return facesContextHelper;
+	}
+
+	@Override
+	public FacesContextHelperFactory getWrapped() {
 
 		// Since this is the default factory instance, it will never wrap another factory.
 		return null;
