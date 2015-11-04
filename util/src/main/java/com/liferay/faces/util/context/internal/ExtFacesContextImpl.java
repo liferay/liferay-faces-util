@@ -15,6 +15,7 @@
  */
 package com.liferay.faces.util.context.internal;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
@@ -41,7 +42,11 @@ import com.liferay.faces.util.context.FacesContextHelperUtil;
 /**
  * @author  Neil Griffin
  */
-public class ExtFacesContextImpl extends ExtFacesContext {
+public class ExtFacesContextImpl extends ExtFacesContext implements Serializable{
+
+	// serialVersionUID Note: This class implements Serializable only to avoid extraneous stacktraces from being thrown
+	// by Mojarra.
+	private static final long serialVersionUID = 102195020822157073L;
 
 	public ExtFacesContextImpl() {
 		setInstance(this);
