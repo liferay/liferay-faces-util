@@ -42,6 +42,9 @@ import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
+ * This class is deprecated and has been replaced by {@link com.liferay.faces.util.context.FacesContextHelperUtil}. For
+ * more information, see <a href="https://issues.liferay.com/browse/FACES-2502">FACES-2502</a>.
+ *
  * @author  Neil Griffin
  */
 public abstract class ExtFacesContext extends FacesContext implements FacesContextHelper {
