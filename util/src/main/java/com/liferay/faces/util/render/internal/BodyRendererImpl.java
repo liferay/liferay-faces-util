@@ -29,6 +29,11 @@ import com.liferay.faces.util.render.RendererWrapper;
 
 
 /**
+ * This {@link Renderer} is designed to ensure that Util's {@link FacesRequestContext} scripts are rendered before the
+ * closing &lt;body&lt; tag. In order to ensure that this {@link BodyRenderer} is compatible with other JSF libraries,
+ * such as Primefaces, this {@link BodyRenderer} wraps other body {@link Renderer}s via Util's {@link RenderKitImpl} and
+ * calls through to the wrapped implementation.
+ *
  * @author  Kyle Stiemann
  */
 public class BodyRendererImpl extends RendererWrapper {

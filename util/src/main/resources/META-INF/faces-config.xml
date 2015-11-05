@@ -18,6 +18,7 @@
 	<factory>
 		<partial-view-context-factory>com.liferay.faces.util.context.internal.PartialViewContextFactoryImpl</partial-view-context-factory>
 		<faces-context-factory>com.liferay.faces.util.context.internal.FacesContextFactoryUtilImpl</faces-context-factory>
+		<render-kit-factory>com.liferay.faces.util.render.internal.RenderKitFactoryImpl</render-kit-factory>
 		<factory-extension>
 			<util:browser-sniffer-factory>com.liferay.faces.util.client.internal.BrowserSnifferFactoryImpl</util:browser-sniffer-factory>
 			<util:component-resource-factory>com.liferay.faces.util.application.internal.ComponentResourceFactoryImpl</util:component-resource-factory>
@@ -33,8 +34,4 @@
 			<util:uploaded-file-factory>com.liferay.faces.util.model.internal.UploadedFileFactoryImpl</util:uploaded-file-factory>
 		</factory-extension>
 	</factory>
-	<render-kit>
-		<render-kit-id>HTML_BASIC</render-kit-id>
-		<render-kit-class>com.liferay.faces.util.render.internal.RenderKitImpl</render-kit-class>
-	</render-kit>
 </faces-config>
