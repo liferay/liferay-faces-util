@@ -16,9 +16,10 @@
 package com.liferay.faces.util.client;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.faces.FacesWrapper;
-import javax.faces.context.ResponseWriter;
+import javax.faces.context.FacesContext;
 
 
 /**
@@ -27,8 +28,18 @@ import javax.faces.context.ResponseWriter;
 public abstract class ScriptEncoderWrapper implements ScriptEncoder, FacesWrapper<ScriptEncoder> {
 
 	@Override
-	public void encodeScripts(ResponseWriter responseWriter) throws IOException {
-		getWrapped().encodeScripts(responseWriter);
+	public void encodeScript(FacesContext facesContext, Script script) throws IOException {
+		getWrapped().encodeScript(facesContext, script);
+	}
+
+	@Override
+	public void encodeScript(FacesContext facesContext, String script) throws IOException {
+		getWrapped().encodeScript(facesContext, script);
+	}
+
+	@Override
+	public void encodeScripts(FacesContext facesContext, List<Script> scripts) throws IOException {
+		getWrapped().encodeScripts(facesContext, scripts);
 	}
 
 	public abstract ScriptEncoder getWrapped();
