@@ -15,12 +15,15 @@
  */
 package com.liferay.faces.util.render.internal;
 
+import javax.faces.component.UIOutput;
 import javax.faces.render.RenderKit;
 import javax.faces.render.RenderKitWrapper;
 import javax.faces.render.Renderer;
 
 
 /**
+ * This {@link RenderKit} is designed to ensure that Util's {@link BodyRendererImpl} wraps other Body{@link Renderer}s.
+ *
  * @author  Kyle Stiemann
  */
 public class RenderKitImpl extends RenderKitWrapper {
@@ -37,7 +40,7 @@ public class RenderKitImpl extends RenderKitWrapper {
 
 		Renderer renderer = super.getRenderer(family, rendererType);
 
-		if ("javax.faces.Body".equals(rendererType)) {
+		if (UIOutput.COMPONENT_FAMILY.equals(family) && "javax.faces.Body".equals(rendererType)) {
 			renderer = new BodyRendererImpl(renderer);
 		}
 

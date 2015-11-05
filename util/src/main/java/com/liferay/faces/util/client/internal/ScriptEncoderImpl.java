@@ -18,11 +18,11 @@ package com.liferay.faces.util.client.internal;
 import java.io.IOException;
 import java.util.List;
 
+import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.client.ScriptEncoder;
-import com.liferay.faces.util.context.FacesRequestContext;
 
 
 /**
@@ -31,16 +31,31 @@ import com.liferay.faces.util.context.FacesRequestContext;
 public class ScriptEncoderImpl implements ScriptEncoder {
 
 	@Override
-	public void encodeScripts(ResponseWriter responseWriter) throws IOException {
+	public void encodeScript(FacesContext facesContext, Script script) throws IOException {
+		encodeScript(facesContext, script.getSourceCode());
+	}
 
-		FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
-		List<Script> scripts = facesRequestContext.getScripts();
+	@Override
+	public void encodeScript(FacesContext facesContext, String script) throws IOException {
+
+		ResponseWriter responseWriter = facesContext.getResponseWriter();
+		encodeScript(responseWriter, script);
+	}
+
+	@Override
+	public void encodeScripts(FacesContext facesContext, List<Script> scripts) throws IOException {
+
+		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
 		for (Script script : scripts) {
-
-			responseWriter.write("(function(){");
-			responseWriter.write(script.getSourceCode());
-			responseWriter.write("})();");
+			encodeScript(responseWriter, script.getSourceCode());
 		}
+	}
+
+	private void encodeScript(ResponseWriter responseWriter, String script) throws IOException {
+
+		responseWriter.write("(function(){");
+		responseWriter.write(script);
+		responseWriter.write("})();");
 	}
 }

@@ -16,19 +16,27 @@
 package com.liferay.faces.util.render.internal;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
+import javax.faces.render.RendererWrapper;
 
+import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.client.ScriptEncoder;
 import com.liferay.faces.util.client.ScriptEncoderFactory;
+import com.liferay.faces.util.context.FacesRequestContext;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
-import javax.faces.render.RendererWrapper;
 
 
 /**
+ * This {@link Renderer} is designed to ensure that Util's {@link FacesRequestContext} scripts are rendered before the
+ * closing &lt;body&lt; tag. In order to ensure that this {@link BodyRenderer} is compatible with other JSF libraries,
+ * such as Primefaces, this {@link BodyRenderer} wraps other body {@link Renderer}s via Util's {@link RenderKitImpl} and
+ * calls through to the wrapped implementation.
+ *
  * @author  Kyle Stiemann
  */
 public class BodyRendererImpl extends RendererWrapper {
@@ -45,15 +53,21 @@ public class BodyRendererImpl extends RendererWrapper {
 
 		if (!facesContext.getPartialViewContext().isAjaxRequest()) {
 
-			ResponseWriter responseWriter = facesContext.getResponseWriter();
-			responseWriter.startElement("script", null);
-			responseWriter.writeAttribute("type", "text/javascript", null);
+			FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
+			List<Script> scripts = facesRequestContext.getScripts();
 
-			ScriptEncoderFactory scriptEncoderFactory = (ScriptEncoderFactory) FactoryExtensionFinder.getFactory(
-					ScriptEncoderFactory.class);
-			ScriptEncoder scriptEncoder = scriptEncoderFactory.getScriptEncoder();
-			scriptEncoder.encodeScripts(responseWriter);
-			responseWriter.endElement("script");
+			if (!scripts.isEmpty()) {
+
+				ResponseWriter responseWriter = facesContext.getResponseWriter();
+				responseWriter.startElement("script", null);
+				responseWriter.writeAttribute("type", "text/javascript", null);
+
+				ScriptEncoderFactory scriptEncoderFactory = (ScriptEncoderFactory) FactoryExtensionFinder.getFactory(
+						ScriptEncoderFactory.class);
+				ScriptEncoder scriptEncoder = scriptEncoderFactory.getScriptEncoder();
+				scriptEncoder.encodeScripts(facesContext, scripts);
+				responseWriter.endElement("script");
+			}
 		}
 
 		super.encodeEnd(facesContext, uiComponent);

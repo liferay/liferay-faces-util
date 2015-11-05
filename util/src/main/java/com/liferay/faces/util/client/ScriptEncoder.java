@@ -16,8 +16,9 @@
 package com.liferay.faces.util.client;
 
 import java.io.IOException;
+import java.util.List;
 
-import javax.faces.context.ResponseWriter;
+import javax.faces.context.FacesContext;
 
 
 /**
@@ -25,5 +26,9 @@ import javax.faces.context.ResponseWriter;
  */
 public interface ScriptEncoder {
 
-	public void encodeScripts(ResponseWriter responseWriter) throws IOException;
+	public void encodeScript(FacesContext facesContext, Script script) throws IOException;
+
+	public void encodeScript(FacesContext facesContext, String script) throws IOException;
+
+	public void encodeScripts(FacesContext facesContext, List<Script> scripts) throws IOException;
 }
