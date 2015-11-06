@@ -22,7 +22,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.PartialResponseWriter;
 import javax.faces.context.PartialViewContext;
 import javax.faces.context.PartialViewContextWrapper;
-import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.client.ScriptEncoder;
@@ -61,7 +60,7 @@ public class PartialViewContextImpl extends PartialViewContextWrapper {
 	public PartialResponseWriter getPartialResponseWriter() {
 
 		if (partialResponseWriter == null) {
-			partialResponseWriter = new PartialResponseWriterBridgeImpl(super.getPartialResponseWriter());
+			partialResponseWriter = new PartialResponseWriterImpl(super.getPartialResponseWriter());
 		}
 
 		return partialResponseWriter;
@@ -78,12 +77,12 @@ public class PartialViewContextImpl extends PartialViewContextWrapper {
 	 *
 	 * @author  Kyle Stiemann
 	 */
-	protected class PartialResponseWriterBridgeImpl extends PartialResponseWriterWrapper {
+	protected class PartialResponseWriterImpl extends PartialResponseWriterWrapper {
 
 		// Private Data Members
 		private boolean wroteEval;
 
-		public PartialResponseWriterBridgeImpl(PartialResponseWriter partialResponseWriter) {
+		public PartialResponseWriterImpl(PartialResponseWriter partialResponseWriter) {
 			super(partialResponseWriter);
 		}
 
@@ -98,7 +97,7 @@ public class PartialViewContextImpl extends PartialViewContextWrapper {
 				if (!scripts.isEmpty()) {
 
 					super.startEval();
-					encodeScripts();
+					encodeScripts(scripts);
 					super.endEval();
 				}
 			}
@@ -113,21 +112,20 @@ public class PartialViewContextImpl extends PartialViewContextWrapper {
 			List<Script> scripts = facesRequestContext.getScripts();
 
 			if (!scripts.isEmpty()) {
-				encodeScripts();
+				encodeScripts(scripts);
 			}
 
 			super.endEval();
 			wroteEval = true;
 		}
 
-		private void encodeScripts() throws IOException {
+		private void encodeScripts(List<Script> scripts) throws IOException {
 
 			ScriptEncoderFactory scriptEncoderFactory = (ScriptEncoderFactory) FactoryExtensionFinder.getFactory(
 					ScriptEncoderFactory.class);
 			ScriptEncoder scriptEncoder = scriptEncoderFactory.getScriptEncoder();
 			FacesContext facesContext = FacesContext.getCurrentInstance();
-			ResponseWriter responseWriter = facesContext.getResponseWriter();
-			scriptEncoder.encodeScripts(responseWriter);
+			scriptEncoder.encodeScripts(facesContext, scripts);
 		}
 	}
 }
