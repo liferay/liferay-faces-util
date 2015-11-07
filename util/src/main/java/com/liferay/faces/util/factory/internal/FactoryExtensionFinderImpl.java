@@ -84,13 +84,50 @@ public class FactoryExtensionFinderImpl extends FactoryExtensionFinder {
 				}
 
 				if (wrapperConstructor == null) {
+
 					logger.debug("Creating instance with zero-arg constructor since wrapperConstructor=null");
-					classInstance = factoryExtensionClass.newInstance();
+
+					try {
+						classInstance = factoryExtensionClass.newInstance();
+					}
+					catch (InstantiationException e) {
+						logger.error("Unable to create an instance of [{0}] with zero-arg constructor.",
+							factoryExtensionClass.getName());
+						throw e;
+					}
+					catch (IllegalAccessException e) {
+						logger.error("Unable to create an instance of [{0}] with zero-arg constructor.",
+							factoryExtensionClass.getName());
+						throw e;
+					}
 				}
 				else {
 					logger.debug("Creating instance with one-arg constructor since wrapperConstructor=[{0}]",
 						wrapperConstructor);
-					classInstance = wrapperConstructor.newInstance(wrappedFactory);
+
+					try {
+						classInstance = wrapperConstructor.newInstance(wrappedFactory);
+					}
+					catch (InstantiationException e) {
+						logger.error("Unable to create an instance of [{0}] with one-arg constructor.",
+							factoryExtensionClass.getName());
+						throw e;
+					}
+					catch (IllegalAccessException e) {
+						logger.error("Unable to create an instance of [{0}] with one-arg constructor.",
+							factoryExtensionClass.getName());
+						throw e;
+					}
+					catch (IllegalArgumentException e) {
+						logger.error("Unable to create an instance of [{0}] with one-arg constructor.",
+							factoryExtensionClass.getName());
+						throw e;
+					}
+					catch (InvocationTargetException e) {
+						logger.error("Unable to create an instance of [{0}] with one-arg constructor.",
+							factoryExtensionClass.getName());
+						throw e;
+					}
 				}
 			}
 		}
