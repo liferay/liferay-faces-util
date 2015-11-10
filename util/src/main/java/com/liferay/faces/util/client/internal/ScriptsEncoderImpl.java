@@ -22,40 +22,35 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.util.client.Script;
-import com.liferay.faces.util.client.ScriptEncoder;
+import com.liferay.faces.util.client.ScriptsEncoder;
 
 
 /**
  * @author  Kyle Stiemann
  */
-public class ScriptEncoderImpl implements ScriptEncoder {
+public class ScriptsEncoderImpl implements ScriptsEncoder {
 
 	@Override
-	public void encodeScript(FacesContext facesContext, Script script) throws IOException {
-		encodeScript(facesContext, script.getSourceCode());
+	public void encodeBodyScripts(FacesContext facesContext, List<Script> scripts) throws IOException {
+
+		ResponseWriter responseWriter = facesContext.getResponseWriter();
+		responseWriter.startElement("script", null);
+		responseWriter.writeAttribute("type", "text/javascript", null);
+		encodeScripts(responseWriter, scripts);
+		responseWriter.endElement("script");
 	}
 
 	@Override
-	public void encodeScript(FacesContext facesContext, String script) throws IOException {
+	public void encodeEvalScripts(FacesContext facesContext, List<Script> scripts) throws IOException {
 
 		ResponseWriter responseWriter = facesContext.getResponseWriter();
-		encodeScript(responseWriter, script);
+		encodeScripts(responseWriter, scripts);
 	}
 
-	@Override
-	public void encodeScripts(FacesContext facesContext, List<Script> scripts) throws IOException {
-
-		ResponseWriter responseWriter = facesContext.getResponseWriter();
+	private void encodeScripts(ResponseWriter responseWriter, List<Script> scripts) throws IOException {
 
 		for (Script script : scripts) {
-			encodeScript(responseWriter, script.getSourceCode());
+			responseWriter.write(script.getSourceCode());
 		}
-	}
-
-	private void encodeScript(ResponseWriter responseWriter, String script) throws IOException {
-
-		responseWriter.write("(function(){");
-		responseWriter.write(script);
-		responseWriter.write("})();");
 	}
 }
