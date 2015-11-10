@@ -76,7 +76,6 @@
 
 	<modules>
 		<module>util</module>
-		<module>showcase-common</module>
 	</modules>
 
 	<properties>
