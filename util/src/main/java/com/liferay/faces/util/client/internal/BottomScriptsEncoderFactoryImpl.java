@@ -15,22 +15,22 @@
  */
 package com.liferay.faces.util.client.internal;
 
-import com.liferay.faces.util.client.ScriptEncoder;
-import com.liferay.faces.util.client.ScriptEncoderFactory;
+import com.liferay.faces.util.client.BottomScriptsEncoder;
+import com.liferay.faces.util.client.BottomScriptsEncoderFactory;
 
 
 /**
  * @author  Kyle Stiemann
  */
-public class ScriptEncoderFactoryImpl extends ScriptEncoderFactory {
+public class BottomScriptsEncoderFactoryImpl extends BottomScriptsEncoderFactory {
 
 	@Override
-	public ScriptEncoder getScriptEncoder() {
-		return new ScriptEncoderImpl();
+	public BottomScriptsEncoder getBottomScriptsEncoder() {
+		return new BottomScriptsEncoderImpl();
 	}
 
 	@Override
-	public ScriptEncoderFactory getWrapped() {
+	public BottomScriptsEncoderFactory getWrapped() {
 		return null;
 	}
 }
