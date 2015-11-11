@@ -188,6 +188,22 @@ public class FacesContextHelperUtil {
 	}
 
 	/**
+	 * Traverses the component tree starting at the specified UIComponent parent and returns the first UIComponent child
+	 * that contains the specified partialClientId.
+	 */
+	public static UIComponent matchComponentInHierarchy(UIComponent parent, String partialClientId) {
+		return FacesContextHelperFactory.getInstance().matchComponentInHierarchy(parent, partialClientId);
+	}
+
+	/**
+	 * Traverses the component tree associated with the UIViewRoot of this FacesContext and returns the first
+	 * UIComponent child that contains the specified partialClientId.
+	 */
+	public static UIComponent matchComponentInViewRoot(String partialClientId) {
+		return FacesContextHelperFactory.getInstance().matchComponentInViewRoot(partialClientId);
+	}
+
+	/**
 	 * Sets the current JSF navigation to the specified outcome.
 	 *
 	 * @param  fromAction  The "from action" as specified in a JSF navigation rule. Can be null to if no action is
@@ -293,47 +309,10 @@ public class FacesContextHelperUtil {
 	}
 
 	/**
-	 * Sets the value of the a request attribute using the specified name and value.
-	 */
-	public static void setRequestAttribute(String name, Object value) {
-		FacesContextHelperFactory.getInstance().setRequestAttribute(name, value);
-	}
-
-	/**
-	 * Sets the value of the a session attribute using the specified name and value.
-	 */
-	public static void setSessionAttribute(String name, Object value) {
-		FacesContextHelperFactory.getInstance().setSessionAttribute(name, value);
-	}
-
-	/**
-	 * Traverses the component tree starting at the specified UIComponent parent and returns the first UIComponent child
-	 * that contains the specified partialClientId.
-	 */
-	public static UIComponent matchComponentInHierarchy(UIComponent parent, String partialClientId) {
-		return FacesContextHelperFactory.getInstance().matchComponentInHierarchy(parent, partialClientId);
-	}
-
-	/**
-	 * Traverses the component tree associated with the UIViewRoot of this FacesContext and returns the first
-	 * UIComponent child that contains the specified partialClientId.
-	 */
-	public static UIComponent matchComponentInViewRoot(String partialClientId) {
-		return FacesContextHelperFactory.getInstance().matchComponentInViewRoot(partialClientId);
-	}
-
-	/**
 	 * Returns the object associated with the specified EL expression.
 	 */
 	public static Object resolveExpression(String elExpression) {
 		return FacesContextHelperFactory.getInstance().resolveExpression(elExpression);
-	}
-
-	/**
-	 * Gets the underlying/wrapped FacesContext ThreadLocal singleton instance.
-	 */
-	public FacesContext getFacesContext() {
-		return FacesContextHelperFactory.getInstance().getFacesContext();
 	}
 
 	/**
@@ -399,6 +378,13 @@ public class FacesContextHelperUtil {
 	 */
 	public static Object getRequestAttribute(String name) {
 		return FacesContextHelperFactory.getInstance().getRequestAttribute(name);
+	}
+
+	/**
+	 * Sets the value of the a request attribute using the specified name and value.
+	 */
+	public static void setRequestAttribute(String name, Object value) {
+		FacesContextHelperFactory.getInstance().setRequestAttribute(name, value);
 	}
 
 	/**
@@ -483,5 +469,19 @@ public class FacesContextHelperUtil {
 	 */
 	public static Object getSessionAttribute(String name) {
 		return FacesContextHelperFactory.getInstance().getSessionAttribute(name);
+	}
+
+	/**
+	 * Sets the value of the a session attribute using the specified name and value.
+	 */
+	public static void setSessionAttribute(String name, Object value) {
+		FacesContextHelperFactory.getInstance().setSessionAttribute(name, value);
+	}
+
+	/**
+	 * Gets the underlying/wrapped FacesContext ThreadLocal singleton instance.
+	 */
+	public FacesContext getFacesContext() {
+		return FacesContextHelperFactory.getInstance().getFacesContext();
 	}
 }

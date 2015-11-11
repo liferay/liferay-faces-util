@@ -280,7 +280,7 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	}
 
 	/**
-	 * @see  {@link FacesContextHelper#resetView(boolean)
+	 * @see  {@link FacesContextHelper#resetView(boolean)}
 	 */
 	public void resetView(boolean renderResponse) {
 		FacesContextHelperUtil.resetView();
@@ -547,7 +547,7 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	}
 
 	/**
-	 * @see  {@link FacesContextHelper#getSession(boolean)
+	 * @see  {@link FacesContextHelper#getSession(boolean)}
 	 */
 	public Object getSession(boolean create) {
 		return FacesContextHelperUtil.getSession(create);
