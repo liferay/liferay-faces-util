@@ -22,9 +22,9 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.render.Renderer;
 
+import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.client.ScriptsEncoder;
 import com.liferay.faces.util.client.ScriptsEncoderFactory;
-import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.context.FacesRequestContext;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.render.RendererWrapper;
@@ -56,8 +56,8 @@ public class BodyRendererUtilImpl extends RendererWrapper {
 
 			if (!scripts.isEmpty()) {
 
-				ScriptsEncoderFactory ScriptsEncoderFactory = (ScriptsEncoderFactory)
-					FactoryExtensionFinder.getFactory(ScriptsEncoderFactory.class);
+				ScriptsEncoderFactory ScriptsEncoderFactory = (ScriptsEncoderFactory) FactoryExtensionFinder.getFactory(
+						ScriptsEncoderFactory.class);
 				ScriptsEncoder ScriptsEncoder = ScriptsEncoderFactory.getScriptsEncoder();
 				ScriptsEncoder.encodeBodyScripts(facesContext, scripts);
 			}

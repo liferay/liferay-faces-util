@@ -21,8 +21,8 @@ import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
-import com.liferay.faces.util.client.ScriptsEncoder;
 import com.liferay.faces.util.client.Script;
+import com.liferay.faces.util.client.ScriptsEncoder;
 
 
 /**
