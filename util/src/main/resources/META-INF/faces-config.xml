@@ -31,6 +31,7 @@
 			<util:rich-text-factory>com.liferay.faces.util.text.internal.RichTextFactoryImpl</util:rich-text-factory>
 			<util:script-encoder-factory>com.liferay.faces.util.client.internal.ScriptEncoderFactoryImpl</util:script-encoder-factory>
 			<util:script-factory>com.liferay.faces.util.client.internal.ScriptFactoryImpl</util:script-factory>
+			<util:scripts-encoder-factory>com.liferay.faces.util.client.internal.ScriptsEncoderFactoryImpl</util:scripts-encoder-factory>
 			<util:uploaded-file-factory>com.liferay.faces.util.model.internal.UploadedFileFactoryImpl</util:uploaded-file-factory>
 		</factory-extension>
 	</factory>
