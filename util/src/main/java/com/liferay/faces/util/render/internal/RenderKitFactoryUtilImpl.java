@@ -37,14 +37,11 @@ import com.liferay.faces.util.context.FacesRequestContext;
  * <ol>
  *   <li>The {@link RenderKitUtilImpl} class from this module could exist in a separate module that specifies
  *     &lt;after&gt;&lt;others/&gt;&lt;/after&gt;</code> and the separate module would register an HTML_BASIC <code>
- *     render-kit</code>.
- *   </li>
- *
+ *     render-kit</code>.</li>
  *   <li>The {@link RenderKitUtilImpl} class could remain in this module, but this module would have to register a
  *     <code>render-kit-factory</code> in order to programatically control the {@link RenderKit} delegation chain and
  *     wrapping of renderers. But the only reason why this works is because <strong>none</strong> of the aforementioned
- *     component suites register a <code>render-kit-factory</code>.
- *   </li>
+ *     component suites register a <code>render-kit-factory</code>.</li>
  * </ol>
  *
  * For the sake of minimizing the number of modules, the second option has been implemented.</p>
