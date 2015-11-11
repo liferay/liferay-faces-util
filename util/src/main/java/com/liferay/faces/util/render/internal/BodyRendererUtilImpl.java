@@ -20,13 +20,12 @@ import java.util.List;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
-import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 import javax.faces.render.RendererWrapper;
 
 import com.liferay.faces.util.client.Script;
-import com.liferay.faces.util.client.ScriptEncoder;
-import com.liferay.faces.util.client.ScriptEncoderFactory;
+import com.liferay.faces.util.client.ScriptsEncoder;
+import com.liferay.faces.util.client.ScriptsEncoderFactory;
 import com.liferay.faces.util.context.FacesRequestContext;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
@@ -57,15 +56,10 @@ public class BodyRendererUtilImpl extends RendererWrapper {
 
 			if (!scripts.isEmpty()) {
 
-				ResponseWriter responseWriter = facesContext.getResponseWriter();
-				responseWriter.startElement("script", null);
-				responseWriter.writeAttribute("type", "text/javascript", null);
-
-				ScriptEncoderFactory scriptEncoderFactory = (ScriptEncoderFactory) FactoryExtensionFinder.getFactory(
-						ScriptEncoderFactory.class);
-				ScriptEncoder scriptEncoder = scriptEncoderFactory.getScriptEncoder();
-				scriptEncoder.encodeScripts(facesContext, scripts);
-				responseWriter.endElement("script");
+				ScriptsEncoderFactory ScriptsEncoderFactory = (ScriptsEncoderFactory) FactoryExtensionFinder.getFactory(
+						ScriptsEncoderFactory.class);
+				ScriptsEncoder ScriptsEncoder = ScriptsEncoderFactory.getScriptsEncoder();
+				ScriptsEncoder.encodeBodyScripts(facesContext, scripts);
 			}
 		}
 
