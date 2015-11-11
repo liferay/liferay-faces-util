@@ -13,22 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.liferay.faces.util.client;
+package com.liferay.faces.util.client.internal;
 
-import java.io.IOException;
-import java.util.List;
-
-import javax.faces.context.FacesContext;
+import com.liferay.faces.util.client.ScriptsEncoder;
+import com.liferay.faces.util.client.ScriptsEncoderFactory;
 
 
 /**
- * @author  Neil Griffin
+ * @author  Kyle Stiemann
  */
-public interface ScriptEncoder {
+public class ScriptsEncoderFactoryImpl extends ScriptsEncoderFactory {
 
-	public void encodeScript(FacesContext facesContext, Script script) throws IOException;
+	@Override
+	public ScriptsEncoder getScriptsEncoder() {
+		return new ScriptsEncoderImpl();
+	}
 
-	public void encodeScript(FacesContext facesContext, String script) throws IOException;
-
-	public void encodeScripts(FacesContext facesContext, List<Script> scripts) throws IOException;
+	@Override
+	public ScriptsEncoderFactory getWrapped() {
+		return null;
+	}
 }

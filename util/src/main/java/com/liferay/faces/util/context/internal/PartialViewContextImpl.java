@@ -23,9 +23,9 @@ import javax.faces.context.PartialResponseWriter;
 import javax.faces.context.PartialViewContext;
 import javax.faces.context.PartialViewContextWrapper;
 
+import com.liferay.faces.util.client.ScriptsEncoder;
+import com.liferay.faces.util.client.ScriptsEncoderFactory;
 import com.liferay.faces.util.client.Script;
-import com.liferay.faces.util.client.ScriptEncoder;
-import com.liferay.faces.util.client.ScriptEncoderFactory;
 import com.liferay.faces.util.context.FacesRequestContext;
 import com.liferay.faces.util.context.PartialResponseWriterWrapper;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
@@ -121,11 +121,11 @@ public class PartialViewContextImpl extends PartialViewContextWrapper {
 
 		private void encodeScripts(List<Script> scripts) throws IOException {
 
-			ScriptEncoderFactory scriptEncoderFactory = (ScriptEncoderFactory) FactoryExtensionFinder.getFactory(
-					ScriptEncoderFactory.class);
-			ScriptEncoder scriptEncoder = scriptEncoderFactory.getScriptEncoder();
+			ScriptsEncoderFactory ScriptsEncoderFactory = (ScriptsEncoderFactory)
+				FactoryExtensionFinder.getFactory(ScriptsEncoderFactory.class);
+			ScriptsEncoder ScriptsEncoder = ScriptsEncoderFactory.getScriptsEncoder();
 			FacesContext facesContext = FacesContext.getCurrentInstance();
-			scriptEncoder.encodeScripts(facesContext, scripts);
+			ScriptsEncoder.encodeEvalScripts(facesContext, scripts);
 		}
 	}
 }
