@@ -24,11 +24,9 @@ import javax.faces.context.FacesContext;
 /**
  * @author  Neil Griffin
  */
-public interface ScriptEncoder {
+public interface BottomScriptsEncoder {
 
-	public void encodeScript(FacesContext facesContext, Script script) throws IOException;
+	public void encodeBodyScripts(FacesContext facesContext, List<Script> scripts) throws IOException;
 
-	public void encodeScript(FacesContext facesContext, String script) throws IOException;
-
-	public void encodeScripts(FacesContext facesContext, List<Script> scripts) throws IOException;
+	public void encodeEvalScripts(FacesContext facesContext, List<Script> scripts) throws IOException;
 }

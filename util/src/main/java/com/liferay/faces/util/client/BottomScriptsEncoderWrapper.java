@@ -15,15 +15,27 @@
  */
 package com.liferay.faces.util.client;
 
+import java.io.IOException;
+import java.util.List;
+
 import javax.faces.FacesWrapper;
+import javax.faces.context.FacesContext;
 
 
 /**
  * @author  Neil Griffin
  */
-public abstract class ScriptEncoderFactory implements FacesWrapper<ScriptEncoderFactory> {
+public abstract class BottomScriptsEncoderWrapper implements BottomScriptsEncoder, FacesWrapper<BottomScriptsEncoder> {
 
-	public abstract ScriptEncoder getScriptEncoder();
+	@Override
+	public void encodeBodyScripts(FacesContext facesContext, List<Script> scripts) throws IOException {
+		getWrapped().encodeBodyScripts(facesContext, scripts);
+	}
 
-	public abstract ScriptEncoderFactory getWrapped();
+	@Override
+	public void encodeEvalScripts(FacesContext facesContext, List<Script> scripts) throws IOException {
+		getWrapped().encodeEvalScripts(facesContext, scripts);
+	}
+
+	public abstract BottomScriptsEncoder getWrapped();
 }
