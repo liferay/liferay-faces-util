@@ -23,7 +23,7 @@ import javax.faces.FacesWrapper;
  */
 public abstract class ScriptFactory implements FacesWrapper<ScriptFactory> {
 
-	public abstract AlloyScript getAlloyScript(String content, String[] modules);
-
 	public abstract Script getScript(String content);
+
+	public abstract Script getScript(String content, String[] modules, Script.Type type);
 }

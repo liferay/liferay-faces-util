@@ -20,5 +20,16 @@ package com.liferay.faces.util.client;
  */
 public interface Script {
 
+	/**
+	 * @author  Kyle Stiemann
+	 */
+	public enum Type {
+		ALLOY
+	}
+
+	public String[] getModules();
+
 	public String getSourceCode();
+
+	public Type getType();
 }

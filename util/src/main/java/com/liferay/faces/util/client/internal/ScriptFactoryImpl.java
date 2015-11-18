@@ -15,7 +15,6 @@
  */
 package com.liferay.faces.util.client.internal;
 
-import com.liferay.faces.util.client.AlloyScript;
 import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.client.ScriptFactory;
 
@@ -26,13 +25,13 @@ import com.liferay.faces.util.client.ScriptFactory;
 public class ScriptFactoryImpl extends ScriptFactory {
 
 	@Override
-	public AlloyScript getAlloyScript(String content, String[] modules) {
-		return new AlloyScriptImpl(content, modules);
+	public Script getScript(String content) {
+		return new ScriptImpl(content);
 	}
 
 	@Override
-	public Script getScript(String content) {
-		return new ScriptImpl(content);
+	public Script getScript(String content, String[] modules, Script.Type type) {
+		return new ScriptImpl(content, modules, type);
 	}
 
 	@Override
