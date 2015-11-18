@@ -15,7 +15,13 @@
  */
 package com.liferay.faces.util.client.internal;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 import com.liferay.faces.util.client.Script;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
@@ -23,14 +29,53 @@ import com.liferay.faces.util.client.Script;
  */
 public class ScriptImpl implements Script {
 
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(ScriptImpl.class);
+
 	// Private Data Members
 	private String sourceCode;
+	private Set<String> modules;
+	private Type type;
 
 	public ScriptImpl(String sourceCode) {
-		this.sourceCode = sourceCode;
+		this(sourceCode, null, null);
 	}
 
+	public ScriptImpl(String sourceCode, Set<String> modules, Type type) {
+		this.sourceCode = sourceCode;
+
+		if ((modules != null) && ((type == null) || (Type.DEFAULT == type))) {
+			logger.warn("Modules will be ignored on scripts with Type.Default.");
+		}
+
+		if (modules == null) {
+			modules = Collections.EMPTY_SET;
+		}
+		else {
+			modules = new HashSet<String>(modules);
+		}
+
+		this.modules = modules;
+
+		if (type == null) {
+			type = Type.DEFAULT;
+		}
+
+		this.type = type;
+	}
+
+	@Override
+	public Set<String> getModules() {
+		return Collections.unmodifiableSet(modules);
+	}
+
+	@Override
 	public String getSourceCode() {
 		return sourceCode;
+	}
+
+	@Override
+	public Type getType() {
+		return type;
 	}
 }
