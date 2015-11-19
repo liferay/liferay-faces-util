@@ -15,6 +15,8 @@
  */
 package com.liferay.faces.util.client;
 
+import java.util.Set;
+
 import javax.faces.FacesWrapper;
 
 
@@ -23,7 +25,7 @@ import javax.faces.FacesWrapper;
  */
 public abstract class ScriptFactory implements FacesWrapper<ScriptFactory> {
 
-	public abstract AlloyScript getAlloyScript(String content, String[] modules);
-
 	public abstract Script getScript(String content);
+
+	public abstract Script getScript(String content, Set<String> modules, Script.Type type);
 }

@@ -15,10 +15,24 @@
  */
 package com.liferay.faces.util.client;
 
+import java.util.Set;
+
+
 /**
  * @author  Kyle Stiemann
  */
 public interface Script {
 
+	/**
+	 * @author  Kyle Stiemann
+	 */
+	public enum Type {
+		ALLOY, DEFAULT
+	}
+
+	public Set<String> getModules();
+
 	public String getSourceCode();
+
+	public Type getType();
 }
