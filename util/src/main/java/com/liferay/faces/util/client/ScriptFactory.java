@@ -23,7 +23,7 @@ import com.liferay.faces.util.helper.Wrapper;
  */
 public abstract class ScriptFactory implements Wrapper<ScriptFactory> {
 
-	public abstract AlloyScript getAlloyScript(String content, String[] modules);
-
 	public abstract Script getScript(String content);
+
+	public abstract Script getScript(String content, String[] modules, Script.Type type);
 }
