@@ -16,6 +16,8 @@
 package com.liferay.faces.util.client.internal;
 
 import com.liferay.faces.util.client.Script;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
@@ -23,14 +25,41 @@ import com.liferay.faces.util.client.Script;
  */
 public class ScriptImpl implements Script {
 
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(ScriptImpl.class);
+
 	// Private Data Members
 	private String sourceCode;
+	private String[] modules;
+	private Type type;
 
 	public ScriptImpl(String sourceCode) {
-		this.sourceCode = sourceCode;
+		this(sourceCode, null, null);
 	}
 
+	public ScriptImpl(String sourceCode, String[] modules, Type type) {
+		this.sourceCode = sourceCode;
+
+		if ((modules != null) && (type == null)) {
+			logger.warn("Modules will be ignored on scripts with type == null.");
+		}
+
+		this.modules = modules;
+		this.type = type;
+	}
+
+	@Override
+	public String[] getModules() {
+		return modules;
+	}
+
+	@Override
 	public String getSourceCode() {
 		return sourceCode;
+	}
+
+	@Override
+	public Type getType() {
+		return type;
 	}
 }

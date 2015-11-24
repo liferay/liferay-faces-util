@@ -20,11 +20,18 @@ package com.liferay.faces.util.helper;
  */
 public class StringHelper {
 
-	public static String[] append(String[] array, String... value) {
-		String[] newArray = new String[array.length + value.length];
+	public static String[] append(String[] array, String... values) {
+
+		String[] newArray = new String[array.length + values.length];
 
 		System.arraycopy(array, 0, newArray, 0, array.length);
-		System.arraycopy(value, 0, newArray, array.length, value.length);
+
+		if (values.length == 1) {
+			newArray[array.length] = values[0];
+		}
+		else {
+			System.arraycopy(values, 0, newArray, array.length, values.length);
+		}
 
 		return newArray;
 	}
