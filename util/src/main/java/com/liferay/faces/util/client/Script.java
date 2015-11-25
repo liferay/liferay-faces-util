@@ -16,20 +16,35 @@
 package com.liferay.faces.util.client;
 
 /**
+ * A Script which can be rendered on the client via {@link
+ * com.liferay.faces.util.context.FacesRequestContext#addScript(com.liferay.faces.util.client.Script)}.
+ *
  * @author  Kyle Stiemann
  */
 public interface Script {
 
 	/**
+	 * The Type is used to determine how to handle the Script's modules.
+	 *
 	 * @author  Kyle Stiemann
 	 */
 	public enum Type {
 		ALLOY
 	}
 
+	/**
+	 * @return  An array of modules which the Script depends on. Returns null if the Script does not depend on any
+	 *          modules.
+	 */
 	public String[] getModules();
 
+	/**
+	 * @return  The Script's text.
+	 */
 	public String getSourceCode();
 
+	/**
+	 * @return  The {@link Script.Type} of the Script.
+	 */
 	public Type getType();
 }
