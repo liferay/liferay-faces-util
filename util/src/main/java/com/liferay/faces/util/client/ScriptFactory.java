@@ -19,7 +19,7 @@ import javax.faces.FacesWrapper;
 
 
 /**
- * A factory for creating {@link Script}s which can be rendered on the client via {@link
+ * A factory for creating a {@link Script} which can be rendered on the client via {@link
  * com.liferay.faces.util.context.FacesRequestContext#addScript(com.liferay.faces.util.client.Script)}.
  *
  * @author  Kyle Stiemann
@@ -27,26 +27,26 @@ import javax.faces.FacesWrapper;
 public abstract class ScriptFactory implements FacesWrapper<ScriptFactory> {
 
 	/**
-	 * Creates a {@link Script} with the specified text. Please consider using {@link
+	 * Creates a {@link Script} with the specified source code. As a convenience, it is possible to call {@link
 	 * com.liferay.faces.util.context.FacesRequestContext#addScript(java.lang.String)} instead since it will create the
 	 * Script and add it to the list of Scripts which will be rendered to the response.
 	 *
-	 * @param   content  The text of the Script.
+	 * @param   sourceCode  The source code of the Script.
 	 *
 	 * @return  A {@link Script} which can be rendered on the client via {@link
 	 *          com.liferay.faces.util.context.FacesRequestContext#addScript(com.liferay.faces.util.client.Script)}
 	 */
-	public abstract Script getScript(String content);
+	public abstract Script getScript(String sourceCode);
 
 	/**
-	 * Creates a {@link Script} with the specified text, modules, and type.
+	 * Creates a {@link Script} with the specified source code, modules, and type.
 	 *
-	 * @param   content  The text of the Script.
-	 * @param   modules  The modules which the Script depends on.
-	 * @param   type     The {@link Script.Type} of the Script.
+	 * @param   sourceCode  The source code of the Script.
+	 * @param   modules     The modules which the Script depends on.
+	 * @param   type        The {@link Script.Type} of the Script.
 	 *
 	 * @return  A {@link Script} which can be rendered on the client via {@link
 	 *          com.liferay.faces.util.context.FacesRequestContext#addScript(com.liferay.faces.util.client.Script)}
 	 */
-	public abstract Script getScript(String content, String[] modules, Script.Type type);
+	public abstract Script getScript(String sourceCode, String[] modules, Script.Type type);
 }
