@@ -25,13 +25,13 @@ import com.liferay.faces.util.client.ScriptFactory;
 public class ScriptFactoryImpl extends ScriptFactory {
 
 	@Override
-	public Script getScript(String content) {
-		return new ScriptImpl(content);
+	public Script getScript(String sourceCode) {
+		return new ScriptImpl(sourceCode);
 	}
 
 	@Override
-	public Script getScript(String content, String[] modules, Script.Type type) {
-		return new ScriptImpl(content, modules, type);
+	public Script getScript(String sourceCode, String[] modules, Script.Type type) {
+		return new ScriptImpl(sourceCode, modules, type);
 	}
 
 	@Override
