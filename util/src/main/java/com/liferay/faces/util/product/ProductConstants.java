@@ -28,6 +28,7 @@ public class ProductConstants {
 	public static final String LIFERAY_FACES_BRIDGE = "Liferay Faces Bridge";
 	public static final String LIFERAY_FACES_CRYSTAL = "Liferay Faces Crystal";
 	public static final String LIFERAY_FACES_PORTAL = "Liferay Faces Portal";
+	public static final String LIFERAY_FACES_SHOWCASE = "Liferay Faces Showcase";
 	public static final String LIFERAY_FACES_UTIL = "Liferay Faces Util";
 	public static final String MOJARRA = "Mojarra";
 	public static final String MYFACES = "MyFaces";
