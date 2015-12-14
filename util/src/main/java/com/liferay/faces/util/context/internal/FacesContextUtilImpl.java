@@ -48,8 +48,13 @@ public class FacesContextUtilImpl extends FacesContextWrapper {
 	public void release() {
 
 		FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
-		facesRequestContext.release();
-		FacesRequestContext.setCurrentInstance(null);
+
+		// FACES-2527: Need to check for null value when rendering runtime JSF portlets contained in the same WAR.
+		if (facesRequestContext != null) {
+			facesRequestContext.release();
+			FacesRequestContext.setCurrentInstance(null);
+		}
+
 		super.release();
 	}
 
