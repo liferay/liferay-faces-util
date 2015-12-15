@@ -22,7 +22,7 @@ import javax.faces.render.Renderer;
 
 
 /**
- * This class extends {@link RenderKitWrapper} in order to programatically control the {@link RenderKit} delegation
+ * This class extends {@link RenderKitWrapper} in order to programmatically control the {@link RenderKit} delegation
  * chain and wrapping of renderers.
  *
  * @author  Kyle Stiemann
@@ -43,6 +43,9 @@ public class RenderKitUtilImpl extends RenderKitWrapper {
 
 		if (UIOutput.COMPONENT_FAMILY.equals(family) && "javax.faces.Body".equals(rendererType)) {
 			renderer = new BodyRendererUtilImpl(renderer);
+		}
+		else if (UIOutput.COMPONENT_FAMILY.equals(family) && "javax.faces.Head".equals(rendererType)) {
+			renderer = new HeadRendererUtilImpl(renderer);
 		}
 
 		return renderer;
