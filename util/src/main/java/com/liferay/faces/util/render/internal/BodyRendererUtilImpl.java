@@ -16,18 +16,14 @@
 package com.liferay.faces.util.render.internal;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 import javax.faces.render.RendererWrapper;
 
-import com.liferay.faces.util.client.Script;
-import com.liferay.faces.util.client.ScriptsEncoder;
-import com.liferay.faces.util.client.ScriptsEncoderFactory;
 import com.liferay.faces.util.context.FacesRequestContext;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
 
 /**
@@ -49,21 +45,21 @@ public class BodyRendererUtilImpl extends RendererWrapper {
 	@Override
 	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
-		if (!facesContext.getPartialViewContext().isAjaxRequest()) {
+		boolean ajaxRequest = facesContext.getPartialViewContext().isAjaxRequest();
+		ResponseWriter responseWriter = facesContext.getResponseWriter();
 
-			FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
-			List<Script> scripts = facesRequestContext.getScripts();
+		if (!ajaxRequest) {
 
-			if (!scripts.isEmpty()) {
-
-				ScriptsEncoderFactory ScriptsEncoderFactory = (ScriptsEncoderFactory) FactoryExtensionFinder.getFactory(
-						ScriptsEncoderFactory.class);
-				ScriptsEncoder ScriptsEncoder = ScriptsEncoderFactory.getScriptsEncoder();
-				ScriptsEncoder.encodeBodyScripts(facesContext, scripts);
-			}
+			BodyScriptEncodingResponseWriter bodyScriptEncodingResponseWriter = new BodyScriptEncodingResponseWriter(
+					responseWriter, facesContext);
+			facesContext.setResponseWriter(bodyScriptEncodingResponseWriter);
 		}
 
 		super.encodeEnd(facesContext, uiComponent);
+
+		if (!ajaxRequest) {
+			facesContext.setResponseWriter(responseWriter);
+		}
 	}
 
 	@Override
