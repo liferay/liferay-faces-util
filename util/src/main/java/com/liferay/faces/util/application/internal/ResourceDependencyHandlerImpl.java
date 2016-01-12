@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2015 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2016 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,21 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.liferay.faces.util.application;
+package com.liferay.faces.util.application.internal;
+
+import javax.faces.component.UIComponent;
+
+import com.liferay.faces.util.application.ResourceDependencyHandler;
+
 
 /**
- * This interface defines a contract for getting information about a {@link javax.faces.component.UIComponent}} resource
- * such as its name, library, and whether or not it should be rendered.
- *
- * @author  Neil Griffin
+ * @author  Kyle Stiemann
  */
-public interface ComponentResource {
+public class ResourceDependencyHandlerImpl implements ResourceDependencyHandler {
 
-	public boolean isRenderable();
-
-	public String getId();
-
-	public String getLibrary();
-
-	public String getName();
+	@Override
+	public boolean isSatisfied(UIComponent componentResource) {
+		return false;
+	}
 }

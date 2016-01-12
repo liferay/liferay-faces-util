@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2015 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2016 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,9 +43,6 @@ public class RenderKitUtilImpl extends RenderKitWrapper {
 
 		if (UIOutput.COMPONENT_FAMILY.equals(family) && "javax.faces.Body".equals(rendererType)) {
 			renderer = new BodyRendererUtilImpl(renderer);
-		}
-		else if (UIOutput.COMPONENT_FAMILY.equals(family) && "javax.faces.Head".equals(rendererType)) {
-			renderer = new HeadRendererUtilImpl(renderer);
 		}
 
 		return renderer;
