@@ -90,6 +90,9 @@ public class BufferedScriptResponseWriter extends ResponseWriter {
 	@Override
 	public void writeText(Object text, String property) throws IOException {
 
+		// JavaScript does not need to be escaped. See
+		// https://github.com/javaserverfaces/mojarra/blob/2.2.12/jsf-ri/src/main/java/com/sun/faces/renderkit/html_basic/HtmlResponseWriter.java#L1280-L1283
+		// for more details.
 		if (text != null) {
 			stringWriter.write(text.toString());
 		}
@@ -98,6 +101,9 @@ public class BufferedScriptResponseWriter extends ResponseWriter {
 	@Override
 	public void writeText(char[] text, int off, int len) throws IOException {
 
+		// JavaScript does not need to be escaped. See
+		// https://github.com/javaserverfaces/mojarra/blob/2.2.12/jsf-ri/src/main/java/com/sun/faces/renderkit/html_basic/HtmlResponseWriter.java#L1280-L1283
+		// for more details.
 		if (text != null) {
 			stringWriter.write(text, off, len);
 		}
