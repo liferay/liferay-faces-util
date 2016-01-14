@@ -63,12 +63,12 @@ public class BodyScriptEncodingResponseWriter extends ResponseWriterWrapper {
 
 		if (bufferedScript.isBuffering() && "script".equals(name)) {
 
-			// If the script is a resouce, then do not buffer it (i.e. write it to the response now).
+			// If the script is an external resource, then write it to the response.
 			if (bufferedScript.isResource()) {
 				bufferedScript.write(wrappedResponseWriter);
 			}
 
-			// Otherwise the script should be written before the closing <body> tag.
+			// Otherwise ensure that the script is written before the closing <body> tag.
 			else {
 
 				String scriptSource = bufferedScript.toString();
@@ -268,9 +268,9 @@ public class BodyScriptEncodingResponseWriter extends ResponseWriterWrapper {
 		private class BufferedScriptAttribute {
 
 			// Private Members
-			private final Object value;
-			private final String property;
-			private final boolean uriAttribute;
+			private Object value;
+			private String property;
+			private boolean uriAttribute;
 
 			public BufferedScriptAttribute(Object value, String property, boolean uriAttribute) {
 				this.value = value;
