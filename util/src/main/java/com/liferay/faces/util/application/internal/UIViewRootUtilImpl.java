@@ -25,7 +25,7 @@ import javax.faces.component.UIViewRoot;
 import javax.faces.component.ValueHolder;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.util.application.ResourceDependencyHandlerFactory;
+import com.liferay.faces.util.application.ResourceDependencyVerifierFactory;
 import com.liferay.faces.util.application.ResourceDependencyVerifier;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -52,7 +52,7 @@ public class UIViewRootUtilImpl extends UIViewRoot {
 
 		// Determine which of the component resources are unsatisfied.
 		List<UIComponent> unsatisfiedComponentResources = new ArrayList<UIComponent>(allComponentResources.size());
-		ResourceDependencyVerifier resourceDependencyVerifier = ResourceDependencyHandlerFactory
+		ResourceDependencyVerifier resourceDependencyVerifier = ResourceDependencyVerifierFactory
 			.getResourceDependencyHandlerInstance();
 
 		for (UIComponent componentResource : allComponentResources) {

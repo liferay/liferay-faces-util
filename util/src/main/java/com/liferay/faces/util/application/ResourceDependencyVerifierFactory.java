@@ -24,23 +24,23 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
  * This class provides the contract for a factory that can create instances of {@link ResourceDependencyVerifier}. It
  * implements {@link FacesWrapper} in order to follow the standard factory delegation pattern found in the Faces API. If
  * a concrete implementation of this class has a one-arg constructor and the type of the argument is {@link
- * ResourceDependencyHandlerFactory} then the constructor will be called with the next factory instance in the
+ * ResourceDependencyVerifierFactory} then the constructor will be called with the next factory instance in the
  * delegation chain.
  *
  * @author  Kyle Stiemann
  */
-public abstract class ResourceDependencyHandlerFactory implements FacesWrapper<ResourceDependencyHandlerFactory> {
+public abstract class ResourceDependencyVerifierFactory implements FacesWrapper<ResourceDependencyVerifierFactory> {
 
 	/**
-	 * Gets an instance of {@link ResourceDependencyVerifier} from the {@link ResourceDependencyHandlerFactory} found by
+	 * Gets an instance of {@link ResourceDependencyVerifier} from the {@link ResourceDependencyVerifierFactory} found by
 	 * the {@link FactoryExtensionFinder}.
 	 */
 	public static ResourceDependencyVerifier getResourceDependencyHandlerInstance() {
 
-		ResourceDependencyHandlerFactory resourceDependencyHandlerFactory = (ResourceDependencyHandlerFactory)
-			FactoryExtensionFinder.getFactory(ResourceDependencyHandlerFactory.class);
+		ResourceDependencyVerifierFactory resourceDependencyVerifierFactory = (ResourceDependencyVerifierFactory)
+			FactoryExtensionFinder.getFactory(ResourceDependencyVerifierFactory.class);
 
-		return resourceDependencyHandlerFactory.getResourceDependencyVerifier();
+		return resourceDependencyVerifierFactory.getResourceDependencyVerifier();
 	}
 
 	/**
@@ -52,5 +52,5 @@ public abstract class ResourceDependencyHandlerFactory implements FacesWrapper<R
 	 * If this factory has been decorated then this method provides access to the wrapped factory instance.
 	 */
 	@Override
-	public abstract ResourceDependencyHandlerFactory getWrapped();
+	public abstract ResourceDependencyVerifierFactory getWrapped();
 }
