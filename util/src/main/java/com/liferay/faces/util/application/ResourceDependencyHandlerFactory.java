@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2015 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2016 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,30 +19,17 @@ import javax.faces.FacesWrapper;
 
 
 /**
- * @author  Neil Griffin
+ * This class provides the contract for a factory which can create {@link ResourceDependencyHandler}s.
+ *
+ * @author  Kyle Stiemann
  */
-public abstract class ComponentResourceWrapper implements ComponentResource, FacesWrapper<ComponentResource> {
+public abstract class ResourceDependencyHandlerFactory implements FacesWrapper<ResourceDependencyHandlerFactory> {
 
-	@Override
-	public boolean isRenderable() {
-		return getWrapped().isRenderable();
-	}
-
-	@Override
-	public String getId() {
-		return getWrapped().getId();
-	}
-
-	@Override
-	public String getLibrary() {
-		return getWrapped().getLibrary();
-	}
-
-	@Override
-	public String getName() {
-		return getWrapped().getName();
-	}
-
-	@Override
-	public abstract ComponentResource getWrapped();
+	/**
+	 * Gets an instance of {@link ResourceDependencyHandler}.
+	 *
+	 * @return  A ResourceDependencyHandler which wraps the ResourceDependencyHandler returned by the wrapped
+	 *          ResourceDependencyHandlerFactory instance.
+	 */
+	public abstract ResourceDependencyHandler getResourceDependencyHandler();
 }
