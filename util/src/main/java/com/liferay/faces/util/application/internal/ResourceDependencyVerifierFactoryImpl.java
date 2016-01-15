@@ -22,7 +22,7 @@ import com.liferay.faces.util.application.ResourceDependencyVerifier;
 /**
  * @author  Kyle Stiemann
  */
-public class ResourceDependencyHandlerFactoryImpl extends ResourceDependencyHandlerFactory {
+public class ResourceDependencyVerifierFactoryImpl extends ResourceDependencyHandlerFactory {
 
 	// Private Data Members
 	private ResourceDependencyVerifier resourceDependencyVerifier = new ResourceDependencyVerifierImpl();
