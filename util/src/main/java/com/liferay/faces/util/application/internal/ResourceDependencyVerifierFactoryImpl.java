@@ -15,8 +15,8 @@
  */
 package com.liferay.faces.util.application.internal;
 
-import com.liferay.faces.util.application.ResourceDependencyVerifierFactory;
 import com.liferay.faces.util.application.ResourceDependencyVerifier;
+import com.liferay.faces.util.application.ResourceDependencyVerifierFactory;
 
 
 /**
