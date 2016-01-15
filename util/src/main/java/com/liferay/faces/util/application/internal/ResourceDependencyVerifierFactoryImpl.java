@@ -15,14 +15,14 @@
  */
 package com.liferay.faces.util.application.internal;
 
-import com.liferay.faces.util.application.ResourceDependencyHandlerFactory;
+import com.liferay.faces.util.application.ResourceDependencyVerifierFactory;
 import com.liferay.faces.util.application.ResourceDependencyVerifier;
 
 
 /**
  * @author  Kyle Stiemann
  */
-public class ResourceDependencyVerifierFactoryImpl extends ResourceDependencyHandlerFactory {
+public class ResourceDependencyVerifierFactoryImpl extends ResourceDependencyVerifierFactory {
 
 	// Private Data Members
 	private ResourceDependencyVerifier resourceDependencyVerifier = new ResourceDependencyVerifierImpl();
@@ -32,7 +32,7 @@ public class ResourceDependencyVerifierFactoryImpl extends ResourceDependencyHan
 	}
 
 	@Override
-	public ResourceDependencyHandlerFactory getWrapped() {
+	public ResourceDependencyVerifierFactory getWrapped() {
 		return null;
 	}
 }
