@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2016 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2015 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ package com.liferay.faces.util.application.internal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
@@ -26,96 +25,58 @@ import javax.faces.component.UIViewRoot;
 import javax.faces.component.ValueHolder;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.util.application.ResourceDependencyHandler;
 import com.liferay.faces.util.application.ResourceDependencyHandlerFactory;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
+import com.liferay.faces.util.application.ResourceDependencyVerifier;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
+ * This class ensures that the resource dependencies that have already been satisfied are not present in the list of
+ * component resources returned by {@link #getComponentResources(FacesContext, String)}. This in turn ensures that
+ * resources that have already been satisfied are not rendered when the head renderer attempts to render component
+ * resources in the &lt;head&gt;...&lt;/head&gt; section of the page.
+ *
  * @author  Kyle Stiemann
  */
-public class UIViewRootUtilImpl extends UIViewRootWrapper {
+public class UIViewRootUtilImpl extends UIViewRoot {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(UIViewRootUtilImpl.class);
 
-	// Private Members
-	private UIViewRoot wrappedUIViewRoot;
-
-	public UIViewRootUtilImpl(UIViewRoot wrappedUIViewRoot) {
-		this.wrappedUIViewRoot = wrappedUIViewRoot;
-	}
-
-	@Override
-	public void removeComponentResource(FacesContext context, UIComponent componentResource) {
-
-		if (componentResource instanceof UnrenderedResourceDependency) {
-
-			UnrenderedResourceDependency unrenderedResourceDependency = (UnrenderedResourceDependency)
-				componentResource;
-			componentResource = unrenderedResourceDependency.getWrapped();
-		}
-
-		super.removeComponentResource(context, componentResource);
-	}
-
-	@Override
-	public void removeComponentResource(FacesContext context, UIComponent componentResource, String target) {
-
-		if (componentResource instanceof UnrenderedResourceDependency) {
-
-			UnrenderedResourceDependency unrenderedResourceDependency = (UnrenderedResourceDependency)
-				componentResource;
-			componentResource = unrenderedResourceDependency.getWrapped();
-		}
-
-		super.removeComponentResource(context, componentResource, target);
-	}
-
 	@Override
 	public List<UIComponent> getComponentResources(FacesContext facesContext, String target) {
 
-		List<UIComponent> componentResources = super.getComponentResources(facesContext, target);
-		componentResources = new ArrayList<UIComponent>(componentResources);
+		// Get the list of all component resources.
+		List<UIComponent> allComponentResources = super.getComponentResources(facesContext, target);
 
-		ListIterator<UIComponent> componentResourceListIterator = componentResources.listIterator();
+		// Determine which of the component resources are unsatisfied.
+		List<UIComponent> unsatisfiedComponentResources = new ArrayList<UIComponent>(allComponentResources.size());
+		ResourceDependencyVerifier resourceDependencyVerifier = ResourceDependencyHandlerFactory
+			.getResourceDependencyHandlerInstance();
 
-		ResourceDependencyHandlerFactory resourceDependencyHandlerFactory = (ResourceDependencyHandlerFactory)
-			FactoryExtensionFinder.getFactory(ResourceDependencyHandlerFactory.class);
-		ResourceDependencyHandler resourceDependencyHandler =
-			resourceDependencyHandlerFactory.getResourceDependencyHandler();
+		for (UIComponent componentResource : allComponentResources) {
 
-		while (componentResourceListIterator.hasNext()) {
-
-			UIComponent componentResource = componentResourceListIterator.next();
-
-			if (resourceDependencyHandler.isSatisfied(componentResource)) {
-
-				if (!(componentResource instanceof UnrenderedResourceDependency)) {
-
-					componentResourceListIterator.remove();
-					componentResource = new UnrenderedResourceDependency(componentResource);
-					componentResourceListIterator.add(componentResource);
-				}
+			if (resourceDependencyVerifier.isResourceDependencySatisfied(componentResource)) {
 
 				if (logger.isDebugEnabled()) {
 
 					Map<String, Object> componentResourceAttributes = componentResource.getAttributes();
 
 					logger.debug(
-						"Suppressed rendering of resource: name=[{0}] library=[{1}] rendererType=[{2}] value=[{3}] className=[{4}]",
-						new Object[] {
-							componentResourceAttributes.get("name"), componentResourceAttributes.get("library"),
-							componentResource.getRendererType(), getComponentValue(componentResource),
-							componentResource.getClass().getName(),
-						});
+						"Resource dependency already satisfied: name=[{0}] library=[{1}] rendererType=[{2}] value=[{3}] className=[{4}]",
+						componentResourceAttributes.get("name"), componentResourceAttributes.get("library"),
+						componentResource.getRendererType(), getComponentValue(componentResource),
+						componentResource.getClass().getName());
 				}
+			}
+			else {
+				unsatisfiedComponentResources.add(componentResource);
 			}
 		}
 
-		return Collections.unmodifiableList(componentResources);
+		// Return an immutable list of unsatisfied resources.
+		return Collections.unmodifiableList(unsatisfiedComponentResources);
 	}
 
 	private String getComponentValue(UIComponent componentResource) {
@@ -132,10 +93,5 @@ public class UIViewRootUtilImpl extends UIViewRootWrapper {
 		}
 
 		return componentResourceValue;
-	}
-
-	@Override
-	public UIViewRoot getWrapped() {
-		return wrappedUIViewRoot;
 	}
 }

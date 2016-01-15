@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2016 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2015 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,19 +17,40 @@ package com.liferay.faces.util.application;
 
 import javax.faces.FacesWrapper;
 
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
+
 
 /**
- * This class provides the contract for a factory which can create {@link ResourceDependencyHandler}s.
+ * This class provides the contract for a factory that can create instances of {@link ResourceDependencyVerifier}. It
+ * implements {@link FacesWrapper} in order to follow the standard factory delegation pattern found in the Faces API. If
+ * a concrete implementation of this class has a one-arg constructor and the type of the argument is {@link
+ * ResourceDependencyHandlerFactory} then the constructor will be called with the next factory instance in the
+ * delegation chain.
  *
  * @author  Kyle Stiemann
  */
 public abstract class ResourceDependencyHandlerFactory implements FacesWrapper<ResourceDependencyHandlerFactory> {
 
 	/**
-	 * Gets an instance of {@link ResourceDependencyHandler}.
-	 *
-	 * @return  A ResourceDependencyHandler which wraps the ResourceDependencyHandler returned by the wrapped
-	 *          ResourceDependencyHandlerFactory instance.
+	 * Gets an instance of {@link ResourceDependencyVerifier} from the {@link ResourceDependencyHandlerFactory} found by
+	 * the {@link FactoryExtensionFinder}.
 	 */
-	public abstract ResourceDependencyHandler getResourceDependencyHandler();
+	public static ResourceDependencyVerifier getResourceDependencyHandlerInstance() {
+
+		ResourceDependencyHandlerFactory resourceDependencyHandlerFactory = (ResourceDependencyHandlerFactory)
+			FactoryExtensionFinder.getFactory(ResourceDependencyHandlerFactory.class);
+
+		return resourceDependencyHandlerFactory.getResourceDependencyVerifier();
+	}
+
+	/**
+	 * Gets an instance of {@link ResourceDependencyVerifier} which is the first member of the delegation chain.
+	 */
+	public abstract ResourceDependencyVerifier getResourceDependencyVerifier();
+
+	/**
+	 * If this factory has been decorated then this method provides access to the wrapped factory instance.
+	 */
+	@Override
+	public abstract ResourceDependencyHandlerFactory getWrapped();
 }

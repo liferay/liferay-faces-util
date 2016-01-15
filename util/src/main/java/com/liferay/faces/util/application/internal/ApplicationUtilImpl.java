@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2016 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2015 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,9 @@ import javax.faces.el.ValueBinding;
 
 
 /**
+ * The purpose of this class is to ensure that instances of {@link UIViewRootUtilImpl} are created when
+ * "javax.faces.ViewRoot" is specified as the component type.
+ *
  * @author  Kyle Stiemann
  */
 public class ApplicationUtilImpl extends ApplicationWrapper {
@@ -40,75 +43,61 @@ public class ApplicationUtilImpl extends ApplicationWrapper {
 	@Override
 	public UIComponent createComponent(String componentType) throws FacesException {
 
-		UIComponent createdUIComponent = super.createComponent(componentType);
-
 		if (UIViewRoot.COMPONENT_TYPE.equals(componentType)) {
-
-			UIViewRoot createdUIViewRoot = (UIViewRoot) createdUIComponent;
-			createdUIComponent = new UIViewRootUtilImpl(createdUIViewRoot);
+			return new UIViewRootUtilImpl();
 		}
-
-		return createdUIComponent;
+		else {
+			return super.createComponent(componentType);
+		}
 	}
 
 	@Override
 	public UIComponent createComponent(FacesContext context, String componentType, String rendererType) {
 
-		UIComponent createdUIComponent = super.createComponent(context, componentType, rendererType);
-
 		if (UIViewRoot.COMPONENT_TYPE.equals(componentType)) {
-
-			UIViewRoot createdUIViewRoot = (UIViewRoot) createdUIComponent;
-			createdUIComponent = new UIViewRootUtilImpl(createdUIViewRoot);
+			return new UIViewRootUtilImpl();
 		}
-
-		return createdUIComponent;
+		else {
+			return super.createComponent(context, componentType, rendererType);
+		}
 	}
 
 	@Override
 	public UIComponent createComponent(ValueExpression componentExpression, FacesContext context, String componentType)
 		throws FacesException {
 
-		UIComponent createdUIComponent = super.createComponent(componentExpression, context, componentType);
-
 		if (UIViewRoot.COMPONENT_TYPE.equals(componentType)) {
-
-			UIViewRoot createdUIViewRoot = (UIViewRoot) createdUIComponent;
-			createdUIComponent = new UIViewRootUtilImpl(createdUIViewRoot);
+			return new UIViewRootUtilImpl();
 		}
-
-		return createdUIComponent;
+		else {
+			return super.createComponent(componentExpression, context, componentType);
+		}
 	}
 
 	@Override
+	@Deprecated
+	@SuppressWarnings("deprecation")
 	public UIComponent createComponent(ValueBinding componentBinding, FacesContext context, String componentType)
 		throws FacesException {
 
-		UIComponent createdUIComponent = super.createComponent(componentBinding, context, componentType);
-
 		if (UIViewRoot.COMPONENT_TYPE.equals(componentType)) {
-
-			UIViewRoot createdUIViewRoot = (UIViewRoot) createdUIComponent;
-			createdUIComponent = new UIViewRootUtilImpl(createdUIViewRoot);
+			return new UIViewRootUtilImpl();
 		}
-
-		return createdUIComponent;
+		else {
+			return super.createComponent(componentBinding, context, componentType);
+		}
 	}
 
 	@Override
 	public UIComponent createComponent(ValueExpression componentExpression, FacesContext context, String componentType,
 		String rendererType) {
 
-		UIComponent createdUIComponent = super.createComponent(componentExpression, context, componentType,
-				rendererType);
-
 		if (UIViewRoot.COMPONENT_TYPE.equals(componentType)) {
-
-			UIViewRoot createdUIViewRoot = (UIViewRoot) createdUIComponent;
-			createdUIComponent = new UIViewRootUtilImpl(createdUIViewRoot);
+			return new UIViewRootUtilImpl();
 		}
-
-		return createdUIComponent;
+		else {
+			return super.createComponent(componentExpression, context, componentType, rendererType);
+		}
 	}
 
 	@Override
