@@ -22,7 +22,7 @@ import com.liferay.faces.util.application.ResourceDependencyHandlerFactory;
 /**
  * @author  Kyle Stiemann
  */
-public class ResourceDependencyHandlerFactoryImpl extends ResourceDependencyHandlerFactory {
+public class ResourceDependencyVerifierFactoryImpl extends ResourceDependencyHandlerFactory {
 
 	@Override
 	public ResourceDependencyHandler getResourceDependencyHandler() {
