@@ -25,8 +25,8 @@ import javax.faces.component.UIViewRoot;
 import javax.faces.component.ValueHolder;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.util.application.ResourceDependencyVerifierFactory;
 import com.liferay.faces.util.application.ResourceDependencyVerifier;
+import com.liferay.faces.util.application.ResourceDependencyVerifierFactory;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
