@@ -13,26 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.liferay.faces.util.application.internal;
+package com.liferay.faces.util.application;
 
-import com.liferay.faces.util.application.ResourceDependencyHandlerFactory;
-import com.liferay.faces.util.application.ResourceDependencyVerifier;
+import javax.faces.FacesWrapper;
+import javax.faces.component.UIComponent;
 
 
 /**
+ * Provides a simple implementation of {@link ResourceDependencyVerifier} that can be subclassed in order to decorate
+ * another instance of the same type.
+ *
  * @author  Kyle Stiemann
  */
-public class ResourceDependencyVerifierFactoryImpl extends ResourceDependencyHandlerFactory {
+public abstract class ResourceDependencyVerifierWrapper implements ResourceDependencyVerifier,
+	FacesWrapper<ResourceDependencyVerifier> {
 
-	// Private Data Members
-	private ResourceDependencyVerifier resourceDependencyVerifier = new ResourceDependencyVerifierImpl();
-
-	public ResourceDependencyVerifier getResourceDependencyVerifier() {
-		return resourceDependencyVerifier;
-	}
-
+	/**
+	 * @see  {@link ResourceDependencyVerifier#isResourceDependencySatisfied(UIComponent)}
+	 */
 	@Override
-	public ResourceDependencyHandlerFactory getWrapped() {
-		return null;
+	public boolean isResourceDependencySatisfied(UIComponent componentResource) {
+		return getWrapped().isResourceDependencySatisfied(componentResource);
 	}
 }
