@@ -21,18 +21,18 @@ import com.liferay.faces.util.product.ProductConstants;
 /**
  * @author  Neil Griffin
  */
-public class ProductLiferayFacesCrystalImpl extends ProductBaseImpl {
+public class ProductLiferayFacesMetalImpl extends ProductBaseImpl {
 
-	public ProductLiferayFacesCrystalImpl() {
+	public ProductLiferayFacesMetalImpl() {
 
 		try {
-			this.title = ProductConstants.LIFERAY_FACES_CRYSTAL;
+			this.title = ProductConstants.LIFERAY_FACES_METAL;
 
-			Class<?> clazz = Class.forName("com.liferay.faces.crystal.component.inputtext.InputText");
-			init(clazz, ProductConstants.LIFERAY_FACES_CRYSTAL);
+			Class<?> clazz = Class.forName("com.liferay.faces.metal.component.inputtext.InputText");
+			init(clazz, ProductConstants.LIFERAY_FACES_METAL);
 		}
 		catch (Exception e) {
-			// Ignore -- Liferay Faces Alloy is likely not present.
+			// Ignore -- Liferay Faces Metal is likely not present.
 		}
 	}
 }
