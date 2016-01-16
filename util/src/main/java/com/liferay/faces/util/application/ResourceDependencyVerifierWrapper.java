@@ -30,38 +30,6 @@ import javax.faces.component.UIComponent;
 public abstract class ResourceDependencyVerifierWrapper implements ResourceDependencyVerifier,
 	FacesWrapper<ResourceDependencyVerifier> {
 
-	protected static String getResourceDependencyId(UIComponent componentResource) {
-
-		String library = null;
-		String name = null;
-
-		if (componentResource != null) {
-
-			Map<String, Object> componentResourceAttributes = componentResource.getAttributes();
-			library = (String) componentResourceAttributes.get("library");
-			name = (String) componentResourceAttributes.get("name");
-		}
-
-		return getResourceDependencyId(library, name);
-	}
-
-	protected static String getResourceDependencyId(String library, String name) {
-
-		String resourceDependencyId;
-
-		if (library == null) {
-			resourceDependencyId = name;
-		}
-		else if (name == null) {
-			resourceDependencyId = library;
-		}
-		else {
-			resourceDependencyId = library + ":" + name;
-		}
-
-		return resourceDependencyId;
-	}
-
 	/**
 	 * @see  {@link ResourceDependencyVerifier#isResourceDependencySatisfied(UIComponent)}
 	 */

@@ -22,11 +22,11 @@ import java.util.Map;
 
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIViewRoot;
-import javax.faces.component.ValueHolder;
 import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.application.ResourceDependencyVerifier;
 import com.liferay.faces.util.application.ResourceDependencyVerifierFactory;
+import com.liferay.faces.util.application.ResourceUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -66,7 +66,7 @@ public class UIViewRootUtilImpl extends UIViewRoot {
 					logger.debug(
 						"Resource dependency already satisfied: name=[{0}] library=[{1}] rendererType=[{2}] value=[{3}] className=[{4}]",
 						componentResourceAttributes.get("name"), componentResourceAttributes.get("library"),
-						componentResource.getRendererType(), getComponentValue(componentResource),
+						componentResource.getRendererType(), ResourceUtil.getComponentValue(componentResource),
 						componentResource.getClass().getName());
 				}
 			}
@@ -77,21 +77,5 @@ public class UIViewRootUtilImpl extends UIViewRoot {
 
 		// Return an immutable list of unsatisfied resources.
 		return Collections.unmodifiableList(unsatisfiedComponentResources);
-	}
-
-	private String getComponentValue(UIComponent componentResource) {
-
-		String componentResourceValue = null;
-
-		if (componentResource instanceof ValueHolder) {
-			ValueHolder valueHolder = (ValueHolder) componentResource;
-			Object valueAsObject = valueHolder.getValue();
-
-			if (valueAsObject != null) {
-				componentResourceValue = valueAsObject.toString();
-			}
-		}
-
-		return componentResourceValue;
 	}
 }
