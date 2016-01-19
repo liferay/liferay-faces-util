@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2015 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2016 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,22 +19,22 @@ import java.util.Map;
 
 import javax.faces.FacesWrapper;
 import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 
 
 /**
- * Provides a simple implementation of {@link ResourceDependencyVerifier} that can be subclassed in order to decorate
- * another instance of the same type.
+ * Provides a simple implementation of {@link ResourceVerifier} that can be subclassed in order to decorate another
+ * instance of the same type.
  *
  * @author  Kyle Stiemann
  */
-public abstract class ResourceDependencyVerifierWrapper implements ResourceDependencyVerifier,
-	FacesWrapper<ResourceDependencyVerifier> {
+public abstract class ResourceVerifierWrapper implements ResourceVerifier, FacesWrapper<ResourceVerifier> {
 
 	/**
-	 * @see  {@link ResourceDependencyVerifier#isResourceDependencySatisfied(UIComponent)}
+	 * @see  {@link ResourceVerifier#isDependencySatisfied(UIComponent)}
 	 */
 	@Override
-	public boolean isResourceDependencySatisfied(UIComponent componentResource) {
-		return getWrapped().isResourceDependencySatisfied(componentResource);
+	public boolean isDependencySatisfied(FacesContext facestContext, UIComponent componentResource) {
+		return getWrapped().isDependencySatisfied(facestContext, componentResource);
 	}
 }
