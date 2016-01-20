@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2015 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2016 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,19 +39,19 @@ import javax.faces.context.FacesContext;
  *
  * @author  Kyle Stiemann
  */
-public interface ResourceDependencyVerifier {
+public interface ResourceVerifier {
 
 	/**
 	 * Determines whether or not a {@link ResourceDependency} represented by a {@link UIComponent} has already been
 	 * satisfied.
 	 *
-	 * <p>Since the {@link ResourceDependencyVerifier} utilizes the delegation pattern, if an implementation in the
-	 * delegation chain determines that a resource dependency has been satisfied, then it returns <code>true</code>.
-	 * Otherwise it will return the value from the next member in the delegation chain. The default implementation
-	 * returns <code>false</code> assuming that a resource dependency has not already been satisfied and therefore needs
-	 * to be rendered.</p>
+	 * <p>Since the {@link ResourceVerifier} utilizes the delegation pattern, if an implementation in the delegation
+	 * chain determines that a resource dependency has been satisfied, then it returns <code>true</code>. Otherwise it
+	 * will return the value from the next member in the delegation chain. The default implementation returns <code>
+	 * false</code> assuming that a resource dependency has not already been satisfied and therefore needs to be
+	 * rendered.</p>
 	 *
 	 * @return  <code>true</code> when the resource dependency is already satisfied, otherwise <code>false</code>.
 	 */
-	public boolean isResourceDependencySatisfied(UIComponent componentResource);
+	public boolean isDependencySatisfied(FacesContext facestContext, UIComponent componentResource);
 }

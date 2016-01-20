@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2015 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2016 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,11 +22,11 @@ import java.util.Map;
 
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIViewRoot;
+import javax.faces.component.ValueHolder;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.util.application.ResourceDependencyVerifier;
-import com.liferay.faces.util.application.ResourceDependencyVerifierFactory;
-import com.liferay.faces.util.application.ResourceUtil;
+import com.liferay.faces.util.application.ResourceVerifier;
+import com.liferay.faces.util.application.ResourceVerifierFactory;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -52,12 +52,11 @@ public class UIViewRootUtilImpl extends UIViewRoot {
 
 		// Determine which of the component resources are unsatisfied.
 		List<UIComponent> unsatisfiedComponentResources = new ArrayList<UIComponent>(allComponentResources.size());
-		ResourceDependencyVerifier resourceDependencyVerifier = ResourceDependencyVerifierFactory
-			.getResourceDependencyHandlerInstance();
+		ResourceVerifier resourceVerifier = ResourceVerifierFactory.getResourceDependencyHandlerInstance();
 
 		for (UIComponent componentResource : allComponentResources) {
 
-			if (resourceDependencyVerifier.isResourceDependencySatisfied(componentResource)) {
+			if (resourceVerifier.isDependencySatisfied(facesContext, componentResource)) {
 
 				if (logger.isDebugEnabled()) {
 
@@ -66,7 +65,7 @@ public class UIViewRootUtilImpl extends UIViewRoot {
 					logger.debug(
 						"Resource dependency already satisfied: name=[{0}] library=[{1}] rendererType=[{2}] value=[{3}] className=[{4}]",
 						componentResourceAttributes.get("name"), componentResourceAttributes.get("library"),
-						componentResource.getRendererType(), ResourceUtil.getComponentValue(componentResource),
+						componentResource.getRendererType(), getComponentValue(componentResource),
 						componentResource.getClass().getName());
 				}
 			}
@@ -77,5 +76,21 @@ public class UIViewRootUtilImpl extends UIViewRoot {
 
 		// Return an immutable list of unsatisfied resources.
 		return Collections.unmodifiableList(unsatisfiedComponentResources);
+	}
+
+	private String getComponentValue(UIComponent componentResource) {
+
+		String componentResourceValue = null;
+
+		if (componentResource instanceof ValueHolder) {
+			ValueHolder valueHolder = (ValueHolder) componentResource;
+			Object valueAsObject = valueHolder.getValue();
+
+			if (valueAsObject != null) {
+				componentResourceValue = valueAsObject.toString();
+			}
+		}
+
+		return componentResourceValue;
 	}
 }

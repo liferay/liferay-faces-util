@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2015 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2016 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,17 +16,18 @@
 package com.liferay.faces.util.application.internal;
 
 import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 
-import com.liferay.faces.util.application.ResourceDependencyVerifier;
+import com.liferay.faces.util.application.ResourceVerifier;
 
 
 /**
  * @author  Kyle Stiemann
  */
-public class ResourceDependencyVerifierImpl implements ResourceDependencyVerifier {
+public class ResourceVerifierImpl implements ResourceVerifier {
 
 	@Override
-	public boolean isResourceDependencySatisfied(UIComponent componentResource) {
+	public boolean isDependencySatisfied(FacesContext facestContext, UIComponent componentResource) {
 
 		// Assume that the specified resource dependency has not been satisfied and that it should therefore be
 		// rendered.

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2015 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2016 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,24 +15,24 @@
  */
 package com.liferay.faces.util.application.internal;
 
-import com.liferay.faces.util.application.ResourceDependencyVerifier;
-import com.liferay.faces.util.application.ResourceDependencyVerifierFactory;
+import com.liferay.faces.util.application.ResourceVerifier;
+import com.liferay.faces.util.application.ResourceVerifierFactory;
 
 
 /**
  * @author  Kyle Stiemann
  */
-public class ResourceDependencyVerifierFactoryImpl extends ResourceDependencyVerifierFactory {
+public class ResourceVerifierFactoryImpl extends ResourceVerifierFactory {
 
 	// Private Data Members
-	private ResourceDependencyVerifier resourceDependencyVerifier = new ResourceDependencyVerifierImpl();
+	private ResourceVerifier resourceVerifier = new ResourceVerifierImpl();
 
-	public ResourceDependencyVerifier getResourceDependencyVerifier() {
-		return resourceDependencyVerifier;
+	public ResourceVerifier getResourceVerifier() {
+		return resourceVerifier;
 	}
 
 	@Override
-	public ResourceDependencyVerifierFactory getWrapped() {
+	public ResourceVerifierFactory getWrapped() {
 		return null;
 	}
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2015 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2016 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ package com.liferay.faces.util.application;
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
-import javax.faces.component.ValueHolder;
 
 
 /**
@@ -31,23 +30,7 @@ public final class ResourceUtil {
 		throw new AssertionError();
 	}
 
-	public static String getComponentValue(UIComponent componentResource) {
-
-		String componentResourceValue = null;
-
-		if (componentResource instanceof ValueHolder) {
-			ValueHolder valueHolder = (ValueHolder) componentResource;
-			Object valueAsObject = valueHolder.getValue();
-
-			if (valueAsObject != null) {
-				componentResourceValue = valueAsObject.toString();
-			}
-		}
-
-		return componentResourceValue;
-	}
-
-	public static String getResourceDependencyId(UIComponent componentResource) {
+	public static String getResourceId(UIComponent componentResource) {
 
 		String library = null;
 		String name = null;
@@ -59,10 +42,10 @@ public final class ResourceUtil {
 			name = (String) componentResourceAttributes.get("name");
 		}
 
-		return getResourceDependencyId(library, name);
+		return getResourceId(library, name);
 	}
 
-	public static String getResourceDependencyId(String library, String name) {
+	public static String getResourceId(String library, String name) {
 
 		String resourceDependencyId;
 
