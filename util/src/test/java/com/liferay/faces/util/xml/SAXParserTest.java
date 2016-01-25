@@ -199,19 +199,19 @@ public class SAXParserTest {
 		protected void testURI(String uri, String localName) {
 
 			if (localName.equals("composition")) {
-				Assert.assertEquals(uri, "http://xmlns.jcp.org/jsf/facelets");
+				Assert.assertEquals(uri, "http://java.sun.com/jsf/facelets");
 			}
 			else if (localName.equals("layout")) {
 				Assert.assertEquals(uri, "http://liferay.com/faces/aui");
 			}
 			else if (localName.equals("clipboard")) {
-				Assert.assertEquals(uri, "http://xmlns.jcp.org/jsf/composite/example-cc");
+				Assert.assertEquals(uri, "http://java.sun.com/jsf/composite/example-cc");
 			}
 			else if (localName.equals("form")) {
-				Assert.assertEquals(uri, "http://xmlns.jcp.org/jsf/html");
+				Assert.assertEquals(uri, "http://java.sun.com/jsf/html");
 			}
 			else if (localName.equals("ajax")) {
-				Assert.assertEquals(uri, "http://xmlns.jcp.org/jsf/core");
+				Assert.assertEquals(uri, "http://java.sun.com/jsf/core");
 			}
 			else if (localName.equals("inputFile")) {
 				Assert.assertEquals(uri, "http://liferay.com/faces/bridge");
