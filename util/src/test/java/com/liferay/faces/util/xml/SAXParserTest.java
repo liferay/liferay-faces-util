@@ -84,7 +84,7 @@ public class SAXParserTest {
 		}
 	}
 
-	protected class TestHandler extends DefaultHandler implements LexicalHandler {
+	private static class TestHandler extends DefaultHandler implements LexicalHandler {
 
 		// Private Data Members
 		private int totalAttributes;

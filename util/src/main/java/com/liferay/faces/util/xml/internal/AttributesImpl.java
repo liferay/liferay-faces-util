@@ -196,7 +196,7 @@ public class AttributesImpl implements Attributes {
 		return value;
 	}
 
-	protected class Attribute {
+	private static class Attribute {
 
 		// Public Data Members
 		public String uri;

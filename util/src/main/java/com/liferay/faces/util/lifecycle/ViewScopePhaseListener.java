@@ -177,7 +177,7 @@ public class ViewScopePhaseListener implements PhaseListener {
 		return PhaseId.RESTORE_VIEW;
 	}
 
-	protected class ManagedPropertyInjector {
+	private static class ManagedPropertyInjector {
 
 		// Private Constants
 		private static final String EXPRESSION_PREFIX = "#{";
