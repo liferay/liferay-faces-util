@@ -85,7 +85,7 @@ public class PartialViewContextOnChangeImpl extends PartialViewContextWrapper {
 			Collection<String> renderIds = wrappedPartialViewContext.getExecuteIds();
 			EnumSet<VisitHint> visitHints = EnumSet.of(VisitHint.EXECUTE_LIFECYCLE);
 			VisitContext visitContext = visitContextFactory.getVisitContext(facesContext, renderIds, visitHints);
-			VisitCallback visitCallback = new VisitCallbackApplyRequestValuesImpl();
+			VisitCallback visitCallback = new VisitCallbackApplyRequestValuesImpl(valueMap, validMap);
 			facesContext.getViewRoot().visitTree(visitContext, visitCallback);
 		}
 
@@ -98,7 +98,7 @@ public class PartialViewContextOnChangeImpl extends PartialViewContextWrapper {
 			Collection<String> renderIds = wrappedPartialViewContext.getExecuteIds();
 			EnumSet<VisitHint> visitHints = EnumSet.of(VisitHint.EXECUTE_LIFECYCLE);
 			VisitContext visitContext = visitContextFactory.getVisitContext(facesContext, renderIds, visitHints);
-			VisitCallback visitCallback = new VisitCallbackRenderResponseImpl();
+			VisitCallback visitCallback = new VisitCallbackRenderResponseImpl(facesContext, valueMap, validMap);
 			facesContext.getViewRoot().visitTree(visitContext, visitCallback);
 		}
 
@@ -119,7 +119,15 @@ public class PartialViewContextOnChangeImpl extends PartialViewContextWrapper {
 		return wrappedPartialViewContext;
 	}
 
-	protected class VisitCallbackApplyRequestValuesImpl implements VisitCallback {
+	private static class VisitCallbackApplyRequestValuesImpl implements VisitCallback {
+		
+		private Map<String, Object> valueMap;
+		private Map<String, Boolean> validMap;
+		
+		public VisitCallbackApplyRequestValuesImpl(Map<String, Object> valueMap, Map<String, Boolean> validMap) {
+			this.validMap = validMap;
+			this.valueMap = valueMap;
+		}
 
 		public VisitResult visit(VisitContext visitContext, UIComponent uiComponent) {
 
@@ -137,7 +145,17 @@ public class PartialViewContextOnChangeImpl extends PartialViewContextWrapper {
 
 	}
 
-	protected class VisitCallbackRenderResponseImpl implements VisitCallback {
+	private static class VisitCallbackRenderResponseImpl implements VisitCallback {
+		
+		private FacesContext facesContext;
+		private Map<String, Object> valueMap;
+		private Map<String, Boolean> validMap;
+		
+		public VisitCallbackRenderResponseImpl(FacesContext facesContext, Map<String, Object> valueMap, Map<String, Boolean> validMap) {
+			this.facesContext = facesContext;
+			this.validMap = validMap;
+			this.valueMap = valueMap;
+		}
 
 		public VisitResult visit(VisitContext visitContext, UIComponent uiComponent) {
 
