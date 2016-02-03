@@ -26,7 +26,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
- * this class provides an extension point to allow developers to filter the text of a wrapped JSF resource.
+ * This class provides an extension point that allows developers to filter the text of a wrapped JSF resource.
  *
  * @author  Kyle Stiemann
  */
@@ -44,14 +44,14 @@ public abstract class FilteredResourceBase extends ResourceWrapper {
 	}
 
 	/**
-	 * This is an abstract method that allows developers to filter the contents of a resource (via {@link
+	 * This is an abstract method that allows developers to filter the contents of a resource (typically via {@link
 	 * String#replace(char, char)} etc.) before it is written to the response.
 	 *
-	 * @param   resourceContents  The string containing the contents of the resource.
+	 * @param   resourceText  The string containing the text content of the resource.
 	 *
 	 * @return  the filtered contents of the resource.
 	 */
-	protected abstract String filter(String resourceContents);
+	protected abstract String filter(String resourceText);
 
 	/**
 	 * @return  the character buffer size used to convert the wrapped resource's {@link InputStream} to a string.
