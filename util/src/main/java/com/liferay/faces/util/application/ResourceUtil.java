@@ -15,6 +15,11 @@
  */
 package com.liferay.faces.util.application;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
@@ -28,6 +33,87 @@ public final class ResourceUtil {
 	// Prevent instantiation since this is a static utility class.
 	private ResourceUtil() {
 		throw new AssertionError();
+	}
+
+	/**
+	 * Converts a String to an {@link InputStream}.
+	 *
+	 * @param   string
+	 * @param   encoding
+	 *
+	 * @return  the InputStream representation of the String.
+	 *
+	 * @throws  UnsupportedEncodingException
+	 */
+	public static InputStream toInputStream(String string, String encoding) throws UnsupportedEncodingException {
+		return new ByteArrayInputStream(string.getBytes(encoding));
+	}
+
+	/**
+	 * Calls {@link ResourceUtil#toString(java.io.InputStream, java.lang.String, int)} with the default buffer size of
+	 * 1024.
+	 */
+	/**
+	 * Converts an {@link InputStream} to a String. Calls {@link ResourceUtil#toString(java.io.InputStream,
+	 * java.lang.String, int)} with the default buffer size of 1024.
+	 *
+	 * @param   inputStream  The InputStream which contains some text.
+	 * @param   encoding     The encoding of the text of the InputStream.
+	 *
+	 * @return  the string content of the InputStream.
+	 *
+	 * @throws  IOException
+	 */
+	public static String toString(InputStream inputStream, String encoding) throws IOException {
+		return toString(inputStream, encoding, 1024);
+	}
+
+	/**
+	 * Converts an {@link InputStream} to a String.
+	 *
+	 * @param   inputStream  The InputStream which contains some text.
+	 * @param   encoding     The encoding of the text of the InputStream.
+	 * @param   bufferSize   The size of the character buffer to be used when reading the file. If you do not want to
+	 *                       specify this value, use {@link ResourceUtil#toInputStream(java.lang.String,
+	 *                       java.lang.String)} which provides a default of 1024.
+	 *
+	 * @return  the string content of the InputStream.
+	 *
+	 * @throws  IOException
+	 */
+	public static String toString(InputStream inputStream, String encoding, int bufferSize) throws IOException {
+
+		char[] buffer = new char[bufferSize];
+		StringBuilder stringBuilder = new StringBuilder();
+		InputStreamReader inputStreamReader = null;
+
+		try {
+
+			inputStreamReader = new InputStreamReader(inputStream, encoding);
+
+			int charsRead = 0;
+
+			while (charsRead != -1) {
+
+				charsRead = inputStreamReader.read(buffer, 0, buffer.length);
+
+				if (charsRead > 0) {
+					stringBuilder.append(buffer, 0, charsRead);
+				}
+			}
+		}
+		finally {
+
+			if (inputStream != null) {
+				inputStream.close();
+			}
+
+			if (inputStreamReader != null) {
+				inputStreamReader.close();
+			}
+		}
+
+		return stringBuilder.toString();
 	}
 
 	public static String getResourceId(UIComponent componentResource) {
