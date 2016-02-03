@@ -50,25 +50,6 @@ public final class ResourceUtil {
 	}
 
 	/**
-	 * Calls {@link ResourceUtil#toString(java.io.InputStream, java.lang.String, int)} with the default buffer size of
-	 * 1024.
-	 */
-	/**
-	 * Converts an {@link InputStream} to a String. Calls {@link ResourceUtil#toString(java.io.InputStream,
-	 * java.lang.String, int)} with the default buffer size of 1024.
-	 *
-	 * @param   inputStream  The InputStream which contains some text.
-	 * @param   encoding     The encoding of the text of the InputStream.
-	 *
-	 * @return  the string content of the InputStream.
-	 *
-	 * @throws  IOException
-	 */
-	public static String toString(InputStream inputStream, String encoding) throws IOException {
-		return toString(inputStream, encoding, 1024);
-	}
-
-	/**
 	 * Converts an {@link InputStream} to a String.
 	 *
 	 * @param   inputStream  The InputStream which contains some text.
