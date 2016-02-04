@@ -29,7 +29,7 @@ public abstract class ScriptWrapper implements Script, Wrapper<Script> {
 	/**
 	 * @see  {@link Script#getModules()}
 	 */
-	@Override
+	// Java 1.6+ @Override
 	public String[] getModules() {
 		return getWrapped().getModules();
 	}
@@ -37,7 +37,7 @@ public abstract class ScriptWrapper implements Script, Wrapper<Script> {
 	/**
 	 * @see  {@link Script#getSourceCode()}
 	 */
-	@Override
+	// Java 1.6+ @Override
 	public String getSourceCode() {
 		return getWrapped().getSourceCode();
 	}
@@ -45,7 +45,7 @@ public abstract class ScriptWrapper implements Script, Wrapper<Script> {
 	/**
 	 * @see  {@link Script#getType()}
 	 */
-	@Override
+	// Java 1.6+ @Override
 	public Type getType() {
 		return getWrapped().getType();
 	}
