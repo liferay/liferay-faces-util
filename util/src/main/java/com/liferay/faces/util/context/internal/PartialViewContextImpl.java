@@ -77,7 +77,7 @@ public class PartialViewContextImpl extends PartialViewContextWrapper {
 	 *
 	 * @author  Kyle Stiemann
 	 */
-	protected class PartialResponseWriterImpl extends PartialResponseWriterWrapper {
+	private static class PartialResponseWriterImpl extends PartialResponseWriterWrapper {
 
 		// Private Data Members
 		private boolean wroteEval;
