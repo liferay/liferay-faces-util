@@ -16,7 +16,6 @@
 		</system-event-listener>
 	</application>
 	<factory>
-		<application-factory>com.liferay.faces.util.application.internal.ApplicationFactoryUtilImpl</application-factory>
 		<partial-view-context-factory>com.liferay.faces.util.context.internal.PartialViewContextFactoryImpl</partial-view-context-factory>
 		<faces-context-factory>com.liferay.faces.util.context.internal.FacesContextFactoryUtilImpl</faces-context-factory>
 		<render-kit-factory>com.liferay.faces.util.render.internal.RenderKitFactoryUtilImpl</render-kit-factory>
