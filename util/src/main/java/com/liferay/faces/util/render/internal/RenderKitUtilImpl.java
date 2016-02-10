@@ -44,6 +44,11 @@ public class RenderKitUtilImpl extends RenderKitWrapper {
 		if (UIOutput.COMPONENT_FAMILY.equals(family) && "javax.faces.Body".equals(rendererType)) {
 			renderer = new BodyRendererUtilImpl(renderer);
 		}
+		else if (UIOutput.COMPONENT_FAMILY.equals(family) &&
+				("javax.faces.resource.Script".equals(rendererType) ||
+					"javax.faces.resource.Stylesheet".equals(rendererType))) {
+			renderer = new ResourceRendererUtilImpl(renderer);
+		}
 
 		return renderer;
 	}
