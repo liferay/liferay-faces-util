@@ -34,7 +34,7 @@ public abstract class ResourceVerifierFactory implements FacesWrapper<ResourceVe
 	 * Gets an instance of {@link ResourceVerifier} from the {@link ResourceVerifierFactory} found by the {@link
 	 * FactoryExtensionFinder}.
 	 */
-	public static ResourceVerifier getResourceDependencyHandlerInstance() {
+	public static ResourceVerifier getResourceVerifierInstance() {
 
 		ResourceVerifierFactory resourceVerifierFactory = (ResourceVerifierFactory) FactoryExtensionFinder.getFactory(
 				ResourceVerifierFactory.class);
