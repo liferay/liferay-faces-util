@@ -50,6 +50,7 @@ public class ResourceRendererUtilImpl extends RendererWrapper implements Compone
 
 	// Private Members
 	private boolean transientFlag;
+	private ResourceVerifier resourceVerifier;
 	private Renderer wrappedRenderer;
 
 	/**
@@ -62,19 +63,18 @@ public class ResourceRendererUtilImpl extends RendererWrapper implements Compone
 	 */
 	public ResourceRendererUtilImpl() {
 		// Defer initialization of wrappedRenderer until restoreState(FacesContext, Object) is called.
+		resourceVerifier = ResourceVerifierFactory.getResourceVerifierInstance();
 	}
 
 	public ResourceRendererUtilImpl(Renderer wrappedRenderer) {
 		this.wrappedRenderer = wrappedRenderer;
+		resourceVerifier = ResourceVerifierFactory.getResourceVerifierInstance();
 	}
 
 	@Override
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
-		if (!isResourceDependencySatisfied(facesContext, uiComponent)) {
-			super.encodeBegin(facesContext, uiComponent);
-		}
-		else {
+		if (resourceVerifier.isDependencySatisfied(facesContext, uiComponent)) {
 
 			if (logger.isDebugEnabled()) {
 
@@ -85,16 +85,16 @@ public class ResourceRendererUtilImpl extends RendererWrapper implements Compone
 					componentResourceAttributes.get("name"), componentResourceAttributes.get("library"),
 					uiComponent.getRendererType(), getComponentValue(uiComponent), uiComponent.getClass().getName());
 			}
+		}
+		else {
+			super.encodeBegin(facesContext, uiComponent);
 		}
 	}
 
 	@Override
 	public void encodeChildren(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
-		if (!isResourceDependencySatisfied(facesContext, uiComponent)) {
-			super.encodeChildren(facesContext, uiComponent);
-		}
-		else {
+		if (resourceVerifier.isDependencySatisfied(facesContext, uiComponent)) {
 
 			if (logger.isDebugEnabled()) {
 
@@ -105,16 +105,16 @@ public class ResourceRendererUtilImpl extends RendererWrapper implements Compone
 					componentResourceAttributes.get("name"), componentResourceAttributes.get("library"),
 					uiComponent.getRendererType(), getComponentValue(uiComponent), uiComponent.getClass().getName());
 			}
+		}
+		else {
+			super.encodeChildren(facesContext, uiComponent);
 		}
 	}
 
 	@Override
 	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
-		if (!isResourceDependencySatisfied(facesContext, uiComponent)) {
-			super.encodeEnd(facesContext, uiComponent);
-		}
-		else {
+		if (resourceVerifier.isDependencySatisfied(facesContext, uiComponent)) {
 
 			if (logger.isDebugEnabled()) {
 
@@ -125,6 +125,9 @@ public class ResourceRendererUtilImpl extends RendererWrapper implements Compone
 					componentResourceAttributes.get("name"), componentResourceAttributes.get("library"),
 					uiComponent.getRendererType(), getComponentValue(uiComponent), uiComponent.getClass().getName());
 			}
+		}
+		else {
+			super.encodeEnd(facesContext, uiComponent);
 		}
 	}
 
@@ -186,13 +189,6 @@ public class ResourceRendererUtilImpl extends RendererWrapper implements Compone
 		}
 
 		return componentResourceValue;
-	}
-
-	private boolean isResourceDependencySatisfied(FacesContext facesContext, UIComponent componentResource) {
-
-		ResourceVerifier resourceVerifier = ResourceVerifierFactory.getResourceVerifierInstance();
-
-		return resourceVerifier.isDependencySatisfied(facesContext, componentResource);
 	}
 
 	@Override
