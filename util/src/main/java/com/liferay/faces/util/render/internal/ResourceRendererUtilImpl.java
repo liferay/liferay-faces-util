@@ -28,12 +28,12 @@ import javax.faces.event.ComponentSystemEventListener;
 import javax.faces.event.ListenerFor;
 import javax.faces.event.PostAddToViewEvent;
 import javax.faces.render.Renderer;
-import javax.faces.render.RendererWrapper;
 
 import com.liferay.faces.util.application.ResourceVerifier;
 import com.liferay.faces.util.application.ResourceVerifierFactory;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.render.RendererWrapper;
 
 
 /**
