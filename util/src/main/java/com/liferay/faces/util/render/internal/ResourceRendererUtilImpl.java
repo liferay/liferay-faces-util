@@ -62,6 +62,7 @@ public class ResourceRendererUtilImpl extends RendererWrapper implements Compone
 	 * constructor, and then calls the {@link #restoreState(FacesContext, Object)} method.
 	 */
 	public ResourceRendererUtilImpl() {
+
 		// Defer initialization of wrappedRenderer until restoreState(FacesContext, Object) is called.
 		resourceVerifier = ResourceVerifierFactory.getResourceVerifierInstance();
 	}
