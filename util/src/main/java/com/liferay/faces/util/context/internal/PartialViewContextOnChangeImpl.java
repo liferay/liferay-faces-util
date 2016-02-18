@@ -120,10 +120,10 @@ public class PartialViewContextOnChangeImpl extends PartialViewContextWrapper {
 	}
 
 	private static class VisitCallbackApplyRequestValuesImpl implements VisitCallback {
-		
+
 		private Map<String, Object> valueMap;
 		private Map<String, Boolean> validMap;
-		
+
 		public VisitCallbackApplyRequestValuesImpl(Map<String, Object> valueMap, Map<String, Boolean> validMap) {
 			this.validMap = validMap;
 			this.valueMap = valueMap;
@@ -146,12 +146,13 @@ public class PartialViewContextOnChangeImpl extends PartialViewContextWrapper {
 	}
 
 	private static class VisitCallbackRenderResponseImpl implements VisitCallback {
-		
+
 		private FacesContext facesContext;
 		private Map<String, Object> valueMap;
 		private Map<String, Boolean> validMap;
-		
-		public VisitCallbackRenderResponseImpl(FacesContext facesContext, Map<String, Object> valueMap, Map<String, Boolean> validMap) {
+
+		public VisitCallbackRenderResponseImpl(FacesContext facesContext, Map<String, Object> valueMap,
+			Map<String, Boolean> validMap) {
 			this.facesContext = facesContext;
 			this.validMap = validMap;
 			this.valueMap = valueMap;
