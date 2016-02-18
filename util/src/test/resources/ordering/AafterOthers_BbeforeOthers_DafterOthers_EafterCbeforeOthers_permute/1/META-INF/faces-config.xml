@@ -5,8 +5,8 @@
 	<name>a</name>
 	<ordering>
 		<after>
-        	<others />
-        </after>
+			<others />
+		</after>
 	</ordering>
 	<application>
 		<view-handler>com.a.ViewHandlerImpl</view-handler>

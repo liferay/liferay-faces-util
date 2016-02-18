@@ -4,8 +4,8 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
 	<ordering>
 		<after>
-        	<others />
-        </after>
+			<others />
+		</after>
 		<before>
 			<name>c</name>
 		</before>
