@@ -112,6 +112,31 @@ public class OrderingTest {
 		return extractedNames;
 	}
 
+	public static List<List<String>> permute(List<String> list) {
+
+		if (list.size() == 0) {
+			List<List<String>> newLols = new ArrayList<List<String>>();
+			newLols.add(new ArrayList<String>());
+			return newLols;
+		}
+
+		List<List<String>> lols = new ArrayList<List<String>>();
+
+		String first = list.remove(0);
+
+		List<List<String>> resultingLols = permute(list);
+		for (List<String> resultingList : resultingLols) {
+
+			for (int index = 0; index <= resultingList.size(); index++) {
+				List<String> listOfStrings = new ArrayList<String>(resultingList);
+				listOfStrings.add(index, first);
+				lols.add(listOfStrings);
+			}
+
+		}
+		return lols;
+	}
+
 	// This fails intermittently without the preSort
 	@Test
 	public void test00_0() throws Exception {
@@ -1014,72 +1039,126 @@ public class OrderingTest {
 
 	}
 
+	// TODO
 	@Test
-	public void test20_beforeCafterOthers_BbeforeC_DafterOthers_startWith_BCDEF() throws Exception {
+	public void test20_beforeCafterOthers_BbeforeOthers_DafterOthers_EbeforeOthers_permute() throws Exception {
 
 		List<FacesConfigDescriptor> facesConfigDescriptors = new ArrayList<FacesConfigDescriptor>();
-		parseConfigurationResources("ordering/_beforeCafterOthers_BbeforeC_DafterOthers_startWithABCDEF",
-			facesConfigDescriptors, META_INF_FACES_CONFIG_XML);
+		parseConfigurationResources("ordering/_beforeCafterOthers_BbeforeOthers_DafterOthers_EbeforeOthers",
+				facesConfigDescriptors, META_INF_FACES_CONFIG_XML);
 
-		String[] originalOrder = extractNames(facesConfigDescriptors);
-		facesConfigDescriptors = OrderingUtil.getOrder(facesConfigDescriptors);
+		Map<String, FacesConfigDescriptor> configMap = OrderingUtil.getConfigMap(facesConfigDescriptors);
 
-		// some solutions:
-		// [B, E, F, , C, D]
-		// [B, E, F, D, , C]
+		List<String> strList = new ArrayList<String>();
+		strList.add("");
+		strList.add("b");
+		strList.add("c");
+		strList.add("d");
+		strList.add("e");
+		strList.add("f");
+		List<List<String>> lists = permute(strList);
 
-		String[] orderedNames = extractNames(facesConfigDescriptors);
+		String message = "";
 
-		List<String> original = Arrays.asList(originalOrder);
-		List<String> actually = Arrays.asList(orderedNames);
+		for (List<String> list : lists) {
 
-		List<String> possibility1 = Arrays.asList("b", "e", "f", "", "c", "d");
-		List<String> possibility2 = Arrays.asList("b", "e", "f", "d", "", "c");
+			List<FacesConfigDescriptor> temp = new ArrayList<FacesConfigDescriptor>();
+			for (String i : list) {
+				temp.add(configMap.get(i));
+			}
+			facesConfigDescriptors = temp;
 
-		boolean assertion = (actually.equals(possibility1) || actually.equals(possibility2));
-		String message = "\n original: " + original + "\n expected: " + possibility1 + "\n       or: " + possibility2 +
-			"\n actually: " + actually + "\n";
-		Assert.assertTrue(message, assertion);
-		logger.info("test20_beforeCafterOthers_BbeforeC_DafterOthers_startWith_BCDEF: Passed" + message);
+			String[] originalOrder = extractNames(facesConfigDescriptors);
+			facesConfigDescriptors = OrderingUtil.getOrder(facesConfigDescriptors);
 
+			// some solutions:
+			// [B, E, F, , C, D]
+			// [B, E, F, D, , C]
+			// [e, b, f, , c, d]
+
+			String[] orderedNames = extractNames(facesConfigDescriptors);
+
+			List<String> original = Arrays.asList(originalOrder);
+			List<String> actually = Arrays.asList(orderedNames);
+
+			List<String> possibility1 = Arrays.asList("b", "e", "f", "", "c", "d");
+			List<String> possibility2 = Arrays.asList("b", "e", "f", "d", "", "c");
+			List<String> possibility3 = Arrays.asList("e", "b", "f", "", "c", "d");
+
+			boolean assertion = (actually.equals(possibility1) || actually.equals(possibility2) || actually.equals(possibility3));
+			message = "\n original: " + original +
+				"\n expected: " + possibility1 +
+				"\n       or: " + possibility2 +
+				"\n       or: " + possibility3 +
+				"\n actually: " + actually + "\n";
+			Assert.assertTrue(message, assertion);
+			logger.info("test20_beforeCafterOthers_BbeforeOthers_DafterOthers_EbeforeOthers_permute: Passed" + message);
+
+		}
 	}
 
+	// TODO
 	@Test
-	public void test21_AafterOthers_BbeforeOthers_DafterOthers_EafterCbeforeOthers_startingWithABCDEF()
+	public void test21_AafterOthers_BbeforeOthers_DafterOthers_EafterCbeforeOthers_permute()
 		throws Exception {
 
 		List<FacesConfigDescriptor> facesConfigDescriptors = new ArrayList<FacesConfigDescriptor>();
 		parseConfigurationResources(
-			"ordering/AafterOthers_BbeforeOthers_DafterOthers_EafterCbeforeOthers_startingWithABCDEF",
+			"ordering/AafterOthers_BbeforeOthers_DafterOthers_EafterCbeforeOthers_permute",
 			facesConfigDescriptors, META_INF_FACES_CONFIG_XML);
 
-		String[] originalOrder = extractNames(facesConfigDescriptors);
+		Map<String, FacesConfigDescriptor> configMap = OrderingUtil.getConfigMap(facesConfigDescriptors);
 
-		facesConfigDescriptors = OrderingUtil.getOrder(facesConfigDescriptors);
+		List<String> strList = new ArrayList<String>();
+		strList.add("a");
+		strList.add("b");
+		strList.add("c");
+		strList.add("d");
+		strList.add("e");
+		strList.add("f");
+		List<List<String>> lists = permute(strList);
 
-		// some solutions:
-		// [B, C, E, F, A, D]
-		// [B, C, E, F, D, A]
-		// [C, E, B, F, A, D]
-		// [C, E, B, F, D, A]
+		String message = "";
 
-		String[] orderedNames = extractNames(facesConfigDescriptors);
+		for (List<String> list : lists) {
 
-		List<String> original = Arrays.asList(originalOrder);
-		List<String> actually = Arrays.asList(orderedNames);
+			List<FacesConfigDescriptor> temp = new ArrayList<FacesConfigDescriptor>();
+			for (String i : list) {
+				temp.add(configMap.get(i));
+			}
+			facesConfigDescriptors = temp;
 
-		List<String> possibility1 = Arrays.asList("b", "c", "e", "f", "a", "d");
-		List<String> possibility2 = Arrays.asList("b", "c", "e", "f", "d", "a");
-		List<String> possibility3 = Arrays.asList("c", "e", "b", "f", "a", "d");
-		List<String> possibility4 = Arrays.asList("c", "e", "b", "f", "d", "a");
+			String[] originalOrder = extractNames(facesConfigDescriptors);
+			facesConfigDescriptors = OrderingUtil.getOrder(facesConfigDescriptors);
 
-		boolean assertion = (actually.equals(possibility1) || actually.equals(possibility2) ||
-				actually.equals(possibility3) || actually.equals(possibility4));
-		String message = "\n original: " + original + "\n expected: " + possibility1 + "\n       or: " + possibility2 +
-			"\n       or: " + possibility3 + "\n       or: " + possibility4 + "\n actually: " + actually + "\n";
-		Assert.assertTrue(message, assertion);
-		logger.info("test21_AafterOthers_BbeforeOthers_DafterOthers_EafterCbeforeOthers_startingWithABCDEF: Passed" +
-			message);
+			// some solutions:
+			// [B, C, E, F, A, D]
+			// [B, C, E, F, D, A]
+			// [C, E, B, F, A, D]
+			// [C, E, B, F, D, A]
+
+			String[] orderedNames = extractNames(facesConfigDescriptors);
+
+			List<String> original = Arrays.asList(originalOrder);
+			List<String> actually = Arrays.asList(orderedNames);
+
+			List<String> possibility1 = Arrays.asList("b", "c", "e", "f", "a", "d");
+			List<String> possibility2 = Arrays.asList("b", "c", "e", "f", "d", "a");
+			List<String> possibility3 = Arrays.asList("c", "e", "b", "f", "a", "d");
+			List<String> possibility4 = Arrays.asList("c", "e", "b", "f", "d", "a");
+
+			boolean assertion = (actually.equals(possibility1) || actually.equals(possibility2) ||
+					actually.equals(possibility3) || actually.equals(possibility4));
+			message = "\n original: " + original +
+				"\n expected: " + possibility1 +
+				"\n       or: " + possibility2 +
+				"\n       or: " + possibility3 +
+				"\n       or: " + possibility4 +
+				"\n actually: " + actually + "\n";
+			Assert.assertTrue(message, assertion);
+			logger.info("test21_AafterOthers_BbeforeOthers_DafterOthers_EafterCbeforeOthers_permute: Passed" +
+				message);
+		}
 	}
 
 	// submitted as an issue in mojarra:
