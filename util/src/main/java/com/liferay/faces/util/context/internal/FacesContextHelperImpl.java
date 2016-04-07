@@ -43,7 +43,6 @@ import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.context.FacesContextHelper;
 import com.liferay.faces.util.context.MessageContext;
 import com.liferay.faces.util.context.MessageContextFactory;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.helper.IntegerHelper;
 import com.liferay.faces.util.helper.LongHelper;
@@ -335,11 +334,7 @@ public class FacesContextHelperImpl implements FacesContextHelper {
 	}
 
 	protected MessageContext getMessageContext() {
-
-		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
-				MessageContextFactory.class);
-
-		return messageContextFactory.getMessageContext();
+		return MessageContextFactory.getMessageContextInstance();
 	}
 
 	public String getNamespace() {

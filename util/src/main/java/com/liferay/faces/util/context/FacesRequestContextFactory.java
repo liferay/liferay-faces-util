@@ -17,11 +17,25 @@ package com.liferay.faces.util.context;
 
 import javax.faces.FacesWrapper;
 
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
+
 
 /**
  * @author  Kyle Stiemann
  */
 public abstract class FacesRequestContextFactory implements FacesWrapper<FacesRequestContextFactory> {
+
+	/**
+	 * @return  an instance of {@link FacesRequestContext} from the {@link FacesRequestContextFactory} found by the
+	 *          {@link FactoryExtensionFinder}.
+	 */
+	public static FacesRequestContext getFacesRequestContextInstance() {
+
+		FacesRequestContextFactory facesRequestContextFactory = (FacesRequestContextFactory) FactoryExtensionFinder
+			.getFactory(FacesRequestContextFactory.class);
+
+		return facesRequestContextFactory.getFacesRequestContext();
+	}
 
 	public abstract FacesRequestContext getFacesRequestContext();
 }

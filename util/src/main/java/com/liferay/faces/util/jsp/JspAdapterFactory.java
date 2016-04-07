@@ -23,6 +23,8 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.BodyContent;
 
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
+
 
 /**
  * This factory provides methods for creating instances of classes associated with the JavaServer Pages (JSP) API that
@@ -32,6 +34,30 @@ import javax.servlet.jsp.tagext.BodyContent;
  * @author  Kyle Stiemann
  */
 public abstract class JspAdapterFactory implements FacesWrapper<JspAdapterFactory> {
+
+	/**
+	 * @return  an instance of {@link StringBodyContent} from the {@link JspAdapterFactory} found by the {@link
+	 *          FactoryExtensionFinder}.
+	 */
+	public static BodyContent getStringBodyContentInstance(JspWriter stringJspWriter) {
+
+		JspAdapterFactory jspAdapterFactory = (JspAdapterFactory) FactoryExtensionFinder.getFactory(
+				JspAdapterFactory.class);
+
+		return jspAdapterFactory.getStringBodyContent(stringJspWriter);
+	}
+
+	/**
+	 * @return  an instance of {@link StringJspWriter} from the {@link JspAdapterFactory} found by the {@link
+	 *          FactoryExtensionFinder}.
+	 */
+	public static JspWriter getStringJspWriterInstance() {
+
+		JspAdapterFactory jspAdapterFactory = (JspAdapterFactory) FactoryExtensionFinder.getFactory(
+				JspAdapterFactory.class);
+
+		return jspAdapterFactory.getStringJspWriter();
+	}
 
 	public abstract BodyContent getStringBodyContent(JspWriter stringJspWriter);
 

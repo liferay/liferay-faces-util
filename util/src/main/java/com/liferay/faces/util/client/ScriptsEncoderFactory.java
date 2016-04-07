@@ -17,11 +17,25 @@ package com.liferay.faces.util.client;
 
 import javax.faces.FacesWrapper;
 
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
+
 
 /**
  * @author  Neil Griffin
  */
 public abstract class ScriptsEncoderFactory implements FacesWrapper<ScriptsEncoderFactory> {
+
+	/**
+	 * @return  an instance of {@link ScriptsEncoder} from the {@link ScriptsEncoderFactory} found by the {@link
+	 *          FactoryExtensionFinder}.
+	 */
+	public static ScriptsEncoder getScriptsEncoderInstance() {
+
+		ScriptsEncoderFactory scriptsEncoderFactory = (ScriptsEncoderFactory) FactoryExtensionFinder.getFactory(
+				ScriptsEncoderFactory.class);
+
+		return scriptsEncoderFactory.getScriptsEncoder();
+	}
 
 	public abstract ScriptsEncoder getScriptsEncoder();
 

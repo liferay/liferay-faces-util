@@ -20,11 +20,40 @@ import java.util.Map;
 
 import javax.faces.FacesWrapper;
 
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
+
 
 /**
  * @author  Neil Griffin
  */
 public abstract class UploadedFileFactory implements FacesWrapper<UploadedFileFactory> {
+
+	/**
+	 * @return  an instance of {@link UploadedFile} from the {@link UploadedFileFactory} found by the {@link
+	 *          FactoryExtensionFinder}.
+	 */
+	public static UploadedFile getUploadedFileInstance(Exception e) {
+
+		UploadedFileFactory uploadedFileFactory = (UploadedFileFactory) FactoryExtensionFinder.getFactory(
+				UploadedFileFactory.class);
+
+		return uploadedFileFactory.getUploadedFile(e);
+	}
+
+	/**
+	 * @return  an instance of {@link UploadedFile} from the {@link UploadedFileFactory} found by the {@link
+	 *          FactoryExtensionFinder}.
+	 */
+	public static UploadedFile getUploadedFileInstance(String absolutePath, Map<String, Object> attributes,
+		String charSet, String contentType, Map<String, List<String>> headers, String id, String message, String name,
+		long size, UploadedFile.Status status) {
+
+		UploadedFileFactory uploadedFileFactory = (UploadedFileFactory) FactoryExtensionFinder.getFactory(
+				UploadedFileFactory.class);
+
+		return uploadedFileFactory.getUploadedFile(absolutePath, attributes, charSet, contentType, headers, id, message,
+				name, size, status);
+	}
 
 	public abstract UploadedFile getUploadedFile(Exception e);
 
