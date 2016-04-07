@@ -28,7 +28,6 @@ import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.context.MessageContext;
 import com.liferay.faces.util.context.MessageContextFactory;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
 
 /**
@@ -54,11 +53,7 @@ public class MessageContextImpl implements MessageContext {
 		facesMessage.setSummary(messageId);
 		facesMessage.setDetail(null);
 
-		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
-				MessageContextFactory.class);
-
-		MessageContext messageContext = messageContextFactory.getMessageContext();
-
+		MessageContext messageContext = MessageContextFactory.getMessageContextInstance();
 		String summary = messageContext.getMessage(locale, messageId);
 
 		if (summary != null) {

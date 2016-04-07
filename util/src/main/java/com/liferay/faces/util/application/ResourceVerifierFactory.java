@@ -31,8 +31,8 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
 public abstract class ResourceVerifierFactory implements FacesWrapper<ResourceVerifierFactory> {
 
 	/**
-	 * Gets an instance of {@link ResourceVerifier} from the {@link ResourceVerifierFactory} found by the {@link
-	 * FactoryExtensionFinder}.
+	 * @return  an instance of {@link ResourceVerifier} from the {@link ResourceVerifierFactory} found by the {@link
+	 *          FactoryExtensionFinder}.
 	 */
 	public static ResourceVerifier getResourceVerifierInstance() {
 

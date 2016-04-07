@@ -17,11 +17,24 @@ package com.liferay.faces.util.text;
 
 import javax.faces.FacesWrapper;
 
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
+
 
 /**
  * @author  Neil Griffin
  */
 public abstract class RichTextFactory implements FacesWrapper<RichTextFactory> {
+
+	/**
+	 * @return  an instance of {@link RichText} from the {@link RichTextFactory} found by the {@link
+	 *          FactoryExtensionFinder}.
+	 */
+	public static RichText getRichTextInstance(RichText.Type type, String value) {
+
+		RichTextFactory richTextFactory = (RichTextFactory) FactoryExtensionFinder.getFactory(RichTextFactory.class);
+
+		return richTextFactory.getRichText(type, value);
+	}
 
 	public abstract RichText getRichText(RichText.Type type, String value);
 }
