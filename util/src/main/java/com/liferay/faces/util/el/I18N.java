@@ -28,7 +28,6 @@ import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.context.MessageContext;
 import com.liferay.faces.util.context.MessageContextFactory;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
 
 /**
@@ -68,8 +67,6 @@ public class I18N extends I18NCompat {
 			locale = application.getDefaultLocale();
 		}
 
-		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
-				MessageContextFactory.class);
 		MessageContext messageContext = MessageContextFactory.getMessageContextInstance();
 
 		return messageContext.getMessage(locale, messageId, arg1);
