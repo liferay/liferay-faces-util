@@ -17,6 +17,7 @@ package com.liferay.faces.util.client;
 
 import javax.faces.context.ExternalContext;
 
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.helper.Wrapper;
 
 
@@ -24,6 +25,18 @@ import com.liferay.faces.util.helper.Wrapper;
  * @author  Neil Griffin
  */
 public abstract class BrowserSnifferFactory implements Wrapper<BrowserSnifferFactory> {
+
+	/**
+	 * @return  an instance of {@link BrowserSniffer} from the {@link BrowserSnifferFactory} found by the {@link
+	 *          FactoryExtensionFinder}.
+	 */
+	public static BrowserSniffer getBrowserSnifferInstance(ExternalContext externalContext) {
+
+		BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
+				BrowserSnifferFactory.class);
+
+		return browserSnifferFactory.getBrowserSniffer(externalContext);
+	}
 
 	public abstract BrowserSniffer getBrowserSniffer(ExternalContext externalContext);
 }

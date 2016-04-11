@@ -22,6 +22,7 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.BodyContent;
 
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.helper.Wrapper;
 
 
@@ -33,6 +34,30 @@ import com.liferay.faces.util.helper.Wrapper;
  * @author  Kyle Stiemann
  */
 public abstract class JspAdapterFactory implements Wrapper<JspAdapterFactory> {
+
+	/**
+	 * @return  an instance of {@link StringBodyContent} from the {@link JspAdapterFactory} found by the {@link
+	 *          FactoryExtensionFinder}.
+	 */
+	public static BodyContent getStringBodyContentInstance(JspWriter stringJspWriter) {
+
+		JspAdapterFactory jspAdapterFactory = (JspAdapterFactory) FactoryExtensionFinder.getFactory(
+				JspAdapterFactory.class);
+
+		return jspAdapterFactory.getStringBodyContent(stringJspWriter);
+	}
+
+	/**
+	 * @return  an instance of {@link StringJspWriter} from the {@link JspAdapterFactory} found by the {@link
+	 *          FactoryExtensionFinder}.
+	 */
+	public static JspWriter getStringJspWriterInstance() {
+
+		JspAdapterFactory jspAdapterFactory = (JspAdapterFactory) FactoryExtensionFinder.getFactory(
+				JspAdapterFactory.class);
+
+		return jspAdapterFactory.getStringJspWriter();
+	}
 
 	public abstract BodyContent getStringBodyContent(JspWriter stringJspWriter);
 

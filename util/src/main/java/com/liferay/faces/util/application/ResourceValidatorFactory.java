@@ -17,11 +17,25 @@ package com.liferay.faces.util.application;
 
 import com.liferay.faces.util.helper.Wrapper;
 
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
+
 
 /**
  * @author  Neil Griffin
  */
 public abstract class ResourceValidatorFactory implements Wrapper<ResourceValidatorFactory> {
+
+	/**
+	 * @return  an instance of {@link ResourceValidator} from the {@link ResourceValidatorFactory} found by the {@link
+	 *          FactoryExtensionFinder}.
+	 */
+	public static ResourceValidator getResourceValidatorInstance() {
+
+		ResourceValidatorFactory resourceValidatorFactory = (ResourceValidatorFactory) FactoryExtensionFinder
+			.getFactory(ResourceValidatorFactory.class);
+
+		return resourceValidatorFactory.getResourceValidator();
+	}
 
 	public abstract ResourceValidator getResourceValidator();
 }

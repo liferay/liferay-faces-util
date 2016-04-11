@@ -25,10 +25,10 @@ import com.liferay.faces.util.helper.Wrapper;
 public abstract class FacesContextHelperFactory implements Wrapper<FacesContextHelperFactory> {
 
 	/**
-	 * Returns an instance of {@link FacesContextHelper} from the {@link FacesContextHelperFactory} found by the {@link
-	 * FactoryExtensionFinder}.
+	 * @return  an instance of {@link FacesContextHelper} from the {@link FacesContextHelperFactory} found by the {@link
+	 *          FactoryExtensionFinder}.
 	 */
-	public static FacesContextHelper getInstance() {
+	public static FacesContextHelper getFacesContextHelperInstance() {
 
 		FacesContextHelperFactory facesContextHelperFactory = (FacesContextHelperFactory) FactoryExtensionFinder
 			.getFactory(FacesContextHelperFactory.class);
