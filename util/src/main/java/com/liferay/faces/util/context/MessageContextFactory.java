@@ -17,11 +17,25 @@ package com.liferay.faces.util.context;
 
 import javax.faces.FacesWrapper;
 
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
+
 
 /**
  * @author  Neil Griffin
  */
 public abstract class MessageContextFactory implements FacesWrapper<MessageContextFactory> {
+
+	/**
+	 * @return  an instance of {@link MessageContext} from the {@link MessageContextFactory} found by the {@link
+	 *          FactoryExtensionFinder}.
+	 */
+	public static MessageContext getMessageContextInstance() {
+
+		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
+				MessageContextFactory.class);
+
+		return messageContextFactory.getMessageContext();
+	}
 
 	public abstract MessageContext getMessageContext();
 }

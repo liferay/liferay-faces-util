@@ -17,11 +17,25 @@ package com.liferay.faces.util.render;
 
 import javax.faces.FacesWrapper;
 
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
+
 
 /**
  * @author  Neil Griffin
  */
 public abstract class FacesURLEncoderFactory implements FacesWrapper<FacesURLEncoderFactory> {
+
+	/**
+	 * @return  an instance of {@link FacesURLEncoder} from the {@link FacesURLEncoderFactory} found by the {@link
+	 *          FactoryExtensionFinder}.
+	 */
+	public static FacesURLEncoder getFacesURLEncoderInstance() {
+
+		FacesURLEncoderFactory facesURLEncoderFactory = (FacesURLEncoderFactory) FactoryExtensionFinder.getFactory(
+				FacesURLEncoderFactory.class);
+
+		return facesURLEncoderFactory.getFacesURLEncoder();
+	}
 
 	public abstract FacesURLEncoder getFacesURLEncoder();
 }

@@ -70,7 +70,7 @@ public class I18N extends I18NCompat {
 
 		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
 				MessageContextFactory.class);
-		MessageContext messageContext = messageContextFactory.getMessageContext();
+		MessageContext messageContext = MessageContextFactory.getMessageContextInstance();
 
 		return messageContext.getMessage(locale, messageId, arg1);
 	}
@@ -97,9 +97,7 @@ public class I18N extends I18NCompat {
 			locale = application.getDefaultLocale();
 		}
 
-		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
-				MessageContextFactory.class);
-		MessageContext messageContext = messageContextFactory.getMessageContext();
+		MessageContext messageContext = MessageContextFactory.getMessageContextInstance();
 
 		return messageContext.getMessage(locale, messageId, arg1, arg2);
 	}
@@ -127,9 +125,7 @@ public class I18N extends I18NCompat {
 			locale = application.getDefaultLocale();
 		}
 
-		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
-				MessageContextFactory.class);
-		MessageContext messageContext = messageContextFactory.getMessageContext();
+		MessageContext messageContext = MessageContextFactory.getMessageContextInstance();
 
 		return messageContext.getMessage(locale, messageId, arg1, arg2, arg3);
 	}
@@ -158,9 +154,7 @@ public class I18N extends I18NCompat {
 			locale = application.getDefaultLocale();
 		}
 
-		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
-				MessageContextFactory.class);
-		MessageContext messageContext = messageContextFactory.getMessageContext();
+		MessageContext messageContext = MessageContextFactory.getMessageContextInstance();
 
 		return messageContext.getMessage(locale, messageId, arg1, arg2, arg3, arg4);
 	}
@@ -181,9 +175,7 @@ public class I18N extends I18NCompat {
 				locale = application.getDefaultLocale();
 			}
 
-			MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
-					MessageContextFactory.class);
-			MessageContext messageContext = messageContextFactory.getMessageContext();
+			MessageContext messageContext = MessageContextFactory.getMessageContextInstance();
 
 			if (cacheEnabled) {
 

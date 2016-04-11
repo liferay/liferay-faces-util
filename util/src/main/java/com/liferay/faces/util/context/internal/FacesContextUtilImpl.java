@@ -20,7 +20,6 @@ import javax.faces.context.FacesContextWrapper;
 
 import com.liferay.faces.util.context.FacesRequestContext;
 import com.liferay.faces.util.context.FacesRequestContextFactory;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
 
 /**
@@ -38,9 +37,7 @@ public class FacesContextUtilImpl extends FacesContextWrapper {
 
 		this.wrappedFacesContext = facesContext;
 
-		FacesRequestContextFactory facesRequestContextFactory = (FacesRequestContextFactory) FactoryExtensionFinder
-			.getFactory(FacesRequestContextFactory.class);
-		FacesRequestContext facesRequestContext = facesRequestContextFactory.getFacesRequestContext();
+		FacesRequestContext facesRequestContext = FacesRequestContextFactory.getFacesRequestContextInstance();
 		FacesRequestContext.setCurrentInstance(facesRequestContext);
 	}
 

@@ -22,7 +22,6 @@ import java.util.List;
 import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.client.ScriptFactory;
 import com.liferay.faces.util.context.FacesRequestContext;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
 
 /**
@@ -44,9 +43,7 @@ public class FacesRequestContextImpl extends FacesRequestContext {
 
 	@Override
 	public void addScript(String script) {
-
-		ScriptFactory scriptFactory = (ScriptFactory) FactoryExtensionFinder.getFactory(ScriptFactory.class);
-		scripts.add(scriptFactory.getScript(script));
+		scripts.add(ScriptFactory.getScriptInstance(script));
 	}
 
 	@Override
