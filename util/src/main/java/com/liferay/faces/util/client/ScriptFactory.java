@@ -17,6 +17,8 @@ package com.liferay.faces.util.client;
 
 import javax.faces.FacesWrapper;
 
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
+
 
 /**
  * A factory for creating a {@link Script} which can be rendered on the client via {@link
@@ -25,6 +27,28 @@ import javax.faces.FacesWrapper;
  * @author  Kyle Stiemann
  */
 public abstract class ScriptFactory implements FacesWrapper<ScriptFactory> {
+
+	/**
+	 * @return  an instance of {@link Script} from the {@link ScriptFactory} found by the {@link
+	 *          FactoryExtensionFinder}.
+	 */
+	public static Script getScriptInstance(String sourceCode) {
+
+		ScriptFactory scriptFactory = (ScriptFactory) FactoryExtensionFinder.getFactory(ScriptFactory.class);
+
+		return scriptFactory.getScript(sourceCode);
+	}
+
+	/**
+	 * @return  an instance of {@link Script} from the {@link ScriptFactory} found by the {@link
+	 *          FactoryExtensionFinder}.
+	 */
+	public static Script getScriptInstance(String sourceCode, String[] modules, Script.Type type) {
+
+		ScriptFactory scriptFactory = (ScriptFactory) FactoryExtensionFinder.getFactory(ScriptFactory.class);
+
+		return scriptFactory.getScript(sourceCode, modules, type);
+	}
 
 	/**
 	 * Creates a {@link Script} with the specified source code. As a convenience, it is possible to call {@link
