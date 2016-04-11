@@ -82,12 +82,16 @@ public class BodyScriptEncodingResponseWriter extends ResponseWriterWrapper {
 			if ("body".equals(name)) {
 
 				List<Script> scripts = facesRequestContext.getScripts();
-				ScriptsEncoderFactory ScriptsEncoderFactory = (ScriptsEncoderFactory) FactoryExtensionFinder.getFactory(
-						ScriptsEncoderFactory.class);
-				ScriptsEncoder scriptsEncoder = ScriptsEncoderFactory.getScriptsEncoder();
-				facesContext.setResponseWriter(wrappedResponseWriter);
-				scriptsEncoder.encodeBodyScripts(facesContext, scripts);
-				facesContext.setResponseWriter(this);
+
+				if (!scripts.isEmpty()) {
+
+					ScriptsEncoderFactory ScriptsEncoderFactory = (ScriptsEncoderFactory) FactoryExtensionFinder
+						.getFactory(ScriptsEncoderFactory.class);
+					ScriptsEncoder scriptsEncoder = ScriptsEncoderFactory.getScriptsEncoder();
+					facesContext.setResponseWriter(wrappedResponseWriter);
+					scriptsEncoder.encodeBodyScripts(facesContext, scripts);
+					facesContext.setResponseWriter(this);
+				}
 			}
 
 			super.endElement(name);
