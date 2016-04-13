@@ -31,7 +31,6 @@ import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.client.ScriptsEncoder;
 import com.liferay.faces.util.client.ScriptsEncoderFactory;
 import com.liferay.faces.util.context.FacesRequestContext;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
 
 /**
@@ -85,9 +84,7 @@ public class BodyScriptEncodingResponseWriter extends ResponseWriterWrapper {
 
 				if (!scripts.isEmpty()) {
 
-					ScriptsEncoderFactory ScriptsEncoderFactory = (ScriptsEncoderFactory) FactoryExtensionFinder
-						.getFactory(ScriptsEncoderFactory.class);
-					ScriptsEncoder scriptsEncoder = ScriptsEncoderFactory.getScriptsEncoder();
+					ScriptsEncoder scriptsEncoder = ScriptsEncoderFactory.getScriptsEncoderInstance();
 					facesContext.setResponseWriter(wrappedResponseWriter);
 					scriptsEncoder.encodeBodyScripts(facesContext, scripts);
 					facesContext.setResponseWriter(this);

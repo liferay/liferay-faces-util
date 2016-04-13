@@ -36,7 +36,7 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
 public abstract class JspAdapterFactory implements FacesWrapper<JspAdapterFactory> {
 
 	/**
-	 * @return  an instance of {@link StringBodyContent} from the {@link JspAdapterFactory} found by the {@link
+	 * @return  an instance of {@link BodyContent} from the {@link JspAdapterFactory} found by the {@link
 	 *          FactoryExtensionFinder}.
 	 */
 	public static BodyContent getStringBodyContentInstance(JspWriter stringJspWriter) {
@@ -48,7 +48,7 @@ public abstract class JspAdapterFactory implements FacesWrapper<JspAdapterFactor
 	}
 
 	/**
-	 * @return  an instance of {@link StringJspWriter} from the {@link JspAdapterFactory} found by the {@link
+	 * @return  an instance of {@link JspWriter} from the {@link JspAdapterFactory} found by the {@link
 	 *          FactoryExtensionFinder}.
 	 */
 	public static JspWriter getStringJspWriterInstance() {
@@ -57,6 +57,20 @@ public abstract class JspAdapterFactory implements FacesWrapper<JspAdapterFactor
 				JspAdapterFactory.class);
 
 		return jspAdapterFactory.getStringJspWriter();
+	}
+
+	/**
+	 * @return  an instance of {@link PageContext} from the {@link JspAdapterFactory} found by the {@link
+	 *          FactoryExtensionFinder}.
+	 */
+	public static PageContext getStringPageContextInstance(HttpServletRequest httpServletRequest,
+		HttpServletResponse httpServletResponse, ELContext elContext, JspWriter stringJspWriter) {
+
+		JspAdapterFactory jspAdapterFactory = (JspAdapterFactory) FactoryExtensionFinder.getFactory(
+				JspAdapterFactory.class);
+
+		return jspAdapterFactory.getStringPageContext(httpServletRequest, httpServletResponse, elContext,
+				stringJspWriter);
 	}
 
 	public abstract BodyContent getStringBodyContent(JspWriter stringJspWriter);
