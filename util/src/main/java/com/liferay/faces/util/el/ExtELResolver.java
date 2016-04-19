@@ -22,7 +22,6 @@ import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.client.BrowserSniffer;
 import com.liferay.faces.util.client.BrowserSnifferFactory;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -70,9 +69,7 @@ public class ExtELResolver extends ELResolverBase {
 			else if (varName.equals(BROWSER_SNIFFER)) {
 
 				FacesContext currentInstance = FacesContext.getCurrentInstance();
-				BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
-						BrowserSnifferFactory.class);
-				value = browserSnifferFactory.getBrowserSniffer(currentInstance.getExternalContext());
+				value = BrowserSnifferFactory.getBrowserSnifferInstance(currentInstance.getExternalContext());
 			}
 		}
 		catch (Exception e) {
