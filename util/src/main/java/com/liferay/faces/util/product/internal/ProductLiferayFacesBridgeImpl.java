@@ -28,7 +28,7 @@ public class ProductLiferayFacesBridgeImpl extends ProductBaseImpl {
 		try {
 			this.title = ProductConstants.LIFERAY_FACES_BRIDGE;
 
-			Class<?> clazz = Class.forName("com.liferay.faces.bridge.context.BridgeContext");
+			Class<?> clazz = Class.forName("com.liferay.faces.bridge.BridgePhase");
 			init(clazz, ProductConstants.LIFERAY_FACES_BRIDGE);
 		}
 		catch (Exception e) {
