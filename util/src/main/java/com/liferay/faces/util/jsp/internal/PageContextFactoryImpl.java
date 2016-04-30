@@ -18,36 +18,24 @@ package com.liferay.faces.util.jsp.internal;
 import javax.el.ELContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.tagext.BodyContent;
 
-import com.liferay.faces.util.jsp.JspAdapterFactory;
+import com.liferay.faces.util.jsp.PageContextFactory;
 
 
 /**
  * @author  Kyle Stiemann
  */
-public class JspAdapterFactoryImpl extends JspAdapterFactory {
-
-	@Override
-	public BodyContent getStringBodyContent(JspWriter stringJspWriter) {
-		return new BodyContentStringImpl(stringJspWriter);
-	}
-
-	@Override
-	public JspWriter getStringJspWriter() {
-		return new JspWriterStringImpl();
-	}
+public class PageContextFactoryImpl extends PageContextFactory {
 
 	@Override
 	public PageContext getStringPageContext(HttpServletRequest httpServletRequest,
-		HttpServletResponse httpServletResponse, ELContext elContext, JspWriter stringJspWriter) {
-		return new PageContextStringImpl(httpServletRequest, httpServletResponse, elContext, stringJspWriter);
+		HttpServletResponse httpServletResponse, ELContext elContext) {
+		return new PageContextStringImpl(httpServletRequest, httpServletResponse, elContext);
 	}
 
 	@Override
-	public JspAdapterFactory getWrapped() {
+	public PageContextFactory getWrapped() {
 
 		// Since this is the factory instance provided by default, it will never wrap another factory.
 		return null;

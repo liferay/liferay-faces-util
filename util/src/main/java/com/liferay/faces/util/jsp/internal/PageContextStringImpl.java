@@ -65,7 +65,7 @@ public class PageContextStringImpl extends PageContext {
 	private JspWriter stringJspWriter;
 
 	public PageContextStringImpl(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
-		ELContext elContext, JspWriter stringJspWriter) {
+		ELContext elContext) {
 
 		this.httpServletRequest = httpServletRequest;
 		this.httpServletResponse = httpServletResponse;
@@ -73,7 +73,7 @@ public class PageContextStringImpl extends PageContext {
 		this.httpSession = httpServletRequest.getSession();
 		this.servletContext = httpSession.getServletContext();
 		this.servletConfig = new ServletConfigAdapter(this.servletContext);
-		this.stringJspWriter = stringJspWriter;
+		this.stringJspWriter = new JspWriterStringImpl();
 
 		// Initialize scope maps
 		this.applicationScope = new ApplicationScope(this.servletContext);
