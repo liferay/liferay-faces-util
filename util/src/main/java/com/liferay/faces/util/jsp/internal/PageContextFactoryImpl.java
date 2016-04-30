@@ -34,7 +34,7 @@ public class PageContextFactoryImpl extends PageContextFactory {
 		return new PageContextStringImpl(httpServletRequest, httpServletResponse, elContext);
 	}
 
-	@Override
+	// Java 1.6+ @Override
 	public PageContextFactory getWrapped() {
 
 		// Since this is the factory instance provided by default, it will never wrap another factory.

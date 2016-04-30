@@ -16,12 +16,12 @@
 package com.liferay.faces.util.jsp;
 
 import javax.el.ELContext;
-import javax.faces.FacesWrapper;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.PageContext;
 
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
@@ -31,7 +31,7 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
  *
  * @author  Kyle Stiemann
  */
-public abstract class PageContextFactory implements FacesWrapper<PageContextFactory> {
+public abstract class PageContextFactory implements Wrapper<PageContextFactory> {
 
 	/**
 	 * Returns an instance of {@link PageContext} from the {@link PageContextFactory} found by the {@link
