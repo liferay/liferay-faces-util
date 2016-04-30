@@ -34,8 +34,8 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
 public abstract class PageContextFactory implements FacesWrapper<PageContextFactory> {
 
 	/**
-	 * @return  an instance of {@link PageContext} from the {@link PageContextFactory} found by the {@link
-	 *          FactoryExtensionFinder}.
+	 * Returns an instance of {@link PageContext} from the {@link PageContextFactory} found by the {@link
+	 * FactoryExtensionFinder}.
 	 */
 	public static PageContext getStringPageContextInstance(HttpServletRequest httpServletRequest,
 		HttpServletResponse httpServletResponse, ELContext elContext) {
@@ -52,9 +52,14 @@ public abstract class PageContextFactory implements FacesWrapper<PageContextFact
 	 * javax.servlet.jsp.tagext.Tag#doStartTag()} or similar methods to render tag output to a String. Call {@link
 	 * PageContext#getOut()#toString()} to obtain the tag output as a string.
 	 *
-	 * @param  httpServletRequest
-	 * @param  httpServletResponse
-	 * @param  elContext
+	 * @param  httpServletRequest   The {@link HttpServletRequest} underlying the {@link
+	 *                              javax.faces.context.ExternalContext} associated with the current {@link
+	 *                              javax.faces.context.FacesContext}.
+	 * @param  httpServletResponse  The {@link HttpServletResponse} underlying the {@link
+	 *                              javax.faces.context.ExternalContext} associated with the current {@link
+	 *                              javax.faces.context.FacesContext}.
+	 * @param  elContext            The {@link ELContext} associated with the current {@link
+	 *                              javax.faces.context.FacesContext}.
 	 */
 	public abstract PageContext getStringPageContext(HttpServletRequest httpServletRequest,
 		HttpServletResponse httpServletResponse, ELContext elContext);
