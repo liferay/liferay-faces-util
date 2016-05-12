@@ -19,10 +19,9 @@ import java.io.IOException;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.context.ResponseWriter;
 import javax.faces.render.RenderKit;
 import javax.faces.render.Renderer;
-
-import com.liferay.faces.util.render.internal.DelegationResponseWriter;
 
 
 /**
@@ -46,29 +45,29 @@ public interface DelegatingRenderer {
 	 * {@link Renderer#encodeChildren(FacesContext, UIComponent)}, and {@link Renderer#encodeEnd(FacesContext,
 	 * UIComponent)} methods using the specified {@link DelegationResponseWriter}.
 	 */
-	public void encodeAll(FacesContext facesContext, UIComponent uiComponent,
-		DelegationResponseWriter delegationResponseWriter) throws IOException;
+	public void encodeAll(FacesContext facesContext, UIComponent uiComponent, ResponseWriter delegationResponseWriter)
+		throws IOException;
 
 	/**
 	 * Calls the delegate renderer's {@link Renderer#encodeBegin(FacesContext, UIComponent)} method using the specified
 	 * {@link DelegationResponseWriter}.
 	 */
-	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent,
-		DelegationResponseWriter delegationResponseWriter) throws IOException;
+	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent, ResponseWriter delegationResponseWriter)
+		throws IOException;
 
 	/**
 	 * Calls the delegate renderer's {@link Renderer#encodeChildren(FacesContext, UIComponent)} method using the
 	 * specified {@link DelegationResponseWriter}.
 	 */
 	public void encodeChildren(FacesContext facesContext, UIComponent uiComponent,
-		DelegationResponseWriter delegationResponseWriter) throws IOException;
+		ResponseWriter delegationResponseWriter) throws IOException;
 
 	/**
 	 * Calls the delegate renderer's {@link Renderer#encodeEnd(FacesContext, UIComponent)} method using the specified
 	 * {@link DelegationResponseWriter}.
 	 */
-	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent,
-		DelegationResponseWriter delegationResponseWriter) throws IOException;
+	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent, ResponseWriter delegationResponseWriter)
+		throws IOException;
 
 	/**
 	 * Returns the component family associated with the delegate renderer.

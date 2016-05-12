@@ -26,12 +26,10 @@ import javax.faces.render.Renderer;
 
 
 /**
- * This is an abstract class that implements the {@link DelegatingRenderer} interface in order to provide base
- * functionality for delegating the responsibility of rendering a {@link UIComponent} to a different renderer.
- *
  * @author  Neil Griffin
  */
-public abstract class DelegatingRendererBase extends Renderer implements DelegatingRenderer {
+public abstract class DelegatingClientComponentRendererBase extends ClientComponentRendererBase
+	implements DelegatingClientComponentRenderer {
 
 	@Override
 	public String convertClientId(FacesContext facesContext, String clientId) {
@@ -45,6 +43,7 @@ public abstract class DelegatingRendererBase extends Renderer implements Delegat
 	public void decode(FacesContext facesContext, UIComponent uiComponent) {
 
 		Renderer delegateRenderer = getDelegateRenderer(facesContext);
+		decodeClientState(facesContext, uiComponent);
 		delegateRenderer.decode(facesContext, uiComponent);
 	}
 
@@ -81,8 +80,9 @@ public abstract class DelegatingRendererBase extends Renderer implements Delegat
 	@Override
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
-		Renderer delegateRenderer = getDelegateRenderer(facesContext);
-		delegateRenderer.encodeBegin(facesContext, uiComponent);
+		// Must not delegate to the delegate renderer since the ClientComponentRendererBase.encodeEnd(FacesContext,
+		// UIComponent) method needs to start driving the rendering process.
+		super.encodeBegin(facesContext, uiComponent);
 	}
 
 	/**
@@ -96,8 +96,9 @@ public abstract class DelegatingRendererBase extends Renderer implements Delegat
 		ResponseWriter originalResponseWriter = facesContext.getResponseWriter();
 		facesContext.setResponseWriter(delegationResponseWriter);
 
-		Renderer delegateRenderer = getDelegateRenderer(facesContext);
-		delegateRenderer.encodeBegin(facesContext, uiComponent);
+		// Must not delegate to the delegate renderer since the ClientComponentRendererBase.encodeEnd(FacesContext,
+		// UIComponent) method needs to start driving the rendering process.
+		super.encodeBegin(facesContext, uiComponent);
 		facesContext.setResponseWriter(originalResponseWriter);
 	}
 
@@ -127,8 +128,9 @@ public abstract class DelegatingRendererBase extends Renderer implements Delegat
 	@Override
 	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
-		Renderer delegateRenderer = getDelegateRenderer(facesContext);
-		delegateRenderer.encodeEnd(facesContext, uiComponent);
+		// Must not delegate to the delegate renderer since the ClientComponentRendererBase.encodeEnd(FacesContext,
+		// UIComponent) method needs to finish driving the rendering process.
+		super.encodeEnd(facesContext, uiComponent);
 	}
 
 	/**
@@ -138,6 +140,59 @@ public abstract class DelegatingRendererBase extends Renderer implements Delegat
 	@Override
 	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent, ResponseWriter delegationResponseWriter)
 		throws IOException {
+
+		ResponseWriter originalResponseWriter = facesContext.getResponseWriter();
+		facesContext.setResponseWriter(delegationResponseWriter);
+
+		// Must not delegate to the delegate renderer since the ClientComponentRendererBase.encodeEnd(FacesContext,
+		// UIComponent) method needs to finish driving the rendering process.
+		super.encodeEnd(facesContext, uiComponent);
+		facesContext.setResponseWriter(originalResponseWriter);
+	}
+
+	/**
+	 * @see  {@link ClientComponentRenderer#encodeMarkupBegin(javax.faces.context.FacesContext,
+	 *       javax.faces.component.UIComponent)}
+	 */
+	@Override
+	public void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+		Renderer delegateRenderer = getDelegateRenderer(facesContext);
+		delegateRenderer.encodeBegin(facesContext, uiComponent);
+	}
+
+	/**
+	 * @see  {@link DelegatingClientComponentRenderer#encodeMarkupBegin(javax.faces.context.FacesContext,
+	 *       javax.faces.component.UIComponent, javax.faces.context.ResponseWriter)}
+	 */
+	@Override
+	public void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent,
+		ResponseWriter delegationResponseWriter) throws IOException {
+
+		ResponseWriter originalResponseWriter = facesContext.getResponseWriter();
+		facesContext.setResponseWriter(delegationResponseWriter);
+
+		Renderer delegateRenderer = getDelegateRenderer(facesContext);
+		delegateRenderer.encodeBegin(facesContext, uiComponent);
+		facesContext.setResponseWriter(originalResponseWriter);
+	}
+
+	/**
+	 * @see  {@link ClientComponentRenderer#encodeMarkupEnd(javax.faces.context.FacesContext,
+	 *       javax.faces.component.UIComponent)}
+	 */
+	@Override
+	public void encodeMarkupEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+		Renderer delegateRenderer = getDelegateRenderer(facesContext);
+		delegateRenderer.encodeEnd(facesContext, uiComponent);
+	}
+
+	/**
+	 * @see  {@link DelegatingClientComponentRenderer#encodeMarkupEnd(javax.faces.context.FacesContext,
+	 *       javax.faces.component.UIComponent, javax.faces.context.ResponseWriter)}
+	 */
+	@Override
+	public void encodeMarkupEnd(FacesContext facesContext, UIComponent uiComponent,
+		ResponseWriter delegationResponseWriter) throws IOException {
 
 		ResponseWriter originalResponseWriter = facesContext.getResponseWriter();
 		facesContext.setResponseWriter(delegationResponseWriter);

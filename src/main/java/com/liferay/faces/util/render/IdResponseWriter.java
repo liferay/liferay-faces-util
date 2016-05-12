@@ -13,12 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.liferay.faces.util.render.internal;
+package com.liferay.faces.util.render;
 
 import java.io.IOException;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
+import javax.faces.context.ResponseWriterWrapper;
 
 
 /**
@@ -28,15 +29,16 @@ import javax.faces.context.ResponseWriter;
  *
  * @author  Neil Griffin
  */
-public class IdDelegationResponseWriter extends DelegationResponseWriterBase {
+public class IdResponseWriter extends ResponseWriterWrapper {
 
 	// Private Data Members
 	private String idElement;
 	private String idValue;
 	private boolean writingIdElement;
+	private ResponseWriter wrappedResponseWriter;
 
-	public IdDelegationResponseWriter(ResponseWriter responseWriter, String idElement, String idValue) {
-		super(responseWriter);
+	public IdResponseWriter(ResponseWriter responseWriter, String idElement, String idValue) {
+		this.wrappedResponseWriter = responseWriter;
 		this.idElement = idElement;
 		this.idValue = idValue;
 	}
@@ -74,5 +76,10 @@ public class IdDelegationResponseWriter extends DelegationResponseWriterBase {
 		else {
 			super.writeAttribute(name, value, property);
 		}
+	}
+
+	@Override
+	public ResponseWriter getWrapped() {
+		return wrappedResponseWriter;
 	}
 }
