@@ -13,29 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.liferay.faces.util.render.internal;
+package com.liferay.faces.util.render;
 
-import javax.faces.context.ResponseWriter;
-import javax.faces.context.ResponseWriterWrapper;
+import java.io.Serializable;
 
 
 /**
- * This class provides a concrete implementation of {@link ResponseWriterWrapper} that is intended to be used (or
- * extended) by renderers that implement {@link RendererDelegator}.
+ * This is a simple marker class that wraps a String. It marks the fact that the wrapped string is a fragment of
+ * JavaScript code.
  *
  * @author  Neil Griffin
  */
-public class DelegationResponseWriterBase extends DelegationResponseWriter {
+public final class JavaScriptFragment implements Serializable {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 5918907480864436697L;
 
 	// Private Data Members
-	private ResponseWriter wrappedResponseWriter;
+	private String value;
 
-	public DelegationResponseWriterBase(ResponseWriter responseWriter) {
-		this.wrappedResponseWriter = responseWriter;
+	public JavaScriptFragment(String value) {
+		this.value = value;
 	}
 
 	@Override
-	public ResponseWriter getWrapped() {
-		return wrappedResponseWriter;
+	public String toString() {
+		return value;
 	}
 }
