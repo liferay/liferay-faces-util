@@ -8,8 +8,8 @@
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.liferay.faces.util</groupId>
-	<artifactId>liferay-faces-util</artifactId>
+	<groupId>com.liferay.faces</groupId>
+	<artifactId>com.liferay.faces.util</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<name>Liferay Faces Util</name>
 	<description>Liferay Faces Utilities</description>
