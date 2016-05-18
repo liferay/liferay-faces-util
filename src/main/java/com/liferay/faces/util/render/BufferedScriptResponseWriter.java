@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.liferay.faces.util.render.internal;
+package com.liferay.faces.util.render;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -22,11 +22,20 @@ import java.io.Writer;
 import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
 
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
+
 
 /**
+ * This class is designed to write scripts to a string to be rendered to the response later. This class suppresses all
+ * html markup.
+ *
  * @author  Neil Griffin
  */
 public class BufferedScriptResponseWriter extends ResponseWriter {
+
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(BufferedScriptResponseWriter.class);
 
 	StringWriter stringWriter = null;
 
@@ -36,6 +45,11 @@ public class BufferedScriptResponseWriter extends ResponseWriter {
 
 	@Override
 	public ResponseWriter cloneWithWriter(Writer writer) {
+
+		logger.debug(
+			"Returning null from cloneWithWriter({0}) since BufferedScriptResponseWriter only supports writing scripts.",
+			writer);
+
 		return null;
 	}
 
@@ -46,10 +60,15 @@ public class BufferedScriptResponseWriter extends ResponseWriter {
 
 	@Override
 	public void endDocument() throws IOException {
+		logger.debug(
+			"Suppressing the output of endDocument() since BufferedScriptResponseWriter only supports writing scripts.");
 	}
 
 	@Override
 	public void endElement(String name) throws IOException {
+		logger.debug(
+			"Suppressing the output of endElement({0}, {1}) since BufferedScriptResponseWriter only supports writing scripts.",
+			name);
 	}
 
 	@Override
@@ -59,10 +78,15 @@ public class BufferedScriptResponseWriter extends ResponseWriter {
 
 	@Override
 	public void startDocument() throws IOException {
+		logger.debug(
+			"Suppressing the output of startDocument() since BufferedScriptResponseWriter only supports writing scripts.");
 	}
 
 	@Override
 	public void startElement(String name, UIComponent component) throws IOException {
+		logger.debug(
+			"Suppressing the output of startElement({0}, {1}) since BufferedScriptResponseWriter only supports writing scripts.",
+			name, component);
 	}
 
 	@Override
@@ -77,13 +101,19 @@ public class BufferedScriptResponseWriter extends ResponseWriter {
 
 	@Override
 	public void writeAttribute(String name, Object value, String property) throws IOException {
+		logger.debug(
+			"Suppressing the output of writeAttribute({0}, {1}, {2}) since BufferedScriptResponseWriter only supports writing scripts.",
+			name, value, property);
 	}
 
 	@Override
 	public void writeComment(Object comment) throws IOException {
 
 		if (comment != null) {
+
+			stringWriter.write("/*");
 			stringWriter.write(comment.toString());
+			stringWriter.write("*/");
 		}
 	}
 
@@ -111,17 +141,26 @@ public class BufferedScriptResponseWriter extends ResponseWriter {
 
 	@Override
 	public void writeURIAttribute(String name, Object value, String property) throws IOException {
-		writeAttribute(name, value, property);
+		logger.debug(
+			"Suppressing the output of writeURIAttribute({0}, {1}, {2}) since BufferedScriptResponseWriter only supports writing scripts.",
+			name, value, property);
 	}
 
 	@Override
 	public String getCharacterEncoding() {
+
+		logger.debug(
+			"Returning null from getCharacterEncoding() since BufferedScriptResponseWriter only supports writing scripts.");
+
 		return null;
 	}
 
 	@Override
 	public String getContentType() {
+
+		logger.debug(
+			"Returning null from getContentType() since BufferedScriptResponseWriter only supports writing scripts.");
+
 		return null;
 	}
-
 }

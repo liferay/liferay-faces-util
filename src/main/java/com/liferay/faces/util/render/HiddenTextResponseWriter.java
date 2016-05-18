@@ -13,12 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.liferay.faces.util.render.internal;
+package com.liferay.faces.util.render;
 
 import java.io.IOException;
 
 import javax.faces.component.html.HtmlInputText;
 import javax.faces.context.ResponseWriter;
+import javax.faces.context.ResponseWriterWrapper;
 
 
 /**
@@ -28,14 +29,15 @@ import javax.faces.context.ResponseWriter;
  *
  * @author  Neil Griffin
  */
-public class HiddenTextResponseWriter extends DelegationResponseWriterBase {
+public class HiddenTextResponseWriter extends ResponseWriterWrapper {
 
 	// Private Data Members
 	private String id;
 	private boolean wroteId;
+	private ResponseWriter wrappedResponseWriter;
 
 	public HiddenTextResponseWriter(ResponseWriter responseWriter, String id) {
-		super(responseWriter);
+		this.wrappedResponseWriter = responseWriter;
 		this.id = id;
 	}
 
@@ -64,5 +66,10 @@ public class HiddenTextResponseWriter extends DelegationResponseWriterBase {
 		else {
 			super.writeAttribute(name, value, property);
 		}
+	}
+
+	@Override
+	public ResponseWriter getWrapped() {
+		return wrappedResponseWriter;
 	}
 }
