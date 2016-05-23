@@ -16,10 +16,14 @@
 package com.liferay.faces.util.render;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import javax.faces.application.Application;
 import javax.faces.component.UIComponent;
+import javax.faces.component.behavior.AjaxBehavior;
 import javax.faces.component.behavior.ClientBehavior;
 import javax.faces.component.behavior.ClientBehaviorHolder;
 import javax.faces.context.FacesContext;
@@ -27,12 +31,57 @@ import javax.faces.context.ResponseWriter;
 
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
  * @author  Neil Griffin
  */
 public class RendererUtil {
+
+	// Private Constants
+	private static final String JAVA_SCRIPT_HEX_PREFIX = "\\x";
+	private static final char[] _HEX_DIGITS = {
+			'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
+		};
+
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(RendererUtil.class);
+
+	public static void addDefaultAjaxBehavior(ClientBehaviorHolder clientBehaviorHolder, String execute, String process,
+		String defaultExecute, String render, String update, String defaultRender) {
+
+		Map<String, List<ClientBehavior>> clientBehaviorMap = clientBehaviorHolder.getClientBehaviors();
+		String defaultEventName = clientBehaviorHolder.getDefaultEventName();
+		List<ClientBehavior> clientBehaviors = clientBehaviorMap.get(defaultEventName);
+
+		boolean doAdd = true;
+
+		if (clientBehaviors != null) {
+
+			for (ClientBehavior clientBehavior : clientBehaviors) {
+
+				if (clientBehavior instanceof AjaxBehavior) {
+					doAdd = false;
+
+					break;
+				}
+			}
+		}
+
+		if (doAdd) {
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			Application application = facesContext.getApplication();
+			AjaxBehavior ajaxBehavior = (AjaxBehavior) application.createBehavior(AjaxBehavior.BEHAVIOR_ID);
+			Collection<String> executeIds = getExecuteIds(execute, process, defaultExecute);
+			ajaxBehavior.setExecute(executeIds);
+
+			Collection<String> renderIds = getRenderIds(render, update, defaultRender);
+			ajaxBehavior.setRender(renderIds);
+			clientBehaviorHolder.addClientBehavior(defaultEventName, ajaxBehavior);
+		}
+	}
 
 	public static void decodeClientBehaviors(FacesContext facesContext, UIComponent uiComponent) {
 
@@ -92,5 +141,107 @@ public class RendererUtil {
 		if (style != null) {
 			responseWriter.writeAttribute(Styleable.STYLE, style, Styleable.STYLE);
 		}
+	}
+
+	/**
+	 * Escapes JavaScript so that it can safely be rendered as string in the browser. This method escapes JS according
+	 * to the recommendations provided in <a
+	 * href="https://www.owasp.org/index.php/XSS_%28Cross_Site_Scripting%29_Prevention_Cheat_Sheet#RULE_.233_-_JavaScript_Escape_Before_Inserting_Untrusted_Data_into_JavaScript_Data_Values">
+	 * OWASP's Cross Site Scripting (XSS) Prevention Cheat Sheet</a>. <strong>Note:</strong> escaped JS can only be
+	 * rendered into certain JS strings. If it is rendered anywhere else, the site will still be vulnerable to XSS. See
+	 * the link for more details.
+	 *
+	 * @param   javaScript
+	 *
+	 * @return
+	 */
+	public static String escapeJavaScript(String javaScript) {
+
+		StringBuilder stringBuilder = new StringBuilder();
+		char[] javaScriptCharArray = javaScript.toCharArray();
+
+		for (char character : javaScriptCharArray) {
+
+			if ((character > 255) || Character.isLetterOrDigit(character)) {
+
+				stringBuilder.append(character);
+			}
+			else {
+				stringBuilder.append(JAVA_SCRIPT_HEX_PREFIX);
+
+				String hexString = toHexString(character);
+
+				if (hexString.length() == 1) {
+					stringBuilder.append("0");
+				}
+
+				stringBuilder.append(hexString);
+			}
+		}
+
+		if (stringBuilder.length() != javaScript.length()) {
+			javaScript = stringBuilder.toString();
+		}
+
+		return javaScript;
+	}
+
+	private static String toHexString(int i) {
+		char[] buffer = new char[8];
+
+		int index = 8;
+
+		do {
+			buffer[--index] = _HEX_DIGITS[i & 15];
+
+			i >>>= 4;
+		}
+		while (i != 0);
+
+		return new String(buffer, index, 8 - index);
+	}
+
+	private static Collection<String> getExecuteIds(String execute, String process, String defaultValue) {
+
+		// If the values of the execute and process attributes differ, then
+		if (!execute.equals(process)) {
+
+			// If the process attribute was specified and the execute attribute was omitted, then use the value of the
+			// process attribute.
+			if (execute.equals(defaultValue)) {
+				execute = process;
+			}
+
+			// Otherwise, if both the execute and process attributes were specified with different values, then log a
+			// warning indicating that the value of the execute attribute takes precedence.
+			else if (!process.equals(defaultValue)) {
+				logger.warn(
+					"Different values were specified for the execute=[{0}] and process=[{0}]. The value for execute takes precedence.");
+			}
+		}
+
+		return Arrays.asList(execute.split(" "));
+	}
+
+	private static Collection<String> getRenderIds(String render, String update, String defaultValue) {
+
+		// If the values of the render and update attributes differ, then
+		if (!render.equals(update)) {
+
+			// If the update attribute was specified and the render attribute was omitted, then use the value of the
+			// update attribute.
+			if (render.equals(defaultValue)) {
+				render = update;
+			}
+
+			// Otherwise, if both the render and update attributes were specified with different values, then log a
+			// warning indicating that the value of the render attribute takes precedence.
+			else if (!update.equals(defaultValue)) {
+				logger.warn(
+					"Different values were specified for the render=[{0}] and update=[{0}]. The value for render takes precedence.");
+			}
+		}
+
+		return Arrays.asList(render.split(" "));
 	}
 }
