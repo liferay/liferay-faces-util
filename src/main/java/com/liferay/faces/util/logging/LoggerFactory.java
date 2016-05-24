@@ -15,56 +15,42 @@
  */
 package com.liferay.faces.util.logging;
 
-import com.liferay.faces.util.logging.Logger;
-import com.liferay.faces.util.logging.internal.LoggerDefaultImpl;
-import com.liferay.faces.util.logging.internal.LoggerLog4JImpl;
-import com.liferay.faces.util.product.Product;
-import com.liferay.faces.util.product.ProductConstants;
-import com.liferay.faces.util.product.ProductMap;
+import java.util.Iterator;
+import java.util.ServiceLoader;
 
 
 /**
- * In order to minimize dependencies, this class provides as a layer of abstraction over different logging mechanisms
+ * In order to minimize dependencies, this class provides a layer of abstraction over different logging mechanisms
  * including Log4J and standard Java SE logging.
  *
  * @author  Neil Griffin
  */
-public class LoggerFactory {
+public abstract class LoggerFactory {
 
-	// Private Constants
-	private static final String CLASS_NAME_LOG4J_LOGGER = "org.apache.log4j.Logger";
-
-	// Statically-Initialized Private Constants
-	private static boolean LOG4J_AVAILABLE = false;
+	private static final LoggerFactory loggerFactory;
 
 	static {
 
-		try {
-			Class.forName(CLASS_NAME_LOG4J_LOGGER);
-			LOG4J_AVAILABLE = true;
+		ServiceLoader<LoggerFactory> serviceLoader = ServiceLoader.load(LoggerFactory.class);
 
-			try {
-				new LoggerLog4JImpl(CLASS_NAME_LOG4J_LOGGER);
+		if (serviceLoader != null) {
+
+			Iterator<LoggerFactory> iterator = serviceLoader.iterator();
+
+			LoggerFactory loggerFactoryImpl = null;
+
+			while ((loggerFactoryImpl == null) && iterator.hasNext()) {
+				loggerFactoryImpl = iterator.next();
 			}
-			catch (NoClassDefFoundError e) {
 
-				String className = LoggerFactory.class.getName();
-				Product wildfly = ProductMap.getInstance().get(ProductConstants.WILDFLY);
-
-				if (wildfly.isDetected()) {
-					System.out.println(className + " (INFO): Detected JBoss Server " + wildfly.getVersion());
-					System.out.println(className + " (INFO): Add WEB-INF/log4j.jar to activate Log4J logging");
-				}
-				else {
-					System.err.println(className +
-						" (WARN): Possibly an incompatible version of log4j.jar in the classpath: " + e.getMessage());
-				}
-
-				LOG4J_AVAILABLE = false;
+			if (loggerFactoryImpl == null) {
+				throw new NullPointerException("Unable locate service for " + LoggerFactory.class.getName());
 			}
+
+			loggerFactory = loggerFactoryImpl;
 		}
-		catch (Exception e) {
-			LOG4J_AVAILABLE = false;
+		else {
+			throw new NullPointerException("Unable to acquire ServiceLoader for " + LoggerFactory.class.getName());
 		}
 	}
 
@@ -78,24 +64,7 @@ public class LoggerFactory {
 	 * @return  The logger associated with the specified name.
 	 */
 	public static final Logger getLogger(String name) {
-
-		Logger logger = null;
-
-		try {
-
-			if (LOG4J_AVAILABLE) {
-				logger = new LoggerLog4JImpl(name);
-			}
-		}
-		catch (NoClassDefFoundError e) {
-			// Ignore
-		}
-
-		if (logger == null) {
-			logger = new LoggerDefaultImpl(name);
-		}
-
-		return logger;
+		return loggerFactory.getLoggerImplementation(name);
 	}
 
 	/**
@@ -110,4 +79,6 @@ public class LoggerFactory {
 	public static final Logger getLogger(Class<?> clazz) {
 		return getLogger(clazz.getName());
 	}
+
+	public abstract Logger getLoggerImplementation(String name);
 }
