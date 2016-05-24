@@ -31,6 +31,18 @@ import javax.faces.render.Renderer;
 public abstract class DelegatingClientComponentRendererBase extends ClientComponentRendererBase
 	implements DelegatingClientComponentRenderer {
 
+	/**
+	 * @see  {@link DelegatingRenderer#getDelegateComponentFamily()}
+	 */
+	@Override
+	public abstract String getDelegateComponentFamily();
+
+	/**
+	 * @see  {@link DelegatingRenderer#getDelegateRendererType()}
+	 */
+	@Override
+	public abstract String getDelegateRendererType();
+
 	@Override
 	public String convertClientId(FacesContext facesContext, String clientId) {
 
@@ -213,12 +225,6 @@ public abstract class DelegatingClientComponentRendererBase extends ClientCompon
 	}
 
 	/**
-	 * @see  {@link DelegatingRenderer#getDelegateComponentFamily()}
-	 */
-	@Override
-	public abstract String getDelegateComponentFamily();
-
-	/**
 	 * @see  {@link DelegatingRenderer#getDelegateRenderer(javax.faces.context.FacesContext)}
 	 */
 	@Override
@@ -229,12 +235,6 @@ public abstract class DelegatingClientComponentRendererBase extends ClientCompon
 
 		return delegateRenderer;
 	}
-
-	/**
-	 * @see  {@link DelegatingRenderer#getDelegateRendererType()}
-	 */
-	@Override
-	public abstract String getDelegateRendererType();
 
 	@Override
 	public boolean getRendersChildren() {

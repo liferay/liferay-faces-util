@@ -27,6 +27,8 @@ import javax.faces.context.FacesContext;
  */
 public abstract class ScriptsEncoderWrapper implements ScriptsEncoder, FacesWrapper<ScriptsEncoder> {
 
+	public abstract ScriptsEncoder getWrapped();
+
 	@Override
 	public void encodeBodyScripts(FacesContext facesContext, List<Script> scripts) throws IOException {
 		getWrapped().encodeBodyScripts(facesContext, scripts);
@@ -36,6 +38,4 @@ public abstract class ScriptsEncoderWrapper implements ScriptsEncoder, FacesWrap
 	public void encodeEvalScripts(FacesContext facesContext, List<Script> scripts) throws IOException {
 		getWrapped().encodeEvalScripts(facesContext, scripts);
 	}
-
-	public abstract ScriptsEncoder getWrapped();
 }

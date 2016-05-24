@@ -62,11 +62,6 @@ public class FacesConfigDescriptorImpl implements FacesConfigDescriptor, Seriali
 	}
 
 	@Override
-	public boolean isWebInfFacesConfig() {
-		return isWebInfFacesConfig;
-	}
-
-	@Override
 	public String getName() {
 
 		if (name == null) {
@@ -76,22 +71,27 @@ public class FacesConfigDescriptorImpl implements FacesConfigDescriptor, Seriali
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	@Override
 	public Ordering getOrdering() {
 		return ordering;
 	}
 
-	public void setOrdering(Ordering ordering) {
-		this.ordering = ordering;
-	}
-
 	@Override
 	public String getURL() {
 		return url;
+	}
+
+	@Override
+	public boolean isWebInfFacesConfig() {
+		return isWebInfFacesConfig;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setOrdering(Ordering ordering) {
+		this.ordering = ordering;
 	}
 
 }

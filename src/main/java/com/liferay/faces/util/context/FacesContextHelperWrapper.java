@@ -32,6 +32,9 @@ import javax.faces.event.PhaseListener;
 public abstract class FacesContextHelperWrapper implements FacesContextHelper, FacesWrapper<FacesContextHelper> {
 
 	@Override
+	public abstract FacesContextHelper getWrapped();
+
+	@Override
 	public void addComponentErrorMessage(String clientId, String messageId) {
 		getWrapped().addComponentErrorMessage(clientId, messageId);
 	}
@@ -117,6 +120,106 @@ public abstract class FacesContextHelperWrapper implements FacesContextHelper, F
 	}
 
 	@Override
+	public FacesContext getFacesContext() {
+		return getWrapped().getFacesContext();
+	}
+
+	@Override
+	public Locale getLocale() {
+		return getWrapped().getLocale();
+	}
+
+	@Override
+	public String getMessage(String messageId) {
+		return getWrapped().getMessage(messageId);
+	}
+
+	@Override
+	public String getMessage(String messageId, Object... arguments) {
+		return getWrapped().getMessage(messageId, arguments);
+	}
+
+	@Override
+	public String getMessage(Locale locale, String messageId) {
+		return getWrapped().getMessage(locale, messageId);
+	}
+
+	@Override
+	public String getMessage(Locale locale, String messageId, Object... arguments) {
+		return getWrapped().getMessage(locale, messageId, arguments);
+	}
+
+	@Override
+	public String getNamespace() {
+		return getWrapped().getNamespace();
+	}
+
+	@Override
+	public UIForm getParentForm(UIComponent uiComponent) {
+		return getWrapped().getParentForm(uiComponent);
+	}
+
+	@Override
+	public Object getRequestAttribute(String name) {
+		return getWrapped().getRequestAttribute(name);
+	}
+
+	@Override
+	public String getRequestContextPath() {
+		return getWrapped().getRequestContextPath();
+	}
+
+	@Override
+	public String getRequestParameter(String name) {
+		return getWrapped().getRequestParameter(name);
+	}
+
+	@Override
+	public boolean getRequestParameterAsBool(String name, boolean defaultValue) {
+		return getWrapped().getRequestParameterAsBool(name, defaultValue);
+	}
+
+	@Override
+	public int getRequestParameterAsInt(String name, int defaultValue) {
+		return getWrapped().getRequestParameterAsInt(name, defaultValue);
+	}
+
+	@Override
+	public long getRequestParameterAsLong(String name, long defaultValue) {
+		return getWrapped().getRequestParameterAsLong(name, defaultValue);
+	}
+
+	@Override
+	public String getRequestParameterFromMap(String name) {
+		return getWrapped().getRequestParameterFromMap(name);
+	}
+
+	@Override
+	public Map<String, String> getRequestParameterMap() {
+		return getWrapped().getRequestParameterMap();
+	}
+
+	@Override
+	public String getRequestQueryString() {
+		return getWrapped().getRequestQueryString();
+	}
+
+	@Override
+	public String getRequestQueryStringParameter(String name) {
+		return getWrapped().getRequestQueryStringParameter(name);
+	}
+
+	@Override
+	public Object getSession(boolean create) {
+		return getWrapped().getSession(create);
+	}
+
+	@Override
+	public Object getSessionAttribute(String name) {
+		return getWrapped().getSessionAttribute(name);
+	}
+
+	@Override
 	public UIComponent matchComponentInHierarchy(UIComponent parent, String partialClientId) {
 		return getWrapped().matchComponentInHierarchy(parent, partialClientId);
 	}
@@ -187,115 +290,12 @@ public abstract class FacesContextHelperWrapper implements FacesContextHelper, F
 	}
 
 	@Override
-	public FacesContext getFacesContext() {
-		return getWrapped().getFacesContext();
-	}
-
-	@Override
-	public Locale getLocale() {
-		return getWrapped().getLocale();
-	}
-
-	@Override
-	public String getMessage(String messageId) {
-		return getWrapped().getMessage(messageId);
-	}
-
-	@Override
-	public String getMessage(String messageId, Object... arguments) {
-		return getWrapped().getMessage(messageId, arguments);
-	}
-
-	@Override
-	public String getMessage(Locale locale, String messageId) {
-		return getWrapped().getMessage(locale, messageId);
-	}
-
-	@Override
-	public String getMessage(Locale locale, String messageId, Object... arguments) {
-		return getWrapped().getMessage(locale, messageId, arguments);
-	}
-
-	@Override
-	public String getNamespace() {
-		return getWrapped().getNamespace();
-	}
-
-	@Override
-	public UIForm getParentForm(UIComponent uiComponent) {
-		return getWrapped().getParentForm(uiComponent);
-	}
-
-	@Override
-	public Object getRequestAttribute(String name) {
-		return getWrapped().getRequestAttribute(name);
-	}
-
-	@Override
 	public void setRequestAttribute(String name, Object value) {
 		getWrapped().setRequestAttribute(name, value);
-	}
-
-	@Override
-	public String getRequestContextPath() {
-		return getWrapped().getRequestContextPath();
-	}
-
-	@Override
-	public String getRequestParameter(String name) {
-		return getWrapped().getRequestParameter(name);
-	}
-
-	@Override
-	public boolean getRequestParameterAsBool(String name, boolean defaultValue) {
-		return getWrapped().getRequestParameterAsBool(name, defaultValue);
-	}
-
-	@Override
-	public int getRequestParameterAsInt(String name, int defaultValue) {
-		return getWrapped().getRequestParameterAsInt(name, defaultValue);
-	}
-
-	@Override
-	public long getRequestParameterAsLong(String name, long defaultValue) {
-		return getWrapped().getRequestParameterAsLong(name, defaultValue);
-	}
-
-	@Override
-	public String getRequestParameterFromMap(String name) {
-		return getWrapped().getRequestParameterFromMap(name);
-	}
-
-	@Override
-	public Map<String, String> getRequestParameterMap() {
-		return getWrapped().getRequestParameterMap();
-	}
-
-	@Override
-	public String getRequestQueryString() {
-		return getWrapped().getRequestQueryString();
-	}
-
-	@Override
-	public String getRequestQueryStringParameter(String name) {
-		return getWrapped().getRequestQueryStringParameter(name);
-	}
-
-	@Override
-	public Object getSession(boolean create) {
-		return getWrapped().getSession(create);
-	}
-
-	@Override
-	public Object getSessionAttribute(String name) {
-		return getWrapped().getSessionAttribute(name);
 	}
 
 	@Override
 	public void setSessionAttribute(String name, Object value) {
 		getWrapped().setSessionAttribute(name, value);
 	}
-
-	@Override
-	public abstract FacesContextHelper getWrapped();
 }

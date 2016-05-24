@@ -102,7 +102,7 @@ public abstract class FactoryExtensionFinder {
 		return instance;
 	}
 
-	public abstract void registerFactory(ConfiguredElement configuredFactoryExtension);
-
 	public abstract Object getFactoryInstance(Class<?> clazz);
+
+	public abstract void registerFactory(ConfiguredElement configuredFactoryExtension);
 }

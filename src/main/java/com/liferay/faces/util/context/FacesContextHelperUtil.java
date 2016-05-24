@@ -192,6 +192,155 @@ public class FacesContextHelperUtil {
 	}
 
 	/**
+	 * Returns the locale of the viewRoot of the current JSF FacesContext
+	 */
+	public static Locale getLocale() {
+		return FacesContextHelperFactory.getFacesContextHelperInstance().getLocale();
+	}
+
+	/**
+	 * Returns the message associated with the specified messageId by delegating to the FacesMessageFactory, according
+	 * to the current locale.
+	 */
+	public static String getMessage(String messageId) {
+		return FacesContextHelperFactory.getFacesContextHelperInstance().getMessage(messageId);
+	}
+
+	/**
+	 * Returns the message associated with the specified messageId by delegating to the FacesMessageFactory, according
+	 * to the current locale and arguments that are to be substituted.
+	 */
+	public static String getMessage(String messageId, Object... arguments) {
+		return FacesContextHelperFactory.getFacesContextHelperInstance().getMessage(messageId, arguments);
+	}
+
+	/**
+	 * Returns the message associated with the specified messageId by delegating to the FacesMessageFactory, according
+	 * to the specified locale.
+	 */
+	public static String getMessage(Locale locale, String messageId) {
+		return FacesContextHelperFactory.getFacesContextHelperInstance().getMessage(locale, messageId);
+	}
+
+	/**
+	 * Returns the message associated with the specified messageId by delegating to the FacesMessageFactory, according
+	 * to the specified locale and arguments that are to be substituted.
+	 */
+	public static String getMessage(Locale locale, String messageId, Object... arguments) {
+		return FacesContextHelperFactory.getFacesContextHelperInstance().getMessage(locale, messageId, arguments);
+	}
+
+	/**
+	 * Delegates to the underlying {@link ExternalContext#encodeNamespace(String)} method in order to get the
+	 * application namespace.
+	 */
+	public static String getNamespace() {
+		return FacesContextHelperFactory.getFacesContextHelperInstance().getNamespace();
+	}
+
+	/**
+	 * Return the parent form of the given component.
+	 *
+	 * @param   uiComponent  The component whose parent is to be found.
+	 *
+	 * @return  The parent form or <code>null</code> if no parent form is found.
+	 */
+	public static UIForm getParentForm(UIComponent uiComponent) {
+		return FacesContextHelperFactory.getFacesContextHelperInstance().getParentForm(uiComponent);
+	}
+
+	/**
+	 * Returns the value of the request attribute associated with the specified name.
+	 */
+	public static Object getRequestAttribute(String name) {
+		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestAttribute(name);
+	}
+
+	/**
+	 * @return  The request context path. {@link FacesContext#getExternalContext()} {@link
+	 *          ExternalContext#getRequestContextPath()}
+	 */
+	public static String getRequestContextPath() {
+		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestContextPath();
+	}
+
+	/**
+	 * Retrieves the specified parameter passed as part of the request
+	 */
+	public static String getRequestParameter(String name) {
+		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestParameter(name);
+	}
+
+	/**
+	 * Retrieves the specified parameter passed as part of the request as a boolean. The values "yes", "true", "y", and
+	 * "1" are accetable values for "TRUE".
+	 */
+	public static boolean getRequestParameterAsBool(String name, boolean defaultValue) {
+		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestParameterAsBool(name, defaultValue);
+	}
+
+	/**
+	 * Retrieves the specified parameter passed as part of the request as an integer.
+	 */
+	public static int getRequestParameterAsInt(String name, int defaultValue) {
+		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestParameterAsInt(name, defaultValue);
+	}
+
+	/**
+	 * Retrieves the specified parameter passed as part of the request as an integer.
+	 */
+	public static long getRequestParameterAsLong(String name, long defaultValue) {
+		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestParameterAsLong(name, defaultValue);
+	}
+
+	/**
+	 * Retrieves the specified parameter from the ExternalContext's request parameter map.
+	 */
+	public static String getRequestParameterFromMap(String name) {
+		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestParameterFromMap(name);
+	}
+
+	/**
+	 * Returns the map of request parameters from the ExternalContext.
+	 *
+	 * @see  {@link ExternalContext#getRequestParameterMap()}.
+	 */
+	public static Map<String, String> getRequestParameterMap() {
+		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestParameterMap();
+	}
+
+	/**
+	 * Retrieves the value of the original "javax.servlet.forward.query_string" request attribute.
+	 */
+	public static String getRequestQueryString() {
+		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestQueryString();
+	}
+
+	/**
+	 * Retrieves the value of the specified parameter name from the original "javax.servlet.forward.query_string"
+	 * request attribute.
+	 */
+	public static String getRequestQueryStringParameter(String name) {
+		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestQueryStringParameter(name);
+	}
+
+	/**
+	 * Returns the session object associated with the current FacesContext.
+	 *
+	 * @param  create  Flag indicating whether or not a session should be created if it doesn't yet exist.
+	 */
+	public static Object getSession(boolean create) {
+		return FacesContextHelperFactory.getFacesContextHelperInstance().getSession(create);
+	}
+
+	/**
+	 * Returns the value of the session attribute associated with the specified name.
+	 */
+	public static Object getSessionAttribute(String name) {
+		return FacesContextHelperFactory.getFacesContextHelperInstance().getSessionAttribute(name);
+	}
+
+	/**
 	 * Traverses the component tree starting at the specified UIComponent parent and returns the first UIComponent child
 	 * that contains the specified partialClientId.
 	 */
@@ -321,159 +470,10 @@ public class FacesContextHelperUtil {
 	}
 
 	/**
-	 * Returns the locale of the viewRoot of the current JSF FacesContext
-	 */
-	public static Locale getLocale() {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getLocale();
-	}
-
-	/**
-	 * Returns the message associated with the specified messageId by delegating to the FacesMessageFactory, according
-	 * to the current locale.
-	 */
-	public static String getMessage(String messageId) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getMessage(messageId);
-	}
-
-	/**
-	 * Returns the message associated with the specified messageId by delegating to the FacesMessageFactory, according
-	 * to the current locale and arguments that are to be substituted.
-	 */
-	public static String getMessage(String messageId, Object... arguments) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getMessage(messageId, arguments);
-	}
-
-	/**
-	 * Returns the message associated with the specified messageId by delegating to the FacesMessageFactory, according
-	 * to the specified locale.
-	 */
-	public static String getMessage(Locale locale, String messageId) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getMessage(locale, messageId);
-	}
-
-	/**
-	 * Returns the message associated with the specified messageId by delegating to the FacesMessageFactory, according
-	 * to the specified locale and arguments that are to be substituted.
-	 */
-	public static String getMessage(Locale locale, String messageId, Object... arguments) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getMessage(locale, messageId, arguments);
-	}
-
-	/**
-	 * Delegates to the underlying {@link ExternalContext#encodeNamespace(String)} method in order to get the
-	 * application namespace.
-	 */
-	public static String getNamespace() {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getNamespace();
-	}
-
-	/**
-	 * Return the parent form of the given component.
-	 *
-	 * @param   uiComponent  The component whose parent is to be found.
-	 *
-	 * @return  The parent form or <code>null</code> if no parent form is found.
-	 */
-	public static UIForm getParentForm(UIComponent uiComponent) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getParentForm(uiComponent);
-	}
-
-	/**
-	 * Returns the value of the request attribute associated with the specified name.
-	 */
-	public static Object getRequestAttribute(String name) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestAttribute(name);
-	}
-
-	/**
 	 * Sets the value of the a request attribute using the specified name and value.
 	 */
 	public static void setRequestAttribute(String name, Object value) {
 		FacesContextHelperFactory.getFacesContextHelperInstance().setRequestAttribute(name, value);
-	}
-
-	/**
-	 * @return  The request context path. {@link FacesContext#getExternalContext()} {@link
-	 *          ExternalContext#getRequestContextPath()}
-	 */
-	public static String getRequestContextPath() {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestContextPath();
-	}
-
-	/**
-	 * Retrieves the specified parameter passed as part of the request
-	 */
-	public static String getRequestParameter(String name) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestParameter(name);
-	}
-
-	/**
-	 * Retrieves the specified parameter passed as part of the request as a boolean. The values "yes", "true", "y", and
-	 * "1" are accetable values for "TRUE".
-	 */
-	public static boolean getRequestParameterAsBool(String name, boolean defaultValue) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestParameterAsBool(name, defaultValue);
-	}
-
-	/**
-	 * Retrieves the specified parameter passed as part of the request as an integer.
-	 */
-	public static int getRequestParameterAsInt(String name, int defaultValue) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestParameterAsInt(name, defaultValue);
-	}
-
-	/**
-	 * Retrieves the specified parameter passed as part of the request as an integer.
-	 */
-	public static long getRequestParameterAsLong(String name, long defaultValue) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestParameterAsLong(name, defaultValue);
-	}
-
-	/**
-	 * Retrieves the specified parameter from the ExternalContext's request parameter map.
-	 */
-	public static String getRequestParameterFromMap(String name) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestParameterFromMap(name);
-	}
-
-	/**
-	 * Returns the map of request parameters from the ExternalContext.
-	 *
-	 * @see  {@link ExternalContext#getRequestParameterMap()}.
-	 */
-	public static Map<String, String> getRequestParameterMap() {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestParameterMap();
-	}
-
-	/**
-	 * Retrieves the value of the original "javax.servlet.forward.query_string" request attribute.
-	 */
-	public static String getRequestQueryString() {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestQueryString();
-	}
-
-	/**
-	 * Retrieves the value of the specified parameter name from the original "javax.servlet.forward.query_string"
-	 * request attribute.
-	 */
-	public static String getRequestQueryStringParameter(String name) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestQueryStringParameter(name);
-	}
-
-	/**
-	 * Returns the session object associated with the current FacesContext.
-	 *
-	 * @param  create  Flag indicating whether or not a session should be created if it doesn't yet exist.
-	 */
-	public static Object getSession(boolean create) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getSession(create);
-	}
-
-	/**
-	 * Returns the value of the session attribute associated with the specified name.
-	 */
-	public static Object getSessionAttribute(String name) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getSessionAttribute(name);
 	}
 
 	/**

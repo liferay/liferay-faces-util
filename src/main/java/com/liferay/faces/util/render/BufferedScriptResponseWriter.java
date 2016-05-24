@@ -77,6 +77,24 @@ public class BufferedScriptResponseWriter extends ResponseWriter {
 	}
 
 	@Override
+	public String getCharacterEncoding() {
+
+		logger.debug(
+			"Returning null from getCharacterEncoding() since BufferedScriptResponseWriter only supports writing scripts.");
+
+		return null;
+	}
+
+	@Override
+	public String getContentType() {
+
+		logger.debug(
+			"Returning null from getContentType() since BufferedScriptResponseWriter only supports writing scripts.");
+
+		return null;
+	}
+
+	@Override
 	public void startDocument() throws IOException {
 		logger.debug(
 			"Suppressing the output of startDocument() since BufferedScriptResponseWriter only supports writing scripts.");
@@ -144,23 +162,5 @@ public class BufferedScriptResponseWriter extends ResponseWriter {
 		logger.debug(
 			"Suppressing the output of writeURIAttribute({0}, {1}, {2}) since BufferedScriptResponseWriter only supports writing scripts.",
 			name, value, property);
-	}
-
-	@Override
-	public String getCharacterEncoding() {
-
-		logger.debug(
-			"Returning null from getCharacterEncoding() since BufferedScriptResponseWriter only supports writing scripts.");
-
-		return null;
-	}
-
-	@Override
-	public String getContentType() {
-
-		logger.debug(
-			"Returning null from getContentType() since BufferedScriptResponseWriter only supports writing scripts.");
-
-		return null;
 	}
 }

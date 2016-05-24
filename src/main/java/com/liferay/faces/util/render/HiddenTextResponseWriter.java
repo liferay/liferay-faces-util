@@ -55,6 +55,11 @@ public class HiddenTextResponseWriter extends ResponseWriterWrapper {
 	}
 
 	@Override
+	public ResponseWriter getWrapped() {
+		return wrappedResponseWriter;
+	}
+
+	@Override
 	public void writeAttribute(String name, Object value, String property) throws IOException {
 
 		if ("id".equals(name)) {
@@ -66,10 +71,5 @@ public class HiddenTextResponseWriter extends ResponseWriterWrapper {
 		else {
 			super.writeAttribute(name, value, property);
 		}
-	}
-
-	@Override
-	public ResponseWriter getWrapped() {
-		return wrappedResponseWriter;
 	}
 }

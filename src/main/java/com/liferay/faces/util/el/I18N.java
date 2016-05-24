@@ -47,6 +47,15 @@ public class I18N extends I18NCompat {
 	}
 
 	/**
+	 * This method is required by the ResourceBundle abstract class, but it will never be called in the normal running
+	 * of a JSF webapp using the EL. Therefore, it just returns an empty Enumeration of Strings.
+	 */
+	@Override
+	public Enumeration<String> getKeys() {
+		return EMPTY_KEYS;
+	}
+
+	/**
 	 * Gets the message associated with the specified messageId according to the locale in the current FacesContext.
 	 * This method is primarily meant to be called via EL, providing the implementation supports passing parameters
 	 * (like JBoss EL).
@@ -198,14 +207,5 @@ public class I18N extends I18NCompat {
 		}
 
 		return message;
-	}
-
-	/**
-	 * This method is required by the ResourceBundle abstract class, but it will never be called in the normal running
-	 * of a JSF webapp using the EL. Therefore, it just returns an empty Enumeration of Strings.
-	 */
-	@Override
-	public Enumeration<String> getKeys() {
-		return EMPTY_KEYS;
 	}
 }

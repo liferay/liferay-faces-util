@@ -37,20 +37,20 @@ public class JspTagConfig implements TagConfig {
 		return nextHandler;
 	}
 
-	public void setNextHandler(FaceletHandler nextHandler) {
-		this.nextHandler = nextHandler;
-	}
-
 	public Tag getTag() {
 		return tag;
 	}
 
-	public void setTag(Tag tag) {
-		this.tag = tag;
-	}
-
 	public String getTagId() {
 		return tagId;
+	}
+
+	public void setNextHandler(FaceletHandler nextHandler) {
+		this.nextHandler = nextHandler;
+	}
+
+	public void setTag(Tag tag) {
+		this.tag = tag;
 	}
 
 	public void setTagId(String tagId) {

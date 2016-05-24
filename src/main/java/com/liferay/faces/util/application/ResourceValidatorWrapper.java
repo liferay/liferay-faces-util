@@ -25,6 +25,9 @@ import javax.faces.context.FacesContext;
 public abstract class ResourceValidatorWrapper implements ResourceValidator, FacesWrapper<ResourceValidator> {
 
 	@Override
+	public abstract ResourceValidator getWrapped();
+
+	@Override
 	public boolean containsBannedPath(String resourceId) {
 		return getWrapped().containsBannedPath(resourceId);
 	}
@@ -32,6 +35,16 @@ public abstract class ResourceValidatorWrapper implements ResourceValidator, Fac
 	@Override
 	public boolean isBannedSequence(String resourceId) {
 		return getWrapped().isBannedSequence(resourceId);
+	}
+
+	@Override
+	public boolean isFaceletDocument(FacesContext facesContext, String resourceId) {
+		return getWrapped().isFaceletDocument(facesContext, resourceId);
+	}
+
+	@Override
+	public boolean isSelfReferencing(FacesContext facesContext, String resourceId) {
+		return getWrapped().isSelfReferencing(facesContext, resourceId);
 	}
 
 	@Override
@@ -43,17 +56,4 @@ public abstract class ResourceValidatorWrapper implements ResourceValidator, Fac
 	public boolean isValidResourceName(String resourceName) {
 		return getWrapped().isValidResourceName(resourceName);
 	}
-
-	@Override
-	public boolean isSelfReferencing(FacesContext facesContext, String resourceId) {
-		return getWrapped().isSelfReferencing(facesContext, resourceId);
-	}
-
-	@Override
-	public boolean isFaceletDocument(FacesContext facesContext, String resourceId) {
-		return getWrapped().isFaceletDocument(facesContext, resourceId);
-	}
-
-	@Override
-	public abstract ResourceValidator getWrapped();
 }

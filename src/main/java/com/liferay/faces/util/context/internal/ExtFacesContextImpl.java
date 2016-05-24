@@ -190,6 +190,338 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	}
 
 	/**
+	 * @since  JSF 1.0
+	 */
+	@Override
+	public Application getApplication() {
+		return FacesContext.getCurrentInstance().getApplication();
+	}
+
+	/**
+	 * @since  JSF 2.0
+	 */
+	@Override
+	public Map<Object, Object> getAttributes() {
+		return FacesContext.getCurrentInstance().getAttributes();
+	}
+
+	/**
+	 * @since  JSF 1.0
+	 */
+	@Override
+	public Iterator<String> getClientIdsWithMessages() {
+		return FacesContext.getCurrentInstance().getClientIdsWithMessages();
+	}
+
+	/**
+	 * @since  JSF 2.0
+	 */
+	@Override
+	public PhaseId getCurrentPhaseId() {
+		return FacesContext.getCurrentInstance().getCurrentPhaseId();
+	}
+
+	/**
+	 * @since  JSF 1.2
+	 */
+	@Override
+	public ELContext getELContext() {
+		return FacesContext.getCurrentInstance().getELContext();
+	}
+
+	/**
+	 * @since  JSF 2.0
+	 */
+	@Override
+	public ExceptionHandler getExceptionHandler() {
+		return FacesContext.getCurrentInstance().getExceptionHandler();
+	}
+
+	/**
+	 * @since  JSF 1.0
+	 */
+	@Override
+	public ExternalContext getExternalContext() {
+		return FacesContext.getCurrentInstance().getExternalContext();
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#getFacesContext()}
+	 */
+	public FacesContext getFacesContext() {
+		return FacesContext.getCurrentInstance();
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#getLocale()}
+	 */
+	public Locale getLocale() {
+		return FacesContextHelperUtil.getLocale();
+	}
+
+	/**
+	 * @since  JSF 1.0
+	 */
+	@Override
+	public Severity getMaximumSeverity() {
+		return FacesContext.getCurrentInstance().getMaximumSeverity();
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#getMessage(String)}
+	 */
+	public String getMessage(String messageId) {
+		return FacesContextHelperUtil.getMessage(messageId);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#getMessage(String, Object...)}
+	 */
+	public String getMessage(String messageId, Object... arguments) {
+		return FacesContextHelperUtil.getMessage(messageId, arguments);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#getMessage(Locale, String)}
+	 */
+	public String getMessage(Locale locale, String messageId) {
+		return FacesContextHelperUtil.getMessage(locale, messageId);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#getMessage(Locale, String, Object...)}
+	 */
+	public String getMessage(Locale locale, String messageId, Object... arguments) {
+		return FacesContextHelperUtil.getMessage(locale, messageId, arguments);
+	}
+
+	/**
+	 * @since  JSF 2.0
+	 */
+	@Override
+	public List<FacesMessage> getMessageList() {
+		return FacesContext.getCurrentInstance().getMessageList();
+	}
+
+	/**
+	 * @since  JSF 2.0
+	 */
+	@Override
+	public List<FacesMessage> getMessageList(String clientId) {
+		return FacesContext.getCurrentInstance().getMessageList(clientId);
+	}
+
+	/**
+	 * @since  JSF 1.0
+	 */
+	@Override
+	public Iterator<FacesMessage> getMessages() {
+		return FacesContext.getCurrentInstance().getMessages();
+	}
+
+	/**
+	 * @since  JSF 1.0
+	 */
+	@Override
+	public Iterator<FacesMessage> getMessages(String clientId) {
+		return FacesContext.getCurrentInstance().getMessages(clientId);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#getNamespace()}
+	 */
+	public String getNamespace() {
+		return FacesContextHelperUtil.getNamespace();
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#getParentForm(UIComponent)}
+	 */
+	public UIForm getParentForm(UIComponent uiComponent) {
+		return FacesContextHelperUtil.getParentForm(uiComponent);
+	}
+
+	/**
+	 * @since  JSF 2.0
+	 */
+	@Override
+	public PartialViewContext getPartialViewContext() {
+		return FacesContext.getCurrentInstance().getPartialViewContext();
+	}
+
+	/**
+	 * @since  JSF 1.0
+	 */
+	@Override
+	public RenderKit getRenderKit() {
+		return FacesContext.getCurrentInstance().getRenderKit();
+	}
+
+	/**
+	 * @since  JSF 1.0
+	 */
+	@Override
+	public boolean getRenderResponse() {
+		return FacesContext.getCurrentInstance().getRenderResponse();
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#getRequestAttribute(String)}
+	 */
+	public Object getRequestAttribute(String name) {
+		return FacesContextHelperUtil.getRequestAttribute(name);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#getRequestContextPath()}
+	 */
+	public String getRequestContextPath() {
+		return FacesContextHelperUtil.getRequestContextPath();
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#getRequestParameter(String)}
+	 */
+	public String getRequestParameter(String name) {
+		return FacesContextHelperUtil.getRequestParameter(name);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#getRequestParameterAsBool(String, boolean)}
+	 */
+	public boolean getRequestParameterAsBool(String name, boolean defaultValue) {
+		return FacesContextHelperUtil.getRequestParameterAsBool(name, defaultValue);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#getRequestParameterAsInt(String, int)}
+	 */
+	public int getRequestParameterAsInt(String name, int defaultValue) {
+		return FacesContextHelperUtil.getRequestParameterAsInt(name, defaultValue);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#getRequestParameterAsLong(String, long)}
+	 */
+	public long getRequestParameterAsLong(String name, long defaultValue) {
+		return FacesContextHelperUtil.getRequestParameterAsLong(name, defaultValue);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#getRequestParameterFromMap(String)}
+	 */
+	public String getRequestParameterFromMap(String name) {
+		return FacesContextHelperUtil.getRequestParameterFromMap(name);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#getRequestParameterMap()}
+	 */
+	public Map<String, String> getRequestParameterMap() {
+		return FacesContextHelperUtil.getRequestParameterMap();
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#getRequestQueryString()}
+	 */
+	public String getRequestQueryString() {
+		return FacesContextHelperUtil.getRequestQueryString();
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#getRequestQueryStringParameter(String)}
+	 */
+	public String getRequestQueryStringParameter(String name) {
+		return FacesContextHelperUtil.getRequestQueryStringParameter(name);
+	}
+
+	/**
+	 * @since  JSF 1.0
+	 */
+	@Override
+	public boolean getResponseComplete() {
+		return FacesContext.getCurrentInstance().getRenderResponse();
+	}
+
+	/**
+	 * @since  JSF 1.0
+	 */
+	@Override
+	public ResponseStream getResponseStream() {
+		return FacesContext.getCurrentInstance().getResponseStream();
+	}
+
+	/**
+	 * @since  JSF 1.0
+	 */
+	@Override
+	public ResponseWriter getResponseWriter() {
+		return FacesContext.getCurrentInstance().getResponseWriter();
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#getSession(boolean)}
+	 */
+	public Object getSession(boolean create) {
+		return FacesContextHelperUtil.getSession(create);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#getSessionAttribute(String)}
+	 */
+	public Object getSessionAttribute(String name) {
+		return FacesContextHelperUtil.getSessionAttribute(name);
+	}
+
+	/**
+	 * @since  JSF 1.0
+	 */
+	@Override
+	public UIViewRoot getViewRoot() {
+		return FacesContext.getCurrentInstance().getViewRoot();
+	}
+
+	/**
+	 * @since  JSF 2.0
+	 */
+	@Override
+	public boolean isPostback() {
+		return FacesContext.getCurrentInstance().isPostback();
+	}
+
+	/**
+	 * @since  JSF 2.0
+	 */
+	@Override
+	public boolean isProcessingEvents() {
+		return FacesContext.getCurrentInstance().isProcessingEvents();
+	}
+
+	/**
+	 * @since  JSF 2.0
+	 */
+	@Override
+	public boolean isProjectStage(ProjectStage stage) {
+		return FacesContext.getCurrentInstance().isProjectStage(stage);
+	}
+
+	/**
+	 * @since  JSF 2.2
+	 */
+	@Override
+	public boolean isReleased() {
+		return FacesContext.getCurrentInstance().isReleased();
+	}
+
+	/**
+	 * @since  JSF 2.0
+	 */
+	@Override
+	public boolean isValidationFailed() {
+		return FacesContext.getCurrentInstance().isValidationFailed();
+	}
+
+	/**
 	 * @see  {@link FacesContextHelper#matchComponentInHierarchy(UIComponent, String)}
 	 */
 	public UIComponent matchComponentInHierarchy(UIComponent parent, String partialClientId) {
@@ -315,88 +647,8 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	 * @since  JSF 2.0
 	 */
 	@Override
-	public void validationFailed() {
-		FacesContext.getCurrentInstance().validationFailed();
-	}
-
-	/**
-	 * @since  JSF 1.0
-	 */
-	@Override
-	public Application getApplication() {
-		return FacesContext.getCurrentInstance().getApplication();
-	}
-
-	/**
-	 * @since  JSF 2.0
-	 */
-	@Override
-	public Map<Object, Object> getAttributes() {
-		return FacesContext.getCurrentInstance().getAttributes();
-	}
-
-	/**
-	 * @since  JSF 1.0
-	 */
-	@Override
-	public Iterator<String> getClientIdsWithMessages() {
-		return FacesContext.getCurrentInstance().getClientIdsWithMessages();
-	}
-
-	/**
-	 * @since  JSF 2.0
-	 */
-	@Override
-	public PhaseId getCurrentPhaseId() {
-		return FacesContext.getCurrentInstance().getCurrentPhaseId();
-	}
-
-	/**
-	 * @since  JSF 2.0
-	 */
-	@Override
 	public void setCurrentPhaseId(PhaseId currentPhaseId) {
 		FacesContext.getCurrentInstance().setCurrentPhaseId(currentPhaseId);
-	}
-
-	/**
-	 * @since  JSF 2.2
-	 */
-	@Override
-	public boolean isReleased() {
-		return FacesContext.getCurrentInstance().isReleased();
-	}
-
-	/**
-	 * @since  JSF 2.0
-	 */
-	@Override
-	public boolean isValidationFailed() {
-		return FacesContext.getCurrentInstance().isValidationFailed();
-	}
-
-	/**
-	 * @since  JSF 2.0
-	 */
-	@Override
-	public boolean isProjectStage(ProjectStage stage) {
-		return FacesContext.getCurrentInstance().isProjectStage(stage);
-	}
-
-	/**
-	 * @since  JSF 1.2
-	 */
-	@Override
-	public ELContext getELContext() {
-		return FacesContext.getCurrentInstance().getELContext();
-	}
-
-	/**
-	 * @since  JSF 2.0
-	 */
-	@Override
-	public ExceptionHandler getExceptionHandler() {
-		return FacesContext.getCurrentInstance().getExceptionHandler();
 	}
 
 	/**
@@ -408,126 +660,6 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	}
 
 	/**
-	 * @since  JSF 1.0
-	 */
-	@Override
-	public ExternalContext getExternalContext() {
-		return FacesContext.getCurrentInstance().getExternalContext();
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#getFacesContext()}
-	 */
-	public FacesContext getFacesContext() {
-		return FacesContext.getCurrentInstance();
-	}
-
-	/**
-	 * @since  JSF 2.0
-	 */
-	@Override
-	public boolean isPostback() {
-		return FacesContext.getCurrentInstance().isPostback();
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#getLocale()}
-	 */
-	public Locale getLocale() {
-		return FacesContextHelperUtil.getLocale();
-	}
-
-	/**
-	 * @since  JSF 1.0
-	 */
-	@Override
-	public Severity getMaximumSeverity() {
-		return FacesContext.getCurrentInstance().getMaximumSeverity();
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#getMessage(String)}
-	 */
-	public String getMessage(String messageId) {
-		return FacesContextHelperUtil.getMessage(messageId);
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#getMessage(String, Object...)}
-	 */
-	public String getMessage(String messageId, Object... arguments) {
-		return FacesContextHelperUtil.getMessage(messageId, arguments);
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#getMessage(Locale, String)}
-	 */
-	public String getMessage(Locale locale, String messageId) {
-		return FacesContextHelperUtil.getMessage(locale, messageId);
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#getMessage(Locale, String, Object...)}
-	 */
-	public String getMessage(Locale locale, String messageId, Object... arguments) {
-		return FacesContextHelperUtil.getMessage(locale, messageId, arguments);
-	}
-
-	/**
-	 * @since  JSF 2.0
-	 */
-	@Override
-	public List<FacesMessage> getMessageList() {
-		return FacesContext.getCurrentInstance().getMessageList();
-	}
-
-	/**
-	 * @since  JSF 2.0
-	 */
-	@Override
-	public List<FacesMessage> getMessageList(String clientId) {
-		return FacesContext.getCurrentInstance().getMessageList(clientId);
-	}
-
-	/**
-	 * @since  JSF 1.0
-	 */
-	@Override
-	public Iterator<FacesMessage> getMessages() {
-		return FacesContext.getCurrentInstance().getMessages();
-	}
-
-	/**
-	 * @since  JSF 1.0
-	 */
-	@Override
-	public Iterator<FacesMessage> getMessages(String clientId) {
-		return FacesContext.getCurrentInstance().getMessages(clientId);
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#getNamespace()}
-	 */
-	public String getNamespace() {
-		return FacesContextHelperUtil.getNamespace();
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#getParentForm(UIComponent)}
-	 */
-	public UIForm getParentForm(UIComponent uiComponent) {
-		return FacesContextHelperUtil.getParentForm(uiComponent);
-	}
-
-	/**
-	 * @since  JSF 2.0
-	 */
-	@Override
-	public PartialViewContext getPartialViewContext() {
-		return FacesContext.getCurrentInstance().getPartialViewContext();
-	}
-
-	/**
 	 * @since  JSF 2.0
 	 */
 	@Override
@@ -536,112 +668,10 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	}
 
 	/**
-	 * @since  JSF 1.0
-	 */
-	@Override
-	public RenderKit getRenderKit() {
-		return FacesContext.getCurrentInstance().getRenderKit();
-	}
-
-	/**
-	 * @since  JSF 1.0
-	 */
-	@Override
-	public boolean getRenderResponse() {
-		return FacesContext.getCurrentInstance().getRenderResponse();
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#getRequestAttribute(String)}
-	 */
-	public Object getRequestAttribute(String name) {
-		return FacesContextHelperUtil.getRequestAttribute(name);
-	}
-
-	/**
 	 * @see  {@link FacesContextHelper#setRequestAttribute(String, Object)}
 	 */
 	public void setRequestAttribute(String name, Object value) {
 		FacesContextHelperUtil.setRequestAttribute(name, value);
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#getRequestContextPath()}
-	 */
-	public String getRequestContextPath() {
-		return FacesContextHelperUtil.getRequestContextPath();
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#getRequestParameter(String)}
-	 */
-	public String getRequestParameter(String name) {
-		return FacesContextHelperUtil.getRequestParameter(name);
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#getRequestParameterAsBool(String, boolean)}
-	 */
-	public boolean getRequestParameterAsBool(String name, boolean defaultValue) {
-		return FacesContextHelperUtil.getRequestParameterAsBool(name, defaultValue);
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#getRequestParameterAsInt(String, int)}
-	 */
-	public int getRequestParameterAsInt(String name, int defaultValue) {
-		return FacesContextHelperUtil.getRequestParameterAsInt(name, defaultValue);
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#getRequestParameterAsLong(String, long)}
-	 */
-	public long getRequestParameterAsLong(String name, long defaultValue) {
-		return FacesContextHelperUtil.getRequestParameterAsLong(name, defaultValue);
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#getRequestParameterFromMap(String)}
-	 */
-	public String getRequestParameterFromMap(String name) {
-		return FacesContextHelperUtil.getRequestParameterFromMap(name);
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#getRequestParameterMap()}
-	 */
-	public Map<String, String> getRequestParameterMap() {
-		return FacesContextHelperUtil.getRequestParameterMap();
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#getRequestQueryString()}
-	 */
-	public String getRequestQueryString() {
-		return FacesContextHelperUtil.getRequestQueryString();
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#getRequestQueryStringParameter(String)}
-	 */
-	public String getRequestQueryStringParameter(String name) {
-		return FacesContextHelperUtil.getRequestQueryStringParameter(name);
-	}
-
-	/**
-	 * @since  JSF 1.0
-	 */
-	@Override
-	public boolean getResponseComplete() {
-		return FacesContext.getCurrentInstance().getRenderResponse();
-	}
-
-	/**
-	 * @since  JSF 1.0
-	 */
-	@Override
-	public ResponseStream getResponseStream() {
-		return FacesContext.getCurrentInstance().getResponseStream();
 	}
 
 	/**
@@ -656,38 +686,8 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	 * @since  JSF 1.0
 	 */
 	@Override
-	public ResponseWriter getResponseWriter() {
-		return FacesContext.getCurrentInstance().getResponseWriter();
-	}
-
-	/**
-	 * @since  JSF 1.0
-	 */
-	@Override
 	public void setResponseWriter(ResponseWriter responseWriter) {
 		FacesContext.getCurrentInstance().setResponseWriter(responseWriter);
-	}
-
-	/**
-	 * @since  JSF 2.0
-	 */
-	@Override
-	public boolean isProcessingEvents() {
-		return FacesContext.getCurrentInstance().isProcessingEvents();
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#getSession(boolean)}
-	 */
-	public Object getSession(boolean create) {
-		return FacesContextHelperUtil.getSession(create);
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#getSessionAttribute(String)}
-	 */
-	public Object getSessionAttribute(String name) {
-		return FacesContextHelperUtil.getSessionAttribute(name);
 	}
 
 	/**
@@ -701,15 +701,15 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	 * @since  JSF 1.0
 	 */
 	@Override
-	public UIViewRoot getViewRoot() {
-		return FacesContext.getCurrentInstance().getViewRoot();
+	public void setViewRoot(UIViewRoot viewRoot) {
+		FacesContext.getCurrentInstance().setViewRoot(viewRoot);
 	}
 
 	/**
-	 * @since  JSF 1.0
+	 * @since  JSF 2.0
 	 */
 	@Override
-	public void setViewRoot(UIViewRoot viewRoot) {
-		FacesContext.getCurrentInstance().setViewRoot(viewRoot);
+	public void validationFailed() {
+		FacesContext.getCurrentInstance().validationFailed();
 	}
 }

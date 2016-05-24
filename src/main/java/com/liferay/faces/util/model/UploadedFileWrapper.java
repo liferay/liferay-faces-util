@@ -28,12 +28,10 @@ import javax.faces.FacesWrapper;
  */
 public abstract class UploadedFileWrapper implements UploadedFile, FacesWrapper<UploadedFile> {
 
+	public abstract UploadedFile getWrapped();
+
 	public void delete() throws IOException {
 		getWrapped().delete();
-	}
-
-	public void write(String fileName) throws IOException {
-		getWrapped().write(fileName);
 	}
 
 	public String getAbsolutePath() {
@@ -92,5 +90,7 @@ public abstract class UploadedFileWrapper implements UploadedFile, FacesWrapper<
 		return getWrapped().getStatus();
 	}
 
-	public abstract UploadedFile getWrapped();
+	public void write(String fileName) throws IOException {
+		getWrapped().write(fileName);
+	}
 }

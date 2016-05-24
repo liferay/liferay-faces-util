@@ -40,12 +40,12 @@ public class SortCriterion {
 		return columnId;
 	}
 
-	public void setColumnId(String columnId) {
-		this.columnId = columnId;
-	}
-
 	public Order getOrder() {
 		return order;
+	}
+
+	public void setColumnId(String columnId) {
+		this.columnId = columnId;
 	}
 
 	public void setOrder(Order order) {

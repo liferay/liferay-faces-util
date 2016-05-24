@@ -38,6 +38,56 @@ public class BrowserSnifferImpl extends LiferayPortalBrowserSnifferImpl implemen
 	}
 
 	@Override
+	public String getBrowserId() {
+		return getBrowserId(httpServletRequest);
+	}
+
+	@Override
+	public float getMajorVersion() {
+		return getMajorVersion(httpServletRequest);
+	}
+
+	@Override
+	public String getRevision() {
+		return getRevision(httpServletRequest);
+	}
+
+	@Override
+	public String getVersion() {
+		return getVersion(httpServletRequest);
+	}
+
+	@Override
+	public boolean isAir() {
+		return isAir(httpServletRequest);
+	}
+
+	@Override
+	public boolean isAndroid() {
+		return isAndroid(httpServletRequest);
+	}
+
+	@Override
+	public boolean isChrome() {
+		return isChrome(httpServletRequest);
+	}
+
+	@Override
+	public boolean isFirefox() {
+		return isFirefox(httpServletRequest);
+	}
+
+	@Override
+	public boolean isGecko() {
+		return isGecko(httpServletRequest);
+	}
+
+	@Override
+	public boolean isIe() {
+		return isIe(httpServletRequest);
+	}
+
+	@Override
 	public boolean isIeOnWin32() {
 		return isIeOnWin32(httpServletRequest);
 	}
@@ -45,31 +95,6 @@ public class BrowserSnifferImpl extends LiferayPortalBrowserSnifferImpl implemen
 	@Override
 	public boolean isIeOnWin64() {
 		return isIeOnWin64(httpServletRequest);
-	}
-
-	@Override
-	public boolean isMozilla() {
-		return isMozilla(httpServletRequest);
-	}
-
-	@Override
-	public boolean isOpera() {
-		return isOpera(httpServletRequest);
-	}
-
-	@Override
-	public String getBrowserId() {
-		return getBrowserId(httpServletRequest);
-	}
-
-	@Override
-	public boolean isMac() {
-		return isMac(httpServletRequest);
-	}
-
-	@Override
-	public boolean isAndroid() {
-		return isAndroid(httpServletRequest);
 	}
 
 	@Override
@@ -84,23 +109,33 @@ public class BrowserSnifferImpl extends LiferayPortalBrowserSnifferImpl implemen
 	}
 
 	@Override
-	public boolean isChrome() {
-		return isChrome(httpServletRequest);
-	}
-
-	@Override
-	public boolean isIe() {
-		return isIe(httpServletRequest);
-	}
-
-	@Override
 	public boolean isIphone() {
 		return isIphone(httpServletRequest);
 	}
 
 	@Override
+	public boolean isLinux() {
+		return isLinux(httpServletRequest);
+	}
+
+	@Override
+	public boolean isMac() {
+		return isMac(httpServletRequest);
+	}
+
+	@Override
 	public boolean isMobile() {
 		return isMobile(httpServletRequest);
+	}
+
+	@Override
+	public boolean isMozilla() {
+		return isMozilla(httpServletRequest);
+	}
+
+	@Override
+	public boolean isOpera() {
+		return isOpera(httpServletRequest);
 	}
 
 	@Override
@@ -114,28 +149,8 @@ public class BrowserSnifferImpl extends LiferayPortalBrowserSnifferImpl implemen
 	}
 
 	@Override
-	public boolean isWapXhtml() {
-		return isWapXhtml(httpServletRequest);
-	}
-
-	@Override
-	public boolean isWml() {
-		return isWml(httpServletRequest);
-	}
-
-	@Override
-	public float getMajorVersion() {
-		return getMajorVersion(httpServletRequest);
-	}
-
-	@Override
 	public boolean isSun() {
 		return isSun(httpServletRequest);
-	}
-
-	@Override
-	public boolean isGecko() {
-		return isGecko(httpServletRequest);
 	}
 
 	@Override
@@ -144,18 +159,8 @@ public class BrowserSnifferImpl extends LiferayPortalBrowserSnifferImpl implemen
 	}
 
 	@Override
-	public boolean isAir() {
-		return isAir(httpServletRequest);
-	}
-
-	@Override
-	public String getRevision() {
-		return getRevision(httpServletRequest);
-	}
-
-	@Override
-	public boolean isWindows() {
-		return isWindows(httpServletRequest);
+	public boolean isWapXhtml() {
+		return isWapXhtml(httpServletRequest);
 	}
 
 	@Override
@@ -164,17 +169,12 @@ public class BrowserSnifferImpl extends LiferayPortalBrowserSnifferImpl implemen
 	}
 
 	@Override
-	public String getVersion() {
-		return getVersion(httpServletRequest);
+	public boolean isWindows() {
+		return isWindows(httpServletRequest);
 	}
 
 	@Override
-	public boolean isFirefox() {
-		return isFirefox(httpServletRequest);
-	}
-
-	@Override
-	public boolean isLinux() {
-		return isLinux(httpServletRequest);
+	public boolean isWml() {
+		return isWml(httpServletRequest);
 	}
 }

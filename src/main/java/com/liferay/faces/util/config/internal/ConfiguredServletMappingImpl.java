@@ -74,22 +74,29 @@ public class ConfiguredServletMappingImpl implements ConfiguredServletMapping {
 		}
 	}
 
-	@Override
-	public String toString() {
-		return "extension=" + extension + " extensionMapped=" + extensionMapped + " path=" + path + " pathMapped=" +
-			pathMapped + " servletName=" + servletName + " urlPattern=" + urlPattern;
+	public String getExtension() {
+		return extension;
+	}
+
+	public String getServletName() {
+		return servletName;
+	}
+
+	public String getServletPath() {
+		return path;
+	}
+
+	public String getUrlPattern() {
+		return urlPattern;
 	}
 
 	public boolean isExtensionMapped() {
 		return extensionMapped;
 	}
 
-	public boolean isPathMapped() {
-		return pathMapped;
-	}
-
-	public String getExtension() {
-		return extension;
+	@Override
+	public boolean isImplicit() {
+		return implicit;
 	}
 
 	public boolean isMatch(String uri) {
@@ -121,20 +128,13 @@ public class ConfiguredServletMappingImpl implements ConfiguredServletMapping {
 		return match;
 	}
 
-	public String getServletName() {
-		return servletName;
-	}
-
-	public String getServletPath() {
-		return path;
+	public boolean isPathMapped() {
+		return pathMapped;
 	}
 
 	@Override
-	public boolean isImplicit() {
-		return implicit;
-	}
-
-	public String getUrlPattern() {
-		return urlPattern;
+	public String toString() {
+		return "extension=" + extension + " extensionMapped=" + extensionMapped + " path=" + path + " pathMapped=" +
+			pathMapped + " servletName=" + servletName + " urlPattern=" + urlPattern;
 	}
 }

@@ -39,51 +39,8 @@ public abstract class FilteredResourceBase extends ResourceWrapper {
 	 * Since this method is not supplied by the {@link ResourceWrapper} class it has to be implemented here.
 	 */
 	@Override
-	public String toString() {
-		return getWrapped().toString();
-	}
-
-	/**
-	 * This is an abstract method that allows developers to filter the contents of a resource (typically via {@link
-	 * String#replace(char, char)} etc.) before it is written to the response.
-	 *
-	 * @param   resourceText  The string containing the text content of the resource.
-	 *
-	 * @return  the filtered contents of the resource.
-	 */
-	protected abstract String filter(String resourceText);
-
-	/**
-	 * @return  the character buffer size used to convert the wrapped resource's {@link InputStream} to a string.
-	 *          Override this method to provide a different buffer size than the default (1024).
-	 */
-	protected int getBufferSize() {
-		return 1024;
-	}
-
-	/**
-	 * Since this method is not supplied by the {@link ResourceWrapper} class it has to be implemented here.
-	 */
-	@Override
 	public String getContentType() {
 		return getWrapped().getContentType();
-	}
-
-	/**
-	 * Since this method is not supplied by the {@link ResourceWrapper} class it has to be implemented here.
-	 */
-	@Override
-	public void setContentType(String contentType) {
-		getWrapped().setContentType(contentType);
-	}
-
-	/**
-	 * @return  the encoding of the wrapped resource's {@link InputStream}. If the Content-Encoding request header is
-	 *          not specified, the encoding returned from this method is used to read the InputStream. Override this
-	 *          method to provide a different encoding than the default ("UTF-8").
-	 */
-	protected String getEncoding() {
-		return "UTF-8";
 	}
 
 	@Override
@@ -138,14 +95,6 @@ public abstract class FilteredResourceBase extends ResourceWrapper {
 	 * Since this method is not supplied by the {@link ResourceWrapper} class it has to be implemented here.
 	 */
 	@Override
-	public void setLibraryName(String libraryName) {
-		getWrapped().setLibraryName(libraryName);
-	}
-
-	/**
-	 * Since this method is not supplied by the {@link ResourceWrapper} class it has to be implemented here.
-	 */
-	@Override
 	public String getResourceName() {
 		return getWrapped().getResourceName();
 	}
@@ -154,7 +103,58 @@ public abstract class FilteredResourceBase extends ResourceWrapper {
 	 * Since this method is not supplied by the {@link ResourceWrapper} class it has to be implemented here.
 	 */
 	@Override
+	public void setContentType(String contentType) {
+		getWrapped().setContentType(contentType);
+	}
+
+	/**
+	 * Since this method is not supplied by the {@link ResourceWrapper} class it has to be implemented here.
+	 */
+	@Override
+	public void setLibraryName(String libraryName) {
+		getWrapped().setLibraryName(libraryName);
+	}
+
+	/**
+	 * Since this method is not supplied by the {@link ResourceWrapper} class it has to be implemented here.
+	 */
+	@Override
 	public void setResourceName(String resourceName) {
 		getWrapped().setResourceName(resourceName);
+	}
+
+	/**
+	 * Since this method is not supplied by the {@link ResourceWrapper} class it has to be implemented here.
+	 */
+	@Override
+	public String toString() {
+		return getWrapped().toString();
+	}
+
+	/**
+	 * This is an abstract method that allows developers to filter the contents of a resource (typically via {@link
+	 * String#replace(char, char)} etc.) before it is written to the response.
+	 *
+	 * @param   resourceText  The string containing the text content of the resource.
+	 *
+	 * @return  the filtered contents of the resource.
+	 */
+	protected abstract String filter(String resourceText);
+
+	/**
+	 * @return  the character buffer size used to convert the wrapped resource's {@link InputStream} to a string.
+	 *          Override this method to provide a different buffer size than the default (1024).
+	 */
+	protected int getBufferSize() {
+		return 1024;
+	}
+
+	/**
+	 * @return  the encoding of the wrapped resource's {@link InputStream}. If the Content-Encoding request header is
+	 *          not specified, the encoding returned from this method is used to read the InputStream. Override this
+	 *          method to provide a different encoding than the default ("UTF-8").
+	 */
+	protected String getEncoding() {
+		return "UTF-8";
 	}
 }

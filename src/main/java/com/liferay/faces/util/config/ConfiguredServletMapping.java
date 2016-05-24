@@ -23,25 +23,10 @@ package com.liferay.faces.util.config;
 public interface ConfiguredServletMapping {
 
 	/**
-	 * Flag indicating whether or not the servlet-mapping url-pattern is extension-mapped.
-	 */
-	public boolean isExtensionMapped();
-
-	/**
-	 * Flag indicating whether or not the servlet-mapping url-pattern is path-mapped.
-	 */
-	public boolean isPathMapped();
-
-	/**
 	 * If the servlet-mapping url-pattern is extension-mapped (like *.faces), then this method returns the .faces
 	 * extension. Otherwise returns null.
 	 */
 	public String getExtension();
-
-	/**
-	 * Flag indicating whether or not the specified <code>uri</code> matches the servlet-mapping url-pattern.
-	 */
-	public boolean isMatch(String uri);
 
 	/**
 	 * Returns the servlet-mapping servlet-name.
@@ -55,6 +40,16 @@ public interface ConfiguredServletMapping {
 	public String getServletPath();
 
 	/**
+	 * Returns the servlet-mapping url-pattern.
+	 */
+	public String getUrlPattern();
+
+	/**
+	 * Flag indicating whether or not the servlet-mapping url-pattern is extension-mapped.
+	 */
+	public boolean isExtensionMapped();
+
+	/**
 	 * Flag indicating whether or not the servlet-mapping is implicit, meaning it is associated with {@link
 	 * javax.faces.application.ViewHandler#DEFAULT_SUFFIX} or {@link
 	 * javax.faces.application.ViewHandler#DEFAULT_SUFFIX_PARAM_NAME}.
@@ -62,7 +57,12 @@ public interface ConfiguredServletMapping {
 	public boolean isImplicit();
 
 	/**
-	 * Returns the servlet-mapping url-pattern.
+	 * Flag indicating whether or not the specified <code>uri</code> matches the servlet-mapping url-pattern.
 	 */
-	public String getUrlPattern();
+	public boolean isMatch(String uri);
+
+	/**
+	 * Flag indicating whether or not the servlet-mapping url-pattern is path-mapped.
+	 */
+	public boolean isPathMapped();
 }

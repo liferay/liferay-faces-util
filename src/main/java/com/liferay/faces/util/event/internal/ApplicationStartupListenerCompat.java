@@ -37,15 +37,12 @@ public abstract class ApplicationStartupListenerCompat implements SystemEventLis
 
 	public abstract void processSystemEvent(EventObject systemEvent);
 
-	public void processEvent(SystemEvent systemEvent) throws AbortProcessingException {
-		processSystemEvent(systemEvent);
+	public boolean isListenerForSource(Object source) {
+		return ((source != null) && (source instanceof Application));
 	}
 
-	protected void publishEvent(Application application, FacesContext facesContext,
-		ApplicationConfig applicationConfig) {
-
-		application.publishEvent(facesContext, PostConstructApplicationConfigEvent.class, ApplicationConfig.class,
-			applicationConfig);
+	public void processEvent(SystemEvent systemEvent) throws AbortProcessingException {
+		processSystemEvent(systemEvent);
 	}
 
 	protected String getApplicationContextPath(ExternalContext externalContext) {
@@ -65,7 +62,10 @@ public abstract class ApplicationStartupListenerCompat implements SystemEventLis
 		return applicationContextPath;
 	}
 
-	public boolean isListenerForSource(Object source) {
-		return ((source != null) && (source instanceof Application));
+	protected void publishEvent(Application application, FacesContext facesContext,
+		ApplicationConfig applicationConfig) {
+
+		application.publishEvent(facesContext, PostConstructApplicationConfigEvent.class, ApplicationConfig.class,
+			applicationConfig);
 	}
 }

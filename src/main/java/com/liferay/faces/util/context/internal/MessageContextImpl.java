@@ -38,6 +38,53 @@ public class MessageContextImpl implements MessageContext {
 	private Map<Locale, ResourceBundle> facesResourceBundleMap = new ConcurrentHashMap<Locale, ResourceBundle>();
 
 	@Override
+	public String getMessage(Locale locale, String messageId) {
+
+		String message = null;
+
+		ResourceBundle resourceBundle = null;
+
+		try {
+			resourceBundle = ResourceBundle.getBundle("i18n", locale);
+			message = resourceBundle.getString(messageId);
+		}
+		catch (MissingResourceException e) {
+			// ignore
+		}
+
+		if (message == null) {
+			resourceBundle = getFacesResourceBundle(locale);
+
+			if (resourceBundle != null) {
+
+				try {
+					message = resourceBundle.getString(messageId);
+				}
+				catch (MissingResourceException e) {
+					// ignore
+				}
+			}
+		}
+
+		if (message == null) {
+			message = messageId;
+		}
+
+		return message;
+	}
+
+	@Override
+	public String getMessage(Locale locale, String messageId, Object... arguments) {
+		String message = getMessage(locale, messageId);
+
+		if (message != null) {
+			message = MessageFormat.format(message, arguments);
+		}
+
+		return message;
+	}
+
+	@Override
 	public FacesMessage newFacesMessage(FacesContext facesContext, Severity severity, String key) {
 
 		String messageId = key;
@@ -114,53 +161,6 @@ public class MessageContextImpl implements MessageContext {
 		}
 
 		return facesResourceBundle;
-	}
-
-	@Override
-	public String getMessage(Locale locale, String messageId) {
-
-		String message = null;
-
-		ResourceBundle resourceBundle = null;
-
-		try {
-			resourceBundle = ResourceBundle.getBundle("i18n", locale);
-			message = resourceBundle.getString(messageId);
-		}
-		catch (MissingResourceException e) {
-			// ignore
-		}
-
-		if (message == null) {
-			resourceBundle = getFacesResourceBundle(locale);
-
-			if (resourceBundle != null) {
-
-				try {
-					message = resourceBundle.getString(messageId);
-				}
-				catch (MissingResourceException e) {
-					// ignore
-				}
-			}
-		}
-
-		if (message == null) {
-			message = messageId;
-		}
-
-		return message;
-	}
-
-	@Override
-	public String getMessage(Locale locale, String messageId, Object... arguments) {
-		String message = getMessage(locale, messageId);
-
-		if (message != null) {
-			message = MessageFormat.format(message, arguments);
-		}
-
-		return message;
 	}
 
 }

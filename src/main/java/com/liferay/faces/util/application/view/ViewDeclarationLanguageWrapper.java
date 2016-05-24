@@ -1,17 +1,23 @@
 /**
  * Copyright (c) 2000-2016 Liferay, Inc. All rights reserved.
  *
- * This library is free software; you can redistribute it and/or modify it under
- * the terms of the GNU Lesser General Public License as published by the Free
- * Software Foundation; either version 2.1 of the License, or (at your option)
- * any later version.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * This library is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details.
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package com.liferay.faces.util.application.view;
+
+import java.beans.BeanInfo;
+import java.io.IOException;
+import java.util.List;
 
 import javax.faces.FacesWrapper;
 import javax.faces.application.Resource;
@@ -22,9 +28,6 @@ import javax.faces.view.AttachedObjectHandler;
 import javax.faces.view.StateManagementStrategy;
 import javax.faces.view.ViewDeclarationLanguage;
 import javax.faces.view.ViewMetadata;
-import java.beans.BeanInfo;
-import java.io.IOException;
-import java.util.List;
 
 
 /**
@@ -32,6 +35,8 @@ import java.util.List;
  */
 public abstract class ViewDeclarationLanguageWrapper extends ViewDeclarationLanguage
 	implements FacesWrapper<ViewDeclarationLanguage> {
+
+	public abstract ViewDeclarationLanguage getWrapped();
 
 	@Override
 	public void buildView(FacesContext facesContext, UIViewRoot uiViewRoot) throws IOException {
@@ -41,32 +46,6 @@ public abstract class ViewDeclarationLanguageWrapper extends ViewDeclarationLang
 	@Override
 	public UIViewRoot createView(FacesContext facesContext, String viewId) {
 		return getWrapped().createView(facesContext, viewId);
-	}
-
-	@Override
-	public void renderView(FacesContext facesContext, UIViewRoot uiViewRoot) throws IOException {
-		getWrapped().renderView(facesContext, uiViewRoot);
-	}
-
-	@Override
-	public UIViewRoot restoreView(FacesContext facesContext, String viewId) {
-		return getWrapped().restoreView(facesContext, viewId);
-	}
-
-	@Override
-	public void retargetAttachedObjects(FacesContext facesContext, UIComponent uiComponent,
-		List<AttachedObjectHandler> handlers) {
-		getWrapped().retargetAttachedObjects(facesContext, uiComponent, handlers);
-	}
-
-	@Override
-	public void retargetMethodExpressions(FacesContext facesContext, UIComponent uiComponent) {
-		getWrapped().retargetMethodExpressions(facesContext, uiComponent);
-	}
-
-	@Override
-	public boolean viewExists(FacesContext facesContext, String viewId) {
-		return getWrapped().viewExists(facesContext, viewId);
 	}
 
 	@Override
@@ -94,6 +73,30 @@ public abstract class ViewDeclarationLanguageWrapper extends ViewDeclarationLang
 		return getWrapped().getViewMetadata(facesContext, viewId);
 	}
 
-	public abstract ViewDeclarationLanguage getWrapped();
+	@Override
+	public void renderView(FacesContext facesContext, UIViewRoot uiViewRoot) throws IOException {
+		getWrapped().renderView(facesContext, uiViewRoot);
+	}
+
+	@Override
+	public UIViewRoot restoreView(FacesContext facesContext, String viewId) {
+		return getWrapped().restoreView(facesContext, viewId);
+	}
+
+	@Override
+	public void retargetAttachedObjects(FacesContext facesContext, UIComponent uiComponent,
+		List<AttachedObjectHandler> handlers) {
+		getWrapped().retargetAttachedObjects(facesContext, uiComponent, handlers);
+	}
+
+	@Override
+	public void retargetMethodExpressions(FacesContext facesContext, UIComponent uiComponent) {
+		getWrapped().retargetMethodExpressions(facesContext, uiComponent);
+	}
+
+	@Override
+	public boolean viewExists(FacesContext facesContext, String viewId) {
+		return getWrapped().viewExists(facesContext, viewId);
+	}
 
 }

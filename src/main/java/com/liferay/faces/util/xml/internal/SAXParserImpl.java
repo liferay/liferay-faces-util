@@ -45,23 +45,6 @@ public class SAXParserImpl extends SAXParser {
 	}
 
 	@Override
-	public void reset() {
-		// This method needs to be overriden in order to prevent the superclass from throwing a
-		// UnsupportedOperationException. Since this implementation is thread-safe, it inherently
-		// supports the reset functionality.
-	}
-
-	@Override
-	public boolean isNamespaceAware() {
-		return namespaceAware;
-	}
-
-	@Override
-	public boolean isValidating() {
-		return validating;
-	}
-
-	@Override
 	@SuppressWarnings("deprecation")
 	public org.xml.sax.Parser getParser() throws SAXException {
 		throw new UnsupportedOperationException();
@@ -79,6 +62,28 @@ public class SAXParserImpl extends SAXParser {
 	}
 
 	@Override
+	public XMLReader getXMLReader() throws SAXException {
+		return xmlReader;
+	}
+
+	@Override
+	public boolean isNamespaceAware() {
+		return namespaceAware;
+	}
+
+	@Override
+	public boolean isValidating() {
+		return validating;
+	}
+
+	@Override
+	public void reset() {
+		// This method needs to be overriden in order to prevent the superclass from throwing a
+		// UnsupportedOperationException. Since this implementation is thread-safe, it inherently
+		// supports the reset functionality.
+	}
+
+	@Override
 	public void setProperty(String name, Object value) throws SAXNotRecognizedException, SAXNotSupportedException {
 
 		try {
@@ -87,11 +92,6 @@ public class SAXParserImpl extends SAXParser {
 		catch (SAXException e) {
 			throw new SAXNotRecognizedException(e.getMessage());
 		}
-	}
-
-	@Override
-	public XMLReader getXMLReader() throws SAXException {
-		return xmlReader;
 	}
 
 }

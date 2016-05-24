@@ -186,21 +186,6 @@ public class RendererUtil {
 		return javaScript;
 	}
 
-	private static String toHexString(int i) {
-		char[] buffer = new char[8];
-
-		int index = 8;
-
-		do {
-			buffer[--index] = _HEX_DIGITS[i & 15];
-
-			i >>>= 4;
-		}
-		while (i != 0);
-
-		return new String(buffer, index, 8 - index);
-	}
-
 	private static Collection<String> getExecuteIds(String execute, String process, String defaultValue) {
 
 		// If the values of the execute and process attributes differ, then
@@ -243,5 +228,20 @@ public class RendererUtil {
 		}
 
 		return Arrays.asList(render.split(" "));
+	}
+
+	private static String toHexString(int i) {
+		char[] buffer = new char[8];
+
+		int index = 8;
+
+		do {
+			buffer[--index] = _HEX_DIGITS[i & 15];
+
+			i >>>= 4;
+		}
+		while (i != 0);
+
+		return new String(buffer, index, 8 - index);
 	}
 }

@@ -94,6 +94,22 @@ public class ComponentUtil {
 		return clientId;
 	}
 
+	public static String getComponentLabel(UIComponent uiComponent) {
+
+		String componentLabel = null;
+
+		if (uiComponent != null) {
+
+			componentLabel = getParentFieldLabelValue(uiComponent);
+
+			if (componentLabel == null) {
+				componentLabel = getSiblingLabelValue((uiComponent));
+			}
+		}
+
+		return componentLabel;
+	}
+
 	public static UIComponent matchComponentInHierarchy(FacesContext facesContext, UIComponent parent,
 		String partialClientId) {
 		UIComponent uiComponent = null;
@@ -123,22 +139,6 @@ public class ComponentUtil {
 		}
 
 		return uiComponent;
-	}
-
-	public static String getComponentLabel(UIComponent uiComponent) {
-
-		String componentLabel = null;
-
-		if (uiComponent != null) {
-
-			componentLabel = getParentFieldLabelValue(uiComponent);
-
-			if (componentLabel == null) {
-				componentLabel = getSiblingLabelValue((uiComponent));
-			}
-		}
-
-		return componentLabel;
 	}
 
 	private static String getParentFieldLabelValue(UIComponent uiComponent) {

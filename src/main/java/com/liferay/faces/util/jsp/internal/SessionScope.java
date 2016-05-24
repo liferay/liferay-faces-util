@@ -41,23 +41,23 @@ public class SessionScope extends AbstractPropertyMap<Object> {
 	}
 
 	@Override
-	protected void removeProperty(String name) {
-		httpSession.removeAttribute(name);
-	}
-
-	@Override
 	protected Object getProperty(String name) {
 		return httpSession.getAttribute(name);
 	}
 
 	@Override
-	protected void setProperty(String name, Object value) {
-		httpSession.setAttribute(name, value);
+	protected Enumeration<String> getPropertyNames() {
+		return (Enumeration<String>) httpSession.getAttributeNames();
 	}
 
 	@Override
-	protected Enumeration<String> getPropertyNames() {
-		return (Enumeration<String>) httpSession.getAttributeNames();
+	protected void removeProperty(String name) {
+		httpSession.removeAttribute(name);
+	}
+
+	@Override
+	protected void setProperty(String name, Object value) {
+		httpSession.setAttribute(name, value);
 	}
 
 }

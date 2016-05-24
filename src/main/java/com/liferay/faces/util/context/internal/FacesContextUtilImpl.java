@@ -42,6 +42,11 @@ public class FacesContextUtilImpl extends FacesContextWrapper {
 	}
 
 	@Override
+	public FacesContext getWrapped() {
+		return wrappedFacesContext;
+	}
+
+	@Override
 	public void release() {
 
 		FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
@@ -53,10 +58,5 @@ public class FacesContextUtilImpl extends FacesContextWrapper {
 		}
 
 		super.release();
-	}
-
-	@Override
-	public FacesContext getWrapped() {
-		return wrappedFacesContext;
 	}
 }

@@ -96,6 +96,11 @@ public class BodyScriptEncodingResponseWriter extends ResponseWriterWrapper {
 	}
 
 	@Override
+	public ResponseWriter getWrapped() {
+		return wrappedResponseWriter;
+	}
+
+	@Override
 	public void startElement(String name, UIComponent uiComponent) throws IOException {
 
 		if ("script".equals(name)) {
@@ -181,11 +186,6 @@ public class BodyScriptEncodingResponseWriter extends ResponseWriterWrapper {
 		}
 	}
 
-	@Override
-	public ResponseWriter getWrapped() {
-		return wrappedResponseWriter;
-	}
-
 	private static class BufferedScript {
 
 		// Private Members
@@ -231,6 +231,14 @@ public class BodyScriptEncodingResponseWriter extends ResponseWriterWrapper {
 			sourceCodeWriterBuffer.setLength(0);
 		}
 
+		private boolean isBuffering() {
+			return writingScript;
+		}
+
+		private boolean isResource() {
+			return attributes.containsKey("src");
+		}
+
 		private void startBuffering(UIComponent scriptComponent) {
 
 			writingScript = true;
@@ -256,14 +264,6 @@ public class BodyScriptEncodingResponseWriter extends ResponseWriterWrapper {
 			}
 
 			responseWriter.endElement("script");
-		}
-
-		private boolean isResource() {
-			return attributes.containsKey("src");
-		}
-
-		private boolean isBuffering() {
-			return writingScript;
 		}
 
 		private static class BufferedScriptAttribute {

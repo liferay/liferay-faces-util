@@ -150,6 +150,122 @@ public interface FacesContextHelper {
 	public void addMessage(String clientId, Severity severity, String messageId, Object... arguments);
 
 	/**
+	 * Gets the underlying/wrapped FacesContext ThreadLocal singleton instance.
+	 */
+	public FacesContext getFacesContext();
+
+	/**
+	 * Returns the locale of the viewRoot of the current JSF FacesContext
+	 */
+	public Locale getLocale();
+
+	/**
+	 * Returns the message associated with the specified messageId by delegating to the FacesMessageFactory, according
+	 * to the current locale.
+	 */
+	public String getMessage(String messageId);
+
+	/**
+	 * Returns the message associated with the specified messageId by delegating to the FacesMessageFactory, according
+	 * to the current locale and arguments that are to be substituted.
+	 */
+	public String getMessage(String messageId, Object... arguments);
+
+	/**
+	 * Returns the message associated with the specified messageId by delegating to the FacesMessageFactory, according
+	 * to the specified locale.
+	 */
+	public String getMessage(Locale locale, String messageId);
+
+	/**
+	 * Returns the message associated with the specified messageId by delegating to the FacesMessageFactory, according
+	 * to the specified locale and arguments that are to be substituted.
+	 */
+	public String getMessage(Locale locale, String messageId, Object... arguments);
+
+	/**
+	 * Delegates to the underlying {@link ExternalContext#encodeNamespace(String)} method in order to get the
+	 * application namespace.
+	 */
+	public String getNamespace();
+
+	/**
+	 * Return the parent form of the given component.
+	 *
+	 * @param   uiComponent  The component whose parent is to be found.
+	 *
+	 * @return  the parent form or <code>null</code> if no parent form is found.
+	 */
+	public UIForm getParentForm(final UIComponent uiComponent);
+
+	/**
+	 * Returns the value of the request attribute associated with the specified name.
+	 */
+	public Object getRequestAttribute(String name);
+
+	/**
+	 * @return  The request context path. {@link FacesContext#getExternalContext()} {@link
+	 *          ExternalContext#getRequestContextPath()}
+	 */
+	public String getRequestContextPath();
+
+	/**
+	 * Retrieves the specified parameter passed as part of the request
+	 */
+	public String getRequestParameter(String name);
+
+	/**
+	 * Retrieves the specified parameter passed as part of the request as a boolean. The values "yes", "true", "y", and
+	 * "1" are accetable values for "TRUE".
+	 */
+	public boolean getRequestParameterAsBool(String name, boolean defaultValue);
+
+	/**
+	 * Retrieves the specified parameter passed as part of the request as an integer.
+	 */
+	public int getRequestParameterAsInt(String name, int defaultValue);
+
+	/**
+	 * Retrieves the specified parameter passed as part of the request as an integer.
+	 */
+	public long getRequestParameterAsLong(String name, long defaultValue);
+
+	/**
+	 * Retrieves the specified parameter from the ExternalContext's request parameter map.
+	 */
+	public String getRequestParameterFromMap(String name);
+
+	/**
+	 * Returns the map of request parameters from the ExternalContext.
+	 *
+	 * @see  {@link ExternalContext#getRequestParameterMap()}.
+	 */
+	public Map<String, String> getRequestParameterMap();
+
+	/**
+	 * Retrieves the value of the original "javax.servlet.forward.query_string" request attribute.
+	 */
+	public String getRequestQueryString();
+
+	/**
+	 * Retrieves the value of the specified parameter name from the original "javax.servlet.forward.query_string"
+	 * request attribute.
+	 */
+	public String getRequestQueryStringParameter(String name);
+
+	/**
+	 * Returns the session object associated with the current FacesContext.
+	 *
+	 * @param  create  Flag indicating whether or not a session should be created if it doesn't yet exist.
+	 */
+	public Object getSession(boolean create);
+
+	/**
+	 * Returns the value of the session attribute associated with the specified name.
+	 */
+	public Object getSessionAttribute(String name);
+
+	/**
 	 * Traverses the component tree starting at the specified UIComponent parent and returns the first UIComponent child
 	 * that contains the specified partialClientId.
 	 */
@@ -250,125 +366,9 @@ public interface FacesContextHelper {
 	public Object resolveExpression(String elExpression);
 
 	/**
-	 * Gets the underlying/wrapped FacesContext ThreadLocal singleton instance.
-	 */
-	public FacesContext getFacesContext();
-
-	/**
-	 * Returns the locale of the viewRoot of the current JSF FacesContext
-	 */
-	public Locale getLocale();
-
-	/**
-	 * Returns the message associated with the specified messageId by delegating to the FacesMessageFactory, according
-	 * to the current locale.
-	 */
-	public String getMessage(String messageId);
-
-	/**
-	 * Returns the message associated with the specified messageId by delegating to the FacesMessageFactory, according
-	 * to the current locale and arguments that are to be substituted.
-	 */
-	public String getMessage(String messageId, Object... arguments);
-
-	/**
-	 * Returns the message associated with the specified messageId by delegating to the FacesMessageFactory, according
-	 * to the specified locale.
-	 */
-	public String getMessage(Locale locale, String messageId);
-
-	/**
-	 * Returns the message associated with the specified messageId by delegating to the FacesMessageFactory, according
-	 * to the specified locale and arguments that are to be substituted.
-	 */
-	public String getMessage(Locale locale, String messageId, Object... arguments);
-
-	/**
-	 * Delegates to the underlying {@link ExternalContext#encodeNamespace(String)} method in order to get the
-	 * application namespace.
-	 */
-	public String getNamespace();
-
-	/**
-	 * Return the parent form of the given component.
-	 *
-	 * @param   uiComponent  The component whose parent is to be found.
-	 *
-	 * @return  the parent form or <code>null</code> if no parent form is found.
-	 */
-	public UIForm getParentForm(final UIComponent uiComponent);
-
-	/**
-	 * Returns the value of the request attribute associated with the specified name.
-	 */
-	public Object getRequestAttribute(String name);
-
-	/**
 	 * Sets the value of the a request attribute using the specified name and value.
 	 */
 	public void setRequestAttribute(String name, Object value);
-
-	/**
-	 * @return  The request context path. {@link FacesContext#getExternalContext()} {@link
-	 *          ExternalContext#getRequestContextPath()}
-	 */
-	public String getRequestContextPath();
-
-	/**
-	 * Retrieves the specified parameter passed as part of the request
-	 */
-	public String getRequestParameter(String name);
-
-	/**
-	 * Retrieves the specified parameter passed as part of the request as a boolean. The values "yes", "true", "y", and
-	 * "1" are accetable values for "TRUE".
-	 */
-	public boolean getRequestParameterAsBool(String name, boolean defaultValue);
-
-	/**
-	 * Retrieves the specified parameter passed as part of the request as an integer.
-	 */
-	public int getRequestParameterAsInt(String name, int defaultValue);
-
-	/**
-	 * Retrieves the specified parameter passed as part of the request as an integer.
-	 */
-	public long getRequestParameterAsLong(String name, long defaultValue);
-
-	/**
-	 * Retrieves the specified parameter from the ExternalContext's request parameter map.
-	 */
-	public String getRequestParameterFromMap(String name);
-
-	/**
-	 * Returns the map of request parameters from the ExternalContext.
-	 *
-	 * @see  {@link ExternalContext#getRequestParameterMap()}.
-	 */
-	public Map<String, String> getRequestParameterMap();
-
-	/**
-	 * Retrieves the value of the original "javax.servlet.forward.query_string" request attribute.
-	 */
-	public String getRequestQueryString();
-
-	/**
-	 * Retrieves the value of the specified parameter name from the original "javax.servlet.forward.query_string"
-	 * request attribute.
-	 */
-	public String getRequestQueryStringParameter(String name);
-
-	/**
-	 * Returns the session object associated with the current FacesContext.
-	 *
-	 * @param  create  Flag indicating whether or not a session should be created if it doesn't yet exist.
-	 */
-	public Object getSession(boolean create);
-
-	/**
-	 * Returns the value of the session attribute associated with the specified name.
-	 */
-	public Object getSessionAttribute(String name);
 
 	/**
 	 * Sets the value of the a session attribute using the specified name and value.

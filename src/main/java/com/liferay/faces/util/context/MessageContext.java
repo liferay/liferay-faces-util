@@ -27,6 +27,10 @@ import javax.faces.context.FacesContext;
  */
 public interface MessageContext {
 
+	public String getMessage(Locale locale, String messageId);
+
+	public String getMessage(Locale locale, String messageId, Object... arguments);
+
 	public FacesMessage newFacesMessage(Locale locale, Severity severity, String messageId);
 
 	public FacesMessage newFacesMessage(FacesContext facesContext, Severity severity, String messageId);
@@ -35,9 +39,5 @@ public interface MessageContext {
 
 	public FacesMessage newFacesMessage(FacesContext facesContext, Severity severity, String messageId,
 		Object... arguments);
-
-	public String getMessage(Locale locale, String messageId);
-
-	public String getMessage(Locale locale, String messageId, Object... arguments);
 
 }

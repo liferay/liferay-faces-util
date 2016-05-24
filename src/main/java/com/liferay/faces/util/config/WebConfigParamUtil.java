@@ -74,10 +74,6 @@ public class WebConfigParamUtil {
 		return configuredValue;
 	}
 
-	public static boolean isSpecified(ExternalContext externalContext, String name, String alternateName) {
-		return (getConfiguredValue(externalContext, name, alternateName) != null);
-	}
-
 	public static int getIntegerValue(ExternalContext externalContext, String name, String alternateName,
 		int defaultIntegerValue) {
 
@@ -151,5 +147,9 @@ public class WebConfigParamUtil {
 		}
 
 		return stringValue;
+	}
+
+	public static boolean isSpecified(ExternalContext externalContext, String name, String alternateName) {
+		return (getConfiguredValue(externalContext, name, alternateName) != null);
 	}
 }

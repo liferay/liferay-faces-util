@@ -24,58 +24,58 @@ public interface BrowserSniffer {
 
 	public boolean acceptsGzip();
 
+	public String getBrowserId();
+
+	public float getMajorVersion();
+
+	public String getRevision();
+
+	public String getVersion();
+
+	public boolean isAir();
+
+	public boolean isAndroid();
+
+	public boolean isChrome();
+
+	public boolean isFirefox();
+
+	public boolean isGecko();
+
+	public boolean isIe();
+
 	public boolean isIeOnWin32();
 
 	public boolean isIeOnWin64();
+
+	public boolean isIpad();
+
+	public boolean isIphone();
+
+	public boolean isLinux();
+
+	public boolean isMac();
+
+	public boolean isMobile();
 
 	public boolean isMozilla();
 
 	public boolean isOpera();
 
-	public String getBrowserId();
-
-	public boolean isMac();
-
-	public boolean isAndroid();
-
-	public boolean isIpad();
-
-	public boolean isChrome();
-
-	public boolean isIe();
-
-	public boolean isIphone();
-
-	public boolean isMobile();
-
 	public boolean isRtf();
 
 	public boolean isSafari();
 
-	public boolean isWapXhtml();
-
-	public boolean isWml();
-
-	public float getMajorVersion();
-
 	public boolean isSun();
-
-	public boolean isGecko();
 
 	public boolean isWap();
 
-	public boolean isAir();
-
-	public String getRevision();
-
-	public boolean isWindows();
+	public boolean isWapXhtml();
 
 	public boolean isWebKit();
 
-	public String getVersion();
+	public boolean isWindows();
 
-	public boolean isFirefox();
-
-	public boolean isLinux();
+	public boolean isWml();
 
 }
