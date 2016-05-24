@@ -15,56 +15,49 @@
  */
 package com.liferay.faces.util.logging;
 
-import com.liferay.faces.util.logging.Logger;
-import com.liferay.faces.util.logging.internal.LoggerDefaultImpl;
-import com.liferay.faces.util.logging.internal.LoggerLog4JImpl;
-import com.liferay.faces.util.product.Product;
-import com.liferay.faces.util.product.ProductConstants;
-import com.liferay.faces.util.product.ProductMap;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.List;
 
 
 /**
- * In order to minimize dependencies, this class provides as a layer of abstraction over different logging mechanisms
+ * In order to minimize dependencies, this class provides a layer of abstraction over different logging mechanisms
  * including Log4J and standard Java SE logging.
  *
  * @author  Neil Griffin
  */
-public class LoggerFactory {
+public abstract class LoggerFactory {
 
-	// Private Constants
-	private static final String CLASS_NAME_LOG4J_LOGGER = "org.apache.log4j.Logger";
-
-	// Statically-Initialized Private Constants
-	private static boolean LOG4J_AVAILABLE = false;
+	private static final LoggerFactory loggerFactory;
 
 	static {
 
-		try {
-			Class.forName(CLASS_NAME_LOG4J_LOGGER);
-			LOG4J_AVAILABLE = true;
+		ServiceFinder<LoggerFactory> serviceLoader = ServiceFinder.load(LoggerFactory.class);
 
-			try {
-				new LoggerLog4JImpl(CLASS_NAME_LOG4J_LOGGER);
+		if (serviceLoader != null) {
+
+			Iterator<LoggerFactory> iterator = serviceLoader.iterator();
+
+			LoggerFactory loggerFactoryImpl = null;
+
+			while ((loggerFactoryImpl == null) && iterator.hasNext()) {
+				loggerFactoryImpl = iterator.next();
 			}
-			catch (NoClassDefFoundError e) {
 
-				String className = LoggerFactory.class.getName();
-				Product wildfly = ProductMap.getInstance().get(ProductConstants.WILDFLY);
-
-				if (wildfly.isDetected()) {
-					System.out.println(className + " (INFO): Detected JBoss Server " + wildfly.getVersion());
-					System.out.println(className + " (INFO): Add WEB-INF/log4j.jar to activate Log4J logging");
-				}
-				else {
-					System.err.println(className +
-						" (WARN): Possibly an incompatible version of log4j.jar in the classpath: " + e.getMessage());
-				}
-
-				LOG4J_AVAILABLE = false;
+			if (loggerFactoryImpl == null) {
+				throw new NullPointerException("Unable locate service for " + LoggerFactory.class.getName());
 			}
+
+			loggerFactory = loggerFactoryImpl;
 		}
-		catch (Exception e) {
-			LOG4J_AVAILABLE = false;
+		else {
+			throw new NullPointerException("Unable to acquire ServiceLoader for " + LoggerFactory.class.getName());
 		}
 	}
 
@@ -78,24 +71,7 @@ public class LoggerFactory {
 	 * @return  The logger associated with the specified name.
 	 */
 	public static final Logger getLogger(String name) {
-
-		Logger logger = null;
-
-		try {
-
-			if (LOG4J_AVAILABLE) {
-				logger = new LoggerLog4JImpl(name);
-			}
-		}
-		catch (NoClassDefFoundError e) {
-			// Ignore
-		}
-
-		if (logger == null) {
-			logger = new LoggerDefaultImpl(name);
-		}
-
-		return logger;
+		return loggerFactory.getLoggerImplementation(name);
 	}
 
 	/**
@@ -109,5 +85,101 @@ public class LoggerFactory {
 	 */
 	public static final Logger getLogger(Class<?> clazz) {
 		return getLogger(clazz.getName());
+	}
+
+	public abstract Logger getLoggerImplementation(String name);
+
+	private static final class ServiceFinder<S> implements Iterable<S> {
+
+		private Class<S> serviceClass;
+
+		private ServiceFinder(Class<S> serviceClass) {
+			this.serviceClass = serviceClass;
+		}
+
+		private static <S> ServiceFinder<S> load(Class<S> serviceClass) {
+			return new ServiceFinder(serviceClass);
+		}
+
+		public Iterator<S> iterator() {
+
+			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+			List<S> instances = new ArrayList<S>();
+			Enumeration<URL> resources = null;
+
+			try {
+				resources = classLoader.getResources("META-INF/services/" + serviceClass.getName());
+			}
+			catch (IOException e) {
+
+				// Since the logging hasn't been initialized, the best we can do is print to stderr.
+				System.err.println(LoggerFactory.class.getName() +
+					" (ERROR): Unable to obtain resources via path=[META-INF/services/" + serviceClass.getName() +
+					"]:");
+				e.printStackTrace();
+			}
+
+			while ((resources != null) && resources.hasMoreElements()) {
+
+				URL resource = resources.nextElement();
+				InputStream inputStream = null;
+				InputStreamReader inputStreamReader = null;
+				BufferedReader bufferedReader = null;
+				String className = null;
+
+				try {
+
+					inputStream = resource.openStream();
+					inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+					bufferedReader = new BufferedReader(inputStreamReader);
+					className = bufferedReader.readLine();
+
+				}
+				catch (IOException e) {
+
+					// Since logging hasn't been initialized, the best we can do is print to stderr.
+					System.err.println("Unable to read contents of resource=[" + resource.getPath() + "]");
+				}
+				finally {
+
+					try {
+
+						if (bufferedReader != null) {
+							bufferedReader.close();
+						}
+
+						if (inputStreamReader != null) {
+							inputStreamReader.close();
+						}
+
+						if (inputStream != null) {
+							inputStream.close();
+						}
+					}
+					catch (IOException e) {
+						// ignore
+					}
+				}
+
+				if (className != null) {
+
+					try {
+
+						Class<?> clazz = Class.forName(className);
+						S instance = (S) clazz.newInstance();
+						instances.add(instance);
+					}
+					catch (Exception e) {
+
+						// Since logging hasn't been initialized, the best we can do is print to stderr.
+						System.err.println(LoggerFactory.class.getName() + " (ERROR): Unable to instantiate class=[" +
+							className + "]:");
+						e.printStackTrace();
+					}
+				}
+			}
+
+			return instances.iterator();
+		}
 	}
 }
