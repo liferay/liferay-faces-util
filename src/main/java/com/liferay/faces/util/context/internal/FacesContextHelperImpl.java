@@ -145,6 +145,167 @@ public class FacesContextHelperImpl implements FacesContextHelper {
 		FacesContext.getCurrentInstance().addMessage(clientId, facesMessage);
 	}
 
+	public FacesContext getFacesContext() {
+		return FacesContext.getCurrentInstance();
+	}
+
+	public Locale getLocale() {
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		UIViewRoot viewRoot = facesContext.getViewRoot();
+		Locale locale = viewRoot.getLocale();
+
+		// If the JSF ViewRoot didn't return a locale, then try and get it from the JSF Application.
+		if (locale == null) {
+			Application application = facesContext.getApplication();
+			locale = application.getDefaultLocale();
+		}
+
+		// Otherwise, if we couldn't determine the locale, just use the server's default value.
+		if (locale == null) {
+			locale = Locale.getDefault();
+		}
+
+		return locale;
+	}
+
+	public String getMessage(String messageId) {
+		return getMessage(getLocale(), messageId);
+	}
+
+	public String getMessage(String messageId, Object... arguments) {
+
+		MessageContext messageContext = getMessageContext();
+
+		return messageContext.getMessage(getLocale(), messageId, arguments);
+	}
+
+	public String getMessage(Locale locale, String messageId) {
+
+		MessageContext messageContext = getMessageContext();
+
+		return messageContext.getMessage(locale, messageId);
+	}
+
+	public String getMessage(Locale locale, String messageId, Object... arguments) {
+
+		MessageContext messageContext = getMessageContext();
+
+		return messageContext.getMessage(locale, messageId, arguments);
+	}
+
+	public String getNamespace() {
+		return FacesContext.getCurrentInstance().getExternalContext().encodeNamespace("");
+	}
+
+	public UIForm getParentForm(final UIComponent uiComponent) {
+
+		UIComponent parent = uiComponent;
+
+		while ((parent != null) && !(parent instanceof UIForm)) {
+			parent = parent.getParent();
+		}
+
+		return (UIForm) parent;
+	}
+
+	public Object getRequestAttribute(String name) {
+
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		HttpServletRequest httpServletRequest = (HttpServletRequest) externalContext.getRequest();
+
+		return httpServletRequest.getAttribute(name);
+	}
+
+	public String getRequestContextPath() {
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+
+		return externalContext.getRequestContextPath();
+	}
+
+	public String getRequestParameter(String name) {
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		Map<String, String> requestParameterMap = externalContext.getRequestParameterMap();
+
+		return requestParameterMap.get(name);
+	}
+
+	public boolean getRequestParameterAsBool(String name, boolean defaultValue) {
+		return BooleanHelper.toBoolean(getRequestParameter(name), defaultValue);
+	}
+
+	public int getRequestParameterAsInt(String name, int defaultValue) {
+		return IntegerHelper.toInteger(getRequestParameter(name), defaultValue);
+	}
+
+	public long getRequestParameterAsLong(String name, long defaultValue) {
+		return LongHelper.toLong(getRequestParameter(name), defaultValue);
+	}
+
+	public String getRequestParameterFromMap(String name) {
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+
+		return externalContext.getRequestParameterMap().get(name);
+	}
+
+	public Map<String, String> getRequestParameterMap() {
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+
+		return externalContext.getRequestParameterMap();
+	}
+
+	public String getRequestQueryString() {
+		return (String) getRequestAttribute("javax.servlet.forward.query_string");
+	}
+
+	public String getRequestQueryStringParameter(String name) {
+
+		String value = null;
+		String queryString = getRequestQueryString();
+
+		if (queryString != null) {
+			String[] queryStringTokens = queryString.split("&");
+			boolean found = false;
+
+			for (int i = 0; (!found && (i < queryStringTokens.length)); i++) {
+				String nameValuePair = queryStringTokens[i];
+				String[] nameValuePairArray = nameValuePair.split("=");
+				found = nameValuePairArray[0].equals(name);
+
+				if (found && (nameValuePairArray.length > 1)) {
+					value = nameValuePairArray[1];
+				}
+			}
+		}
+
+		return value;
+	}
+
+	public Object getSession(boolean create) {
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+
+		return externalContext.getSession(create);
+	}
+
+	public Object getSessionAttribute(String name) {
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		Map<String, Object> sessionMap = externalContext.getSessionMap();
+
+		return sessionMap.get(name);
+	}
+
 	public UIComponent matchComponentInHierarchy(UIComponent parent, String partialClientId) {
 
 		FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -284,176 +445,11 @@ public class FacesContextHelperImpl implements FacesContextHelper {
 		return elResolver.getValue(elContext, null, elExpression);
 	}
 
-	public FacesContext getFacesContext() {
-		return FacesContext.getCurrentInstance();
-	}
-
-	public Locale getLocale() {
-
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		UIViewRoot viewRoot = facesContext.getViewRoot();
-		Locale locale = viewRoot.getLocale();
-
-		// If the JSF ViewRoot didn't return a locale, then try and get it from the JSF Application.
-		if (locale == null) {
-			Application application = facesContext.getApplication();
-			locale = application.getDefaultLocale();
-		}
-
-		// Otherwise, if we couldn't determine the locale, just use the server's default value.
-		if (locale == null) {
-			locale = Locale.getDefault();
-		}
-
-		return locale;
-	}
-
-	public String getMessage(String messageId) {
-		return getMessage(getLocale(), messageId);
-	}
-
-	public String getMessage(String messageId, Object... arguments) {
-
-		MessageContext messageContext = getMessageContext();
-
-		return messageContext.getMessage(getLocale(), messageId, arguments);
-	}
-
-	public String getMessage(Locale locale, String messageId) {
-
-		MessageContext messageContext = getMessageContext();
-
-		return messageContext.getMessage(locale, messageId);
-	}
-
-	public String getMessage(Locale locale, String messageId, Object... arguments) {
-
-		MessageContext messageContext = getMessageContext();
-
-		return messageContext.getMessage(locale, messageId, arguments);
-	}
-
-	protected MessageContext getMessageContext() {
-		return MessageContextFactory.getMessageContextInstance();
-	}
-
-	public String getNamespace() {
-		return FacesContext.getCurrentInstance().getExternalContext().encodeNamespace("");
-	}
-
-	public UIForm getParentForm(final UIComponent uiComponent) {
-
-		UIComponent parent = uiComponent;
-
-		while ((parent != null) && !(parent instanceof UIForm)) {
-			parent = parent.getParent();
-		}
-
-		return (UIForm) parent;
-	}
-
-	public Object getRequestAttribute(String name) {
-
-		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-		HttpServletRequest httpServletRequest = (HttpServletRequest) externalContext.getRequest();
-
-		return httpServletRequest.getAttribute(name);
-	}
-
 	public void setRequestAttribute(String name, Object value) {
 
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 		HttpServletRequest httpServletRequest = (HttpServletRequest) externalContext.getRequest();
 		httpServletRequest.setAttribute(name, value);
-	}
-
-	public String getRequestContextPath() {
-
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		ExternalContext externalContext = facesContext.getExternalContext();
-
-		return externalContext.getRequestContextPath();
-	}
-
-	public String getRequestParameter(String name) {
-
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		ExternalContext externalContext = facesContext.getExternalContext();
-		Map<String, String> requestParameterMap = externalContext.getRequestParameterMap();
-
-		return requestParameterMap.get(name);
-	}
-
-	public boolean getRequestParameterAsBool(String name, boolean defaultValue) {
-		return BooleanHelper.toBoolean(getRequestParameter(name), defaultValue);
-	}
-
-	public int getRequestParameterAsInt(String name, int defaultValue) {
-		return IntegerHelper.toInteger(getRequestParameter(name), defaultValue);
-	}
-
-	public long getRequestParameterAsLong(String name, long defaultValue) {
-		return LongHelper.toLong(getRequestParameter(name), defaultValue);
-	}
-
-	public String getRequestParameterFromMap(String name) {
-
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		ExternalContext externalContext = facesContext.getExternalContext();
-
-		return externalContext.getRequestParameterMap().get(name);
-	}
-
-	public Map<String, String> getRequestParameterMap() {
-
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		ExternalContext externalContext = facesContext.getExternalContext();
-
-		return externalContext.getRequestParameterMap();
-	}
-
-	public String getRequestQueryString() {
-		return (String) getRequestAttribute("javax.servlet.forward.query_string");
-	}
-
-	public String getRequestQueryStringParameter(String name) {
-
-		String value = null;
-		String queryString = getRequestQueryString();
-
-		if (queryString != null) {
-			String[] queryStringTokens = queryString.split("&");
-			boolean found = false;
-
-			for (int i = 0; (!found && (i < queryStringTokens.length)); i++) {
-				String nameValuePair = queryStringTokens[i];
-				String[] nameValuePairArray = nameValuePair.split("=");
-				found = nameValuePairArray[0].equals(name);
-
-				if (found && (nameValuePairArray.length > 1)) {
-					value = nameValuePairArray[1];
-				}
-			}
-		}
-
-		return value;
-	}
-
-	public Object getSession(boolean create) {
-
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		ExternalContext externalContext = facesContext.getExternalContext();
-
-		return externalContext.getSession(create);
-	}
-
-	public Object getSessionAttribute(String name) {
-
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		ExternalContext externalContext = facesContext.getExternalContext();
-		Map<String, Object> sessionMap = externalContext.getSessionMap();
-
-		return sessionMap.get(name);
 	}
 
 	public void setSessionAttribute(String name, Object value) {
@@ -462,5 +458,9 @@ public class FacesContextHelperImpl implements FacesContextHelper {
 		ExternalContext externalContext = facesContext.getExternalContext();
 		Map<String, Object> sessionMap = externalContext.getSessionMap();
 		sessionMap.put(name, value);
+	}
+
+	protected MessageContext getMessageContext() {
+		return MessageContextFactory.getMessageContextInstance();
 	}
 }

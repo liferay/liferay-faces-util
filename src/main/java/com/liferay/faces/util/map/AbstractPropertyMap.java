@@ -111,6 +111,12 @@ public abstract class AbstractPropertyMap<V> implements Map<String, V> {
 		return value;
 	}
 
+	public boolean isEmpty() {
+		Enumeration<String> propertyNames = getPropertyNames();
+
+		return ((propertyNames == null) || !propertyNames.hasMoreElements());
+	}
+
 	public Set<String> keySet() {
 		Set<String> keySet = null;
 		Enumeration<String> propertyNames = getPropertyNames();
@@ -194,17 +200,11 @@ public abstract class AbstractPropertyMap<V> implements Map<String, V> {
 
 	protected abstract AbstractPropertyMapEntry<V> createPropertyMapEntry(String name);
 
-	protected abstract void removeProperty(String name);
-
 	protected abstract V getProperty(String name);
-
-	protected abstract void setProperty(String name, V value);
 
 	protected abstract Enumeration<String> getPropertyNames();
 
-	public boolean isEmpty() {
-		Enumeration<String> propertyNames = getPropertyNames();
+	protected abstract void removeProperty(String name);
 
-		return ((propertyNames == null) || !propertyNames.hasMoreElements());
-	}
+	protected abstract void setProperty(String name, V value);
 }

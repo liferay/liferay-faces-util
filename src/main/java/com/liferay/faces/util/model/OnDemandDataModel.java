@@ -58,38 +58,10 @@ public abstract class OnDemandDataModel<E> extends DataModel<E> implements Pagin
 	public abstract Collection<E> findRows(int startRow, int finishRow, List<SortCriterion> sortCritieria);
 
 	/**
-	 * Resets (clears) the underlying wrapped data.
-	 */
-	public void reset() {
-		setRowCount(-1);
-		setWrappedData(null);
-		setStartRowIndex(-1);
-		setFinishRowIndex(-1);
-	}
-
-	/**
-	 * @see  {@link javax.faces.model.DataModel#isRowAvailable()}
-	 */
-	@Override
-	public boolean isRowAvailable() {
-
-		int rowIndex = getRowIndex();
-
-		return (rowIndex >= 0) && (rowIndex < getRowCount());
-	}
-
-	/**
 	 * Returns the index of the finishing row associated with the underlying wrapped data.
 	 */
 	public int getFinishRowIndex() {
 		return finishRowIndex;
-	}
-
-	/**
-	 * Sets the finishing row associated with the underlying wrapped data.
-	 */
-	public void setFinishRowIndex(int finishRowIndex) {
-		this.finishRowIndex = finishRowIndex;
 	}
 
 	/**
@@ -103,13 +75,6 @@ public abstract class OnDemandDataModel<E> extends DataModel<E> implements Pagin
 		}
 
 		return rowCount;
-	}
-
-	/**
-	 * Sets the rowCount to the specified value.
-	 */
-	public void setRowCount(int rowCount) {
-		this.rowCount = rowCount;
 	}
 
 	/**
@@ -146,6 +111,84 @@ public abstract class OnDemandDataModel<E> extends DataModel<E> implements Pagin
 	}
 
 	/**
+	 * @see  {@link Paginated#getRowsPerPage()}
+	 */
+	public int getRowsPerPage() {
+		return rowsPerPage;
+	}
+
+	/**
+	 * @see  {@link Sortable#getSortCriteria()}
+	 */
+	@Override
+	public List<SortCriterion> getSortCriteria() {
+		return sortCriteria;
+	}
+
+	/**
+	 * Returns the index of the starting row associated with the underlying wrapped data.
+	 */
+	public int getStartRowIndex() {
+		return startRowIndex;
+	}
+
+	/**
+	 * @see  {@link javax.faces.model.DataModel#getWrappedData()}
+	 */
+	@Override
+	public List<E> getWrappedData() {
+
+		if (wrappedData == null) {
+
+			int startRowIndex = rowIndex;
+			int finishRowIndex = Math.min(rowIndex + getRowsPerPage() - 1, getRowCount() - 1);
+
+			logger.debug("finding new startRowIndex=[{0}] finishRowIndex=[{1}]", startRowIndex, finishRowIndex);
+
+			setWrappedData(findRows(startRowIndex, finishRowIndex, sortCriteria));
+			setFinishRowIndex(finishRowIndex);
+			setStartRowIndex(startRowIndex);
+		}
+
+		return wrappedData;
+	}
+
+	/**
+	 * @see  {@link javax.faces.model.DataModel#isRowAvailable()}
+	 */
+	@Override
+	public boolean isRowAvailable() {
+
+		int rowIndex = getRowIndex();
+
+		return (rowIndex >= 0) && (rowIndex < getRowCount());
+	}
+
+	/**
+	 * Resets (clears) the underlying wrapped data.
+	 */
+	public void reset() {
+		setRowCount(-1);
+		setWrappedData(null);
+		setStartRowIndex(-1);
+		setFinishRowIndex(-1);
+	}
+
+	/**
+	 * Sets the finishing row associated with the underlying wrapped data.
+	 */
+	public void setFinishRowIndex(int finishRowIndex) {
+		this.finishRowIndex = finishRowIndex;
+	}
+
+	/**
+	 * Sets the rowCount to the specified value.
+	 */
+	public void setRowCount(int rowCount) {
+		this.rowCount = rowCount;
+	}
+
+	/**
 	 * @see  {@link javax.faces.model.DataModel#setRowIndex(int)}
 	 */
 	@Override
@@ -179,25 +222,10 @@ public abstract class OnDemandDataModel<E> extends DataModel<E> implements Pagin
 	}
 
 	/**
-	 * @see  {@link Paginated#getRowsPerPage()}
-	 */
-	public int getRowsPerPage() {
-		return rowsPerPage;
-	}
-
-	/**
 	 * @see  {@link Paginated#setRowsPerPage(int)}
 	 */
 	public void setRowsPerPage(int rowsPerPage) {
 		this.rowsPerPage = rowsPerPage;
-	}
-
-	/**
-	 * @see  {@link Sortable#getSortCriteria()}
-	 */
-	@Override
-	public List<SortCriterion> getSortCriteria() {
-		return sortCriteria;
 	}
 
 	/**
@@ -210,38 +238,10 @@ public abstract class OnDemandDataModel<E> extends DataModel<E> implements Pagin
 	}
 
 	/**
-	 * Returns the index of the starting row associated with the underlying wrapped data.
-	 */
-	public int getStartRowIndex() {
-		return startRowIndex;
-	}
-
-	/**
 	 * Sets the starting row associated with the underlying wrapped data.
 	 */
 	public void setStartRowIndex(int startRowIndex) {
 		this.startRowIndex = startRowIndex;
-	}
-
-	/**
-	 * @see  {@link javax.faces.model.DataModel#getWrappedData()}
-	 */
-	@Override
-	public List<E> getWrappedData() {
-
-		if (wrappedData == null) {
-
-			int startRowIndex = rowIndex;
-			int finishRowIndex = Math.min(rowIndex + getRowsPerPage() - 1, getRowCount() - 1);
-
-			logger.debug("finding new startRowIndex=[{0}] finishRowIndex=[{1}]", startRowIndex, finishRowIndex);
-
-			setWrappedData(findRows(startRowIndex, finishRowIndex, sortCriteria));
-			setFinishRowIndex(finishRowIndex);
-			setStartRowIndex(startRowIndex);
-		}
-
-		return wrappedData;
 	}
 
 	/**

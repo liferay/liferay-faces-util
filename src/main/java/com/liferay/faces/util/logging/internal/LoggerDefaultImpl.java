@@ -102,6 +102,26 @@ public class LoggerDefaultImpl implements Logger {
 		}
 	}
 
+	public boolean isDebugEnabled() {
+		return wrappedLogger.isLoggable(java.util.logging.Level.FINE);
+	}
+
+	public boolean isErrorEnabled() {
+		return wrappedLogger.isLoggable(java.util.logging.Level.SEVERE);
+	}
+
+	public boolean isInfoEnabled() {
+		return wrappedLogger.isLoggable(java.util.logging.Level.INFO);
+	}
+
+	public boolean isTraceEnabled() {
+		return wrappedLogger.isLoggable(java.util.logging.Level.FINEST);
+	}
+
+	public boolean isWarnEnabled() {
+		return wrappedLogger.isLoggable(java.util.logging.Level.WARNING);
+	}
+
 	public void trace(String message) {
 
 		if (isTraceEnabled()) {
@@ -196,26 +216,6 @@ public class LoggerDefaultImpl implements Logger {
 
 			return formattedMessage;
 		}
-	}
-
-	public boolean isDebugEnabled() {
-		return wrappedLogger.isLoggable(java.util.logging.Level.FINE);
-	}
-
-	public boolean isErrorEnabled() {
-		return wrappedLogger.isLoggable(java.util.logging.Level.SEVERE);
-	}
-
-	public boolean isInfoEnabled() {
-		return wrappedLogger.isLoggable(java.util.logging.Level.INFO);
-	}
-
-	public boolean isTraceEnabled() {
-		return wrappedLogger.isLoggable(java.util.logging.Level.FINEST);
-	}
-
-	public boolean isWarnEnabled() {
-		return wrappedLogger.isLoggable(java.util.logging.Level.WARNING);
 	}
 
 	protected LogRecord getLogRecord(java.util.logging.Level level, String message, Throwable thrown) {

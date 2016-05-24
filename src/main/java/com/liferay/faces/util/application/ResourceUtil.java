@@ -35,6 +35,38 @@ public final class ResourceUtil {
 		throw new AssertionError();
 	}
 
+	public static String getResourceId(UIComponent componentResource) {
+
+		String library = null;
+		String name = null;
+
+		if (componentResource != null) {
+
+			Map<String, Object> componentResourceAttributes = componentResource.getAttributes();
+			library = (String) componentResourceAttributes.get("library");
+			name = (String) componentResourceAttributes.get("name");
+		}
+
+		return getResourceId(library, name);
+	}
+
+	public static String getResourceId(String library, String name) {
+
+		String resourceDependencyId;
+
+		if (library == null) {
+			resourceDependencyId = name;
+		}
+		else if (name == null) {
+			resourceDependencyId = library;
+		}
+		else {
+			resourceDependencyId = library.concat(":").concat(name);
+		}
+
+		return resourceDependencyId;
+	}
+
 	/**
 	 * Converts a String to an {@link InputStream}.
 	 *
@@ -95,37 +127,5 @@ public final class ResourceUtil {
 		}
 
 		return stringBuilder.toString();
-	}
-
-	public static String getResourceId(UIComponent componentResource) {
-
-		String library = null;
-		String name = null;
-
-		if (componentResource != null) {
-
-			Map<String, Object> componentResourceAttributes = componentResource.getAttributes();
-			library = (String) componentResourceAttributes.get("library");
-			name = (String) componentResourceAttributes.get("name");
-		}
-
-		return getResourceId(library, name);
-	}
-
-	public static String getResourceId(String library, String name) {
-
-		String resourceDependencyId;
-
-		if (library == null) {
-			resourceDependencyId = name;
-		}
-		else if (name == null) {
-			resourceDependencyId = library;
-		}
-		else {
-			resourceDependencyId = library.concat(":").concat(name);
-		}
-
-		return resourceDependencyId;
 	}
 }

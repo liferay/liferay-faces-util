@@ -32,17 +32,17 @@ public interface Ordering {
 
 	public String OTHERS = Ordering.class.getName() + ".OTHERS";
 
-	public boolean isOrdered();
-
-	public boolean isBefore(String name);
+	public EnumMap<Path, String[]> getRoutes();
 
 	public boolean isAfter(String name);
 
-	public EnumMap<Path, String[]> getRoutes();
-
-	public void setRoutes(EnumMap<Path, String[]> routes);
-
 	public boolean isAfterOthers();
 
+	public boolean isBefore(String name);
+
 	public boolean isBeforeOthers();
+
+	public boolean isOrdered();
+
+	public void setRoutes(EnumMap<Path, String[]> routes);
 }

@@ -200,6 +200,16 @@ public abstract class ClientComponentRendererBase extends Renderer implements Cl
 		responseWriter.write("'");
 	}
 
+	protected String getClientVarName(FacesContext facesContext, ClientComponent clientComponent) {
+
+		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
+		String clientId = clientComponent.getClientId();
+		String regex = "[" + separatorChar + "]";
+		String clientVarName = clientId.replaceAll(regex, "_");
+
+		return clientVarName;
+	}
+
 	protected void renderScript(FacesContext facesContext, String bufferedScriptString, String[] modules,
 		Script.Type scriptType) {
 
@@ -256,15 +266,5 @@ public abstract class ClientComponentRendererBase extends Renderer implements Cl
 				responseWriter.write(parameter.toString());
 			}
 		}
-	}
-
-	protected String getClientVarName(FacesContext facesContext, ClientComponent clientComponent) {
-
-		char separatorChar = UINamingContainer.getSeparatorChar(facesContext);
-		String clientId = clientComponent.getClientId();
-		String regex = "[" + separatorChar + "]";
-		String clientVarName = clientId.replaceAll(regex, "_");
-
-		return clientVarName;
 	}
 }

@@ -62,13 +62,13 @@ public abstract class FacesRequestContext {
 	public abstract void addScript(String script);
 
 	/**
-	 * Releases any resources that are associated with this {@link FacesRequestContext} instance.
-	 */
-	public abstract void release();
-
-	/**
 	 * Returns an immutable list of scripts that were added via the {@link #addScript(Script)} or {@link
 	 * #addScript(String)} method.
 	 */
 	public abstract List<Script> getScripts();
+
+	/**
+	 * Releases any resources that are associated with this {@link FacesRequestContext} instance.
+	 */
+	public abstract void release();
 }

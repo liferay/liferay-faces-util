@@ -43,10 +43,6 @@ public abstract class ELResolverBase extends ELResolver {
 		FEATURE_DESCRIPTORS.add(featureDescriptor);
 	}
 
-	protected abstract Object resolveProperty(ELContext elContext, Object base, String property);
-
-	protected abstract Object resolveVariable(ELContext elContext, String varName);
-
 	@Override
 	public Iterator<FeatureDescriptor> getFeatureDescriptors(ELContext elContext, Object base) {
 
@@ -101,6 +97,12 @@ public abstract class ELResolverBase extends ELResolver {
 	}
 
 	@Override
+	public boolean isReadOnly(ELContext elContext, Object base, Object property) {
+
+		return true;
+	}
+
+	@Override
 	public void setValue(ELContext elContext, Object base, Object property, Object value) {
 
 		if (elContext == null) {
@@ -110,9 +112,7 @@ public abstract class ELResolverBase extends ELResolver {
 		}
 	}
 
-	@Override
-	public boolean isReadOnly(ELContext elContext, Object base, Object property) {
+	protected abstract Object resolveProperty(ELContext elContext, Object base, String property);
 
-		return true;
-	}
+	protected abstract Object resolveVariable(ELContext elContext, String varName);
 }

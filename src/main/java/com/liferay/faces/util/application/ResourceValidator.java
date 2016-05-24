@@ -27,11 +27,11 @@ public interface ResourceValidator {
 
 	public boolean isBannedSequence(String resourceId);
 
-	public boolean isValidLibraryName(String libraryName);
-
-	public boolean isValidResourceName(String resourceName);
+	public boolean isFaceletDocument(FacesContext facesContext, String resourceId);
 
 	public boolean isSelfReferencing(FacesContext facesContext, String resourceId);
 
-	public boolean isFaceletDocument(FacesContext facesContext, String resourceId);
+	public boolean isValidLibraryName(String libraryName);
+
+	public boolean isValidResourceName(String resourceName);
 }

@@ -132,6 +132,16 @@ public class ResourceRendererUtilImpl extends RendererWrapper implements Compone
 		}
 	}
 
+	@Override
+	public Renderer getWrapped() {
+		return wrappedRenderer;
+	}
+
+	@Override
+	public boolean isTransient() {
+		return transientFlag;
+	}
+
 	/**
 	 * Since the Mojarra {@link com.sun.faces.renderkit.html_basic.ScriptStyleBaseRenderer} class implements {@link
 	 * ComponentSystemEventListener}, this class must implement that interface too, since this is a wrapper type of
@@ -176,6 +186,11 @@ public class ResourceRendererUtilImpl extends RendererWrapper implements Compone
 		return wrappedRenderer.getClass().getName();
 	}
 
+	@Override
+	public void setTransient(boolean transientFlag) {
+		this.transientFlag = transientFlag;
+	}
+
 	private String getComponentValue(UIComponent componentResource) {
 
 		String componentResourceValue = null;
@@ -190,20 +205,5 @@ public class ResourceRendererUtilImpl extends RendererWrapper implements Compone
 		}
 
 		return componentResourceValue;
-	}
-
-	@Override
-	public boolean isTransient() {
-		return transientFlag;
-	}
-
-	@Override
-	public void setTransient(boolean transientFlag) {
-		this.transientFlag = transientFlag;
-	}
-
-	@Override
-	public Renderer getWrapped() {
-		return wrappedRenderer;
 	}
 }

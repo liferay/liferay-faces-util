@@ -23,10 +23,10 @@ import javax.faces.FacesWrapper;
  */
 public abstract class FacesURLEncoderWrapper implements FacesURLEncoder, FacesWrapper<FacesURLEncoder> {
 
+	public abstract FacesURLEncoder getWrapped();
+
 	@Override
 	public String encode(String url, String encoding) {
 		return getWrapped().encode(url, encoding);
 	}
-
-	public abstract FacesURLEncoder getWrapped();
 }

@@ -24,28 +24,11 @@ import javax.faces.FacesWrapper;
 public abstract class BrowserSnifferWrapper implements BrowserSniffer, FacesWrapper<BrowserSniffer> {
 
 	@Override
+	public abstract BrowserSniffer getWrapped();
+
+	@Override
 	public boolean acceptsGzip() {
 		return getWrapped().acceptsGzip();
-	}
-
-	@Override
-	public boolean isIeOnWin32() {
-		return getWrapped().isIeOnWin32();
-	}
-
-	@Override
-	public boolean isIeOnWin64() {
-		return getWrapped().isIeOnWin64();
-	}
-
-	@Override
-	public boolean isMozilla() {
-		return getWrapped().isMozilla();
-	}
-
-	@Override
-	public boolean isOpera() {
-		return getWrapped().isOpera();
 	}
 
 	@Override
@@ -54,8 +37,23 @@ public abstract class BrowserSnifferWrapper implements BrowserSniffer, FacesWrap
 	}
 
 	@Override
-	public boolean isMac() {
-		return getWrapped().isMac();
+	public float getMajorVersion() {
+		return getWrapped().getMajorVersion();
+	}
+
+	@Override
+	public String getRevision() {
+		return getWrapped().getRevision();
+	}
+
+	@Override
+	public String getVersion() {
+		return getWrapped().getVersion();
+	}
+
+	@Override
+	public boolean isAir() {
+		return getWrapped().isAir();
 	}
 
 	@Override
@@ -69,8 +67,28 @@ public abstract class BrowserSnifferWrapper implements BrowserSniffer, FacesWrap
 	}
 
 	@Override
+	public boolean isFirefox() {
+		return getWrapped().isFirefox();
+	}
+
+	@Override
+	public boolean isGecko() {
+		return getWrapped().isGecko();
+	}
+
+	@Override
 	public boolean isIe() {
 		return getWrapped().isIe();
+	}
+
+	@Override
+	public boolean isIeOnWin32() {
+		return getWrapped().isIeOnWin32();
+	}
+
+	@Override
+	public boolean isIeOnWin64() {
+		return getWrapped().isIeOnWin64();
 	}
 
 	@Override
@@ -79,8 +97,28 @@ public abstract class BrowserSnifferWrapper implements BrowserSniffer, FacesWrap
 	}
 
 	@Override
+	public boolean isLinux() {
+		return getWrapped().isLinux();
+	}
+
+	@Override
+	public boolean isMac() {
+		return getWrapped().isMac();
+	}
+
+	@Override
 	public boolean isMobile() {
 		return getWrapped().isMobile();
+	}
+
+	@Override
+	public boolean isMozilla() {
+		return getWrapped().isMozilla();
+	}
+
+	@Override
+	public boolean isOpera() {
+		return getWrapped().isOpera();
 	}
 
 	@Override
@@ -94,28 +132,8 @@ public abstract class BrowserSnifferWrapper implements BrowserSniffer, FacesWrap
 	}
 
 	@Override
-	public boolean isWapXhtml() {
-		return getWrapped().isWapXhtml();
-	}
-
-	@Override
-	public boolean isWml() {
-		return getWrapped().isWml();
-	}
-
-	@Override
-	public float getMajorVersion() {
-		return getWrapped().getMajorVersion();
-	}
-
-	@Override
 	public boolean isSun() {
 		return getWrapped().isSun();
-	}
-
-	@Override
-	public boolean isGecko() {
-		return getWrapped().isGecko();
 	}
 
 	@Override
@@ -124,18 +142,8 @@ public abstract class BrowserSnifferWrapper implements BrowserSniffer, FacesWrap
 	}
 
 	@Override
-	public boolean isAir() {
-		return getWrapped().isAir();
-	}
-
-	@Override
-	public String getRevision() {
-		return getWrapped().getRevision();
-	}
-
-	@Override
-	public boolean isWindows() {
-		return getWrapped().isWindows();
+	public boolean isWapXhtml() {
+		return getWrapped().isWapXhtml();
 	}
 
 	@Override
@@ -144,21 +152,13 @@ public abstract class BrowserSnifferWrapper implements BrowserSniffer, FacesWrap
 	}
 
 	@Override
-	public String getVersion() {
-		return getWrapped().getVersion();
+	public boolean isWindows() {
+		return getWrapped().isWindows();
 	}
 
 	@Override
-	public abstract BrowserSniffer getWrapped();
-
-	@Override
-	public boolean isFirefox() {
-		return getWrapped().isFirefox();
-	}
-
-	@Override
-	public boolean isLinux() {
-		return getWrapped().isLinux();
+	public boolean isWml() {
+		return getWrapped().isWml();
 	}
 
 }

@@ -20,12 +20,7 @@ package com.liferay.faces.util.product;
  */
 public interface Product {
 
-	@Override
-	String toString();
-
 	int getBuildId();
-
-	boolean isDetected();
 
 	int getMajorVersion();
 
@@ -36,4 +31,9 @@ public interface Product {
 	String getTitle();
 
 	String getVersion();
+
+	boolean isDetected();
+
+	@Override
+	String toString();
 }

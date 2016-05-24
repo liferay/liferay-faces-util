@@ -93,6 +93,10 @@ public class ObservableList<E> implements List<E>, Observable {
 		return wrappedList.indexOf(o);
 	}
 
+	public boolean isEmpty() {
+		return wrappedList.isEmpty();
+	}
+
 	public Iterator<E> iterator() {
 		return wrappedList.iterator();
 	}
@@ -170,10 +174,6 @@ public class ObservableList<E> implements List<E>, Observable {
 
 	public <T> T[] toArray(T[] a) {
 		return wrappedList.toArray(a);
-	}
-
-	public boolean isEmpty() {
-		return wrappedList.isEmpty();
 	}
 
 }

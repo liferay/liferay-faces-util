@@ -58,11 +58,6 @@ public class ConcurrentSAXParserFactory extends SAXParserFactory {
 	}
 
 	@Override
-	public SAXParser newSAXParser() throws ParserConfigurationException, SAXException {
-		return new SAXParserImpl(isNamespaceAware(), isValidating(), featureMap);
-	}
-
-	@Override
 	public boolean getFeature(String name) throws ParserConfigurationException, SAXNotRecognizedException,
 		SAXNotSupportedException {
 		Boolean feature = featureMap.get(name);
@@ -72,6 +67,11 @@ public class ConcurrentSAXParserFactory extends SAXParserFactory {
 		}
 
 		return feature;
+	}
+
+	@Override
+	public SAXParser newSAXParser() throws ParserConfigurationException, SAXException {
+		return new SAXParserImpl(isNamespaceAware(), isValidating(), featureMap);
 	}
 
 	@Override

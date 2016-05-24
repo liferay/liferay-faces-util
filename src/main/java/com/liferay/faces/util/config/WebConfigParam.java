@@ -121,11 +121,6 @@ public enum WebConfigParam implements ConfigParam<ExternalContext> {
 		return WebConfigParamUtil.getConfiguredValue(externalContext, name, alternateName);
 	}
 
-	@Override
-	public boolean isConfigured(ExternalContext externalContext) {
-		return WebConfigParamUtil.isSpecified(externalContext, name, alternateName);
-	}
-
 	public boolean getDefaultBooleanValue() {
 		return defaultBooleanValue;
 	}
@@ -160,5 +155,10 @@ public enum WebConfigParam implements ConfigParam<ExternalContext> {
 	@Override
 	public String getStringValue(ExternalContext externalContext) {
 		return WebConfigParamUtil.getStringValue(externalContext, name, alternateName, defaultStringValue);
+	}
+
+	@Override
+	public boolean isConfigured(ExternalContext externalContext) {
+		return WebConfigParamUtil.isSpecified(externalContext, name, alternateName);
 	}
 }

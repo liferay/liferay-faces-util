@@ -74,6 +74,11 @@ public class PartialViewContextOnChangeImpl extends PartialViewContextWrapper {
 	}
 
 	@Override
+	public PartialViewContext getWrapped() {
+		return wrappedPartialViewContext;
+	}
+
+	@Override
 	public void processPartial(PhaseId phaseId) {
 
 		// If processing a partial request during the "Apply Request Values" phase of the JSF lifecycle, then register
@@ -112,11 +117,6 @@ public class PartialViewContextOnChangeImpl extends PartialViewContextWrapper {
 	@Override
 	public void setPartialRequest(boolean isPartialRequest) {
 		wrappedPartialViewContext.setPartialRequest(isPartialRequest);
-	}
-
-	@Override
-	public PartialViewContext getWrapped() {
-		return wrappedPartialViewContext;
 	}
 
 	private static class VisitCallbackApplyRequestValuesImpl implements VisitCallback {

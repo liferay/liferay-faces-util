@@ -36,6 +36,34 @@ public class ProductBaseImpl implements Product {
 	protected String title;
 	protected String version;
 
+	public int getBuildId() {
+		return buildId;
+	}
+
+	public int getMajorVersion() {
+		return majorVersion;
+	}
+
+	public int getMinorVersion() {
+		return minorVersion;
+	}
+
+	public int getRevisionVersion() {
+		return revisionVersion;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public boolean isDetected() {
+		return detected;
+	}
+
 	@Override
 	public String toString() {
 
@@ -55,6 +83,10 @@ public class ProductBaseImpl implements Product {
 		}
 
 		return stringValue;
+	}
+
+	protected Package getPackage() {
+		return null;
 	}
 
 	protected void init(Class<?> clazz, String expectedTitle) {
@@ -114,37 +146,5 @@ public class ProductBaseImpl implements Product {
 		}
 
 		return intValue;
-	}
-
-	public int getBuildId() {
-		return buildId;
-	}
-
-	public boolean isDetected() {
-		return detected;
-	}
-
-	public int getMajorVersion() {
-		return majorVersion;
-	}
-
-	public int getMinorVersion() {
-		return minorVersion;
-	}
-
-	protected Package getPackage() {
-		return null;
-	}
-
-	public int getRevisionVersion() {
-		return revisionVersion;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public String getVersion() {
-		return version;
 	}
 }

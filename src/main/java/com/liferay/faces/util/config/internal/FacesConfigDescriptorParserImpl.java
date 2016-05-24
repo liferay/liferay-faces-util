@@ -211,6 +211,10 @@ public class FacesConfigDescriptorParserImpl extends SAXHandlerBase implements F
 		content = null;
 	}
 
+	public boolean isWebInfFacesConfig() {
+		return isWebInfFacesConfig;
+	}
+
 	@Override
 	public FacesConfigDescriptor parse(InputStream inputStream, String path) throws IOException {
 
@@ -357,9 +361,5 @@ public class FacesConfigDescriptorParserImpl extends SAXHandlerBase implements F
 		else {
 			super.startElement(uri, localName, elementName, attributes);
 		}
-	}
-
-	public boolean isWebInfFacesConfig() {
-		return isWebInfFacesConfig;
 	}
 }

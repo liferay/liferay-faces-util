@@ -33,26 +33,13 @@ public class OrderingImpl implements Ordering {
 		this.routes.put(Path.AFTER, new String[0]);
 	}
 
-	public boolean isOrdered() {
-		return ((routes.get(Path.BEFORE).length != 0) || (routes.get(Path.AFTER).length != 0));
-	}
-
-	public boolean isBefore(String name) {
-
-		return (Arrays.binarySearch(routes.get(Path.BEFORE), name) >= 0);
+	public EnumMap<Path, String[]> getRoutes() {
+		return routes;
 	}
 
 	public boolean isAfter(String name) {
 
 		return (Arrays.binarySearch(routes.get(Path.AFTER), name) >= 0);
-	}
-
-	public EnumMap<Path, String[]> getRoutes() {
-		return routes;
-	}
-
-	public void setRoutes(EnumMap<Path, String[]> routes) {
-		this.routes = routes;
 	}
 
 	public boolean isAfterOthers() {
@@ -66,6 +53,11 @@ public class OrderingImpl implements Ordering {
 		return value;
 	}
 
+	public boolean isBefore(String name) {
+
+		return (Arrays.binarySearch(routes.get(Path.BEFORE), name) >= 0);
+	}
+
 	public boolean isBeforeOthers() {
 
 		boolean value = false;
@@ -75,5 +67,13 @@ public class OrderingImpl implements Ordering {
 		}
 
 		return value;
+	}
+
+	public boolean isOrdered() {
+		return ((routes.get(Path.BEFORE).length != 0) || (routes.get(Path.AFTER).length != 0));
+	}
+
+	public void setRoutes(EnumMap<Path, String[]> routes) {
+		this.routes = routes;
 	}
 }

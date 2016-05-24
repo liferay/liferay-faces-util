@@ -46,6 +46,41 @@ public class ExtELResolver extends ELResolverBase {
 	private I18N i18n;
 
 	@Override
+	public Class<?> getCommonPropertyType(ELContext elContext, Object base) {
+
+		Class<?> commonPropertyType = null;
+
+		return commonPropertyType;
+	}
+
+	@Override
+	public boolean isReadOnly(ELContext elContext, Object base, Object property) {
+
+		return true;
+	}
+
+	@Override
+	public void setValue(ELContext elContext, Object base, Object property, Object value) {
+
+		if (elContext == null) {
+
+			// Throw an exception as directed by the JavaDoc for ELContext.
+			throw new NullPointerException("elContext may not be null");
+		}
+
+		if ((property != null) && (property instanceof String)) {
+			String propertyAsString = (String) property;
+
+			if (propertyAsString.equals(I18N)) {
+				throw new PropertyNotWritableException(propertyAsString);
+			}
+			else if (propertyAsString.equals(BROWSER_SNIFFER)) {
+				throw new PropertyNotWritableException(propertyAsString);
+			}
+		}
+	}
+
+	@Override
 	protected Object resolveProperty(ELContext elContext, Object base, String property) {
 
 		return null;
@@ -90,40 +125,5 @@ public class ExtELResolver extends ELResolverBase {
 		}
 
 		return value;
-	}
-
-	@Override
-	public Class<?> getCommonPropertyType(ELContext elContext, Object base) {
-
-		Class<?> commonPropertyType = null;
-
-		return commonPropertyType;
-	}
-
-	@Override
-	public void setValue(ELContext elContext, Object base, Object property, Object value) {
-
-		if (elContext == null) {
-
-			// Throw an exception as directed by the JavaDoc for ELContext.
-			throw new NullPointerException("elContext may not be null");
-		}
-
-		if ((property != null) && (property instanceof String)) {
-			String propertyAsString = (String) property;
-
-			if (propertyAsString.equals(I18N)) {
-				throw new PropertyNotWritableException(propertyAsString);
-			}
-			else if (propertyAsString.equals(BROWSER_SNIFFER)) {
-				throw new PropertyNotWritableException(propertyAsString);
-			}
-		}
-	}
-
-	@Override
-	public boolean isReadOnly(ELContext elContext, Object base, Object property) {
-
-		return true;
 	}
 }

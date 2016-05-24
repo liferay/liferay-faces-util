@@ -31,11 +31,6 @@ public abstract class RichTextBaseImpl implements RichText {
 	}
 
 	@Override
-	public String toString() {
-		return value;
-	}
-
-	@Override
 	public int getPlainTextLength() {
 
 		int count = 0;
@@ -48,6 +43,11 @@ public abstract class RichTextBaseImpl implements RichText {
 	}
 
 	public String getValue() {
+		return value;
+	}
+
+	@Override
+	public String toString() {
 		return value;
 	}
 }

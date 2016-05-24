@@ -59,6 +59,30 @@ public class XMLReaderImpl implements XMLReader {
 		this.featureMap = featureMap;
 	}
 
+	public ContentHandler getContentHandler() {
+		return contentHandler;
+	}
+
+	public DTDHandler getDTDHandler() {
+		return dtdHandler;
+	}
+
+	public EntityResolver getEntityResolver() {
+		return entityResolver;
+	}
+
+	public ErrorHandler getErrorHandler() {
+		return errorHandler;
+	}
+
+	public boolean getFeature(String name) throws SAXNotRecognizedException, SAXNotSupportedException {
+		return featureMap.get(name);
+	}
+
+	public Object getProperty(String name) throws SAXNotRecognizedException, SAXNotSupportedException {
+		return propertyMap.get(name);
+	}
+
 	public void parse(InputSource inputSource) throws IOException, SAXException {
 
 		Reader reader = inputSource.getCharacterStream();
@@ -90,6 +114,43 @@ public class XMLReaderImpl implements XMLReader {
 
 	public void parse(String systemId) throws IOException, SAXException {
 		throw new UnsupportedOperationException();
+	}
+
+	public void setContentHandler(ContentHandler contentHandler) {
+		this.contentHandler = contentHandler;
+
+		if ((contentHandler != null) && (contentHandler instanceof LexicalHandler)) {
+			this.lexicalHandler = (LexicalHandler) contentHandler;
+		}
+	}
+
+	public void setDTDHandler(DTDHandler dtdHandler) {
+		this.dtdHandler = dtdHandler;
+	}
+
+	public void setEntityResolver(EntityResolver entityResolver) {
+		this.entityResolver = entityResolver;
+	}
+
+	public void setErrorHandler(ErrorHandler errorHandler) {
+		this.errorHandler = errorHandler;
+	}
+
+	public void setFeature(String name, boolean value) throws SAXNotRecognizedException, SAXNotSupportedException {
+		featureMap.put(name, value);
+	}
+
+	public void setProperty(String name, Object value) throws SAXNotRecognizedException, SAXNotSupportedException {
+		propertyMap.put(name, value);
+	}
+
+	protected Map<String, Object> getPropertyMap() {
+
+		if (propertyMap == null) {
+			propertyMap = new HashMap<String, Object>();
+		}
+
+		return propertyMap;
 	}
 
 	/**
@@ -391,67 +452,6 @@ public class XMLReaderImpl implements XMLReader {
 			prevChar1 = curChar;
 			characterAsInt = reader.read();
 		}
-	}
-
-	public ContentHandler getContentHandler() {
-		return contentHandler;
-	}
-
-	public void setContentHandler(ContentHandler contentHandler) {
-		this.contentHandler = contentHandler;
-
-		if ((contentHandler != null) && (contentHandler instanceof LexicalHandler)) {
-			this.lexicalHandler = (LexicalHandler) contentHandler;
-		}
-	}
-
-	public DTDHandler getDTDHandler() {
-		return dtdHandler;
-	}
-
-	public void setDTDHandler(DTDHandler dtdHandler) {
-		this.dtdHandler = dtdHandler;
-	}
-
-	public EntityResolver getEntityResolver() {
-		return entityResolver;
-	}
-
-	public void setEntityResolver(EntityResolver entityResolver) {
-		this.entityResolver = entityResolver;
-	}
-
-	public ErrorHandler getErrorHandler() {
-		return errorHandler;
-	}
-
-	public void setErrorHandler(ErrorHandler errorHandler) {
-		this.errorHandler = errorHandler;
-	}
-
-	public boolean getFeature(String name) throws SAXNotRecognizedException, SAXNotSupportedException {
-		return featureMap.get(name);
-	}
-
-	public void setFeature(String name, boolean value) throws SAXNotRecognizedException, SAXNotSupportedException {
-		featureMap.put(name, value);
-	}
-
-	public Object getProperty(String name) throws SAXNotRecognizedException, SAXNotSupportedException {
-		return propertyMap.get(name);
-	}
-
-	public void setProperty(String name, Object value) throws SAXNotRecognizedException, SAXNotSupportedException {
-		propertyMap.put(name, value);
-	}
-
-	protected Map<String, Object> getPropertyMap() {
-
-		if (propertyMap == null) {
-			propertyMap = new HashMap<String, Object>();
-		}
-
-		return propertyMap;
 	}
 
 }

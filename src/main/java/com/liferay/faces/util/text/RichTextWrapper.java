@@ -24,10 +24,10 @@ import javax.faces.FacesWrapper;
 public abstract class RichTextWrapper implements RichText, FacesWrapper<RichText> {
 
 	@Override
+	public abstract RichText getWrapped();
+
+	@Override
 	public int getPlainTextLength() {
 		return getWrapped().getPlainTextLength();
 	}
-
-	@Override
-	public abstract RichText getWrapped();
 }

@@ -47,12 +47,12 @@ public class FacesRequestContextImpl extends FacesRequestContext {
 	}
 
 	@Override
-	public void release() {
-		scripts = null;
+	public List<Script> getScripts() {
+		return Collections.unmodifiableList(scripts);
 	}
 
 	@Override
-	public List<Script> getScripts() {
-		return Collections.unmodifiableList(scripts);
+	public void release() {
+		scripts = null;
 	}
 }

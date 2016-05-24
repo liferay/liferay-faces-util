@@ -25,12 +25,12 @@ public interface FacesConfigDescriptor {
 
 	public List<String> getAbsoluteOrdering();
 
-	public boolean isWebInfFacesConfig();
-
 	public String getName();
 
 	public Ordering getOrdering();
 
 	public String getURL();
+
+	public boolean isWebInfFacesConfig();
 
 }

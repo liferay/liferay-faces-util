@@ -73,43 +73,8 @@ public class ViewScopePhaseListener implements PhaseListener {
 		// This method is required by the interface but is not used.
 	}
 
-	protected void injectManagedProperties(Object managedBean, ManagedPropertyInjector managedPropertyInjector) {
-
-		if (managedBean.getClass().isAnnotationPresent(ManagedBean.class)) {
-			Map<String, Field> managedPropertyFields = getManagedPropertyFields(managedBean.getClass());
-			Set<Map.Entry<String, Field>> managedPropertyEntrySet = managedPropertyFields.entrySet();
-
-			for (Map.Entry<String, Field> managedPropertyMapEntry : managedPropertyEntrySet) {
-				String managedPropertyName = managedPropertyMapEntry.getKey();
-				Field managedPropertyField = managedPropertyMapEntry.getValue();
-				ManagedProperty managedPropertyAnnotation = managedPropertyField.getAnnotation(ManagedProperty.class);
-				String managedPropertyExpression = managedPropertyAnnotation.value();
-
-				if ((managedPropertyExpression != null) && (managedPropertyExpression.length() > 0)) {
-					managedPropertyInjector.inject(managedBean, managedPropertyName, managedPropertyField.getType(),
-						managedPropertyExpression);
-				}
-			}
-		}
-	}
-
-	protected void processViewScopedManagedBeans(FacesContext facesContext) {
-		UIViewRoot viewRoot = facesContext.getViewRoot();
-
-		if (viewRoot != null) {
-
-			ManagedPropertyInjector managedPropertyInjector = new ManagedPropertyInjector(facesContext);
-			Map<String, Object> viewMap = viewRoot.getViewMap();
-			Set<Map.Entry<String, Object>> managedBeanEntrySet = viewMap.entrySet();
-
-			for (Map.Entry<String, Object> managedBeanMapEntry : managedBeanEntrySet) {
-				Object managedBean = managedBeanMapEntry.getValue();
-
-				if (managedBean != null) {
-					injectManagedProperties(managedBean, managedPropertyInjector);
-				}
-			}
-		}
+	public PhaseId getPhaseId() {
+		return PhaseId.RESTORE_VIEW;
 	}
 
 	protected Map<String, Field> getManagedPropertyFields(Class<?> managedBeanClass) {
@@ -173,8 +138,43 @@ public class ViewScopePhaseListener implements PhaseListener {
 		return managedPropertyName;
 	}
 
-	public PhaseId getPhaseId() {
-		return PhaseId.RESTORE_VIEW;
+	protected void injectManagedProperties(Object managedBean, ManagedPropertyInjector managedPropertyInjector) {
+
+		if (managedBean.getClass().isAnnotationPresent(ManagedBean.class)) {
+			Map<String, Field> managedPropertyFields = getManagedPropertyFields(managedBean.getClass());
+			Set<Map.Entry<String, Field>> managedPropertyEntrySet = managedPropertyFields.entrySet();
+
+			for (Map.Entry<String, Field> managedPropertyMapEntry : managedPropertyEntrySet) {
+				String managedPropertyName = managedPropertyMapEntry.getKey();
+				Field managedPropertyField = managedPropertyMapEntry.getValue();
+				ManagedProperty managedPropertyAnnotation = managedPropertyField.getAnnotation(ManagedProperty.class);
+				String managedPropertyExpression = managedPropertyAnnotation.value();
+
+				if ((managedPropertyExpression != null) && (managedPropertyExpression.length() > 0)) {
+					managedPropertyInjector.inject(managedBean, managedPropertyName, managedPropertyField.getType(),
+						managedPropertyExpression);
+				}
+			}
+		}
+	}
+
+	protected void processViewScopedManagedBeans(FacesContext facesContext) {
+		UIViewRoot viewRoot = facesContext.getViewRoot();
+
+		if (viewRoot != null) {
+
+			ManagedPropertyInjector managedPropertyInjector = new ManagedPropertyInjector(facesContext);
+			Map<String, Object> viewMap = viewRoot.getViewMap();
+			Set<Map.Entry<String, Object>> managedBeanEntrySet = viewMap.entrySet();
+
+			for (Map.Entry<String, Object> managedBeanMapEntry : managedBeanEntrySet) {
+				Object managedBean = managedBeanMapEntry.getValue();
+
+				if (managedBean != null) {
+					injectManagedProperties(managedBean, managedPropertyInjector);
+				}
+			}
+		}
 	}
 
 	private static class ManagedPropertyInjector {
