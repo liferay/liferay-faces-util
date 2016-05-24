@@ -24,10 +24,10 @@ import com.liferay.faces.util.helper.Wrapper;
 public abstract class RichTextWrapper implements RichText, Wrapper<RichText> {
 
 	// Java 1.6+ @Override
+	public abstract RichText getWrapped();
+
+	// Java 1.6+ @Override
 	public int getPlainTextLength() {
 		return getWrapped().getPlainTextLength();
 	}
-
-	// Java 1.6+ @Override
-	public abstract RichText getWrapped();
 }

@@ -51,13 +51,13 @@ public class ApplicationFactoryImpl extends ApplicationFactory implements Wrappe
 	}
 
 	@Override
-	public void setApplication(Application application) {
-		wrappedFactory.setApplication(application);
+	public ApplicationFactory getWrapped() {
+		return wrappedFactory;
 	}
 
 	@Override
-	public ApplicationFactory getWrapped() {
-		return wrappedFactory;
+	public void setApplication(Application application) {
+		wrappedFactory.setApplication(application);
 	}
 
 	protected class PostConstructApplicationFactoryEvent extends EventObject {

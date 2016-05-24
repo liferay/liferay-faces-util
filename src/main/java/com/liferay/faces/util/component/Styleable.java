@@ -29,9 +29,9 @@ public interface Styleable {
 
 	public String getStyle();
 
-	public void setStyle(String style);
-
 	public String getStyleClass();
+
+	public void setStyle(String style);
 
 	public void setStyleClass(String styleClass);
 }

@@ -253,14 +253,6 @@ public class FacesConfigScannerImpl implements FacesConfigScanner {
 		return facesConfig;
 	}
 
-	protected FacesConfigDescriptorParser newFacesConfigDescriptorParser() {
-		return new FacesConfigDescriptorParserImpl(saxParser, resolveEntities);
-	}
-
-	protected FacesConfigParser newFacesConfigParser() {
-		return new FacesConfigParserImpl(saxParser, resolveEntities);
-	}
-
 	protected List<FacesConfigDescriptor> getOrderedConfigs(List<FacesConfigDescriptor> facesConfigDescriptors,
 		FacesConfigDescriptor webInfFacesConfig) throws Exception {
 
@@ -283,5 +275,13 @@ public class FacesConfigScannerImpl implements FacesConfigScanner {
 
 	protected SAXParser getSAXParser() {
 		return saxParser;
+	}
+
+	protected FacesConfigDescriptorParser newFacesConfigDescriptorParser() {
+		return new FacesConfigDescriptorParserImpl(saxParser, resolveEntities);
+	}
+
+	protected FacesConfigParser newFacesConfigParser() {
+		return new FacesConfigParserImpl(saxParser, resolveEntities);
 	}
 }

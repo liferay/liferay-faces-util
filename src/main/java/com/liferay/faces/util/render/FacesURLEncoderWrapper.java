@@ -23,10 +23,10 @@ import com.liferay.faces.util.helper.Wrapper;
  */
 public abstract class FacesURLEncoderWrapper implements FacesURLEncoder, Wrapper<FacesURLEncoder> {
 
+	public abstract FacesURLEncoder getWrapped();
+
 	@Override
 	public String encode(String url, String encoding) {
 		return getWrapped().encode(url, encoding);
 	}
-
-	public abstract FacesURLEncoder getWrapped();
 }

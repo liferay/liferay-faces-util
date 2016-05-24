@@ -38,6 +38,17 @@ public class FactoryExtensionFinderImpl extends FactoryExtensionFinder {
 	private Map<Class<?>, Object> factoryExtensionCache = new HashMap<Class<?>, Object>();
 
 	@Override
+	public Object getFactoryInstance(Class<?> clazz) {
+		Object factory = null;
+
+		if (clazz != null) {
+			factory = factoryExtensionCache.get(clazz);
+		}
+
+		return factory;
+	}
+
+	@Override
 	@SuppressWarnings("unchecked")
 	public void registerFactory(ConfiguredElement configuredFactoryExtension) {
 
@@ -59,6 +70,19 @@ public class FactoryExtensionFinderImpl extends FactoryExtensionFinder {
 				logger.error(e);
 			}
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	protected Class<?> getBaseFactoryExtensionClass(Class<?> factoryClass) {
+
+		Class<?> baseFactoryExtensionClass = factoryClass;
+		Class<?> factorySuperclass = factoryClass.getSuperclass();
+
+		if (!Object.class.getName().equals(factorySuperclass.getName())) {
+			baseFactoryExtensionClass = getBaseFactoryExtensionClass(factorySuperclass);
+		}
+
+		return baseFactoryExtensionClass;
 	}
 
 	protected Object newFactoryInstance(Class<?> factoryExtensionClass, Class<?> baseFactoryExtensionClass,
@@ -133,29 +157,5 @@ public class FactoryExtensionFinderImpl extends FactoryExtensionFinder {
 		}
 
 		return classInstance;
-	}
-
-	@SuppressWarnings("unchecked")
-	protected Class<?> getBaseFactoryExtensionClass(Class<?> factoryClass) {
-
-		Class<?> baseFactoryExtensionClass = factoryClass;
-		Class<?> factorySuperclass = factoryClass.getSuperclass();
-
-		if (!Object.class.getName().equals(factorySuperclass.getName())) {
-			baseFactoryExtensionClass = getBaseFactoryExtensionClass(factorySuperclass);
-		}
-
-		return baseFactoryExtensionClass;
-	}
-
-	@Override
-	public Object getFactoryInstance(Class<?> clazz) {
-		Object factory = null;
-
-		if (clazz != null) {
-			factory = factoryExtensionCache.get(clazz);
-		}
-
-		return factory;
 	}
 }

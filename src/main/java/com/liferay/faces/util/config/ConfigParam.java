@@ -39,11 +39,6 @@ public interface ConfigParam<T> {
 	public String getConfiguredValue(T config);
 
 	/**
-	 * Flag indicating whether or not the config param was specified in the configuration file.
-	 */
-	public boolean isConfigured(T config);
-
-	/**
 	 * Returns the default boolean value of the config param.
 	 */
 	public boolean getDefaultBooleanValue();
@@ -85,4 +80,9 @@ public interface ConfigParam<T> {
 	 * #getDefaultStringValue()} is returned.
 	 */
 	public String getStringValue(T config);
+
+	/**
+	 * Flag indicating whether or not the config param was specified in the configuration file.
+	 */
+	public boolean isConfigured(T config);
 }

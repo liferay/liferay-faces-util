@@ -61,6 +61,11 @@ public class JspWriterStringImpl extends JspWriter {
 	}
 
 	@Override
+	public int getRemaining() {
+		return getBufferSize() - stringWriter.getBuffer().length();
+	}
+
+	@Override
 	public void newLine() throws IOException {
 		stringWriter.write("\n");
 	}
@@ -183,11 +188,6 @@ public class JspWriterStringImpl extends JspWriter {
 	@Override
 	public void write(char[] cbuf, int off, int len) throws IOException {
 		stringWriter.write(cbuf, off, len);
-	}
-
-	@Override
-	public int getRemaining() {
-		return getBufferSize() - stringWriter.getBuffer().length();
 	}
 
 }

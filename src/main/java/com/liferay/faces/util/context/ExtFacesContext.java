@@ -200,125 +200,6 @@ public abstract class ExtFacesContext extends FacesContext implements FacesConte
 		Object... arguments);
 
 	/**
-	 * @deprecated  Call {@link FacesContextHelperUtil#matchComponentInHierarchy(UIComponent, String)} instead.
-	 */
-	@Deprecated
-	// Java 1.6+ @Override
-	public abstract UIComponent matchComponentInHierarchy(UIComponent parent, String partialClientId);
-
-	/**
-	 * @deprecated  Call {@link FacesContextHelperUtil#matchComponentInViewRoot(String)} instead.
-	 */
-	@Deprecated
-	// Java 1.6+ @Override
-	public abstract UIComponent matchComponentInViewRoot(String partialClientId);
-
-	/**
-	 * @deprecated  Call {@link FacesContextHelperUtil#navigate(String, String)} instead.
-	 */
-	@Deprecated
-	// Java 1.6+ @Override
-	public abstract void navigate(String fromAction, String outcome);
-
-	/**
-	 * @deprecated  Call {@link FacesContextHelperUtil#navigateTo(String)} instead.
-	 */
-	@Deprecated
-	// Java 1.6+ @Override
-	public abstract void navigateTo(String outcome);
-
-	/**
-	 * @deprecated  Call {@link FacesContextHelperUtil#recreateComponentTree()} instead.
-	 */
-	@Deprecated
-	// Java 1.6+ @Override
-	public abstract void recreateComponentTree();
-
-	/**
-	 * @deprecated  Call {@link FacesContextHelperUtil#registerPhaseListener(PhaseListener)} instead.
-	 */
-	@Deprecated
-	// Java 1.6+ @Override
-	public abstract void registerPhaseListener(PhaseListener phaseListener);
-
-	/**
-	 * @deprecated  Call {@link FacesContext#release()} instead.
-	 */
-	@Deprecated
-	// Java 1.6+ @Override
-	public abstract void release();
-
-	/**
-	 * @deprecated  Call {@link FacesContextHelperUtil#removeChildrenFromComponentTree(String)} instead.
-	 */
-	@Deprecated
-	// Java 1.6+ @Override
-	public abstract void removeChildrenFromComponentTree(String clientId);
-
-	/**
-	 * @deprecated  Call {@link FacesContextHelperUtil#removeMessages(String)} instead.
-	 */
-	@Deprecated
-	// Java 1.6+ @Override
-	public abstract void removeMessages(String clientId);
-
-	/**
-	 * @deprecated  Call {@link FacesContextHelperUtil#removeMessagesForImmediateComponents()} instead.
-	 */
-	@Deprecated
-	// Java 1.6+ @Override
-	public abstract void removeMessagesForImmediateComponents();
-
-	/**
-	 * @deprecated  Call {@link FacesContextHelperUtil#removeMessagesForImmediateComponents(UIComponent)} instead.
-	 */
-	@Deprecated
-	// Java 1.6+ @Override
-	public abstract void removeMessagesForImmediateComponents(UIComponent uiComponent);
-
-	/**
-	 * @deprecated  Call {@link FacesContextHelperUtil#removeParentFormFromComponentTree(UIComponent)} instead.
-	 */
-	@Deprecated
-	// Java 1.6+ @Override
-	public abstract void removeParentFormFromComponentTree(UIComponent uiComponent);
-
-	/**
-	 * @deprecated  Call {@link FacesContext#renderResponse()} instead.
-	 */
-	@Deprecated
-	// Java 1.6+ @Override
-	public abstract void renderResponse();
-
-	/**
-	 * @deprecated  Call {@link FacesContextHelperUtil#resetView()} instead.
-	 */
-	@Deprecated
-	// Java 1.6+ @Override
-	public abstract void resetView();
-
-	/**
-	 * @deprecated  Call {@link FacesContextHelperUtil#resetView(boolean)} instead.
-	 */
-	@Deprecated
-	// Java 1.6+ @Override
-	public abstract void resetView(boolean renderResponse);
-
-	/**
-	 * @deprecated  Call {@link FacesContextHelperUtil#resolveExpression(String)} instead.
-	 */
-	@Deprecated
-	// Java 1.6+ @Override
-	public abstract Object resolveExpression(String elExpression);
-
-	/**
-	 * @deprecated  Call {@link FacesContext#responseComplete()} instead.
-	 */
-	@Deprecated
-	// Java 1.6+ @Override
-	public abstract void responseComplete();
-
-	/**
 	 * @deprecated  Call {@link FacesContext#getApplication()} instead.
 	 */
 	@Deprecated
@@ -445,13 +326,6 @@ public abstract class ExtFacesContext extends FacesContext implements FacesConte
 	public abstract Object getRequestAttribute(String name);
 
 	/**
-	 * @deprecated  Call {@link FacesContextHelperUtil#setRequestAttribute(String, Object)} instead.
-	 */
-	@Deprecated
-	// Java 1.6+ @Override
-	public abstract void setRequestAttribute(String name, Object value);
-
-	/**
 	 * @deprecated  Call {@link FacesContextHelperUtil#getRequestContextPath()} instead.
 	 */
 	@Deprecated
@@ -529,25 +403,11 @@ public abstract class ExtFacesContext extends FacesContext implements FacesConte
 	public abstract ResponseStream getResponseStream();
 
 	/**
-	 * @deprecated  Call {@link FacesContext#setResponseStream(ResponseStream)} instead.
-	 */
-	@Deprecated
-	// Java 1.6+ @Override
-	public abstract void setResponseStream(ResponseStream responseStream);
-
-	/**
 	 * @deprecated  Call {@link FacesContext#getResponseWriter()} instead.
 	 */
 	@Deprecated
 	// Java 1.6+ @Override
 	public abstract ResponseWriter getResponseWriter();
-
-	/**
-	 * @deprecated  Call {@link FacesContext#setResponseWriter(ResponseWriter)} instead.
-	 */
-	@Deprecated
-	// Java 1.6+ @Override
-	public abstract void setResponseWriter(ResponseWriter responseWriter);
 
 	/**
 	 * @deprecated  Call {@link FacesContextHelperUtil#getSession(boolean)} instead.
@@ -564,18 +424,158 @@ public abstract class ExtFacesContext extends FacesContext implements FacesConte
 	public abstract Object getSessionAttribute(String name);
 
 	/**
-	 * @deprecated  Call {@link FacesContextHelperUtil#setSessionAttribute(String, Object)} instead.
-	 */
-	@Deprecated
-	// Java 1.6+ @Override
-	public abstract void setSessionAttribute(String name, Object value);
-
-	/**
 	 * @deprecated  Call {@link FacesContext#getViewRoot()} instead.
 	 */
 	@Deprecated
 	// Java 1.6+ @Override
 	public abstract UIViewRoot getViewRoot();
+
+	/**
+	 * @deprecated  Call {@link FacesContextHelperUtil#matchComponentInHierarchy(UIComponent, String)} instead.
+	 */
+	@Deprecated
+	// Java 1.6+ @Override
+	public abstract UIComponent matchComponentInHierarchy(UIComponent parent, String partialClientId);
+
+	/**
+	 * @deprecated  Call {@link FacesContextHelperUtil#matchComponentInViewRoot(String)} instead.
+	 */
+	@Deprecated
+	// Java 1.6+ @Override
+	public abstract UIComponent matchComponentInViewRoot(String partialClientId);
+
+	/**
+	 * @deprecated  Call {@link FacesContextHelperUtil#navigate(String, String)} instead.
+	 */
+	@Deprecated
+	// Java 1.6+ @Override
+	public abstract void navigate(String fromAction, String outcome);
+
+	/**
+	 * @deprecated  Call {@link FacesContextHelperUtil#navigateTo(String)} instead.
+	 */
+	@Deprecated
+	// Java 1.6+ @Override
+	public abstract void navigateTo(String outcome);
+
+	/**
+	 * @deprecated  Call {@link FacesContextHelperUtil#recreateComponentTree()} instead.
+	 */
+	@Deprecated
+	// Java 1.6+ @Override
+	public abstract void recreateComponentTree();
+
+	/**
+	 * @deprecated  Call {@link FacesContextHelperUtil#registerPhaseListener(PhaseListener)} instead.
+	 */
+	@Deprecated
+	// Java 1.6+ @Override
+	public abstract void registerPhaseListener(PhaseListener phaseListener);
+
+	/**
+	 * @deprecated  Call {@link FacesContext#release()} instead.
+	 */
+	@Deprecated
+	// Java 1.6+ @Override
+	public abstract void release();
+
+	/**
+	 * @deprecated  Call {@link FacesContextHelperUtil#removeChildrenFromComponentTree(String)} instead.
+	 */
+	@Deprecated
+	// Java 1.6+ @Override
+	public abstract void removeChildrenFromComponentTree(String clientId);
+
+	/**
+	 * @deprecated  Call {@link FacesContextHelperUtil#removeMessages(String)} instead.
+	 */
+	@Deprecated
+	// Java 1.6+ @Override
+	public abstract void removeMessages(String clientId);
+
+	/**
+	 * @deprecated  Call {@link FacesContextHelperUtil#removeMessagesForImmediateComponents()} instead.
+	 */
+	@Deprecated
+	// Java 1.6+ @Override
+	public abstract void removeMessagesForImmediateComponents();
+
+	/**
+	 * @deprecated  Call {@link FacesContextHelperUtil#removeMessagesForImmediateComponents(UIComponent)} instead.
+	 */
+	@Deprecated
+	// Java 1.6+ @Override
+	public abstract void removeMessagesForImmediateComponents(UIComponent uiComponent);
+
+	/**
+	 * @deprecated  Call {@link FacesContextHelperUtil#removeParentFormFromComponentTree(UIComponent)} instead.
+	 */
+	@Deprecated
+	// Java 1.6+ @Override
+	public abstract void removeParentFormFromComponentTree(UIComponent uiComponent);
+
+	/**
+	 * @deprecated  Call {@link FacesContext#renderResponse()} instead.
+	 */
+	@Deprecated
+	// Java 1.6+ @Override
+	public abstract void renderResponse();
+
+	/**
+	 * @deprecated  Call {@link FacesContextHelperUtil#resetView()} instead.
+	 */
+	@Deprecated
+	// Java 1.6+ @Override
+	public abstract void resetView();
+
+	/**
+	 * @deprecated  Call {@link FacesContextHelperUtil#resetView(boolean)} instead.
+	 */
+	@Deprecated
+	// Java 1.6+ @Override
+	public abstract void resetView(boolean renderResponse);
+
+	/**
+	 * @deprecated  Call {@link FacesContextHelperUtil#resolveExpression(String)} instead.
+	 */
+	@Deprecated
+	// Java 1.6+ @Override
+	public abstract Object resolveExpression(String elExpression);
+
+	/**
+	 * @deprecated  Call {@link FacesContext#responseComplete()} instead.
+	 */
+	@Deprecated
+	// Java 1.6+ @Override
+	public abstract void responseComplete();
+
+	/**
+	 * @deprecated  Call {@link FacesContextHelperUtil#setRequestAttribute(String, Object)} instead.
+	 */
+	@Deprecated
+	// Java 1.6+ @Override
+	public abstract void setRequestAttribute(String name, Object value);
+
+	/**
+	 * @deprecated  Call {@link FacesContext#setResponseStream(ResponseStream)} instead.
+	 */
+	@Deprecated
+	// Java 1.6+ @Override
+	public abstract void setResponseStream(ResponseStream responseStream);
+
+	/**
+	 * @deprecated  Call {@link FacesContext#setResponseWriter(ResponseWriter)} instead.
+	 */
+	@Deprecated
+	// Java 1.6+ @Override
+	public abstract void setResponseWriter(ResponseWriter responseWriter);
+
+	/**
+	 * @deprecated  Call {@link FacesContextHelperUtil#setSessionAttribute(String, Object)} instead.
+	 */
+	@Deprecated
+	// Java 1.6+ @Override
+	public abstract void setSessionAttribute(String name, Object value);
 
 	/**
 	 * @deprecated  Call {@link FacesContext#setViewRoot(UIViewRoot)} instead.

@@ -36,24 +36,11 @@ import com.liferay.faces.util.helper.Wrapper;
  */
 public abstract class FacesContextWrapper extends FacesContext implements Wrapper<FacesContext> {
 
+	public abstract FacesContext getWrapped();
+
 	@Override
 	public void addMessage(String clientId, FacesMessage message) {
 		getWrapped().addMessage(clientId, message);
-	}
-
-	@Override
-	public void release() {
-		getWrapped().release();
-	}
-
-	@Override
-	public void renderResponse() {
-		getWrapped().renderResponse();
-	}
-
-	@Override
-	public void responseComplete() {
-		getWrapped().responseComplete();
 	}
 
 	@Override
@@ -112,18 +99,8 @@ public abstract class FacesContextWrapper extends FacesContext implements Wrappe
 	}
 
 	@Override
-	public void setResponseStream(ResponseStream responseStream) {
-		getWrapped().setResponseStream(responseStream);
-	}
-
-	@Override
 	public ResponseWriter getResponseWriter() {
 		return getWrapped().getResponseWriter();
-	}
-
-	@Override
-	public void setResponseWriter(ResponseWriter responseWriter) {
-		getWrapped().setResponseWriter(responseWriter);
 	}
 
 	@Override
@@ -132,9 +109,32 @@ public abstract class FacesContextWrapper extends FacesContext implements Wrappe
 	}
 
 	@Override
+	public void release() {
+		getWrapped().release();
+	}
+
+	@Override
+	public void renderResponse() {
+		getWrapped().renderResponse();
+	}
+
+	@Override
+	public void responseComplete() {
+		getWrapped().responseComplete();
+	}
+
+	@Override
+	public void setResponseStream(ResponseStream responseStream) {
+		getWrapped().setResponseStream(responseStream);
+	}
+
+	@Override
+	public void setResponseWriter(ResponseWriter responseWriter) {
+		getWrapped().setResponseWriter(responseWriter);
+	}
+
+	@Override
 	public void setViewRoot(UIViewRoot root) {
 		getWrapped().setViewRoot(root);
 	}
-
-	public abstract FacesContext getWrapped();
 }

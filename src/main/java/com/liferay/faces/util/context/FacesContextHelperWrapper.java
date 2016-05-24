@@ -15,8 +15,6 @@
  */
 package com.liferay.faces.util.context;
 
-import com.liferay.faces.util.helper.Wrapper;
-
 import java.util.Locale;
 import java.util.Map;
 
@@ -26,11 +24,16 @@ import javax.faces.component.UIForm;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseListener;
 
+import com.liferay.faces.util.helper.Wrapper;
+
 
 /**
  * @author  Neil Griffin
  */
 public abstract class FacesContextHelperWrapper implements FacesContextHelper, Wrapper<FacesContextHelper> {
+
+	// Java 1.6+ @Override
+	public abstract FacesContextHelper getWrapped();
 
 	// Java 1.6+ @Override
 	public void addComponentErrorMessage(String clientId, String messageId) {
@@ -118,6 +121,106 @@ public abstract class FacesContextHelperWrapper implements FacesContextHelper, W
 	}
 
 	// Java 1.6+ @Override
+	public FacesContext getFacesContext() {
+		return getWrapped().getFacesContext();
+	}
+
+	// Java 1.6+ @Override
+	public Locale getLocale() {
+		return getWrapped().getLocale();
+	}
+
+	// Java 1.6+ @Override
+	public String getMessage(String messageId) {
+		return getWrapped().getMessage(messageId);
+	}
+
+	// Java 1.6+ @Override
+	public String getMessage(String messageId, Object... arguments) {
+		return getWrapped().getMessage(messageId, arguments);
+	}
+
+	// Java 1.6+ @Override
+	public String getMessage(Locale locale, String messageId) {
+		return getWrapped().getMessage(locale, messageId);
+	}
+
+	// Java 1.6+ @Override
+	public String getMessage(Locale locale, String messageId, Object... arguments) {
+		return getWrapped().getMessage(locale, messageId, arguments);
+	}
+
+	// Java 1.6+ @Override
+	public String getNamespace() {
+		return getWrapped().getNamespace();
+	}
+
+	// Java 1.6+ @Override
+	public UIForm getParentForm(UIComponent uiComponent) {
+		return getWrapped().getParentForm(uiComponent);
+	}
+
+	// Java 1.6+ @Override
+	public Object getRequestAttribute(String name) {
+		return getWrapped().getRequestAttribute(name);
+	}
+
+	// Java 1.6+ @Override
+	public String getRequestContextPath() {
+		return getWrapped().getRequestContextPath();
+	}
+
+	// Java 1.6+ @Override
+	public String getRequestParameter(String name) {
+		return getWrapped().getRequestParameter(name);
+	}
+
+	// Java 1.6+ @Override
+	public boolean getRequestParameterAsBool(String name, boolean defaultValue) {
+		return getWrapped().getRequestParameterAsBool(name, defaultValue);
+	}
+
+	// Java 1.6+ @Override
+	public int getRequestParameterAsInt(String name, int defaultValue) {
+		return getWrapped().getRequestParameterAsInt(name, defaultValue);
+	}
+
+	// Java 1.6+ @Override
+	public long getRequestParameterAsLong(String name, long defaultValue) {
+		return getWrapped().getRequestParameterAsLong(name, defaultValue);
+	}
+
+	// Java 1.6+ @Override
+	public String getRequestParameterFromMap(String name) {
+		return getWrapped().getRequestParameterFromMap(name);
+	}
+
+	// Java 1.6+ @Override
+	public Map<String, String> getRequestParameterMap() {
+		return getWrapped().getRequestParameterMap();
+	}
+
+	// Java 1.6+ @Override
+	public String getRequestQueryString() {
+		return getWrapped().getRequestQueryString();
+	}
+
+	// Java 1.6+ @Override
+	public String getRequestQueryStringParameter(String name) {
+		return getWrapped().getRequestQueryStringParameter(name);
+	}
+
+	// Java 1.6+ @Override
+	public Object getSession(boolean create) {
+		return getWrapped().getSession(create);
+	}
+
+	// Java 1.6+ @Override
+	public Object getSessionAttribute(String name) {
+		return getWrapped().getSessionAttribute(name);
+	}
+
+	// Java 1.6+ @Override
 	public UIComponent matchComponentInHierarchy(UIComponent parent, String partialClientId) {
 		return getWrapped().matchComponentInHierarchy(parent, partialClientId);
 	}
@@ -188,115 +291,12 @@ public abstract class FacesContextHelperWrapper implements FacesContextHelper, W
 	}
 
 	// Java 1.6+ @Override
-	public FacesContext getFacesContext() {
-		return getWrapped().getFacesContext();
-	}
-
-	// Java 1.6+ @Override
-	public Locale getLocale() {
-		return getWrapped().getLocale();
-	}
-
-	// Java 1.6+ @Override
-	public String getMessage(String messageId) {
-		return getWrapped().getMessage(messageId);
-	}
-
-	// Java 1.6+ @Override
-	public String getMessage(String messageId, Object... arguments) {
-		return getWrapped().getMessage(messageId, arguments);
-	}
-
-	// Java 1.6+ @Override
-	public String getMessage(Locale locale, String messageId) {
-		return getWrapped().getMessage(locale, messageId);
-	}
-
-	// Java 1.6+ @Override
-	public String getMessage(Locale locale, String messageId, Object... arguments) {
-		return getWrapped().getMessage(locale, messageId, arguments);
-	}
-
-	// Java 1.6+ @Override
-	public String getNamespace() {
-		return getWrapped().getNamespace();
-	}
-
-	// Java 1.6+ @Override
-	public UIForm getParentForm(UIComponent uiComponent) {
-		return getWrapped().getParentForm(uiComponent);
-	}
-
-	// Java 1.6+ @Override
-	public Object getRequestAttribute(String name) {
-		return getWrapped().getRequestAttribute(name);
-	}
-
-	// Java 1.6+ @Override
 	public void setRequestAttribute(String name, Object value) {
 		getWrapped().setRequestAttribute(name, value);
-	}
-
-	// Java 1.6+ @Override
-	public String getRequestContextPath() {
-		return getWrapped().getRequestContextPath();
-	}
-
-	// Java 1.6+ @Override
-	public String getRequestParameter(String name) {
-		return getWrapped().getRequestParameter(name);
-	}
-
-	// Java 1.6+ @Override
-	public boolean getRequestParameterAsBool(String name, boolean defaultValue) {
-		return getWrapped().getRequestParameterAsBool(name, defaultValue);
-	}
-
-	// Java 1.6+ @Override
-	public int getRequestParameterAsInt(String name, int defaultValue) {
-		return getWrapped().getRequestParameterAsInt(name, defaultValue);
-	}
-
-	// Java 1.6+ @Override
-	public long getRequestParameterAsLong(String name, long defaultValue) {
-		return getWrapped().getRequestParameterAsLong(name, defaultValue);
-	}
-
-	// Java 1.6+ @Override
-	public String getRequestParameterFromMap(String name) {
-		return getWrapped().getRequestParameterFromMap(name);
-	}
-
-	// Java 1.6+ @Override
-	public Map<String, String> getRequestParameterMap() {
-		return getWrapped().getRequestParameterMap();
-	}
-
-	// Java 1.6+ @Override
-	public String getRequestQueryString() {
-		return getWrapped().getRequestQueryString();
-	}
-
-	// Java 1.6+ @Override
-	public String getRequestQueryStringParameter(String name) {
-		return getWrapped().getRequestQueryStringParameter(name);
-	}
-
-	// Java 1.6+ @Override
-	public Object getSession(boolean create) {
-		return getWrapped().getSession(create);
-	}
-
-	// Java 1.6+ @Override
-	public Object getSessionAttribute(String name) {
-		return getWrapped().getSessionAttribute(name);
 	}
 
 	// Java 1.6+ @Override
 	public void setSessionAttribute(String name, Object value) {
 		getWrapped().setSessionAttribute(name, value);
 	}
-
-	// Java 1.6+ @Override
-	public abstract FacesContextHelper getWrapped();
 }

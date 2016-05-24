@@ -29,11 +29,11 @@ public abstract class AbstractPropertyMapEntry<V> implements Map.Entry<String, V
 		this.key = key;
 	}
 
-	public void remove() {
-		throw new UnsupportedOperationException();
-	}
-
 	public String getKey() {
 		return key;
+	}
+
+	public void remove() {
+		throw new UnsupportedOperationException();
 	}
 }

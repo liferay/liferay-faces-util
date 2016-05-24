@@ -41,24 +41,24 @@ public class ApplicationScope extends AbstractPropertyMap<Object> {
 	}
 
 	@Override
-	protected void removeProperty(String name) {
-		servletContext.removeAttribute(name);
-	}
-
-	@Override
 	protected Object getProperty(String name) {
 		return servletContext.getAttribute(name);
-	}
-
-	@Override
-	protected void setProperty(String name, Object value) {
-		servletContext.setAttribute(name, value);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	protected Enumeration<String> getPropertyNames() {
 		return (Enumeration<String>) servletContext.getAttributeNames();
+	}
+
+	@Override
+	protected void removeProperty(String name) {
+		servletContext.removeAttribute(name);
+	}
+
+	@Override
+	protected void setProperty(String name, Object value) {
+		servletContext.setAttribute(name, value);
 	}
 
 }

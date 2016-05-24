@@ -114,107 +114,6 @@ public class PageContextStringImpl extends PageContext {
 	}
 
 	@Override
-	public void handlePageException(Exception e) throws ServletException, IOException {
-		logger.error(e);
-	}
-
-	@Override
-	public void handlePageException(Throwable t) throws ServletException, IOException {
-		logger.error(t);
-	}
-
-	@Override
-	public void include(String relativeUrlPath) throws ServletException, IOException {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public void include(String relativeUrlPath, boolean flush) throws ServletException, IOException {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public void initialize(Servlet servlet, ServletRequest request, ServletResponse response,
-		java.lang.String errorPageURL, boolean needsSession, int bufferSize, boolean autoFlush) throws IOException,
-		IllegalStateException, IllegalArgumentException {
-	}
-
-	@Override
-	public void release() {
-		applicationScope = null;
-		elContext = null;
-		httpServletRequest = null;
-		httpServletResponse = null;
-		httpSession = null;
-		page = null;
-		pageScope.clear();
-		pageScope = null;
-		requestScope = null;
-		servletConfig = null;
-		servletContext = null;
-		sessionScope = null;
-		stringJspWriter = null;
-	}
-
-	@Override
-	public void removeAttribute(String name) {
-
-		if (pageScope.containsKey(name)) {
-			pageScope.remove(name);
-		}
-
-		if (requestScope.containsKey(name)) {
-			requestScope.remove(name);
-		}
-
-		if (sessionScope.containsKey(name)) {
-			sessionScope.remove(name);
-		}
-
-		if (applicationScope.containsKey(name)) {
-			applicationScope.remove(name);
-		}
-	}
-
-	@Override
-	public void removeAttribute(String name, int scope) {
-
-		if (name == null) {
-			throw new NullPointerException();
-		}
-		else {
-
-			if ((scope == PAGE_SCOPE)) {
-
-				if (pageScope.containsKey(name)) {
-					pageScope.remove(name);
-				}
-			}
-			else if (scope == REQUEST_SCOPE) {
-
-				if (requestScope.containsKey(name)) {
-					requestScope.remove(name);
-				}
-			}
-			else if (scope == SESSION_SCOPE) {
-
-				if (sessionScope.containsKey(name)) {
-					sessionScope.remove(name);
-				}
-			}
-			else if (scope == APPLICATION_SCOPE) {
-
-				if (applicationScope.containsKey(name)) {
-					applicationScope.remove(name);
-				}
-			}
-			else {
-				throw new IllegalArgumentException("Invalid scope " + scope);
-			}
-		}
-	}
-
-	@Override
 	public Object getAttribute(String name) {
 
 		if (name == null) {
@@ -275,55 +174,6 @@ public class PageContextStringImpl extends PageContext {
 			}
 			else {
 				throw new IllegalArgumentException("Invalid scope " + scope);
-			}
-		}
-	}
-
-	@Override
-	public void setAttribute(String name, Object value) {
-
-		if (name == null) {
-			throw new NullPointerException();
-		}
-		else {
-
-			if (value == null) {
-				removeAttribute(name);
-			}
-			else {
-				pageScope.put(name, value);
-			}
-		}
-	}
-
-	@Override
-	public void setAttribute(String name, Object value, int scope) {
-
-		if (name == null) {
-			throw new NullPointerException();
-		}
-		else {
-
-			if (value == null) {
-
-			}
-			else {
-
-				if (scope == PAGE_SCOPE) {
-					pageScope.put(name, value);
-				}
-				else if (scope == REQUEST_SCOPE) {
-					requestScope.put(name, value);
-				}
-				else if (scope == SESSION_SCOPE) {
-					sessionScope.put(name, value);
-				}
-				else if (scope == APPLICATION_SCOPE) {
-					applicationScope.put(name, value);
-				}
-				else {
-					throw new IllegalArgumentException("Invalid scope " + scope);
-				}
 			}
 		}
 	}
@@ -434,6 +284,156 @@ public class PageContextStringImpl extends PageContext {
 	@SuppressWarnings("deprecation")
 	public javax.servlet.jsp.el.VariableResolver getVariableResolver() {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void handlePageException(Exception e) throws ServletException, IOException {
+		logger.error(e);
+	}
+
+	@Override
+	public void handlePageException(Throwable t) throws ServletException, IOException {
+		logger.error(t);
+	}
+
+	@Override
+	public void include(String relativeUrlPath) throws ServletException, IOException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void include(String relativeUrlPath, boolean flush) throws ServletException, IOException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void initialize(Servlet servlet, ServletRequest request, ServletResponse response,
+		java.lang.String errorPageURL, boolean needsSession, int bufferSize, boolean autoFlush) throws IOException,
+		IllegalStateException, IllegalArgumentException {
+	}
+
+	@Override
+	public void release() {
+		applicationScope = null;
+		elContext = null;
+		httpServletRequest = null;
+		httpServletResponse = null;
+		httpSession = null;
+		page = null;
+		pageScope.clear();
+		pageScope = null;
+		requestScope = null;
+		servletConfig = null;
+		servletContext = null;
+		sessionScope = null;
+		stringJspWriter = null;
+	}
+
+	@Override
+	public void removeAttribute(String name) {
+
+		if (pageScope.containsKey(name)) {
+			pageScope.remove(name);
+		}
+
+		if (requestScope.containsKey(name)) {
+			requestScope.remove(name);
+		}
+
+		if (sessionScope.containsKey(name)) {
+			sessionScope.remove(name);
+		}
+
+		if (applicationScope.containsKey(name)) {
+			applicationScope.remove(name);
+		}
+	}
+
+	@Override
+	public void removeAttribute(String name, int scope) {
+
+		if (name == null) {
+			throw new NullPointerException();
+		}
+		else {
+
+			if ((scope == PAGE_SCOPE)) {
+
+				if (pageScope.containsKey(name)) {
+					pageScope.remove(name);
+				}
+			}
+			else if (scope == REQUEST_SCOPE) {
+
+				if (requestScope.containsKey(name)) {
+					requestScope.remove(name);
+				}
+			}
+			else if (scope == SESSION_SCOPE) {
+
+				if (sessionScope.containsKey(name)) {
+					sessionScope.remove(name);
+				}
+			}
+			else if (scope == APPLICATION_SCOPE) {
+
+				if (applicationScope.containsKey(name)) {
+					applicationScope.remove(name);
+				}
+			}
+			else {
+				throw new IllegalArgumentException("Invalid scope " + scope);
+			}
+		}
+	}
+
+	@Override
+	public void setAttribute(String name, Object value) {
+
+		if (name == null) {
+			throw new NullPointerException();
+		}
+		else {
+
+			if (value == null) {
+				removeAttribute(name);
+			}
+			else {
+				pageScope.put(name, value);
+			}
+		}
+	}
+
+	@Override
+	public void setAttribute(String name, Object value, int scope) {
+
+		if (name == null) {
+			throw new NullPointerException();
+		}
+		else {
+
+			if (value == null) {
+
+			}
+			else {
+
+				if (scope == PAGE_SCOPE) {
+					pageScope.put(name, value);
+				}
+				else if (scope == REQUEST_SCOPE) {
+					requestScope.put(name, value);
+				}
+				else if (scope == SESSION_SCOPE) {
+					sessionScope.put(name, value);
+				}
+				else if (scope == APPLICATION_SCOPE) {
+					applicationScope.put(name, value);
+				}
+				else {
+					throw new IllegalArgumentException("Invalid scope " + scope);
+				}
+			}
+		}
 	}
 
 }

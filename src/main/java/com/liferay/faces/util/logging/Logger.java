@@ -36,14 +36,6 @@ public interface Logger {
 
 	public void info(String message, Object... arguments);
 
-	public void trace(String message);
-
-	public void trace(String message, Object... arguments);
-
-	public void warn(String message);
-
-	public void warn(String message, Object... arguments);
-
 	public boolean isDebugEnabled();
 
 	public boolean isErrorEnabled();
@@ -53,4 +45,12 @@ public interface Logger {
 	public boolean isTraceEnabled();
 
 	public boolean isWarnEnabled();
+
+	public void trace(String message);
+
+	public void trace(String message, Object... arguments);
+
+	public void warn(String message);
+
+	public void warn(String message, Object... arguments);
 }

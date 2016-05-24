@@ -38,6 +38,14 @@ public class PageAdapter implements Servlet {
 	public void destroy() {
 	}
 
+	public ServletConfig getServletConfig() {
+		return servletConfig;
+	}
+
+	public String getServletInfo() {
+		return PageAdapter.class.getName();
+	}
+
 	public void init(ServletConfig servletConfig) throws ServletException {
 		this.servletConfig = servletConfig;
 	}
@@ -45,14 +53,6 @@ public class PageAdapter implements Servlet {
 	public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException,
 		IOException {
 		throw new UnsupportedOperationException();
-	}
-
-	public ServletConfig getServletConfig() {
-		return servletConfig;
-	}
-
-	public String getServletInfo() {
-		return PageAdapter.class.getName();
 	}
 
 }

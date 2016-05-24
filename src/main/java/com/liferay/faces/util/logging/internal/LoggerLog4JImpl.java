@@ -169,6 +169,31 @@ public class LoggerLog4JImpl extends LoggerDefaultImpl {
 	}
 
 	@Override
+	public boolean isDebugEnabled() {
+		return wrappedLogger.isDebugEnabled();
+	}
+
+	@Override
+	public boolean isErrorEnabled() {
+		return wrappedLogger.isEnabledFor(Level.ERROR);
+	}
+
+	@Override
+	public boolean isInfoEnabled() {
+		return wrappedLogger.isInfoEnabled();
+	}
+
+	@Override
+	public boolean isTraceEnabled() {
+		return wrappedLogger.isTraceEnabled();
+	}
+
+	@Override
+	public boolean isWarnEnabled() {
+		return wrappedLogger.isEnabledFor(Level.WARN);
+	}
+
+	@Override
 	public void trace(String message) {
 
 		if (isTraceSupported()) {
@@ -242,31 +267,6 @@ public class LoggerLog4JImpl extends LoggerDefaultImpl {
 				e.printStackTrace();
 			}
 		}
-	}
-
-	@Override
-	public boolean isDebugEnabled() {
-		return wrappedLogger.isDebugEnabled();
-	}
-
-	@Override
-	public boolean isErrorEnabled() {
-		return wrappedLogger.isEnabledFor(Level.ERROR);
-	}
-
-	@Override
-	public boolean isInfoEnabled() {
-		return wrappedLogger.isInfoEnabled();
-	}
-
-	@Override
-	public boolean isTraceEnabled() {
-		return wrappedLogger.isTraceEnabled();
-	}
-
-	@Override
-	public boolean isWarnEnabled() {
-		return wrappedLogger.isEnabledFor(Level.WARN);
 	}
 
 	protected boolean isTraceSupported() {

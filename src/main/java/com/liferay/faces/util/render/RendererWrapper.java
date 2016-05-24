@@ -30,6 +30,8 @@ import com.liferay.faces.util.helper.Wrapper;
  */
 public abstract class RendererWrapper extends Renderer implements Wrapper<Renderer> {
 
+	public abstract Renderer getWrapped();
+
 	@Override
 	public String convertClientId(FacesContext context, String clientId) {
 		return getWrapped().convertClientId(context, clientId);
@@ -65,6 +67,4 @@ public abstract class RendererWrapper extends Renderer implements Wrapper<Render
 	public boolean getRendersChildren() {
 		return getWrapped().getRendersChildren();
 	}
-
-	public abstract Renderer getWrapped();
 }

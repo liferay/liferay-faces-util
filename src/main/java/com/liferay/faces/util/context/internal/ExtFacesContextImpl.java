@@ -42,7 +42,7 @@ import com.liferay.faces.util.context.FacesContextHelperUtil;
 /**
  * @author  Neil Griffin
  */
-public class ExtFacesContextImpl extends ExtFacesContext implements Serializable{
+public class ExtFacesContextImpl extends ExtFacesContext implements Serializable {
 
 	// serialVersionUID Note: This class implements Serializable only to avoid extraneous stacktraces from being thrown
 	// by Mojarra.
@@ -177,128 +177,6 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	 */
 	public void addMessage(String clientId, Severity severity, String messageId, Object... arguments) {
 		FacesContextHelperUtil.addMessage(clientId, severity, messageId, arguments);
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#matchComponentInHierarchy(UIComponent, String)}
-	 */
-	public UIComponent matchComponentInHierarchy(UIComponent parent, String partialClientId) {
-		return FacesContextHelperUtil.matchComponentInHierarchy(parent, partialClientId);
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#matchComponentInViewRoot(String)}
-	 */
-	public UIComponent matchComponentInViewRoot(String partialClientId) {
-		return FacesContextHelperUtil.matchComponentInViewRoot(partialClientId);
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#navigate(String, String)}
-	 */
-	public void navigate(String fromAction, String outcome) {
-		FacesContextHelperUtil.navigate(fromAction, outcome);
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#navigateTo(String)}
-	 */
-	public void navigateTo(String outcome) {
-		FacesContextHelperUtil.navigateTo(outcome);
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#recreateComponentTree()}
-	 */
-	public void recreateComponentTree() {
-		FacesContextHelperUtil.recreateComponentTree();
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#registerPhaseListener(PhaseListener)}
-	 */
-	public void registerPhaseListener(PhaseListener phaseListener) {
-		FacesContextHelperUtil.registerPhaseListener(phaseListener);
-	}
-
-	/**
-	 * @since  JSF 1.0
-	 */
-	@Override
-	public void release() {
-		FacesContext.getCurrentInstance().release();
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#removeChildrenFromComponentTree(String)}
-	 */
-	public void removeChildrenFromComponentTree(String clientId) {
-		FacesContextHelperUtil.removeChildrenFromComponentTree(clientId);
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#removeMessages(String)}
-	 */
-	public void removeMessages(String clientId) {
-		FacesContextHelperUtil.removeMessages(clientId);
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#removeMessagesForImmediateComponents()}
-	 */
-	public void removeMessagesForImmediateComponents() {
-		FacesContextHelperUtil.removeMessagesForImmediateComponents();
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#removeMessagesForImmediateComponents(UIComponent)}
-	 */
-	public void removeMessagesForImmediateComponents(UIComponent uiComponent) {
-		FacesContextHelperUtil.removeMessagesForImmediateComponents(uiComponent);
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#removeParentFormFromComponentTree(UIComponent)}
-	 */
-	public void removeParentFormFromComponentTree(UIComponent uiComponent) {
-		FacesContextHelperUtil.removeParentFormFromComponentTree(uiComponent);
-	}
-
-	/**
-	 * @since  JSF 1.0
-	 */
-	@Override
-	public void renderResponse() {
-		FacesContext.getCurrentInstance().renderResponse();
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#resetView()}
-	 */
-	public void resetView() {
-		FacesContextHelperUtil.resetView();
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#resetView(boolean)}
-	 */
-	public void resetView(boolean renderResponse) {
-		FacesContextHelperUtil.resetView();
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#resolveExpression(String)}
-	 */
-	public Object resolveExpression(String elExpression) {
-		return FacesContextHelperUtil.resolveExpression(elExpression);
-	}
-
-	/**
-	 * @since  JSF 1.0
-	 */
-	@Override
-	public void responseComplete() {
-		FacesContext.getCurrentInstance().responseComplete();
 	}
 
 	/**
@@ -437,13 +315,6 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	}
 
 	/**
-	 * @see  {@link FacesContextHelper#setRequestAttribute(String, Object)}
-	 */
-	public void setRequestAttribute(String name, Object value) {
-		FacesContextHelperUtil.setRequestAttribute(name, value);
-	}
-
-	/**
 	 * @see  {@link FacesContextHelper#getRequestContextPath()}
 	 */
 	public String getRequestContextPath() {
@@ -526,24 +397,8 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	 * @since  JSF 1.0
 	 */
 	@Override
-	public void setResponseStream(ResponseStream responseStream) {
-		FacesContext.getCurrentInstance().setResponseStream(responseStream);
-	}
-
-	/**
-	 * @since  JSF 1.0
-	 */
-	@Override
 	public ResponseWriter getResponseWriter() {
 		return FacesContext.getCurrentInstance().getResponseWriter();
-	}
-
-	/**
-	 * @since  JSF 1.0
-	 */
-	@Override
-	public void setResponseWriter(ResponseWriter responseWriter) {
-		FacesContext.getCurrentInstance().setResponseWriter(responseWriter);
 	}
 
 	/**
@@ -561,18 +416,163 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	}
 
 	/**
-	 * @see  {@link FacesContextHelper#setSessionAttribute(String, Object)}
+	 * @since  JSF 1.0
 	 */
-	public void setSessionAttribute(String name, Object value) {
-		FacesContextHelperUtil.setSessionAttribute(name, value);
+	@Override
+	public UIViewRoot getViewRoot() {
+		return FacesContext.getCurrentInstance().getViewRoot();
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#matchComponentInHierarchy(UIComponent, String)}
+	 */
+	public UIComponent matchComponentInHierarchy(UIComponent parent, String partialClientId) {
+		return FacesContextHelperUtil.matchComponentInHierarchy(parent, partialClientId);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#matchComponentInViewRoot(String)}
+	 */
+	public UIComponent matchComponentInViewRoot(String partialClientId) {
+		return FacesContextHelperUtil.matchComponentInViewRoot(partialClientId);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#navigate(String, String)}
+	 */
+	public void navigate(String fromAction, String outcome) {
+		FacesContextHelperUtil.navigate(fromAction, outcome);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#navigateTo(String)}
+	 */
+	public void navigateTo(String outcome) {
+		FacesContextHelperUtil.navigateTo(outcome);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#recreateComponentTree()}
+	 */
+	public void recreateComponentTree() {
+		FacesContextHelperUtil.recreateComponentTree();
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#registerPhaseListener(PhaseListener)}
+	 */
+	public void registerPhaseListener(PhaseListener phaseListener) {
+		FacesContextHelperUtil.registerPhaseListener(phaseListener);
 	}
 
 	/**
 	 * @since  JSF 1.0
 	 */
 	@Override
-	public UIViewRoot getViewRoot() {
-		return FacesContext.getCurrentInstance().getViewRoot();
+	public void release() {
+		FacesContext.getCurrentInstance().release();
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#removeChildrenFromComponentTree(String)}
+	 */
+	public void removeChildrenFromComponentTree(String clientId) {
+		FacesContextHelperUtil.removeChildrenFromComponentTree(clientId);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#removeMessages(String)}
+	 */
+	public void removeMessages(String clientId) {
+		FacesContextHelperUtil.removeMessages(clientId);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#removeMessagesForImmediateComponents()}
+	 */
+	public void removeMessagesForImmediateComponents() {
+		FacesContextHelperUtil.removeMessagesForImmediateComponents();
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#removeMessagesForImmediateComponents(UIComponent)}
+	 */
+	public void removeMessagesForImmediateComponents(UIComponent uiComponent) {
+		FacesContextHelperUtil.removeMessagesForImmediateComponents(uiComponent);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#removeParentFormFromComponentTree(UIComponent)}
+	 */
+	public void removeParentFormFromComponentTree(UIComponent uiComponent) {
+		FacesContextHelperUtil.removeParentFormFromComponentTree(uiComponent);
+	}
+
+	/**
+	 * @since  JSF 1.0
+	 */
+	@Override
+	public void renderResponse() {
+		FacesContext.getCurrentInstance().renderResponse();
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#resetView()}
+	 */
+	public void resetView() {
+		FacesContextHelperUtil.resetView();
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#resetView(boolean)}
+	 */
+	public void resetView(boolean renderResponse) {
+		FacesContextHelperUtil.resetView();
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#resolveExpression(String)}
+	 */
+	public Object resolveExpression(String elExpression) {
+		return FacesContextHelperUtil.resolveExpression(elExpression);
+	}
+
+	/**
+	 * @since  JSF 1.0
+	 */
+	@Override
+	public void responseComplete() {
+		FacesContext.getCurrentInstance().responseComplete();
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#setRequestAttribute(String, Object)}
+	 */
+	public void setRequestAttribute(String name, Object value) {
+		FacesContextHelperUtil.setRequestAttribute(name, value);
+	}
+
+	/**
+	 * @since  JSF 1.0
+	 */
+	@Override
+	public void setResponseStream(ResponseStream responseStream) {
+		FacesContext.getCurrentInstance().setResponseStream(responseStream);
+	}
+
+	/**
+	 * @since  JSF 1.0
+	 */
+	@Override
+	public void setResponseWriter(ResponseWriter responseWriter) {
+		FacesContext.getCurrentInstance().setResponseWriter(responseWriter);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#setSessionAttribute(String, Object)}
+	 */
+	public void setSessionAttribute(String name, Object value) {
+		FacesContextHelperUtil.setSessionAttribute(name, value);
 	}
 
 	/**

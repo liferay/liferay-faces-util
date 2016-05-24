@@ -72,17 +72,6 @@ public class UploadedFileImpl implements Serializable, UploadedFile {
 		}
 	}
 
-	@Override
-	public String toString() {
-		return this.absolutePath;
-	}
-
-	public void write(String fileName) throws IOException {
-		OutputStream outputStream = new FileOutputStream(fileName);
-		outputStream.write(getBytes());
-		outputStream.close();
-	}
-
 	public String getAbsolutePath() {
 		return absolutePath;
 	}
@@ -173,5 +162,16 @@ public class UploadedFileImpl implements Serializable, UploadedFile {
 
 	public Status getStatus() {
 		return status;
+	}
+
+	@Override
+	public String toString() {
+		return this.absolutePath;
+	}
+
+	public void write(String fileName) throws IOException {
+		OutputStream outputStream = new FileOutputStream(fileName);
+		outputStream.write(getBytes());
+		outputStream.close();
 	}
 }

@@ -29,6 +29,18 @@ import com.liferay.faces.util.helper.Wrapper;
  */
 public abstract class MessageContextWrapper implements MessageContext, Wrapper<MessageContext> {
 
+	public abstract MessageContext getWrapped();
+
+	@Override
+	public String getMessage(Locale locale, String messageId) {
+		return getWrapped().getMessage(locale, messageId);
+	}
+
+	@Override
+	public String getMessage(Locale locale, String messageId, Object... arguments) {
+		return getWrapped().getMessage(locale, messageId, arguments);
+	}
+
 	@Override
 	public FacesMessage newFacesMessage(Locale locale, Severity severity, String messageId) {
 		return getWrapped().newFacesMessage(locale, severity, messageId);
@@ -49,16 +61,4 @@ public abstract class MessageContextWrapper implements MessageContext, Wrapper<M
 		Object... arguments) {
 		return getWrapped().newFacesMessage(facesContext, severity, messageId, arguments);
 	}
-
-	@Override
-	public String getMessage(Locale locale, String messageId) {
-		return getWrapped().getMessage(locale, messageId);
-	}
-
-	@Override
-	public String getMessage(Locale locale, String messageId, Object... arguments) {
-		return getWrapped().getMessage(locale, messageId, arguments);
-	}
-
-	public abstract MessageContext getWrapped();
 }

@@ -41,24 +41,24 @@ public class RequestScope extends AbstractPropertyMap<Object> {
 	}
 
 	@Override
-	protected void removeProperty(String name) {
-		httpServletRequest.removeAttribute(name);
-	}
-
-	@Override
 	protected Object getProperty(String name) {
 		return httpServletRequest.getAttribute(name);
-	}
-
-	@Override
-	protected void setProperty(String name, Object value) {
-		httpServletRequest.setAttribute(name, value);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	protected Enumeration<String> getPropertyNames() {
 		return (Enumeration<String>) httpServletRequest.getAttributeNames();
+	}
+
+	@Override
+	protected void removeProperty(String name) {
+		httpServletRequest.removeAttribute(name);
+	}
+
+	@Override
+	protected void setProperty(String name, Object value) {
+		httpServletRequest.setAttribute(name, value);
 	}
 
 }

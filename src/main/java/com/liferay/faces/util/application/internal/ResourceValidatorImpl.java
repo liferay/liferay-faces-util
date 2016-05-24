@@ -93,63 +93,6 @@ public class ResourceValidatorImpl implements ResourceValidator {
 		return bannedSequence;
 	}
 
-	public boolean isValidLibraryName(String libraryName) {
-
-		boolean validLibraryName = true;
-
-		if (excludeLibraryPatterns != null) {
-
-			for (Pattern excludeLibraryPattern : excludeLibraryPatterns) {
-
-				Matcher matcher = excludeLibraryPattern.matcher(libraryName);
-
-				if (matcher.matches()) {
-
-					validLibraryName = false;
-					logger.trace("MATCHED LIBRARY NAME EXCLUSION PATTERN libraryName=[{0}] matcher=[{1}]", libraryName,
-						matcher);
-
-					break;
-				}
-			}
-		}
-
-		return validLibraryName;
-	}
-
-	public boolean isValidResourceName(String resourceName) {
-
-		boolean validResourceName = true;
-
-		if (excludeResourcePatterns != null) {
-
-			for (Pattern excludeResourcePattern : excludeResourcePatterns) {
-
-				Matcher matcher = excludeResourcePattern.matcher(resourceName);
-
-				if (matcher.matches()) {
-
-					validResourceName = false;
-					logger.trace("MATCHED RESOURCE NAME EXCLUSION PATTERN resourceName=[{0}] matcher=[{1}] ",
-						resourceName, matcher);
-
-					break;
-				}
-			}
-		}
-
-		return validResourceName;
-	}
-
-	@Override
-	public boolean isSelfReferencing(FacesContext facesContext, String resourceId) {
-		return false;
-	}
-
-	protected boolean isFaceletsVDL(String viewId) {
-		return false;
-	}
-
 	@Override
 	public boolean isFaceletDocument(FacesContext facesContext, String resourceId) {
 
@@ -230,5 +173,62 @@ public class ResourceValidatorImpl implements ResourceValidator {
 		}
 
 		return faceletDocument;
+	}
+
+	@Override
+	public boolean isSelfReferencing(FacesContext facesContext, String resourceId) {
+		return false;
+	}
+
+	public boolean isValidLibraryName(String libraryName) {
+
+		boolean validLibraryName = true;
+
+		if (excludeLibraryPatterns != null) {
+
+			for (Pattern excludeLibraryPattern : excludeLibraryPatterns) {
+
+				Matcher matcher = excludeLibraryPattern.matcher(libraryName);
+
+				if (matcher.matches()) {
+
+					validLibraryName = false;
+					logger.trace("MATCHED LIBRARY NAME EXCLUSION PATTERN libraryName=[{0}] matcher=[{1}]", libraryName,
+						matcher);
+
+					break;
+				}
+			}
+		}
+
+		return validLibraryName;
+	}
+
+	public boolean isValidResourceName(String resourceName) {
+
+		boolean validResourceName = true;
+
+		if (excludeResourcePatterns != null) {
+
+			for (Pattern excludeResourcePattern : excludeResourcePatterns) {
+
+				Matcher matcher = excludeResourcePattern.matcher(resourceName);
+
+				if (matcher.matches()) {
+
+					validResourceName = false;
+					logger.trace("MATCHED RESOURCE NAME EXCLUSION PATTERN resourceName=[{0}] matcher=[{1}] ",
+						resourceName, matcher);
+
+					break;
+				}
+			}
+		}
+
+		return validResourceName;
+	}
+
+	protected boolean isFaceletsVDL(String viewId) {
+		return false;
 	}
 }

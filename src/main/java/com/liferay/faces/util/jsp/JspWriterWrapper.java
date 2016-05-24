@@ -33,6 +33,9 @@ public abstract class JspWriterWrapper extends JspWriter implements Wrapper<JspW
 	}
 
 	@Override
+	public abstract JspWriter getWrapped();
+
+	@Override
 	public Writer append(char c) throws IOException {
 		return getWrapped().append(c);
 	}
@@ -65,6 +68,21 @@ public abstract class JspWriterWrapper extends JspWriter implements Wrapper<JspW
 	@Override
 	public void flush() throws IOException {
 		getWrapped().flush();
+	}
+
+	@Override
+	public int getBufferSize() {
+		return getWrapped().getBufferSize();
+	}
+
+	@Override
+	public int getRemaining() {
+		return getWrapped().getRemaining();
+	}
+
+	@Override
+	public boolean isAutoFlush() {
+		return getWrapped().isAutoFlush();
 	}
 
 	@Override
@@ -196,22 +214,4 @@ public abstract class JspWriterWrapper extends JspWriter implements Wrapper<JspW
 	public void write(char[] cbuf, int off, int len) throws IOException {
 		getWrapped().write(cbuf, off, len);
 	}
-
-	@Override
-	public int getBufferSize() {
-		return getWrapped().getBufferSize();
-	}
-
-	@Override
-	public boolean isAutoFlush() {
-		return getWrapped().isAutoFlush();
-	}
-
-	@Override
-	public int getRemaining() {
-		return getWrapped().getRemaining();
-	}
-
-	@Override
-	public abstract JspWriter getWrapped();
 }

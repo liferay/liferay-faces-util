@@ -15,9 +15,8 @@
  */
 package com.liferay.faces.util.application;
 
-import com.liferay.faces.util.helper.Wrapper;
-
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
+import com.liferay.faces.util.helper.Wrapper;
 
 
 /**

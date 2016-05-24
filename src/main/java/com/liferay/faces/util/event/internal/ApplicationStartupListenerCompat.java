@@ -43,6 +43,23 @@ public abstract class ApplicationStartupListenerCompat {
 
 	public abstract void processSystemEvent(EventObject systemEvent);
 
+	protected String getApplicationContextPath(ExternalContext externalContext) {
+
+		String applicationContextPath = null;
+
+		try {
+			applicationContextPath = externalContext.getRequestContextPath();
+		}
+		catch (UnsupportedOperationException e) {
+			// MyFaces does not support this feature during startup. However, this is OK since the value is only needed
+			// in a JSF 2.2 environment. For more information, see
+			// ApplicationStartupListenerCompat_2_2#getApplicationContextPath(ExternalContext) and
+			// ExternalContextCompat_2_2_Impl#getApplicationContxtPath()
+		}
+
+		return applicationContextPath;
+	}
+
 	protected void publishEvent(Application application, FacesContext facesContext,
 		ApplicationConfig applicationConfig) {
 
@@ -80,22 +97,5 @@ public abstract class ApplicationStartupListenerCompat {
 			}
 		}
 
-	}
-
-	protected String getApplicationContextPath(ExternalContext externalContext) {
-
-		String applicationContextPath = null;
-
-		try {
-			applicationContextPath = externalContext.getRequestContextPath();
-		}
-		catch (UnsupportedOperationException e) {
-			// MyFaces does not support this feature during startup. However, this is OK since the value is only needed
-			// in a JSF 2.2 environment. For more information, see
-			// ApplicationStartupListenerCompat_2_2#getApplicationContextPath(ExternalContext) and
-			// ExternalContextCompat_2_2_Impl#getApplicationContxtPath()
-		}
-
-		return applicationContextPath;
 	}
 }
