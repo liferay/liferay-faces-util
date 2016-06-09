@@ -17,18 +17,36 @@ package com.liferay.faces.util.product.internal;
 
 /**
  * @author  Neil Griffin
+ * @author  Kyle Stiemann
  */
-public class ProductLiferayFacesUtilImpl extends ProductBaseImpl {
+public class ProductWeldImpl extends ProductBaseImpl {
 
-	public ProductLiferayFacesUtilImpl() {
+	public ProductWeldImpl() {
 
 		try {
+			this.title = "Weld";
 
-			this.title = "Liferay Faces Util";
-			init(this.getClass(), "Liferay Faces Util");
+			Class<?> cdiImplClass = Class.forName("org.jboss.weld.util.Types");
+			init(cdiImplClass, "Weld Servlet (Uber Jar)");
+
+			if (!isDetected()) {
+				init(cdiImplClass, "Weld Implementation");
+			}
+
+			if (isDetected()) {
+
+				Package pkg = cdiImplClass.getPackage();
+
+				if ((pkg != null) && (pkg.getSpecificationVersion() != null)) {
+
+					// The precise version of Weld is found in the Specification-Version rather than the
+					// Implementation-Version in META-INF/MANIFEST.MF
+					initVersionInfo(pkg.getSpecificationVersion());
+				}
+			}
 		}
 		catch (Exception e) {
-			// Ignore
+			// Ignore -- Weld is likely not present.
 		}
 	}
 }

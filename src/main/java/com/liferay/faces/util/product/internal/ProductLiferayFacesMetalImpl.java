@@ -15,9 +15,6 @@
  */
 package com.liferay.faces.util.product.internal;
 
-import com.liferay.faces.util.product.ProductConstants;
-
-
 /**
  * @author  Neil Griffin
  */
@@ -26,10 +23,10 @@ public class ProductLiferayFacesMetalImpl extends ProductBaseImpl {
 	public ProductLiferayFacesMetalImpl() {
 
 		try {
-			this.title = ProductConstants.LIFERAY_FACES_METAL;
+			this.title = "Liferay Faces Metal";
 
 			Class<?> clazz = Class.forName("com.liferay.faces.metal.component.inputtext.InputText");
-			init(clazz, ProductConstants.LIFERAY_FACES_METAL);
+			init(clazz, "Liferay Faces Metal");
 		}
 		catch (Exception e) {
 			// Ignore -- Liferay Faces Metal is likely not present.

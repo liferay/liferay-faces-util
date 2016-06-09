@@ -21,8 +21,6 @@ import javax.management.MBeanServer;
 import javax.management.MBeanServerFactory;
 import javax.management.ObjectName;
 
-import com.liferay.faces.util.product.ProductConstants;
-
 
 /**
  * @author  Neil Griffin
@@ -32,7 +30,7 @@ public class ProductWildFlyImpl extends ProductBaseImpl {
 	public ProductWildFlyImpl() {
 
 		try {
-			this.title = ProductConstants.WILDFLY;
+			this.title = "Wildfly";
 
 			List<MBeanServer> mBeanServers = MBeanServerFactory.findMBeanServer(null);
 

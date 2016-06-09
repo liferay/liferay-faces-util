@@ -17,8 +17,6 @@ package com.liferay.faces.util.product.internal;
 
 import java.lang.reflect.Method;
 
-import com.liferay.faces.util.product.ProductConstants;
-
 
 /**
  * @author  Neil Griffin
@@ -28,7 +26,7 @@ public class ProductLiferayPortalImpl extends ProductBaseImpl {
 	public ProductLiferayPortalImpl() {
 
 		try {
-			this.title = ProductConstants.LIFERAY_PORTAL;
+			this.title = "Liferay Portal";
 
 			Class<?> releaseInfoClass = Class.forName("com.liferay.portal.kernel.util.ReleaseInfo");
 			Class<?>[] emptyClassArray = new Class[] {};

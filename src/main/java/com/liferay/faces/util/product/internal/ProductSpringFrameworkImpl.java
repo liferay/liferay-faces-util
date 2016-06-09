@@ -15,9 +15,6 @@
  */
 package com.liferay.faces.util.product.internal;
 
-import com.liferay.faces.util.product.ProductConstants;
-
-
 /**
  * @author  Neil Griffin
  */
@@ -26,10 +23,11 @@ public class ProductSpringFrameworkImpl extends ProductBaseImpl {
 	public ProductSpringFrameworkImpl() {
 
 		try {
+			this.title = "Spring Framework";
+
 			Class<?> springClass = Class.forName("org.springframework.core.SpringVersion");
-			this.title = ProductConstants.SPRING_FRAMEWORK;
 			init(springClass, "org.springframework.core");
-			this.title = ProductConstants.SPRING_FRAMEWORK;
+			this.title = "Spring Framework";
 		}
 		catch (Exception e) {
 			// Ignore -- Spring Framework is likely not present.

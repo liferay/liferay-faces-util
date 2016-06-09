@@ -17,8 +17,6 @@ package com.liferay.faces.util.product.internal;
 
 import java.lang.reflect.Method;
 
-import com.liferay.faces.util.product.ProductConstants;
-
 
 /**
  * @author  Neil Griffin
@@ -28,7 +26,7 @@ public class ProductRichFacesImpl extends ProductBaseImpl {
 	public ProductRichFacesImpl() {
 
 		try {
-			this.title = ProductConstants.RICHFACES;
+			this.title = "RichFaces";
 
 			try {
 				Class<?> versionBeanClass = Class.forName("org.richfaces.VersionBean");
@@ -50,7 +48,7 @@ public class ProductRichFacesImpl extends ProductBaseImpl {
 				// Workaround for https://issues.jboss.org/browse/RF-12805
 				Class<?> utilClass = Class.forName("org.richfaces.util.Util");
 				init(utilClass, "RichFaces Core Implementation");
-				this.title = ProductConstants.RICHFACES;
+				this.title = "RichFaces";
 			}
 		}
 		catch (Exception e) {

@@ -17,18 +17,20 @@ package com.liferay.faces.util.product.internal;
 
 /**
  * @author  Neil Griffin
+ * @author  Kyle Stiemann
  */
-public class ProductLiferayFacesUtilImpl extends ProductBaseImpl {
+public class ProductOpenWebBeansImpl extends ProductBaseImpl {
 
-	public ProductLiferayFacesUtilImpl() {
+	public ProductOpenWebBeansImpl() {
 
 		try {
+			this.title = "OpenWebBeans";
 
-			this.title = "Liferay Faces Util";
-			init(this.getClass(), "Liferay Faces Util");
+			Class<?> cdiImplClass = Class.forName("org.apache.webbeans.util.WebBeansConstants");
+			init(cdiImplClass, "OpenWebBeans Core");
 		}
 		catch (Exception e) {
-			// Ignore
+			// Ignore -- OpenWebBeans is likely not present.
 		}
 	}
 }

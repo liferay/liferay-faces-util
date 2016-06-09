@@ -40,17 +40,13 @@ public class PackageManifest {
 
 	// Private Constants
 	private static final String MANIFEST_MF_PATH = "META-INF/MANIFEST.MF";
-	private static final String IMPLEMENTATION_VERSION_UNKNOWN = "0.0.0";
 
 	// Private Data Members
-	private String implementationTitle;
 	private String implementationVersion;
 
 	public PackageManifest(Class<?> clazz, String expectedImplementationTitle) {
 
 		try {
-			implementationTitle = expectedImplementationTitle;
-			implementationVersion = IMPLEMENTATION_VERSION_UNKNOWN;
 
 			// For each of the "META-INF/MANIFEST.MF" resources found by the ClassLoader:
 			Enumeration<URL> manifestURLs = clazz.getClassLoader().getResources(MANIFEST_MF_PATH);
@@ -74,10 +70,6 @@ public class PackageManifest {
 		catch (IOException e) {
 			logger.error(e);
 		}
-	}
-
-	public String getImplementationTitle() {
-		return implementationTitle;
 	}
 
 	public String getImplementationVersion() {
