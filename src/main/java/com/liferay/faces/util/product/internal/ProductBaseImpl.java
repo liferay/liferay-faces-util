@@ -15,6 +15,8 @@
  */
 package com.liferay.faces.util.product.internal;
 
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.product.Product;
 
 
@@ -22,6 +24,9 @@ import com.liferay.faces.util.product.Product;
  * @author  Neil Griffin
  */
 public class ProductBaseImpl implements Product {
+
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(ProductBaseImpl.class);
 
 	// Private Constants
 	private static final String REGEX_VERSION_DELIMITER = "[.[-]_]";
@@ -57,6 +62,11 @@ public class ProductBaseImpl implements Product {
 	}
 
 	public String getVersion() {
+
+		if (version == null) {
+			version = getMajorVersion() + "." + getMinorVersion() + "." + getRevisionVersion();
+		}
+
 		return version;
 	}
 
@@ -90,26 +100,44 @@ public class ProductBaseImpl implements Product {
 	}
 
 	protected void init(Class<?> clazz, String expectedTitle) {
+		init(clazz, expectedTitle, null);
+	}
 
+	protected void init(Class<?> clazz, String expectedTitle, String pomPropertiesFile) {
+
+		detected = true;
+
+		String implementationVersion = null;
 		Package pkg = clazz.getPackage();
 
 		if ((pkg != null) && (pkg.getImplementationVersion() != null)) {
-			this.title = pkg.getImplementationTitle();
 
-			if (this.title == null) {
-				this.title = expectedTitle;
+			String implementationTitle = pkg.getImplementationTitle();
+
+			if (implementationTitle != null) {
+				this.title = implementationTitle;
 			}
 
-			initVersionInfo(pkg.getImplementationVersion());
-		}
-		else {
-			PackageManifest packageManifest = new PackageManifest(clazz, expectedTitle);
-			this.title = packageManifest.getImplementationTitle();
-			initVersionInfo(packageManifest.getImplementationVersion());
+			implementationVersion = pkg.getImplementationVersion();
 		}
 
-		if (this.majorVersion > 0) {
-			detected = true;
+		if (implementationVersion == null) {
+
+			PackageManifest packageManifest = new PackageManifest(clazz, expectedTitle);
+			implementationVersion = packageManifest.getImplementationVersion();
+		}
+
+		if ((implementationVersion == null) && (pomPropertiesFile != null)) {
+
+			PomProperties pomProperties = new PomProperties(clazz, pomPropertiesFile);
+			implementationVersion = pomProperties.getVersion();
+		}
+
+		if (implementationVersion != null) {
+			initVersionInfo(implementationVersion);
+		}
+		else {
+			logger.warn("Unable to obtain version information for {0}.", this.title);
 		}
 	}
 

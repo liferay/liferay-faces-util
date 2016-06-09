@@ -16,19 +16,20 @@
 package com.liferay.faces.util.product.internal;
 
 /**
- * @author  Neil Griffin
+ * @author  Kyle Stiemann
  */
-public class ProductLiferayFacesUtilImpl extends ProductBaseImpl {
+public class ProductDeltaSpikeImpl extends ProductBaseImpl {
 
-	public ProductLiferayFacesUtilImpl() {
+	public ProductDeltaSpikeImpl() {
 
 		try {
+			this.title = "DeltaSpike";
 
-			this.title = "Liferay Faces Util";
-			init(this.getClass(), "Liferay Faces Util");
+			Class<?> clazz = Class.forName("org.apache.deltaspike.core.util.ClassUtils");
+			init(clazz, "DeltaSpike");
 		}
 		catch (Exception e) {
-			// Ignore
+			// Ignore -- DeltaSpike is likely not present.
 		}
 	}
 }

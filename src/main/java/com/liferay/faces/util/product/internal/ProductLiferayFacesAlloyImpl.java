@@ -15,9 +15,6 @@
  */
 package com.liferay.faces.util.product.internal;
 
-import com.liferay.faces.util.product.ProductConstants;
-
-
 /**
  * @author  Neil Griffin
  */
@@ -26,10 +23,10 @@ public class ProductLiferayFacesAlloyImpl extends ProductBaseImpl {
 	public ProductLiferayFacesAlloyImpl() {
 
 		try {
-			this.title = ProductConstants.LIFERAY_FACES_ALLOY;
+			this.title = "Liferay Faces Alloy";
 
 			Class<?> clazz = Class.forName("com.liferay.faces.alloy.component.column.Column");
-			init(clazz, ProductConstants.LIFERAY_FACES_ALLOY);
+			init(clazz, "Liferay Faces Alloy");
 		}
 		catch (Exception e) {
 			// Ignore -- Liferay Faces Alloy is likely not present.

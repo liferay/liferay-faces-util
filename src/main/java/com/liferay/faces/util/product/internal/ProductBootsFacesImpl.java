@@ -16,19 +16,20 @@
 package com.liferay.faces.util.product.internal;
 
 /**
- * @author  Neil Griffin
+ * @author  Kyle Stiemann
  */
-public class ProductLiferayFacesUtilImpl extends ProductBaseImpl {
+public class ProductBootsFacesImpl extends ProductBaseImpl {
 
-	public ProductLiferayFacesUtilImpl() {
+	public ProductBootsFacesImpl() {
 
 		try {
+			this.title = "BootsFaces";
 
-			this.title = "Liferay Faces Util";
-			init(this.getClass(), "Liferay Faces Util");
+			Class<?> clazz = Class.forName("net.bootsfaces.C");
+			init(clazz, "BootsFaces", "META-INF/maven/net.bootsfaces/bootsfaces/pom.properties");
 		}
 		catch (Exception e) {
-			// Ignore
+			// Ignore -- BootsFaces is likely not present.
 		}
 	}
 }

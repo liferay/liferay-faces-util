@@ -15,9 +15,6 @@
  */
 package com.liferay.faces.util.product.internal;
 
-import com.liferay.faces.util.product.ProductConstants;
-
-
 /**
  * @author  Neil Griffin
  */
@@ -26,10 +23,10 @@ public class ProductResinImpl extends ProductBaseImpl {
 	public ProductResinImpl() {
 
 		try {
-			this.title = ProductConstants.RESIN;
+			this.title = "Resin";
 
 			Class<?> clazz = Class.forName("com.caucho.server.resin.JavaVar");
-			init(clazz, ProductConstants.RESIN);
+			init(clazz, "Resin");
 		}
 		catch (Exception e) {
 			// Ignore -- Resin is likely not present.

@@ -15,9 +15,6 @@
  */
 package com.liferay.faces.util.product.internal;
 
-import com.liferay.faces.util.product.ProductConstants;
-
-
 /**
  * @author  Neil Griffin
  */
@@ -26,10 +23,10 @@ public class ProductLiferayFacesBridgeImpl extends ProductBaseImpl {
 	public ProductLiferayFacesBridgeImpl() {
 
 		try {
-			this.title = ProductConstants.LIFERAY_FACES_BRIDGE;
+			this.title = "Liferay Faces Bridge";
 
 			Class<?> clazz = Class.forName("com.liferay.faces.bridge.BridgePhase");
-			init(clazz, ProductConstants.LIFERAY_FACES_BRIDGE);
+			init(clazz, "Liferay Faces Bridge");
 		}
 		catch (Exception e) {
 			// Ignore -- Liferay Faces Bridge is likely not present.
