@@ -34,22 +34,17 @@ public class ProductWildFlyImpl extends ProductBaseImpl {
 
 			List<MBeanServer> mBeanServers = MBeanServerFactory.findMBeanServer(null);
 
-			if (mBeanServers != null) {
+			for (MBeanServer mBeanServer : mBeanServers) {
 
-				for (MBeanServer mBeanServer : mBeanServers) {
+				ObjectName objectName = new ObjectName("jboss.as:management-root=server");
 
-					ObjectName objectName = new ObjectName("jboss.as:management-root=server");
+				String releaseVersion = (String) mBeanServer.getAttribute(objectName, "releaseVersion");
 
-					if (objectName != null) {
-						String releaseVersion = (String) mBeanServer.getAttribute(objectName, "releaseVersion");
+				if (releaseVersion != null) {
+					detected = true;
+					initVersionInfo(releaseVersion);
 
-						if (releaseVersion != null) {
-							detected = true;
-							initVersionInfo(releaseVersion);
-
-							break;
-						}
-					}
+					break;
 				}
 			}
 		}
