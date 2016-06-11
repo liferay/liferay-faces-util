@@ -29,7 +29,7 @@ public class ProductPrimeFacesImpl extends ProductBaseImpl {
 			Class<?> constantsClass = Class.forName("org.primefaces.util.Constants");
 			this.detected = true;
 
-			String version = null;
+			String version;
 
 			try {
 				version = (String) constantsClass.getDeclaredField("VERSION").get(String.class);
