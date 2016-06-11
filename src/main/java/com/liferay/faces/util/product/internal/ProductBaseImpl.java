@@ -147,19 +147,16 @@ public class ProductBaseImpl implements Product {
 
 		String[] versionParts = version.split(REGEX_VERSION_DELIMITER);
 
-		if (versionParts != null) {
+		if (versionParts.length > 0) {
+			majorVersion = parseInt(versionParts[0]);
+		}
 
-			if (versionParts.length > 0) {
-				majorVersion = parseInt(versionParts[0]);
-			}
+		if (versionParts.length > 1) {
+			minorVersion = parseInt(versionParts[1]);
+		}
 
-			if (versionParts.length > 1) {
-				minorVersion = parseInt(versionParts[1]);
-			}
-
-			if (versionParts.length > 2) {
-				revisionVersion = parseInt(versionParts[2]);
-			}
+		if (versionParts.length > 2) {
+			revisionVersion = parseInt(versionParts[2]);
 		}
 	}
 

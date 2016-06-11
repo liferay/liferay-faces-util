@@ -23,9 +23,9 @@ public class ProductICEfacesImpl extends ProductBaseImpl {
 	public ProductICEfacesImpl() {
 
 		try {
-			this.title = "ICEFaces";
+			this.title = "ICEfaces";
 
-			Class<?> productInfoClass = null;
+			Class<?> productInfoClass;
 
 			try {
 				productInfoClass = Class.forName("org.icefaces.application.ProductInfo");
