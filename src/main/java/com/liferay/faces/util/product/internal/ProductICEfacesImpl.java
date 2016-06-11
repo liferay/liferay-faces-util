@@ -23,6 +23,8 @@ public class ProductICEfacesImpl extends ProductBaseImpl {
 	public ProductICEfacesImpl() {
 
 		try {
+			this.title = "ICEFaces";
+
 			Class<?> productInfoClass = null;
 
 			try {

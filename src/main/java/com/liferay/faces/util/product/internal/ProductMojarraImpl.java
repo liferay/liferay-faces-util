@@ -15,38 +15,22 @@
  */
 package com.liferay.faces.util.product.internal;
 
-import com.liferay.faces.util.product.ProductConstants;
-
-
 /**
  * @author  Neil Griffin
+ * @author  Kyle Stiemann
  */
-public class ProductJSFImpl extends ProductBaseImpl {
-
-	// Private Constants
-	private static final String SNAPSHOT = "-SNAPSHOT";
+public class ProductMojarraImpl extends ProductBaseImpl {
 
 	// Private Data Members
-	private boolean mojarra;
 	private String toStringValue;
 
-	public ProductJSFImpl() {
+	public ProductMojarraImpl() {
 
 		try {
-			Class<?> jsfImplClass;
+			this.title = "Mojarra";
 
-			try {
-				this.title = ProductConstants.MOJARRA;
-				jsfImplClass = Class.forName("com.sun.faces.RIConstants");
-				init(jsfImplClass, ProductConstants.MOJARRA);
-				mojarra = true;
-
-			}
-			catch (ClassNotFoundException e) {
-				this.title = ProductConstants.MYFACES;
-				jsfImplClass = Class.forName("org.apache.myfaces.util.ContainerUtils");
-				init(jsfImplClass, ProductConstants.MYFACES);
-			}
+			Class<?> jsfImplClass = Class.forName("com.sun.faces.RIConstants");
+			init(jsfImplClass, "Mojarra");
 		}
 		catch (Exception e) {
 			// Ignore -- JSF implementation is likely not present.
@@ -60,8 +44,8 @@ public class ProductJSFImpl extends ProductBaseImpl {
 			toStringValue = super.toString();
 
 			// Some versions of Mojarra are mislabeled "-SNAPSHOT" (i.e.: "1.2_15-20100816-SNAPSHOT")
-			if (mojarra && (toStringValue != null)) {
-				int pos = toStringValue.indexOf(SNAPSHOT);
+			if (toStringValue != null) {
+				int pos = toStringValue.indexOf("-SNAPSHOT");
 
 				if (pos > 0) {
 					toStringValue = toStringValue.substring(0, pos);
@@ -72,5 +56,4 @@ public class ProductJSFImpl extends ProductBaseImpl {
 		return toStringValue;
 
 	}
-
 }

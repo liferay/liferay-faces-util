@@ -15,9 +15,6 @@
  */
 package com.liferay.faces.util.product.internal;
 
-import com.liferay.faces.util.product.ProductConstants;
-
-
 /**
  * @author  Neil Griffin
  */
@@ -26,10 +23,10 @@ public class ProductPlutoImpl extends ProductBaseImpl {
 	public ProductPlutoImpl() {
 
 		try {
-			this.title = ProductConstants.PLUTO;
+			this.title = "Pluto";
 
 			Class<?> clazz = Class.forName("org.apache.pluto.container.ContainerInfo");
-			init(clazz, ProductConstants.PLUTO);
+			init(clazz, "Pluto");
 		}
 		catch (Exception e) {
 			// Ignore -- Pluto is likely not present.

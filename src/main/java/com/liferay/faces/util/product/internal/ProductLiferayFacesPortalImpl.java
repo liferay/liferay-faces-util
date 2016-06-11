@@ -15,9 +15,6 @@
  */
 package com.liferay.faces.util.product.internal;
 
-import com.liferay.faces.util.product.ProductConstants;
-
-
 /**
  * @author  Neil Griffin
  */
@@ -26,10 +23,10 @@ public class ProductLiferayFacesPortalImpl extends ProductBaseImpl {
 	public ProductLiferayFacesPortalImpl() {
 
 		try {
-			this.title = ProductConstants.LIFERAY_FACES_PORTAL;
+			this.title = "Liferay Faces Portal";
 
 			Class<?> clazz = Class.forName("com.liferay.faces.portal.context.LiferayFacesContext");
-			init(clazz, ProductConstants.LIFERAY_FACES_PORTAL);
+			init(clazz, "Liferay Faces Portal");
 		}
 		catch (Exception e) {
 			// Ignore -- Liferay Faces Portal is likely not present.

@@ -17,18 +17,20 @@ package com.liferay.faces.util.product.internal;
 
 /**
  * @author  Neil Griffin
+ * @author  Kyle Stiemann
  */
-public class ProductLiferayFacesUtilImpl extends ProductBaseImpl {
+public class ProductMyfacesImpl extends ProductBaseImpl {
 
-	public ProductLiferayFacesUtilImpl() {
+	public ProductMyfacesImpl() {
 
 		try {
+			this.title = "MyFaces";
 
-			this.title = "Liferay Faces Util";
-			init(this.getClass(), "Liferay Faces Util");
+			Class<?> jsfImplClass = Class.forName("org.apache.myfaces.util.ContainerUtils");
+			init(jsfImplClass, "MyFaces");
 		}
 		catch (Exception e) {
-			// Ignore
+			// Ignore -- JSF implementation is likely not present.
 		}
 	}
 }

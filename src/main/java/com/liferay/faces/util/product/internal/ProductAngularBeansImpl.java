@@ -16,19 +16,20 @@
 package com.liferay.faces.util.product.internal;
 
 /**
- * @author  Neil Griffin
+ * @author  Kyle Stiemann
  */
-public class ProductLiferayFacesUtilImpl extends ProductBaseImpl {
+public class ProductAngularBeansImpl extends ProductBaseImpl {
 
-	public ProductLiferayFacesUtilImpl() {
+	public ProductAngularBeansImpl() {
 
 		try {
+			this.title = "AngularBeans";
 
-			this.title = "Liferay Faces Util";
-			init(this.getClass(), "Liferay Faces Util");
+			Class<?> clazz = Class.forName("angularBeans.api.NGApp");
+			init(clazz, "AngularBeans", "META-INF/maven/com.github.bessemHmidi/angularBeans/pom.properties");
 		}
 		catch (Exception e) {
-			// Ignore
+			// Ignore -- AngularBeans is likely not present.
 		}
 	}
 }

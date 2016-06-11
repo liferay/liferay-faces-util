@@ -16,19 +16,20 @@
 package com.liferay.faces.util.product.internal;
 
 /**
- * @author  Neil Griffin
+ * @author  Kyle Stiemann
  */
-public class ProductLiferayFacesUtilImpl extends ProductBaseImpl {
+public class ProductOmniFacesImpl extends ProductBaseImpl {
 
-	public ProductLiferayFacesUtilImpl() {
+	public ProductOmniFacesImpl() {
 
 		try {
+			this.title = "OmniFaces";
 
-			this.title = "Liferay Faces Util";
-			init(this.getClass(), "Liferay Faces Util");
+			Class<?> clazz = Class.forName("org.omnifaces.util.Utils");
+			init(clazz, "OmniFaces");
 		}
 		catch (Exception e) {
-			// Ignore
+			// Ignore -- OmniFaces is likely not present.
 		}
 	}
 }
