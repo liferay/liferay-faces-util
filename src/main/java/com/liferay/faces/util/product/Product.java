@@ -36,7 +36,7 @@ public interface Product {
 
 	int getMinorVersion();
 
-	int getRevisionVersion();
+	int getPatchVersion();
 
 	String getTitle();
 

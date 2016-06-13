@@ -44,7 +44,7 @@ public class ProductPrimeFacesImpl extends ProductBaseImpl {
 			if (version != null) {
 
 				initVersionInfo(version);
-				this.buildId = (this.majorVersion * 100) + (this.minorVersion * 10) + this.revisionVersion;
+				this.buildId = (this.majorVersion * 100) + (this.minorVersion * 10) + this.patchVersion;
 			}
 		}
 		catch (Exception e) {
