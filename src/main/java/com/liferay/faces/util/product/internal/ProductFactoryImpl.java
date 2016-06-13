@@ -38,6 +38,7 @@ public class ProductFactoryImpl extends ProductFactory {
 		productMap.put(Product.Name.ANGULARFACES, new ProductAngularFacesImpl());
 		productMap.put(Product.Name.BOOTSFACES, new ProductBootsFacesImpl());
 		productMap.put(Product.Name.BUTTERFACES, new ProductButterFacesImpl());
+		productMap.put(Product.Name.CLOSURE_TEMPLATES, new ProductClosureTemplatesImpl());
 		productMap.put(Product.Name.DELTASPIKE, new ProductDeltaSpikeImpl());
 		productMap.put(Product.Name.ICEFACES, new ProductICEfacesImpl());
 		productMap.put(Product.Name.LIFERAY_FACES_ALLOY, new ProductLiferayFacesAlloyImpl());
