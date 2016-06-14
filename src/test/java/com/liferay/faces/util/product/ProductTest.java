@@ -31,8 +31,10 @@ public class ProductTest {
 	private static final Logger logger = LoggerFactory.getLogger(ProductTest.class);
 
 	static {
-		logger.info("Liferay Faces Util's version cannot be obtained at test time (likely because the MANIFEST.MF cannot be found).");
-		logger.info("However, Liferay Faces Util's version can be obtained normally when running in a servlet or portlet container.");
+		logger.info(
+			"Liferay Faces Util's version cannot be obtained at test time (likely because the MANIFEST.MF cannot be found).");
+		logger.info(
+			"However, Liferay Faces Util's version can be obtained normally when running in a servlet or portlet container.");
 	}
 
 	@Test
@@ -73,10 +75,10 @@ public class ProductTest {
 			"'s minor version is not 0 even though Mojarra is not detected. Instead Mojarra's minor version is " +
 			minorVersion + ".", 0, minorVersion);
 
-		int revisionVersion = product.getRevisionVersion();
+		int patchVersion = product.getPatchVersion();
 		Assert.assertEquals(title +
-			"'s revision version is not 0 even though Mojarra is not detected. Instead Mojarra's revision version is " +
-			revisionVersion + ".", 0, revisionVersion);
+			"'s patch version is not 0 even though Mojarra is not detected. Instead Mojarra's patch version is " +
+			patchVersion + ".", 0, patchVersion);
 
 		int buildId = product.getBuildId();
 		Assert.assertEquals(title +

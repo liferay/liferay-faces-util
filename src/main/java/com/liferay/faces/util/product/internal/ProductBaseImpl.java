@@ -36,7 +36,7 @@ public class ProductBaseImpl implements Product {
 	protected boolean detected;
 	protected int majorVersion;
 	protected int minorVersion;
-	protected int revisionVersion;
+	protected int patchVersion;
 	protected String stringValue;
 	protected String title;
 	protected String version;
@@ -53,8 +53,8 @@ public class ProductBaseImpl implements Product {
 		return minorVersion;
 	}
 
-	public int getRevisionVersion() {
-		return revisionVersion;
+	public int getPatchVersion() {
+		return patchVersion;
 	}
 
 	public String getTitle() {
@@ -64,7 +64,7 @@ public class ProductBaseImpl implements Product {
 	public String getVersion() {
 
 		if (version == null) {
-			version = getMajorVersion() + "." + getMinorVersion() + "." + getRevisionVersion();
+			version = getMajorVersion() + "." + getMinorVersion() + "." + getPatchVersion();
 		}
 
 		return version;
@@ -156,7 +156,7 @@ public class ProductBaseImpl implements Product {
 		}
 
 		if (versionParts.length > 2) {
-			revisionVersion = parseInt(versionParts[2]);
+			patchVersion = parseInt(versionParts[2]);
 		}
 	}
 
