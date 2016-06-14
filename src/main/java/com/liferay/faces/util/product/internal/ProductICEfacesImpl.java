@@ -37,7 +37,7 @@ public class ProductICEfacesImpl extends ProductBaseImpl {
 			this.buildId = parseInt((String) productInfoClass.getDeclaredField("REVISION").get(String.class));
 			this.majorVersion = parseInt((String) productInfoClass.getDeclaredField("PRIMARY").get(String.class));
 			this.minorVersion = parseInt((String) productInfoClass.getDeclaredField("SECONDARY").get(String.class));
-			this.revisionVersion = parseInt((String) productInfoClass.getDeclaredField("TERTIARY").get(String.class));
+			this.patchVersion = parseInt((String) productInfoClass.getDeclaredField("TERTIARY").get(String.class));
 			this.title = (String) productInfoClass.getDeclaredField("PRODUCT").get(String.class);
 
 			StringBuilder buf = new StringBuilder();
@@ -45,7 +45,7 @@ public class ProductICEfacesImpl extends ProductBaseImpl {
 			buf.append(".");
 			buf.append(this.minorVersion);
 			buf.append(".");
-			buf.append(this.revisionVersion);
+			buf.append(this.patchVersion);
 			this.version = buf.toString();
 
 			if (this.majorVersion > 0) {

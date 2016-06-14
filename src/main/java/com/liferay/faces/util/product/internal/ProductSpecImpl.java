@@ -62,8 +62,8 @@ public class ProductSpecImpl implements Product {
 	}
 
 	@Override
-	public int getRevisionVersion() {
-		return wrappedProduct.getRevisionVersion();
+	public int getPatchVersion() {
+		return wrappedProduct.getPatchVersion();
 	}
 
 	@Override
