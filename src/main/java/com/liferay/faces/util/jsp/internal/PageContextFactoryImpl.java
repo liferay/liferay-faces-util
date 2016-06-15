@@ -20,6 +20,7 @@ import java.io.Serializable;
 import javax.el.ELContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspFactory;
 import javax.servlet.jsp.PageContext;
 
 import com.liferay.faces.util.jsp.PageContextFactory;
@@ -36,7 +37,14 @@ public class PageContextFactoryImpl extends PageContextFactory implements Serial
 	@Override
 	public PageContext getStringPageContext(HttpServletRequest httpServletRequest,
 		HttpServletResponse httpServletResponse, ELContext elContext) {
-		return new PageContextStringImpl(httpServletRequest, httpServletResponse, elContext);
+
+		JspFactory jspFactory = JspFactory.getDefaultFactory();
+
+		PageContext wrappedPageContext = jspFactory.getPageContext(new PageAdapter(
+					httpServletRequest.getServletContext()), httpServletRequest, httpServletResponse, null, false, 0,
+				false);
+
+		return new PageContextStringImpl(elContext, wrappedPageContext);
 	}
 
 	@Override

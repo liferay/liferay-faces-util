@@ -16,10 +16,8 @@
 package com.liferay.faces.util.jsp.internal;
 
 import java.io.IOException;
-import java.util.Collections;
+import java.io.Writer;
 import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.el.ELContext;
 import javax.servlet.Servlet;
@@ -28,8 +26,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
@@ -52,61 +48,21 @@ public class PageContextStringImpl extends PageContext {
 	private static final Logger logger = LoggerFactory.getLogger(PageContextStringImpl.class);
 
 	// Private Data Members
-	private ApplicationScope applicationScope;
 	private ELContext elContext;
-	private HttpServletRequest httpServletRequest;
-	private HttpServletResponse httpServletResponse;
-	private HttpSession httpSession;
-	private Servlet page;
-	private Map<String, Object> pageScope;
-	private Map<String, Object> requestScope;
-	private ServletConfig servletConfig;
-	private ServletContext servletContext;
-	private SessionScope sessionScope;
 	private JspWriter stringJspWriter;
+	private PageContext wrappedPageContext;
 
-	public PageContextStringImpl(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
-		ELContext elContext) {
+	public PageContextStringImpl(ELContext elContext, PageContext pageContext) {
 
-		this.httpServletRequest = httpServletRequest;
-		this.httpServletResponse = httpServletResponse;
 		this.elContext = elContext;
-		this.httpSession = httpServletRequest.getSession();
-		this.servletContext = httpSession.getServletContext();
-		this.servletConfig = new ServletConfigAdapter(this.servletContext);
 		this.stringJspWriter = new JspWriterStringImpl();
+		this.wrappedPageContext = pageContext;
 
-		// Initialize scope maps
-		this.applicationScope = new ApplicationScope(this.servletContext);
-		this.pageScope = new HashMap<String, Object>();
-		this.requestScope = new RequestScope(httpServletRequest);
-		this.sessionScope = new SessionScope(httpSession);
 	}
 
 	@Override
 	public Object findAttribute(String name) {
-
-		if (name == null) {
-			throw new NullPointerException();
-		}
-		else {
-			Object value = null;
-
-			if (pageScope.containsKey(name)) {
-				value = pageScope.get(name);
-			}
-			else if (requestScope.containsKey(name)) {
-				value = requestScope.get(name);
-			}
-			else if (sessionScope.containsKey(name)) {
-				value = sessionScope.get(name);
-			}
-			else if (applicationScope.containsKey(name)) {
-				value = applicationScope.get(name);
-			}
-
-			return value;
-		}
+		return wrappedPageContext.findAttribute(name);
 	}
 
 	@Override
@@ -116,113 +72,22 @@ public class PageContextStringImpl extends PageContext {
 
 	@Override
 	public Object getAttribute(String name) {
-
-		if (name == null) {
-			throw new NullPointerException();
-		}
-		else {
-			Object value = null;
-
-			if (pageScope.containsKey(name)) {
-				value = pageScope.get(name);
-			}
-
-			return value;
-		}
+		return wrappedPageContext.findAttribute(name);
 	}
 
 	@Override
 	public Object getAttribute(String name, int scope) {
-
-		if (name == null) {
-			throw new NullPointerException();
-		}
-		else {
-
-			Object value = null;
-
-			if ((scope == PAGE_SCOPE)) {
-
-				if (pageScope.containsKey(name)) {
-					value = pageScope.get(name);
-				}
-
-				return value;
-			}
-			else if (scope == REQUEST_SCOPE) {
-
-				if (requestScope.containsKey(name)) {
-					value = requestScope.get(name);
-				}
-
-				return value;
-			}
-			else if (scope == SESSION_SCOPE) {
-
-				if (sessionScope.containsKey(name)) {
-					value = sessionScope.get(name);
-				}
-
-				return value;
-			}
-			else if (scope == APPLICATION_SCOPE) {
-
-				if (applicationScope.containsKey(name)) {
-					value = applicationScope.get(name);
-				}
-
-				return value;
-			}
-			else {
-				throw new IllegalArgumentException("Invalid scope " + scope);
-			}
-		}
+		return wrappedPageContext.getAttribute(name, scope);
 	}
 
 	@Override
 	public Enumeration<String> getAttributeNamesInScope(int scope) {
-
-		if (scope == PAGE_SCOPE) {
-			return Collections.enumeration(pageScope.keySet());
-		}
-		else if (scope == REQUEST_SCOPE) {
-			return Collections.enumeration(requestScope.keySet());
-		}
-		else if (scope == SESSION_SCOPE) {
-			return Collections.enumeration(sessionScope.keySet());
-		}
-		else if (scope == APPLICATION_SCOPE) {
-			return Collections.enumeration(applicationScope.keySet());
-		}
-		else {
-			throw new IllegalArgumentException("Invalid scope " + scope);
-		}
+		return wrappedPageContext.getAttributeNamesInScope(scope);
 	}
 
 	@Override
 	public int getAttributesScope(String name) {
-
-		if (name == null) {
-			throw new NullPointerException();
-		}
-		else {
-			int scope = 0;
-
-			if (pageScope.containsKey(name)) {
-				scope = PAGE_SCOPE;
-			}
-			else if (requestScope.containsKey(name)) {
-				scope = REQUEST_SCOPE;
-			}
-			else if (sessionScope.containsKey(name)) {
-				scope = SESSION_SCOPE;
-			}
-			else if (applicationScope.containsKey(name)) {
-				scope = APPLICATION_SCOPE;
-			}
-
-			return scope;
-		}
+		return wrappedPageContext.getAttributesScope(name);
 	}
 
 	@Override
@@ -232,7 +97,7 @@ public class PageContextStringImpl extends PageContext {
 
 	@Override
 	public Exception getException() {
-		return null;
+		return wrappedPageContext.getException();
 	}
 
 	@Override
@@ -248,37 +113,32 @@ public class PageContextStringImpl extends PageContext {
 
 	@Override
 	public Object getPage() {
-
-		if (page == null) {
-			page = new PageAdapter(servletConfig);
-		}
-
-		return page;
+		return wrappedPageContext.getPage();
 	}
 
 	@Override
 	public ServletRequest getRequest() {
-		return httpServletRequest;
+		return wrappedPageContext.getRequest();
 	}
 
 	@Override
 	public ServletResponse getResponse() {
-		return httpServletResponse;
+		return wrappedPageContext.getResponse();
 	}
 
 	@Override
 	public ServletConfig getServletConfig() {
-		return servletConfig;
+		return wrappedPageContext.getServletConfig();
 	}
 
 	@Override
 	public ServletContext getServletContext() {
-		return servletContext;
+		return wrappedPageContext.getServletContext();
 	}
 
 	@Override
 	public HttpSession getSession() {
-		return httpSession;
+		return wrappedPageContext.getSession();
 	}
 
 	@Override
@@ -311,135 +171,48 @@ public class PageContextStringImpl extends PageContext {
 	public void initialize(Servlet servlet, ServletRequest request, ServletResponse response,
 		java.lang.String errorPageURL, boolean needsSession, int bufferSize, boolean autoFlush) throws IOException,
 		IllegalStateException, IllegalArgumentException {
+
+		wrappedPageContext.initialize(servlet, request, response, errorPageURL, needsSession, bufferSize, autoFlush);
+	}
+
+	@Override
+	public JspWriter popBody() {
+		return wrappedPageContext.popBody();
 	}
 
 	@Override
 	public BodyContent pushBody() {
-		return new BodyContentStringImpl(new JspWriterStringImpl());
+		return wrappedPageContext.pushBody();
+	}
+
+	@Override
+	public JspWriter pushBody(Writer writer) {
+		return wrappedPageContext.pushBody(writer);
 	}
 
 	@Override
 	public void release() {
-		applicationScope = null;
 		elContext = null;
-		httpServletRequest = null;
-		httpServletResponse = null;
-		httpSession = null;
-		page = null;
-		pageScope.clear();
-		pageScope = null;
-		requestScope = null;
-		servletConfig = null;
-		servletContext = null;
-		sessionScope = null;
 		stringJspWriter = null;
 	}
 
 	@Override
 	public void removeAttribute(String name) {
-
-		if (pageScope.containsKey(name)) {
-			pageScope.remove(name);
-		}
-
-		if (requestScope.containsKey(name)) {
-			requestScope.remove(name);
-		}
-
-		if (sessionScope.containsKey(name)) {
-			sessionScope.remove(name);
-		}
-
-		if (applicationScope.containsKey(name)) {
-			applicationScope.remove(name);
-		}
+		wrappedPageContext.removeAttribute(name);
 	}
 
 	@Override
 	public void removeAttribute(String name, int scope) {
-
-		if (name == null) {
-			throw new NullPointerException();
-		}
-		else {
-
-			if ((scope == PAGE_SCOPE)) {
-
-				if (pageScope.containsKey(name)) {
-					pageScope.remove(name);
-				}
-			}
-			else if (scope == REQUEST_SCOPE) {
-
-				if (requestScope.containsKey(name)) {
-					requestScope.remove(name);
-				}
-			}
-			else if (scope == SESSION_SCOPE) {
-
-				if (sessionScope.containsKey(name)) {
-					sessionScope.remove(name);
-				}
-			}
-			else if (scope == APPLICATION_SCOPE) {
-
-				if (applicationScope.containsKey(name)) {
-					applicationScope.remove(name);
-				}
-			}
-			else {
-				throw new IllegalArgumentException("Invalid scope " + scope);
-			}
-		}
+		wrappedPageContext.removeAttribute(name, scope);
 	}
 
 	@Override
 	public void setAttribute(String name, Object value) {
-
-		if (name == null) {
-			throw new NullPointerException();
-		}
-		else {
-
-			if (value == null) {
-				removeAttribute(name);
-			}
-			else {
-				pageScope.put(name, value);
-			}
-		}
+		wrappedPageContext.setAttribute(name, value);
 	}
 
 	@Override
 	public void setAttribute(String name, Object value, int scope) {
-
-		if (name == null) {
-			throw new NullPointerException();
-		}
-		else {
-
-			if (value == null) {
-
-			}
-			else {
-
-				if (scope == PAGE_SCOPE) {
-					pageScope.put(name, value);
-				}
-				else if (scope == REQUEST_SCOPE) {
-					requestScope.put(name, value);
-				}
-				else if (scope == SESSION_SCOPE) {
-					sessionScope.put(name, value);
-				}
-				else if (scope == APPLICATION_SCOPE) {
-					applicationScope.put(name, value);
-				}
-				else {
-					throw new IllegalArgumentException("Invalid scope " + scope);
-				}
-			}
-		}
+		wrappedPageContext.setAttribute(name, value, scope);
 	}
-
 }
