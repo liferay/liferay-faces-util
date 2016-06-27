@@ -66,35 +66,30 @@ public class ProductTest {
 			").getTitle() did not return a title. Instead it returned null.", title);
 
 		int majorVersion = product.getMajorVersion();
-		Assert.assertEquals(title +
-			"'s major version is not 0 even though Mojarra is not detected. Instead Mojarra's major version is " +
-			majorVersion + ".", 0, majorVersion);
+		Assert.assertEquals(title + "'s major version is not 0 even though " + title + " is not detected. Instead " +
+			title + "'s major version is " + majorVersion + ".", 0, majorVersion);
 
 		int minorVersion = product.getMinorVersion();
-		Assert.assertEquals(title +
-			"'s minor version is not 0 even though Mojarra is not detected. Instead Mojarra's minor version is " +
-			minorVersion + ".", 0, minorVersion);
+		Assert.assertEquals(title + "'s minor version is not 0 even though " + title + " is not detected. Instead " +
+			title + "'s minor version is " + minorVersion + ".", 0, minorVersion);
 
 		int patchVersion = product.getPatchVersion();
-		Assert.assertEquals(title +
-			"'s patch version is not 0 even though Mojarra is not detected. Instead Mojarra's patch version is " +
-			patchVersion + ".", 0, patchVersion);
+		Assert.assertEquals(title + "'s patch version is not 0 even though " + title + " is not detected. Instead " +
+			title + "'s patch version is " + patchVersion + ".", 0, patchVersion);
 
 		int buildId = product.getBuildId();
-		Assert.assertEquals(title +
-			"'s build ID is not 0 even though Mojarra is not detected. Instead Mojarra's build ID is " + buildId + ".",
-			0, buildId);
+		Assert.assertEquals(title + "'s build ID is not 0 even though " + title + " is not detected. Instead " + title +
+			"'s build ID is " + buildId + ".", 0, buildId);
 
 		String version = product.getVersion();
-		Assert.assertEquals(title +
-			"'s build ID is not \"0.0.0\" even though Mojarra is not detected. Instead Mojarra's build ID is \"" +
-			version + "\".", "0.0.0", version);
+		Assert.assertEquals(title + "'s build ID is not \"0.0.0\" even though " + title + " is not detected. Instead " +
+			title + "'s build ID is \"" + version + "\".", "0.0.0", version);
 
 		String productString = product.toString();
 		Assert.assertNotNull("ProductFactory.get(Product.Name." + productName +
 			").toString() did not string. Instead it returned null.", productString);
 		logger.info("{0} was correctly not detected.", title);
-		logger.info("ProductFactory.get(Product.Name." + productName + ").toString() equals \"{0}\"", productString);
+		logger.info("ProductFactory.get(Product.Name.{0}).toString() equals \"{1}\"", productName, productString);
 	}
 
 	@Test
