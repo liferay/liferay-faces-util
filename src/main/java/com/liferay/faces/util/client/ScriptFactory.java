@@ -42,7 +42,7 @@ public abstract class ScriptFactory implements Wrapper<ScriptFactory> {
 	 * @return  an instance of {@link Script} from the {@link ScriptFactory} found by the {@link
 	 *          FactoryExtensionFinder}.
 	 */
-	public static Script getScriptInstance(String sourceCode, String[] modules, Script.Type type) {
+	public static Script getScriptInstance(String sourceCode, String[] modules, Script.ModulesType type) {
 
 		ScriptFactory scriptFactory = (ScriptFactory) FactoryExtensionFinder.getFactory(ScriptFactory.class);
 
@@ -66,10 +66,10 @@ public abstract class ScriptFactory implements Wrapper<ScriptFactory> {
 	 *
 	 * @param   sourceCode  The source code of the Script.
 	 * @param   modules     The modules which the Script depends on.
-	 * @param   type        The {@link Script.Type} of the Script.
+	 * @param   type        The {@link Script.ModulesType} of the Script.
 	 *
 	 * @return  A {@link Script} which can be rendered on the client via {@link
 	 *          com.liferay.faces.util.context.FacesRequestContext#addScript(com.liferay.faces.util.client.Script)}
 	 */
-	public abstract Script getScript(String sourceCode, String[] modules, Script.Type type);
+	public abstract Script getScript(String sourceCode, String[] modules, Script.ModulesType type);
 }
