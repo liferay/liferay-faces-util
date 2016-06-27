@@ -210,22 +210,6 @@ public abstract class ClientComponentRendererBase extends Renderer implements Cl
 		return clientVarName;
 	}
 
-	protected void renderScript(FacesContext facesContext, String bufferedScriptString, String[] modules,
-		Script.ModulesType modulesType) {
-
-		Script script;
-
-		if (modules != null) {
-			script = ScriptFactory.getScriptInstance(bufferedScriptString, modules, modulesType);
-		}
-		else {
-			script = ScriptFactory.getScriptInstance(bufferedScriptString);
-		}
-
-		FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
-		facesRequestContext.addScript(script);
-	}
-
 	private void encodeFunctionParameter(ResponseWriter responseWriter, Object parameter) throws IOException {
 
 		if (parameter == null) {
