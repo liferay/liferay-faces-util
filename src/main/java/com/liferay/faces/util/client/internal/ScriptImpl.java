@@ -31,13 +31,13 @@ public class ScriptImpl implements Script {
 	// Private Data Members
 	private String sourceCode;
 	private String[] modules;
-	private Type type;
+	private ModulesType type;
 
 	public ScriptImpl(String sourceCode) {
 		this(sourceCode, null, null);
 	}
 
-	public ScriptImpl(String sourceCode, String[] modules, Type type) {
+	public ScriptImpl(String sourceCode, String[] modules, ModulesType type) {
 		this.sourceCode = sourceCode;
 
 		if ((modules != null) && (type == null)) {
@@ -54,12 +54,12 @@ public class ScriptImpl implements Script {
 	}
 
 	@Override
-	public String getSourceCode() {
-		return sourceCode;
+	public ModulesType getModulesType() {
+		return type;
 	}
 
 	@Override
-	public Type getType() {
-		return type;
+	public String getSourceCode() {
+		return sourceCode;
 	}
 }

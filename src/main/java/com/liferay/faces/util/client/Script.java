@@ -24,12 +24,12 @@ package com.liferay.faces.util.client;
 public interface Script {
 
 	/**
-	 * The Type is used to determine how to handle the Script's modules.
+	 * The ModulesType is used to determine how to handle the Script's modules.
 	 *
 	 * @author  Kyle Stiemann
 	 */
-	public enum Type {
-		ALLOY
+	public enum ModulesType {
+		ALLOY, ES6
 	}
 
 	/**
@@ -39,12 +39,12 @@ public interface Script {
 	public String[] getModules();
 
 	/**
+	 * @return  The {@link Script.ModulesType} of the Script.
+	 */
+	public ModulesType getModulesType();
+
+	/**
 	 * @return  The Script's text.
 	 */
 	public String getSourceCode();
-
-	/**
-	 * @return  The {@link Script.Type} of the Script.
-	 */
-	public Type getType();
 }

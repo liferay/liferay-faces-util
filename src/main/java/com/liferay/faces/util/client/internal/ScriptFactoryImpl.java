@@ -30,7 +30,7 @@ public class ScriptFactoryImpl extends ScriptFactory {
 	}
 
 	@Override
-	public Script getScript(String sourceCode, String[] modules, Script.Type type) {
+	public Script getScript(String sourceCode, String[] modules, Script.ModulesType type) {
 		return new ScriptImpl(sourceCode, modules, type);
 	}
 
