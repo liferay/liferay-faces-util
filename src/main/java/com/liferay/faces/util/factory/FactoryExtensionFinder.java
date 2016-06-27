@@ -15,10 +15,6 @@
  */
 package com.liferay.faces.util.factory;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.Iterator;
 import java.util.ServiceLoader;
 
@@ -34,42 +30,6 @@ public abstract class FactoryExtensionFinder {
 
 	// Private Static Data Members
 	private static FactoryExtensionFinder instance;
-
-	public static String getClassPathResourceAsString(String resourcePath) {
-		String classPathResourceAsString = null;
-		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-
-		if (classLoader != null) {
-			InputStream inputStream = classLoader.getResourceAsStream(resourcePath);
-
-			if (inputStream != null) {
-				InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-				BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-
-				try {
-					classPathResourceAsString = bufferedReader.readLine();
-				}
-				catch (IOException e) {
-
-					// Since the API can't use a logging system like SLF4J the best we can do is print to stderr.
-					System.err.println("Unable to read contents of resourcePath=[" + resourcePath + "]");
-				}
-				finally {
-
-					try {
-						bufferedReader.close();
-						inputStreamReader.close();
-						inputStream.close();
-					}
-					catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		}
-
-		return classPathResourceAsString;
-	}
 
 	public static Object getFactory(Class<?> clazz) {
 		return getInstance().getFactoryInstance(clazz);
