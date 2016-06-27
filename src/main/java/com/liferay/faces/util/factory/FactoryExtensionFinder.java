@@ -33,7 +33,38 @@ public abstract class FactoryExtensionFinder {
 	// Private Static Data Members
 	private static FactoryExtensionFinder instance;
 
-	public static String getClassPathResourceAsString(String resourcePath) {
+	public static Object getFactory(Class<?> clazz) {
+		return getInstance().getFactoryInstance(clazz);
+	}
+
+	public static FactoryExtensionFinder getInstance() throws FacesException {
+
+		if (instance == null) {
+
+			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+
+			try {
+				String facesFactoryFinderService =
+					"META-INF/services/com.liferay.faces.util.factory.FactoryExtensionFinder";
+				String facesFactoryFinderClassName = getClassPathResourceAsString(facesFactoryFinderService);
+
+				if (facesFactoryFinderClassName != null) {
+					Class<?> facesFactoryFinderClass = classLoader.loadClass(facesFactoryFinderClassName);
+					instance = (FactoryExtensionFinder) facesFactoryFinderClass.newInstance();
+				}
+				else {
+					throw new FacesException("Unable to load resource=[" + facesFactoryFinderService + "]");
+				}
+			}
+			catch (Exception e) {
+				throw new FacesException(e);
+			}
+		}
+
+		return instance;
+	}
+
+	private static String getClassPathResourceAsString(String resourcePath) {
 		String classPathResourceAsString = null;
 		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 
@@ -67,37 +98,6 @@ public abstract class FactoryExtensionFinder {
 		}
 
 		return classPathResourceAsString;
-	}
-
-	public static Object getFactory(Class<?> clazz) {
-		return getInstance().getFactoryInstance(clazz);
-	}
-
-	public static FactoryExtensionFinder getInstance() throws FacesException {
-
-		if (instance == null) {
-
-			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-
-			try {
-				String facesFactoryFinderService =
-					"META-INF/services/com.liferay.faces.util.factory.FactoryExtensionFinder";
-				String facesFactoryFinderClassName = getClassPathResourceAsString(facesFactoryFinderService);
-
-				if (facesFactoryFinderClassName != null) {
-					Class<?> facesFactoryFinderClass = classLoader.loadClass(facesFactoryFinderClassName);
-					instance = (FactoryExtensionFinder) facesFactoryFinderClass.newInstance();
-				}
-				else {
-					throw new FacesException("Unable to load resource=[" + facesFactoryFinderService + "]");
-				}
-			}
-			catch (Exception e) {
-				throw new FacesException(e);
-			}
-		}
-
-		return instance;
 	}
 
 	public abstract Object getFactoryInstance(Class<?> clazz);
