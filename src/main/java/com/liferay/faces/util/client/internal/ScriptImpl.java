@@ -31,21 +31,21 @@ public class ScriptImpl implements Script {
 	// Private Data Members
 	private String sourceCode;
 	private String[] modules;
-	private ModulesType type;
+	private ModulesType modulesType;
 
 	public ScriptImpl(String sourceCode) {
 		this(sourceCode, null, null);
 	}
 
-	public ScriptImpl(String sourceCode, String[] modules, ModulesType type) {
+	public ScriptImpl(String sourceCode, String[] modules, ModulesType modulesType) {
 		this.sourceCode = sourceCode;
 
-		if ((modules != null) && (type == null)) {
-			logger.warn("Modules will be ignored on scripts with type == null.");
+		if ((modules != null) && (modulesType == null)) {
+			logger.warn("Modules will be ignored on scripts with modulesType == null.");
 		}
 
 		this.modules = modules;
-		this.type = type;
+		this.modulesType = modulesType;
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class ScriptImpl implements Script {
 
 	@Override
 	public ModulesType getModulesType() {
-		return type;
+		return modulesType;
 	}
 
 	@Override
