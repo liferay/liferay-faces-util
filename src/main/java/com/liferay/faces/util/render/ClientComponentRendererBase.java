@@ -211,7 +211,7 @@ public abstract class ClientComponentRendererBase extends Renderer implements Cl
 	}
 
 	protected void renderScript(FacesContext facesContext, String bufferedScriptString, String[] modules,
-		Script.Type scriptType) {
+		Script.ModulesType scriptType) {
 
 		Script script;
 

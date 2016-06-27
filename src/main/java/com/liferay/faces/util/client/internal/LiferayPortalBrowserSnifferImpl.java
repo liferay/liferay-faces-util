@@ -17,8 +17,6 @@ package com.liferay.faces.util.client.internal;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.liferay.faces.util.HttpHeaders;
-
 //J-
 /**
  * This class was copied from Liferay Portal in order to utilize the features of the Portal's BrowserSniffer without
@@ -32,7 +30,7 @@ import com.liferay.faces.util.HttpHeaders;
 public class LiferayPortalBrowserSnifferImpl extends LiferayPortalBrowserSnifferCompat implements LiferayPortalBrowserSniffer {
 	@Override
 	public boolean acceptsGzip(HttpServletRequest request) {
-		String acceptEncoding = request.getHeader(HttpHeaders.ACCEPT_ENCODING);
+		String acceptEncoding = request.getHeader("Accept-Encoding");
 
 		if ((acceptEncoding != null) && acceptEncoding.contains("gzip")) {
 			return true;
@@ -459,13 +457,13 @@ public class LiferayPortalBrowserSnifferImpl extends LiferayPortalBrowserSniffer
 			return accept;
 		}
 
-		accept = String.valueOf(request.getAttribute(HttpHeaders.ACCEPT));
+		accept = String.valueOf(request.getAttribute("ACCEPT"));
 
 		if (Validator.isNotNull(accept)) {
 			return accept;
 		}
 
-		accept = request.getHeader(HttpHeaders.ACCEPT);
+		accept = request.getHeader("ACCEPT");
 
 		if (accept != null) {
 			accept = StringUtil.toLowerCase(accept);
@@ -474,7 +472,7 @@ public class LiferayPortalBrowserSnifferImpl extends LiferayPortalBrowserSniffer
 			accept = "";
 		}
 
-		request.setAttribute(HttpHeaders.ACCEPT, accept);
+		request.setAttribute("ACCEPT", accept);
 
 		return accept;
 	}
@@ -487,13 +485,13 @@ public class LiferayPortalBrowserSnifferImpl extends LiferayPortalBrowserSniffer
 		}
 
 		userAgent = String.valueOf(
-			request.getAttribute(HttpHeaders.USER_AGENT));
+			request.getAttribute("User-Agent"));
 
 		if (Validator.isNotNull(userAgent)) {
 			return userAgent;
 		}
 
-		userAgent = request.getHeader(HttpHeaders.USER_AGENT);
+		userAgent = request.getHeader("User-Agent");
 
 		if (userAgent != null) {
 			userAgent = StringUtil.toLowerCase(userAgent);
@@ -502,7 +500,7 @@ public class LiferayPortalBrowserSnifferImpl extends LiferayPortalBrowserSniffer
 			userAgent = "";
 		}
 
-		request.setAttribute(HttpHeaders.USER_AGENT, userAgent);
+		request.setAttribute("User-Agent", userAgent);
 
 		return userAgent;
 	}
