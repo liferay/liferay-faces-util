@@ -37,7 +37,7 @@ public enum WebConfigParam implements ConfigParam<ExternalContext> {
 	 */
 	UploadedFilesDir("com.liferay.faces.util.uploadedFilesDir", System.getProperty("java.io.tmpdir")),
 
-	/** Maximum file size for an uploaded file. Default is 104857600 bytes (100MB) */
+	/** Maximum file size for an uploaded file. Default is 104,857,600 (~100MB), upper limit is 2,147,483,647 (~2GB) */
 	UploadedFileMaxSize("com.liferay.faces.util.uploadedFileMaxSize", 104857600);
 
 	// Private Data Members
