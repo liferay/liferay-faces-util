@@ -37,8 +37,8 @@ import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
- * This class wraps resources and uses {@link ResourceVerifier#isDependencySatisfied(FacesContext, UIComponent)} to
- * determine if the resources should be rendered.
+ * This class wraps resources and uses {@link ResourceVerifier#isDependencySatisfied(UIComponent)} to determine if the
+ * resources should be rendered.
  *
  * @author  Kyle Stiemann
  */
@@ -48,9 +48,12 @@ public class ResourceRendererUtilImpl extends RendererWrapper implements Compone
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(ResourceRendererUtilImpl.class);
 
+	// Private Constants
+	private static final String RESOURCE_VERIFIER_KEY = ResourceRendererUtilImpl.class.getName() + "_" +
+		"ResourceVerifier";
+
 	// Private Members
 	private boolean transientFlag;
-	private ResourceVerifier resourceVerifier;
 	private Renderer wrappedRenderer;
 
 	/**
@@ -62,30 +65,22 @@ public class ResourceRendererUtilImpl extends RendererWrapper implements Compone
 	 * constructor, and then calls the {@link #restoreState(FacesContext, Object)} method.
 	 */
 	public ResourceRendererUtilImpl() {
-
 		// Defer initialization of wrappedRenderer until restoreState(FacesContext, Object) is called.
-		resourceVerifier = ResourceVerifierFactory.getResourceVerifierInstance();
 	}
 
 	public ResourceRendererUtilImpl(Renderer wrappedRenderer) {
 		this.wrappedRenderer = wrappedRenderer;
-		resourceVerifier = ResourceVerifierFactory.getResourceVerifierInstance();
 	}
 
 	@Override
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
-		if (resourceVerifier.isDependencySatisfied(facesContext, uiComponent)) {
+		ResourceVerifier resourceVerifier = ResourceVerifierFactory.getResourceVerifierInstance(facesContext);
+		Map<Object, Object> facesContextAttributes = facesContext.getAttributes();
+		facesContextAttributes.put(RESOURCE_VERIFIER_KEY, resourceVerifier);
 
-			if (logger.isDebugEnabled()) {
-
-				Map<String, Object> componentResourceAttributes = uiComponent.getAttributes();
-
-				logger.debug(
-					"Resource dependency already satisfied: name=[{0}] library=[{1}] rendererType=[{2}] value=[{3}] className=[{4}]",
-					componentResourceAttributes.get("name"), componentResourceAttributes.get("library"),
-					uiComponent.getRendererType(), getComponentValue(uiComponent), uiComponent.getClass().getName());
-			}
+		if (resourceVerifier.isDependencySatisfied(uiComponent)) {
+			logResourceDependencySatisfiedDebugMessage(uiComponent);
 		}
 		else {
 			super.encodeBegin(facesContext, uiComponent);
@@ -95,17 +90,11 @@ public class ResourceRendererUtilImpl extends RendererWrapper implements Compone
 	@Override
 	public void encodeChildren(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
-		if (resourceVerifier.isDependencySatisfied(facesContext, uiComponent)) {
+		Map<Object, Object> facesContextAttributes = facesContext.getAttributes();
+		ResourceVerifier resourceVerifier = (ResourceVerifier) facesContextAttributes.get(RESOURCE_VERIFIER_KEY);
 
-			if (logger.isDebugEnabled()) {
-
-				Map<String, Object> componentResourceAttributes = uiComponent.getAttributes();
-
-				logger.debug(
-					"Resource dependency already satisfied: name=[{0}] library=[{1}] rendererType=[{2}] value=[{3}] className=[{4}]",
-					componentResourceAttributes.get("name"), componentResourceAttributes.get("library"),
-					uiComponent.getRendererType(), getComponentValue(uiComponent), uiComponent.getClass().getName());
-			}
+		if (resourceVerifier.isDependencySatisfied(uiComponent)) {
+			logResourceDependencySatisfiedDebugMessage(uiComponent);
 		}
 		else {
 			super.encodeChildren(facesContext, uiComponent);
@@ -115,17 +104,11 @@ public class ResourceRendererUtilImpl extends RendererWrapper implements Compone
 	@Override
 	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
-		if (resourceVerifier.isDependencySatisfied(facesContext, uiComponent)) {
+		Map<Object, Object> facesContextAttributes = facesContext.getAttributes();
+		ResourceVerifier resourceVerifier = (ResourceVerifier) facesContextAttributes.remove(RESOURCE_VERIFIER_KEY);
 
-			if (logger.isDebugEnabled()) {
-
-				Map<String, Object> componentResourceAttributes = uiComponent.getAttributes();
-
-				logger.debug(
-					"Resource dependency already satisfied: name=[{0}] library=[{1}] rendererType=[{2}] value=[{3}] className=[{4}]",
-					componentResourceAttributes.get("name"), componentResourceAttributes.get("library"),
-					uiComponent.getRendererType(), getComponentValue(uiComponent), uiComponent.getClass().getName());
-			}
+		if (resourceVerifier.isDependencySatisfied(uiComponent)) {
+			logResourceDependencySatisfiedDebugMessage(uiComponent);
 		}
 		else {
 			super.encodeEnd(facesContext, uiComponent);
@@ -191,19 +174,27 @@ public class ResourceRendererUtilImpl extends RendererWrapper implements Compone
 		this.transientFlag = transientFlag;
 	}
 
-	private String getComponentValue(UIComponent componentResource) {
+	private void logResourceDependencySatisfiedDebugMessage(UIComponent uiComponent) {
 
-		String componentResourceValue = null;
+		if (logger.isDebugEnabled()) {
 
-		if (componentResource instanceof ValueHolder) {
-			ValueHolder valueHolder = (ValueHolder) componentResource;
-			Object valueAsObject = valueHolder.getValue();
+			Map<String, Object> componentResourceAttributes = uiComponent.getAttributes();
+			String componentResourceValue = null;
 
-			if (valueAsObject != null) {
-				componentResourceValue = valueAsObject.toString();
+			if (uiComponent instanceof ValueHolder) {
+
+				ValueHolder valueHolder = (ValueHolder) uiComponent;
+				Object valueAsObject = valueHolder.getValue();
+
+				if (valueAsObject != null) {
+					componentResourceValue = valueAsObject.toString();
+				}
 			}
-		}
 
-		return componentResourceValue;
+			logger.debug(
+				"Resource dependency already satisfied: name=[{0}] library=[{1}] rendererType=[{2}] value=[{3}] className=[{4}]",
+				componentResourceAttributes.get("name"), componentResourceAttributes.get("library"),
+				uiComponent.getRendererType(), componentResourceValue, uiComponent.getClass().getName());
+		}
 	}
 }

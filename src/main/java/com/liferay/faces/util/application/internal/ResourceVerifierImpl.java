@@ -16,7 +16,6 @@
 package com.liferay.faces.util.application.internal;
 
 import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.application.ResourceVerifier;
 
@@ -27,7 +26,7 @@ import com.liferay.faces.util.application.ResourceVerifier;
 public class ResourceVerifierImpl implements ResourceVerifier {
 
 	@Override
-	public boolean isDependencySatisfied(FacesContext facestContext, UIComponent componentResource) {
+	public boolean isDependencySatisfied(UIComponent componentResource) {
 
 		// Assume that the specified resource dependency has not been satisfied and that it should therefore be
 		// rendered.
