@@ -154,16 +154,6 @@ public class BrowserSnifferImpl extends LiferayPortalBrowserSnifferImpl implemen
 	}
 
 	@Override
-	public boolean isWap() {
-		return isWap(httpServletRequest);
-	}
-
-	@Override
-	public boolean isWapXhtml() {
-		return isWapXhtml(httpServletRequest);
-	}
-
-	@Override
 	public boolean isWebKit() {
 		return isWebKit(httpServletRequest);
 	}
@@ -171,10 +161,5 @@ public class BrowserSnifferImpl extends LiferayPortalBrowserSnifferImpl implemen
 	@Override
 	public boolean isWindows() {
 		return isWindows(httpServletRequest);
-	}
-
-	@Override
-	public boolean isWml() {
-		return isWml(httpServletRequest);
 	}
 }
