@@ -15,11 +15,8 @@
  */
 package com.liferay.faces.util.application;
 
-import java.util.Map;
-
 import javax.faces.FacesWrapper;
 import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
 
 
 /**
@@ -34,7 +31,7 @@ public abstract class ResourceVerifierWrapper implements ResourceVerifier, Faces
 	 * @see  {@link ResourceVerifier#isDependencySatisfied(UIComponent)}
 	 */
 	@Override
-	public boolean isDependencySatisfied(FacesContext facestContext, UIComponent componentResource) {
-		return getWrapped().isDependencySatisfied(facestContext, componentResource);
+	public boolean isDependencySatisfied(UIComponent componentResource) {
+		return getWrapped().isDependencySatisfied(componentResource);
 	}
 }

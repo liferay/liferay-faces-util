@@ -15,6 +15,8 @@
  */
 package com.liferay.faces.util.application.internal;
 
+import javax.faces.context.FacesContext;
+
 import com.liferay.faces.util.application.ResourceVerifier;
 import com.liferay.faces.util.application.ResourceVerifierFactory;
 
@@ -27,7 +29,7 @@ public class ResourceVerifierFactoryImpl extends ResourceVerifierFactory {
 	// Private Data Members
 	private ResourceVerifier resourceVerifier = new ResourceVerifierImpl();
 
-	public ResourceVerifier getResourceVerifier() {
+	public ResourceVerifier getResourceVerifier(FacesContext facesContext) {
 		return resourceVerifier;
 	}
 

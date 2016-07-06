@@ -53,5 +53,5 @@ public interface ResourceVerifier {
 	 *
 	 * @return  <code>true</code> when the resource dependency is already satisfied, otherwise <code>false</code>.
 	 */
-	public boolean isDependencySatisfied(FacesContext facestContext, UIComponent componentResource);
+	public boolean isDependencySatisfied(UIComponent componentResource);
 }

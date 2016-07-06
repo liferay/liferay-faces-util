@@ -16,6 +16,7 @@
 package com.liferay.faces.util.application;
 
 import javax.faces.FacesWrapper;
+import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
@@ -31,21 +32,22 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
 public abstract class ResourceVerifierFactory implements FacesWrapper<ResourceVerifierFactory> {
 
 	/**
-	 * @return  an instance of {@link ResourceVerifier} from the {@link ResourceVerifierFactory} found by the {@link
-	 *          FactoryExtensionFinder}.
+	 * Create (if necessary) and return an instance of {@link ResourceVerifier} from the {@link ResourceVerifierFactory}
+	 * found by the {@link FactoryExtensionFinder}.
 	 */
-	public static ResourceVerifier getResourceVerifierInstance() {
+	public static ResourceVerifier getResourceVerifierInstance(FacesContext facesContext) {
 
 		ResourceVerifierFactory resourceVerifierFactory = (ResourceVerifierFactory) FactoryExtensionFinder.getFactory(
 				ResourceVerifierFactory.class);
 
-		return resourceVerifierFactory.getResourceVerifier();
+		return resourceVerifierFactory.getResourceVerifier(facesContext);
 	}
 
 	/**
-	 * Gets an instance of {@link ResourceVerifier} which is the first member of the delegation chain.
+	 * Create (if necessary) and return an instance of {@link ResourceVerifier} which is the first member of the
+	 * delegation chain.
 	 */
-	public abstract ResourceVerifier getResourceVerifier();
+	public abstract ResourceVerifier getResourceVerifier(FacesContext facesContext);
 
 	/**
 	 * If this factory has been decorated then this method provides access to the wrapped factory instance.
