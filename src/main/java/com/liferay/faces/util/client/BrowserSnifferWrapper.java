@@ -137,16 +137,6 @@ public abstract class BrowserSnifferWrapper implements BrowserSniffer, Wrapper<B
 	}
 
 	@Override
-	public boolean isWap() {
-		return getWrapped().isWap();
-	}
-
-	@Override
-	public boolean isWapXhtml() {
-		return getWrapped().isWapXhtml();
-	}
-
-	@Override
 	public boolean isWebKit() {
 		return getWrapped().isWebKit();
 	}
@@ -155,10 +145,4 @@ public abstract class BrowserSnifferWrapper implements BrowserSniffer, Wrapper<B
 	public boolean isWindows() {
 		return getWrapped().isWindows();
 	}
-
-	@Override
-	public boolean isWml() {
-		return getWrapped().isWml();
-	}
-
 }

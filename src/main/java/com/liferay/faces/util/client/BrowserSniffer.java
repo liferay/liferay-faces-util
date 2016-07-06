@@ -68,14 +68,7 @@ public interface BrowserSniffer {
 
 	public boolean isSun();
 
-	public boolean isWap();
-
-	public boolean isWapXhtml();
-
 	public boolean isWebKit();
 
 	public boolean isWindows();
-
-	public boolean isWml();
-
 }
