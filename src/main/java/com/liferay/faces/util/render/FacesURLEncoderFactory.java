@@ -26,8 +26,10 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
 public abstract class FacesURLEncoderFactory implements FacesWrapper<FacesURLEncoderFactory> {
 
 	/**
-	 * @return  an instance of {@link FacesURLEncoder} from the {@link FacesURLEncoderFactory} found by the {@link
-	 *          FactoryExtensionFinder}.
+	 * Returns a stateless, thread-safe, singleton instance of {@link FacesURLEncoder} from the {@link
+	 * FacesURLEncoderFactory} found by the {@link FactoryExtensionFinder}. FacesURLEncoder is stateless, thread-safe ,
+	 * singleton because it is designed to be used by a {@link javax.faces.render.Renderer}, which is stateless and
+	 * thread-safe, singleton.
 	 */
 	public static FacesURLEncoder getFacesURLEncoderInstance() {
 
@@ -37,5 +39,16 @@ public abstract class FacesURLEncoderFactory implements FacesWrapper<FacesURLEnc
 		return facesURLEncoderFactory.getFacesURLEncoder();
 	}
 
+	/**
+	 * Returns a stateless, thread-safe, singleton instance of {@link FacesURLEncoder}. FacesURLEncoder is stateless,
+	 * thread-safe, singleton because it is designed to be used by a {@link javax.faces.render.Renderer}, which is
+	 * stateless and thread-safe, singleton.
+	 */
 	public abstract FacesURLEncoder getFacesURLEncoder();
+
+	/**
+	 * Returns the wrapped factory instance if this factory has been decorated. Otherwise, this method returns null.
+	 */
+	@Override
+	public abstract FacesURLEncoderFactory getWrapped();
 }

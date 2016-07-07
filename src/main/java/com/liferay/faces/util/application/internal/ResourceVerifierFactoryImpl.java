@@ -15,6 +15,8 @@
  */
 package com.liferay.faces.util.application.internal;
 
+import java.io.Serializable;
+
 import com.liferay.faces.util.application.ResourceVerifier;
 import com.liferay.faces.util.application.ResourceVerifierFactory;
 
@@ -22,7 +24,10 @@ import com.liferay.faces.util.application.ResourceVerifierFactory;
 /**
  * @author  Kyle Stiemann
  */
-public class ResourceVerifierFactoryImpl extends ResourceVerifierFactory {
+public class ResourceVerifierFactoryImpl extends ResourceVerifierFactory implements Serializable {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 1703402757138333720L;
 
 	// Private Data Members
 	private ResourceVerifier resourceVerifier = new ResourceVerifierImpl();

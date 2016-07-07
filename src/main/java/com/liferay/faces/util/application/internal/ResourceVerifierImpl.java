@@ -15,6 +15,8 @@
  */
 package com.liferay.faces.util.application.internal;
 
+import java.io.Serializable;
+
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 
@@ -24,7 +26,10 @@ import com.liferay.faces.util.application.ResourceVerifier;
 /**
  * @author  Kyle Stiemann
  */
-public class ResourceVerifierImpl implements ResourceVerifier {
+public class ResourceVerifierImpl implements ResourceVerifier, Serializable {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 4133463355765570238L;
 
 	@Override
 	public boolean isDependencySatisfied(FacesContext facestContext, UIComponent componentResource) {

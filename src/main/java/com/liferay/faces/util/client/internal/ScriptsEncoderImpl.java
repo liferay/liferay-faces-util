@@ -16,6 +16,7 @@
 package com.liferay.faces.util.client.internal;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.context.FacesContext;
@@ -28,7 +29,10 @@ import com.liferay.faces.util.client.ScriptsEncoder;
 /**
  * @author  Kyle Stiemann
  */
-public class ScriptsEncoderImpl implements ScriptsEncoder {
+public class ScriptsEncoderImpl implements ScriptsEncoder, Serializable {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 8419754847219420589L;
 
 	@Override
 	public void encodeBodyScripts(FacesContext facesContext, List<Script> scripts) throws IOException {

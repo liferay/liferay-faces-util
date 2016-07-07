@@ -15,6 +15,8 @@
  */
 package com.liferay.faces.util.client.internal;
 
+import java.io.Serializable;
+
 import com.liferay.faces.util.client.ScriptsEncoder;
 import com.liferay.faces.util.client.ScriptsEncoderFactory;
 
@@ -22,11 +24,17 @@ import com.liferay.faces.util.client.ScriptsEncoderFactory;
 /**
  * @author  Kyle Stiemann
  */
-public class ScriptsEncoderFactoryImpl extends ScriptsEncoderFactory {
+public class ScriptsEncoderFactoryImpl extends ScriptsEncoderFactory implements Serializable {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 6529478676356894935L;
+
+	// Private Data Members
+	private ScriptsEncoder scriptsEncoder = new ScriptsEncoderImpl();
 
 	@Override
 	public ScriptsEncoder getScriptsEncoder() {
-		return new ScriptsEncoderImpl();
+		return scriptsEncoder;
 	}
 
 	@Override

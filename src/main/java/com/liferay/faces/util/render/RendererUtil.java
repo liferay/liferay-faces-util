@@ -151,9 +151,9 @@ public class RendererUtil {
 	 * rendered into certain JS strings. If it is rendered anywhere else, the site will still be vulnerable to XSS. See
 	 * the link for more details.
 	 *
-	 * @param   javaScript
+	 * @param   javaScript  a JavaScript string which has not been escaped to prevent XSS.
 	 *
-	 * @return
+	 * @return  an escaped JavaScript string.
 	 */
 	public static String escapeJavaScript(String javaScript) {
 

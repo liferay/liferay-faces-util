@@ -16,7 +16,7 @@
 package com.liferay.faces.util.render.internal;
 
 import java.io.Serializable;
-import java.net.URLEncoder;
+import java.lang.reflect.Method;
 
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -24,25 +24,31 @@ import com.liferay.faces.util.render.FacesURLEncoder;
 
 
 /**
- * @author  Neil Griffin
+ * @author  Kyle Stiemann
  */
-public class FacesURLEncoderImpl implements FacesURLEncoder, Serializable {
+public class FacesURLEncoderMyFacesImpl implements FacesURLEncoder, Serializable {
 
 	// serialVersionUID
-	private static final long serialVersionUID = 5849771243243889350L;
+	private static final long serialVersionUID = 5278636625657659412L;
 
 	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(FacesURLEncoderImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(FacesURLEncoderMyFacesImpl.class);
+
+	// Private Constants
+	private final Method MYFACES_METHOD_ENCODE_URI_ATTRIBUTE;
+
+	public FacesURLEncoderMyFacesImpl(Method myFacesMethodEncodeURIAtribute) {
+		this.MYFACES_METHOD_ENCODE_URI_ATTRIBUTE = myFacesMethodEncodeURIAtribute;
+	}
 
 	@Override
 	public String encode(String url, String encoding) {
-
 		String encodedURL = url;
 
 		if (url != null) {
 
 			try {
-				encodedURL = URLEncoder.encode(url, encoding);
+				encodedURL = (String) MYFACES_METHOD_ENCODE_URI_ATTRIBUTE.invoke(null, url, encoding);
 			}
 			catch (Exception e) {
 				logger.error(e);

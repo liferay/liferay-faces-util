@@ -239,11 +239,9 @@ public class FacesContextHelperUtil {
 	}
 
 	/**
-	 * Return the parent form of the given component.
+	 * Returns the parent form of the given component or <code>null</code> if no parent form is found.
 	 *
-	 * @param   uiComponent  The component whose parent is to be found.
-	 *
-	 * @return  The parent form or <code>null</code> if no parent form is found.
+	 * @param  uiComponent  The component whose parent is to be found.
 	 */
 	public static UIForm getParentForm(UIComponent uiComponent) {
 		return FacesContextHelperFactory.getFacesContextHelperInstance().getParentForm(uiComponent);
@@ -257,8 +255,8 @@ public class FacesContextHelperUtil {
 	}
 
 	/**
-	 * @return  The request context path. {@link FacesContext#getExternalContext()} {@link
-	 *          ExternalContext#getRequestContextPath()}
+	 * Returns The request context path. {@link FacesContext#getExternalContext()} {@link
+	 * ExternalContext#getRequestContextPath()}
 	 */
 	public static String getRequestContextPath() {
 		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestContextPath();

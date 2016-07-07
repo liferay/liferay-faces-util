@@ -33,18 +33,18 @@ public interface Script {
 	}
 
 	/**
-	 * @return  An array of modules which the Script depends on. Returns null if the Script does not depend on any
-	 *          modules.
+	 * Returns An array of modules which the Script depends on. Returns null if the Script does not depend on any
+	 * modules.
 	 */
 	public String[] getModules();
 
 	/**
-	 * @return  The {@link Script.ModulesType} of the Script.
+	 * Returns The {@link Script.ModulesType} of the Script.
 	 */
 	public ModulesType getModulesType();
 
 	/**
-	 * @return  The Script's text.
+	 * Returns The Script's text.
 	 */
 	public String getSourceCode();
 }

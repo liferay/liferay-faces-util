@@ -16,7 +16,8 @@
 package com.liferay.faces.util.render.internal;
 
 import java.io.Serializable;
-import java.net.URLEncoder;
+import java.io.StringWriter;
+import java.lang.reflect.Method;
 
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -24,15 +25,22 @@ import com.liferay.faces.util.render.FacesURLEncoder;
 
 
 /**
- * @author  Neil Griffin
+ * @author  Kyle Stiemann
  */
-public class FacesURLEncoderImpl implements FacesURLEncoder, Serializable {
+public class FacesURLEncoderMojarraImpl implements FacesURLEncoder, Serializable {
 
 	// serialVersionUID
-	private static final long serialVersionUID = 5849771243243889350L;
+	private static final long serialVersionUID = 2057180600133838130L;
 
 	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(FacesURLEncoderImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(FacesURLEncoderMojarraImpl.class);
+
+	// Private Constants
+	private final Method MOJARRA_METHOD_WRITE_URL;
+
+	public FacesURLEncoderMojarraImpl(Method mojarraMethodWriteURL) {
+		this.MOJARRA_METHOD_WRITE_URL = mojarraMethodWriteURL;
+	}
 
 	@Override
 	public String encode(String url, String encoding) {
@@ -42,7 +50,12 @@ public class FacesURLEncoderImpl implements FacesURLEncoder, Serializable {
 		if (url != null) {
 
 			try {
-				encodedURL = URLEncoder.encode(url, encoding);
+
+				StringWriter stringWriter = new StringWriter();
+				char[] urlBuf = new char[url.length() * 2];
+				MOJARRA_METHOD_WRITE_URL.invoke(null, stringWriter, url, urlBuf, encoding);
+				stringWriter.flush();
+				encodedURL = stringWriter.toString();
 			}
 			catch (Exception e) {
 				logger.error(e);
