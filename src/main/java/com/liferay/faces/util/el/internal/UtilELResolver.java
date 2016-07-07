@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.liferay.faces.util.el;
+package com.liferay.faces.util.el.internal;
 
 import javax.el.ELContext;
 import javax.el.ELException;
@@ -22,6 +22,7 @@ import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.client.BrowserSniffer;
 import com.liferay.faces.util.client.BrowserSnifferFactory;
+import com.liferay.faces.util.el.ELResolverBase;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -29,12 +30,12 @@ import com.liferay.faces.util.logging.LoggerFactory;
 /**
  * @author  Neil Griffin
  */
-public class ExtELResolver extends ELResolverBase {
+public class UtilELResolver extends ELResolverBase {
 
 	public static final String BROWSER_SNIFFER = "browserSniffer";
 	public static final String I18N = "i18n";
 
-	private static final Logger logger = LoggerFactory.getLogger(ExtELResolver.class);
+	private static final Logger logger = LoggerFactory.getLogger(UtilELResolver.class);
 
 	static {
 
