@@ -16,7 +16,7 @@
 		</before>
 	</ordering>
 	<application>
-		<el-resolver>com.liferay.faces.util.el.ExtELResolver</el-resolver>
+		<el-resolver>com.liferay.faces.util.el.internal.UtilELResolver</el-resolver>
 		<system-event-listener>
 			<system-event-listener-class>com.liferay.faces.util.event.internal.ApplicationStartupListener</system-event-listener-class>
 			<system-event-class>javax.faces.event.PostConstructApplicationEvent</system-event-class>
