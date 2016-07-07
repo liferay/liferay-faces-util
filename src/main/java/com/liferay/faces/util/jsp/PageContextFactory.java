@@ -34,8 +34,9 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
 public abstract class PageContextFactory implements FacesWrapper<PageContextFactory> {
 
 	/**
-	 * Returns an instance of {@link PageContext} from the {@link PageContextFactory} found by the {@link
-	 * FactoryExtensionFinder}.
+	 * @return  a new instance of {@link PageContext} from the {@link PageContextFactory} found by the {@link
+	 *          FactoryExtensionFinder}. The returned instance is designed to be used during execution of a request
+	 *          thread.
 	 */
 	public static PageContext getStringPageContextInstance(HttpServletRequest httpServletRequest,
 		HttpServletResponse httpServletResponse, ELContext elContext) {
@@ -52,15 +53,24 @@ public abstract class PageContextFactory implements FacesWrapper<PageContextFact
 	 * javax.servlet.jsp.tagext.Tag#doStartTag()} or similar methods to render tag output to a String. Call {@link
 	 * PageContext#getOut()#toString()} to obtain the tag output as a string.
 	 *
-	 * @param  httpServletRequest   The {@link HttpServletRequest} underlying the {@link
-	 *                              javax.faces.context.ExternalContext} associated with the current {@link
-	 *                              javax.faces.context.FacesContext}.
-	 * @param  httpServletResponse  The {@link HttpServletResponse} underlying the {@link
-	 *                              javax.faces.context.ExternalContext} associated with the current {@link
-	 *                              javax.faces.context.FacesContext}.
-	 * @param  elContext            The {@link ELContext} associated with the current {@link
-	 *                              javax.faces.context.FacesContext}.
+	 * @param   httpServletRequest   The {@link HttpServletRequest} underlying the {@link
+	 *                               javax.faces.context.ExternalContext} associated with the current {@link
+	 *                               javax.faces.context.FacesContext}.
+	 * @param   httpServletResponse  The {@link HttpServletResponse} underlying the {@link
+	 *                               javax.faces.context.ExternalContext} associated with the current {@link
+	 *                               javax.faces.context.FacesContext}.
+	 * @param   elContext            The {@link ELContext} associated with the current {@link
+	 *                               javax.faces.context.FacesContext}.
+	 *
+	 * @return  a new instance of {@link PageContext}. The returned instance is designed to be used during execution of
+	 *          a request thread.
 	 */
 	public abstract PageContext getStringPageContext(HttpServletRequest httpServletRequest,
 		HttpServletResponse httpServletResponse, ELContext elContext);
+
+	/**
+	 * @return  the wrapped factory instance if this factory has been decorated. Otherwise, this method returns null.
+	 */
+	@Override
+	public abstract PageContextFactory getWrapped();
 }

@@ -35,7 +35,7 @@ import com.liferay.faces.util.xml.internal.SAXParserImpl;
  * obtaining parser implementations from the classpath, and 2) Since {@link #newSAXParser()} can be called without
  * performance concerns, multi-threaded environments (like web applications and portlets) can feel free to call the
  * method as much as required in each request, in order to maintain thread-safety. The drawback is that the {@link
- * SAXParserImpl} class does fully implement all of the functionality of the one provided by the JRE.</p>
+ * SAXParserImpl} class does not fully implement all of the functionality of the one provided by the JRE.</p>
  *
  * <p>For more information about the performance issues of the implementation provided by the JRE, see <a
  * href="http://www.ibm.com/developerworks/xml/library/x-perfap2/index.html">Reuse parser instances with the Xerces2 SAX

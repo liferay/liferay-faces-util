@@ -29,7 +29,7 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
 public abstract class ScriptFactory implements FacesWrapper<ScriptFactory> {
 
 	/**
-	 * @return  an instance of {@link Script} from the {@link ScriptFactory} found by the {@link
+	 * @return  a new instance of {@link Script} from the {@link ScriptFactory} found by the {@link
 	 *          FactoryExtensionFinder}.
 	 */
 	public static Script getScriptInstance(String sourceCode) {
@@ -40,7 +40,7 @@ public abstract class ScriptFactory implements FacesWrapper<ScriptFactory> {
 	}
 
 	/**
-	 * @return  an instance of {@link Script} from the {@link ScriptFactory} found by the {@link
+	 * @return  a new instance of {@link Script} from the {@link ScriptFactory} found by the {@link
 	 *          FactoryExtensionFinder}.
 	 */
 	public static Script getScriptInstance(String sourceCode, String[] modules, Script.ModulesType modulesType) {
@@ -57,7 +57,7 @@ public abstract class ScriptFactory implements FacesWrapper<ScriptFactory> {
 	 *
 	 * @param   sourceCode  The source code of the Script.
 	 *
-	 * @return  A {@link Script} which can be rendered on the client via {@link
+	 * @return  a new instance of {@link Script} which can be rendered on the client via {@link
 	 *          com.liferay.faces.util.context.FacesRequestContext#addScript(com.liferay.faces.util.client.Script)}
 	 */
 	public abstract Script getScript(String sourceCode);
@@ -65,12 +65,18 @@ public abstract class ScriptFactory implements FacesWrapper<ScriptFactory> {
 	/**
 	 * Creates a {@link Script} with the specified source code, modules, and type.
 	 *
-	 * @param   sourceCode  The source code of the Script.
-	 * @param   modules     The modules which the Script depends on.
-	 * @param   modulesType The {@link Script.ModulesType} of the Script.
+	 * @param   sourceCode   The source code of the Script.
+	 * @param   modules      The modules which the Script depends on.
+	 * @param   modulesType  The {@link Script.ModulesType} of the Script.
 	 *
-	 * @return  A {@link Script} which can be rendered on the client via {@link
+	 * @return  a new instance of {@link Script} which can be rendered on the client via {@link
 	 *          com.liferay.faces.util.context.FacesRequestContext#addScript(com.liferay.faces.util.client.Script)}
 	 */
 	public abstract Script getScript(String sourceCode, String[] modules, Script.ModulesType modulesType);
+
+	/**
+	 * @return  the wrapped factory instance if this factory has been decorated. Otherwise, this method returns null.
+	 */
+	@Override
+	public abstract ScriptFactory getWrapped();
 }
