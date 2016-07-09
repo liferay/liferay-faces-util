@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.liferay.faces.util.context;
+package com.liferay.faces.util.i18n;
 
 import java.text.MessageFormat;
 import java.util.Locale;
@@ -22,35 +22,35 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.liferay.faces.util.i18n.I18n;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
  * This is an abstract class that provides a convenient base implementation for introducing an internationalized {@link
- * ResourceBundle} into the {@link MessageContext} delegation chain. For the sake of performance, lookups into the
- * ResourceBundle are cached by this class in a synchronized map.
+ * ResourceBundle} into the {@link I18n} delegation chain. For the sake of performance, lookups into the ResourceBundle
+ * are cached by this class in a synchronized map.
  *
  * @author  Neil Griffin
  */
-public abstract class MessageContextBundleBase extends MessageContextWrapper {
+public abstract class I18nBundleBase extends I18nWrapper {
 
 	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(MessageContextBundleBase.class);
+	private static final Logger logger = LoggerFactory.getLogger(I18nBundleBase.class);
 
 	// Private Data Members
 	private boolean initialized;
 	private Map<String, String> messageMap;
-	private MessageContext wrappedMessageContext;
+	private I18n wrappedI18n;
 
-	public MessageContextBundleBase(MessageContext messageContext) {
-		this.wrappedMessageContext = messageContext;
+	public I18nBundleBase(I18n i18n) {
+		this.wrappedI18n = i18n;
 		this.messageMap = new ConcurrentHashMap<String, String>();
 	}
 
 	public abstract String getBundleKey();
 
-	@Override
 	public String getMessage(Locale locale, String messageId) {
 
 		String message = null;
@@ -97,13 +97,14 @@ public abstract class MessageContextBundleBase extends MessageContextWrapper {
 		}
 
 		if (message == null) {
-			message = super.getMessage(locale, messageId);
+
+			// TODO: Uncomment!
+			// message = super.getMessage(locale, messageId);
 		}
 
 		return message;
 	}
 
-	@Override
 	public String getMessage(Locale locale, String messageId, Object... arguments) {
 
 		String message = getMessage(locale, messageId);
@@ -115,8 +116,7 @@ public abstract class MessageContextBundleBase extends MessageContextWrapper {
 		return message;
 	}
 
-	@Override
-	public MessageContext getWrapped() {
-		return wrappedMessageContext;
+	public I18n getWrapped() {
+		return wrappedI18n;
 	}
 }

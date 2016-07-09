@@ -13,26 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.liferay.faces.util.context.internal;
+package com.liferay.faces.util.i18n.internal;
 
-import com.liferay.faces.util.context.MessageContext;
-import com.liferay.faces.util.context.MessageContextFactory;
+import com.liferay.faces.util.i18n.I18n;
+import com.liferay.faces.util.i18n.I18nFactory;
 
 
 /**
  * @author  Neil Griffin
  */
-public class MessageContextFactoryImpl extends MessageContextFactory {
+public class I18nFactoryImpl extends I18nFactory {
 
-	private static final MessageContext messageContext = new MessageContextImpl();
+	// Private Data Members
+	private I18n i18n = new I18nImpl();
 
 	@Override
-	public MessageContext getMessageContext() {
-		return messageContext;
+	public I18n getI18n() {
+		return i18n;
 	}
 
 	@Override
-	public MessageContextFactory getWrapped() {
+	public I18nFactory getWrapped() {
 
 		// Since this is the default factory instance, it will never wrap another factory.
 		return null;

@@ -41,11 +41,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.context.FacesContextHelper;
-import com.liferay.faces.util.context.MessageContext;
-import com.liferay.faces.util.context.MessageContextFactory;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.helper.IntegerHelper;
 import com.liferay.faces.util.helper.LongHelper;
+import com.liferay.faces.util.i18n.I18n;
+import com.liferay.faces.util.i18n.I18nFactory;
 
 
 /**
@@ -121,28 +121,20 @@ public class FacesContextHelperImpl implements FacesContextHelper {
 
 	public void addMessage(String clientId, Severity severity, String messageId) {
 
-		Locale locale = getLocale();
-		MessageContext messageContext = getMessageContext();
-		FacesMessage facesMessage = messageContext.newFacesMessage(locale, severity, messageId);
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		facesContext.addMessage(clientId, facesMessage);
-	}
-
-	public void addMessage(String clientId, Severity severity, String messageId, Object argument) {
-
 		Locale locale = getLocale();
-		MessageContext messageContext = getMessageContext();
-		FacesMessage facesMessage = messageContext.newFacesMessage(locale, severity, messageId, argument);
-		FacesContext facesContext = FacesContext.getCurrentInstance();
+		I18n i18n = getI18n();
+		FacesMessage facesMessage = i18n.getFacesMessage(facesContext, locale, severity, messageId);
 		facesContext.addMessage(clientId, facesMessage);
 	}
 
 	public void addMessage(String clientId, Severity severity, String messageId, Object... arguments) {
 
+		FacesContext facesContext = FacesContext.getCurrentInstance();
 		Locale locale = getLocale();
-		MessageContext messageContext = getMessageContext();
-		FacesMessage facesMessage = messageContext.newFacesMessage(locale, severity, messageId, arguments);
-		FacesContext.getCurrentInstance().addMessage(clientId, facesMessage);
+		I18n i18n = getI18n();
+		FacesMessage facesMessage = i18n.getFacesMessage(facesContext, locale, severity, messageId, arguments);
+		facesContext.addMessage(clientId, facesMessage);
 	}
 
 	public FacesContext getFacesContext() {
@@ -175,23 +167,26 @@ public class FacesContextHelperImpl implements FacesContextHelper {
 
 	public String getMessage(String messageId, Object... arguments) {
 
-		MessageContext messageContext = getMessageContext();
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		I18n i18n = getI18n();
 
-		return messageContext.getMessage(getLocale(), messageId, arguments);
+		return i18n.getMessage(facesContext, getLocale(), messageId, arguments);
 	}
 
 	public String getMessage(Locale locale, String messageId) {
 
-		MessageContext messageContext = getMessageContext();
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		I18n i18n = getI18n();
 
-		return messageContext.getMessage(locale, messageId);
+		return i18n.getMessage(facesContext, locale, messageId);
 	}
 
 	public String getMessage(Locale locale, String messageId, Object... arguments) {
 
-		MessageContext messageContext = getMessageContext();
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		I18n i18n = getI18n();
 
-		return messageContext.getMessage(locale, messageId, arguments);
+		return i18n.getMessage(facesContext, locale, messageId, arguments);
 	}
 
 	public String getNamespace() {
@@ -460,7 +455,7 @@ public class FacesContextHelperImpl implements FacesContextHelper {
 		sessionMap.put(name, value);
 	}
 
-	protected MessageContext getMessageContext() {
-		return MessageContextFactory.getMessageContextInstance();
+	protected I18n getI18n() {
+		return I18nFactory.getI18nInstance();
 	}
 }

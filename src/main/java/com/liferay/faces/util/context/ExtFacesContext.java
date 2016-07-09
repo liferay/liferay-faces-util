@@ -82,13 +82,6 @@ public abstract class ExtFacesContext extends FacesContext implements FacesConte
 	public abstract void addComponentErrorMessage(String clientId, String messageId);
 
 	/**
-	 * @deprecated  Call {@link FacesContextHelperUtil#addComponentErrorMessage(String, String, Object)} instead.
-	 */
-	@Deprecated
-	@Override
-	public abstract void addComponentErrorMessage(String clientId, String messageId, Object argument);
-
-	/**
 	 * @deprecated  Call {@link FacesContextHelperUtil#addComponentErrorMessage(String, String, Object...)} instead.
 	 */
 	@Deprecated
@@ -185,14 +178,6 @@ public abstract class ExtFacesContext extends FacesContext implements FacesConte
 	@Deprecated
 	@Override
 	public abstract void addMessage(String clientId, FacesMessage.Severity severity, String messageId);
-
-	/**
-	 * @deprecated  Call {@link FacesContextHelperUtil#addMessage(String, FacesMessage.Severity, String, Object)}
-	 *              instead.
-	 */
-	@Deprecated
-	@Override
-	public abstract void addMessage(String clientId, FacesMessage.Severity severity, String messageId, Object argument);
 
 	/**
 	 * @deprecated  Call {@link FacesContextHelperUtil#addMessage(String, FacesMessage.Severity, String, Object...)}
