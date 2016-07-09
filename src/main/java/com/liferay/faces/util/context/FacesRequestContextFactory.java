@@ -26,8 +26,9 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
 public abstract class FacesRequestContextFactory implements FacesWrapper<FacesRequestContextFactory> {
 
 	/**
-	 * @return  an instance of {@link FacesRequestContext} from the {@link FacesRequestContextFactory} found by the
-	 *          {@link FactoryExtensionFinder}.
+	 * @return  a {@link ThreadLocal} singleton instance of {@link FacesRequestContext} from the {@link
+	 *          FacesRequestContextFactory} found by the {@link FactoryExtensionFinder}. The returned instance is
+	 *          designed to be used during the execution of a request thread.
 	 */
 	public static FacesRequestContext getFacesRequestContextInstance() {
 
@@ -37,5 +38,15 @@ public abstract class FacesRequestContextFactory implements FacesWrapper<FacesRe
 		return facesRequestContextFactory.getFacesRequestContext();
 	}
 
+	/**
+	 * @return  a {@link ThreadLocal} singleton instance of {@link FacesRequestContext}. The returned instance is
+	 *          designed to be used during the execution of a request thread.
+	 */
 	public abstract FacesRequestContext getFacesRequestContext();
+
+	/**
+	 * @return  the wrapped factory instance if this factory has been decorated. Otherwise, this method returns null.
+	 */
+	@Override
+	public abstract FacesRequestContextFactory getWrapped();
 }
