@@ -42,14 +42,6 @@ public interface FacesContextHelper {
 
 	/**
 	 * Adds the specified key as a global message to the FacesContext with severity <code>
-	 * javax.faces.application.FacesMessage.SEVERITY_ERROR</code> and substitutes the specified argument for the tokens
-	 * in the specified key. The message will not be global, rather it will be associated with the <code>
-	 * javax.faces.component.UIComponent</code> that is associated with the specified clientId.
-	 */
-	public void addComponentErrorMessage(String clientId, String messageId, Object argument);
-
-	/**
-	 * Adds the specified key as a global message to the FacesContext with severity <code>
 	 * javax.faces.application.FacesMessage.SEVERITY_ERROR</code> and substitutes the specified argument(s) for the
 	 * tokens in the specified key. The message will not be global, rather it will be associated with the <code>
 	 * javax.faces.component.UIComponent</code> that is associated with the specified clientId.
@@ -136,12 +128,6 @@ public interface FacesContextHelper {
 	 * clientId=null for global messages.
 	 */
 	public void addMessage(String clientId, Severity severity, String messageId);
-
-	/**
-	 * Adds the specified key as a message associated with the UIComponent that has the specified clientId. Specify
-	 * clientId=null for global messages.
-	 */
-	public void addMessage(String clientId, Severity severity, String messageId, Object argument);
 
 	/**
 	 * Adds the specified key as a message associated with the UIComponent that has the specified clientId. Specify

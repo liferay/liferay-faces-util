@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.liferay.faces.util.context;
+package com.liferay.faces.util.i18n;
 
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.helper.Wrapper;
@@ -22,19 +22,17 @@ import com.liferay.faces.util.helper.Wrapper;
 /**
  * @author  Neil Griffin
  */
-public abstract class MessageContextFactory implements Wrapper<MessageContextFactory> {
+public abstract class I18nFactory implements Wrapper<I18nFactory> {
 
 	/**
-	 * @return  an instance of {@link MessageContext} from the {@link MessageContextFactory} found by the {@link
-	 *          FactoryExtensionFinder}.
+	 * Returns an instance of {@link I18n} from the {@link I18nFactory} found by the {@link FactoryExtensionFinder}.
 	 */
-	public static MessageContext getMessageContextInstance() {
+	public static I18n getI18nInstance() {
 
-		MessageContextFactory messageContextFactory = (MessageContextFactory) FactoryExtensionFinder.getFactory(
-				MessageContextFactory.class);
+		I18nFactory i18nFactory = (I18nFactory) FactoryExtensionFinder.getFactory(I18nFactory.class);
 
-		return messageContextFactory.getMessageContext();
+		return i18nFactory.getI18n();
 	}
 
-	public abstract MessageContext getMessageContext();
+	public abstract I18n getI18n();
 }

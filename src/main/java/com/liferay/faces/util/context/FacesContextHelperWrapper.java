@@ -41,11 +41,6 @@ public abstract class FacesContextHelperWrapper implements FacesContextHelper, W
 	}
 
 	// Java 1.6+ @Override
-	public void addComponentErrorMessage(String clientId, String messageId, Object argument) {
-		getWrapped().addComponentErrorMessage(clientId, messageId, argument);
-	}
-
-	// Java 1.6+ @Override
 	public void addComponentErrorMessage(String clientId, String messageId, Object... arguments) {
 		getWrapped().addComponentErrorMessage(clientId, messageId, arguments);
 	}
@@ -108,11 +103,6 @@ public abstract class FacesContextHelperWrapper implements FacesContextHelper, W
 	// Java 1.6+ @Override
 	public void addMessage(String clientId, FacesMessage.Severity severity, String messageId) {
 		getWrapped().addMessage(clientId, severity, messageId);
-	}
-
-	// Java 1.6+ @Override
-	public void addMessage(String clientId, FacesMessage.Severity severity, String messageId, Object argument) {
-		getWrapped().addMessage(clientId, severity, messageId, argument);
 	}
 
 	// Java 1.6+ @Override

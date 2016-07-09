@@ -26,8 +26,8 @@ import javax.faces.application.Application;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.util.context.MessageContext;
-import com.liferay.faces.util.context.MessageContextFactory;
+import com.liferay.faces.util.i18n.I18n;
+import com.liferay.faces.util.i18n.I18nFactory;
 
 
 /**
@@ -76,9 +76,9 @@ public class I18N extends I18NCompat {
 			locale = application.getDefaultLocale();
 		}
 
-		MessageContext messageContext = MessageContextFactory.getMessageContextInstance();
+		I18n i18n = I18nFactory.getI18nInstance();
 
-		return messageContext.getMessage(locale, messageId, arg1);
+		return i18n.getMessage(facesContext, locale, messageId, arg1);
 	}
 
 	/**
@@ -103,9 +103,9 @@ public class I18N extends I18NCompat {
 			locale = application.getDefaultLocale();
 		}
 
-		MessageContext messageContext = MessageContextFactory.getMessageContextInstance();
+		I18n i18n = I18nFactory.getI18nInstance();
 
-		return messageContext.getMessage(locale, messageId, arg1, arg2);
+		return i18n.getMessage(facesContext, locale, messageId, arg1, arg2);
 	}
 
 	/**
@@ -131,9 +131,9 @@ public class I18N extends I18NCompat {
 			locale = application.getDefaultLocale();
 		}
 
-		MessageContext messageContext = MessageContextFactory.getMessageContextInstance();
+		I18n i18n = I18nFactory.getI18nInstance();
 
-		return messageContext.getMessage(locale, messageId, arg1, arg2, arg3);
+		return i18n.getMessage(facesContext, locale, messageId, arg1, arg2, arg3);
 	}
 
 	/**
@@ -160,9 +160,9 @@ public class I18N extends I18NCompat {
 			locale = application.getDefaultLocale();
 		}
 
-		MessageContext messageContext = MessageContextFactory.getMessageContextInstance();
+		I18n i18n = I18nFactory.getI18nInstance();
 
-		return messageContext.getMessage(locale, messageId, arg1, arg2, arg3, arg4);
+		return i18n.getMessage(facesContext, locale, messageId, arg1, arg2, arg3, arg4);
 	}
 
 	@Override
@@ -181,7 +181,7 @@ public class I18N extends I18NCompat {
 				locale = application.getDefaultLocale();
 			}
 
-			MessageContext messageContext = MessageContextFactory.getMessageContextInstance();
+			I18n i18n = I18nFactory.getI18nInstance();
 
 			if (cacheEnabled) {
 
@@ -194,7 +194,7 @@ public class I18N extends I18NCompat {
 				message = cache.get(messageKey);
 
 				if (message == null) {
-					message = messageContext.getMessage(locale, key);
+					message = i18n.getMessage(facesContext, locale, key);
 
 					if (message != null) {
 						cache.put(messageKey, message);
@@ -202,7 +202,7 @@ public class I18N extends I18NCompat {
 				}
 			}
 			else {
-				message = messageContext.getMessage(locale, key);
+				message = i18n.getMessage(facesContext, locale, key);
 			}
 		}
 
