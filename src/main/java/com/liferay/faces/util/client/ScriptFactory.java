@@ -64,9 +64,9 @@ public abstract class ScriptFactory implements Wrapper<ScriptFactory> {
 	/**
 	 * Creates a {@link Script} with the specified source code, modules, and type.
 	 *
-	 * @param   sourceCode  The source code of the Script.
-	 * @param   modules     The modules which the Script depends on.
-	 * @param   modulesType The {@link Script.ModulesType} of the Script.
+	 * @param   sourceCode   The source code of the Script.
+	 * @param   modules      The modules which the Script depends on.
+	 * @param   modulesType  The {@link Script.ModulesType} of the Script.
 	 *
 	 * @return  A {@link Script} which can be rendered on the client via {@link
 	 *          com.liferay.faces.util.context.FacesRequestContext#addScript(com.liferay.faces.util.client.Script)}
