@@ -31,10 +31,10 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
 public abstract class ResourceVerifierFactory implements FacesWrapper<ResourceVerifierFactory> {
 
 	/**
-	 * Returns a stateless, thread-safe, singleton instance of {@link ResourceVerifier} from the {@link
+	 * Returns a stateless, thread-safe singleton instance of {@link ResourceVerifier} from the {@link
 	 * ResourceVerifierFactory} found by the {@link FactoryExtensionFinder}. ResourceVerifier is stateless, thread-safe
-	 * , singleton because it is designed to be used by a {@link javax.faces.render.Renderer}, which is stateless and
-	 * thread-safe, singleton.
+	 * singleton because it is designed to be used by a {@link javax.faces.render.Renderer}, which is a stateless,
+	 * thread-safe singleton.
 	 */
 	public static ResourceVerifier getResourceVerifierInstance() {
 
@@ -45,9 +45,9 @@ public abstract class ResourceVerifierFactory implements FacesWrapper<ResourceVe
 	}
 
 	/**
-	 * Returns a stateless, thread-safe, singleton instance of {@link ResourceVerifier}. The returned ResourceVerifier
+	 * Returns a stateless, thread-safe singleton instance of {@link ResourceVerifier}. The returned ResourceVerifier
 	 * is the first member of a delegation chain. ResourceVerifier is stateless, thread-safe (and potentially singleton)
-	 * because it is designed to be used by a {@link javax.faces.render.Renderer}, which is stateless and thread-safe,
+	 * because it is designed to be used by a {@link javax.faces.render.Renderer}, which is a stateless, thread-safe
 	 * singleton.
 	 */
 	public abstract ResourceVerifier getResourceVerifier();

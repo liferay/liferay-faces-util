@@ -46,7 +46,6 @@ public abstract class I18nBundleBase extends I18nWrapper implements Serializable
 	private static final Logger logger = LoggerFactory.getLogger(I18nBundleBase.class);
 
 	// Private Data Members
-	private boolean initialized;
 	private transient Map<String, String> messageCache;
 	private I18n wrappedI18n;
 
@@ -83,13 +82,8 @@ public abstract class I18nBundleBase extends I18nWrapper implements Serializable
 				resourceBundle = ResourceBundle.getBundle(bundleKey, locale);
 			}
 			catch (MissingResourceException e) {
-
-				if (!initialized) {
-					logger.error(e);
-				}
+				logger.error(e);
 			}
-
-			initialized = true;
 
 			if (resourceBundle != null) {
 
