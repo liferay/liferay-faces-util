@@ -22,7 +22,8 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.liferay.faces.util.i18n.I18n;
+import javax.faces.context.FacesContext;
+
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -51,7 +52,8 @@ public abstract class I18nBundleBase extends I18nWrapper {
 
 	public abstract String getBundleKey();
 
-	public String getMessage(Locale locale, String messageId) {
+	@Override
+	public String getMessage(FacesContext facesContext, Locale locale, String messageId) {
 
 		String message = null;
 		String key = messageId;
@@ -98,16 +100,16 @@ public abstract class I18nBundleBase extends I18nWrapper {
 
 		if (message == null) {
 
-			// TODO: Uncomment!
-			// message = super.getMessage(locale, messageId);
+			message = super.getMessage(facesContext, locale, messageId);
 		}
 
 		return message;
 	}
 
-	public String getMessage(Locale locale, String messageId, Object... arguments) {
+	@Override
+	public String getMessage(FacesContext facesContext, Locale locale, String messageId, Object... arguments) {
 
-		String message = getMessage(locale, messageId);
+		String message = getMessage(facesContext, locale, messageId);
 
 		if (message != null) {
 			message = MessageFormat.format(message, arguments);
@@ -116,6 +118,7 @@ public abstract class I18nBundleBase extends I18nWrapper {
 		return message;
 	}
 
+	@Override
 	public I18n getWrapped() {
 		return wrappedI18n;
 	}
