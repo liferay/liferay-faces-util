@@ -15,6 +15,8 @@
  */
 package com.liferay.faces.util.jsp.internal;
 
+import java.io.Serializable;
+
 import javax.el.ELContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +28,10 @@ import com.liferay.faces.util.jsp.PageContextFactory;
 /**
  * @author  Kyle Stiemann
  */
-public class PageContextFactoryImpl extends PageContextFactory {
+public class PageContextFactoryImpl extends PageContextFactory implements Serializable {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 4886312841579943217L;
 
 	@Override
 	public PageContext getStringPageContext(HttpServletRequest httpServletRequest,
