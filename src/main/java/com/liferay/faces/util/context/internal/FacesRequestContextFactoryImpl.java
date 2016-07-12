@@ -15,6 +15,8 @@
  */
 package com.liferay.faces.util.context.internal;
 
+import java.io.Serializable;
+
 import com.liferay.faces.util.context.FacesRequestContext;
 import com.liferay.faces.util.context.FacesRequestContextFactory;
 
@@ -22,7 +24,10 @@ import com.liferay.faces.util.context.FacesRequestContextFactory;
 /**
  * @author  Kyle Stiemann
  */
-public class FacesRequestContextFactoryImpl extends FacesRequestContextFactory {
+public class FacesRequestContextFactoryImpl extends FacesRequestContextFactory implements Serializable {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 4557353458470834725L;
 
 	@Override
 	public FacesRequestContext getFacesRequestContext() {
