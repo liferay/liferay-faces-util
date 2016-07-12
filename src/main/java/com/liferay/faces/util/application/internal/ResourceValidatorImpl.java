@@ -15,6 +15,7 @@
  */
 package com.liferay.faces.util.application.internal;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -32,7 +33,10 @@ import com.liferay.faces.util.logging.LoggerFactory;
 /**
  * @author  Neil Griffin
  */
-public class ResourceValidatorImpl implements ResourceValidator {
+public class ResourceValidatorImpl implements ResourceValidator, Serializable {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 1439627171348715228L;
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(ResourceValidatorImpl.class);
@@ -49,13 +53,30 @@ public class ResourceValidatorImpl implements ResourceValidator {
 			"javax.faces.FACELETS_VIEW_MAPPINGS", "facelets.VIEW_MAPPINGS"
 		};
 
-	// Private Data Members
-	private List<Pattern> excludeResourcePatterns;
-	private List<Pattern> excludeLibraryPatterns;
+	// Private Constants
+	private final List<Pattern> EXCLUDE_RESOURCE_PATTERNS;
+	private final List<Pattern> EXCLUDE_LIBRARY_PATTERNS;
 
-	public ResourceValidatorImpl(List<Pattern> excludeResourcePatterns, List<Pattern> excludeLibraryPatterns) {
-		this.excludeResourcePatterns = excludeResourcePatterns;
-		this.excludeLibraryPatterns = excludeLibraryPatterns;
+	/**
+	 * @param  excludeResourcePatterns  a {@link java.io.Serializable} {@link ArrayList} of excluded resource patterns.
+	 * @param  excludeLibraryPatterns   a {@link java.io.Serializable} {@link ArrayList} of excluded library patterns.
+	 */
+	public ResourceValidatorImpl(ArrayList<Pattern> excludeResourcePatterns,
+		ArrayList<Pattern> excludeLibraryPatterns) {
+
+		if (excludeResourcePatterns != null) {
+			this.EXCLUDE_RESOURCE_PATTERNS = Collections.unmodifiableList(excludeResourcePatterns);
+		}
+		else {
+			this.EXCLUDE_RESOURCE_PATTERNS = null;
+		}
+
+		if (excludeLibraryPatterns != null) {
+			this.EXCLUDE_LIBRARY_PATTERNS = Collections.unmodifiableList(excludeLibraryPatterns);
+		}
+		else {
+			this.EXCLUDE_LIBRARY_PATTERNS = null;
+		}
 	}
 
 	@Override
@@ -184,9 +205,9 @@ public class ResourceValidatorImpl implements ResourceValidator {
 
 		boolean validLibraryName = true;
 
-		if (excludeLibraryPatterns != null) {
+		if (EXCLUDE_LIBRARY_PATTERNS != null) {
 
-			for (Pattern excludeLibraryPattern : excludeLibraryPatterns) {
+			for (Pattern excludeLibraryPattern : EXCLUDE_LIBRARY_PATTERNS) {
 
 				Matcher matcher = excludeLibraryPattern.matcher(libraryName);
 
@@ -208,9 +229,9 @@ public class ResourceValidatorImpl implements ResourceValidator {
 
 		boolean validResourceName = true;
 
-		if (excludeResourcePatterns != null) {
+		if (EXCLUDE_RESOURCE_PATTERNS != null) {
 
-			for (Pattern excludeResourcePattern : excludeResourcePatterns) {
+			for (Pattern excludeResourcePattern : EXCLUDE_RESOURCE_PATTERNS) {
 
 				Matcher matcher = excludeResourcePattern.matcher(resourceName);
 

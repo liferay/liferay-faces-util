@@ -25,8 +25,12 @@ import com.liferay.faces.util.helper.Wrapper;
 public abstract class ResourceValidatorFactory implements Wrapper<ResourceValidatorFactory> {
 
 	/**
-	 * @return  an instance of {@link ResourceValidator} from the {@link ResourceValidatorFactory} found by the {@link
-	 *          FactoryExtensionFinder}.
+	 * Returns a stateless, thread-safe, singleton instance of {@link ResourceValidator} from the {@link
+	 * ResourceValidatorFactory} found by the {@link FactoryExtensionFinder}. ResourceValidator is stateless,
+	 * thread-safe, singleton because it is designed to be used by a {@link javax.faces.application.ResourceHandler},
+	 * which is a <a
+	 * href="https://javaserverfaces.java.net/nonav/docs/2.2/javadocs/javax/faces/application/Application.html#getResourceHandler()">
+	 * stateless, thread-safe singleton</a>.
 	 */
 	public static ResourceValidator getResourceValidatorInstance() {
 
@@ -36,5 +40,18 @@ public abstract class ResourceValidatorFactory implements Wrapper<ResourceValida
 		return resourceValidatorFactory.getResourceValidator();
 	}
 
+	/**
+	 * Returns a stateless, thread-safe, singleton instance of {@link ResourceValidator}. ResourceValidator is
+	 * stateless, thread-safe, singleton because it is designed to be used by a {@link
+	 * javax.faces.application.ResourceHandler}, which is a <a
+	 * href="https://javaserverfaces.java.net/nonav/docs/2.2/javadocs/javax/faces/application/Application.html#getResourceHandler()">
+	 * stateless, thread-safe singleton</a>.
+	 */
 	public abstract ResourceValidator getResourceValidator();
+
+	/**
+	 * Returns the wrapped factory instance if this factory has been decorated. Otherwise, this method returns null.
+	 */
+	@Override
+	public abstract ResourceValidatorFactory getWrapped();
 }

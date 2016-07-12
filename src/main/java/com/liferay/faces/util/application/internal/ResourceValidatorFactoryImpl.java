@@ -15,8 +15,8 @@
  */
 package com.liferay.faces.util.application.internal;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Pattern;
 
 import javax.faces.context.ExternalContext;
@@ -31,14 +31,16 @@ import com.liferay.faces.util.logging.LoggerFactory;
 /**
  * @author  Neil Griffin
  */
-public class ResourceValidatorFactoryImpl extends ResourceValidatorFactory {
+public class ResourceValidatorFactoryImpl extends ResourceValidatorFactory implements Serializable {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 1540511281114845438L;
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(ResourceValidatorFactoryImpl.class);
 
 	// Private Data Members
-	private List<Pattern> excludeResourcePatterns;
-	private List<Pattern> excludeLibraryPatterns;
+	private ResourceValidator resourceValidator;
 
 	public ResourceValidatorFactoryImpl() {
 
@@ -56,11 +58,15 @@ public class ResourceValidatorFactoryImpl extends ResourceValidatorFactory {
 			}
 		}
 
+		// The list of patterns are declared as ArrayList to ensure that they are Serializable.
+		ArrayList<Pattern> excludeResourcePatterns = null;
+		ArrayList<Pattern> excludeLibraryPatterns = null;
+
 		if (excludeResourceExtensions != null) {
 
 			String[] extensions = excludeResourceExtensions.split(" ");
 
-			this.excludeResourcePatterns = new ArrayList<Pattern>(extensions.length + 1);
+			excludeResourcePatterns = new ArrayList<Pattern>(extensions.length + 1);
 
 			for (String extension : extensions) {
 				Pattern pattern = Pattern.compile(".*\\" + extension + ".*");
@@ -70,17 +76,19 @@ public class ResourceValidatorFactoryImpl extends ResourceValidatorFactory {
 
 			// Prevent for a leading dot character for resource names and library names
 			Pattern pattern = Pattern.compile("^\\..*");
-			this.excludeResourcePatterns.add(pattern);
+			excludeResourcePatterns.add(pattern);
 			logger.debug("Excluding resource pattern=[{0}]", pattern);
-			this.excludeLibraryPatterns = new ArrayList<Pattern>(1);
-			this.excludeLibraryPatterns.add(pattern);
+			excludeLibraryPatterns = new ArrayList<Pattern>(1);
+			excludeLibraryPatterns.add(pattern);
 			logger.debug("Excluding library pattern=[{0}]", pattern);
 		}
+
+		resourceValidator = new ResourceValidatorImpl(excludeResourcePatterns, excludeLibraryPatterns);
 	}
 
 	@Override
 	public ResourceValidator getResourceValidator() {
-		return new ResourceValidatorImpl(excludeResourcePatterns, excludeLibraryPatterns);
+		return resourceValidator;
 	}
 
 	@Override

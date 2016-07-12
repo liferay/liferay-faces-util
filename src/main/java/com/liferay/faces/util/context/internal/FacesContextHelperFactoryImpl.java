@@ -15,6 +15,8 @@
  */
 package com.liferay.faces.util.context.internal;
 
+import java.io.Serializable;
+
 import com.liferay.faces.util.context.FacesContextHelper;
 import com.liferay.faces.util.context.FacesContextHelperFactory;
 
@@ -22,14 +24,13 @@ import com.liferay.faces.util.context.FacesContextHelperFactory;
 /**
  * @author  Neil Griffin
  */
-public class FacesContextHelperFactoryImpl extends FacesContextHelperFactory {
+public class FacesContextHelperFactoryImpl extends FacesContextHelperFactory implements Serializable {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 7422626640334343615L;
 
 	// Private Data Members
-	private FacesContextHelper facesContextHelper;
-
-	public FacesContextHelperFactoryImpl() {
-		facesContextHelper = new FacesContextHelperImpl();
-	}
+	private FacesContextHelper facesContextHelper = new FacesContextHelperImpl();
 
 	@Override
 	public FacesContextHelper getFacesContextHelper() {

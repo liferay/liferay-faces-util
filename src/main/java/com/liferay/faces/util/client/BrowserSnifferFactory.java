@@ -27,8 +27,8 @@ import com.liferay.faces.util.helper.Wrapper;
 public abstract class BrowserSnifferFactory implements Wrapper<BrowserSnifferFactory> {
 
 	/**
-	 * @return  an instance of {@link BrowserSniffer} from the {@link BrowserSnifferFactory} found by the {@link
-	 *          FactoryExtensionFinder}.
+	 * Returns a new instance of {@link BrowserSniffer} from the {@link BrowserSnifferFactory} found by the {@link
+	 * FactoryExtensionFinder}. The returned instance is designed to be used during execution of a request thread.
 	 */
 	public static BrowserSniffer getBrowserSnifferInstance(ExternalContext externalContext) {
 
@@ -38,5 +38,15 @@ public abstract class BrowserSnifferFactory implements Wrapper<BrowserSnifferFac
 		return browserSnifferFactory.getBrowserSniffer(externalContext);
 	}
 
+	/**
+	 * Returns a new instance of {@link BrowserSniffer}. The returned instance is designed to be used during execution
+	 * of a request thread.
+	 */
 	public abstract BrowserSniffer getBrowserSniffer(ExternalContext externalContext);
+
+	/**
+	 * Returns the wrapped factory instance if this factory has been decorated. Otherwise, this method returns null.
+	 */
+	@Override
+	public abstract BrowserSnifferFactory getWrapped();
 }

@@ -34,8 +34,8 @@ import com.liferay.faces.util.helper.Wrapper;
 public abstract class PageContextFactory implements Wrapper<PageContextFactory> {
 
 	/**
-	 * Returns an instance of {@link PageContext} from the {@link PageContextFactory} found by the {@link
-	 * FactoryExtensionFinder}.
+	 * Returns a new instance of {@link PageContext} from the {@link PageContextFactory} found by the {@link
+	 * FactoryExtensionFinder}. The returned instance is designed to be used during execution of a request thread.
 	 */
 	public static PageContext getStringPageContextInstance(HttpServletRequest httpServletRequest,
 		HttpServletResponse httpServletResponse, ELContext elContext) {
@@ -47,8 +47,9 @@ public abstract class PageContextFactory implements Wrapper<PageContextFactory> 
 	}
 
 	/**
-	 * Returns an instance of {@link PageContext} which renders tag output to a String. Pass the {@link PageContext} to
-	 * {@link javax.servlet.jsp.tagext.Tag#setPageContext(javax.servlet.jsp.PageContext)} before calling {@link
+	 * Returns a new instance of {@link PageContext} which renders tag output to a String. The returned instance is
+	 * designed to be used during execution of a request thread. Pass the {@link PageContext} to {@link
+	 * javax.servlet.jsp.tagext.Tag#setPageContext(javax.servlet.jsp.PageContext)} before calling {@link
 	 * javax.servlet.jsp.tagext.Tag#doStartTag()} or similar methods to render tag output to a String. Call {@link
 	 * PageContext#getOut()#toString()} to obtain the tag output as a string.
 	 *
@@ -63,4 +64,10 @@ public abstract class PageContextFactory implements Wrapper<PageContextFactory> 
 	 */
 	public abstract PageContext getStringPageContext(HttpServletRequest httpServletRequest,
 		HttpServletResponse httpServletResponse, ELContext elContext);
+
+	/**
+	 * Returns the wrapped factory instance if this factory has been decorated. Otherwise, this method returns null.
+	 */
+	@Override
+	public abstract PageContextFactory getWrapped();
 }

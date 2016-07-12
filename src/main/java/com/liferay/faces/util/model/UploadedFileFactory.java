@@ -28,8 +28,8 @@ import com.liferay.faces.util.helper.Wrapper;
 public abstract class UploadedFileFactory implements Wrapper<UploadedFileFactory> {
 
 	/**
-	 * @return  an instance of {@link UploadedFile} from the {@link UploadedFileFactory} found by the {@link
-	 *          FactoryExtensionFinder}.
+	 * Returns a new instance of {@link UploadedFile} from the {@link UploadedFileFactory} found by the {@link
+	 * FactoryExtensionFinder}.
 	 */
 	public static UploadedFile getUploadedFileInstance(Exception e) {
 
@@ -40,8 +40,8 @@ public abstract class UploadedFileFactory implements Wrapper<UploadedFileFactory
 	}
 
 	/**
-	 * @return  an instance of {@link UploadedFile} from the {@link UploadedFileFactory} found by the {@link
-	 *          FactoryExtensionFinder}.
+	 * Returns a new instance of {@link UploadedFile} from the {@link UploadedFileFactory} found by the {@link
+	 * FactoryExtensionFinder}.
 	 */
 	public static UploadedFile getUploadedFileInstance(String absolutePath, Map<String, Object> attributes,
 		String charSet, String contentType, Map<String, List<String>> headers, String id, String message, String name,
@@ -54,9 +54,21 @@ public abstract class UploadedFileFactory implements Wrapper<UploadedFileFactory
 				name, size, status);
 	}
 
+	/**
+	 * Returns a new instance of {@link UploadedFile}.
+	 */
 	public abstract UploadedFile getUploadedFile(Exception e);
 
+	/**
+	 * Returns a new instance of {@link UploadedFile}.
+	 */
 	public abstract UploadedFile getUploadedFile(String absolutePath, Map<String, Object> attributes, String charSet,
 		String contentType, Map<String, List<String>> headers, String id, String message, String name, long size,
 		UploadedFile.Status status);
+
+	/**
+	 * Returns the wrapped factory instance if this factory has been decorated. Otherwise, this method returns null.
+	 */
+	@Override
+	public abstract UploadedFileFactory getWrapped();
 }

@@ -25,8 +25,8 @@ import com.liferay.faces.util.helper.Wrapper;
 public abstract class FacesContextHelperFactory implements Wrapper<FacesContextHelperFactory> {
 
 	/**
-	 * @return  an instance of {@link FacesContextHelper} from the {@link FacesContextHelperFactory} found by the {@link
-	 *          FactoryExtensionFinder}.
+	 * Returns a stateless, thread-safe, singleton instance of {@link FacesContextHelper} from the {@link
+	 * FacesContextHelperFactory} found by the {@link FactoryExtensionFinder}.
 	 */
 	public static FacesContextHelper getFacesContextHelperInstance() {
 
@@ -37,7 +37,13 @@ public abstract class FacesContextHelperFactory implements Wrapper<FacesContextH
 	}
 
 	/**
-	 * Returns the {@link FacesContextHelper} instance from the factory delegation chain.
+	 * Returns a stateless, thread-safe, singleton instance of {@link FacesContextHelper}.
 	 */
 	public abstract FacesContextHelper getFacesContextHelper();
+
+	/**
+	 * Returns the wrapped factory instance if this factory has been decorated. Otherwise, this method returns null.
+	 */
+	@Override
+	public abstract FacesContextHelperFactory getWrapped();
 }
