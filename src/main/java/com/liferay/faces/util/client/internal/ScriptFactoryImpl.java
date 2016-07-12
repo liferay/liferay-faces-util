@@ -15,6 +15,8 @@
  */
 package com.liferay.faces.util.client.internal;
 
+import java.io.Serializable;
+
 import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.client.ScriptFactory;
 
@@ -22,7 +24,10 @@ import com.liferay.faces.util.client.ScriptFactory;
 /**
  * @author  Kyle Stiemann
  */
-public class ScriptFactoryImpl extends ScriptFactory {
+public class ScriptFactoryImpl extends ScriptFactory implements Serializable {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 8070502062615438592L;
 
 	@Override
 	public Script getScript(String sourceCode) {

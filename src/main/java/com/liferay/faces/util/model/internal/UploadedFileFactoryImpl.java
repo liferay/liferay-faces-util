@@ -15,6 +15,7 @@
  */
 package com.liferay.faces.util.model.internal;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +31,10 @@ import com.liferay.faces.util.model.UploadedFileFactory;
 /**
  * @author  Neil Griffin
  */
-public class UploadedFileFactoryImpl extends UploadedFileFactory {
+public class UploadedFileFactoryImpl extends UploadedFileFactory implements Serializable {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 1276552178390469143L;
 
 	@Override
 	public UploadedFile getUploadedFile(Exception e) {

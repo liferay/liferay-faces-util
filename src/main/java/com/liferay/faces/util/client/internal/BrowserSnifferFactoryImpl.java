@@ -15,6 +15,8 @@
  */
 package com.liferay.faces.util.client.internal;
 
+import java.io.Serializable;
+
 import javax.faces.context.ExternalContext;
 import javax.servlet.http.HttpServletRequest;
 
@@ -25,7 +27,10 @@ import com.liferay.faces.util.client.BrowserSnifferFactory;
 /**
  * @author  Neil Griffin
  */
-public class BrowserSnifferFactoryImpl extends BrowserSnifferFactory {
+public class BrowserSnifferFactoryImpl extends BrowserSnifferFactory implements Serializable {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 2480449562969899228L;
 
 	@Override
 	public BrowserSniffer getBrowserSniffer(ExternalContext externalContext) {

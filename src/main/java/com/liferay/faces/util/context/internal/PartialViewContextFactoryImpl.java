@@ -15,6 +15,8 @@
  */
 package com.liferay.faces.util.context.internal;
 
+import java.io.Serializable;
+
 import javax.faces.context.FacesContext;
 import javax.faces.context.PartialViewContext;
 import javax.faces.context.PartialViewContextFactory;
@@ -23,7 +25,10 @@ import javax.faces.context.PartialViewContextFactory;
 /**
  * @author  Neil Griffin
  */
-public class PartialViewContextFactoryImpl extends PartialViewContextFactory {
+public class PartialViewContextFactoryImpl extends PartialViewContextFactory implements Serializable {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 7873536780716976024L;
 
 	// Private Data Members
 	private PartialViewContextFactory wrappedPartialViewContextFactory;
