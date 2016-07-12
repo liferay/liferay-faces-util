@@ -26,10 +26,10 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
 public abstract class ScriptsEncoderFactory implements FacesWrapper<ScriptsEncoderFactory> {
 
 	/**
-	 * Returns a stateless, thread-safe, singleton instance of {@link ScriptsEncoder} from the {@link
+	 * Returns a stateless, thread-safe singleton instance of {@link ScriptsEncoder} from the {@link
 	 * ScriptsEncoderFactory} found by the {@link FactoryExtensionFinder}. ScriptsEncoder is stateless, thread-safe (and
 	 * potentially singleton) because it is designed to be used by a {@link javax.faces.render.Renderer}, which is
-	 * stateless and thread-safe, singleton.
+	 * stateless and thread-safe singleton.
 	 */
 	public static ScriptsEncoder getScriptsEncoderInstance() {
 
@@ -40,9 +40,9 @@ public abstract class ScriptsEncoderFactory implements FacesWrapper<ScriptsEncod
 	}
 
 	/**
-	 * Returns a stateless, thread-safe, singleton instance of {@link ScriptsEncoder}. ScriptsEncoder is stateless,
-	 * thread-safe, singleton because it is designed to be used by a {@link javax.faces.render.Renderer}, which is
-	 * stateless and thread-safe, singleton.
+	 * Returns a stateless, thread-safe singleton instance of {@link ScriptsEncoder}. ScriptsEncoder is stateless,
+	 * thread-safe singleton because it is designed to be used by a {@link javax.faces.render.Renderer}, which is
+	 * stateless and thread-safe singleton.
 	 */
 	public abstract ScriptsEncoder getScriptsEncoder();
 
