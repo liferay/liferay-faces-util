@@ -15,6 +15,7 @@
  */
 package com.liferay.faces.util.render.internal;
 
+import java.io.Serializable;
 import java.io.Writer;
 import java.lang.reflect.Method;
 
@@ -25,43 +26,56 @@ import com.liferay.faces.util.render.FacesURLEncoderFactory;
 /**
  * @author  Neil Griffin
  */
-public class FacesURLEncoderFactoryImpl extends FacesURLEncoderFactory {
+public class FacesURLEncoderFactoryImpl extends FacesURLEncoderFactory implements Serializable {
 
-	// Private Constants
-	private static final String MOJARRA_ENCODER_FQCN = "com.sun.faces.util.HtmlUtils";
-	private static final String MOJARRA_METHOD_WRITE_URL = "writeURL";
-	private static final String MYFACES_ENCODER_FQCN = "org.apache.myfaces.shared.renderkit.html.util.HTMLEncoder";
-	private static final String MYFACES_METHOD_ENCODE_URI_ATTRIBUTE = "encodeURIAtributte";
+	// serialVersionUID
+	private static final long serialVersionUID = 6782130515246024964L;
 
 	// Private Data Members
-	private static Class<?> mojarraHtmlUtilsClass;
-	private static Method mojarraMethodWriteURL;
-	private static Class<?> myFacesHTMLEncoderClass;
-	private static Method myFacesMethodEncodeURIAtribute;
+	private FacesURLEncoder facesURLEncoder;
 
-	static {
+	public FacesURLEncoderFactoryImpl() {
+
+		Method mojarraMethodWriteURL = null;
+		Method myFacesMethodEncodeURIAtribute = null;
 
 		try {
-			mojarraHtmlUtilsClass = Class.forName(MOJARRA_ENCODER_FQCN);
-			mojarraMethodWriteURL = mojarraHtmlUtilsClass.getMethod(MOJARRA_METHOD_WRITE_URL,
+
+			final String MOJARRA_ENCODER_FQCN = "com.sun.faces.util.HtmlUtils";
+			Class<?> mojarraHtmlUtilsClass = Class.forName(MOJARRA_ENCODER_FQCN);
+			final String MOJARRA_WRITE_URL_METHOD_NAME = "writeURL";
+			mojarraMethodWriteURL = mojarraHtmlUtilsClass.getMethod(MOJARRA_WRITE_URL_METHOD_NAME,
 					new Class[] { Writer.class, String.class, char[].class, String.class });
 		}
 		catch (Exception e1) {
 
 			try {
-				myFacesHTMLEncoderClass = Class.forName(MYFACES_ENCODER_FQCN);
-				myFacesMethodEncodeURIAtribute = myFacesHTMLEncoderClass.getMethod(MYFACES_METHOD_ENCODE_URI_ATTRIBUTE,
-						new Class[] { String.class, String.class });
+
+				final String MYFACES_ENCODER_FQCN = "org.apache.myfaces.shared.renderkit.html.util.HTMLEncoder";
+				Class<?> myFacesHTMLEncoderClass = Class.forName(MYFACES_ENCODER_FQCN);
+				final String MYFACES_ENCODE_URI_ATTRIBUTE_METHOD_NAME = "encodeURIAtributte";
+				myFacesMethodEncodeURIAtribute = myFacesHTMLEncoderClass.getMethod(
+						MYFACES_ENCODE_URI_ATTRIBUTE_METHOD_NAME, new Class[] { String.class, String.class });
 			}
 			catch (Exception e2) {
 				// Ignore
 			}
 		}
+
+		if (mojarraMethodWriteURL != null) {
+			facesURLEncoder = new FacesURLEncoderMojarraImpl(mojarraMethodWriteURL);
+		}
+		else if (myFacesMethodEncodeURIAtribute != null) {
+			facesURLEncoder = new FacesURLEncoderMyFacesImpl(myFacesMethodEncodeURIAtribute);
+		}
+		else {
+			facesURLEncoder = new FacesURLEncoderImpl();
+		}
 	}
 
 	@Override
 	public FacesURLEncoder getFacesURLEncoder() {
-		return new FacesURLEncoderImpl(mojarraMethodWriteURL, myFacesMethodEncodeURIAtribute);
+		return facesURLEncoder;
 	}
 
 	@Override

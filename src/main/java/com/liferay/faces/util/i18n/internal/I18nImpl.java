@@ -15,6 +15,8 @@
  */
 package com.liferay.faces.util.i18n.internal;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.Map;
@@ -32,10 +34,14 @@ import com.liferay.faces.util.i18n.I18n;
 /**
  * @author  Neil Griffin
  */
-public class I18nImpl implements I18n {
+public class I18nImpl implements I18n, Serializable {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 707385608167301726L;
 
 	// Private Data Members
-	private Map<Locale, ResourceBundle> facesResourceBundleMap = new ConcurrentHashMap<Locale, ResourceBundle>();
+	private transient Map<Locale, ResourceBundle> facesResourceBundleCache =
+		new ConcurrentHashMap<Locale, ResourceBundle>();
 
 	@Override
 	public FacesMessage getFacesMessage(FacesContext facesContext, Locale locale, FacesMessage.Severity severity,
@@ -135,7 +141,7 @@ public class I18nImpl implements I18n {
 
 	private ResourceBundle getFacesResourceBundle(FacesContext facesContext, Locale locale) {
 
-		ResourceBundle facesResourceBundle = facesResourceBundleMap.get(locale);
+		ResourceBundle facesResourceBundle = facesResourceBundleCache.get(locale);
 
 		if (facesResourceBundle == null) {
 
@@ -147,9 +153,13 @@ public class I18nImpl implements I18n {
 			}
 
 			facesResourceBundle = ResourceBundle.getBundle(messageBundle, locale);
-			facesResourceBundleMap.put(locale, facesResourceBundle);
+			facesResourceBundleCache.put(locale, facesResourceBundle);
 		}
 
 		return facesResourceBundle;
+	}
+
+	private void readObject(java.io.ObjectInputStream stream) throws IOException, ClassNotFoundException {
+		facesResourceBundleCache = new ConcurrentHashMap<Locale, ResourceBundle>();
 	}
 }

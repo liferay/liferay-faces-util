@@ -28,7 +28,7 @@ public final class ApplicationUtil {
 	}
 
 	/**
-	 * @return  true if the JSF application is starting up or shutting down.
+	 * Returns true if the JSF application is starting up or shutting down.
 	 */
 	public static boolean isStartupOrShutdown(FacesContext facesContext) {
 

@@ -142,17 +142,17 @@ public abstract class FilteredResourceBase extends ResourceWrapper {
 	protected abstract String filter(String resourceText);
 
 	/**
-	 * @return  the character buffer size used to convert the wrapped resource's {@link InputStream} to a string.
-	 *          Override this method to provide a different buffer size than the default (1024).
+	 * Returns the character buffer size used to convert the wrapped resource's {@link InputStream} to a string.
+	 * Override this method to provide a different buffer size than the default (1024).
 	 */
 	protected int getBufferSize() {
 		return 1024;
 	}
 
 	/**
-	 * @return  the encoding of the wrapped resource's {@link InputStream}. If the Content-Encoding request header is
-	 *          not specified, the encoding returned from this method is used to read the InputStream. Override this
-	 *          method to provide a different encoding than the default ("UTF-8").
+	 * Returns the encoding of the wrapped resource's {@link InputStream}. If the Content-Encoding request header is not
+	 * specified, the encoding returned from this method is used to read the InputStream. Override this method to
+	 * provide a different encoding than the default ("UTF-8").
 	 */
 	protected String getEncoding() {
 		return "UTF-8";

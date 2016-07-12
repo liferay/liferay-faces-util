@@ -26,8 +26,8 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
 public abstract class I18nFactory implements FacesWrapper<I18nFactory> {
 
 	/**
-	 * Returns a stateless, thread-safe, singleton instance instance of {@link I18n} from the {@link I18nFactory} found
-	 * by the {@link FactoryExtensionFinder}.
+	 * Returns a stateless, thread-safe, singleton instance of {@link I18n} from the {@link I18nFactory} found by the
+	 * {@link FactoryExtensionFinder}.
 	 */
 	public static I18n getI18nInstance() {
 
@@ -37,7 +37,7 @@ public abstract class I18nFactory implements FacesWrapper<I18nFactory> {
 	}
 
 	/**
-	 * Returns a stateless, thread-safe, singleton instance instance of {@link I18n}.
+	 * Returns a stateless, thread-safe, singleton instance of {@link I18n}.
 	 */
 	public abstract I18n getI18n();
 }

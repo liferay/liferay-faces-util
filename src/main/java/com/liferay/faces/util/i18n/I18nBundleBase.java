@@ -15,6 +15,8 @@
  */
 package com.liferay.faces.util.i18n;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.Map;
@@ -35,19 +37,22 @@ import com.liferay.faces.util.logging.LoggerFactory;
  *
  * @author  Neil Griffin
  */
-public abstract class I18nBundleBase extends I18nWrapper {
+public abstract class I18nBundleBase extends I18nWrapper implements Serializable {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 3785524975078495843L;
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(I18nBundleBase.class);
 
 	// Private Data Members
 	private boolean initialized;
-	private Map<String, String> messageMap;
+	private transient Map<String, String> messageCache;
 	private I18n wrappedI18n;
 
 	public I18nBundleBase(I18n i18n) {
 		this.wrappedI18n = i18n;
-		this.messageMap = new ConcurrentHashMap<String, String>();
+		this.messageCache = new ConcurrentHashMap<String, String>();
 	}
 
 	public abstract String getBundleKey();
@@ -62,8 +67,8 @@ public abstract class I18nBundleBase extends I18nWrapper {
 			key = locale.toString() + messageId;
 		}
 
-		if (messageMap.containsKey(key)) {
-			message = messageMap.get(key);
+		if (messageCache.containsKey(key)) {
+			message = messageCache.get(key);
 
 			if ("".equals(message)) {
 				message = null;
@@ -90,10 +95,10 @@ public abstract class I18nBundleBase extends I18nWrapper {
 
 				try {
 					message = resourceBundle.getString(messageId);
-					messageMap.put(key, message);
+					messageCache.put(key, message);
 				}
 				catch (MissingResourceException e) {
-					messageMap.put(key, "");
+					messageCache.put(key, "");
 				}
 			}
 		}
@@ -121,5 +126,14 @@ public abstract class I18nBundleBase extends I18nWrapper {
 	@Override
 	public I18n getWrapped() {
 		return wrappedI18n;
+	}
+
+	private void readObject(java.io.ObjectInputStream stream) throws IOException, ClassNotFoundException {
+		wrappedI18n = (I18n) stream.readObject();
+		messageCache = new ConcurrentHashMap<String, String>();
+	}
+
+	private void writeObject(java.io.ObjectOutputStream out) throws IOException {
+		out.writeObject(wrappedI18n);
 	}
 }

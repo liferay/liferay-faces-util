@@ -15,6 +15,7 @@
  */
 package com.liferay.faces.util.context.internal;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -51,7 +52,10 @@ import com.liferay.faces.util.i18n.I18nFactory;
 /**
  * @author  Neil Griffin
  */
-public class FacesContextHelperImpl implements FacesContextHelper {
+public class FacesContextHelperImpl implements FacesContextHelper, Serializable {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 5363868926989717581L;
 
 	// Private Constants
 	private static final String UNEXPECTED_ERROR_MSG_ID = "an-unexpected-error-occurred";

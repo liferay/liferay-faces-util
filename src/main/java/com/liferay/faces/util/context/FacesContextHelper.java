@@ -176,11 +176,9 @@ public interface FacesContextHelper {
 	public String getNamespace();
 
 	/**
-	 * Return the parent form of the given component.
+	 * Returns the parent form of the given component or <code>null</code> if no parent form is found.
 	 *
-	 * @param   uiComponent  The component whose parent is to be found.
-	 *
-	 * @return  the parent form or <code>null</code> if no parent form is found.
+	 * @param  uiComponent  The component whose parent is to be found.
 	 */
 	public UIForm getParentForm(final UIComponent uiComponent);
 
@@ -190,8 +188,8 @@ public interface FacesContextHelper {
 	public Object getRequestAttribute(String name);
 
 	/**
-	 * @return  The request context path. {@link FacesContext#getExternalContext()} {@link
-	 *          ExternalContext#getRequestContextPath()}
+	 * Returns The request context path. {@link FacesContext#getExternalContext()} {@link
+	 * ExternalContext#getRequestContextPath()}
 	 */
 	public String getRequestContextPath();
 
