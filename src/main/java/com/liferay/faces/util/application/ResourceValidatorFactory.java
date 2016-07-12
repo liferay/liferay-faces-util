@@ -27,7 +27,7 @@ public abstract class ResourceValidatorFactory implements FacesWrapper<ResourceV
 
 	/**
 	 * Returns a stateless, thread-safe singleton instance of {@link ResourceValidator} from the {@link
-	 * ResourceValidatorFactory} found by the {@link FactoryExtensionFinder}. ResourceValidator is stateless,
+	 * ResourceValidatorFactory} found by the {@link FactoryExtensionFinder}. ResourceValidator is a stateless,
 	 * thread-safe singleton because it is designed to be used by a {@link javax.faces.application.ResourceHandler},
 	 * which is a <a
 	 * href="https://javaserverfaces.java.net/nonav/docs/2.2/javadocs/javax/faces/application/Application.html#getResourceHandler()">
@@ -42,9 +42,9 @@ public abstract class ResourceValidatorFactory implements FacesWrapper<ResourceV
 	}
 
 	/**
-	 * Returns a stateless, thread-safe singleton instance of {@link ResourceValidator}. ResourceValidator is
-	 * stateless, thread-safe singleton because it is designed to be used by a {@link
-	 * javax.faces.application.ResourceHandler}, which is a <a
+	 * Returns a stateless, thread-safe singleton instance of {@link ResourceValidator}. ResourceValidator is stateless,
+	 * thread-safe singleton because it is designed to be used by a {@link javax.faces.application.ResourceHandler},
+	 * which is a <a
 	 * href="https://javaserverfaces.java.net/nonav/docs/2.2/javadocs/javax/faces/application/Application.html#getResourceHandler()">
 	 * stateless, thread-safe singleton</a>.
 	 */

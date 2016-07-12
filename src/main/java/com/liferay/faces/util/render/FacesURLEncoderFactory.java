@@ -40,7 +40,7 @@ public abstract class FacesURLEncoderFactory implements FacesWrapper<FacesURLEnc
 	}
 
 	/**
-	 * Returns a stateless, thread-safe singleton instance of {@link FacesURLEncoder}. FacesURLEncoder is stateless,
+	 * Returns a stateless, thread-safe singleton instance of {@link FacesURLEncoder}. FacesURLEncoder is a stateless,
 	 * thread-safe singleton because it is designed to be used by a {@link javax.faces.render.Renderer}, which is
 	 * stateless and thread-safe singleton.
 	 */
