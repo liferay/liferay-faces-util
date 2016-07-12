@@ -53,9 +53,9 @@ public class ResourceValidatorImpl implements ResourceValidator, Serializable {
 			"javax.faces.FACELETS_VIEW_MAPPINGS", "facelets.VIEW_MAPPINGS"
 		};
 
-	// Private Constants
-	private final List<Pattern> EXCLUDE_RESOURCE_PATTERNS;
-	private final List<Pattern> EXCLUDE_LIBRARY_PATTERNS;
+	// Final Data Members
+	private final List<Pattern> excludeResourcePatterns;
+	private final List<Pattern> excludeLibraryPatterns;
 
 	/**
 	 * @param  excludeResourcePatterns  a {@link java.io.Serializable} {@link ArrayList} of excluded resource patterns.
@@ -65,17 +65,17 @@ public class ResourceValidatorImpl implements ResourceValidator, Serializable {
 		ArrayList<Pattern> excludeLibraryPatterns) {
 
 		if (excludeResourcePatterns != null) {
-			this.EXCLUDE_RESOURCE_PATTERNS = Collections.unmodifiableList(excludeResourcePatterns);
+			this.excludeResourcePatterns = Collections.unmodifiableList(excludeResourcePatterns);
 		}
 		else {
-			this.EXCLUDE_RESOURCE_PATTERNS = null;
+			this.excludeResourcePatterns = null;
 		}
 
 		if (excludeLibraryPatterns != null) {
-			this.EXCLUDE_LIBRARY_PATTERNS = Collections.unmodifiableList(excludeLibraryPatterns);
+			this.excludeLibraryPatterns = Collections.unmodifiableList(excludeLibraryPatterns);
 		}
 		else {
-			this.EXCLUDE_LIBRARY_PATTERNS = null;
+			this.excludeLibraryPatterns = null;
 		}
 	}
 
@@ -205,9 +205,9 @@ public class ResourceValidatorImpl implements ResourceValidator, Serializable {
 
 		boolean validLibraryName = true;
 
-		if (EXCLUDE_LIBRARY_PATTERNS != null) {
+		if (excludeLibraryPatterns != null) {
 
-			for (Pattern excludeLibraryPattern : EXCLUDE_LIBRARY_PATTERNS) {
+			for (Pattern excludeLibraryPattern : excludeLibraryPatterns) {
 
 				Matcher matcher = excludeLibraryPattern.matcher(libraryName);
 
@@ -229,9 +229,9 @@ public class ResourceValidatorImpl implements ResourceValidator, Serializable {
 
 		boolean validResourceName = true;
 
-		if (EXCLUDE_RESOURCE_PATTERNS != null) {
+		if (excludeResourcePatterns != null) {
 
-			for (Pattern excludeResourcePattern : EXCLUDE_RESOURCE_PATTERNS) {
+			for (Pattern excludeResourcePattern : excludeResourcePatterns) {
 
 				Matcher matcher = excludeResourcePattern.matcher(resourceName);
 

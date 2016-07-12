@@ -25,10 +25,10 @@ import com.liferay.faces.util.helper.Wrapper;
 public abstract class FacesURLEncoderFactory implements Wrapper<FacesURLEncoderFactory> {
 
 	/**
-	 * Returns a stateless, thread-safe, singleton instance of {@link FacesURLEncoder} from the {@link
-	 * FacesURLEncoderFactory} found by the {@link FactoryExtensionFinder}. FacesURLEncoder is stateless, thread-safe ,
-	 * singleton because it is designed to be used by a {@link javax.faces.render.Renderer}, which is stateless and
-	 * thread-safe, singleton.
+	 * Returns a stateless, thread-safe singleton instance of {@link FacesURLEncoder} from the {@link
+	 * FacesURLEncoderFactory} found by the {@link FactoryExtensionFinder}. FacesURLEncoder is a stateless, thread-safe
+	 * singleton because it is designed to be used by a {@link javax.faces.render.Renderer}, which is a stateless,
+	 * thread-safe singleton.
 	 */
 	public static FacesURLEncoder getFacesURLEncoderInstance() {
 
@@ -39,9 +39,9 @@ public abstract class FacesURLEncoderFactory implements Wrapper<FacesURLEncoderF
 	}
 
 	/**
-	 * Returns a stateless, thread-safe, singleton instance of {@link FacesURLEncoder}. FacesURLEncoder is stateless,
-	 * thread-safe, singleton because it is designed to be used by a {@link javax.faces.render.Renderer}, which is
-	 * stateless and thread-safe, singleton.
+	 * Returns a stateless, thread-safe singleton instance of {@link FacesURLEncoder}. FacesURLEncoder is stateless,
+	 * thread-safe singleton because it is designed to be used by a {@link javax.faces.render.Renderer}, which is
+	 * stateless and thread-safe singleton.
 	 */
 	public abstract FacesURLEncoder getFacesURLEncoder();
 
