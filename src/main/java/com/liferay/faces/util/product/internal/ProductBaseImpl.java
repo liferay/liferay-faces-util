@@ -39,7 +39,7 @@ public class ProductBaseImpl implements Product {
 	protected int patchVersion;
 	protected String stringValue;
 	protected String title;
-	protected String version = majorVersion + "." + minorVersion + "." + patchVersion;
+	protected String version = "0.0.0";
 
 	public int getBuildId() {
 		return buildId;
