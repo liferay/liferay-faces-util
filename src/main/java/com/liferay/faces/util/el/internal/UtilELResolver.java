@@ -25,6 +25,7 @@ import com.liferay.faces.util.client.BrowserSnifferFactory;
 import com.liferay.faces.util.el.ELResolverBase;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.product.Product;
 
 
 /**
@@ -43,10 +44,12 @@ public class UtilELResolver extends ELResolverBase {
 		// Initialize the list of static feature descriptors.
 		addFeatureDescriptor("browserSniffer", BrowserSniffer.class);
 		addFeatureDescriptor("i18n", String.class);
+		addFeatureDescriptor("product", Product.class);
 	}
 
 	// Private Data Members
 	private I18nMap i18n = new I18nMap();
+	private ProductMap product = new ProductMap();
 
 	@Override
 	public Class<?> getCommonPropertyType(ELContext elContext, Object base) {
@@ -98,6 +101,9 @@ public class UtilELResolver extends ELResolverBase {
 
 				FacesContext currentInstance = FacesContext.getCurrentInstance();
 				value = BrowserSnifferFactory.getBrowserSnifferInstance(currentInstance.getExternalContext());
+			}
+			else if (varName.equals("product")) {
+				value = product;
 			}
 		}
 		catch (Exception e) {
