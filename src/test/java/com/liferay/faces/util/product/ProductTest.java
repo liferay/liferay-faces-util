@@ -82,8 +82,8 @@ public class ProductTest {
 			"'s build ID is " + buildId + ".", 0, buildId);
 
 		String version = product.getVersion();
-		Assert.assertEquals(title + "'s build ID is not \"0.0.0\" even though " + title + " is not detected. Instead " +
-			title + "'s build ID is \"" + version + "\".", "0.0.0", version);
+		Assert.assertEquals(title + "'s version is not \"0.0.0\" even though " + title + " is not detected. Instead " +
+			title + "'s version is \"" + version + "\".", "0.0.0", version);
 
 		String productString = product.toString();
 		Assert.assertNotNull("ProductFactory.get(Product.Name." + productName +
