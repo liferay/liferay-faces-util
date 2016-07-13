@@ -48,8 +48,8 @@ public class UtilELResolver extends ELResolverBase {
 	}
 
 	// Private Data Members
-	private I18nMap i18n = new I18nMap();
-	private ProductMap product = new ProductMap();
+	private I18nMap i18nMap = new I18nMap();
+	private ProductMap productMap = new ProductMap();
 
 	@Override
 	public Class<?> getCommonPropertyType(ELContext elContext, Object base) {
@@ -95,7 +95,7 @@ public class UtilELResolver extends ELResolverBase {
 		try {
 
 			if (varName.equals("i18n")) {
-				value = i18n;
+				value = i18nMap;
 			}
 			else if (varName.equals("browserSniffer")) {
 
@@ -103,7 +103,7 @@ public class UtilELResolver extends ELResolverBase {
 				value = BrowserSnifferFactory.getBrowserSnifferInstance(currentInstance.getExternalContext());
 			}
 			else if (varName.equals("product")) {
-				value = product;
+				value = productMap;
 			}
 		}
 		catch (Exception e) {
