@@ -15,7 +15,8 @@
  */
 package com.liferay.faces.util.el.internal;
 
-import java.util.ResourceBundle;
+import java.io.Serializable;
+import java.util.Map;
 
 import javax.faces.application.ProjectStage;
 import javax.faces.context.FacesContext;
@@ -26,12 +27,15 @@ import javax.faces.context.FacesContext;
  *
  * @author  Neil Griffin
  */
-public abstract class I18NCompat extends ResourceBundle {
+public abstract class I18nMapCompat implements Map<String, Object>, Serializable {
+
+	// serialVersionUID
+	private static final long serialVersionUID = 170055432633295830L;
 
 	// Protected Data Members
 	protected boolean cacheEnabled;
 
-	public I18NCompat() {
+	public I18nMapCompat() {
 
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 

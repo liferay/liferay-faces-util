@@ -15,11 +15,11 @@
  */
 package com.liferay.faces.util.el.internal;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Enumeration;
+import java.io.IOException;
+import java.util.Collection;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.faces.application.Application;
@@ -33,26 +33,103 @@ import com.liferay.faces.util.i18n.I18nFactory;
 /**
  * @author  Neil Griffin
  */
-public class I18N extends I18NCompat {
+public class I18nMap extends I18nMapCompat {
 
-	// Private Constants
-	private static final Enumeration<String> EMPTY_KEYS = Collections.enumeration(new ArrayList<String>());
+	// serialVersionUID
+	private static final long serialVersionUID = 5549598732411060854L;
 
 	// Private Data Members
-	private Map<String, String> cache;
+	private transient Map<String, String> cache = new ConcurrentHashMap<String, String>();
 
-	public I18N() {
-		super();
-		this.cache = new ConcurrentHashMap<String, String>();
+	@Override
+	public void clear() {
+		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * This method is required by the ResourceBundle abstract class, but it will never be called in the normal running
-	 * of a JSF webapp using the EL. Therefore, it just returns an empty Enumeration of Strings.
-	 */
 	@Override
-	public Enumeration<String> getKeys() {
-		return EMPTY_KEYS;
+	public boolean containsKey(Object key) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean containsValue(Object value) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Set<Entry<String, Object>> entrySet() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Object get(Object key) {
+
+		String message = null;
+
+		if (key != null) {
+
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			UIViewRoot viewRoot = facesContext.getViewRoot();
+			Locale locale = viewRoot.getLocale();
+
+			if (locale == null) {
+				Application application = facesContext.getApplication();
+				locale = application.getDefaultLocale();
+			}
+
+			I18n i18n = I18nFactory.getI18nInstance();
+
+			String keyAsString = key.toString();
+
+			if (cacheEnabled) {
+
+				String messageKey = keyAsString;
+
+				if (locale != null) {
+					messageKey = locale.toString().concat(keyAsString);
+				}
+
+				message = cache.get(messageKey);
+
+				if (message == null) {
+					message = i18n.getMessage(facesContext, locale, keyAsString);
+
+					if (message != null) {
+						cache.put(messageKey, message);
+					}
+				}
+			}
+			else {
+				message = i18n.getMessage(facesContext, locale, keyAsString);
+			}
+		}
+
+		return message;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Set<String> keySet() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Object put(String key, Object value) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void putAll(Map<? extends String, ?> m) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Object remove(Object key) {
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -166,46 +243,16 @@ public class I18N extends I18NCompat {
 	}
 
 	@Override
-	protected Object handleGetObject(String key) {
+	public int size() {
+		throw new UnsupportedOperationException();
+	}
 
-		String message = null;
+	@Override
+	public Collection<Object> values() {
+		throw new UnsupportedOperationException();
+	}
 
-		if (key != null) {
-
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-			UIViewRoot viewRoot = facesContext.getViewRoot();
-			Locale locale = viewRoot.getLocale();
-
-			if (locale == null) {
-				Application application = facesContext.getApplication();
-				locale = application.getDefaultLocale();
-			}
-
-			I18n i18n = I18nFactory.getI18nInstance();
-
-			if (cacheEnabled) {
-
-				String messageKey = key;
-
-				if (locale != null) {
-					messageKey = locale.toString().concat(key);
-				}
-
-				message = cache.get(messageKey);
-
-				if (message == null) {
-					message = i18n.getMessage(facesContext, locale, key);
-
-					if (message != null) {
-						cache.put(messageKey, message);
-					}
-				}
-			}
-			else {
-				message = i18n.getMessage(facesContext, locale, key);
-			}
-		}
-
-		return message;
+	private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
+		cache = new ConcurrentHashMap<String, String>();
 	}
 }
