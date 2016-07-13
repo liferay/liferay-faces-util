@@ -16,18 +16,31 @@
 package com.liferay.faces.util.el;
 
 import java.beans.FeatureDescriptor;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.el.ELContext;
 import javax.el.ELResolver;
+import javax.faces.application.Application;
 
 
 /**
+ * This is a convenience base class that extends {@link ELResolver}. A subclasses must be designed to be instantiated as
+ * a singleton because the JavaDoc for {@link Application#getELResolver()} indicates that an {@code ELResolver} should
+ * be a singleton instance. This class implements the {@link Serializable} interface as a clue to subclasses that they
+ * should implement a stateless, thread-safe singleton design. Subclasses should call the static {@link
+ * #addFeatureDescriptor(String, Class)} method from a {@code static} block in order to add to the list of feature
+ * descriptors.
+ *
  * @author  Neil Griffin
  */
-public abstract class ELResolverBase extends ELResolver {
+public abstract class ELResolverBase extends ELResolver implements Serializable {
 
+	// serialVersionUID
+	private static final long serialVersionUID = 8075201303544048292L;
+
+	// Private Constants
 	private static final ArrayList<FeatureDescriptor> FEATURE_DESCRIPTORS = new ArrayList<FeatureDescriptor>();
 
 	protected static void addFeatureDescriptor(String featureName, Class<?> classType) {
@@ -45,7 +58,6 @@ public abstract class ELResolverBase extends ELResolver {
 
 	@Override
 	public Iterator<FeatureDescriptor> getFeatureDescriptors(ELContext elContext, Object base) {
-
 		return FEATURE_DESCRIPTORS.iterator();
 	}
 
@@ -98,7 +110,6 @@ public abstract class ELResolverBase extends ELResolver {
 
 	@Override
 	public boolean isReadOnly(ELContext elContext, Object base, Object property) {
-
 		return true;
 	}
 

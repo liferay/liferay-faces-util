@@ -32,31 +32,29 @@ import com.liferay.faces.util.logging.LoggerFactory;
  */
 public class UtilELResolver extends ELResolverBase {
 
-	public static final String BROWSER_SNIFFER = "browserSniffer";
-	public static final String I18N = "i18n";
-
+	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(UtilELResolver.class);
+
+	// serialVersionUID
+	private static final long serialVersionUID = 4993137243887595902L;
 
 	static {
 
 		// Initialize the list of static feature descriptors.
-		addFeatureDescriptor(BROWSER_SNIFFER, BrowserSniffer.class);
-		addFeatureDescriptor(I18N, String.class);
+		addFeatureDescriptor("browserSniffer", BrowserSniffer.class);
+		addFeatureDescriptor("i18n", String.class);
 	}
 
-	private I18N i18n;
+	// Private Data Members
+	private I18nMap i18n = new I18nMap();
 
 	@Override
 	public Class<?> getCommonPropertyType(ELContext elContext, Object base) {
-
-		Class<?> commonPropertyType = null;
-
-		return commonPropertyType;
+		return null;
 	}
 
 	@Override
 	public boolean isReadOnly(ELContext elContext, Object base, Object property) {
-
 		return true;
 	}
 
@@ -72,10 +70,10 @@ public class UtilELResolver extends ELResolverBase {
 		if ((property != null) && (property instanceof String)) {
 			String propertyAsString = (String) property;
 
-			if (propertyAsString.equals(I18N)) {
+			if (propertyAsString.equals("i18n")) {
 				throw new PropertyNotWritableException(propertyAsString);
 			}
-			else if (propertyAsString.equals(BROWSER_SNIFFER)) {
+			else if (propertyAsString.equals("browserSniffer")) {
 				throw new PropertyNotWritableException(propertyAsString);
 			}
 		}
@@ -83,7 +81,6 @@ public class UtilELResolver extends ELResolverBase {
 
 	@Override
 	protected Object resolveProperty(ELContext elContext, Object base, String property) {
-
 		return null;
 	}
 
@@ -94,15 +91,10 @@ public class UtilELResolver extends ELResolverBase {
 
 		try {
 
-			if (varName.equals(I18N)) {
-
-				if (i18n == null) {
-					i18n = new I18N();
-				}
-
+			if (varName.equals("i18n")) {
 				value = i18n;
 			}
-			else if (varName.equals(BROWSER_SNIFFER)) {
+			else if (varName.equals("browserSniffer")) {
 
 				FacesContext currentInstance = FacesContext.getCurrentInstance();
 				value = BrowserSnifferFactory.getBrowserSnifferInstance(currentInstance.getExternalContext());
@@ -113,16 +105,10 @@ public class UtilELResolver extends ELResolverBase {
 		}
 
 		if (value == null) {
-
-			if (logger.isDebugEnabled()) {
-				logger.debug("Unable to resolve variable [" + varName + "] value=" + value);
-			}
+			logger.debug("Resolved variable [{0}] value=[null]", varName);
 		}
 		else {
-
-			if (logger.isDebugEnabled()) {
-				logger.debug("Resolved variable [" + varName + "] value=" + value);
-			}
+			logger.debug("Unable to resolve variable [{0}] value=[{1}]", varName, value);
 		}
 
 		return value;
