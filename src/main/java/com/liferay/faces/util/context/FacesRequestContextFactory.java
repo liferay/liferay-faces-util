@@ -28,7 +28,7 @@ public abstract class FacesRequestContextFactory implements FacesWrapper<FacesRe
 	/**
 	 * Returns a {@link ThreadLocal} singleton instance of {@link FacesRequestContext} from the {@link
 	 * FacesRequestContextFactory} found by the {@link FactoryExtensionFinder}. The returned instance is designed to be
-	 * used during the execution of a request thread.
+	 * used during execution of a request thread, so it is not guaranteed to be {@link java.io.Serializable}.
 	 */
 	public static FacesRequestContext getFacesRequestContextInstance() {
 
@@ -40,7 +40,8 @@ public abstract class FacesRequestContextFactory implements FacesWrapper<FacesRe
 
 	/**
 	 * Returns a {@link ThreadLocal} singleton instance of {@link FacesRequestContext}. The returned instance is
-	 * designed to be used during the execution of a request thread.
+	 * designed to be used during execution of a request thread, so it is not guaranteed to be {@link
+	 * java.io.Serializable}.
 	 */
 	public abstract FacesRequestContext getFacesRequestContext();
 
