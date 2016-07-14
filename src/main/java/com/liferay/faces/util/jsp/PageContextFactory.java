@@ -77,7 +77,7 @@ public abstract class PageContextFactory implements FacesWrapper<PageContextFact
 		HttpServletResponse httpServletResponse, ELContext elContext);
 
 	/**
-	 * Returns the wrapped factory instance if this factory has been decorated. Otherwise, this method returns null.
+	 * Returns the wrapped factory instance if this factory decorates another. Otherwise, this method returns null.
 	 */
 	@Override
 	public abstract PageContextFactory getWrapped();

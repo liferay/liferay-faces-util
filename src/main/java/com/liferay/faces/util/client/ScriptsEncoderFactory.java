@@ -47,7 +47,7 @@ public abstract class ScriptsEncoderFactory implements FacesWrapper<ScriptsEncod
 	public abstract ScriptsEncoder getScriptsEncoder();
 
 	/**
-	 * Returns the wrapped factory instance if this factory has been decorated. Otherwise, this method returns null.
+	 * Returns the wrapped factory instance if this factory decorates another. Otherwise, this method returns null.
 	 */
 	@Override
 	public abstract ScriptsEncoderFactory getWrapped();
