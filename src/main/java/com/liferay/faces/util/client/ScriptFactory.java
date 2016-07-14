@@ -29,7 +29,8 @@ public abstract class ScriptFactory implements Wrapper<ScriptFactory> {
 
 	/**
 	 * Returns a new instance of {@link Script} from the {@link ScriptFactory} found by the {@link
-	 * FactoryExtensionFinder}.
+	 * FactoryExtensionFinder}. The returned instance is guaranteed to be {@link java.io.Serializable} but not
+	 * guaranteed to be thread-safe.
 	 */
 	public static Script getScriptInstance(String sourceCode) {
 
@@ -40,7 +41,8 @@ public abstract class ScriptFactory implements Wrapper<ScriptFactory> {
 
 	/**
 	 * Returns a new instance of {@link Script} from the {@link ScriptFactory} found by the {@link
-	 * FactoryExtensionFinder}.
+	 * FactoryExtensionFinder}. The returned instance is guaranteed to be {@link java.io.Serializable} but not
+	 * guaranteed to be thread-safe.
 	 */
 	public static Script getScriptInstance(String sourceCode, String[] modules, Script.ModulesType modulesType) {
 
@@ -50,7 +52,8 @@ public abstract class ScriptFactory implements Wrapper<ScriptFactory> {
 	}
 
 	/**
-	 * Returns a new instance of {@link Script} with the specified source code. The Script can be rendered on the client
+	 * Returns a new instance of {@link Script} with the specified source code. The returned instance is guaranteed to
+	 * be {@link java.io.Serializable} but not guaranteed to be thread-safe. The Script can be rendered on the client
 	 * via {@link com.liferay.faces.util.context.FacesRequestContext#addScript(com.liferay.faces.util.client.Script)}.
 	 * As a convenience, it is possible to call {@link
 	 * com.liferay.faces.util.context.FacesRequestContext#addScript(java.lang.String)} instead since it will create the
@@ -61,8 +64,9 @@ public abstract class ScriptFactory implements Wrapper<ScriptFactory> {
 	public abstract Script getScript(String sourceCode);
 
 	/**
-	 * Returns a new instance of {@link Script} with the specified source code, modules, and type. The Script can be
-	 * rendered on the client via {@link
+	 * Returns a new instance of {@link Script} with the specified source code, modules, and type. The returned instance
+	 * is guaranteed to be {@link java.io.Serializable} but not guaranteed to be thread-safe. The Script can be rendered
+	 * on the client via {@link
 	 * com.liferay.faces.util.context.FacesRequestContext#addScript(com.liferay.faces.util.client.Script)}.
 	 *
 	 * @param  sourceCode   The source code of the Script.

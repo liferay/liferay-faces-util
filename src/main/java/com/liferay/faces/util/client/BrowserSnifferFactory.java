@@ -28,7 +28,8 @@ public abstract class BrowserSnifferFactory implements Wrapper<BrowserSnifferFac
 
 	/**
 	 * Returns a new instance of {@link BrowserSniffer} from the {@link BrowserSnifferFactory} found by the {@link
-	 * FactoryExtensionFinder}. The returned instance is designed to be used during execution of a request thread.
+	 * FactoryExtensionFinder}. The returned instance is designed to be used during execution of a request thread, so it
+	 * is not guaranteed to be {@link java.io.Serializable}.
 	 */
 	public static BrowserSniffer getBrowserSnifferInstance(ExternalContext externalContext) {
 
@@ -40,7 +41,7 @@ public abstract class BrowserSnifferFactory implements Wrapper<BrowserSnifferFac
 
 	/**
 	 * Returns a new instance of {@link BrowserSniffer}. The returned instance is designed to be used during execution
-	 * of a request thread.
+	 * of a request thread, so it is not guaranteed to be {@link java.io.Serializable}.
 	 */
 	public abstract BrowserSniffer getBrowserSniffer(ExternalContext externalContext);
 
