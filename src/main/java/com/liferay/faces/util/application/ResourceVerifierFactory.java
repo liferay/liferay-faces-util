@@ -53,7 +53,7 @@ public abstract class ResourceVerifierFactory implements FacesWrapper<ResourceVe
 	public abstract ResourceVerifier getResourceVerifier();
 
 	/**
-	 * Returns the wrapped factory instance if this factory has been decorated. Otherwise, this method returns null.
+	 * Returns the wrapped factory instance if this factory decorates another. Otherwise, this method returns null.
 	 */
 	@Override
 	public abstract ResourceVerifierFactory getWrapped();
