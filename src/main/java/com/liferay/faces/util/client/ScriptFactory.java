@@ -76,7 +76,7 @@ public abstract class ScriptFactory implements Wrapper<ScriptFactory> {
 	public abstract Script getScript(String sourceCode, String[] modules, Script.ModulesType modulesType);
 
 	/**
-	 * Returns the wrapped factory instance if this factory has been decorated. Otherwise, this method returns null.
+	 * Returns the wrapped factory instance if this factory decorates another. Otherwise, this method returns null.
 	 */
 	@Override
 	public abstract ScriptFactory getWrapped();
