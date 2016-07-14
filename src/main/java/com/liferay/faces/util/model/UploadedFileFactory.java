@@ -30,7 +30,8 @@ public abstract class UploadedFileFactory implements FacesWrapper<UploadedFileFa
 
 	/**
 	 * Returns a new instance of {@link UploadedFile} from the {@link UploadedFileFactory} found by the {@link
-	 * FactoryExtensionFinder}.
+	 * FactoryExtensionFinder}. The returned instance is guaranteed to be {@link java.io.Serializable} but not
+	 * guaranteed to be thread-safe.
 	 */
 	public static UploadedFile getUploadedFileInstance(Exception e) {
 
@@ -42,7 +43,8 @@ public abstract class UploadedFileFactory implements FacesWrapper<UploadedFileFa
 
 	/**
 	 * Returns a new instance of {@link UploadedFile} from the {@link UploadedFileFactory} found by the {@link
-	 * FactoryExtensionFinder}.
+	 * FactoryExtensionFinder}. The returned instance is guaranteed to be {@link java.io.Serializable} but not
+	 * guaranteed to be thread-safe.
 	 */
 	public static UploadedFile getUploadedFileInstance(String absolutePath, Map<String, Object> attributes,
 		String charSet, String contentType, Map<String, List<String>> headers, String id, String message, String name,
@@ -56,12 +58,14 @@ public abstract class UploadedFileFactory implements FacesWrapper<UploadedFileFa
 	}
 
 	/**
-	 * Returns a new instance of {@link UploadedFile}.
+	 * Returns a new instance of {@link UploadedFile}. The returned instance is guaranteed to be {@link
+	 * java.io.Serializable} but not guaranteed to be thread-safe.
 	 */
 	public abstract UploadedFile getUploadedFile(Exception e);
 
 	/**
-	 * Returns a new instance of {@link UploadedFile}.
+	 * Returns a new instance of {@link UploadedFile}. The returned instance is guaranteed to be {@link
+	 * java.io.Serializable} but not guaranteed to be thread-safe.
 	 */
 	public abstract UploadedFile getUploadedFile(String absolutePath, Map<String, Object> attributes, String charSet,
 		String contentType, Map<String, List<String>> headers, String id, String message, String name, long size,

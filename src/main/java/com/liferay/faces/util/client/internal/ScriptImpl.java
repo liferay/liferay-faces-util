@@ -15,6 +15,8 @@
  */
 package com.liferay.faces.util.client.internal;
 
+import java.io.Serializable;
+
 import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -23,7 +25,10 @@ import com.liferay.faces.util.logging.LoggerFactory;
 /**
  * @author  Kyle Stiemann
  */
-public class ScriptImpl implements Script {
+public class ScriptImpl implements Script, Serializable {
+
+	// serialVersionUI
+	private static final long serialVersionUID = 7977887323051720778L;
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(ScriptImpl.class);
