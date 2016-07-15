@@ -113,13 +113,6 @@ public abstract class ExtFacesContext extends FacesContext implements FacesConte
 	public abstract void addComponentInfoMessage(String clientId, String messageId);
 
 	/**
-	 * @deprecated  Call {@link FacesContextHelperUtil#addComponentInfoMessage(String, String, Object)} instead.
-	 */
-	@Deprecated
-	@Override
-	public abstract void addComponentInfoMessage(String clientId, String messageId, Object argument);
-
-	/**
 	 * @deprecated  Call {@link FacesContextHelperUtil#addComponentInfoMessage(String, String, Object...)} instead.
 	 */
 	@Deprecated
@@ -132,14 +125,6 @@ public abstract class ExtFacesContext extends FacesContext implements FacesConte
 	@Deprecated
 	@Override
 	public abstract void addComponentInfoMessage(FacesContext facesContext, String clientId, String messageId);
-
-	/**
-	 * @deprecated  Call {@link FacesContextHelperUtil#addComponentInfoMessage(String, String, Object)} instead.
-	 */
-	@Deprecated
-	@Override
-	public abstract void addComponentInfoMessage(FacesContext facesContext, String clientId, String messageId,
-		Object argument);
 
 	/**
 	 * @deprecated  Call {@link FacesContextHelperUtil#addComponentInfoMessage(String, String, Object...)} instead.
@@ -157,13 +142,6 @@ public abstract class ExtFacesContext extends FacesContext implements FacesConte
 	public abstract void addGlobalErrorMessage(String messageId);
 
 	/**
-	 * @deprecated  Call {@link FacesContextHelperUtil#addGlobalErrorMessage(String, Object)} instead.
-	 */
-	@Deprecated
-	@Override
-	public abstract void addGlobalErrorMessage(String messageId, Object argument);
-
-	/**
 	 * @deprecated  Call {@link FacesContextHelperUtil#addGlobalErrorMessage(String, Object...)} instead.
 	 */
 	@Deprecated
@@ -176,13 +154,6 @@ public abstract class ExtFacesContext extends FacesContext implements FacesConte
 	@Deprecated
 	@Override
 	public abstract void addGlobalErrorMessage(FacesContext facesContext, String messageId);
-
-	/**
-	 * @deprecated  Call {@link FacesContextHelperUtil#addGlobalErrorMessage(String, Object)} instead.
-	 */
-	@Deprecated
-	@Override
-	public abstract void addGlobalErrorMessage(FacesContext facesContext, String messageId, Object argument);
 
 	/**
 	 * @deprecated  Call {@link FacesContextHelperUtil#addGlobalErrorMessage(String, Object...)} instead.
@@ -199,13 +170,6 @@ public abstract class ExtFacesContext extends FacesContext implements FacesConte
 	public abstract void addGlobalInfoMessage(String messageId);
 
 	/**
-	 * @deprecated  Call {@link FacesContextHelperUtil#addGlobalInfoMessage(String, Object)} instead.
-	 */
-	@Deprecated
-	@Override
-	public abstract void addGlobalInfoMessage(String messageId, Object argument);
-
-	/**
 	 * @deprecated  Call {@link FacesContextHelperUtil#addGlobalInfoMessage(String, Object...)} instead.
 	 */
 	@Deprecated
@@ -218,13 +182,6 @@ public abstract class ExtFacesContext extends FacesContext implements FacesConte
 	@Deprecated
 	@Override
 	public abstract void addGlobalInfoMessage(FacesContext facesContext, String messageId);
-
-	/**
-	 * @deprecated  Call {@link FacesContextHelperUtil#addGlobalInfoMessage(String, Object)} instead.
-	 */
-	@Deprecated
-	@Override
-	public abstract void addGlobalInfoMessage(FacesContext facesContext, String messageId, Object argument);
 
 	/**
 	 * @deprecated  Call {@link FacesContextHelperUtil#addGlobalInfoMessage(String, Object...)} instead.

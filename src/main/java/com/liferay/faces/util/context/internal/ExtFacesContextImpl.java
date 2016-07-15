@@ -42,6 +42,7 @@ import javax.faces.event.PhaseListener;
 import javax.faces.render.RenderKit;
 
 import com.liferay.faces.util.context.ExtFacesContext;
+import com.liferay.faces.util.context.FacesContextHelper;
 import com.liferay.faces.util.context.FacesContextHelperUtil;
 
 
@@ -103,14 +104,6 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	}
 
 	/**
-	 * @see  {@link FacesContextHelper#addComponentInfoMessage(String, String, Object)}
-	 */
-	@Override
-	public void addComponentInfoMessage(String clientId, String messageId, Object argument) {
-		FacesContextHelperUtil.addComponentInfoMessage(clientId, messageId, argument);
-	}
-
-	/**
 	 * @see  {@link FacesContextHelper#addComponentInfoMessage(String, String, Object...)}
 	 */
 	@Override
@@ -124,14 +117,6 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	@Override
 	public void addComponentInfoMessage(FacesContext facesContext, String clientId, String messageId) {
 		FacesContextHelperUtil.addComponentInfoMessage(facesContext, clientId, messageId);
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#addComponentInfoMessage(String, String, Object)}
-	 */
-	@Override
-	public void addComponentInfoMessage(FacesContext facesContext, String clientId, String messageId, Object argument) {
-		FacesContextHelperUtil.addComponentInfoMessage(facesContext, clientId, messageId, argument);
 	}
 
 	/**
@@ -152,14 +137,6 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	}
 
 	/**
-	 * @see  {@link FacesContextHelper#addGlobalErrorMessage(String, Object)}
-	 */
-	@Override
-	public void addGlobalErrorMessage(String messageId, Object argument) {
-		FacesContextHelperUtil.addGlobalErrorMessage(messageId, argument);
-	}
-
-	/**
 	 * @see  {@link FacesContextHelper#addGlobalErrorMessage(String, Object...)}
 	 */
 	@Override
@@ -173,14 +150,6 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	@Override
 	public void addGlobalErrorMessage(FacesContext facesContext, String messageId) {
 		FacesContextHelperUtil.addGlobalErrorMessage(facesContext, messageId);
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#addGlobalErrorMessage(String, Object)}
-	 */
-	@Override
-	public void addGlobalErrorMessage(FacesContext facesContext, String messageId, Object argument) {
-		FacesContextHelperUtil.addGlobalErrorMessage(facesContext, messageId, argument);
 	}
 
 	/**
@@ -200,14 +169,6 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	}
 
 	/**
-	 * @see  {@link FacesContextHelper#addGlobalInfoMessage(String, Object)}
-	 */
-	@Override
-	public void addGlobalInfoMessage(String messageId, Object argument) {
-		FacesContextHelperUtil.addGlobalInfoMessage(messageId, argument);
-	}
-
-	/**
 	 * @see  {@link FacesContextHelper#addGlobalInfoMessage(String, Object...)}
 	 */
 	@Override
@@ -221,14 +182,6 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	@Override
 	public void addGlobalInfoMessage(FacesContext facesContext, String messageId) {
 		FacesContextHelperUtil.addGlobalInfoMessage(facesContext, messageId);
-	}
-
-	/**
-	 * @see  {@link FacesContextHelper#addGlobalInfoMessage(String, Object)}
-	 */
-	@Override
-	public void addGlobalInfoMessage(FacesContext facesContext, String messageId, Object argument) {
-		FacesContextHelperUtil.addGlobalInfoMessage(facesContext, messageId, argument);
 	}
 
 	/**
