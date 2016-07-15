@@ -55,99 +55,163 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	/**
 	 * @see  {@link FacesContextHelper#addComponentErrorMessage(String, String)}
 	 */
+	@Override
 	public void addComponentErrorMessage(String clientId, String messageId) {
 		FacesContextHelperUtil.addComponentErrorMessage(clientId, messageId);
 	}
 
 	/**
-	 * @see  {@link FacesContextHelper#addComponentErrorMessage(String, String, Object)}
-	 */
-	public void addComponentErrorMessage(String clientId, String messageId, Object argument) {
-		FacesContextHelperUtil.addComponentErrorMessage(clientId, messageId, argument);
-	}
-
-	/**
 	 * @see  {@link FacesContextHelper#addComponentErrorMessage(String, String, Object...)}
 	 */
+	@Override
 	public void addComponentErrorMessage(String clientId, String messageId, Object... arguments) {
 		FacesContextHelperUtil.addComponentErrorMessage(clientId, messageId, arguments);
 	}
 
 	/**
+	 * @see  {@link FacesContextHelper#addComponentErrorMessage(String, String)}
+	 */
+	@Override
+	public void addComponentErrorMessage(FacesContext facesContext, String clientId, String messageId) {
+		FacesContextHelperUtil.addComponentErrorMessage(facesContext, clientId, messageId);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#addComponentErrorMessage(String, String, Object...)}
+	 */
+	@Override
+	public void addComponentErrorMessage(FacesContext facesContext, String clientId, String messageId,
+		Object... arguments) {
+		FacesContextHelperUtil.addComponentErrorMessage(facesContext, clientId, messageId, arguments);
+	}
+
+	/**
 	 * @see  {@link FacesContextHelper#addComponentInfoMessage(String, String)}
 	 */
+	@Override
 	public void addComponentInfoMessage(String clientId, String messageId) {
 		FacesContextHelperUtil.addComponentInfoMessage(clientId, messageId);
 	}
 
 	/**
-	 * @see  {@link FacesContextHelper#addComponentInfoMessage(String, String, Object)}
-	 */
-	public void addComponentInfoMessage(String clientId, String messageId, Object argument) {
-		FacesContextHelperUtil.addComponentInfoMessage(clientId, messageId, argument);
-	}
-
-	/**
 	 * @see  {@link FacesContextHelper#addComponentInfoMessage(String, String, Object...)}
 	 */
+	@Override
 	public void addComponentInfoMessage(String clientId, String messageId, Object... arguments) {
 		FacesContextHelperUtil.addComponentInfoMessage(clientId, messageId, arguments);
 	}
 
 	/**
+	 * @see  {@link FacesContextHelper#addComponentInfoMessage(String, String)}
+	 */
+	@Override
+	public void addComponentInfoMessage(FacesContext facesContext, String clientId, String messageId) {
+		FacesContextHelperUtil.addComponentInfoMessage(facesContext, clientId, messageId);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#addComponentInfoMessage(String, String, Object...)}
+	 */
+	@Override
+	public void addComponentInfoMessage(FacesContext facesContext, String clientId, String messageId,
+		Object... arguments) {
+		FacesContextHelperUtil.addComponentInfoMessage(facesContext, clientId, messageId, arguments);
+	}
+
+	/**
 	 * @see  {@link FacesContextHelper#addGlobalErrorMessage(String)}
 	 */
+	@Override
 	public void addGlobalErrorMessage(String messageId) {
 		FacesContextHelperUtil.addGlobalErrorMessage(messageId);
 	}
 
 	/**
-	 * @see  {@link FacesContextHelper#addGlobalErrorMessage(String, Object)}
-	 */
-	public void addGlobalErrorMessage(String messageId, Object argument) {
-		FacesContextHelperUtil.addGlobalErrorMessage(messageId, argument);
-	}
-
-	/**
 	 * @see  {@link FacesContextHelper#addGlobalErrorMessage(String, Object...)}
 	 */
+	@Override
 	public void addGlobalErrorMessage(String messageId, Object... arguments) {
 		FacesContextHelperUtil.addGlobalErrorMessage(messageId, arguments);
 	}
 
 	/**
+	 * @see  {@link FacesContextHelper#addGlobalErrorMessage(String)}
+	 */
+	@Override
+	public void addGlobalErrorMessage(FacesContext facesContext, String messageId) {
+		FacesContextHelperUtil.addGlobalErrorMessage(facesContext, messageId);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#addGlobalErrorMessage(String, Object...)}
+	 */
+	@Override
+	public void addGlobalErrorMessage(FacesContext facesContext, String messageId, Object... arguments) {
+		FacesContextHelperUtil.addGlobalErrorMessage(facesContext, messageId, arguments);
+	}
+
+	/**
 	 * @see  {@link FacesContextHelper#addGlobalInfoMessage(String)}
 	 */
+	@Override
 	public void addGlobalInfoMessage(String messageId) {
 		FacesContextHelperUtil.addGlobalInfoMessage(messageId);
 	}
 
 	/**
-	 * @see  {@link FacesContextHelper#addGlobalInfoMessage(String, Object)}
-	 */
-	public void addGlobalInfoMessage(String messageId, Object argument) {
-		FacesContextHelperUtil.addGlobalInfoMessage(messageId, argument);
-	}
-
-	/**
 	 * @see  {@link FacesContextHelper#addGlobalInfoMessage(String, Object...)}
 	 */
+	@Override
 	public void addGlobalInfoMessage(String messageId, Object... arguments) {
 		FacesContextHelperUtil.addGlobalInfoMessage(messageId, arguments);
 	}
 
 	/**
+	 * @see  {@link FacesContextHelper#addGlobalInfoMessage(String)}
+	 */
+	@Override
+	public void addGlobalInfoMessage(FacesContext facesContext, String messageId) {
+		FacesContextHelperUtil.addGlobalInfoMessage(facesContext, messageId);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#addGlobalInfoMessage(String, Object...)}
+	 */
+	@Override
+	public void addGlobalInfoMessage(FacesContext facesContext, String messageId, Object... arguments) {
+		FacesContextHelperUtil.addGlobalInfoMessage(facesContext, messageId, arguments);
+	}
+
+	/**
 	 * @see  {@link FacesContextHelper#addGlobalSuccessInfoMessage()}
 	 */
+	@Override
 	public void addGlobalSuccessInfoMessage() {
 		FacesContextHelperUtil.addGlobalSuccessInfoMessage();
 	}
 
 	/**
+	 * @see  {@link FacesContextHelper#addGlobalSuccessInfoMessage()}
+	 */
+	@Override
+	public void addGlobalSuccessInfoMessage(FacesContext facesContext) {
+		FacesContextHelperUtil.addGlobalSuccessInfoMessage(facesContext);
+	}
+
+	/**
 	 * @see  {@link FacesContextHelper#addGlobalUnexpectedErrorMessage()}
 	 */
+	@Override
 	public void addGlobalUnexpectedErrorMessage() {
 		FacesContextHelperUtil.addGlobalUnexpectedErrorMessage();
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#addGlobalUnexpectedErrorMessage()}
+	 */
+	@Override
+	public void addGlobalUnexpectedErrorMessage(FacesContext facesContext) {
+		FacesContextHelperUtil.addGlobalUnexpectedErrorMessage(facesContext);
 	}
 
 	/**
@@ -161,22 +225,34 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	/**
 	 * @see  {@link FacesContextHelper#addMessage(String, Severity, String)}
 	 */
+	@Override
 	public void addMessage(String clientId, Severity severity, String messageId) {
 		FacesContextHelperUtil.addMessage(clientId, severity, messageId);
 	}
 
 	/**
-	 * @see  {@link FacesContextHelper#addMessage(String, Severity, String, Object)}
+	 * @see  {@link FacesContextHelper#addMessage(String, Severity, String, Object...)}
 	 */
-	public void addMessage(String clientId, Severity severity, String messageId, Object argument) {
-		FacesContextHelperUtil.addMessage(clientId, severity, messageId, argument);
+	@Override
+	public void addMessage(String clientId, Severity severity, String messageId, Object... arguments) {
+		FacesContextHelperUtil.addMessage(clientId, severity, messageId, arguments);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#addMessage(String, Severity, String)}
+	 */
+	@Override
+	public void addMessage(FacesContext facesContext, String clientId, Severity severity, String messageId) {
+		FacesContextHelperUtil.addMessage(facesContext, clientId, severity, messageId);
 	}
 
 	/**
 	 * @see  {@link FacesContextHelper#addMessage(String, Severity, String, Object...)}
 	 */
-	public void addMessage(String clientId, Severity severity, String messageId, Object... arguments) {
-		FacesContextHelperUtil.addMessage(clientId, severity, messageId, arguments);
+	@Override
+	public void addMessage(FacesContext facesContext, String clientId, Severity severity, String messageId,
+		Object... arguments) {
+		FacesContextHelperUtil.addMessage(facesContext, clientId, severity, messageId, arguments);
 	}
 
 	/**
@@ -214,6 +290,7 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	/**
 	 * @see  {@link FacesContextHelper#getFacesContext()}
 	 */
+	@Override
 	public FacesContext getFacesContext() {
 		return FacesContext.getCurrentInstance();
 	}
@@ -221,8 +298,17 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	/**
 	 * @see  {@link FacesContextHelper#getLocale()}
 	 */
+	@Override
 	public Locale getLocale() {
 		return FacesContextHelperUtil.getLocale();
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#getLocale()}
+	 */
+	@Override
+	public Locale getLocale(FacesContext facesContext) {
+		return FacesContextHelperUtil.getLocale(facesContext);
 	}
 
 	/**
@@ -236,6 +322,7 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	/**
 	 * @see  {@link FacesContextHelper#getMessage(String)}
 	 */
+	@Override
 	public String getMessage(String messageId) {
 		return FacesContextHelperUtil.getMessage(messageId);
 	}
@@ -243,6 +330,7 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	/**
 	 * @see  {@link FacesContextHelper#getMessage(String, Object...)}
 	 */
+	@Override
 	public String getMessage(String messageId, Object... arguments) {
 		return FacesContextHelperUtil.getMessage(messageId, arguments);
 	}
@@ -250,15 +338,49 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	/**
 	 * @see  {@link FacesContextHelper#getMessage(Locale, String)}
 	 */
+	@Override
 	public String getMessage(Locale locale, String messageId) {
 		return FacesContextHelperUtil.getMessage(locale, messageId);
 	}
 
 	/**
+	 * @see  {@link FacesContextHelper#getMessage(String)}
+	 */
+	@Override
+	public String getMessage(FacesContext facesContext, String messageId) {
+		return FacesContextHelperUtil.getMessage(facesContext, messageId);
+	}
+
+	/**
 	 * @see  {@link FacesContextHelper#getMessage(Locale, String, Object...)}
 	 */
+	@Override
 	public String getMessage(Locale locale, String messageId, Object... arguments) {
 		return FacesContextHelperUtil.getMessage(locale, messageId, arguments);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#getMessage(String, Object...)}
+	 */
+	@Override
+	public String getMessage(FacesContext facesContext, String messageId, Object... arguments) {
+		return FacesContextHelperUtil.getMessage(facesContext, messageId, arguments);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#getMessage(Locale, String)}
+	 */
+	@Override
+	public String getMessage(FacesContext facesContext, Locale locale, String messageId) {
+		return FacesContextHelperUtil.getMessage(facesContext, locale, messageId);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#getMessage(Locale, String, Object...)}
+	 */
+	@Override
+	public String getMessage(FacesContext facesContext, Locale locale, String messageId, Object... arguments) {
+		return FacesContextHelperUtil.getMessage(facesContext, locale, messageId, arguments);
 	}
 
 	/**
@@ -280,13 +402,23 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	/**
 	 * @see  {@link FacesContextHelper#getNamespace()}
 	 */
+	@Override
 	public String getNamespace() {
 		return FacesContextHelperUtil.getNamespace();
 	}
 
 	/**
+	 * @see  {@link FacesContextHelper#getNamespace()}
+	 */
+	@Override
+	public String getNamespace(FacesContext facesContext) {
+		return FacesContextHelperUtil.getNamespace(facesContext);
+	}
+
+	/**
 	 * @see  {@link FacesContextHelper#getParentForm(UIComponent)}
 	 */
+	@Override
 	public UIForm getParentForm(UIComponent uiComponent) {
 		return FacesContextHelperUtil.getParentForm(uiComponent);
 	}
@@ -310,71 +442,161 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	/**
 	 * @see  {@link FacesContextHelper#getRequestAttribute(String)}
 	 */
+	@Override
 	public Object getRequestAttribute(String name) {
 		return FacesContextHelperUtil.getRequestAttribute(name);
 	}
 
 	/**
+	 * @see  {@link FacesContextHelper#getRequestAttribute(String)}
+	 */
+	@Override
+	public Object getRequestAttribute(FacesContext facesContext, String name) {
+		return FacesContextHelperUtil.getRequestAttribute(facesContext, name);
+	}
+
+	/**
 	 * @see  {@link FacesContextHelper#getRequestContextPath()}
 	 */
+	@Override
 	public String getRequestContextPath() {
 		return FacesContextHelperUtil.getRequestContextPath();
 	}
 
 	/**
+	 * @see  {@link FacesContextHelper#getRequestContextPath()}
+	 */
+	@Override
+	public String getRequestContextPath(FacesContext facesContext) {
+		return FacesContextHelperUtil.getRequestContextPath(facesContext);
+	}
+
+	/**
 	 * @see  {@link FacesContextHelper#getRequestParameter(String)}
 	 */
+	@Override
 	public String getRequestParameter(String name) {
 		return FacesContextHelperUtil.getRequestParameter(name);
 	}
 
 	/**
+	 * @see  {@link FacesContextHelper#getRequestParameter(String)}
+	 */
+	@Override
+	public String getRequestParameter(FacesContext facesContext, String name) {
+		return FacesContextHelperUtil.getRequestParameter(facesContext, name);
+	}
+
+	/**
 	 * @see  {@link FacesContextHelper#getRequestParameterAsBool(String, boolean)}
 	 */
+	@Override
 	public boolean getRequestParameterAsBool(String name, boolean defaultValue) {
 		return FacesContextHelperUtil.getRequestParameterAsBool(name, defaultValue);
 	}
 
 	/**
+	 * @see  {@link FacesContextHelper#getRequestParameterAsBool(String, boolean)}
+	 */
+	@Override
+	public boolean getRequestParameterAsBool(FacesContext facesContext, String name, boolean defaultValue) {
+		return FacesContextHelperUtil.getRequestParameterAsBool(facesContext, name, defaultValue);
+	}
+
+	/**
 	 * @see  {@link FacesContextHelper#getRequestParameterAsInt(String, int)}
 	 */
+	@Override
 	public int getRequestParameterAsInt(String name, int defaultValue) {
 		return FacesContextHelperUtil.getRequestParameterAsInt(name, defaultValue);
 	}
 
 	/**
+	 * @see  {@link FacesContextHelper#getRequestParameterAsInt(String, int)}
+	 */
+	@Override
+	public int getRequestParameterAsInt(FacesContext facesContext, String name, int defaultValue) {
+		return FacesContextHelperUtil.getRequestParameterAsInt(facesContext, name, defaultValue);
+	}
+
+	/**
 	 * @see  {@link FacesContextHelper#getRequestParameterAsLong(String, long)}
 	 */
+	@Override
 	public long getRequestParameterAsLong(String name, long defaultValue) {
 		return FacesContextHelperUtil.getRequestParameterAsLong(name, defaultValue);
 	}
 
 	/**
+	 * @see  {@link FacesContextHelper#getRequestParameterAsLong(String, long)}
+	 */
+	@Override
+	public long getRequestParameterAsLong(FacesContext facesContext, String name, long defaultValue) {
+		return FacesContextHelperUtil.getRequestParameterAsLong(facesContext, name, defaultValue);
+	}
+
+	/**
 	 * @see  {@link FacesContextHelper#getRequestParameterFromMap(String)}
 	 */
+	@Override
 	public String getRequestParameterFromMap(String name) {
 		return FacesContextHelperUtil.getRequestParameterFromMap(name);
 	}
 
 	/**
+	 * @see  {@link FacesContextHelper#getRequestParameterFromMap(String)}
+	 */
+	@Override
+	public String getRequestParameterFromMap(FacesContext facesContext, String name) {
+		return FacesContextHelperUtil.getRequestParameterFromMap(facesContext, name);
+	}
+
+	/**
 	 * @see  {@link FacesContextHelper#getRequestParameterMap()}
 	 */
+	@Override
 	public Map<String, String> getRequestParameterMap() {
 		return FacesContextHelperUtil.getRequestParameterMap();
 	}
 
 	/**
+	 * @see  {@link FacesContextHelper#getRequestParameterMap()}
+	 */
+	@Override
+	public Map<String, String> getRequestParameterMap(FacesContext facesContext) {
+		return FacesContextHelperUtil.getRequestParameterMap(facesContext);
+	}
+
+	/**
 	 * @see  {@link FacesContextHelper#getRequestQueryString()}
 	 */
+	@Override
 	public String getRequestQueryString() {
 		return FacesContextHelperUtil.getRequestQueryString();
 	}
 
 	/**
+	 * @see  {@link FacesContextHelper#getRequestQueryString()}
+	 */
+	@Override
+	public String getRequestQueryString(FacesContext facesContext) {
+		return FacesContextHelperUtil.getRequestQueryString(facesContext);
+	}
+
+	/**
 	 * @see  {@link FacesContextHelper#getRequestQueryStringParameter(String)}
 	 */
+	@Override
 	public String getRequestQueryStringParameter(String name) {
 		return FacesContextHelperUtil.getRequestQueryStringParameter(name);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#getRequestQueryStringParameter(String)}
+	 */
+	@Override
+	public String getRequestQueryStringParameter(FacesContext facesContext, String name) {
+		return FacesContextHelperUtil.getRequestQueryStringParameter(facesContext, name);
 	}
 
 	/**
@@ -404,15 +626,33 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	/**
 	 * @see  {@link FacesContextHelper#getSession(boolean)}
 	 */
+	@Override
 	public Object getSession(boolean create) {
 		return FacesContextHelperUtil.getSession(create);
 	}
 
 	/**
+	 * @see  {@link FacesContextHelper#getSession(boolean)}
+	 */
+	@Override
+	public Object getSession(FacesContext facesContext, boolean create) {
+		return FacesContextHelperUtil.getSession(facesContext, create);
+	}
+
+	/**
 	 * @see  {@link FacesContextHelper#getSessionAttribute(String)}
 	 */
+	@Override
 	public Object getSessionAttribute(String name) {
 		return FacesContextHelperUtil.getSessionAttribute(name);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#getSessionAttribute(String)}
+	 */
+	@Override
+	public Object getSessionAttribute(FacesContext facesContext, String name) {
+		return FacesContextHelperUtil.getSessionAttribute(facesContext, name);
 	}
 
 	/**
@@ -426,41 +666,88 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	/**
 	 * @see  {@link FacesContextHelper#matchComponentInHierarchy(UIComponent, String)}
 	 */
+	@Override
 	public UIComponent matchComponentInHierarchy(UIComponent parent, String partialClientId) {
 		return FacesContextHelperUtil.matchComponentInHierarchy(parent, partialClientId);
 	}
 
 	/**
+	 * @see  {@link FacesContextHelper#matchComponentInHierarchy(UIComponent, String)}
+	 */
+	@Override
+	public UIComponent matchComponentInHierarchy(FacesContext facesContext, UIComponent parent,
+		String partialClientId) {
+		return FacesContextHelperUtil.matchComponentInHierarchy(facesContext, parent, partialClientId);
+	}
+
+	/**
 	 * @see  {@link FacesContextHelper#matchComponentInViewRoot(String)}
 	 */
+	@Override
 	public UIComponent matchComponentInViewRoot(String partialClientId) {
 		return FacesContextHelperUtil.matchComponentInViewRoot(partialClientId);
 	}
 
 	/**
+	 * @see  {@link FacesContextHelper#matchComponentInViewRoot(String)}
+	 */
+	@Override
+	public UIComponent matchComponentInViewRoot(FacesContext facesContext, String partialClientId) {
+		return FacesContextHelperUtil.matchComponentInViewRoot(facesContext, partialClientId);
+	}
+
+	/**
 	 * @see  {@link FacesContextHelper#navigate(String, String)}
 	 */
+	@Override
 	public void navigate(String fromAction, String outcome) {
 		FacesContextHelperUtil.navigate(fromAction, outcome);
 	}
 
 	/**
+	 * @see  {@link FacesContextHelper#navigate(String, String)}
+	 */
+	@Override
+	public void navigate(FacesContext facesContext, String fromAction, String outcome) {
+		FacesContextHelperUtil.navigate(facesContext, fromAction, outcome);
+	}
+
+	/**
 	 * @see  {@link FacesContextHelper#navigateTo(String)}
 	 */
+	@Override
 	public void navigateTo(String outcome) {
 		FacesContextHelperUtil.navigateTo(outcome);
 	}
 
 	/**
+	 * @see  {@link FacesContextHelper#navigateTo(String)}
+	 */
+	@Override
+	public void navigateTo(FacesContext facesContext, String outcome) {
+		FacesContextHelperUtil.navigateTo(facesContext, outcome);
+	}
+
+	/**
 	 * @see  {@link FacesContextHelper#recreateComponentTree()}
 	 */
+	@Override
 	public void recreateComponentTree() {
 		FacesContextHelperUtil.recreateComponentTree();
 	}
 
 	/**
+	 * @see  {@link FacesContextHelper#recreateComponentTree()}
+	 */
+	@Override
+	public void recreateComponentTree(FacesContext facesContext) {
+		FacesContextHelperUtil.recreateComponentTree(facesContext);
+	}
+
+	/**
 	 * @see  {@link FacesContextHelper#registerPhaseListener(PhaseListener)}
 	 */
+	@Override
 	public void registerPhaseListener(PhaseListener phaseListener) {
 		FacesContextHelperUtil.registerPhaseListener(phaseListener);
 	}
@@ -476,20 +763,39 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	/**
 	 * @see  {@link FacesContextHelper#removeChildrenFromComponentTree(String)}
 	 */
+	@Override
 	public void removeChildrenFromComponentTree(String clientId) {
 		FacesContextHelperUtil.removeChildrenFromComponentTree(clientId);
 	}
 
 	/**
+	 * @see  {@link FacesContextHelper#removeChildrenFromComponentTree(String)}
+	 */
+	@Override
+	public void removeChildrenFromComponentTree(FacesContext facesContext, String clientId) {
+		FacesContextHelperUtil.removeChildrenFromComponentTree(facesContext, clientId);
+	}
+
+	/**
 	 * @see  {@link FacesContextHelper#removeMessages(String)}
 	 */
+	@Override
 	public void removeMessages(String clientId) {
 		FacesContextHelperUtil.removeMessages(clientId);
 	}
 
 	/**
+	 * @see  {@link FacesContextHelper#removeMessages(String)}
+	 */
+	@Override
+	public void removeMessages(FacesContext facesContext, String clientId) {
+		FacesContextHelperUtil.removeMessages(facesContext, clientId);
+	}
+
+	/**
 	 * @see  {@link FacesContextHelper#removeMessagesForImmediateComponents()}
 	 */
+	@Override
 	public void removeMessagesForImmediateComponents() {
 		FacesContextHelperUtil.removeMessagesForImmediateComponents();
 	}
@@ -497,13 +803,31 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	/**
 	 * @see  {@link FacesContextHelper#removeMessagesForImmediateComponents(UIComponent)}
 	 */
+	@Override
 	public void removeMessagesForImmediateComponents(UIComponent uiComponent) {
 		FacesContextHelperUtil.removeMessagesForImmediateComponents(uiComponent);
 	}
 
 	/**
+	 * @see  {@link FacesContextHelper#removeMessagesForImmediateComponents()}
+	 */
+	@Override
+	public void removeMessagesForImmediateComponents(FacesContext facesContext) {
+		FacesContextHelperUtil.removeMessagesForImmediateComponents(facesContext);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#removeMessagesForImmediateComponents(UIComponent)}
+	 */
+	@Override
+	public void removeMessagesForImmediateComponents(FacesContext facesContext, UIComponent uiComponent) {
+		FacesContextHelperUtil.removeMessagesForImmediateComponents(facesContext, uiComponent);
+	}
+
+	/**
 	 * @see  {@link FacesContextHelper#removeParentFormFromComponentTree(UIComponent)}
 	 */
+	@Override
 	public void removeParentFormFromComponentTree(UIComponent uiComponent) {
 		FacesContextHelperUtil.removeParentFormFromComponentTree(uiComponent);
 	}
@@ -519,6 +843,7 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	/**
 	 * @see  {@link FacesContextHelper#resetView()}
 	 */
+	@Override
 	public void resetView() {
 		FacesContextHelperUtil.resetView();
 	}
@@ -526,15 +851,41 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	/**
 	 * @see  {@link FacesContextHelper#resetView(boolean)}
 	 */
+	@Override
 	public void resetView(boolean renderResponse) {
 		FacesContextHelperUtil.resetView();
 	}
 
 	/**
+	 * @see  {@link FacesContextHelper#resetView()}
+	 */
+	@Override
+	public void resetView(FacesContext facesContext) {
+		FacesContextHelperUtil.resetView(facesContext);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#resetView(boolean)}
+	 */
+	@Override
+	public void resetView(FacesContext facesContext, boolean renderResponse) {
+		FacesContextHelperUtil.resetView(facesContext);
+	}
+
+	/**
 	 * @see  {@link FacesContextHelper#resolveExpression(String)}
 	 */
+	@Override
 	public Object resolveExpression(String elExpression) {
 		return FacesContextHelperUtil.resolveExpression(elExpression);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#resolveExpression(String)}
+	 */
+	@Override
+	public Object resolveExpression(FacesContext facesContext, String elExpression) {
+		return FacesContextHelperUtil.resolveExpression(facesContext, elExpression);
 	}
 
 	/**
@@ -548,8 +899,17 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	/**
 	 * @see  {@link FacesContextHelper#setRequestAttribute(String, Object)}
 	 */
+	@Override
 	public void setRequestAttribute(String name, Object value) {
 		FacesContextHelperUtil.setRequestAttribute(name, value);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#setRequestAttribute(String, Object)}
+	 */
+	@Override
+	public void setRequestAttribute(FacesContext facesContext, String name, Object value) {
+		FacesContextHelperUtil.setRequestAttribute(facesContext, name, value);
 	}
 
 	/**
@@ -571,8 +931,17 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	/**
 	 * @see  {@link FacesContextHelper#setSessionAttribute(String, Object)}
 	 */
+	@Override
 	public void setSessionAttribute(String name, Object value) {
 		FacesContextHelperUtil.setSessionAttribute(name, value);
+	}
+
+	/**
+	 * @see  {@link FacesContextHelper#setSessionAttribute(String, Object)}
+	 */
+	@Override
+	public void setSessionAttribute(FacesContext facesContext, String name, Object value) {
+		FacesContextHelperUtil.setSessionAttribute(facesContext, name, value);
 	}
 
 	/**
