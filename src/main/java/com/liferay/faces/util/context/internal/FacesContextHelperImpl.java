@@ -69,17 +69,8 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		addMessage(facesContext, clientId, FacesMessage.SEVERITY_ERROR, messageId);
 	}
 
-	public void addComponentErrorMessage(String clientId, String messageId, Object argument) {
-		addComponentErrorMessage(FacesContext.getCurrentInstance(), clientId, messageId, argument);
-	}
-
 	public void addComponentErrorMessage(String clientId, String messageId, Object... arguments) {
 		addComponentErrorMessage(FacesContext.getCurrentInstance(), clientId, messageId, arguments);
-	}
-
-	public void addComponentErrorMessage(FacesContext facesContext, String clientId, String messageId,
-		Object argument) {
-		addMessage(facesContext, clientId, FacesMessage.SEVERITY_ERROR, messageId, argument);
 	}
 
 	public void addComponentErrorMessage(FacesContext facesContext, String clientId, String messageId,
@@ -95,16 +86,8 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		addMessage(facesContext, clientId, FacesMessage.SEVERITY_INFO, messageId);
 	}
 
-	public void addComponentInfoMessage(String clientId, String messageId, Object argument) {
-		addComponentInfoMessage(FacesContext.getCurrentInstance(), clientId, messageId, argument);
-	}
-
 	public void addComponentInfoMessage(String clientId, String messageId, Object... arguments) {
 		addComponentInfoMessage(FacesContext.getCurrentInstance(), clientId, messageId, arguments);
-	}
-
-	public void addComponentInfoMessage(FacesContext facesContext, String clientId, String messageId, Object argument) {
-		addMessage(facesContext, clientId, FacesMessage.SEVERITY_INFO, messageId, argument);
 	}
 
 	public void addComponentInfoMessage(FacesContext facesContext, String clientId, String messageId,
@@ -120,16 +103,8 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		addComponentErrorMessage(facesContext, null, messageId);
 	}
 
-	public void addGlobalErrorMessage(String messageId, Object argument) {
-		addGlobalErrorMessage(FacesContext.getCurrentInstance(), messageId, argument);
-	}
-
 	public void addGlobalErrorMessage(String messageId, Object... arguments) {
 		addGlobalErrorMessage(FacesContext.getCurrentInstance(), messageId, arguments);
-	}
-
-	public void addGlobalErrorMessage(FacesContext facesContext, String messageId, Object argument) {
-		addComponentErrorMessage(facesContext, null, messageId, argument);
 	}
 
 	public void addGlobalErrorMessage(FacesContext facesContext, String messageId, Object... arguments) {
@@ -144,16 +119,8 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		addComponentInfoMessage(facesContext, null, messageId);
 	}
 
-	public void addGlobalInfoMessage(String messageId, Object argument) {
-		addGlobalInfoMessage(FacesContext.getCurrentInstance(), messageId, argument);
-	}
-
 	public void addGlobalInfoMessage(String messageId, Object... arguments) {
 		addGlobalInfoMessage(FacesContext.getCurrentInstance(), messageId, arguments);
-	}
-
-	public void addGlobalInfoMessage(FacesContext facesContext, String messageId, Object argument) {
-		addComponentInfoMessage(facesContext, null, messageId, argument);
 	}
 
 	public void addGlobalInfoMessage(FacesContext facesContext, String messageId, Object... arguments) {

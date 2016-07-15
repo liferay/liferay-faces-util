@@ -66,18 +66,8 @@ public abstract class FacesContextHelperWrapper implements FacesContextHelper, F
 	}
 
 	@Override
-	public void addComponentInfoMessage(String clientId, String messageId, Object argument) {
-		getWrapped().addComponentInfoMessage(clientId, messageId, argument);
-	}
-
-	@Override
 	public void addComponentInfoMessage(String clientId, String messageId, Object... arguments) {
 		getWrapped().addComponentInfoMessage(clientId, messageId, arguments);
-	}
-
-	@Override
-	public void addComponentInfoMessage(FacesContext facesContext, String clientId, String messageId, Object argument) {
-		getWrapped().addComponentInfoMessage(facesContext, clientId, messageId, argument);
 	}
 
 	@Override
@@ -97,18 +87,8 @@ public abstract class FacesContextHelperWrapper implements FacesContextHelper, F
 	}
 
 	@Override
-	public void addGlobalErrorMessage(String messageId, Object argument) {
-		getWrapped().addGlobalErrorMessage(messageId, argument);
-	}
-
-	@Override
 	public void addGlobalErrorMessage(String messageId, Object... arguments) {
 		getWrapped().addGlobalErrorMessage(messageId, arguments);
-	}
-
-	@Override
-	public void addGlobalErrorMessage(FacesContext facesContext, String messageId, Object argument) {
-		getWrapped().addGlobalErrorMessage(facesContext, messageId, argument);
 	}
 
 	@Override
@@ -127,18 +107,8 @@ public abstract class FacesContextHelperWrapper implements FacesContextHelper, F
 	}
 
 	@Override
-	public void addGlobalInfoMessage(String messageId, Object argument) {
-		getWrapped().addGlobalInfoMessage(messageId, argument);
-	}
-
-	@Override
 	public void addGlobalInfoMessage(String messageId, Object... arguments) {
 		getWrapped().addGlobalInfoMessage(messageId, arguments);
-	}
-
-	@Override
-	public void addGlobalInfoMessage(FacesContext facesContext, String messageId, Object argument) {
-		getWrapped().addGlobalInfoMessage(facesContext, messageId, argument);
 	}
 
 	@Override
