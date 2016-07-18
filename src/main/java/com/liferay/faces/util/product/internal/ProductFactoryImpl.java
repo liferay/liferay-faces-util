@@ -44,6 +44,7 @@ public class ProductFactoryImpl extends ProductFactory {
 		productMap.put(Product.Name.ICEFACES, new ProductICEfacesImpl());
 		productMap.put(Product.Name.LIFERAY_FACES_ALLOY, new ProductLiferayFacesAlloyImpl());
 		productMap.put(Product.Name.LIFERAY_FACES_BRIDGE, new ProductLiferayFacesBridgeImpl());
+		productMap.put(Product.Name.LIFERAY_FACES_BRIDGE_EXT, new ProductLiferayFacesBridgeExtImpl());
 		productMap.put(Product.Name.LIFERAY_FACES_METAL, new ProductLiferayFacesMetalImpl());
 		productMap.put(Product.Name.LIFERAY_FACES_PORTAL, new ProductLiferayFacesPortalImpl());
 		productMap.put(Product.Name.LIFERAY_FACES_SHOWCASE, new ProductLiferayFacesShowcaseImpl());

@@ -42,6 +42,7 @@ public class ApplicationStartupListener extends ApplicationStartupListenerCompat
 	@Override
 	public void processSystemEvent(EventObject systemEvent) throws AbortProcessingException {
 
+		UtilDependencyVerifier.verify();
 		Application application = (Application) systemEvent.getSource();
 		FacesContext initFacesContext = FacesContext.getCurrentInstance();
 		ExternalContext externalContext = initFacesContext.getExternalContext();
