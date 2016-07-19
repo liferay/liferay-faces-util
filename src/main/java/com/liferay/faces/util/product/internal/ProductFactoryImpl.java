@@ -64,10 +64,12 @@ public class ProductFactoryImpl extends ProductFactory {
 		ProductPlutoImpl productPlutoImpl = new ProductPlutoImpl();
 		productMap.put(Product.Name.PLUTO, productPlutoImpl);
 		productMap.put(Product.Name.PORTAL, new ProductSpecImpl("Portal", productLiferayPortalImpl, productPlutoImpl));
+		productMap.put(Product.Name.PORTLET_API, new ProductPortletApiImpl());
 		productMap.put(Product.Name.PRIMEFACES, new ProductPrimeFacesImpl());
 		productMap.put(Product.Name.PRIMEFACES_EXTENSIONS, new ProductPrimeFacesExtensionsImpl());
 		productMap.put(Product.Name.RESIN, new ProductResinImpl());
 		productMap.put(Product.Name.RICHFACES, new ProductRichFacesImpl());
+		productMap.put(Product.Name.SERVLET_API, new ProductServletApiImpl());
 		productMap.put(Product.Name.SPRING_FRAMEWORK, new ProductSpringFrameworkImpl());
 
 		Product productOpenWebBeansImpl = new ProductOpenWebBeansImpl();
