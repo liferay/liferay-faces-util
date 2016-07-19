@@ -35,7 +35,7 @@ public class UtilDependencyVerifier {
 		int jsfMajorVersion = jsf.getMajorVersion();
 		int jsfMinorVersion = jsf.getMinorVersion();
 
-		if ((jsfMajorVersion != 2) && (jsfMinorVersion != 1)) {
+		if (!((jsfMajorVersion == 2) && (jsfMinorVersion == 1))) {
 
 			Package utilPackage = UtilDependencyVerifier.class.getPackage();
 			String implementationTitle = utilPackage.getImplementationTitle();
