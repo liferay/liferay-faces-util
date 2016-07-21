@@ -38,6 +38,8 @@ public class ResourceVerifierFactoryImpl extends ResourceVerifierFactory impleme
 
 	@Override
 	public ResourceVerifierFactory getWrapped() {
+
+		// Since this is the default factory instance, it will never wrap another factory.
 		return null;
 	}
 }
