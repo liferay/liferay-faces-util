@@ -37,6 +37,9 @@ public abstract class FactoryExtensionFinder {
 
 	public static FactoryExtensionFinder getInstance() throws FacesException {
 
+		// This method of lazy-initialization is thread-safe because the FactoryExtensionFinder is first called during
+		// ApplicationStartupListener.processSystemEvent(). ApplicationStartupListener.processSystemEvent() occurs
+		// before multiple threads have the opportunity to concurrently access the FactoryExtensionFinder.
 		if (instance == null) {
 
 			ServiceLoader<FactoryExtensionFinder> serviceLoader = ServiceLoader.load(FactoryExtensionFinder.class);
