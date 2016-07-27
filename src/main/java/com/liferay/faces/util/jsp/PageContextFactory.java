@@ -62,7 +62,9 @@ public abstract class PageContextFactory implements FacesWrapper<PageContextFact
 	 * java.io.Serializable}. Pass the {@link PageContext} to {@link
 	 * javax.servlet.jsp.tagext.Tag#setPageContext(javax.servlet.jsp.PageContext)} before calling {@link
 	 * javax.servlet.jsp.tagext.Tag#doStartTag()} or similar methods to render tag output to a String. Call {@link
-	 * PageContext#getOut()#toString()} to obtain the tag output as a string.
+	 * PageContext#getOut()} to obtain the string {@link javax.servlet.jsp.JspWriter}. Call {@link
+	 * PageContext#pushBody()} to obtain a new instance of a string {@link javax.servlet.jsp.tagext.BodyContent}. Call
+	 * {@link PageContext#getOut()#toString()} to obtain the tag output as a string.
 	 *
 	 * @param  httpServletRequest   The {@link HttpServletRequest} underlying the {@link
 	 *                              javax.faces.context.ExternalContext} associated with the current {@link

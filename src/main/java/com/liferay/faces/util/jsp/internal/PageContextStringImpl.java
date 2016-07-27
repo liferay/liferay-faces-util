@@ -33,9 +33,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
+import javax.servlet.jsp.tagext.BodyContent;
 import javax.servlet.jsp.tagext.Tag;
 
-import com.liferay.faces.util.jsp.JspWriterStringImpl;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -311,6 +311,11 @@ public class PageContextStringImpl extends PageContext {
 	public void initialize(Servlet servlet, ServletRequest request, ServletResponse response,
 		java.lang.String errorPageURL, boolean needsSession, int bufferSize, boolean autoFlush) throws IOException,
 		IllegalStateException, IllegalArgumentException {
+	}
+
+	@Override
+	public BodyContent pushBody() {
+		return new BodyContentStringImpl(new JspWriterStringImpl());
 	}
 
 	@Override
