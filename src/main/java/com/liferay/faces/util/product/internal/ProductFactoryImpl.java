@@ -38,10 +38,13 @@ public class ProductFactoryImpl extends ProductFactory {
 		productMap.put(Product.Name.ANGULARFACES, new ProductAngularFacesImpl());
 		productMap.put(Product.Name.BOOTSFACES, new ProductBootsFacesImpl());
 		productMap.put(Product.Name.BUTTERFACES, new ProductButterFacesImpl());
+		productMap.put(Product.Name.CDI_API, new ProductCDIApiImpl());
 		productMap.put(Product.Name.CLOSURE_TEMPLATES, new ProductClosureTemplatesImpl());
 		productMap.put(Product.Name.DELTASPIKE, new ProductDeltaSpikeImpl());
+		productMap.put(Product.Name.GLASSFISH, new ProductGlassfishImpl());
 		productMap.put(Product.Name.HIGHFACES, new ProductHighFacesImpl());
 		productMap.put(Product.Name.ICEFACES, new ProductICEfacesImpl());
+		productMap.put(Product.Name.JETTY, new ProductJettyImpl());
 		productMap.put(Product.Name.LIFERAY_FACES_ALLOY, new ProductLiferayFacesAlloyImpl());
 		productMap.put(Product.Name.LIFERAY_FACES_BRIDGE, new ProductLiferayFacesBridgeImpl());
 		productMap.put(Product.Name.LIFERAY_FACES_BRIDGE_EXT, new ProductLiferayFacesBridgeExtImpl());
@@ -53,31 +56,29 @@ public class ProductFactoryImpl extends ProductFactory {
 		ProductLiferayPortalImpl productLiferayPortalImpl = new ProductLiferayPortalImpl();
 		productMap.put(Product.Name.LIFERAY_PORTAL, productLiferayPortalImpl);
 
-		Product productMojarraImpl = new ProductMojarraImpl();
+		ProductMojarraImpl productMojarraImpl = new ProductMojarraImpl();
 		productMap.put(Product.Name.MOJARRA, productMojarraImpl);
 
-		Product productMyfacesImpl = new ProductMyfacesImpl();
+		ProductMyfacesImpl productMyfacesImpl = new ProductMyfacesImpl();
 		productMap.put(Product.Name.MYFACES, productMyfacesImpl);
-		productMap.put(Product.Name.JSF, new ProductSpecImpl("JSF", productMojarraImpl, productMyfacesImpl));
+
+		ProductJSFApiImpl productJSFApiImpl = new ProductJSFApiImpl(productMojarraImpl, productMyfacesImpl);
+		productMap.put(Product.Name.JSF_API, productJSFApiImpl);
+		productMap.put(Product.Name.JSF, new ProductJSFImpl(productMojarraImpl, productMyfacesImpl, productJSFApiImpl));
 		productMap.put(Product.Name.OMNIFACES, new ProductOmniFacesImpl());
+		productMap.put(Product.Name.OPEN_WEB_BEANS, new ProductOpenWebBeansImpl());
 
 		ProductPlutoImpl productPlutoImpl = new ProductPlutoImpl();
 		productMap.put(Product.Name.PLUTO, productPlutoImpl);
-		productMap.put(Product.Name.PORTAL, new ProductSpecImpl("Portal", productLiferayPortalImpl, productPlutoImpl));
-		productMap.put(Product.Name.PORTLET_API, new ProductPortletApiImpl());
+		productMap.put(Product.Name.PORTLET_API, new ProductPortletApiImpl(productLiferayPortalImpl, productPlutoImpl));
 		productMap.put(Product.Name.PRIMEFACES, new ProductPrimeFacesImpl());
 		productMap.put(Product.Name.PRIMEFACES_EXTENSIONS, new ProductPrimeFacesExtensionsImpl());
 		productMap.put(Product.Name.RESIN, new ProductResinImpl());
 		productMap.put(Product.Name.RICHFACES, new ProductRichFacesImpl());
 		productMap.put(Product.Name.SERVLET_API, new ProductServletApiImpl());
 		productMap.put(Product.Name.SPRING_FRAMEWORK, new ProductSpringFrameworkImpl());
-
-		Product productOpenWebBeansImpl = new ProductOpenWebBeansImpl();
-		productMap.put(Product.Name.OPEN_WEB_BEANS, productOpenWebBeansImpl);
-
-		Product productWeldImpl = new ProductWeldImpl();
-		productMap.put(Product.Name.WELD, productWeldImpl);
-		productMap.put(Product.Name.CDI, new ProductSpecImpl("CDI", productWeldImpl, productOpenWebBeansImpl));
+		productMap.put(Product.Name.TOMCAT, new ProductTomcatImpl());
+		productMap.put(Product.Name.WELD, new ProductWeldImpl());
 		productMap.put(Product.Name.WILDFLY, new ProductWildFlyImpl());
 		PRODUCTS = Collections.unmodifiableMap(productMap);
 	}

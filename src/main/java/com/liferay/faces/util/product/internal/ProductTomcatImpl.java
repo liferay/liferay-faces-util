@@ -18,18 +18,19 @@ package com.liferay.faces.util.product.internal;
 /**
  * @author  Neil Griffin
  */
-public class ProductServletApiImpl extends ProductBaseImpl {
+public class ProductTomcatImpl extends ProductBaseImpl {
 
-	public ProductServletApiImpl() {
+	public ProductTomcatImpl() {
 
 		try {
-			this.title = "Servlet API";
+			this.title = "Tomcat";
 
-			Class<?> clazz = Class.forName("javax.servlet.ServletContext");
-			init(clazz, "Servlet API");
+			Class<?> clazz = Class.forName("org.apache.tomcat.util.buf.Constants");
+			init(clazz, "Tomcat");
 		}
 		catch (Exception e) {
-			// Ignore -- Servlet API is likely not present.
+			// Ignore -- Tomcat is likely not present.
 		}
 	}
+
 }

@@ -18,18 +18,19 @@ package com.liferay.faces.util.product.internal;
 /**
  * @author  Neil Griffin
  */
-public class ProductServletApiImpl extends ProductBaseImpl {
+public class ProductJettyImpl extends ProductBaseImpl {
 
-	public ProductServletApiImpl() {
+	public ProductJettyImpl() {
 
 		try {
-			this.title = "Servlet API";
+			this.title = "Jetty";
 
-			Class<?> clazz = Class.forName("javax.servlet.ServletContext");
-			init(clazz, "Servlet API");
+			Class<?> clazz = Class.forName("org.eclipse.jetty.util.URIUtil");
+			init(clazz, "Jetty");
 		}
 		catch (Exception e) {
-			// Ignore -- Servlet API is likely not present.
+			// Ignore -- Jetty is likely not present.
 		}
 	}
+
 }

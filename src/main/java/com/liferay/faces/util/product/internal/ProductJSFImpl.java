@@ -21,28 +21,22 @@ import com.liferay.faces.util.product.Product;
 /**
  * @author  Kyle Stiemann
  */
-public class ProductSpecImpl implements Product {
+public class ProductJSFImpl implements Product {
 
 	// Private Members
-	private String specTitle;
 	private Product wrappedProduct;
 
-	public ProductSpecImpl(String specTitle, Product... specImplProducts) {
+	public ProductJSFImpl(ProductMojarraImpl productMojarraImpl, ProductMyfacesImpl productMyfacesImpl,
+		ProductJSFApiImpl productJSFApiImpl) {
 
-		for (Product specImplProduct : specImplProducts) {
-
-			if (specImplProduct.isDetected()) {
-
-				this.wrappedProduct = specImplProduct;
-
-				break;
-			}
+		if (productMojarraImpl.isDetected()) {
+			wrappedProduct = productMojarraImpl;
 		}
-
-		if (this.wrappedProduct == null) {
-
-			this.wrappedProduct = new ProductBaseImpl();
-			this.specTitle = specTitle;
+		else if (productMyfacesImpl.isDetected()) {
+			wrappedProduct = productMyfacesImpl;
+		}
+		else {
+			wrappedProduct = productJSFApiImpl;
 		}
 	}
 
@@ -68,13 +62,7 @@ public class ProductSpecImpl implements Product {
 
 	@Override
 	public String getTitle() {
-
-		if (!isDetected()) {
-			return specTitle;
-		}
-		else {
-			return wrappedProduct.getTitle();
-		}
+		return wrappedProduct.getTitle();
 	}
 
 	@Override
