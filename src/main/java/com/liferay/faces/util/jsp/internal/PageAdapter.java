@@ -16,23 +16,28 @@
 package com.liferay.faces.util.jsp.internal;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Enumeration;
 
-import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServlet;
 
 
 /**
  * @author  Neil Griffin
  */
-public class PageAdapter implements Servlet {
+public class PageAdapter extends HttpServlet {
 
 	private ServletConfig servletConfig;
+	private ServletContext servletContext;
 
-	public PageAdapter(ServletConfig servletConfig) {
-		this.servletConfig = servletConfig;
+	public PageAdapter(ServletContext servletContext) {
+		this.servletConfig = new PageAdapterServletConfig();
+		this.servletContext = servletContext;
 	}
 
 	public void destroy() {
@@ -40,6 +45,11 @@ public class PageAdapter implements Servlet {
 
 	public ServletConfig getServletConfig() {
 		return servletConfig;
+	}
+
+	@Override
+	public ServletContext getServletContext() {
+		return servletContext;
 	}
 
 	public String getServletInfo() {
@@ -53,6 +63,30 @@ public class PageAdapter implements Servlet {
 	public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException,
 		IOException {
 		throw new UnsupportedOperationException();
+	}
+
+	private class PageAdapterServletConfig implements ServletConfig {
+
+		@Override
+		public String getInitParameter(String name) {
+			return null;
+		}
+
+		@Override
+		public Enumeration<String> getInitParameterNames() {
+			return Collections.enumeration(Collections.<String>emptyList());
+		}
+
+		@Override
+		public ServletContext getServletContext() {
+			return servletContext;
+		}
+
+		@Override
+		public String getServletName() {
+			return PageAdapterServletConfig.class.getName();
+		}
+
 	}
 
 }
