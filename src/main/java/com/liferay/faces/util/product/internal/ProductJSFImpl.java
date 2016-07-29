@@ -26,17 +26,16 @@ public class ProductJSFImpl implements Product {
 	// Private Members
 	private Product wrappedProduct;
 
-	public ProductJSFImpl(ProductMojarraImpl productMojarraImpl, ProductMyfacesImpl productMyfacesImpl,
-		ProductJSFApiImpl productJSFApiImpl) {
+	public ProductJSFImpl(Product mojarra, Product myFaces, Product jsfApi) {
 
-		if (productMojarraImpl.isDetected()) {
-			wrappedProduct = productMojarraImpl;
+		if (mojarra.isDetected()) {
+			wrappedProduct = mojarra;
 		}
-		else if (productMyfacesImpl.isDetected()) {
-			wrappedProduct = productMyfacesImpl;
+		else if (myFaces.isDetected()) {
+			wrappedProduct = myFaces;
 		}
 		else {
-			wrappedProduct = productJSFApiImpl;
+			wrappedProduct = jsfApi;
 		}
 	}
 
