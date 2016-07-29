@@ -15,22 +15,23 @@
  */
 package com.liferay.faces.util.product.internal;
 
+import com.liferay.faces.util.product.Product;
+
+
 /**
  * @author  Neil Griffin
  */
 public class ProductPortletApiImpl extends ProductBaseImpl {
 
-	public ProductPortletApiImpl(ProductLiferayPortalImpl productLiferayPortalImpl, ProductPlutoImpl productPlutoImpl) {
+	public ProductPortletApiImpl(Product liferayPortal, Product pluto) {
 
 		this.title = "Portlet API";
 
 		// Liferay 6.2.0 through 6.2.4 and Pluto 2.0 rely on the Portlet 2.0 API jar which does not contain the
 		// correct version information.
-		if ((productLiferayPortalImpl.isDetected() && (productLiferayPortalImpl.getMajorVersion() == 6) &&
-					(productLiferayPortalImpl.getMinorVersion() == 2) &&
-					(productLiferayPortalImpl.getPatchVersion() < 5)) ||
-				(productPlutoImpl.isDetected() && (productPlutoImpl.getMajorVersion() == 2) &&
-					(productPlutoImpl.getMinorVersion() == 0))) {
+		if ((liferayPortal.isDetected() && (liferayPortal.getMajorVersion() == 6) &&
+					(liferayPortal.getMinorVersion() == 2) && (liferayPortal.getPatchVersion() < 5)) ||
+				(pluto.isDetected() && (pluto.getMajorVersion() == 2) && (pluto.getMinorVersion() == 0))) {
 
 			this.detected = true;
 			initVersionInfo("2.0");

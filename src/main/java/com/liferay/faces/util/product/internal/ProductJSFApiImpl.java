@@ -23,20 +23,20 @@ import com.liferay.faces.util.product.Product;
  */
 public class ProductJSFApiImpl extends ProductBaseImpl {
 
-	public ProductJSFApiImpl(ProductMojarraImpl productMojarraImpl, ProductMyfacesImpl productMyfacesImpl) {
+	public ProductJSFApiImpl(Product mojarra, Product myFaces) {
 
 		this.title = "JSF API";
 
-		Product productJSFImpl;
+		Product jsfRuntime;
 
-		if (productMyfacesImpl.isDetected()) {
-			productJSFImpl = productMyfacesImpl;
+		if (myFaces.isDetected()) {
+			jsfRuntime = myFaces;
 		}
 		else {
-			productJSFImpl = productMojarraImpl;
+			jsfRuntime = mojarra;
 		}
 
-		this.detected = productJSFImpl.isDetected();
-		initVersionInfo(productJSFImpl.getMajorVersion() + "." + productJSFImpl.getMinorVersion());
+		this.detected = jsfRuntime.isDetected();
+		initVersionInfo(jsfRuntime.getMajorVersion() + "." + jsfRuntime.getMinorVersion());
 	}
 }

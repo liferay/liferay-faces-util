@@ -53,24 +53,24 @@ public class ProductFactoryImpl extends ProductFactory {
 		productMap.put(Product.Name.LIFERAY_FACES_SHOWCASE, new ProductLiferayFacesShowcaseImpl());
 		productMap.put(Product.Name.LIFERAY_FACES_UTIL, new ProductLiferayFacesUtilImpl());
 
-		ProductLiferayPortalImpl productLiferayPortalImpl = new ProductLiferayPortalImpl();
-		productMap.put(Product.Name.LIFERAY_PORTAL, productLiferayPortalImpl);
+		Product liferayPortal = new ProductLiferayPortalImpl();
+		productMap.put(Product.Name.LIFERAY_PORTAL, liferayPortal);
 
-		ProductMojarraImpl productMojarraImpl = new ProductMojarraImpl();
-		productMap.put(Product.Name.MOJARRA, productMojarraImpl);
+		Product mojarra = new ProductMojarraImpl();
+		productMap.put(Product.Name.MOJARRA, mojarra);
 
-		ProductMyfacesImpl productMyfacesImpl = new ProductMyfacesImpl();
-		productMap.put(Product.Name.MYFACES, productMyfacesImpl);
+		Product myFaces = new ProductMyfacesImpl();
+		productMap.put(Product.Name.MYFACES, myFaces);
 
-		ProductJSFApiImpl productJSFApiImpl = new ProductJSFApiImpl(productMojarraImpl, productMyfacesImpl);
-		productMap.put(Product.Name.JSF_API, productJSFApiImpl);
-		productMap.put(Product.Name.JSF, new ProductJSFImpl(productMojarraImpl, productMyfacesImpl, productJSFApiImpl));
+		Product jsfApi = new ProductJSFApiImpl(mojarra, myFaces);
+		productMap.put(Product.Name.JSF_API, jsfApi);
+		productMap.put(Product.Name.JSF, new ProductJSFImpl(mojarra, myFaces, jsfApi));
 		productMap.put(Product.Name.OMNIFACES, new ProductOmniFacesImpl());
 		productMap.put(Product.Name.OPEN_WEB_BEANS, new ProductOpenWebBeansImpl());
 
-		ProductPlutoImpl productPlutoImpl = new ProductPlutoImpl();
-		productMap.put(Product.Name.PLUTO, productPlutoImpl);
-		productMap.put(Product.Name.PORTLET_API, new ProductPortletApiImpl(productLiferayPortalImpl, productPlutoImpl));
+		Product pluto = new ProductPlutoImpl();
+		productMap.put(Product.Name.PLUTO, pluto);
+		productMap.put(Product.Name.PORTLET_API, new ProductPortletApiImpl(liferayPortal, pluto));
 		productMap.put(Product.Name.PRIMEFACES, new ProductPrimeFacesImpl());
 		productMap.put(Product.Name.PRIMEFACES_EXTENSIONS, new ProductPrimeFacesExtensionsImpl());
 		productMap.put(Product.Name.RESIN, new ProductResinImpl());
