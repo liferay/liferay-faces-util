@@ -20,7 +20,6 @@
 			<util:faces-context-helper-factory>com.liferay.faces.util.context.internal.FacesContextHelperFactoryImpl</util:faces-context-helper-factory>
 			<util:faces-url-encoder-factory>com.liferay.faces.util.render.internal.FacesURLEncoderFactoryImpl</util:faces-url-encoder-factory>
 			<util:i18n-factory>com.liferay.faces.util.i18n.internal.I18nFactoryImpl</util:i18n-factory>
-			<util:page-context-factory>com.liferay.faces.util.jsp.internal.PageContextFactoryImpl</util:page-context-factory>
 			<util:resource-validator-factory>com.liferay.faces.util.application.internal.ResourceValidatorFactoryImpl</util:resource-validator-factory>
 			<util:script-factory>com.liferay.faces.util.client.internal.ScriptFactoryImpl</util:script-factory>
 			<util:uploaded-file-factory>com.liferay.faces.util.model.internal.UploadedFileFactoryImpl</util:uploaded-file-factory>
