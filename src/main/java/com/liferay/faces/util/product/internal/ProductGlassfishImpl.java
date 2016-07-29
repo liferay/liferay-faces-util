@@ -18,18 +18,19 @@ package com.liferay.faces.util.product.internal;
 /**
  * @author  Neil Griffin
  */
-public class ProductServletApiImpl extends ProductBaseImpl {
+public class ProductGlassfishImpl extends ProductBaseImpl {
 
-	public ProductServletApiImpl() {
+	public ProductGlassfishImpl() {
 
 		try {
-			this.title = "Servlet API";
+			this.title = "Glassfish";
 
-			Class<?> clazz = Class.forName("javax.servlet.ServletContext");
-			init(clazz, "Servlet API");
+			Class<?> clazz = Class.forName("org.glassfish.api.web.Constants");
+			init(clazz, "Glassfish", "META-INF/maven/org.glassfish.main.common/glassfish-api/pom.properties");
 		}
 		catch (Exception e) {
-			// Ignore -- Servlet API is likely not present.
+			// Ignore -- Glassfish is likely not present.
 		}
 	}
+
 }
