@@ -20,16 +20,31 @@ package com.liferay.faces.util.product.internal;
  */
 public class ProductPortletApiImpl extends ProductBaseImpl {
 
-	public ProductPortletApiImpl() {
+	public ProductPortletApiImpl(ProductLiferayPortalImpl productLiferayPortalImpl, ProductPlutoImpl productPlutoImpl) {
 
-		try {
-			this.title = "Portlet API";
+		this.title = "Portlet API";
 
-			Class<?> clazz = Class.forName("javax.portlet.PortletContext");
-			init(clazz, "Portlet API");
+		// Liferay 6.2.0 through 6.2.4 and Pluto 2.0 rely on the Portlet 2.0 API jar which does not contain the
+		// correct version information.
+		if ((productLiferayPortalImpl.isDetected() && (productLiferayPortalImpl.getMajorVersion() == 6) &&
+					(productLiferayPortalImpl.getMinorVersion() == 2) &&
+					(productLiferayPortalImpl.getPatchVersion() < 5)) ||
+				(productPlutoImpl.isDetected() && (productPlutoImpl.getMajorVersion() == 2) &&
+					(productPlutoImpl.getMinorVersion() == 0))) {
+
+			this.detected = true;
+			initVersionInfo("2.0");
 		}
-		catch (Exception e) {
-			// Ignore -- Pluto is likely not present.
+		else {
+
+			try {
+
+				Class<?> clazz = Class.forName("javax.portlet.PortletContext");
+				init(clazz, "Portlet API");
+			}
+			catch (Exception e) {
+				// Ignore -- the Portlet API is likely not present.
+			}
 		}
 	}
 }

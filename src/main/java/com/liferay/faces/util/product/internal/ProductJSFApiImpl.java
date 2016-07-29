@@ -15,21 +15,28 @@
  */
 package com.liferay.faces.util.product.internal;
 
+import com.liferay.faces.util.product.Product;
+
+
 /**
  * @author  Neil Griffin
  */
-public class ProductServletApiImpl extends ProductBaseImpl {
+public class ProductJSFApiImpl extends ProductBaseImpl {
 
-	public ProductServletApiImpl() {
+	public ProductJSFApiImpl(ProductMojarraImpl productMojarraImpl, ProductMyfacesImpl productMyfacesImpl) {
 
-		try {
-			this.title = "Servlet API";
+		this.title = "JSF API";
 
-			Class<?> clazz = Class.forName("javax.servlet.ServletContext");
-			init(clazz, "Servlet API");
+		Product productJSFImpl;
+
+		if (productMyfacesImpl.isDetected()) {
+			productJSFImpl = productMyfacesImpl;
 		}
-		catch (Exception e) {
-			// Ignore -- Servlet API is likely not present.
+		else {
+			productJSFImpl = productMojarraImpl;
 		}
+
+		this.detected = productJSFImpl.isDetected();
+		initVersionInfo(productJSFImpl.getMajorVersion() + "." + productJSFImpl.getMinorVersion());
 	}
 }
