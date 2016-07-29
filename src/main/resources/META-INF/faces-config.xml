@@ -25,7 +25,6 @@
 			<util:faces-request-context-factory>com.liferay.faces.util.context.internal.FacesRequestContextFactoryImpl</util:faces-request-context-factory>
 			<util:faces-url-encoder-factory>com.liferay.faces.util.render.internal.FacesURLEncoderFactoryImpl</util:faces-url-encoder-factory>
 			<util:i18n-factory>com.liferay.faces.util.i18n.internal.I18nFactoryImpl</util:i18n-factory>
-			<util:page-context-factory>com.liferay.faces.util.jsp.internal.PageContextFactoryImpl</util:page-context-factory>
 			<util:resource-validator-factory>com.liferay.faces.util.application.internal.ResourceValidatorFactoryImpl</util:resource-validator-factory>
 			<util:resource-verifier-factory>com.liferay.faces.util.application.internal.ResourceVerifierFactoryImpl</util:resource-verifier-factory>
 			<util:script-factory>com.liferay.faces.util.client.internal.ScriptFactoryImpl</util:script-factory>
