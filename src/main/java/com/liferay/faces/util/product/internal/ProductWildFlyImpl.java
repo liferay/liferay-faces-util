@@ -44,6 +44,10 @@ public class ProductWildFlyImpl extends ProductBaseImpl {
 					detected = true;
 					initVersionInfo(releaseVersion);
 
+					if (getMajorVersion() < 8) {
+						this.title = "JBoss AS";
+					}
+
 					break;
 				}
 			}
