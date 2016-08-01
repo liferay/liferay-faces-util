@@ -24,9 +24,10 @@ import com.liferay.faces.util.product.Product;
 public class ProductSpecImpl implements Product {
 
 	// Private Members
+	private String specTitle;
 	private Product wrappedProduct;
 
-	public ProductSpecImpl(Product... specImplProducts) {
+	public ProductSpecImpl(String specTitle, Product... specImplProducts) {
 
 		for (int i = 0; i < specImplProducts.length; i++) {
 
@@ -35,9 +36,15 @@ public class ProductSpecImpl implements Product {
 			if (specImplProduct.isDetected() || (i == (specImplProducts.length - 1))) {
 
 				this.wrappedProduct = specImplProduct;
-
+				this.specTitle = specImplProduct.getTitle();
 				break;
 			}
+		}
+
+		if (this.wrappedProduct == null) {
+
+			this.wrappedProduct = new ProductBaseImpl();
+			this.specTitle = specTitle;
 		}
 	}
 
@@ -63,7 +70,7 @@ public class ProductSpecImpl implements Product {
 
 	@Override
 	public String getTitle() {
-		return wrappedProduct.getTitle();
+		return specTitle;
 	}
 
 	@Override

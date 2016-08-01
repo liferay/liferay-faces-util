@@ -70,10 +70,10 @@ public class ProductFactoryImpl extends ProductFactory {
 
 		Product jsfApi = new ProductJSFApiImpl(mojarra, myFaces);
 		productMap.put(Product.Name.JSF_API, jsfApi);
-		productMap.put(Product.Name.JSF, new ProductSpecImpl(mojarra, myFaces, jsfApi));
+		productMap.put(Product.Name.JSF, new ProductSpecImpl("JSF", mojarra, myFaces, jsfApi));
 		productMap.put(Product.Name.OMNIFACES, new ProductOmniFacesImpl());
 
-		ProductOpenWebBeansImpl openWebBeans = new ProductOpenWebBeansImpl();
+		Product openWebBeans = new ProductOpenWebBeansImpl();
 		productMap.put(Product.Name.OPEN_WEB_BEANS, openWebBeans);
 
 		Product pluto = new ProductPlutoImpl();
@@ -81,7 +81,7 @@ public class ProductFactoryImpl extends ProductFactory {
 
 		Product portletApi = new ProductPortletApiImpl(liferayPortal, pluto);
 		productMap.put(Product.Name.PORTLET_API, portletApi);
-		productMap.put(Product.Name.PORTLET_CONTAINER, new ProductSpecImpl(liferayPortal, pluto, portletApi));
+		productMap.put(Product.Name.PORTLET_CONTAINER, new ProductSpecImpl("Portlet", liferayPortal, pluto));
 		productMap.put(Product.Name.PRIMEFACES, new ProductPrimeFacesImpl());
 		productMap.put(Product.Name.PRIMEFACES_EXTENSIONS, new ProductPrimeFacesExtensionsImpl());
 
@@ -98,7 +98,7 @@ public class ProductFactoryImpl extends ProductFactory {
 
 		Product weld = new ProductWeldImpl();
 		productMap.put(Product.Name.WELD, weld);
-		productMap.put(Product.Name.CDI, new ProductSpecImpl(weld, openWebBeans, cdiApi));
+		productMap.put(Product.Name.CDI, new ProductSpecImpl("CDI", weld, openWebBeans));
 
 		Product weblogic = new ProductWebLogicImpl();
 		productMap.put(Product.Name.WEBLOGIC, weblogic);
@@ -109,7 +109,7 @@ public class ProductFactoryImpl extends ProductFactory {
 		Product wildfly = new ProductWildFlyImpl();
 		productMap.put(Product.Name.WILDFLY, wildfly);
 		productMap.put(Product.Name.SERVLET_CONTAINER,
-			new ProductSpecImpl(tomcat, wildfly, resin, glassfish, weblogic, websphere, jetty, servletApi));
+			new ProductSpecImpl("Servlet", tomcat, wildfly, resin, glassfish, weblogic, websphere, jetty));
 		PRODUCTS = Collections.unmodifiableMap(productMap);
 	}
 
