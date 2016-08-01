@@ -21,21 +21,23 @@ import com.liferay.faces.util.product.Product;
 /**
  * @author  Kyle Stiemann
  */
-public class ProductJSFImpl implements Product {
+public class ProductSpecImpl implements Product {
 
 	// Private Members
 	private Product wrappedProduct;
 
-	public ProductJSFImpl(Product mojarra, Product myFaces, Product jsfApi) {
+	public ProductSpecImpl(Product... specImplProducts) {
 
-		if (mojarra.isDetected()) {
-			wrappedProduct = mojarra;
-		}
-		else if (myFaces.isDetected()) {
-			wrappedProduct = myFaces;
-		}
-		else {
-			wrappedProduct = jsfApi;
+		for (int i = 0; i < specImplProducts.length; i++) {
+
+			Product specImplProduct = specImplProducts[i];
+
+			if (specImplProduct.isDetected() || (i == (specImplProducts.length - 1))) {
+
+				this.wrappedProduct = specImplProduct;
+
+				break;
+			}
 		}
 	}
 
