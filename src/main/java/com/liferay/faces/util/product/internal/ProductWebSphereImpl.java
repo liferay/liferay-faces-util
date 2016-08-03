@@ -31,7 +31,7 @@ public class ProductWebSphereImpl extends ProductBaseImpl {
 
 		try {
 			this.title = "WebSphere";
-			logger.info("WebSphere detection is not yet implemented.");
+			// TODO: FACES-2859 - Unable to detect the version of WebSphere
 		}
 		catch (Exception e) {
 			// Ignore -- WebSphere is likely not present.
