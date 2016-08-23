@@ -37,7 +37,7 @@ public class ProductMojarraImpl extends ProductBaseImpl {
 			String version = getVersion();
 
 			if ((version != null) && (version.startsWith("1.0.0.0_") || version.startsWith("2.0.0.0_"))) {
-				version = version.substring(8).replaceAll("[-]", ".");
+				version = version.substring("x.0.0.0_".length()).replaceAll("[-]", ".");
 				initVersionInfo(version);
 			}
 		}
