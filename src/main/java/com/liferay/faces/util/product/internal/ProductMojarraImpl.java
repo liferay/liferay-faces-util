@@ -31,6 +31,15 @@ public class ProductMojarraImpl extends ProductBaseImpl {
 
 			Class<?> jsfImplClass = Class.forName("com.sun.faces.RIConstants");
 			init(jsfImplClass, "Mojarra");
+
+			// If running on WebLogic 12c (12.1.x), then the version typically looks like "1.0.0.0_2-1-20" or
+			// "2.0.0.0_2-1-20"
+			String version = getVersion();
+
+			if ((version != null) && (version.startsWith("1.0.0.0_") || version.startsWith("2.0.0.0_"))) {
+				version = version.substring(8).replaceAll("[-]", ".");
+				initVersionInfo(version);
+			}
 		}
 		catch (Exception e) {
 			// Ignore -- JSF implementation is likely not present.
