@@ -29,6 +29,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.i18n.I18n;
+import com.liferay.faces.util.i18n.I18nUtil;
 
 
 /**
@@ -46,56 +47,18 @@ public class I18nImpl implements I18n, Serializable {
 	@Override
 	public FacesMessage getFacesMessage(FacesContext facesContext, Locale locale, FacesMessage.Severity severity,
 		String messageId) {
-		return getFacesMessage(facesContext, locale, severity, messageId, null);
+		return I18nUtil.getFacesMessage(this, facesContext, locale, severity, messageId);
 	}
 
 	@Override
 	public FacesMessage getFacesMessage(FacesContext facesContext, Locale locale, FacesMessage.Severity severity,
 		String messageId, Object... arguments) {
-
-		FacesMessage facesMessage = new FacesMessage();
-		facesMessage.setSeverity(severity);
-		facesMessage.setDetail(null);
-
-		String summary;
-
-		if (arguments == null) {
-			summary = getMessage(facesContext, locale, messageId);
-		}
-		else {
-			summary = getMessage(facesContext, locale, messageId, arguments);
-		}
-
-		if (summary == null) {
-			facesMessage.setSummary(messageId);
-		}
-		else {
-			facesMessage.setSummary(summary);
-
-			String detailMessageId = messageId + "_detail";
-			String detail;
-
-			if (arguments == null) {
-				detail = getMessage(facesContext, locale, detailMessageId);
-			}
-			else {
-				detail = getMessage(facesContext, locale, detailMessageId, arguments);
-			}
-
-			if (detail == null) {
-				facesMessage.setDetail(detailMessageId);
-			}
-			else {
-				facesMessage.setDetail(detail);
-			}
-		}
-
-		return facesMessage;
+		return I18nUtil.getFacesMessage(this, facesContext, locale, severity, messageId, arguments);
 	}
 
 	@Override
 	public String getMessage(FacesContext facesContext, Locale locale, String messageId) {
-		return getMessage(facesContext, locale, messageId, null);
+		return getMessage(facesContext, locale, messageId, new Object[] {});
 	}
 
 	@Override
