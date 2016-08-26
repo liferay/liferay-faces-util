@@ -24,6 +24,7 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.logging.Logger;
@@ -55,6 +56,18 @@ public abstract class I18nBundleBase extends I18nWrapper implements Serializable
 	}
 
 	public abstract String getBundleKey();
+
+	@Override
+	public FacesMessage getFacesMessage(FacesContext facesContext, Locale locale, FacesMessage.Severity severity,
+		String messageId) {
+		return I18nUtil.getFacesMessage(this, facesContext, locale, severity, messageId);
+	}
+
+	@Override
+	public FacesMessage getFacesMessage(FacesContext facesContext, Locale locale, FacesMessage.Severity severity,
+		String messageId, Object... arguments) {
+		return I18nUtil.getFacesMessage(this, facesContext, locale, severity, messageId, arguments);
+	}
 
 	@Override
 	public String getMessage(FacesContext facesContext, Locale locale, String messageId) {
