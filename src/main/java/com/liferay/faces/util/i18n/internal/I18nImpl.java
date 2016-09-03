@@ -94,7 +94,7 @@ public class I18nImpl implements I18n, Serializable {
 		}
 		else {
 
-			if (arguments != null) {
+			if ((arguments != null) && (arguments.length > 0)) {
 				message = MessageFormat.format(message, arguments);
 			}
 		}
