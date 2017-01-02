@@ -15,17 +15,16 @@
  */
 package com.liferay.faces.util.el.internal;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 import javax.faces.application.Application;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 
+import com.liferay.faces.util.application.ApplicationUtil;
 import com.liferay.faces.util.i18n.I18n;
 import com.liferay.faces.util.i18n.I18nFactory;
 
@@ -37,9 +36,6 @@ public class I18nMap extends I18nMapCompat {
 
 	// serialVersionUID
 	private static final long serialVersionUID = 5549598732411060854L;
-
-	// Private Data Members
-	private transient Map<String, String> cache = new ConcurrentHashMap<String, String>();
 
 	@Override
 	public void clear() {
@@ -89,13 +85,15 @@ public class I18nMap extends I18nMapCompat {
 					messageKey = locale.toString().concat(keyAsString);
 				}
 
-				message = cache.get(messageKey);
+				Map<String, Object> messageCache = getMessageCache();
+
+				message = (String) messageCache.get(messageKey);
 
 				if (message == null) {
 					message = i18n.getMessage(facesContext, locale, keyAsString);
 
 					if (message != null) {
-						cache.put(messageKey, message);
+						messageCache.put(messageKey, message);
 					}
 				}
 			}
@@ -252,7 +250,10 @@ public class I18nMap extends I18nMapCompat {
 		throw new UnsupportedOperationException();
 	}
 
-	private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
-		cache = new ConcurrentHashMap<String, String>();
+	private Map<String, Object> getMessageCache() {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		String cacheName = I18nMap.class.getName();
+
+		return ApplicationUtil.getOrCreateApplicationCache(facesContext, cacheName);
 	}
 }
