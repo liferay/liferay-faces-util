@@ -44,24 +44,7 @@ public abstract class LoggerFactory {
 			}
 
 			if (loggerFactoryImpl == null) {
-
-				// FACES-2966 Netbeans auto completion fails for Liferay Faces components
-				if (LoggerFactory.class.getClassLoader().getClass().getName().contains(
-							"org.netbeans.modules.web.jsf.editor")) {
-
-					try {
-
-						Class<?> loggerFactoryImplClass = Class.forName(LoggerFactory.class.getPackage().getName() +
-								".internal." + LoggerFactory.class.getSimpleName() + "Impl");
-						loggerFactoryImpl = (LoggerFactory) loggerFactoryImplClass.newInstance();
-					}
-					catch (Exception e) {
-						throw new RuntimeException("Unable locate service for " + LoggerFactory.class.getName(), e);
-					}
-				}
-				else {
-					throw new NullPointerException("Unable locate service for " + LoggerFactory.class.getName());
-				}
+				throw new NullPointerException("Unable locate service for " + LoggerFactory.class.getName());
 			}
 
 			loggerFactory = loggerFactoryImpl;

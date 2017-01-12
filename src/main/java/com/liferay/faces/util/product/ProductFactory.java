@@ -41,24 +41,7 @@ public abstract class ProductFactory {
 			}
 
 			if (productFactoryImpl == null) {
-
-				// FACES-2966 Netbeans auto completion fails for Liferay Faces components
-				if (ProductFactory.class.getClassLoader().getClass().getName().contains(
-							"org.netbeans.modules.web.jsf.editor")) {
-
-					try {
-
-						Class<?> productFactoryImplClass = Class.forName(ProductFactory.class.getPackage().getName() +
-								".internal." + ProductFactory.class.getSimpleName() + "Impl");
-						productFactoryImpl = (ProductFactory) productFactoryImplClass.newInstance();
-					}
-					catch (Exception e) {
-						throw new RuntimeException("Unable locate service for " + ProductFactory.class.getName(), e);
-					}
-				}
-				else {
-					throw new NullPointerException("Unable locate service for " + ProductFactory.class.getName());
-				}
+				throw new NullPointerException("Unable locate service for " + ProductFactory.class.getName());
 			}
 
 			productFactory = productFactoryImpl;
