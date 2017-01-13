@@ -15,6 +15,12 @@
  */
 package com.liferay.faces.util.logging;
 
+import java.io.BufferedReader;
+import java.io.Closeable;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.Iterator;
 import java.util.ServiceLoader;
 
@@ -43,8 +49,39 @@ public abstract class LoggerFactory {
 				loggerFactoryImpl = iterator.next();
 			}
 
+			// loggerFactoryImpl should never be null in production.
 			if (loggerFactoryImpl == null) {
-				throw new NullPointerException("Unable locate service for " + LoggerFactory.class.getName());
+
+				InputStream inputStream = null;
+				InputStreamReader inputStreamReader = null;
+				BufferedReader bufferedReader = null;
+
+				try {
+
+					// FACES-2966 Netbeans auto completion fails for Liferay Faces components
+					URL resource = LoggerFactory.class.getResource("/META-INF/resources/services/" +
+							LoggerFactory.class.getName());
+					inputStream = resource.openStream();
+					inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+					bufferedReader = new BufferedReader(inputStreamReader);
+
+					String className = bufferedReader.readLine();
+					Class<?> clazz = Class.forName(className);
+					loggerFactoryImpl = (LoggerFactory) clazz.newInstance();
+				}
+				catch (Exception e) {
+					// do nothing
+				}
+				finally {
+
+					close(inputStream);
+					close(inputStreamReader);
+					close(bufferedReader);
+
+					if (loggerFactoryImpl == null) {
+						throw new NullPointerException("Unable locate service for " + LoggerFactory.class.getName());
+					}
+				}
 			}
 
 			loggerFactory = loggerFactoryImpl;
@@ -78,6 +115,19 @@ public abstract class LoggerFactory {
 	 */
 	public static final Logger getLogger(Class<?> clazz) {
 		return getLogger(clazz.getName());
+	}
+
+	private static void close(Closeable closable) {
+
+		if (closable != null) {
+
+			try {
+				closable.close();
+			}
+			catch (IOException e) {
+				// do nothing
+			}
+		}
 	}
 
 	public abstract Logger getLoggerImplementation(String name);

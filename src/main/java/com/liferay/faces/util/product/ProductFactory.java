@@ -15,6 +15,12 @@
  */
 package com.liferay.faces.util.product;
 
+import java.io.BufferedReader;
+import java.io.Closeable;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.Iterator;
 import java.util.ServiceLoader;
 
@@ -40,8 +46,39 @@ public abstract class ProductFactory {
 				productFactoryImpl = iterator.next();
 			}
 
+			// productFactoryImpl should never be null in production.
 			if (productFactoryImpl == null) {
-				throw new NullPointerException("Unable locate service for " + ProductFactory.class.getName());
+
+				InputStream inputStream = null;
+				InputStreamReader inputStreamReader = null;
+				BufferedReader bufferedReader = null;
+
+				try {
+
+					// FACES-2966 Netbeans auto completion fails for Liferay Faces components
+					URL resource = ProductFactory.class.getResource("/META-INF/resources/services/" +
+							ProductFactory.class.getName());
+					inputStream = resource.openStream();
+					inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+					bufferedReader = new BufferedReader(inputStreamReader);
+
+					String className = bufferedReader.readLine();
+					Class<?> clazz = Class.forName(className);
+					productFactoryImpl = (ProductFactory) clazz.newInstance();
+				}
+				catch (Exception e) {
+					// do nothing
+				}
+				finally {
+
+					close(inputStream);
+					close(inputStreamReader);
+					close(bufferedReader);
+
+					if (productFactoryImpl == null) {
+						throw new NullPointerException("Unable locate service for " + ProductFactory.class.getName());
+					}
+				}
 			}
 
 			productFactory = productFactoryImpl;
@@ -60,6 +97,19 @@ public abstract class ProductFactory {
 	 */
 	public static final Product getProduct(Product.Name productId) {
 		return productFactory.getProductImplementation(productId);
+	}
+
+	private static void close(Closeable closable) {
+
+		if (closable != null) {
+
+			try {
+				closable.close();
+			}
+			catch (IOException e) {
+				// do nothing
+			}
+		}
 	}
 
 	public abstract Product getProductImplementation(Product.Name product);
