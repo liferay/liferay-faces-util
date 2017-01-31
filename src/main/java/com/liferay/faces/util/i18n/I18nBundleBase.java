@@ -92,7 +92,7 @@ public abstract class I18nBundleBase extends I18nWrapper implements Serializable
 
 			try {
 				String bundleKey = getBundleKey();
-				resourceBundle = ResourceBundle.getBundle(bundleKey, locale);
+				resourceBundle = ResourceBundle.getBundle(bundleKey, locale, new UTF8Control());
 			}
 			catch (MissingResourceException e) {
 				logger.error(e);
