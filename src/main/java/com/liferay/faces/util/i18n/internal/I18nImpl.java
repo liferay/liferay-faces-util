@@ -30,6 +30,7 @@ import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.i18n.I18n;
 import com.liferay.faces.util.i18n.I18nUtil;
+import com.liferay.faces.util.i18n.UTF8Control;
 
 
 /**
@@ -67,7 +68,7 @@ public class I18nImpl implements I18n, Serializable {
 		String message = null;
 
 		try {
-			ResourceBundle resourceBundle = ResourceBundle.getBundle("i18n", locale);
+			ResourceBundle resourceBundle = ResourceBundle.getBundle("i18n", locale, new UTF8Control());
 			message = resourceBundle.getString(messageId);
 		}
 		catch (MissingResourceException e) {
@@ -115,7 +116,7 @@ public class I18nImpl implements I18n, Serializable {
 				messageBundle = FacesMessage.FACES_MESSAGES;
 			}
 
-			facesResourceBundle = ResourceBundle.getBundle(messageBundle, locale);
+			facesResourceBundle = ResourceBundle.getBundle(messageBundle, locale, new UTF8Control());
 			facesResourceBundleCache.put(locale, facesResourceBundle);
 		}
 
