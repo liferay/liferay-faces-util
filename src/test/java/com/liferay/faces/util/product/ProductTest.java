@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2016 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,8 +18,10 @@ package com.liferay.faces.util.product;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.liferay.faces.util.factory.util.BlockServiceLoaderUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.product.internal.ProductFactoryImpl;
 
 
 /**
@@ -35,6 +37,16 @@ public class ProductTest {
 			"Liferay Faces Util's version cannot be obtained at test time (likely because the MANIFEST.MF cannot be found).");
 		logger.info(
 			"However, Liferay Faces Util's version can be obtained normally when running in a servlet or portlet container.");
+	}
+
+	@Test
+	public void loadProductFactoryWhenServicesDirectoryInaccessibleFACES_2966() {
+
+		// FACES-2966 Netbeans auto completion fails for Liferay Faces components
+		Product product = BlockServiceLoaderUtil.<Product>getFactoryOutputWithBlockedServiceLoader(
+				Product.Name.LIFERAY_FACES_UTIL, ProductFactory.class, ProductFactoryImpl.class);
+		Assert.assertNotNull(product);
+		Assert.assertTrue(product.isDetected());
 	}
 
 	@Test
