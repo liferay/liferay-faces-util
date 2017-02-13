@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2016 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,7 +44,16 @@ public abstract class LoggerFactory {
 			}
 
 			if (loggerFactoryImpl == null) {
-				throw new NullPointerException("Unable locate service for " + LoggerFactory.class.getName());
+
+				try {
+
+					// FACES-2966 Netbeans auto completion fails for Liferay Faces components
+					Class<?> clazz = Class.forName("com.liferay.faces.util.logging.internal.LoggerFactoryImpl");
+					loggerFactoryImpl = (LoggerFactory) clazz.newInstance();
+				}
+				catch (Exception e) {
+					throw new RuntimeException("Unable locate service for " + LoggerFactory.class.getName(), e);
+				}
 			}
 
 			loggerFactory = loggerFactoryImpl;
