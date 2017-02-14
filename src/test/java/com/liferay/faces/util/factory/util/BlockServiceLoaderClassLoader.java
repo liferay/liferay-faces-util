@@ -22,20 +22,45 @@ import java.net.URL;
 import java.util.Collections;
 import java.util.Enumeration;
 
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
+
 
 /**
  * @author  Kyle Stiemann
  */
-public class BlockServiceLoaderClassLoader extends ClassLoader {
+/* package-private */ class BlockServiceLoaderClassLoader extends ClassLoader {
 
-	public BlockServiceLoaderClassLoader(ClassLoader parent) {
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(BlockServiceLoaderClassLoader.class);
+
+	// Private Data Members
+	private final String serviceClassName;
+	private int attemptsToAccessServiceFile = 0;
+
+	public BlockServiceLoaderClassLoader(ClassLoader parent, String serviceClassName) {
+
 		super(parent);
+		this.serviceClassName = serviceClassName;
+	}
+
+	public boolean attemptedToAccessServiceFile() {
+
+		logger.debug("There were {0} attempts to access service file: {1}", attemptsToAccessServiceFile,
+			"/META-INF/services/" + serviceClassName);
+
+		return attemptsToAccessServiceFile > 0;
 	}
 
 	@Override
 	public URL findResource(String name) {
 
 		if (name.contains("META-INF/services")) {
+
+			if (name.contains(serviceClassName)) {
+				attemptsToAccessServiceFile++;
+			}
+
 			return null;
 		}
 		else {
@@ -47,6 +72,11 @@ public class BlockServiceLoaderClassLoader extends ClassLoader {
 	public Enumeration<URL> findResources(String name) throws IOException {
 
 		if (name.contains("META-INF/services")) {
+
+			if (name.contains(serviceClassName)) {
+				attemptsToAccessServiceFile++;
+			}
+
 			return Collections.<URL>emptyEnumeration();
 		}
 		else {
@@ -58,6 +88,11 @@ public class BlockServiceLoaderClassLoader extends ClassLoader {
 	public URL getResource(String name) {
 
 		if (name.contains("META-INF/services")) {
+
+			if (name.contains(serviceClassName)) {
+				attemptsToAccessServiceFile++;
+			}
+
 			return null;
 		}
 		else {
@@ -69,6 +104,11 @@ public class BlockServiceLoaderClassLoader extends ClassLoader {
 	public InputStream getResourceAsStream(String name) {
 
 		if (name.contains("META-INF/services")) {
+
+			if (name.contains(serviceClassName)) {
+				attemptsToAccessServiceFile++;
+			}
+
 			return null;
 		}
 		else {
@@ -80,6 +120,11 @@ public class BlockServiceLoaderClassLoader extends ClassLoader {
 	public Enumeration<URL> getResources(String name) throws IOException {
 
 		if (name.contains("META-INF/services")) {
+
+			if (name.contains(serviceClassName)) {
+				attemptsToAccessServiceFile++;
+			}
+
 			return Collections.<URL>emptyEnumeration();
 		}
 		else {
