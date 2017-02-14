@@ -15,18 +15,19 @@
  */
 package com.liferay.faces.util.factory.util;
 
-import java.io.Closeable;
-import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
 
+import com.liferay.faces.util.logging.LoggerTest;
 import com.liferay.faces.util.product.ProductTest;
+
+import junit.framework.Assert;
 
 
 /**
  * @author  Kyle Stiemann
  */
-public final class BlockServiceLoaderUtil {
+public final class BlockServiceLoaderUtil extends BlockServiceLoaderUtilCompat {
 
 	private BlockServiceLoaderUtil() {
 		throw new AssertionError();
@@ -53,17 +54,21 @@ public final class BlockServiceLoaderUtil {
 		try {
 
 			ClassLoader classLoader = BlockServiceLoaderUtil.class.getClassLoader();
-			BlockServiceLoaderClassLoader blockServiceLoaderClassLoader = new BlockServiceLoaderClassLoader(
-					classLoader);
+			String factoryClassName = factoryClazz.getName();
+			BlockServiceLoaderClassLoader blockServiceLoaderClassLoader = new BlockServiceLoaderClassLoader(classLoader,
+					factoryClassName);
 			Thread.currentThread().setContextClassLoader(blockServiceLoaderClassLoader);
 
 			String factoryClassFileName = factoryClazzSimpleName + ".class";
 			factoryClassFileInputStream = factoryClazz.getResourceAsStream(factoryClassFileName);
 
-			// Load or reload the factoryClazz with blockServiceLoaderClassLoader to ensure that ServiceLoader cannot
-			// be used to initialize the ProductFactory.
-			Class<?> factoryClazzWithDisabledServiceLoader = blockServiceLoaderClassLoader.loadClass(
-					factoryClazz.getName(), factoryClassFileInputStream);
+			// Load or reload the factoryClazz (and any of its innner classes) with blockServiceLoaderClassLoader to
+			// ensure that ServiceLoader cannot be used to initialize the ProductFactory.
+			loadFactoryClassInnerClasses(factoryClassName, factoryClazzSimpleName, factoryClazz,
+				blockServiceLoaderClassLoader);
+
+			Class<?> factoryClazzWithDisabledServiceLoader = blockServiceLoaderClassLoader.loadClass(factoryClassName,
+					factoryClassFileInputStream);
 
 			// Load the factory implementation with blockServiceLoaderClassLoader to ensure that it extends the
 			// factoryClazzWithDisabledServiceLoader rather than the factoryClazz (otherwise a ClassCastException will
@@ -79,6 +84,10 @@ public final class BlockServiceLoaderUtil {
 			@SuppressWarnings("unchecked")
 			T t = (T) getProductMethod.invoke(null, factoryInput);
 			factoryOutput = t;
+			Assert.assertTrue("Invalid test: no class attempted to access service file \"/META-INF/services/" +
+				factoryClassFileName +
+				"\" via the blockServiceLoaderClassLoader. The file may have been accessed by another classloader.",
+				blockServiceLoaderClassLoader.attemptedToAccessServiceFile());
 		}
 		catch (Throwable t) {
 			throw new AssertionError("Unable to load " + factoryClazzSimpleName +
@@ -92,18 +101,5 @@ public final class BlockServiceLoaderUtil {
 		}
 
 		return factoryOutput;
-	}
-
-	private static void close(Closeable closeable) {
-
-		if (closeable != null) {
-
-			try {
-				closeable.close();
-			}
-			catch (IOException e) {
-				// Do nothing.
-			}
-		}
 	}
 }
