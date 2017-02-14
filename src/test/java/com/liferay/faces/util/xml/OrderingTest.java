@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2016 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -81,12 +81,13 @@ public class OrderingTest {
 						while (facesConfigUrls.hasMoreElements()) {
 							URL facesConfigURL = facesConfigUrls.nextElement();
 
-							// logger.info("parseConfigurationResources: " + facesConfigURL.toString());
+							logger.trace("parseConfigurationResources: " + facesConfigURL.toString());
+
 							InputStream inputStream = facesConfigURL.openStream();
 							FacesConfigDescriptor facesConfigDescriptor = facesConfigDescriptorParser.parse(inputStream,
 									facesConfigURL);
 
-							// logger.info("parseConfigurationResources: >" + facesConfigDescriptor.getName() + "<");
+							logger.trace("parseConfigurationResources: >" + facesConfigDescriptor.getName() + "<");
 							facesConfigDescriptors.add(facesConfigDescriptor);
 							inputStream.close();
 						}
@@ -95,9 +96,36 @@ public class OrderingTest {
 			}
 		}
 		catch (Exception e) {
-			e.printStackTrace();
-			Assert.fail();
+			throw new AssertionError("An unexpected exception was thrown: ", e);
 		}
+	}
+
+	public static List<List<String>> permute(List<String> list) {
+
+		if (list.size() == 0) {
+			List<List<String>> newLols = new ArrayList<List<String>>();
+			newLols.add(new ArrayList<String>());
+
+			return newLols;
+		}
+
+		List<List<String>> lols = new ArrayList<List<String>>();
+
+		String first = list.remove(0);
+
+		List<List<String>> resultingLols = permute(list);
+
+		for (List<String> resultingList : resultingLols) {
+
+			for (int index = 0; index <= resultingList.size(); index++) {
+				List<String> listOfStrings = new ArrayList<String>(resultingList);
+				listOfStrings.add(index, first);
+				lols.add(listOfStrings);
+			}
+
+		}
+
+		return lols;
 	}
 
 	private static String[] extractNames(List<FacesConfigDescriptor> facesConfigDescriptors) {
@@ -112,36 +140,11 @@ public class OrderingTest {
 		return extractedNames;
 	}
 
-	public static List<List<String>> permute(List<String> list) {
-
-		if (list.size() == 0) {
-			List<List<String>> newLols = new ArrayList<List<String>>();
-			newLols.add(new ArrayList<String>());
-			return newLols;
-		}
-
-		List<List<String>> lols = new ArrayList<List<String>>();
-
-		String first = list.remove(0);
-
-		List<List<String>> resultingLols = permute(list);
-		for (List<String> resultingList : resultingLols) {
-
-			for (int index = 0; index <= resultingList.size(); index++) {
-				List<String> listOfStrings = new ArrayList<String>(resultingList);
-				listOfStrings.add(index, first);
-				lols.add(listOfStrings);
-			}
-
-		}
-		return lols;
-	}
-
 	// This fails intermittently without the preSort
 	@Test
 	public void test00_0() throws Exception {
 
-//      logger.info("test00_0: beginning ...");
+		logger.trace("test00_0: beginning ...");
 
 		List<FacesConfigDescriptor> facesConfigDescriptors = new ArrayList<FacesConfigDescriptor>();
 		parseConfigurationResources("ordering/00", facesConfigDescriptors, META_INF_FACES_CONFIG_XML);
@@ -153,18 +156,10 @@ public class OrderingTest {
 
 		FacesConfigDescriptor facesConfig = webInfFacesConfigDescriptors.get(0);
 		List<String> absoluteOrdering = facesConfig.getAbsoluteOrdering();
-
 		String[] originalOrder = extractNames(facesConfigDescriptors);
+		Assert.assertNull("test00_0: absoluteOrdering != null. It should be null.", absoluteOrdering);
 
-		List<FacesConfigDescriptor> order;
-
-		if (absoluteOrdering == null) {
-			order = OrderingUtil.getOrder(facesConfigDescriptors);
-		}
-		else {
-			Assert.fail("test00_0: absoluteOrdering != null. It should be null.");
-			order = OrderingUtil.getOrder(facesConfigDescriptors, absoluteOrdering);
-		}
+		List<FacesConfigDescriptor> order = OrderingUtil.getOrder(facesConfigDescriptors);
 
 		// Append facesConfig from the applicationFacesConfig
 		order.add(facesConfig);
@@ -180,7 +175,8 @@ public class OrderingTest {
 		// LiferayFacesUtil, LiferayFacesBridge, prettyfaces, LiferayFacesAlloy,
 		String message = "\n original: " + original + "\n expected: " + expected + "\n actually: " + actually + "\n";
 		Assert.assertTrue(message, expected.equals(actually));
-		logger.info("test00_0: Passed" + message);
+		logger.info("test00_0: Passed");
+		logger.trace(message);
 
 	}
 
@@ -188,7 +184,7 @@ public class OrderingTest {
 	@Test
 	public void test00_1() throws Exception {
 
-//      logger.info("test00_1: beginning ...");
+		logger.trace("test00_1: beginning ...");
 
 		List<FacesConfigDescriptor> facesConfigDescriptors = new ArrayList<FacesConfigDescriptor>();
 		parseConfigurationResources("ordering/04", facesConfigDescriptors, META_INF_FACES_CONFIG_XML);
@@ -210,18 +206,10 @@ public class OrderingTest {
 
 		FacesConfigDescriptor facesConfig = webInfFacesConfigDescriptors.get(0);
 		List<String> absoluteOrdering = facesConfig.getAbsoluteOrdering();
-
 		String[] originalOrder = extractNames(facesConfigDescriptors);
+		Assert.assertNull("test00_1: absoluteOrdering != null. It should be null.", absoluteOrdering);
 
-		List<FacesConfigDescriptor> order;
-
-		if (absoluteOrdering == null) {
-			order = OrderingUtil.getOrder(facesConfigDescriptors);
-		}
-		else {
-			Assert.fail("test00_1: absoluteOrdering != null. It should be null.");
-			order = OrderingUtil.getOrder(facesConfigDescriptors, absoluteOrdering);
-		}
+		List<FacesConfigDescriptor> order = OrderingUtil.getOrder(facesConfigDescriptors);
 
 		// Append facesConfig from the applicationFacesConfig
 		order.add(facesConfig);
@@ -242,7 +230,8 @@ public class OrderingTest {
 		String message = "\n original: " + original + "\n expected: " + possibility1 + "\n       or: " + possibility2 +
 			"\n actually: " + actually + "\n";
 		Assert.assertTrue(message, assertion);
-		logger.info("test00_1: Passed" + message);
+		logger.info("test00_1: Passed");
+		logger.trace(message);
 
 	}
 
@@ -250,7 +239,7 @@ public class OrderingTest {
 	@Test
 	public void test00_2() throws Exception {
 
-//      logger.info("test00_2: beginning ...");
+		logger.trace("test00_2: beginning ...");
 
 		List<FacesConfigDescriptor> facesConfigDescriptors = new ArrayList<FacesConfigDescriptor>();
 		parseConfigurationResources("ordering/05", facesConfigDescriptors, META_INF_FACES_CONFIG_XML);
@@ -272,18 +261,10 @@ public class OrderingTest {
 
 		FacesConfigDescriptor facesConfig = webInfFacesConfigDescriptors.get(0);
 		List<String> absoluteOrdering = facesConfig.getAbsoluteOrdering();
-
 		String[] originalOrder = extractNames(facesConfigDescriptors);
+		Assert.assertNull("test00_2: absoluteOrdering != null. It should be null.", absoluteOrdering);
 
-		List<FacesConfigDescriptor> order;
-
-		if (absoluteOrdering == null) {
-			order = OrderingUtil.getOrder(facesConfigDescriptors);
-		}
-		else {
-			Assert.fail("test00_2: absoluteOrdering != null. It should be null.");
-			order = OrderingUtil.getOrder(facesConfigDescriptors, absoluteOrdering);
-		}
+		List<FacesConfigDescriptor> order = OrderingUtil.getOrder(facesConfigDescriptors);
 
 		// Append facesConfig from the applicationFacesConfig
 		order.add(facesConfig);
@@ -308,14 +289,15 @@ public class OrderingTest {
 		String message = "\n original: " + original + "\n expected: " + possibility1 + "\n       or: " + possibility2 +
 			"\n       or: " + possibility3 + "\n actually: " + actually + "\n";
 		Assert.assertTrue(message, assertion);
-		logger.info("test00_2: Passed" + message);
+		logger.info("test00_2: Passed");
+		logger.trace(message);
 
 	}
 
 	@Test
 	public void test00_3() throws Exception {
 
-//      logger.info("test00_1: beginning ...");
+		logger.trace("test00_1: beginning ...");
 
 		List<FacesConfigDescriptor> facesConfigDescriptors = new ArrayList<FacesConfigDescriptor>();
 		parseConfigurationResources("ordering/06", facesConfigDescriptors, META_INF_FACES_CONFIG_XML);
@@ -337,18 +319,10 @@ public class OrderingTest {
 
 		FacesConfigDescriptor facesConfig = webInfFacesConfigDescriptors.get(0);
 		List<String> absoluteOrdering = facesConfig.getAbsoluteOrdering();
-
 		String[] originalOrder = extractNames(facesConfigDescriptors);
+		Assert.assertNull("test00_1: absoluteOrdering != null. It should be null.", absoluteOrdering);
 
-		List<FacesConfigDescriptor> order;
-
-		if (absoluteOrdering == null) {
-			order = OrderingUtil.getOrder(facesConfigDescriptors);
-		}
-		else {
-			Assert.fail("test00_1: absoluteOrdering != null. It should be null.");
-			order = OrderingUtil.getOrder(facesConfigDescriptors, absoluteOrdering);
-		}
+		List<FacesConfigDescriptor> order = OrderingUtil.getOrder(facesConfigDescriptors);
 
 		// Append facesConfig from the applicationFacesConfig
 		order.add(facesConfig);
@@ -369,14 +343,15 @@ public class OrderingTest {
 		String message = "\n original: " + original + "\n expected: " + possibility1 + "\n       or: " + possibility2 +
 			"\n actually: " + actually + "\n";
 		Assert.assertTrue(message, assertion);
-		logger.info("test00_3: Passed" + message);
+		logger.info("test00_3: Passed");
+		logger.trace(message);
 
 	}
 
 	@Test
 	public void test01_fromSpec() throws Exception {
 
-//      logger.info("test01_fromSpec: beginning ...");
+		logger.trace("test01_fromSpec: beginning ...");
 
 		List<FacesConfigDescriptor> facesConfigDescriptors = new ArrayList<FacesConfigDescriptor>();
 		parseConfigurationResources("ordering/01", facesConfigDescriptors, META_INF_FACES_CONFIG_XML);
@@ -388,18 +363,10 @@ public class OrderingTest {
 
 		FacesConfigDescriptor facesConfig = webInfFacesConfigDescriptors.get(0);
 		List<String> absoluteOrdering = facesConfig.getAbsoluteOrdering();
-
 		String[] originalOrder = extractNames(facesConfigDescriptors);
+		Assert.assertNull("test01_fromSpec: absoluteOrdering != null. It should be null.", absoluteOrdering);
 
-		List<FacesConfigDescriptor> order;
-
-		if (absoluteOrdering == null) {
-			order = OrderingUtil.getOrder(facesConfigDescriptors);
-		}
-		else {
-			Assert.fail("test01_fromSpec: absoluteOrdering != null. It should be null.");
-			order = OrderingUtil.getOrder(facesConfigDescriptors, absoluteOrdering);
-		}
+		List<FacesConfigDescriptor> order = OrderingUtil.getOrder(facesConfigDescriptors);
 
 		// Append facesConfig from the applicationFacesConfig
 		order.add(facesConfig);
@@ -412,14 +379,15 @@ public class OrderingTest {
 
 		String message = "\n original: " + original + "\n expected: " + expected + "\n actually: " + actually + "\n";
 		Assert.assertTrue(message, expected.equals(actually));
-		logger.info("test01_fromSpec: Passed" + message);
+		logger.info("test01_fromSpec: Passed");
+		logger.trace(message);
 
 	}
 
 	@Test
 	public void test02_fromSpec() throws Exception {
 
-//      logger.info("test02_fromSpec: beginning ...");
+		logger.trace("test02_fromSpec: beginning ...");
 
 		List<FacesConfigDescriptor> facesConfigDescriptors = new ArrayList<FacesConfigDescriptor>();
 		parseConfigurationResources("ordering/02", facesConfigDescriptors, META_INF_FACES_CONFIG_XML);
@@ -431,18 +399,10 @@ public class OrderingTest {
 
 		FacesConfigDescriptor facesConfig = webInfFacesConfigDescriptors.get(0);
 		List<String> absoluteOrdering = facesConfig.getAbsoluteOrdering();
-
 		String[] originalOrder = extractNames(facesConfigDescriptors);
+		Assert.assertNotNull("test02_fromSpec: absoluteOrdering == null. It should not be null.", absoluteOrdering);
 
-		List<FacesConfigDescriptor> order;
-
-		if (absoluteOrdering == null) {
-			Assert.fail("test02_fromSpec: absoluteOrdering == null. It should not be null.");
-			order = OrderingUtil.getOrder(facesConfigDescriptors);
-		}
-		else {
-			order = OrderingUtil.getOrder(facesConfigDescriptors, absoluteOrdering);
-		}
+		List<FacesConfigDescriptor> order = OrderingUtil.getOrder(facesConfigDescriptors, absoluteOrdering);
 
 		// Append facesConfig from the applicationFacesConfig
 		order.add(facesConfig);
@@ -455,14 +415,15 @@ public class OrderingTest {
 
 		String message = "\n original: " + original + "\n expected: " + expected + "\n actually: " + actually + "\n";
 		Assert.assertTrue(message, expected.equals(actually));
-		logger.info("test02_fromSpec: Passed" + message);
+		logger.info("test02_fromSpec: Passed");
+		logger.trace(message);
 
 	}
 
 	@Test
 	public void test03_getAbsoluteOrdering() throws Exception {
 
-//      logger.info("test03_getAbsoluteOrdering: beginning ...");
+		logger.trace("test03_getAbsoluteOrdering: beginning ...");
 
 		// Parse the WEB-INF/faces-config.xml to get any absolute-ordering, if any.
 		List<FacesConfigDescriptor> webInfFacesConfigDescriptors = new ArrayList<FacesConfigDescriptor>();
@@ -495,7 +456,7 @@ public class OrderingTest {
 
 		message = "\n expected: " + expected + "\n actually: " + actually + "\n";
 		Assert.assertTrue(message, expected.equals(actually));
-		logger.info("test03_getAbsoluteOrdering: " + message);
+		logger.trace("test03_getAbsoluteOrdering: " + message);
 
 		webInfFacesConfigDescriptors = new ArrayList<FacesConfigDescriptor>();
 		parseConfigurationResources("ordering/GetAbsoluteOrdering_03", webInfFacesConfigDescriptors,
@@ -512,7 +473,7 @@ public class OrderingTest {
 	@Test
 	public void test04_absoluteOrdering() throws Exception {
 
-//      logger.info("test04_absoluteOrdering: beginning ...");
+		logger.trace("test04_absoluteOrdering: beginning ...");
 
 		List<FacesConfigDescriptor> facesConfigDescriptors = new ArrayList<FacesConfigDescriptor>();
 		parseConfigurationResources("ordering/AbsoluteOrdering_01", facesConfigDescriptors, META_INF_FACES_CONFIG_XML);
@@ -525,19 +486,11 @@ public class OrderingTest {
 
 		FacesConfigDescriptor facesConfig = webInfFacesConfigDescriptors.get(0);
 		List<String> absoluteOrdering = facesConfig.getAbsoluteOrdering();
-
 		String[] originalOrder = extractNames(facesConfigDescriptors);
+		Assert.assertNotNull("test04_absoluteOrdering: absoluteOrdering == null. It should not be null.",
+			absoluteOrdering);
 
-		List<FacesConfigDescriptor> order;
-
-		if (absoluteOrdering == null) {
-			Assert.fail("test04_absoluteOrdering: absoluteOrdering == null. It should not be null.");
-			order = OrderingUtil.getOrder(facesConfigDescriptors);
-		}
-		else {
-			order = OrderingUtil.getOrder(facesConfigDescriptors, absoluteOrdering);
-		}
-
+		List<FacesConfigDescriptor> order = OrderingUtil.getOrder(facesConfigDescriptors, absoluteOrdering);
 		String[] orderedNames = extractNames(order);
 
 		List<String> original = Arrays.asList(originalOrder);
@@ -546,7 +499,7 @@ public class OrderingTest {
 
 		String message = "\n original: " + original + "\n expected: " + expected + "\n actually: " + actually + "\n";
 		Assert.assertTrue(message, expected.equals(actually));
-		logger.info("test04_absoluteOrdering: " + message);
+		logger.trace("test04_absoluteOrdering: " + message);
 
 		webInfFacesConfigDescriptors = new ArrayList<FacesConfigDescriptor>();
 		parseConfigurationResources("ordering/AbsoluteOrdering_02", webInfFacesConfigDescriptors,
@@ -557,14 +510,10 @@ public class OrderingTest {
 
 		originalOrder = extractNames(facesConfigDescriptors);
 
-		if (absoluteOrdering == null) {
-			Assert.fail("test04_absoluteOrdering: absoluteOrdering == null. It should not be null.");
-			order = OrderingUtil.getOrder(facesConfigDescriptors);
-		}
-		else {
-			logger.info("test04_absoluteOrdering: absoluteOrdering = " + absoluteOrdering);
-			order = OrderingUtil.getOrder(facesConfigDescriptors, absoluteOrdering);
-		}
+		Assert.assertNotNull("test04_absoluteOrdering: absoluteOrdering == null. It should not be null.",
+			absoluteOrdering);
+		logger.trace("test04_absoluteOrdering: absoluteOrdering = " + absoluteOrdering);
+		order = OrderingUtil.getOrder(facesConfigDescriptors, absoluteOrdering);
 
 		orderedNames = extractNames(order);
 
@@ -593,14 +542,15 @@ public class OrderingTest {
 			"\n       or: " + possibility3 + "\n       or: " + possibility4 + "\n       or: " + possibility5 +
 			"\n       or: " + possibility6 + "\n actually: " + actually + "\n";
 		Assert.assertTrue(message, assertion);
-		logger.info("test04_absoluteOrdering: Passed" + message);
+		logger.info("test04_absoluteOrdering: Passed");
+		logger.trace(message);
 
 	}
 
 	@Test
 	public void test05_AafterCOthers_BbeforeOthers_CafterOthers_FbeforeCOthers() throws Exception {
 
-//      logger.info("test05_afterAfterOthers: beginning ...");
+		logger.trace("test05_afterAfterOthers: beginning ...");
 
 		List<FacesConfigDescriptor> facesConfigDescriptors = new ArrayList<FacesConfigDescriptor>();
 		parseConfigurationResources("ordering/AafterCOthers_BbeforeOthers_CafterOthers_FbeforeCOthers",
@@ -631,7 +581,8 @@ public class OrderingTest {
 		String message = "\n original: " + original + "\n expected: " + possibility1 + "\n       or: " + possibility2 +
 			"\n       or: " + possibility3 + "\n       or: " + possibility4 + "\n actually: " + actually + "\n";
 		Assert.assertTrue(message, assertion);
-		logger.info("test05_AafterCOthers_BbeforeOthers_CafterOthers_FbeforeCOthers: Passed" + message);
+		logger.info("test05_AafterCOthers_BbeforeOthers_CafterOthers_FbeforeCOthers: Passed");
+		logger.trace(message);
 
 	}
 
@@ -662,7 +613,8 @@ public class OrderingTest {
 		String message = "\n original: " + original + "\n expected: " + possibility1 + "\n       or: " + possibility2 +
 			"\n actually: " + actually + "\n";
 		Assert.assertTrue(message, assertion);
-		logger.info("test06_CafterDbeforeOthers: Passed" + message);
+		logger.info("test06_CafterDbeforeOthers: Passed");
+		logger.trace(message);
 
 	}
 
@@ -686,7 +638,8 @@ public class OrderingTest {
 
 		String message = "\n original: " + original + "\n expected: " + expected + "\n actually: " + actually + "\n";
 		Assert.assertTrue(message, expected.equals(actually));
-		logger.info("test07_eachAfterTheNext: Passed" + message);
+		logger.info("test07_eachAfterTheNext: Passed");
+		logger.trace(message);
 
 	}
 
@@ -711,7 +664,8 @@ public class OrderingTest {
 
 		String message = "\n original: " + original + "\n expected: " + expected + "\n actually: " + actually + "\n";
 		Assert.assertTrue(message, expected.equals(actually));
-		logger.info("test08_eachBeforeThePrevious: Passed" + message);
+		logger.info("test08_eachBeforeThePrevious: Passed");
+		logger.trace(message);
 
 	}
 
@@ -729,17 +683,10 @@ public class OrderingTest {
 		}
 		catch (Exception e) {
 
-			if (e instanceof OrderingBeforeAndAfterException) {
-
-				// this is the expected result
-				logger.info(
-					"test10_AafterBbeforeB_CbeforeOthers: Passed\n Expected exception thrown: e.getMessage() = " +
-					e.getMessage());
-			}
-			else {
-				Assert.fail("An exception stating 'both before and after' should have been thrown. Instead, got: " +
-					e.getMessage() + "\n");
-			}
+			Assert.assertTrue("An exception stating 'both before and after' should have been thrown. Instead, got: " +
+				e.getMessage() + "\n", e instanceof OrderingBeforeAndAfterException);
+			logger.info("test10_AafterBbeforeB_CbeforeOthers: Passed\n Expected exception thrown: e.getMessage() = " +
+				e.getMessage());
 		}
 
 	}
@@ -770,7 +717,8 @@ public class OrderingTest {
 		String message = "\n original: " + original + "\n expected: " + possibility1 + "\n       or: " + possibility2 +
 			"\n actually: " + actually + "\n";
 		Assert.assertTrue(message, assertion);
-		logger.info("test11_CafterOthersbeforeB: Passed" + message);
+		logger.info("test11_CafterOthersbeforeB: Passed");
+		logger.trace(message);
 
 	}
 
@@ -787,17 +735,11 @@ public class OrderingTest {
 		}
 		catch (Exception e) {
 
-			if (e instanceof OrderingCircularDependencyException) {
-
-				// this is the expected result
-				logger.info("test12_BafterC_CafterB: Passed\n Expected exception thrown: e.getMessage() = " +
-					e.getMessage());
-			}
-			else {
-				Assert.fail(
-					"An exception stating 'circular dependencies detected' should have been thrown. Instead, received: " +
-					e.getMessage() + "\n");
-			}
+			Assert.assertTrue(
+				"An exception stating 'circular dependencies detected' should have been thrown. Instead, received: " +
+				e.getMessage() + "\n", e instanceof OrderingCircularDependencyException);
+			logger.info("test10_AafterBbeforeB_CbeforeOthers: Passed\n Expected exception thrown: e.getMessage() = " +
+				e.getMessage());
 		}
 
 	}
@@ -837,9 +779,9 @@ public class OrderingTest {
 					e.getMessage());
 			}
 			else {
-				Assert.fail(
-					"An exception stating 'circular dependencies detected' or 'both before and after' should have been thrown. Instead, got: " +
-					e.getMessage() + "\n");
+				throw new AssertionError(
+					"An exception stating 'circular dependencies detected' or 'both before and after' should have been thrown. Instead, got: ",
+					e);
 			}
 		}
 
@@ -880,9 +822,9 @@ public class OrderingTest {
 					e.getMessage());
 			}
 			else {
-				Assert.fail(
-					"An exception stating 'circular dependencies detected' or 'both before and after' should have been thrown. Instead, got: " +
-					e.getMessage() + "\n");
+				throw new AssertionError(
+					"An exception stating 'circular dependencies detected' or 'both before and after' should have been thrown. Instead, got: ",
+					e);
 			}
 		}
 
@@ -916,14 +858,15 @@ public class OrderingTest {
 		String message = "\n original: " + original + "\n expected: " + possibility1 + "\n       or: " + possibility2 +
 			"\n       or: " + possibility3 + "\n actually: " + actually + "\n";
 		Assert.assertTrue(message, assertion);
-		logger.info("test15_BafterC_CbeforeB: Passed" + message);
+		logger.info("test15_BafterC_CbeforeB: Passed");
+		logger.trace(message);
 
 	}
 
 	@Test
 	public void test16_AafterB_CbeforeOthers() throws Exception {
 
-//      logger.info("test16_AafterB_CbeforeOthers: beginning ...");
+		logger.trace("test16_AafterB_CbeforeOthers: beginning ...");
 
 		List<FacesConfigDescriptor> facesConfigDescriptors = new ArrayList<FacesConfigDescriptor>();
 		parseConfigurationResources("ordering/AafterB_CbeforeOthers", facesConfigDescriptors,
@@ -948,7 +891,8 @@ public class OrderingTest {
 		String message = "\n original: " + original + "\n expected: " + possibility1 + "\n       or: " + possibility2 +
 			"\n actually: " + actually + "\n";
 		Assert.assertTrue(message, assertion);
-		logger.info("test16_AafterB_CbeforeOthers: Passed" + message);
+		logger.info("test16_AafterB_CbeforeOthers: Passed");
+		logger.trace(message);
 
 	}
 
@@ -988,7 +932,8 @@ public class OrderingTest {
 		// d, c, b, f, a, e
 		String message = "\n original: " + original + "\n expected: " + expected + "\n actually: " + actually + "\n";
 		Assert.assertTrue(message, expected.equals(actually));
-		logger.info("test18_AafterC_BafterCbeforeOthers_CafterDbeforeB_EafterD: Passed" + message);
+		logger.info("test18_AafterC_BafterCbeforeOthers_CafterDbeforeB_EafterD: Passed");
+		logger.trace(message);
 
 	}
 
@@ -1035,7 +980,8 @@ public class OrderingTest {
 		String message = "\n original: " + original + "\n expected: " + possibility1 + "\n       or: " + possibility2 +
 			"\n       or: " + possibility3 + "\n actually: " + actually + "\n";
 		Assert.assertTrue(message, assertion);
-		logger.info("test19_FbeforeD_EbeforeDafterOthers_DbeforeCafterE_BbeforeC: Passed" + message);
+		logger.info("test19_FbeforeD_EbeforeDafterOthers_DbeforeCafterE_BbeforeC: Passed");
+		logger.trace(message);
 
 	}
 
@@ -1045,7 +991,7 @@ public class OrderingTest {
 
 		List<FacesConfigDescriptor> facesConfigDescriptors = new ArrayList<FacesConfigDescriptor>();
 		parseConfigurationResources("ordering/_beforeCafterOthers_BbeforeOthers_DafterOthers_EbeforeOthers",
-				facesConfigDescriptors, META_INF_FACES_CONFIG_XML);
+			facesConfigDescriptors, META_INF_FACES_CONFIG_XML);
 
 		Map<String, FacesConfigDescriptor> configMap = OrderingUtil.getConfigMap(facesConfigDescriptors);
 
@@ -1056,6 +1002,7 @@ public class OrderingTest {
 		strList.add("d");
 		strList.add("e");
 		strList.add("f");
+
 		List<List<String>> lists = permute(strList);
 
 		String message = "";
@@ -1063,9 +1010,11 @@ public class OrderingTest {
 		for (List<String> list : lists) {
 
 			List<FacesConfigDescriptor> temp = new ArrayList<FacesConfigDescriptor>();
+
 			for (String i : list) {
 				temp.add(configMap.get(i));
 			}
+
 			facesConfigDescriptors = temp;
 
 			String[] originalOrder = extractNames(facesConfigDescriptors);
@@ -1085,26 +1034,24 @@ public class OrderingTest {
 			List<String> possibility2 = Arrays.asList("b", "e", "f", "d", "", "c");
 			List<String> possibility3 = Arrays.asList("e", "b", "f", "", "c", "d");
 
-			boolean assertion = (actually.equals(possibility1) || actually.equals(possibility2) || actually.equals(possibility3));
-			message = "\n original: " + original +
-				"\n expected: " + possibility1 +
-				"\n       or: " + possibility2 +
-				"\n       or: " + possibility3 +
-				"\n actually: " + actually + "\n";
+			boolean assertion = (actually.equals(possibility1) || actually.equals(possibility2) ||
+					actually.equals(possibility3));
+			message = "\n original: " + original + "\n expected: " + possibility1 + "\n       or: " + possibility2 +
+				"\n       or: " + possibility3 + "\n actually: " + actually + "\n";
 			Assert.assertTrue(message, assertion);
-			logger.info("test20_beforeCafterOthers_BbeforeOthers_DafterOthers_EbeforeOthers_permute: Passed" + message);
+			logger.trace(message);
 
 		}
+
+		logger.info("test20_beforeCafterOthers_BbeforeOthers_DafterOthers_EbeforeOthers_permute: Passed");
 	}
 
 	// TODO
 	@Test
-	public void test21_AafterOthers_BbeforeOthers_DafterOthers_EafterCbeforeOthers_permute()
-		throws Exception {
+	public void test21_AafterOthers_BbeforeOthers_DafterOthers_EafterCbeforeOthers_permute() throws Exception {
 
 		List<FacesConfigDescriptor> facesConfigDescriptors = new ArrayList<FacesConfigDescriptor>();
-		parseConfigurationResources(
-			"ordering/AafterOthers_BbeforeOthers_DafterOthers_EafterCbeforeOthers_permute",
+		parseConfigurationResources("ordering/AafterOthers_BbeforeOthers_DafterOthers_EafterCbeforeOthers_permute",
 			facesConfigDescriptors, META_INF_FACES_CONFIG_XML);
 
 		Map<String, FacesConfigDescriptor> configMap = OrderingUtil.getConfigMap(facesConfigDescriptors);
@@ -1116,6 +1063,7 @@ public class OrderingTest {
 		strList.add("d");
 		strList.add("e");
 		strList.add("f");
+
 		List<List<String>> lists = permute(strList);
 
 		String message = "";
@@ -1123,9 +1071,11 @@ public class OrderingTest {
 		for (List<String> list : lists) {
 
 			List<FacesConfigDescriptor> temp = new ArrayList<FacesConfigDescriptor>();
+
 			for (String i : list) {
 				temp.add(configMap.get(i));
 			}
+
 			facesConfigDescriptors = temp;
 
 			String[] originalOrder = extractNames(facesConfigDescriptors);
@@ -1149,16 +1099,13 @@ public class OrderingTest {
 
 			boolean assertion = (actually.equals(possibility1) || actually.equals(possibility2) ||
 					actually.equals(possibility3) || actually.equals(possibility4));
-			message = "\n original: " + original +
-				"\n expected: " + possibility1 +
-				"\n       or: " + possibility2 +
-				"\n       or: " + possibility3 +
-				"\n       or: " + possibility4 +
-				"\n actually: " + actually + "\n";
+			message = "\n original: " + original + "\n expected: " + possibility1 + "\n       or: " + possibility2 +
+				"\n       or: " + possibility3 + "\n       or: " + possibility4 + "\n actually: " + actually + "\n";
 			Assert.assertTrue(message, assertion);
-			logger.info("test21_AafterOthers_BbeforeOthers_DafterOthers_EafterCbeforeOthers_permute: Passed" +
-				message);
+			logger.trace(message);
 		}
+
+		logger.info("test21_AafterOthers_BbeforeOthers_DafterOthers_EafterCbeforeOthers_permute: Passed");
 	}
 
 	// submitted as an issue in mojarra:
@@ -1192,8 +1139,8 @@ public class OrderingTest {
 		// ['d', 'c', 'b', 'a']
 		String message = "\n original: " + original + "\n expected: " + expected + "\n actually: " + actually + "\n";
 		Assert.assertTrue(message, expected.equals(actually));
-		logger.info("test_JAVASERVERFACES_3757_AafterD_BafterCbeforeOthers_CafterDbeforeB_startWithABCD: Passed" +
-			message);
+		logger.info("test_JAVASERVERFACES_3757_AafterD_BafterCbeforeOthers_CafterDbeforeB_startWithABCD: Passed");
+		logger.trace(message);
 	}
 
 	// submitted as an issue in mojarra:
@@ -1227,8 +1174,8 @@ public class OrderingTest {
 		// ['d', 'c', 'b', 'a']
 		String message = "\n original: " + original + "\n expected: " + expected + "\n actually: " + actually + "\n";
 		Assert.assertTrue(message, expected.equals(actually));
-		logger.info("test_JAVASERVERFACES_3757_AafterD_BafterCbeforeOthers_CafterDbeforeB_startWithADBC: Passed" +
-			message);
+		logger.info("test_JAVASERVERFACES_3757_AafterD_BafterCbeforeOthers_CafterDbeforeB_startWithADBC: Passed");
+		logger.trace(message);
 	}
 
 	// submitted as an issue in mojarra:
@@ -1264,7 +1211,8 @@ public class OrderingTest {
 		String message = "\n original: " + original + "\n expected: " + possibility1 + "\n actually: " + actually +
 			"\n";
 		Assert.assertTrue(message, assertion);
-		logger.info("test_JAVASERVERFACES_3757_Caftera_startWithCab: Passed" + message);
+		logger.info("test_JAVASERVERFACES_3757_Caftera_startWithCab: Passed");
+		logger.trace(message);
 	}
 
 	// submitted as an issue in mojarra:
@@ -1301,7 +1249,7 @@ public class OrderingTest {
 		String message = "\n original: " + original + "\n expected: " + possibility1 + "\n actually: " + actually +
 			"\n";
 		Assert.assertTrue(message, assertion);
-		logger.info("test_JAVASERVERFACES_3757_noOrdering_startWithCab: Passed" + message);
+		logger.info("test_JAVASERVERFACES_3757_noOrdering_startWithCab: Passed");
+		logger.trace(message);
 	}
-
 }
