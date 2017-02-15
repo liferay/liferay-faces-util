@@ -88,37 +88,16 @@ public abstract class I18nBundleBase extends I18nWrapper implements Serializable
 		}
 		else {
 
-			ResourceBundle resourceBundle = null;
-
 			try {
 				String bundleKey = getBundleKey();
 
-				if (locale == null) {
-					resourceBundle = ResourceBundle.getBundle(bundleKey, new UTF8Control());
-				}
-				else {
-					resourceBundle = ResourceBundle.getBundle(bundleKey, locale, new UTF8Control());
-				}
+				message = super.getMessage(facesContext, bundleKey, locale, messageId, new Object[] {});
+				messageCache.put(key, message);
 			}
 			catch (MissingResourceException e) {
 				logger.error(e);
+				messageCache.put(key, "");
 			}
-
-			if (resourceBundle != null) {
-
-				try {
-					message = resourceBundle.getString(messageId);
-					messageCache.put(key, message);
-				}
-				catch (MissingResourceException e) {
-					messageCache.put(key, "");
-				}
-			}
-		}
-
-		if (message == null) {
-
-			message = super.getMessage(facesContext, locale, messageId);
 		}
 
 		return message;
