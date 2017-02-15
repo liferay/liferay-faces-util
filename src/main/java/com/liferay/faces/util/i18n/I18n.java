@@ -78,4 +78,19 @@ public interface I18n {
 	 *                       pattern.
 	 */
 	public String getMessage(FacesContext facesContext, Locale locale, String messageId, Object... arguments);
+
+	/**
+	 * Creates (if necessary) and returns an internationalized {@link String} message based on the specified {@code
+	 * locale}, {@code messageId}. If the message contains a {@link java.text.MessageFormat} pattern then the specified
+	 * {@code arguments} are inserted into the message accordingly.
+	 *
+	 * @param  facesContext  The current faces context.
+	 * @param  bundleKey     The resource bundle baseName.
+	 * @param  locale        The locale of the message.
+	 * @param  messageId     The id of the message.
+	 * @param  arguments     The values that are to be inserted according to the {@link java.text.MessageFormat}
+	 *                       pattern.
+	 */
+	public String getMessage(FacesContext facesContext, String bundleKey, Locale locale, String messageId,
+		Object... arguments);
 }
