@@ -64,13 +64,4 @@ public abstract class I18nWrapper implements I18n, Wrapper<I18n> {
 	public String getMessage(FacesContext facesContext, Locale locale, String messageId, Object... arguments) {
 		return getWrapped().getMessage(facesContext, locale, messageId, arguments);
 	}
-
-	/**
-	 * See {@link I18n#getMessage(FacesContext, String, Locale, String, Object...)}
-	 */
-	@Override
-	public String getMessage(FacesContext facesContext, String bundleKey, Locale locale, String messageId,
-		Object... arguments) {
-		return getWrapped().getMessage(facesContext, bundleKey, locale, messageId, arguments);
-	}
 }
