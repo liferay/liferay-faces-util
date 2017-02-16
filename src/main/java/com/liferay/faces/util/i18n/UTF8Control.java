@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.liferay.faces.util.i18n.internal;
+package com.liferay.faces.util.i18n;
 
 import java.io.IOException;
 import java.io.InputStream;
