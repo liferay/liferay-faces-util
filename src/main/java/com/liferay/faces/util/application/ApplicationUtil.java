@@ -15,6 +15,9 @@
  */
 package com.liferay.faces.util.application;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
@@ -25,6 +28,20 @@ import javax.faces.context.FacesContext;
 public final class ApplicationUtil {
 
 	private ApplicationUtil() {
+	}
+
+	@SuppressWarnings("unchecked")
+	public static Map<String, Object> getOrCreateApplicationCache(FacesContext facesContext, String cacheName) {
+		Map<String, Object> applicationMap = facesContext.getExternalContext().getApplicationMap();
+
+		Map<String, Object> cache = (Map<String, Object>) applicationMap.get(cacheName);
+
+		if (cache == null) {
+			cache = new ConcurrentHashMap<String, Object>();
+			applicationMap.put(cacheName, cache);
+		}
+
+		return cache;
 	}
 
 	/**

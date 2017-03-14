@@ -15,12 +15,13 @@
  */
 package com.liferay.faces.util.config;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 
+import com.liferay.faces.util.application.ApplicationUtil;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.helper.IntegerHelper;
 import com.liferay.faces.util.helper.LongHelper;
@@ -34,14 +35,12 @@ import com.liferay.faces.util.helper.LongHelper;
  */
 public class WebConfigParamUtil {
 
-	// Note: Performance is faster with a synchronized block around HashMap.put(String, Object) rather than using a
-	// ConcurrentHashMap.
-	private static final Map<String, Object> configParamCache = new HashMap<String, Object>();
-
 	public static boolean getBooleanValue(ExternalContext externalContext, String name, String alternateName,
 		boolean defaultBooleanValue) {
 
 		boolean booleanValue = defaultBooleanValue;
+
+		Map<String, Object> configParamCache = getConfigParamCache();
 
 		Object cachedValue = configParamCache.get(name);
 
@@ -55,9 +54,7 @@ public class WebConfigParamUtil {
 				booleanValue = BooleanHelper.isTrueToken(configuredValue);
 			}
 
-			synchronized (configParamCache) {
-				configParamCache.put(name, Boolean.valueOf(booleanValue));
-			}
+			configParamCache.put(name, Boolean.valueOf(booleanValue));
 		}
 
 		return booleanValue;
@@ -79,6 +76,8 @@ public class WebConfigParamUtil {
 
 		int integerValue = defaultIntegerValue;
 
+		Map<String, Object> configParamCache = getConfigParamCache();
+
 		Object cachedValue = configParamCache.get(name);
 
 		if ((cachedValue != null) && (cachedValue instanceof Integer)) {
@@ -91,9 +90,7 @@ public class WebConfigParamUtil {
 				integerValue = IntegerHelper.toInteger(configuredValue);
 			}
 
-			synchronized (configParamCache) {
-				configParamCache.put(name, Integer.valueOf(integerValue));
-			}
+			configParamCache.put(name, Integer.valueOf(integerValue));
 		}
 
 		return integerValue;
@@ -103,6 +100,8 @@ public class WebConfigParamUtil {
 		long defaultLongValue) {
 
 		long longValue = defaultLongValue;
+
+		Map<String, Object> configParamCache = getConfigParamCache();
 
 		Object cachedValue = configParamCache.get(name);
 
@@ -116,9 +115,7 @@ public class WebConfigParamUtil {
 				longValue = LongHelper.toLong(configuredValue);
 			}
 
-			synchronized (configParamCache) {
-				configParamCache.put(name, Long.valueOf(longValue));
-			}
+			configParamCache.put(name, Long.valueOf(longValue));
 		}
 
 		return longValue;
@@ -128,6 +125,8 @@ public class WebConfigParamUtil {
 		String defaultStringValue) {
 
 		String stringValue = defaultStringValue;
+
+		Map<String, Object> configParamCache = getConfigParamCache();
 
 		Object cachedValue = configParamCache.get(name);
 
@@ -141,9 +140,7 @@ public class WebConfigParamUtil {
 				stringValue = configuredValue;
 			}
 
-			synchronized (configParamCache) {
-				configParamCache.put(name, stringValue);
-			}
+			configParamCache.put(name, stringValue);
 		}
 
 		return stringValue;
@@ -151,5 +148,12 @@ public class WebConfigParamUtil {
 
 	public static boolean isSpecified(ExternalContext externalContext, String name, String alternateName) {
 		return (getConfiguredValue(externalContext, name, alternateName) != null);
+	}
+
+	private static Map<String, Object> getConfigParamCache() {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		String cacheName = WebConfigParamUtil.class.getName();
+
+		return ApplicationUtil.getOrCreateApplicationCache(facesContext, cacheName);
 	}
 }

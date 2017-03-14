@@ -15,19 +15,18 @@
  */
 package com.liferay.faces.util.i18n.internal;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
-import java.util.concurrent.ConcurrentHashMap;
 
 import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+import com.liferay.faces.util.application.ApplicationUtil;
 import com.liferay.faces.util.i18n.I18n;
 import com.liferay.faces.util.i18n.I18nUtil;
 import com.liferay.faces.util.i18n.UTF8Control;
@@ -40,10 +39,6 @@ public class I18nImpl implements I18n, Serializable {
 
 	// serialVersionUID
 	private static final long serialVersionUID = 707385608167301726L;
-
-	// Private Data Members
-	private transient Map<Locale, ResourceBundle> facesResourceBundleCache =
-		new ConcurrentHashMap<Locale, ResourceBundle>();
 
 	@Override
 	public FacesMessage getFacesMessage(FacesContext facesContext, Locale locale, FacesMessage.Severity severity,
@@ -105,7 +100,8 @@ public class I18nImpl implements I18n, Serializable {
 
 	private ResourceBundle getFacesResourceBundle(FacesContext facesContext, Locale locale) {
 
-		ResourceBundle facesResourceBundle = facesResourceBundleCache.get(locale);
+		Map<String, Object> facesResourceBundleCache = getFacesResourceBundleCache();
+		ResourceBundle facesResourceBundle = (ResourceBundle) facesResourceBundleCache.get(locale.toString());
 
 		if (facesResourceBundle == null) {
 
@@ -117,13 +113,16 @@ public class I18nImpl implements I18n, Serializable {
 			}
 
 			facesResourceBundle = ResourceBundle.getBundle(messageBundle, locale, new UTF8Control());
-			facesResourceBundleCache.put(locale, facesResourceBundle);
+			facesResourceBundleCache.put(locale.toString(), facesResourceBundle);
 		}
 
 		return facesResourceBundle;
 	}
 
-	private void readObject(java.io.ObjectInputStream stream) throws IOException, ClassNotFoundException {
-		facesResourceBundleCache = new ConcurrentHashMap<Locale, ResourceBundle>();
+	private Map<String, Object> getFacesResourceBundleCache() {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		String cacheName = I18nImpl.class.getName();
+
+		return ApplicationUtil.getOrCreateApplicationCache(facesContext, cacheName);
 	}
 }
