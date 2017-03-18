@@ -37,7 +37,8 @@ public class FacesContextUtilImpl extends FacesContextWrapper {
 
 		this.wrappedFacesContext = facesContext;
 
-		FacesRequestContext facesRequestContext = FacesRequestContextFactory.getFacesRequestContextInstance();
+		FacesRequestContext facesRequestContext = FacesRequestContextFactory.getFacesRequestContextInstance(
+				facesContext.getExternalContext());
 		FacesRequestContext.setCurrentInstance(facesRequestContext);
 	}
 

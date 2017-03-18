@@ -16,6 +16,8 @@
 package com.liferay.faces.util.context;
 
 import javax.faces.FacesWrapper;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
@@ -26,14 +28,34 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
 public abstract class FacesRequestContextFactory implements FacesWrapper<FacesRequestContextFactory> {
 
 	/**
+	 * @deprecated  Call {@link #getFacesRequestContextInstance(ExternalContext)} instead.
+	 *
+	 *              <p>Returns a {@link ThreadLocal} singleton instance of {@link FacesRequestContext} from the {@link
+	 *              FacesRequestContextFactory} found by the {@link FactoryExtensionFinder}. The returned instance is
+	 *              designed to be used during execution of a request thread, so it is not guaranteed to be {@link
+	 *              java.io.Serializable}.</p>
+	 */
+	@Deprecated
+	public static FacesRequestContext getFacesRequestContextInstance() {
+		return getFacesRequestContextInstance(FacesContext.getCurrentInstance().getExternalContext());
+	}
+
+	/**
 	 * Returns a {@link ThreadLocal} singleton instance of {@link FacesRequestContext} from the {@link
 	 * FacesRequestContextFactory} found by the {@link FactoryExtensionFinder}. The returned instance is designed to be
 	 * used during execution of a request thread, so it is not guaranteed to be {@link java.io.Serializable}.
+	 *
+	 * @param  externalContext  The external context associated with the current faces context. It is needed in order
+	 *                          for the {@link FactoryExtensionFinder} to be able to find the factory.
+	 *
+	 * @since  3.1
+	 * @since  2.1
+	 * @since  1.1
 	 */
-	public static FacesRequestContext getFacesRequestContextInstance() {
+	public static FacesRequestContext getFacesRequestContextInstance(ExternalContext externalContext) {
 
 		FacesRequestContextFactory facesRequestContextFactory = (FacesRequestContextFactory) FactoryExtensionFinder
-			.getFactory(FacesRequestContextFactory.class);
+			.getFactory(externalContext, FacesRequestContextFactory.class);
 
 		return facesRequestContextFactory.getFacesRequestContext();
 	}

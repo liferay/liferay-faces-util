@@ -216,10 +216,10 @@ public abstract class ClientComponentRendererBase extends Renderer implements Cl
 		Script script;
 
 		if (modules != null) {
-			script = ScriptFactory.getScriptInstance(bufferedScriptString, modules, modulesType);
+			script = ScriptFactory.getScriptInstance(facesContext.getExternalContext(), bufferedScriptString, modules, modulesType);
 		}
 		else {
-			script = ScriptFactory.getScriptInstance(bufferedScriptString);
+			script = ScriptFactory.getScriptInstance(facesContext.getExternalContext(), bufferedScriptString);
 		}
 
 		FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();

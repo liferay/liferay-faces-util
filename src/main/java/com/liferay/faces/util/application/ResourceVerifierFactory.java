@@ -16,6 +16,8 @@
 package com.liferay.faces.util.application;
 
 import javax.faces.FacesWrapper;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
@@ -31,15 +33,35 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
 public abstract class ResourceVerifierFactory implements FacesWrapper<ResourceVerifierFactory> {
 
 	/**
+	 * @deprecated  Call {@link #getResourceVerifierInstance(ExternalContext)} instead.
+	 *
+	 *              <p>Returns a stateless, thread-safe singleton instance of {@link ResourceVerifier} from the {@link
+	 *              ResourceVerifierFactory} found by the {@link FactoryExtensionFinder}. ResourceVerifier is a
+	 *              stateless, thread-safe singleton because it is designed to be used by a {@link
+	 *              javax.faces.render.Renderer}, which is a stateless, thread-safe singleton.</p>
+	 */
+	@Deprecated
+	public static ResourceVerifier getResourceVerifierInstance() {
+		return getResourceVerifierInstance(FacesContext.getCurrentInstance().getExternalContext());
+	}
+
+	/**
 	 * Returns a stateless, thread-safe singleton instance of {@link ResourceVerifier} from the {@link
 	 * ResourceVerifierFactory} found by the {@link FactoryExtensionFinder}. ResourceVerifier is a stateless,
 	 * thread-safe singleton because it is designed to be used by a {@link javax.faces.render.Renderer}, which is a
 	 * stateless, thread-safe singleton.
+	 *
+	 * @param  externalContext  The external context associated with the current faces context. It is needed in order
+	 *                          for the {@link FactoryExtensionFinder} to be able to find the factory.
+	 *
+	 * @since  3.1
+	 * @since  2.1
+	 * @since  1.1
 	 */
-	public static ResourceVerifier getResourceVerifierInstance() {
+	public static ResourceVerifier getResourceVerifierInstance(ExternalContext externalContext) {
 
 		ResourceVerifierFactory resourceVerifierFactory = (ResourceVerifierFactory) FactoryExtensionFinder.getFactory(
-				ResourceVerifierFactory.class);
+				externalContext, ResourceVerifierFactory.class);
 
 		return resourceVerifierFactory.getResourceVerifier();
 	}

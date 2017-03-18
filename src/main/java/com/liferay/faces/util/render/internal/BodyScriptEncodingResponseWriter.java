@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.faces.component.UIComponent;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.context.ResponseWriterWrapper;
@@ -84,7 +85,8 @@ public class BodyScriptEncodingResponseWriter extends ResponseWriterWrapper {
 
 				if (!scripts.isEmpty()) {
 
-					ScriptsEncoder scriptsEncoder = ScriptsEncoderFactory.getScriptsEncoderInstance();
+					ExternalContext externalContext = facesContext.getExternalContext();
+					ScriptsEncoder scriptsEncoder = ScriptsEncoderFactory.getScriptsEncoderInstance(externalContext);
 					facesContext.setResponseWriter(wrappedResponseWriter);
 					scriptsEncoder.encodeBodyScripts(facesContext, scripts);
 					facesContext.setResponseWriter(this);

@@ -43,18 +43,19 @@ public class ApplicationStartupListener extends ApplicationStartupListenerCompat
 	public void processSystemEvent(EventObject systemEvent) throws AbortProcessingException {
 
 		UtilDependencyVerifier.verify();
+
 		Application application = (Application) systemEvent.getSource();
 		FacesContext initFacesContext = FacesContext.getCurrentInstance();
-		ExternalContext externalContext = initFacesContext.getExternalContext();
-		Map<String, Object> applicationMap = externalContext.getApplicationMap();
+		ExternalContext initExternalContext = initFacesContext.getExternalContext();
+		Map<String, Object> applicationMap = initExternalContext.getApplicationMap();
 		String appConfigAttrName = ApplicationConfig.class.getName();
 		ApplicationConfig applicationConfig = (ApplicationConfig) applicationMap.get(appConfigAttrName);
 
 		if (applicationConfig == null) {
 
-			boolean resolveEntities = WebConfigParam.ResolveXMLEntities.getBooleanValue(externalContext);
+			boolean resolveEntities = WebConfigParam.ResolveXMLEntities.getBooleanValue(initExternalContext);
 
-			String contextPath = getApplicationContextPath(externalContext);
+			String contextPath = getApplicationContextPath(initExternalContext);
 			ApplicationConfigInitializer applicationConfigInitializer = new ApplicationConfigInitializerImpl(
 					contextPath, resolveEntities);
 
@@ -71,7 +72,7 @@ public class ApplicationStartupListener extends ApplicationStartupListenerCompat
 					FactoryExtensionFinder factoryExtensionFinder = FactoryExtensionFinder.getInstance();
 
 					for (ConfiguredElement configuredFactoryExtension : configuredFactoryExtensions) {
-						factoryExtensionFinder.registerFactory(configuredFactoryExtension);
+						factoryExtensionFinder.registerFactory(initExternalContext, configuredFactoryExtension);
 					}
 				}
 			}

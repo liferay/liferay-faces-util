@@ -16,6 +16,8 @@
 package com.liferay.faces.util.client;
 
 import javax.faces.FacesWrapper;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
@@ -29,25 +31,77 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
 public abstract class ScriptFactory implements FacesWrapper<ScriptFactory> {
 
 	/**
-	 * Returns a new instance of {@link Script} from the {@link ScriptFactory} found by the {@link
-	 * FactoryExtensionFinder}. The returned instance is guaranteed to be {@link java.io.Serializable} but not
-	 * guaranteed to be thread-safe.
+	 * @deprecated  Call {@link #getScriptInstance(ExternalContext, String)} instead.
+	 *
+	 *              <p>Returns a new instance of {@link Script} from the {@link ScriptFactory} found by the {@link
+	 *              FactoryExtensionFinder}. The returned instance is guaranteed to be {@link java.io.Serializable} but
+	 *              not guaranteed to be thread-safe.</p>
+	 *
+	 * @param       sourceCode  The source code of the script.
 	 */
+	@Deprecated
 	public static Script getScriptInstance(String sourceCode) {
-
-		ScriptFactory scriptFactory = (ScriptFactory) FactoryExtensionFinder.getFactory(ScriptFactory.class);
-
-		return scriptFactory.getScript(sourceCode);
+		return getScriptInstance(FacesContext.getCurrentInstance().getExternalContext(), sourceCode);
 	}
 
 	/**
 	 * Returns a new instance of {@link Script} from the {@link ScriptFactory} found by the {@link
 	 * FactoryExtensionFinder}. The returned instance is guaranteed to be {@link java.io.Serializable} but not
 	 * guaranteed to be thread-safe.
+	 *
+	 * @param  externalContext  The external context associated with the current faces context. It is needed in order
+	 *                          for the {@link FactoryExtensionFinder} to be able to find the factory.
+	 * @param  sourceCode       The source code of the script.
+	 *
+	 * @since  3.1
+	 * @since  2.1
+	 * @since  1.1
 	 */
-	public static Script getScriptInstance(String sourceCode, String[] modules, Script.ModulesType modulesType) {
+	public static Script getScriptInstance(ExternalContext externalContext, String sourceCode) {
 
-		ScriptFactory scriptFactory = (ScriptFactory) FactoryExtensionFinder.getFactory(ScriptFactory.class);
+		ScriptFactory scriptFactory = (ScriptFactory) FactoryExtensionFinder.getFactory(externalContext,
+				ScriptFactory.class);
+
+		return scriptFactory.getScript(sourceCode);
+	}
+
+	/**
+	 * @deprecated  Call {@link #getScriptInstance(ExternalContext, String, String[], Script.ModulesType)} instead.
+	 *
+	 *              <p>Returns a new instance of {@link Script} from the {@link ScriptFactory} found by the {@link
+	 *              FactoryExtensionFinder}. The returned instance is guaranteed to be {@link java.io.Serializable} but
+	 *              not guaranteed to be thread-safe.</p>
+	 *
+	 * @param       sourceCode   The source code of the Script.
+	 * @param       modules      The modules which the Script depends on.
+	 * @param       modulesType  The {@link Script.ModulesType} of the Script.
+	 */
+	@Deprecated
+	public static Script getScriptInstance(String sourceCode, String[] modules, Script.ModulesType modulesType) {
+		return getScriptInstance(FacesContext.getCurrentInstance().getExternalContext(), sourceCode, modules,
+				modulesType);
+	}
+
+	/**
+	 * Returns a new instance of {@link Script} from the {@link ScriptFactory} found by the {@link
+	 * FactoryExtensionFinder}. The returned instance is guaranteed to be {@link java.io.Serializable} but not
+	 * guaranteed to be thread-safe.
+	 *
+	 * @param  externalContext  The external context associated with the current faces context. It is needed in order
+	 *                          for the {@link FactoryExtensionFinder} to be able to find the factory.
+	 * @param  sourceCode       The source code of the Script.
+	 * @param  modules          The modules which the Script depends on.
+	 * @param  modulesType      The {@link Script.ModulesType} of the Script.
+	 *
+	 * @since  3.1
+	 * @since  2.1
+	 * @since  1.1
+	 */
+	public static Script getScriptInstance(ExternalContext externalContext, String sourceCode, String[] modules,
+		Script.ModulesType modulesType) {
+
+		ScriptFactory scriptFactory = (ScriptFactory) FactoryExtensionFinder.getFactory(externalContext,
+				ScriptFactory.class);
 
 		return scriptFactory.getScript(sourceCode, modules, modulesType);
 	}

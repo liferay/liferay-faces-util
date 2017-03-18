@@ -17,6 +17,7 @@ package com.liferay.faces.util.client;
 
 import javax.faces.FacesWrapper;
 import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
@@ -27,14 +28,33 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
 public abstract class BrowserSnifferFactory implements FacesWrapper<BrowserSnifferFactory> {
 
 	/**
+	 * @deprecated  Call {@link #getBrowserSnifferInstance(ExternalContext)} instead.
+	 *
+	 *              <p>Returns a new instance of {@link BrowserSniffer} from the {@link BrowserSnifferFactory} found by
+	 *              the {@link FactoryExtensionFinder}. The returned instance is designed to be used during execution of
+	 *              a request thread, so it is not guaranteed to be {@link java.io.Serializable}.</p>
+	 */
+	@Deprecated
+	public static BrowserSniffer getBrowserSnifferInstance() {
+		return getBrowserSnifferInstance(FacesContext.getCurrentInstance().getExternalContext());
+	}
+
+	/**
 	 * Returns a new instance of {@link BrowserSniffer} from the {@link BrowserSnifferFactory} found by the {@link
 	 * FactoryExtensionFinder}. The returned instance is designed to be used during execution of a request thread, so it
 	 * is not guaranteed to be {@link java.io.Serializable}.
+	 *
+	 * @param  externalContext  The external context associated with the current faces context. It is needed in order
+	 *                          for the {@link FactoryExtensionFinder} to be able to find the factory.
+	 *
+	 * @since  3.1
+	 * @since  2.1
+	 * @since  1.1
 	 */
 	public static BrowserSniffer getBrowserSnifferInstance(ExternalContext externalContext) {
 
 		BrowserSnifferFactory browserSnifferFactory = (BrowserSnifferFactory) FactoryExtensionFinder.getFactory(
-				BrowserSnifferFactory.class);
+				externalContext, BrowserSnifferFactory.class);
 
 		return browserSnifferFactory.getBrowserSniffer(externalContext);
 	}
