@@ -21,6 +21,7 @@ import java.util.Map;
 import javax.faces.component.StateHolder;
 import javax.faces.component.UIComponent;
 import javax.faces.component.ValueHolder;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AbortProcessingException;
 import javax.faces.event.ComponentSystemEvent;
@@ -50,7 +51,6 @@ public class ResourceRendererUtilImpl extends RendererWrapper implements Compone
 
 	// Private Members
 	private boolean transientFlag;
-	private ResourceVerifier resourceVerifier;
 	private Renderer wrappedRenderer;
 
 	/**
@@ -64,17 +64,17 @@ public class ResourceRendererUtilImpl extends RendererWrapper implements Compone
 	public ResourceRendererUtilImpl() {
 
 		// Defer initialization of wrappedRenderer until restoreState(FacesContext, Object) is called.
-		resourceVerifier = ResourceVerifierFactory.getResourceVerifierInstance();
 	}
 
 	public ResourceRendererUtilImpl(Renderer wrappedRenderer) {
 		this.wrappedRenderer = wrappedRenderer;
-		resourceVerifier = ResourceVerifierFactory.getResourceVerifierInstance();
 	}
 
 	@Override
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
+		ExternalContext externalContext = facesContext.getExternalContext();
+		ResourceVerifier resourceVerifier = ResourceVerifierFactory.getResourceVerifierInstance(externalContext);
 		if (resourceVerifier.isDependencySatisfied(facesContext, uiComponent)) {
 
 			if (logger.isDebugEnabled()) {
@@ -95,6 +95,8 @@ public class ResourceRendererUtilImpl extends RendererWrapper implements Compone
 	@Override
 	public void encodeChildren(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
+		ExternalContext externalContext = facesContext.getExternalContext();
+		ResourceVerifier resourceVerifier = ResourceVerifierFactory.getResourceVerifierInstance(externalContext);
 		if (resourceVerifier.isDependencySatisfied(facesContext, uiComponent)) {
 
 			if (logger.isDebugEnabled()) {
@@ -115,6 +117,8 @@ public class ResourceRendererUtilImpl extends RendererWrapper implements Compone
 	@Override
 	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
 
+		ExternalContext externalContext = facesContext.getExternalContext();
+		ResourceVerifier resourceVerifier = ResourceVerifierFactory.getResourceVerifierInstance(externalContext);
 		if (resourceVerifier.isDependencySatisfied(facesContext, uiComponent)) {
 
 			if (logger.isDebugEnabled()) {

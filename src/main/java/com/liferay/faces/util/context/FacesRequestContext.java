@@ -17,6 +17,8 @@ package com.liferay.faces.util.context;
 
 import java.util.List;
 
+import javax.faces.context.FacesContext;
+
 import com.liferay.faces.util.client.Script;
 
 
@@ -57,13 +59,30 @@ public abstract class FacesRequestContext {
 	public abstract void addScript(Script script);
 
 	/**
-	 * Adds the specified script to the list of scripts that are to be executed on the client.
+	 * @deprecated  Call {@link #addScript(FacesContext, String)} instead.
+	 *
+	 *              <p>Adds the specified script to the list of scripts that are to be executed on the client.</p>
+	 *
+	 * @param       script  The script that is to be added.
 	 */
+	@Deprecated
 	public abstract void addScript(String script);
 
 	/**
+	 * Adds the specified script to the list of scripts that are to be executed on the client.
+	 *
+	 * @param  facesContext  The current faces context.
+	 * @param  script        The script that is to be added.
+	 *
+	 * @since  3.1
+	 * @since  2.1
+	 * @since  1.1
+	 */
+	public abstract void addScript(FacesContext facesContext, String script);
+
+	/**
 	 * Returns an immutable list of scripts that were added via the {@link #addScript(Script)} or {@link
-	 * #addScript(String)} method.
+	 * #addScript(FacesContext,String)} method.
 	 */
 	public abstract List<Script> getScripts();
 

@@ -20,6 +20,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+
 import com.liferay.faces.util.config.ConfiguredElement;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.logging.Logger;
@@ -34,15 +37,16 @@ public class FactoryExtensionFinderImpl extends FactoryExtensionFinder {
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(FactoryExtensionFinderImpl.class);
 
-	// Private Data Members
-	private Map<Class<?>, Object> factoryExtensionCache = new HashMap<Class<?>, Object>();
+	// Private Constants
+	private static final String FACTORY_EXTENSION_CACHE = FactoryExtensionFinderImpl.class.getName();
 
 	@Override
-	public Object getFactoryInstance(Class<?> clazz) {
+	public Object getFactoryInstance(ExternalContext externalContext, Class<?> factoryClass) {
 		Object factory = null;
 
-		if (clazz != null) {
-			factory = factoryExtensionCache.get(clazz);
+		if (factoryClass != null) {
+			Map<Class<?>, Object> factoryExtensionCache = getFactoryExtensionCache(externalContext);
+			factory = factoryExtensionCache.get(factoryClass);
 		}
 
 		return factory;
@@ -50,7 +54,7 @@ public class FactoryExtensionFinderImpl extends FactoryExtensionFinder {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public void registerFactory(ConfiguredElement configuredFactoryExtension) {
+	public void registerFactory(ExternalContext externalContext, ConfiguredElement configuredFactoryExtension) {
 
 		if (configuredFactoryExtension != null) {
 
@@ -58,12 +62,14 @@ public class FactoryExtensionFinderImpl extends FactoryExtensionFinder {
 
 			try {
 
-				Class<?> factoryExtensionClass = Class.forName(factoryClassFQCN);
+				ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+				Class<?> factoryExtensionClass = classLoader.loadClass(factoryClassFQCN);
 				Class<?> baseFactoryExtensionClass = getBaseFactoryExtensionClass(factoryExtensionClass);
-				Object existingFactoryInstance = getFactoryInstance(baseFactoryExtensionClass);
-				Object factoryInstance = newFactoryInstance(factoryExtensionClass, baseFactoryExtensionClass,
-						existingFactoryInstance);
+				Object existingFactoryInstance = getFactoryInstance(externalContext, baseFactoryExtensionClass);
+				Object factoryInstance = newFactoryInstance(classLoader, factoryExtensionClass,
+						baseFactoryExtensionClass, existingFactoryInstance);
 
+				Map<Class<?>, Object> factoryExtensionCache = getFactoryExtensionCache(externalContext);
 				factoryExtensionCache.put(baseFactoryExtensionClass, factoryInstance);
 			}
 			catch (Exception e) {
@@ -73,7 +79,7 @@ public class FactoryExtensionFinderImpl extends FactoryExtensionFinder {
 	}
 
 	@SuppressWarnings("unchecked")
-	protected Class<?> getBaseFactoryExtensionClass(Class<?> factoryClass) {
+	private Class<?> getBaseFactoryExtensionClass(Class<?> factoryClass) {
 
 		Class<?> baseFactoryExtensionClass = factoryClass;
 		Class<?> factorySuperclass = factoryClass.getSuperclass();
@@ -85,11 +91,25 @@ public class FactoryExtensionFinderImpl extends FactoryExtensionFinder {
 		return baseFactoryExtensionClass;
 	}
 
-	protected Object newFactoryInstance(Class<?> factoryExtensionClass, Class<?> baseFactoryExtensionClass,
-		Object wrappedFactory) throws ClassNotFoundException, InstantiationException, IllegalAccessException,
-		IllegalArgumentException, InvocationTargetException {
+	@SuppressWarnings("unchecked")
+	private Map<Class<?>, Object> getFactoryExtensionCache(ExternalContext externalContext) {
 
-		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		Map<String, Object> applicationMap = externalContext.getApplicationMap();
+		Map<Class<?>, Object> factoryExtensionCache = (Map<Class<?>, Object>) applicationMap.get(
+				FACTORY_EXTENSION_CACHE);
+
+		if (factoryExtensionCache == null) {
+			factoryExtensionCache = new HashMap<Class<?>, Object>();
+			applicationMap.put(FACTORY_EXTENSION_CACHE, factoryExtensionCache);
+		}
+
+		return factoryExtensionCache;
+	}
+
+	private Object newFactoryInstance(ClassLoader classLoader, Class<?> factoryExtensionClass,
+		Class<?> baseFactoryExtensionClass, Object wrappedFactory) throws ClassNotFoundException,
+		InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+
 		Object classInstance = null;
 
 		if (classLoader != null) {

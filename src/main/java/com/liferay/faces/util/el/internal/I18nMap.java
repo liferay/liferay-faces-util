@@ -24,6 +24,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.faces.application.Application;
 import javax.faces.component.UIViewRoot;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.i18n.I18n;
@@ -77,7 +78,8 @@ public class I18nMap extends I18nMapCompat {
 				locale = application.getDefaultLocale();
 			}
 
-			I18n i18n = I18nFactory.getI18nInstance();
+			ExternalContext externalContext = facesContext.getExternalContext();
+			I18n i18n = I18nFactory.getI18nInstance(externalContext);
 
 			String keyAsString = key.toString();
 
@@ -153,7 +155,8 @@ public class I18nMap extends I18nMapCompat {
 			locale = application.getDefaultLocale();
 		}
 
-		I18n i18n = I18nFactory.getI18nInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		I18n i18n = I18nFactory.getI18nInstance(externalContext);
 
 		return i18n.getMessage(facesContext, locale, messageId, arg1);
 	}
@@ -180,7 +183,8 @@ public class I18nMap extends I18nMapCompat {
 			locale = application.getDefaultLocale();
 		}
 
-		I18n i18n = I18nFactory.getI18nInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		I18n i18n = I18nFactory.getI18nInstance(externalContext);
 
 		return i18n.getMessage(facesContext, locale, messageId, arg1, arg2);
 	}
@@ -208,7 +212,8 @@ public class I18nMap extends I18nMapCompat {
 			locale = application.getDefaultLocale();
 		}
 
-		I18n i18n = I18nFactory.getI18nInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		I18n i18n = I18nFactory.getI18nInstance(externalContext);
 
 		return i18n.getMessage(facesContext, locale, messageId, arg1, arg2, arg3);
 	}
@@ -237,7 +242,8 @@ public class I18nMap extends I18nMapCompat {
 			locale = application.getDefaultLocale();
 		}
 
-		I18n i18n = I18nFactory.getI18nInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		I18n i18n = I18nFactory.getI18nInstance(externalContext);
 
 		return i18n.getMessage(facesContext, locale, messageId, arg1, arg2, arg3, arg4);
 	}

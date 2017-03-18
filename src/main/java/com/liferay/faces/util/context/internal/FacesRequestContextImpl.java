@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.faces.context.FacesContext;
+
 import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.client.ScriptFactory;
 import com.liferay.faces.util.context.FacesRequestContext;
@@ -42,8 +44,15 @@ public class FacesRequestContextImpl extends FacesRequestContext {
 	}
 
 	@Override
+	@Deprecated
 	public void addScript(String script) {
-		scripts.add(ScriptFactory.getScriptInstance(script));
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		addScript(facesContext, script);
+	}
+
+	@Override
+	public void addScript(FacesContext facesContext, String script) {
+		scripts.add(ScriptFactory.getScriptInstance(facesContext.getExternalContext(), script));
 	}
 
 	@Override

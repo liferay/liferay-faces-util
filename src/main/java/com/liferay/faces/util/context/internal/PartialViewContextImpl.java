@@ -18,6 +18,7 @@ package com.liferay.faces.util.context.internal;
 import java.io.IOException;
 import java.util.List;
 
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.PartialResponseWriter;
 import javax.faces.context.PartialViewContext;
@@ -32,7 +33,7 @@ import com.liferay.faces.util.context.PartialResponseWriterWrapper;
 
 /**
  * This class is a wrapper around the {@link PartialViewContext}. Its purpose is to wrap the {@link
- * PartialResponseWriter} with a {@link PartialResponseWriterAlloyImpl} which writes {@link Script}s from {@link
+ * PartialResponseWriter} with a {@link PartialResponseWriterImpl} which writes {@link Script}s from {@link
  * FacesRequestContext} to the &lt;eval&gt; section of the partial response.
  *
  * @author  Neil Griffin
@@ -96,7 +97,8 @@ public class PartialViewContextImpl extends PartialViewContextWrapper {
 				if (!scripts.isEmpty()) {
 
 					super.startEval();
-					encodeScripts(scripts);
+					FacesContext facesContext = FacesContext.getCurrentInstance();
+					encodeScripts(facesContext, scripts);
 					super.endEval();
 				}
 			}
@@ -111,17 +113,18 @@ public class PartialViewContextImpl extends PartialViewContextWrapper {
 			List<Script> scripts = facesRequestContext.getScripts();
 
 			if (!scripts.isEmpty()) {
-				encodeScripts(scripts);
+				FacesContext facesContext = FacesContext.getCurrentInstance();
+				encodeScripts(facesContext, scripts);
 			}
 
 			super.endEval();
 			wroteEval = true;
 		}
 
-		private void encodeScripts(List<Script> scripts) throws IOException {
+		private void encodeScripts(FacesContext facesContext, List<Script> scripts) throws IOException {
 
-			ScriptsEncoder ScriptsEncoder = ScriptsEncoderFactory.getScriptsEncoderInstance();
-			FacesContext facesContext = FacesContext.getCurrentInstance();
+			ExternalContext externalContext = facesContext.getExternalContext();
+			ScriptsEncoder ScriptsEncoder = ScriptsEncoderFactory.getScriptsEncoderInstance(externalContext);
 			ScriptsEncoder.encodeEvalScripts(facesContext, scripts);
 		}
 	}
