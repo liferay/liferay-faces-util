@@ -42,7 +42,10 @@ public class FacesContextHelperUtil {
 	 * clientId.
 	 */
 	public static void addComponentErrorMessage(String clientId, String messageId) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addComponentErrorMessage(clientId, messageId);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addComponentErrorMessage(clientId, messageId);
 	}
 
 	/**
@@ -52,8 +55,10 @@ public class FacesContextHelperUtil {
 	 * javax.faces.component.UIComponent</code> that is associated with the specified clientId.
 	 */
 	public static void addComponentErrorMessage(String clientId, String messageId, Object argument) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addComponentErrorMessage(clientId, messageId,
-			argument);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addComponentErrorMessage(clientId, messageId, argument);
 	}
 
 	/**
@@ -63,8 +68,10 @@ public class FacesContextHelperUtil {
 	 * javax.faces.component.UIComponent</code> that is associated with the specified clientId.
 	 */
 	public static void addComponentErrorMessage(String clientId, String messageId, Object... arguments) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addComponentErrorMessage(clientId, messageId,
-			arguments);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addComponentErrorMessage(clientId, messageId, arguments);
 	}
 
 	/**
@@ -74,8 +81,9 @@ public class FacesContextHelperUtil {
 	 * clientId.
 	 */
 	public static void addComponentErrorMessage(FacesContext facesContext, String clientId, String messageId) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addComponentErrorMessage(facesContext, clientId,
-			messageId);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addComponentErrorMessage(facesContext, clientId, messageId);
 	}
 
 	/**
@@ -86,8 +94,9 @@ public class FacesContextHelperUtil {
 	 */
 	public static void addComponentErrorMessage(FacesContext facesContext, String clientId, String messageId,
 		Object argument) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addComponentErrorMessage(facesContext, clientId,
-			messageId, argument);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addComponentErrorMessage(facesContext, clientId, messageId, argument);
 	}
 
 	/**
@@ -98,8 +107,9 @@ public class FacesContextHelperUtil {
 	 */
 	public static void addComponentErrorMessage(FacesContext facesContext, String clientId, String messageId,
 		Object... arguments) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addComponentErrorMessage(facesContext, clientId,
-			messageId, arguments);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addComponentErrorMessage(facesContext, clientId, messageId, arguments);
 	}
 
 	/**
@@ -109,7 +119,10 @@ public class FacesContextHelperUtil {
 	 * clientId.
 	 */
 	public static void addComponentInfoMessage(String clientId, String messageId) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addComponentInfoMessage(clientId, messageId);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addComponentInfoMessage(clientId, messageId);
 	}
 
 	/**
@@ -119,8 +132,10 @@ public class FacesContextHelperUtil {
 	 * javax.faces.component.UIComponent</code> that is associated with the specified clientId.
 	 */
 	public static void addComponentInfoMessage(String clientId, String messageId, Object argument) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addComponentInfoMessage(clientId, messageId,
-			argument);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addComponentInfoMessage(clientId, messageId, argument);
 	}
 
 	/**
@@ -130,8 +145,10 @@ public class FacesContextHelperUtil {
 	 * javax.faces.component.UIComponent</code> that is associated with the specified clientId.
 	 */
 	public static void addComponentInfoMessage(String clientId, String messageId, Object... arguments) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addComponentInfoMessage(clientId, messageId,
-			arguments);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addComponentInfoMessage(clientId, messageId, arguments);
 	}
 
 	/**
@@ -141,8 +158,9 @@ public class FacesContextHelperUtil {
 	 * clientId.
 	 */
 	public static void addComponentInfoMessage(FacesContext facesContext, String clientId, String messageId) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addComponentInfoMessage(facesContext, clientId,
-			messageId);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addComponentInfoMessage(facesContext, clientId, messageId);
 	}
 
 	/**
@@ -153,8 +171,9 @@ public class FacesContextHelperUtil {
 	 */
 	public static void addComponentInfoMessage(FacesContext facesContext, String clientId, String messageId,
 		Object argument) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addComponentInfoMessage(facesContext, clientId,
-			messageId, argument);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addComponentInfoMessage(facesContext, clientId, messageId, argument);
 	}
 
 	/**
@@ -165,8 +184,9 @@ public class FacesContextHelperUtil {
 	 */
 	public static void addComponentInfoMessage(FacesContext facesContext, String clientId, String messageId,
 		Object... arguments) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addComponentInfoMessage(facesContext, clientId,
-			messageId, arguments);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addComponentInfoMessage(facesContext, clientId, messageId, arguments);
 	}
 
 	/**
@@ -174,7 +194,10 @@ public class FacesContextHelperUtil {
 	 * javax.faces.application.FacesMessage.SEVERITY_ERROR</code>.
 	 */
 	public static void addGlobalErrorMessage(String messageId) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addGlobalErrorMessage(messageId);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addGlobalErrorMessage(messageId);
 	}
 
 	/**
@@ -183,7 +206,10 @@ public class FacesContextHelperUtil {
 	 * in the specified key.
 	 */
 	public static void addGlobalErrorMessage(String messageId, Object argument) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addGlobalErrorMessage(messageId, argument);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addGlobalErrorMessage(messageId, argument);
 	}
 
 	/**
@@ -192,7 +218,10 @@ public class FacesContextHelperUtil {
 	 * tokens in the specified key.
 	 */
 	public static void addGlobalErrorMessage(String messageId, Object... arguments) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addGlobalErrorMessage(messageId, arguments);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addGlobalErrorMessage(messageId, arguments);
 	}
 
 	/**
@@ -200,7 +229,9 @@ public class FacesContextHelperUtil {
 	 * javax.faces.application.FacesMessage.SEVERITY_ERROR</code>.
 	 */
 	public static void addGlobalErrorMessage(FacesContext facesContext, String messageId) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addGlobalErrorMessage(facesContext, messageId);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addGlobalErrorMessage(facesContext, messageId);
 	}
 
 	/**
@@ -209,8 +240,9 @@ public class FacesContextHelperUtil {
 	 * in the specified key.
 	 */
 	public static void addGlobalErrorMessage(FacesContext facesContext, String messageId, Object argument) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addGlobalErrorMessage(facesContext, messageId,
-			argument);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addGlobalErrorMessage(facesContext, messageId, argument);
 	}
 
 	/**
@@ -219,8 +251,9 @@ public class FacesContextHelperUtil {
 	 * tokens in the specified key.
 	 */
 	public static void addGlobalErrorMessage(FacesContext facesContext, String messageId, Object... arguments) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addGlobalErrorMessage(facesContext, messageId,
-			arguments);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addGlobalErrorMessage(facesContext, messageId, arguments);
 	}
 
 	/**
@@ -228,7 +261,10 @@ public class FacesContextHelperUtil {
 	 * javax.faces.application.FacesMessage.SEVERITY_INFO</code>.
 	 */
 	public static void addGlobalInfoMessage(String messageId) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addGlobalInfoMessage(messageId);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addGlobalInfoMessage(messageId);
 	}
 
 	/**
@@ -237,7 +273,10 @@ public class FacesContextHelperUtil {
 	 * in the specified key.
 	 */
 	public static void addGlobalInfoMessage(String messageId, Object argument) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addGlobalInfoMessage(messageId, argument);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addGlobalInfoMessage(messageId, argument);
 	}
 
 	/**
@@ -246,7 +285,10 @@ public class FacesContextHelperUtil {
 	 * tokens in the specified key.
 	 */
 	public static void addGlobalInfoMessage(String messageId, Object... arguments) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addGlobalInfoMessage(messageId, arguments);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addGlobalInfoMessage(messageId, arguments);
 	}
 
 	/**
@@ -254,7 +296,9 @@ public class FacesContextHelperUtil {
 	 * javax.faces.application.FacesMessage.SEVERITY_INFO</code>.
 	 */
 	public static void addGlobalInfoMessage(FacesContext facesContext, String messageId) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addGlobalInfoMessage(facesContext, messageId);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addGlobalInfoMessage(facesContext, messageId);
 	}
 
 	/**
@@ -263,8 +307,9 @@ public class FacesContextHelperUtil {
 	 * in the specified key.
 	 */
 	public static void addGlobalInfoMessage(FacesContext facesContext, String messageId, Object argument) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addGlobalInfoMessage(facesContext, messageId,
-			argument);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addGlobalInfoMessage(facesContext, messageId, argument);
 	}
 
 	/**
@@ -273,8 +318,9 @@ public class FacesContextHelperUtil {
 	 * tokens in the specified key.
 	 */
 	public static void addGlobalInfoMessage(FacesContext facesContext, String messageId, Object... arguments) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addGlobalInfoMessage(facesContext, messageId,
-			arguments);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addGlobalInfoMessage(facesContext, messageId, arguments);
 	}
 
 	/**
@@ -282,7 +328,10 @@ public class FacesContextHelperUtil {
 	 * the messageId.
 	 */
 	public static void addGlobalSuccessInfoMessage() {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addGlobalSuccessInfoMessage();
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addGlobalSuccessInfoMessage();
 	}
 
 	/**
@@ -290,21 +339,28 @@ public class FacesContextHelperUtil {
 	 * the messageId.
 	 */
 	public static void addGlobalSuccessInfoMessage(FacesContext facesContext) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addGlobalSuccessInfoMessage(facesContext);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addGlobalSuccessInfoMessage(facesContext);
 	}
 
 	/**
 	 * Adds a global error message to the current FacesContext with "an-unexpected-error-occurred" key as the messageId.
 	 */
 	public static void addGlobalUnexpectedErrorMessage() {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addGlobalUnexpectedErrorMessage();
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addGlobalUnexpectedErrorMessage();
 	}
 
 	/**
 	 * Adds a global error message to the current FacesContext with "an-unexpected-error-occurred" key as the messageId.
 	 */
 	public static void addGlobalUnexpectedErrorMessage(FacesContext facesContext) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addGlobalUnexpectedErrorMessage(facesContext);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addGlobalUnexpectedErrorMessage(facesContext);
 	}
 
 	/**
@@ -312,7 +368,10 @@ public class FacesContextHelperUtil {
 	 * clientId=null for global messages.
 	 */
 	public static void addMessage(String clientId, FacesMessage.Severity severity, String messageId) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addMessage(clientId, severity, messageId);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addMessage(clientId, severity, messageId);
 	}
 
 	/**
@@ -320,7 +379,10 @@ public class FacesContextHelperUtil {
 	 * clientId=null for global messages.
 	 */
 	public static void addMessage(String clientId, FacesMessage.Severity severity, String messageId, Object argument) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addMessage(clientId, severity, messageId, argument);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addMessage(clientId, severity, messageId, argument);
 	}
 
 	/**
@@ -329,7 +391,10 @@ public class FacesContextHelperUtil {
 	 */
 	public static void addMessage(String clientId, FacesMessage.Severity severity, String messageId,
 		Object... arguments) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addMessage(clientId, severity, messageId, arguments);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addMessage(clientId, severity, messageId, arguments);
 	}
 
 	/**
@@ -338,8 +403,9 @@ public class FacesContextHelperUtil {
 	 */
 	public static void addMessage(FacesContext facesContext, String clientId, FacesMessage.Severity severity,
 		String messageId) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addMessage(facesContext, clientId, severity,
-			messageId);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addMessage(facesContext, clientId, severity, messageId);
 	}
 
 	/**
@@ -348,8 +414,9 @@ public class FacesContextHelperUtil {
 	 */
 	public static void addMessage(FacesContext facesContext, String clientId, FacesMessage.Severity severity,
 		String messageId, Object argument) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addMessage(facesContext, clientId, severity,
-			messageId, argument);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addMessage(facesContext, clientId, severity, messageId, argument);
 	}
 
 	/**
@@ -358,22 +425,30 @@ public class FacesContextHelperUtil {
 	 */
 	public static void addMessage(FacesContext facesContext, String clientId, FacesMessage.Severity severity,
 		String messageId, Object... arguments) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().addMessage(facesContext, clientId, severity,
-			messageId, arguments);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addMessage(facesContext, clientId, severity, messageId, arguments);
 	}
 
 	/**
 	 * Returns the locale of the viewRoot of the current JSF FacesContext
 	 */
 	public static Locale getLocale() {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getLocale();
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getLocale();
 	}
 
 	/**
 	 * Returns the locale of the viewRoot of the current JSF FacesContext
 	 */
 	public static Locale getLocale(FacesContext facesContext) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getLocale(facesContext);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getLocale(facesContext);
 	}
 
 	/**
@@ -381,7 +456,11 @@ public class FacesContextHelperUtil {
 	 * to the current locale.
 	 */
 	public static String getMessage(String messageId) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getMessage(messageId);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getMessage(messageId);
 	}
 
 	/**
@@ -389,7 +468,11 @@ public class FacesContextHelperUtil {
 	 * to the current locale and arguments that are to be substituted.
 	 */
 	public static String getMessage(String messageId, Object... arguments) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getMessage(messageId, arguments);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getMessage(messageId, arguments);
 	}
 
 	/**
@@ -397,7 +480,11 @@ public class FacesContextHelperUtil {
 	 * to the specified locale.
 	 */
 	public static String getMessage(Locale locale, String messageId) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getMessage(locale, messageId);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getMessage(locale, messageId);
 	}
 
 	/**
@@ -405,7 +492,10 @@ public class FacesContextHelperUtil {
 	 * to the current locale.
 	 */
 	public static String getMessage(FacesContext facesContext, String messageId) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getMessage(facesContext, messageId);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getMessage(facesContext, messageId);
 	}
 
 	/**
@@ -413,7 +503,11 @@ public class FacesContextHelperUtil {
 	 * to the specified locale and arguments that are to be substituted.
 	 */
 	public static String getMessage(Locale locale, String messageId, Object... arguments) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getMessage(locale, messageId, arguments);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getMessage(locale, messageId, arguments);
 	}
 
 	/**
@@ -421,7 +515,10 @@ public class FacesContextHelperUtil {
 	 * to the current locale and arguments that are to be substituted.
 	 */
 	public static String getMessage(FacesContext facesContext, String messageId, Object... arguments) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getMessage(facesContext, messageId, arguments);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getMessage(facesContext, messageId, arguments);
 	}
 
 	/**
@@ -429,7 +526,10 @@ public class FacesContextHelperUtil {
 	 * to the specified locale.
 	 */
 	public static String getMessage(FacesContext facesContext, Locale locale, String messageId) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getMessage(facesContext, locale, messageId);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getMessage(facesContext, locale, messageId);
 	}
 
 	/**
@@ -437,8 +537,10 @@ public class FacesContextHelperUtil {
 	 * to the specified locale and arguments that are to be substituted.
 	 */
 	public static String getMessage(FacesContext facesContext, Locale locale, String messageId, Object... arguments) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getMessage(facesContext, locale, messageId,
-				arguments);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getMessage(facesContext, locale, messageId, arguments);
 	}
 
 	/**
@@ -446,7 +548,11 @@ public class FacesContextHelperUtil {
 	 * application namespace.
 	 */
 	public static String getNamespace() {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getNamespace();
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getNamespace();
 	}
 
 	/**
@@ -454,7 +560,10 @@ public class FacesContextHelperUtil {
 	 * application namespace.
 	 */
 	public static String getNamespace(FacesContext facesContext) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getNamespace(facesContext);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getNamespace(facesContext);
 	}
 
 	/**
@@ -463,51 +572,76 @@ public class FacesContextHelperUtil {
 	 * @param  uiComponent  The component whose parent is to be found.
 	 */
 	public static UIForm getParentForm(UIComponent uiComponent) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getParentForm(uiComponent);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getParentForm(uiComponent);
 	}
 
 	/**
 	 * Returns the value of the request attribute associated with the specified name.
 	 */
 	public static Object getRequestAttribute(String name) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestAttribute(name);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getRequestAttribute(name);
 	}
 
 	/**
 	 * Returns the value of the request attribute associated with the specified name.
 	 */
 	public static Object getRequestAttribute(FacesContext facesContext, String name) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestAttribute(facesContext, name);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getRequestAttribute(facesContext, name);
 	}
 
 	/**
-	 * Returns The request context path. {@link FacesContext#getExternalContext()} {@link
+	 * Returns The request context path. {@link FacesContext#getExternalContext(()} {@link
 	 * ExternalContext#getRequestContextPath()}
 	 */
 	public static String getRequestContextPath() {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestContextPath();
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getRequestContextPath();
 	}
 
 	/**
-	 * Returns The request context path. {@link FacesContext#getExternalContext()} {@link
+	 * Returns The request context path. {@link FacesContext#getExternalContext(()} {@link
 	 * ExternalContext#getRequestContextPath()}
 	 */
 	public static String getRequestContextPath(FacesContext facesContext) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestContextPath(facesContext);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getRequestContextPath(facesContext);
 	}
 
 	/**
 	 * Retrieves the specified parameter passed as part of the request
 	 */
 	public static String getRequestParameter(String name) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestParameter(name);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getRequestParameter(name);
 	}
 
 	/**
 	 * Retrieves the specified parameter passed as part of the request
 	 */
 	public static String getRequestParameter(FacesContext facesContext, String name) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestParameter(facesContext, name);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getRequestParameter(facesContext, name);
 	}
 
 	/**
@@ -515,7 +649,11 @@ public class FacesContextHelperUtil {
 	 * "1" are accetable values for "TRUE".
 	 */
 	public static boolean getRequestParameterAsBool(String name, boolean defaultValue) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestParameterAsBool(name, defaultValue);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getRequestParameterAsBool(name, defaultValue);
 	}
 
 	/**
@@ -523,52 +661,73 @@ public class FacesContextHelperUtil {
 	 * "1" are accetable values for "TRUE".
 	 */
 	public static boolean getRequestParameterAsBool(FacesContext facesContext, String name, boolean defaultValue) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestParameterAsBool(facesContext, name,
-				defaultValue);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getRequestParameterAsBool(facesContext, name, defaultValue);
 	}
 
 	/**
 	 * Retrieves the specified parameter passed as part of the request as an integer.
 	 */
 	public static int getRequestParameterAsInt(String name, int defaultValue) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestParameterAsInt(name, defaultValue);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getRequestParameterAsInt(name, defaultValue);
 	}
 
 	/**
 	 * Retrieves the specified parameter passed as part of the request as an integer.
 	 */
 	public static int getRequestParameterAsInt(FacesContext facesContext, String name, int defaultValue) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestParameterAsInt(facesContext, name,
-				defaultValue);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getRequestParameterAsInt(facesContext, name, defaultValue);
 	}
 
 	/**
 	 * Retrieves the specified parameter passed as part of the request as an integer.
 	 */
 	public static long getRequestParameterAsLong(String name, long defaultValue) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestParameterAsLong(name, defaultValue);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getRequestParameterAsLong(name, defaultValue);
 	}
 
 	/**
 	 * Retrieves the specified parameter passed as part of the request as an integer.
 	 */
 	public static long getRequestParameterAsLong(FacesContext facesContext, String name, long defaultValue) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestParameterAsLong(facesContext, name,
-				defaultValue);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getRequestParameterAsLong(facesContext, name, defaultValue);
 	}
 
 	/**
 	 * Retrieves the specified parameter from the ExternalContext's request parameter map.
 	 */
 	public static String getRequestParameterFromMap(String name) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestParameterFromMap(name);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getRequestParameterFromMap(name);
 	}
 
 	/**
 	 * Retrieves the specified parameter from the ExternalContext's request parameter map.
 	 */
 	public static String getRequestParameterFromMap(FacesContext facesContext, String name) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestParameterFromMap(facesContext, name);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getRequestParameterFromMap(facesContext, name);
 	}
 
 	/**
@@ -577,7 +736,11 @@ public class FacesContextHelperUtil {
 	 * @see  {@link ExternalContext#getRequestParameterMap()}.
 	 */
 	public static Map<String, String> getRequestParameterMap() {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestParameterMap();
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getRequestParameterMap();
 	}
 
 	/**
@@ -586,21 +749,31 @@ public class FacesContextHelperUtil {
 	 * @see  {@link ExternalContext#getRequestParameterMap()}.
 	 */
 	public static Map<String, String> getRequestParameterMap(FacesContext facesContext) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestParameterMap(facesContext);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getRequestParameterMap(facesContext);
 	}
 
 	/**
 	 * Retrieves the value of the original "javax.servlet.forward.query_string" request attribute.
 	 */
 	public static String getRequestQueryString() {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestQueryString();
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getRequestQueryString();
 	}
 
 	/**
 	 * Retrieves the value of the original "javax.servlet.forward.query_string" request attribute.
 	 */
 	public static String getRequestQueryString(FacesContext facesContext) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestQueryString(facesContext);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getRequestQueryString(facesContext);
 	}
 
 	/**
@@ -608,7 +781,11 @@ public class FacesContextHelperUtil {
 	 * request attribute.
 	 */
 	public static String getRequestQueryStringParameter(String name) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestQueryStringParameter(name);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getRequestQueryStringParameter(name);
 	}
 
 	/**
@@ -616,8 +793,10 @@ public class FacesContextHelperUtil {
 	 * request attribute.
 	 */
 	public static String getRequestQueryStringParameter(FacesContext facesContext, String name) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getRequestQueryStringParameter(facesContext,
-				name);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getRequestQueryStringParameter(facesContext, name);
 	}
 
 	/**
@@ -626,7 +805,11 @@ public class FacesContextHelperUtil {
 	 * @param  create  Flag indicating whether or not a session should be created if it doesn't yet exist.
 	 */
 	public static Object getSession(boolean create) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getSession(create);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getSession(create);
 	}
 
 	/**
@@ -635,21 +818,31 @@ public class FacesContextHelperUtil {
 	 * @param  create  Flag indicating whether or not a session should be created if it doesn't yet exist.
 	 */
 	public static Object getSession(FacesContext facesContext, boolean create) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getSession(facesContext, create);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getSession(facesContext, create);
 	}
 
 	/**
 	 * Returns the value of the session attribute associated with the specified name.
 	 */
 	public static Object getSessionAttribute(String name) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getSessionAttribute(name);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getSessionAttribute(name);
 	}
 
 	/**
 	 * Returns the value of the session attribute associated with the specified name.
 	 */
 	public static Object getSessionAttribute(FacesContext facesContext, String name) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getSessionAttribute(facesContext, name);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getSessionAttribute(facesContext, name);
 	}
 
 	/**
@@ -657,8 +850,11 @@ public class FacesContextHelperUtil {
 	 * that contains the specified partialClientId.
 	 */
 	public static UIComponent matchComponentInHierarchy(UIComponent parent, String partialClientId) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().matchComponentInHierarchy(parent,
-				partialClientId);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.matchComponentInHierarchy(parent, partialClientId);
 	}
 
 	/**
@@ -667,8 +863,10 @@ public class FacesContextHelperUtil {
 	 */
 	public static UIComponent matchComponentInHierarchy(FacesContext facesContext, UIComponent parent,
 		String partialClientId) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().matchComponentInHierarchy(facesContext, parent,
-				partialClientId);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.matchComponentInHierarchy(facesContext, parent, partialClientId);
 	}
 
 	/**
@@ -676,7 +874,11 @@ public class FacesContextHelperUtil {
 	 * UIComponent child that contains the specified partialClientId.
 	 */
 	public static UIComponent matchComponentInViewRoot(String partialClientId) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().matchComponentInViewRoot(partialClientId);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.matchComponentInViewRoot(partialClientId);
 	}
 
 	/**
@@ -684,8 +886,10 @@ public class FacesContextHelperUtil {
 	 * UIComponent child that contains the specified partialClientId.
 	 */
 	public static UIComponent matchComponentInViewRoot(FacesContext facesContext, String partialClientId) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().matchComponentInViewRoot(facesContext,
-				partialClientId);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.matchComponentInViewRoot(facesContext, partialClientId);
 	}
 
 	/**
@@ -696,7 +900,10 @@ public class FacesContextHelperUtil {
 	 * @param  outcome     The "from outcome" as specified in a JSF navigation rule
 	 */
 	public static void navigate(String fromAction, String outcome) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().navigate(fromAction, outcome);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.navigate(fromAction, outcome);
 	}
 
 	/**
@@ -707,7 +914,9 @@ public class FacesContextHelperUtil {
 	 * @param  outcome     The "from outcome" as specified in a JSF navigation rule
 	 */
 	public static void navigate(FacesContext facesContext, String fromAction, String outcome) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().navigate(facesContext, fromAction, outcome);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.navigate(facesContext, fromAction, outcome);
 	}
 
 	/**
@@ -716,7 +925,10 @@ public class FacesContextHelperUtil {
 	 * @param  outcome  The "from outcome" as specified in a JSF navigation rule
 	 */
 	public static void navigateTo(String outcome) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().navigateTo(outcome);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.navigateTo(outcome);
 	}
 
 	/**
@@ -725,7 +937,9 @@ public class FacesContextHelperUtil {
 	 * @param  outcome  The "from outcome" as specified in a JSF navigation rule
 	 */
 	public static void navigateTo(FacesContext facesContext, String outcome) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().navigateTo(facesContext, outcome);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.navigateTo(facesContext, outcome);
 	}
 
 	/**
@@ -734,7 +948,10 @@ public class FacesContextHelperUtil {
 	 * method.
 	 */
 	public static void recreateComponentTree() {
-		FacesContextHelperFactory.getFacesContextHelperInstance().recreateComponentTree();
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.recreateComponentTree();
 	}
 
 	/**
@@ -743,7 +960,9 @@ public class FacesContextHelperUtil {
 	 * method.
 	 */
 	public static void recreateComponentTree(FacesContext facesContext) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().recreateComponentTree(facesContext);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.recreateComponentTree(facesContext);
 	}
 
 	/**
@@ -751,7 +970,10 @@ public class FacesContextHelperUtil {
 	 * therefore be controlled by spring and use dependency injection, which is not possible otherwise.
 	 */
 	public static void registerPhaseListener(PhaseListener phaseListener) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().registerPhaseListener(phaseListener);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.registerPhaseListener(phaseListener);
 	}
 
 	/**
@@ -761,7 +983,10 @@ public class FacesContextHelperUtil {
 	 * @param  clientId  all children of the component with this id are cleared.
 	 */
 	public static void removeChildrenFromComponentTree(String clientId) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().removeChildrenFromComponentTree(clientId);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.removeChildrenFromComponentTree(clientId);
 	}
 
 	/**
@@ -771,22 +996,28 @@ public class FacesContextHelperUtil {
 	 * @param  clientId  all children of the component with this id are cleared.
 	 */
 	public static void removeChildrenFromComponentTree(FacesContext facesContext, String clientId) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().removeChildrenFromComponentTree(facesContext,
-			clientId);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.removeChildrenFromComponentTree(facesContext, clientId);
 	}
 
 	/**
 	 * Removes all FacesMessage instances from this FacesContext that are associated with the specified clientId.
 	 */
 	public static void removeMessages(String clientId) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().removeMessages(clientId);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.removeMessages(clientId);
 	}
 
 	/**
 	 * Removes all FacesMessage instances from this FacesContext that are associated with the specified clientId.
 	 */
 	public static void removeMessages(FacesContext facesContext, String clientId) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().removeMessages(facesContext, clientId);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.removeMessages(facesContext, clientId);
 	}
 
 	/**
@@ -796,7 +1027,10 @@ public class FacesContextHelperUtil {
 	 * calls validate() if the the immediate attribute is true.
 	 */
 	public static void removeMessagesForImmediateComponents() {
-		FacesContextHelperFactory.getFacesContextHelperInstance().removeMessagesForImmediateComponents();
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.removeMessagesForImmediateComponents();
 	}
 
 	/**
@@ -806,7 +1040,10 @@ public class FacesContextHelperUtil {
 	 * calls validate() if the the immediate attribute is true.
 	 */
 	public static void removeMessagesForImmediateComponents(UIComponent uiComponent) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().removeMessagesForImmediateComponents(uiComponent);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.removeMessagesForImmediateComponents(uiComponent);
 	}
 
 	/**
@@ -816,7 +1053,9 @@ public class FacesContextHelperUtil {
 	 * calls validate() if the the immediate attribute is true.
 	 */
 	public static void removeMessagesForImmediateComponents(FacesContext facesContext) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().removeMessagesForImmediateComponents(facesContext);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.removeMessagesForImmediateComponents(facesContext);
 	}
 
 	/**
@@ -826,8 +1065,9 @@ public class FacesContextHelperUtil {
 	 * calls validate() if the the immediate attribute is true.
 	 */
 	public static void removeMessagesForImmediateComponents(FacesContext facesContext, UIComponent uiComponent) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().removeMessagesForImmediateComponents(facesContext,
-			uiComponent);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.removeMessagesForImmediateComponents(facesContext, uiComponent);
 	}
 
 	/**
@@ -836,7 +1076,10 @@ public class FacesContextHelperUtil {
 	 * clear these values, use this method.
 	 */
 	public static void removeParentFormFromComponentTree(UIComponent uiComponent) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().removeParentFormFromComponentTree(uiComponent);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.removeParentFormFromComponentTree(uiComponent);
 	}
 
 	/**
@@ -845,7 +1088,10 @@ public class FacesContextHelperUtil {
 	 * @see  {@link FacesContextHelper#resetView(boolean)}
 	 */
 	public static void resetView() {
-		FacesContextHelperFactory.getFacesContextHelperInstance().resetView();
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.resetView();
 	}
 
 	/**
@@ -858,7 +1104,10 @@ public class FacesContextHelperUtil {
 	 * @see    <a href="http://wiki.apache.org/myfaces/ClearInputComponents">ClearInputComponents</a>
 	 */
 	public static void resetView(boolean renderResponse) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().resetView(renderResponse);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.resetView(renderResponse);
 	}
 
 	/**
@@ -867,7 +1116,9 @@ public class FacesContextHelperUtil {
 	 * @see  {@link FacesContextHelper#resetView(boolean)}
 	 */
 	public static void resetView(FacesContext facesContext) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().resetView(facesContext);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.resetView(facesContext);
 	}
 
 	/**
@@ -880,55 +1131,78 @@ public class FacesContextHelperUtil {
 	 * @see    <a href="http://wiki.apache.org/myfaces/ClearInputComponents">ClearInputComponents</a>
 	 */
 	public static void resetView(FacesContext facesContext, boolean renderResponse) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().resetView(facesContext, renderResponse);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.resetView(facesContext, renderResponse);
 	}
 
 	/**
 	 * Returns the object associated with the specified EL expression.
 	 */
 	public static Object resolveExpression(String elExpression) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().resolveExpression(elExpression);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.resolveExpression(elExpression);
 	}
 
 	/**
 	 * Returns the object associated with the specified EL expression.
 	 */
 	public static Object resolveExpression(FacesContext facesContext, String elExpression) {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().resolveExpression(facesContext, elExpression);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.resolveExpression(facesContext, elExpression);
 	}
 
 	/**
 	 * Sets the value of the a request attribute using the specified name and value.
 	 */
 	public static void setRequestAttribute(String name, Object value) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().setRequestAttribute(name, value);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.setRequestAttribute(name, value);
 	}
 
 	/**
 	 * Sets the value of the a request attribute using the specified name and value.
 	 */
 	public static void setRequestAttribute(FacesContext facesContext, String name, Object value) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().setRequestAttribute(facesContext, name, value);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.setRequestAttribute(facesContext, name, value);
 	}
 
 	/**
 	 * Sets the value of the a session attribute using the specified name and value.
 	 */
 	public static void setSessionAttribute(String name, Object value) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().setSessionAttribute(name, value);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.setSessionAttribute(name, value);
 	}
 
 	/**
 	 * Sets the value of the a session attribute using the specified name and value.
 	 */
 	public static void setSessionAttribute(FacesContext facesContext, String name, Object value) {
-		FacesContextHelperFactory.getFacesContextHelperInstance().setSessionAttribute(facesContext, name, value);
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.setSessionAttribute(facesContext, name, value);
 	}
 
 	/**
 	 * Gets the underlying/wrapped FacesContext ThreadLocal singleton instance.
 	 */
 	public FacesContext getFacesContext() {
-		return FacesContextHelperFactory.getFacesContextHelperInstance().getFacesContext();
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelperInstance = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelperInstance.getFacesContext();
 	}
 }

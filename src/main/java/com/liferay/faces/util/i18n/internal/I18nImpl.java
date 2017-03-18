@@ -68,7 +68,8 @@ public class I18nImpl implements I18n, Serializable {
 		String message = null;
 
 		try {
-			ResourceBundle resourceBundle = ResourceBundle.getBundle("i18n", locale, new UTF8Control());
+			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+			ResourceBundle resourceBundle = ResourceBundle.getBundle("i18n", locale, classLoader, new UTF8Control());
 			message = resourceBundle.getString(messageId);
 		}
 		catch (MissingResourceException e) {
@@ -116,7 +117,8 @@ public class I18nImpl implements I18n, Serializable {
 				messageBundle = FacesMessage.FACES_MESSAGES;
 			}
 
-			facesResourceBundle = ResourceBundle.getBundle(messageBundle, locale, new UTF8Control());
+			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+			facesResourceBundle = ResourceBundle.getBundle(messageBundle, locale, classLoader, new UTF8Control());
 			facesResourceBundleCache.put(locale, facesResourceBundle);
 		}
 

@@ -16,6 +16,8 @@
 package com.liferay.faces.util.render;
 
 import javax.faces.FacesWrapper;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
@@ -26,15 +28,35 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
 public abstract class FacesURLEncoderFactory implements FacesWrapper<FacesURLEncoderFactory> {
 
 	/**
+	 * @deprecated  Call {@link #getFacesURLEncoderInstance(ExternalContext)} instead.
+	 *
+	 *              <p>Returns a stateless, thread-safe singleton instance of {@link FacesURLEncoder} from the {@link
+	 *              FacesURLEncoderFactory} found by the {@link FactoryExtensionFinder}. FacesURLEncoder is a stateless,
+	 *              thread-safe singleton because it is designed to be used by a {@link javax.faces.render.Renderer},
+	 *              which is a stateless, thread-safe singleton.</p>
+	 */
+	@Deprecated
+	public static FacesURLEncoder getFacesURLEncoderInstance() {
+		return getFacesURLEncoderInstance(FacesContext.getCurrentInstance().getExternalContext());
+	}
+
+	/**
 	 * Returns a stateless, thread-safe singleton instance of {@link FacesURLEncoder} from the {@link
 	 * FacesURLEncoderFactory} found by the {@link FactoryExtensionFinder}. FacesURLEncoder is a stateless, thread-safe
 	 * singleton because it is designed to be used by a {@link javax.faces.render.Renderer}, which is a stateless,
 	 * thread-safe singleton.
+	 *
+	 * @param  externalContext  The external context associated with the current faces context. It is needed in order
+	 *                          for the {@link FactoryExtensionFinder} to be able to find the factory.
+	 *
+	 * @since  3.1
+	 * @since  2.1
+	 * @since  1.1
 	 */
-	public static FacesURLEncoder getFacesURLEncoderInstance() {
+	public static FacesURLEncoder getFacesURLEncoderInstance(ExternalContext externalContext) {
 
 		FacesURLEncoderFactory facesURLEncoderFactory = (FacesURLEncoderFactory) FactoryExtensionFinder.getFactory(
-				FacesURLEncoderFactory.class);
+				externalContext, FacesURLEncoderFactory.class);
 
 		return facesURLEncoderFactory.getFacesURLEncoder();
 	}
