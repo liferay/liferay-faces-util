@@ -15,6 +15,9 @@
  */
 package com.liferay.faces.util.i18n;
 
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.helper.Wrapper;
 
@@ -25,12 +28,30 @@ import com.liferay.faces.util.helper.Wrapper;
 public abstract class I18nFactory implements Wrapper<I18nFactory> {
 
 	/**
+	 * @deprecated  Call {@link #getI18nInstance(ExternalContext)} instead.
+	 *
+	 *              <p>Returns a stateless, thread-safe singleton instance of {@link I18n} from the {@link I18nFactory}
+	 *              found by the {@link FactoryExtensionFinder}.</p>
+	 */
+	@Deprecated
+	public static I18n getI18nInstance() {
+		return getI18nInstance(FacesContext.getCurrentInstance().getExternalContext());
+	}
+
+	/**
 	 * Returns a stateless, thread-safe singleton instance of {@link I18n} from the {@link I18nFactory} found by the
 	 * {@link FactoryExtensionFinder}.
+	 *
+	 * @param  externalContext  The external context associated with the current faces context. It is needed in order
+	 *                          for the {@link FactoryExtensionFinder} to be able to find the factory.
+	 *
+	 * @since  3.1
+	 * @since  2.1
+	 * @since  1.1
 	 */
-	public static I18n getI18nInstance() {
+	public static I18n getI18nInstance(ExternalContext externalContext) {
 
-		I18nFactory i18nFactory = (I18nFactory) FactoryExtensionFinder.getFactory(I18nFactory.class);
+		I18nFactory i18nFactory = (I18nFactory) FactoryExtensionFinder.getFactory(externalContext, I18nFactory.class);
 
 		return i18nFactory.getI18n();
 	}

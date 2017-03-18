@@ -61,101 +61,84 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 	private static final String UNEXPECTED_ERROR_MSG_ID = "an-unexpected-error-occurred";
 	private static final String SUCCESS_INFO_MSG_ID = "your-request-processed-successfully";
 
+	// Java 1.6+ @Override
 	public void addComponentErrorMessage(String clientId, String messageId) {
 		addComponentErrorMessage(FacesContext.getCurrentInstance(), clientId, messageId);
 	}
 
+	// Java 1.6+ @Override
 	public void addComponentErrorMessage(FacesContext facesContext, String clientId, String messageId) {
 		addMessage(facesContext, clientId, FacesMessage.SEVERITY_ERROR, messageId);
 	}
 
-	public void addComponentErrorMessage(String clientId, String messageId, Object argument) {
-		addComponentErrorMessage(FacesContext.getCurrentInstance(), clientId, messageId, argument);
-	}
-
+	// Java 1.6+ @Override
 	public void addComponentErrorMessage(String clientId, String messageId, Object... arguments) {
 		addComponentErrorMessage(FacesContext.getCurrentInstance(), clientId, messageId, arguments);
 	}
 
-	public void addComponentErrorMessage(FacesContext facesContext, String clientId, String messageId,
-		Object argument) {
-		addMessage(facesContext, clientId, FacesMessage.SEVERITY_ERROR, messageId, argument);
-	}
-
+	// Java 1.6+ @Override
 	public void addComponentErrorMessage(FacesContext facesContext, String clientId, String messageId,
 		Object... arguments) {
 		addMessage(facesContext, clientId, FacesMessage.SEVERITY_ERROR, messageId, arguments);
 	}
 
+	// Java 1.6+ @Override
 	public void addComponentInfoMessage(String clientId, String messageId) {
 		addComponentInfoMessage(FacesContext.getCurrentInstance(), clientId, messageId);
 	}
 
+	// Java 1.6+ @Override
 	public void addComponentInfoMessage(FacesContext facesContext, String clientId, String messageId) {
 		addMessage(facesContext, clientId, FacesMessage.SEVERITY_INFO, messageId);
 	}
 
-	public void addComponentInfoMessage(String clientId, String messageId, Object argument) {
-		addComponentInfoMessage(FacesContext.getCurrentInstance(), clientId, messageId, argument);
-	}
-
+	// Java 1.6+ @Override
 	public void addComponentInfoMessage(String clientId, String messageId, Object... arguments) {
 		addComponentInfoMessage(FacesContext.getCurrentInstance(), clientId, messageId, arguments);
 	}
 
-	public void addComponentInfoMessage(FacesContext facesContext, String clientId, String messageId, Object argument) {
-		addMessage(facesContext, clientId, FacesMessage.SEVERITY_INFO, messageId, argument);
-	}
-
+	// Java 1.6+ @Override
 	public void addComponentInfoMessage(FacesContext facesContext, String clientId, String messageId,
 		Object... arguments) {
 		addMessage(facesContext, clientId, FacesMessage.SEVERITY_INFO, messageId, arguments);
 	}
 
+	// Java 1.6+ @Override
 	public void addGlobalErrorMessage(String messageId) {
 		addGlobalErrorMessage(FacesContext.getCurrentInstance(), messageId);
 	}
 
+	// Java 1.6+ @Override
 	public void addGlobalErrorMessage(FacesContext facesContext, String messageId) {
 		addComponentErrorMessage(facesContext, null, messageId);
 	}
 
-	public void addGlobalErrorMessage(String messageId, Object argument) {
-		addGlobalErrorMessage(FacesContext.getCurrentInstance(), messageId, argument);
-	}
-
+	// Java 1.6+ @Override
 	public void addGlobalErrorMessage(String messageId, Object... arguments) {
 		addGlobalErrorMessage(FacesContext.getCurrentInstance(), messageId, arguments);
 	}
 
-	public void addGlobalErrorMessage(FacesContext facesContext, String messageId, Object argument) {
-		addComponentErrorMessage(facesContext, null, messageId, argument);
-	}
-
+	// Java 1.6+ @Override
 	public void addGlobalErrorMessage(FacesContext facesContext, String messageId, Object... arguments) {
 		addComponentErrorMessage(facesContext, null, messageId, arguments);
 	}
 
+	// Java 1.6+ @Override
 	public void addGlobalInfoMessage(String messageId) {
 		addGlobalInfoMessage(FacesContext.getCurrentInstance(), messageId);
 	}
 
+	// Java 1.6+ @Override
 	public void addGlobalInfoMessage(FacesContext facesContext, String messageId) {
 		addComponentInfoMessage(facesContext, null, messageId);
 	}
 
-	public void addGlobalInfoMessage(String messageId, Object argument) {
-		addGlobalInfoMessage(FacesContext.getCurrentInstance(), messageId, argument);
-	}
-
+	// Java 1.6+ @Override
 	public void addGlobalInfoMessage(String messageId, Object... arguments) {
 		addGlobalInfoMessage(FacesContext.getCurrentInstance(), messageId, arguments);
 	}
 
-	public void addGlobalInfoMessage(FacesContext facesContext, String messageId, Object argument) {
-		addComponentInfoMessage(facesContext, null, messageId, argument);
-	}
-
+	// Java 1.6+ @Override
 	public void addGlobalInfoMessage(FacesContext facesContext, String messageId, Object... arguments) {
 		addComponentInfoMessage(facesContext, null, messageId, arguments);
 	}
@@ -163,6 +146,7 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 	/**
 	 * @see  FacesContextHelper#addGlobalSuccessInfoMessage()
 	 */
+	// Java 1.6+ @Override
 	public void addGlobalSuccessInfoMessage() {
 		addGlobalSuccessInfoMessage(FacesContext.getCurrentInstance());
 	}
@@ -170,6 +154,7 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 	/**
 	 * @see  FacesContextHelper#addGlobalSuccessInfoMessage()
 	 */
+	// Java 1.6+ @Override
 	public void addGlobalSuccessInfoMessage(FacesContext facesContext) {
 		addGlobalInfoMessage(facesContext, SUCCESS_INFO_MSG_ID);
 	}
@@ -177,6 +162,7 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 	/**
 	 * @see  FacesContextHelper#addGlobalUnexpectedErrorMessage()
 	 */
+	// Java 1.6+ @Override
 	public void addGlobalUnexpectedErrorMessage() {
 		addGlobalUnexpectedErrorMessage(FacesContext.getCurrentInstance());
 	}
@@ -184,35 +170,41 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 	/**
 	 * @see  FacesContextHelper#addGlobalUnexpectedErrorMessage()
 	 */
+	// Java 1.6+ @Override
 	public void addGlobalUnexpectedErrorMessage(FacesContext facesContext) {
 		addGlobalErrorMessage(facesContext, UNEXPECTED_ERROR_MSG_ID);
 	}
 
+	// Java 1.6+ @Override
 	public void addMessage(String clientId, Severity severity, String messageId) {
 		addMessage(FacesContext.getCurrentInstance(), clientId, severity, messageId);
 	}
 
+	// Java 1.6+ @Override
 	public void addMessage(FacesContext facesContext, String clientId, Severity severity, String messageId) {
 
 		Locale locale = getLocale(facesContext);
-		I18n i18n = getI18n();
+		I18n i18n = getI18n(facesContext);
 		FacesMessage facesMessage = i18n.getFacesMessage(facesContext, locale, severity, messageId);
 		facesContext.addMessage(clientId, facesMessage);
 	}
 
+	// Java 1.6+ @Override
 	public void addMessage(String clientId, Severity severity, String messageId, Object... arguments) {
 		addMessage(FacesContext.getCurrentInstance(), clientId, severity, messageId, arguments);
 	}
 
+	// Java 1.6+ @Override
 	public void addMessage(FacesContext facesContext, String clientId, Severity severity, String messageId,
 		Object... arguments) {
 
 		Locale locale = getLocale(facesContext);
-		I18n i18n = getI18n();
+		I18n i18n = getI18n(facesContext);
 		FacesMessage facesMessage = i18n.getFacesMessage(facesContext, locale, severity, messageId, arguments);
 		facesContext.addMessage(clientId, facesMessage);
 	}
 
+	// Java 1.6+ @Override
 	public FacesContext getFacesContext() {
 		return getFacesContext(FacesContext.getCurrentInstance());
 	}
@@ -221,10 +213,12 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		return facesContext;
 	}
 
+	// Java 1.6+ @Override
 	public Locale getLocale() {
 		return getLocale(FacesContext.getCurrentInstance());
 	}
 
+	// Java 1.6+ @Override
 	public Locale getLocale(FacesContext facesContext) {
 
 		UIViewRoot viewRoot = facesContext.getViewRoot();
@@ -244,55 +238,66 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		return locale;
 	}
 
+	// Java 1.6+ @Override
 	public String getMessage(String messageId) {
 		return getMessage(FacesContext.getCurrentInstance(), messageId);
 	}
 
+	// Java 1.6+ @Override
 	public String getMessage(FacesContext facesContext, String messageId) {
 		return getMessage(facesContext, getLocale(facesContext), messageId);
 	}
 
+	// Java 1.6+ @Override
 	public String getMessage(String messageId, Object... arguments) {
 		return getMessage(FacesContext.getCurrentInstance(), messageId, arguments);
 	}
 
+	// Java 1.6+ @Override
 	public String getMessage(Locale locale, String messageId) {
 		return getMessage(FacesContext.getCurrentInstance(), locale, messageId);
 	}
 
+	// Java 1.6+ @Override
 	public String getMessage(FacesContext facesContext, String messageId, Object... arguments) {
 
-		I18n i18n = getI18n();
+		I18n i18n = getI18n(facesContext);
 
 		return i18n.getMessage(facesContext, getLocale(facesContext), messageId, arguments);
 	}
 
+	// Java 1.6+ @Override
 	public String getMessage(FacesContext facesContext, Locale locale, String messageId) {
 
-		I18n i18n = getI18n();
+		I18n i18n = getI18n(facesContext);
 
 		return i18n.getMessage(facesContext, locale, messageId);
 	}
 
+	// Java 1.6+ @Override
 	public String getMessage(Locale locale, String messageId, Object... arguments) {
 		return getMessage(FacesContext.getCurrentInstance(), locale, messageId, arguments);
 	}
 
+	// Java 1.6+ @Override
 	public String getMessage(FacesContext facesContext, Locale locale, String messageId, Object... arguments) {
 
-		I18n i18n = getI18n();
+		I18n i18n = getI18n(facesContext);
 
 		return i18n.getMessage(facesContext, locale, messageId, arguments);
 	}
 
+	// Java 1.6+ @Override
 	public String getNamespace() {
 		return getNamespace(FacesContext.getCurrentInstance());
 	}
 
+	// Java 1.6+ @Override
 	public String getNamespace(FacesContext facesContext) {
 		return facesContext.getExternalContext().encodeNamespace("");
 	}
 
+	// Java 1.6+ @Override
 	public UIForm getParentForm(final UIComponent uiComponent) {
 
 		UIComponent parent = uiComponent;
@@ -304,10 +309,12 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		return (UIForm) parent;
 	}
 
+	// Java 1.6+ @Override
 	public Object getRequestAttribute(String name) {
 		return getRequestAttribute(FacesContext.getCurrentInstance(), name);
 	}
 
+	// Java 1.6+ @Override
 	public Object getRequestAttribute(FacesContext facesContext, String name) {
 
 		ExternalContext externalContext = facesContext.getExternalContext();
@@ -316,10 +323,12 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		return httpServletRequest.getAttribute(name);
 	}
 
+	// Java 1.6+ @Override
 	public String getRequestContextPath() {
 		return getRequestContextPath(FacesContext.getCurrentInstance());
 	}
 
+	// Java 1.6+ @Override
 	public String getRequestContextPath(FacesContext facesContext) {
 
 		ExternalContext externalContext = facesContext.getExternalContext();
@@ -327,10 +336,12 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		return externalContext.getRequestContextPath();
 	}
 
+	// Java 1.6+ @Override
 	public String getRequestParameter(String name) {
 		return getRequestParameter(FacesContext.getCurrentInstance(), name);
 	}
 
+	// Java 1.6+ @Override
 	public String getRequestParameter(FacesContext facesContext, String name) {
 
 		ExternalContext externalContext = facesContext.getExternalContext();
@@ -339,34 +350,42 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		return requestParameterMap.get(name);
 	}
 
+	// Java 1.6+ @Override
 	public boolean getRequestParameterAsBool(String name, boolean defaultValue) {
 		return getRequestParameterAsBool(FacesContext.getCurrentInstance(), name, defaultValue);
 	}
 
+	// Java 1.6+ @Override
 	public boolean getRequestParameterAsBool(FacesContext facesContext, String name, boolean defaultValue) {
 		return BooleanHelper.toBoolean(getRequestParameter(facesContext, name), defaultValue);
 	}
 
+	// Java 1.6+ @Override
 	public int getRequestParameterAsInt(String name, int defaultValue) {
 		return getRequestParameterAsInt(FacesContext.getCurrentInstance(), name, defaultValue);
 	}
 
+	// Java 1.6+ @Override
 	public int getRequestParameterAsInt(FacesContext facesContext, String name, int defaultValue) {
 		return IntegerHelper.toInteger(getRequestParameter(facesContext, name), defaultValue);
 	}
 
+	// Java 1.6+ @Override
 	public long getRequestParameterAsLong(String name, long defaultValue) {
 		return getRequestParameterAsLong(FacesContext.getCurrentInstance(), name, defaultValue);
 	}
 
+	// Java 1.6+ @Override
 	public long getRequestParameterAsLong(FacesContext facesContext, String name, long defaultValue) {
 		return LongHelper.toLong(getRequestParameter(facesContext, name), defaultValue);
 	}
 
+	// Java 1.6+ @Override
 	public String getRequestParameterFromMap(String name) {
 		return getRequestParameterFromMap(FacesContext.getCurrentInstance(), name);
 	}
 
+	// Java 1.6+ @Override
 	public String getRequestParameterFromMap(FacesContext facesContext, String name) {
 
 		ExternalContext externalContext = facesContext.getExternalContext();
@@ -374,10 +393,12 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		return externalContext.getRequestParameterMap().get(name);
 	}
 
+	// Java 1.6+ @Override
 	public Map<String, String> getRequestParameterMap() {
 		return getRequestParameterMap(FacesContext.getCurrentInstance());
 	}
 
+	// Java 1.6+ @Override
 	public Map<String, String> getRequestParameterMap(FacesContext facesContext) {
 
 		ExternalContext externalContext = facesContext.getExternalContext();
@@ -385,18 +406,22 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		return externalContext.getRequestParameterMap();
 	}
 
+	// Java 1.6+ @Override
 	public String getRequestQueryString() {
 		return getRequestQueryString(FacesContext.getCurrentInstance());
 	}
 
+	// Java 1.6+ @Override
 	public String getRequestQueryString(FacesContext facesContext) {
 		return (String) getRequestAttribute(facesContext, "javax.servlet.forward.query_string");
 	}
 
+	// Java 1.6+ @Override
 	public String getRequestQueryStringParameter(String name) {
 		return getRequestQueryStringParameter(FacesContext.getCurrentInstance(), name);
 	}
 
+	// Java 1.6+ @Override
 	public String getRequestQueryStringParameter(FacesContext facesContext, String name) {
 
 		String value = null;
@@ -420,10 +445,12 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		return value;
 	}
 
+	// Java 1.6+ @Override
 	public Object getSession(boolean create) {
 		return getSession(FacesContext.getCurrentInstance(), create);
 	}
 
+	// Java 1.6+ @Override
 	public Object getSession(FacesContext facesContext, boolean create) {
 
 		ExternalContext externalContext = facesContext.getExternalContext();
@@ -431,10 +458,12 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		return externalContext.getSession(create);
 	}
 
+	// Java 1.6+ @Override
 	public Object getSessionAttribute(String name) {
 		return getSessionAttribute(FacesContext.getCurrentInstance(), name);
 	}
 
+	// Java 1.6+ @Override
 	public Object getSessionAttribute(FacesContext facesContext, String name) {
 
 		ExternalContext externalContext = facesContext.getExternalContext();
@@ -443,19 +472,23 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		return sessionMap.get(name);
 	}
 
+	// Java 1.6+ @Override
 	public UIComponent matchComponentInHierarchy(UIComponent parent, String partialClientId) {
 		return matchComponentInHierarchy(FacesContext.getCurrentInstance(), parent, partialClientId);
 	}
 
+	// Java 1.6+ @Override
 	public UIComponent matchComponentInHierarchy(FacesContext facesContext, UIComponent parent,
 		String partialClientId) {
 		return ComponentUtil.matchComponentInHierarchy(facesContext, parent, partialClientId);
 	}
 
+	// Java 1.6+ @Override
 	public UIComponent matchComponentInViewRoot(String partialClientId) {
 		return matchComponentInViewRoot(FacesContext.getCurrentInstance(), partialClientId);
 	}
 
+	// Java 1.6+ @Override
 	public UIComponent matchComponentInViewRoot(FacesContext facesContext, String partialClientId) {
 
 		UIViewRoot viewRoot = facesContext.getViewRoot();
@@ -463,10 +496,12 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		return matchComponentInHierarchy(facesContext, viewRoot, partialClientId);
 	}
 
+	// Java 1.6+ @Override
 	public void navigate(String fromAction, String outcome) {
 		navigate(FacesContext.getCurrentInstance(), fromAction, outcome);
 	}
 
+	// Java 1.6+ @Override
 	public void navigate(FacesContext facesContext, String fromAction, String outcome) {
 
 		Application application = facesContext.getApplication();
@@ -474,18 +509,22 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		navigationHandler.handleNavigation(facesContext, fromAction, outcome);
 	}
 
+	// Java 1.6+ @Override
 	public void navigateTo(String outcome) {
 		navigateTo(FacesContext.getCurrentInstance(), outcome);
 	}
 
+	// Java 1.6+ @Override
 	public void navigateTo(FacesContext facesContext, String outcome) {
 		navigate(facesContext, null, outcome);
 	}
 
+	// Java 1.6+ @Override
 	public void recreateComponentTree() {
 		recreateComponentTree(FacesContext.getCurrentInstance());
 	}
 
+	// Java 1.6+ @Override
 	public void recreateComponentTree(FacesContext facesContext) {
 
 		Application application = facesContext.getApplication();
@@ -496,6 +535,7 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		facesContext.renderResponse();
 	}
 
+	// Java 1.6+ @Override
 	public void registerPhaseListener(PhaseListener phaseListener) throws IllegalStateException {
 
 		LifecycleFactory lifecycleFactory = (LifecycleFactory) FactoryFinder.getFactory(
@@ -507,10 +547,12 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		}
 	}
 
+	// Java 1.6+ @Override
 	public void removeChildrenFromComponentTree(String clientId) {
 		removeChildrenFromComponentTree(FacesContext.getCurrentInstance(), clientId);
 	}
 
+	// Java 1.6+ @Override
 	public void removeChildrenFromComponentTree(FacesContext facesContext, String clientId) {
 
 		UIComponent uiComponent = facesContext.getViewRoot().findComponent(clientId);
@@ -521,10 +563,12 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		}
 	}
 
+	// Java 1.6+ @Override
 	public void removeMessages(String clientId) {
 		removeMessages(FacesContext.getCurrentInstance(), clientId);
 	}
 
+	// Java 1.6+ @Override
 	public void removeMessages(FacesContext facesContext, String clientId) {
 
 		Iterator<FacesMessage> facesMessages = facesContext.getMessages(clientId);
@@ -535,18 +579,22 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		}
 	}
 
+	// Java 1.6+ @Override
 	public void removeMessagesForImmediateComponents() {
 		removeMessagesForImmediateComponents(FacesContext.getCurrentInstance());
 	}
 
+	// Java 1.6+ @Override
 	public void removeMessagesForImmediateComponents(FacesContext facesContext) {
 		removeMessagesForImmediateComponents(facesContext, facesContext.getViewRoot());
 	}
 
+	// Java 1.6+ @Override
 	public void removeMessagesForImmediateComponents(UIComponent uiComponent) {
 		removeMessagesForImmediateComponents(FacesContext.getCurrentInstance(), uiComponent);
 	}
 
+	// Java 1.6+ @Override
 	public void removeMessagesForImmediateComponents(FacesContext facesContext, UIComponent uiComponent) {
 
 		if (uiComponent instanceof ActionSource) {
@@ -573,6 +621,7 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		}
 	}
 
+	// Java 1.6+ @Override
 	public void removeParentFormFromComponentTree(final UIComponent uiComponent) {
 
 		UIComponent form = getParentForm(uiComponent);
@@ -583,18 +632,22 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		}
 	}
 
+	// Java 1.6+ @Override
 	public void resetView() {
 		resetView(FacesContext.getCurrentInstance());
 	}
 
+	// Java 1.6+ @Override
 	public void resetView(FacesContext facesContext) {
 		resetView(facesContext, true);
 	}
 
+	// Java 1.6+ @Override
 	public void resetView(boolean renderResponse) {
 		resetView(FacesContext.getCurrentInstance(), renderResponse);
 	}
 
+	// Java 1.6+ @Override
 	public void resetView(FacesContext facesContext, boolean renderResponse) {
 
 		Application application = facesContext.getApplication();
@@ -608,10 +661,12 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		}
 	}
 
+	// Java 1.6+ @Override
 	public Object resolveExpression(String elExpression) {
 		return resolveExpression(FacesContext.getCurrentInstance(), elExpression);
 	}
 
+	// Java 1.6+ @Override
 	public Object resolveExpression(FacesContext facesContext, String elExpression) {
 
 		Application application = facesContext.getApplication();
@@ -621,10 +676,12 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		return elResolver.getValue(elContext, null, elExpression);
 	}
 
+	// Java 1.6+ @Override
 	public void setRequestAttribute(String name, Object value) {
 		setRequestAttribute(FacesContext.getCurrentInstance(), name, value);
 	}
 
+	// Java 1.6+ @Override
 	public void setRequestAttribute(FacesContext facesContext, String name, Object value) {
 
 		ExternalContext externalContext = facesContext.getExternalContext();
@@ -632,10 +689,12 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		httpServletRequest.setAttribute(name, value);
 	}
 
+	// Java 1.6+ @Override
 	public void setSessionAttribute(String name, Object value) {
 		setSessionAttribute(FacesContext.getCurrentInstance(), name, value);
 	}
 
+	// Java 1.6+ @Override
 	public void setSessionAttribute(FacesContext facesContext, String name, Object value) {
 
 		ExternalContext externalContext = facesContext.getExternalContext();
@@ -643,7 +702,10 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		sessionMap.put(name, value);
 	}
 
-	protected I18n getI18n() {
-		return I18nFactory.getI18nInstance();
+	private I18n getI18n(FacesContext facesContext) {
+
+		ExternalContext externalContext = facesContext.getExternalContext();
+
+		return I18nFactory.getI18nInstance(externalContext);
 	}
 }

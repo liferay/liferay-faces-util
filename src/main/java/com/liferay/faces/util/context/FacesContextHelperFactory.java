@@ -15,6 +15,9 @@
  */
 package com.liferay.faces.util.context;
 
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.helper.Wrapper;
 
@@ -25,13 +28,31 @@ import com.liferay.faces.util.helper.Wrapper;
 public abstract class FacesContextHelperFactory implements Wrapper<FacesContextHelperFactory> {
 
 	/**
+	 * @deprecated  Call {@link #getFacesContextHelperInstance(ExternalContext)} instead.
+	 *
+	 *              <p>Returns a stateless, thread-safe singleton instance of {@link FacesContextHelper} from the {@link
+	 *              FacesContextHelperFactory} found by the {@link FactoryExtensionFinder}.</p>
+	 */
+	@Deprecated
+	public static FacesContextHelper getFacesContextHelperInstance() {
+		return getFacesContextHelperInstance(FacesContext.getCurrentInstance().getExternalContext());
+	}
+
+	/**
 	 * Returns a stateless, thread-safe singleton instance of {@link FacesContextHelper} from the {@link
 	 * FacesContextHelperFactory} found by the {@link FactoryExtensionFinder}.
+	 *
+	 * @param  externalContext  The external context associated with the current faces context. It is needed in order
+	 *                          for the {@link FactoryExtensionFinder} to be able to find the factory.
+	 *
+	 * @since  3.1
+	 * @since  2.1
+	 * @since  1.1
 	 */
-	public static FacesContextHelper getFacesContextHelperInstance() {
+	public static FacesContextHelper getFacesContextHelperInstance(ExternalContext externalContext) {
 
 		FacesContextHelperFactory facesContextHelperFactory = (FacesContextHelperFactory) FactoryExtensionFinder
-			.getFactory(FacesContextHelperFactory.class);
+			.getFactory(externalContext, FacesContextHelperFactory.class);
 
 		return facesContextHelperFactory.getFacesContextHelper();
 	}

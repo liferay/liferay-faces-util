@@ -15,6 +15,9 @@
  */
 package com.liferay.faces.util.application;
 
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.helper.Wrapper;
 
@@ -25,17 +28,39 @@ import com.liferay.faces.util.helper.Wrapper;
 public abstract class ResourceValidatorFactory implements Wrapper<ResourceValidatorFactory> {
 
 	/**
+	 * @deprecated  Call {@link #getResourceValidatorInstance(ExternalContext)} instead.
+	 *
+	 *              <p>Returns a stateless, thread-safe singleton instance of {@link ResourceValidator} from the {@link
+	 *              ResourceValidatorFactory} found by the {@link FactoryExtensionFinder}. ResourceValidator is a
+	 *              stateless, thread-safe singleton because it is designed to be used by a {@link
+	 *              javax.faces.application.ResourceHandler}, which is a <a
+	 *              href="https://javaserverfaces.java.net/nonav/docs/2.2/javadocs/javax/faces/application/Application.html#getResourceHandler()">
+	 *              stateless, thread-safe singleton</a>.</p>
+	 */
+	@Deprecated
+	public static ResourceValidator getResourceValidatorInstance() {
+		return getResourceValidatorInstance(FacesContext.getCurrentInstance().getExternalContext());
+	}
+
+	/**
 	 * Returns a stateless, thread-safe singleton instance of {@link ResourceValidator} from the {@link
 	 * ResourceValidatorFactory} found by the {@link FactoryExtensionFinder}. ResourceValidator is a stateless,
 	 * thread-safe singleton because it is designed to be used by a {@link javax.faces.application.ResourceHandler},
 	 * which is a <a
 	 * href="https://javaserverfaces.java.net/nonav/docs/2.2/javadocs/javax/faces/application/Application.html#getResourceHandler()">
 	 * stateless, thread-safe singleton</a>.
+	 *
+	 * @param  externalContext  The external context associated with the current faces context. It is needed in order
+	 *                          for the {@link FactoryExtensionFinder} to be able to find the factory.
+	 *
+	 * @since  3.1
+	 * @since  2.1
+	 * @since  1.1
 	 */
-	public static ResourceValidator getResourceValidatorInstance() {
+	public static ResourceValidator getResourceValidatorInstance(ExternalContext externalContext) {
 
 		ResourceValidatorFactory resourceValidatorFactory = (ResourceValidatorFactory) FactoryExtensionFinder
-			.getFactory(ResourceValidatorFactory.class);
+			.getFactory(externalContext, ResourceValidatorFactory.class);
 
 		return resourceValidatorFactory.getResourceValidator();
 	}
