@@ -134,4 +134,10 @@ public abstract class FactoryExtensionFinder {
 	 * @param  configuredFactoryExtension  The configured factory extension.
 	 */
 	public abstract void registerFactory(ExternalContext externalContext, ConfiguredElement configuredFactoryExtension);
+
+	/**
+	 * Releases all of the factories that were registered via the {@link #registerFactory(ExternalContext,
+	 * ConfiguredElement)} method. It is designed to be called when a webapp context is destroyed.
+	 */
+	public abstract void releaseFactories(ExternalContext externalContext);
 }
