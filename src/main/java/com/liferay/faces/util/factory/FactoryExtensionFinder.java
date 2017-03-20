@@ -133,6 +133,12 @@ public abstract class FactoryExtensionFinder {
 	public abstract void registerFactory(ConfiguredElement configuredFactoryExtension);
 
 	/**
+	 * Releases all of the factories that were registered via the {@link #registerFactory(ExternalContext,
+	 * ConfiguredElement)} method. It is designed to be called when a webapp context is destroyed.
+	 */
+	public abstract void releaseFactories(ExternalContext externalContext);
+
+	/**
 	 * Registers the specified configured factory extension by storing it as an attribute in the specified {@link
 	 * ExternalContext#getApplicationMap()}. Since this method is designed to be called during application
 	 * initialization, it is not guaranteed to be thread-safe.
