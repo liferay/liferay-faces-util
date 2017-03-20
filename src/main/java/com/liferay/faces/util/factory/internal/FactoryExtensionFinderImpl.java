@@ -21,7 +21,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.config.ConfiguredElement;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
@@ -75,6 +74,20 @@ public class FactoryExtensionFinderImpl extends FactoryExtensionFinder {
 			catch (Exception e) {
 				logger.error(e);
 			}
+		}
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public void releaseFactories(ExternalContext externalContext) {
+
+		Map<String, Object> applicationMap = externalContext.getApplicationMap();
+		Map<Class<?>, Object> factoryExtensionCache = (Map<Class<?>, Object>) applicationMap.get(
+				FACTORY_EXTENSION_CACHE);
+
+		if (factoryExtensionCache != null) {
+			factoryExtensionCache.clear();
+			applicationMap.remove(FACTORY_EXTENSION_CACHE);
 		}
 	}
 
