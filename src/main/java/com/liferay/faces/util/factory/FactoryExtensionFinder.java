@@ -36,6 +36,20 @@ public abstract class FactoryExtensionFinder {
 	private static FactoryExtensionFinder instance;
 
 	/**
+	 * @deprecated  Call {@link #getFactory(ExternalContext, Class)} instead.
+	 *
+	 *              <p>Returns the factory instance associated with the specified factory class from the external
+	 *              context associated with the current faces context.</p>
+	 *
+	 * @param       factoryClass  The factory {@link java.lang.Class}.
+	 */
+	@Deprecated
+	@SuppressWarnings("deprecation")
+	public static Object getFactory(Class<?> factoryClass) {
+		return getInstance().getFactoryInstance(factoryClass);
+	}
+
+	/**
 	 * Returns the factory instance associated with the specified factory class from the specified external context.
 	 *
 	 * @param  externalContext  The external context associated with the current faces context.
@@ -81,12 +95,35 @@ public abstract class FactoryExtensionFinder {
 	}
 
 	/**
+	 * @deprecated  Call {@link #getFactoryInstance(ExternalContext, Class)} instead.
+	 *
+	 *              <p>Returns the factory instance associated with the specified factory class from the external
+	 *              context associated with the current faces context.</p>
+	 *
+	 * @param       factoryClass  The factory {@link java.lang.Class}.
+	 */
+	@Deprecated
+	public abstract Object getFactoryInstance(Class<?> factoryClass);
+
+	/**
 	 * Returns the factory instance associated with the specified factory class from the specified external context.
 	 *
 	 * @param  externalContext  The external context associated with the current faces context.
 	 * @param  factoryClass     The factory {@link java.lang.Class}.
 	 */
 	public abstract Object getFactoryInstance(ExternalContext externalContext, Class<?> factoryClass);
+
+	/**
+	 * @deprecated  Call {@link #registerFactory(ExternalContext, ConfiguredElement)} instead.
+	 *
+	 *              <p>Registers the specified configured factory extension by storing it as an attribute in the {@link
+	 *              ExternalContext#getApplicationMap()} associated with the current faces context. Since this method is
+	 *              designed to be called during application initialization, it is not guaranteed to be thread-safe.</p>
+	 *
+	 * @param       configuredFactoryExtension  The configured factory extension.
+	 */
+	@Deprecated
+	public abstract void registerFactory(ConfiguredElement configuredFactoryExtension);
 
 	/**
 	 * Registers the specified configured factory extension by storing it as an attribute in the specified {@link

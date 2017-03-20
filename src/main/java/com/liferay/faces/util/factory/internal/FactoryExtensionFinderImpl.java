@@ -40,6 +40,16 @@ public class FactoryExtensionFinderImpl extends FactoryExtensionFinder {
 	private static final String FACTORY_EXTENSION_CACHE = FactoryExtensionFinderImpl.class.getName();
 
 	@Override
+	@Deprecated
+	public Object getFactoryInstance(Class<?> factoryClass) {
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+
+		return getFactoryInstance(externalContext, factoryClass);
+	}
+
+	@Override
 	public Object getFactoryInstance(ExternalContext externalContext, Class<?> factoryClass) {
 		Object factory = null;
 
@@ -49,6 +59,13 @@ public class FactoryExtensionFinderImpl extends FactoryExtensionFinder {
 		}
 
 		return factory;
+	}
+
+	@Override
+	public void registerFactory(ConfiguredElement configuredFactoryExtension) {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		registerFactory(externalContext, configuredFactoryExtension);
 	}
 
 	@Override
