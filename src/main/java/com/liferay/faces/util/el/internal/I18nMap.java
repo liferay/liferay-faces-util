@@ -27,6 +27,7 @@ import javax.faces.component.UIViewRoot;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
+import com.liferay.faces.util.application.ApplicationUtil;
 import com.liferay.faces.util.i18n.I18n;
 import com.liferay.faces.util.i18n.I18nFactory;
 
@@ -39,8 +40,13 @@ public class I18nMap extends I18nMapCompat {
 	// serialVersionUID
 	private static final long serialVersionUID = 5549598732411060854L;
 
-	// Private Data Members
-	private transient Map<String, String> cache = new ConcurrentHashMap<String, String>();
+	public I18nMap() {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		Map<String, Object> applicationMap = externalContext.getApplicationMap();
+		Map<String, String> cache = new ConcurrentHashMap<String, String>();
+		applicationMap.put(I18nMap.class.getName(), cache);
+	}
 
 	@Override
 	public void clear() {
@@ -91,12 +97,17 @@ public class I18nMap extends I18nMapCompat {
 					messageKey = locale.toString().concat(keyAsString);
 				}
 
-				message = cache.get(messageKey);
+				Map<String, Object> applicationMap = externalContext.getApplicationMap();
+				Map<String, String> cache = (Map<String, String>) applicationMap.get(I18nMap.class.getName());
+
+				if (cache != null) {
+					message = cache.get(messageKey);
+				}
 
 				if (message == null) {
 					message = i18n.getMessage(facesContext, locale, keyAsString);
 
-					if (message != null) {
+					if ((message != null) && (cache != null)) {
 						cache.put(messageKey, message);
 					}
 				}
@@ -256,9 +267,5 @@ public class I18nMap extends I18nMapCompat {
 	@Override
 	public Collection<Object> values() {
 		throw new UnsupportedOperationException();
-	}
-
-	private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
-		cache = new ConcurrentHashMap<String, String>();
 	}
 }
