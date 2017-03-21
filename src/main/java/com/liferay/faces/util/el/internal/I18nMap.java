@@ -30,6 +30,8 @@ import javax.faces.context.FacesContext;
 import com.liferay.faces.util.application.ApplicationUtil;
 import com.liferay.faces.util.i18n.I18n;
 import com.liferay.faces.util.i18n.I18nFactory;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
@@ -40,12 +42,24 @@ public class I18nMap extends I18nMapCompat {
 	// serialVersionUID
 	private static final long serialVersionUID = 5549598732411060854L;
 
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(I18nMap.class);
+
 	public I18nMap() {
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		ExternalContext externalContext = facesContext.getExternalContext();
-		Map<String, Object> applicationMap = externalContext.getApplicationMap();
-		Map<String, String> cache = new ConcurrentHashMap<String, String>();
-		applicationMap.put(I18nMap.class.getName(), cache);
+
+		// This class is instantiated by the UtilELResolver class during application startup.
+		FacesContext startupFacesContext = FacesContext.getCurrentInstance();
+
+		// Store the i18n message cache in the application map (as a Servlet Context attribute).
+		if (startupFacesContext != null) {
+			ExternalContext externalContext = startupFacesContext.getExternalContext();
+			Map<String, Object> applicationMap = externalContext.getApplicationMap();
+			Map<String, String> cache = new ConcurrentHashMap<String, String>();
+			applicationMap.put(I18nMap.class.getName(), cache);
+		}
+		else {
+			logger.error("Unable to store the i18n message cache in the application map");
+		}
 	}
 
 	@Override
