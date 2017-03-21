@@ -15,7 +15,6 @@
  */
 package com.liferay.faces.util.el.internal;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.Locale;
 import java.util.Map;
@@ -27,7 +26,6 @@ import javax.faces.component.UIViewRoot;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
-import com.liferay.faces.util.application.ApplicationUtil;
 import com.liferay.faces.util.i18n.I18n;
 import com.liferay.faces.util.i18n.I18nFactory;
 import com.liferay.faces.util.logging.Logger;
@@ -83,6 +81,7 @@ public class I18nMap extends I18nMapCompat {
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public Object get(Object key) {
 
 		String message = null;
