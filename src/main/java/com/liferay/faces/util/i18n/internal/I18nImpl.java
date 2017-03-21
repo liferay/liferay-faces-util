@@ -15,7 +15,6 @@
  */
 package com.liferay.faces.util.i18n.internal;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.Locale;
@@ -26,11 +25,14 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.i18n.I18n;
 import com.liferay.faces.util.i18n.I18nUtil;
 import com.liferay.faces.util.i18n.UTF8Control;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
@@ -41,9 +43,25 @@ public class I18nImpl implements I18n, Serializable {
 	// serialVersionUID
 	private static final long serialVersionUID = 707385608167301726L;
 
-	// Private Data Members
-	private transient Map<Locale, ResourceBundle> facesResourceBundleCache =
-		new ConcurrentHashMap<Locale, ResourceBundle>();
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(I18nImpl.class);
+
+	public I18nImpl() {
+
+		// This class is instantiated by the I18nFactoryImpl class during application startup.
+		FacesContext startupFacesContext = FacesContext.getCurrentInstance();
+
+		// Store the resource bundle cache in the application map (as a Servlet Context attribute).
+		if (startupFacesContext != null) {
+			ExternalContext externalContext = startupFacesContext.getExternalContext();
+			Map<String, Object> applicationMap = externalContext.getApplicationMap();
+			Map<Locale, ResourceBundle> cache = new ConcurrentHashMap<Locale, ResourceBundle>();
+			applicationMap.put(I18nImpl.class.getName(), cache);
+		}
+		else {
+			logger.error("Unable to store the resource bundle cache in the application map");
+		}
+	}
 
 	@Override
 	public FacesMessage getFacesMessage(FacesContext facesContext, Locale locale, FacesMessage.Severity severity,
@@ -106,7 +124,16 @@ public class I18nImpl implements I18n, Serializable {
 
 	private ResourceBundle getFacesResourceBundle(FacesContext facesContext, Locale locale) {
 
-		ResourceBundle facesResourceBundle = facesResourceBundleCache.get(locale);
+		ExternalContext externalContext = facesContext.getExternalContext();
+		Map<String, Object> applicationMap = externalContext.getApplicationMap();
+		Map<Locale, ResourceBundle> facesResourceBundleCache = (Map<Locale, ResourceBundle>) applicationMap.get(
+				I18nImpl.class.getName());
+
+		ResourceBundle facesResourceBundle = null;
+
+		if (facesResourceBundleCache != null) {
+			facesResourceBundle = facesResourceBundleCache.get(locale);
+		}
 
 		if (facesResourceBundle == null) {
 
@@ -119,13 +146,12 @@ public class I18nImpl implements I18n, Serializable {
 
 			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 			facesResourceBundle = ResourceBundle.getBundle(messageBundle, locale, classLoader, new UTF8Control());
-			facesResourceBundleCache.put(locale, facesResourceBundle);
+
+			if (facesResourceBundleCache != null) {
+				facesResourceBundleCache.put(locale, facesResourceBundle);
+			}
 		}
 
 		return facesResourceBundle;
-	}
-
-	private void readObject(java.io.ObjectInputStream stream) throws IOException, ClassNotFoundException {
-		facesResourceBundleCache = new ConcurrentHashMap<Locale, ResourceBundle>();
 	}
 }
