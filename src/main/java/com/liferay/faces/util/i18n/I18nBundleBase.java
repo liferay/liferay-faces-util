@@ -15,9 +15,9 @@
  */
 package com.liferay.faces.util.i18n;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.text.MessageFormat;
+import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Map;
 import java.util.MissingResourceException;
@@ -25,6 +25,7 @@ import java.util.ResourceBundle;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.logging.Logger;
@@ -47,12 +48,25 @@ public abstract class I18nBundleBase extends I18nWrapper implements Serializable
 	private static final Logger logger = LoggerFactory.getLogger(I18nBundleBase.class);
 
 	// Private Data Members
-	private transient Map<String, String> messageCache;
 	private I18n wrappedI18n;
 
 	public I18nBundleBase(I18n i18n) {
+
 		this.wrappedI18n = i18n;
-		this.messageCache = new ConcurrentHashMap<String, String>();
+
+		// This class is instantiated by the I18nFactory delegation chain during application startup.
+		FacesContext startupFacesContext = FacesContext.getCurrentInstance();
+
+		// Store the message cache in the application map (as a Servlet Context attribute).
+		if (startupFacesContext != null) {
+			ExternalContext externalContext = startupFacesContext.getExternalContext();
+			Map<String, Object> applicationMap = externalContext.getApplicationMap();
+			Map<Locale, ResourceBundle> cache = new ConcurrentHashMap<Locale, ResourceBundle>();
+			applicationMap.put(getClass().getName(), cache);
+		}
+		else {
+			logger.error("Unable to store the resource bundle cache in the application map");
+		}
 	}
 
 	public abstract String getBundleKey();
@@ -79,7 +93,12 @@ public abstract class I18nBundleBase extends I18nWrapper implements Serializable
 			key = locale.toString() + messageId;
 		}
 
-		if (messageCache.containsKey(key)) {
+		ExternalContext externalContext = facesContext.getExternalContext();
+		Map<String, Object> applicationMap = externalContext.getApplicationMap();
+		Map<String, String> messageCache = (Map<String, String>) applicationMap.get(getClass().getName());
+
+		if ((messageCache != null) && messageCache.containsKey(key)) {
+
 			message = messageCache.get(key);
 
 			if ("".equals(message)) {
@@ -95,7 +114,8 @@ public abstract class I18nBundleBase extends I18nWrapper implements Serializable
 				ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 
 				if (locale == null) {
-					resourceBundle = ResourceBundle.getBundle(bundleKey, Locale.getDefault(), classLoader, new UTF8Control());
+					resourceBundle = ResourceBundle.getBundle(bundleKey, Locale.getDefault(), classLoader,
+							new UTF8Control());
 				}
 				else {
 					resourceBundle = ResourceBundle.getBundle(bundleKey, locale, classLoader, new UTF8Control());
@@ -109,10 +129,16 @@ public abstract class I18nBundleBase extends I18nWrapper implements Serializable
 
 				try {
 					message = resourceBundle.getString(messageId);
-					messageCache.put(key, message);
+
+					if (messageCache != null) {
+						messageCache.put(key, message);
+					}
 				}
 				catch (MissingResourceException e) {
-					messageCache.put(key, "");
+
+					if (messageCache != null) {
+						messageCache.put(key, "");
+					}
 				}
 			}
 		}
@@ -140,14 +166,5 @@ public abstract class I18nBundleBase extends I18nWrapper implements Serializable
 	@Override
 	public I18n getWrapped() {
 		return wrappedI18n;
-	}
-
-	private void readObject(java.io.ObjectInputStream stream) throws IOException, ClassNotFoundException {
-		wrappedI18n = (I18n) stream.readObject();
-		messageCache = new ConcurrentHashMap<String, String>();
-	}
-
-	private void writeObject(java.io.ObjectOutputStream out) throws IOException {
-		out.writeObject(wrappedI18n);
 	}
 }
