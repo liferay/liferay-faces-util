@@ -24,7 +24,9 @@ import javax.faces.context.FacesContext;
  */
 public final class ApplicationUtil {
 
+	// Prevent instantiation since this is a static utility class.
 	private ApplicationUtil() {
+		throw new AssertionError();
 	}
 
 	/**
