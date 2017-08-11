@@ -61,8 +61,8 @@ public class I18nUtil {
 				detail = i18n.getMessage(facesContext, locale, detailMessageId, arguments);
 			}
 
-			if (detail == null) {
-				facesMessage.setDetail(detailMessageId);
+			if ((detail == null) || detailMessageId.equals(detail)) {
+				facesMessage.setDetail(summary);
 			}
 			else {
 				facesMessage.setDetail(detail);
