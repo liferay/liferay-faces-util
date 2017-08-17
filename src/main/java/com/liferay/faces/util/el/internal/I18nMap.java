@@ -19,13 +19,13 @@ import java.util.Collection;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 import javax.faces.application.Application;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
+import com.liferay.faces.util.cache.Cache;
 import com.liferay.faces.util.i18n.I18n;
 import com.liferay.faces.util.i18n.I18nFactory;
 import com.liferay.faces.util.logging.Logger;
@@ -42,23 +42,6 @@ public class I18nMap extends I18nMapCompat {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(I18nMap.class);
-
-	public I18nMap() {
-
-		// This class is instantiated by the UtilELResolver class during application startup.
-		FacesContext startupFacesContext = FacesContext.getCurrentInstance();
-
-		// Store the i18n message cache in the application map (as a Servlet Context attribute).
-		if (startupFacesContext != null) {
-			ExternalContext externalContext = startupFacesContext.getExternalContext();
-			Map<String, Object> applicationMap = externalContext.getApplicationMap();
-			Map<String, String> cache = new ConcurrentHashMap<String, String>();
-			applicationMap.put(I18nMap.class.getName(), cache);
-		}
-		else {
-			logger.error("Unable to store the i18n message cache in the application map");
-		}
-	}
 
 	@Override
 	public void clear() {
@@ -110,18 +93,17 @@ public class I18nMap extends I18nMapCompat {
 					messageKey = locale.toString().concat(keyAsString);
 				}
 
-				Map<String, Object> applicationMap = externalContext.getApplicationMap();
-				Map<String, String> cache = (Map<String, String>) applicationMap.get(I18nMap.class.getName());
+				Cache<String, String> messageCache = getMessageCache(externalContext);
 
-				if (cache != null) {
-					message = cache.get(messageKey);
+				if (messageCache != null) {
+					message = messageCache.get(messageKey);
 				}
 
 				if (message == null) {
 					message = i18n.getMessage(facesContext, locale, keyAsString);
 
-					if ((message != null) && (cache != null)) {
-						cache.put(messageKey, message);
+					if ((message != null) && (messageCache != null)) {
+						message = messageCache.putIfAbsent(messageKey, message);
 					}
 				}
 			}
