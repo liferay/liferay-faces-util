@@ -11,6 +11,10 @@
 	<application>
 		<el-resolver>com.liferay.faces.util.el.internal.UtilELResolver</el-resolver>
 		<system-event-listener>
+			<system-event-listener-class>com.liferay.faces.util.el.internal.I18nMap</system-event-listener-class>
+			<system-event-class>com.liferay.faces.util.event.PostConstructApplicationConfigEvent</system-event-class>
+		</system-event-listener>
+		<system-event-listener>
 			<system-event-listener-class>com.liferay.faces.util.event.internal.ApplicationStartupListener</system-event-listener-class>
 			<system-event-class>javax.faces.event.PostConstructApplicationEvent</system-event-class>
 		</system-event-listener>
@@ -21,6 +25,7 @@
 		<render-kit-factory>com.liferay.faces.util.render.internal.RenderKitFactoryUtilImpl</render-kit-factory>
 		<factory-extension>
 			<util:browser-sniffer-factory>com.liferay.faces.util.client.internal.BrowserSnifferFactoryImpl</util:browser-sniffer-factory>
+			<util:cache-factory>com.liferay.faces.util.cache.internal.CacheFactoryImpl</util:cache-factory>
 			<util:faces-context-helper-factory>com.liferay.faces.util.context.internal.FacesContextHelperFactoryImpl</util:faces-context-helper-factory>
 			<util:faces-request-context-factory>com.liferay.faces.util.context.internal.FacesRequestContextFactoryImpl</util:faces-request-context-factory>
 			<util:faces-url-encoder-factory>com.liferay.faces.util.render.internal.FacesURLEncoderFactoryImpl</util:faces-url-encoder-factory>

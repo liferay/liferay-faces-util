@@ -21,13 +21,15 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
-import java.util.concurrent.ConcurrentHashMap;
 
 import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
+import com.liferay.faces.util.cache.Cache;
+import com.liferay.faces.util.cache.CacheFactory;
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.i18n.I18n;
 import com.liferay.faces.util.i18n.I18nUtil;
 import com.liferay.faces.util.i18n.UTF8Control;
@@ -53,10 +55,27 @@ public class I18nImpl implements I18n, Serializable {
 
 		// Store the resource bundle cache in the application map (as a Servlet Context attribute).
 		if (startupFacesContext != null) {
+
 			ExternalContext externalContext = startupFacesContext.getExternalContext();
 			Map<String, Object> applicationMap = externalContext.getApplicationMap();
-			Map<Locale, ResourceBundle> cache = new ConcurrentHashMap<Locale, ResourceBundle>();
-			applicationMap.put(I18nImpl.class.getName(), cache);
+			Cache<Locale, ResourceBundle> facesResourceBundleCache;
+
+			String maxCacheCapacityString = externalContext.getInitParameter(I18n.class.getName() +
+					".maxCacheCapacity");
+
+			if (maxCacheCapacityString != null) {
+
+				CacheFactory cacheFactory = (CacheFactory) FactoryExtensionFinder.getFactory(externalContext,
+						CacheFactory.class);
+				int initialCacheCapacity = cacheFactory.getDefaultInitialCapacity();
+				int maxCacheCapacity = Integer.parseInt(maxCacheCapacityString);
+				facesResourceBundleCache = cacheFactory.getConcurrentCache(initialCacheCapacity, maxCacheCapacity);
+			}
+			else {
+				facesResourceBundleCache = CacheFactory.getConcurrentCacheInstance(externalContext);
+			}
+
+			applicationMap.put(I18nImpl.class.getName(), facesResourceBundleCache);
 		}
 		else {
 			logger.error("Unable to store the resource bundle cache in the application map");
@@ -126,7 +145,7 @@ public class I18nImpl implements I18n, Serializable {
 
 		ExternalContext externalContext = facesContext.getExternalContext();
 		Map<String, Object> applicationMap = externalContext.getApplicationMap();
-		Map<Locale, ResourceBundle> facesResourceBundleCache = (Map<Locale, ResourceBundle>) applicationMap.get(
+		Cache<Locale, ResourceBundle> facesResourceBundleCache = (Cache<Locale, ResourceBundle>) applicationMap.get(
 				I18nImpl.class.getName());
 
 		ResourceBundle facesResourceBundle = null;
@@ -148,7 +167,7 @@ public class I18nImpl implements I18n, Serializable {
 			facesResourceBundle = ResourceBundle.getBundle(messageBundle, locale, classLoader, new UTF8Control());
 
 			if (facesResourceBundleCache != null) {
-				facesResourceBundleCache.put(locale, facesResourceBundle);
+				facesResourceBundle = facesResourceBundleCache.putIfAbsent(locale, facesResourceBundle);
 			}
 		}
 
