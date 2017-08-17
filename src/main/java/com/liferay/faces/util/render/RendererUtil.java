@@ -52,9 +52,25 @@ public class RendererUtil {
 	public static void addDefaultAjaxBehavior(ClientBehaviorHolder clientBehaviorHolder, String execute, String process,
 		String defaultExecute, String render, String update, String defaultRender) {
 
+		Map<String, List<ClientBehavior>> clientBehaviorMap = clientBehaviorHolder.getClientBehaviors();
 		String defaultEventName = clientBehaviorHolder.getDefaultEventName();
+		List<ClientBehavior> clientBehaviors = clientBehaviorMap.get(defaultEventName);
 
-		if (!hasAjaxBehavior(clientBehaviorHolder, defaultEventName)) {
+		boolean doAdd = true;
+
+		if (clientBehaviors != null) {
+
+			for (ClientBehavior clientBehavior : clientBehaviors) {
+
+				if (clientBehavior instanceof AjaxBehavior) {
+					doAdd = false;
+
+					break;
+				}
+			}
+		}
+
+		if (doAdd) {
 			FacesContext facesContext = FacesContext.getCurrentInstance();
 			Application application = facesContext.getApplication();
 			AjaxBehavior ajaxBehavior = (AjaxBehavior) application.createBehavior(AjaxBehavior.BEHAVIOR_ID);
@@ -168,24 +184,6 @@ public class RendererUtil {
 		}
 
 		return javaScript;
-	}
-
-	public static boolean hasAjaxBehavior(ClientBehaviorHolder clientBehaviorHolder, String eventName) {
-
-		Map<String, List<ClientBehavior>> clientBehaviorMap = clientBehaviorHolder.getClientBehaviors();
-		List<ClientBehavior> clientBehaviors = clientBehaviorMap.get(eventName);
-
-		if (clientBehaviors != null) {
-
-			for (ClientBehavior clientBehavior : clientBehaviors) {
-
-				if (clientBehavior instanceof AjaxBehavior) {
-					return true;
-				}
-			}
-		}
-
-		return false;
 	}
 
 	private static Collection<String> getExecuteIds(String execute, String process, String defaultValue) {
