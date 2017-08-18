@@ -34,7 +34,7 @@ public abstract class ResourceVerifierWrapper implements ResourceVerifier, Faces
 	 * @see  {@link ResourceVerifier#isDependencySatisfied(UIComponent)}
 	 */
 	@Override
-	public boolean isDependencySatisfied(FacesContext facestContext, UIComponent componentResource) {
-		return getWrapped().isDependencySatisfied(facestContext, componentResource);
+	public boolean isDependencySatisfied(FacesContext facesContext, UIComponent componentResource) {
+		return getWrapped().isDependencySatisfied(facesContext, componentResource);
 	}
 }

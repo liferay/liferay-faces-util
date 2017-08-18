@@ -32,7 +32,7 @@ public class ResourceVerifierImpl implements ResourceVerifier, Serializable {
 	private static final long serialVersionUID = 4133463355765570238L;
 
 	@Override
-	public boolean isDependencySatisfied(FacesContext facestContext, UIComponent componentResource) {
+	public boolean isDependencySatisfied(FacesContext facesContext, UIComponent componentResource) {
 
 		// Assume that the specified resource dependency has not been satisfied and that it should therefore be
 		// rendered.

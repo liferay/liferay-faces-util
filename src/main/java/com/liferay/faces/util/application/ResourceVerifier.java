@@ -30,7 +30,7 @@ import javax.faces.context.FacesContext;
  *
  * <p>In some situations, resource dependencies may already be satisfied (meaning they are guaranteed to appear on the
  * page already, or are already provided as a resource with a different library name or resource name). When this
- * happens it unnecessary to render the resource. For example, Liferay Portal includes Bootstrap CSS on the page by
+ * happens it unnecessary to render the resource. For example, Liferay Portal includes Bootstrap CSS on the page
  * automatically. It would therefore be unnecessary for <a
  * href="http://www.liferay.com/community/liferay-projects/liferay-faces/alloy">Liferay Faces Alloy</a> or <a
  * href="http://www.bootsfaces.net/">BootsFaces</a> to render a Bootstrap CSS resource. Another example would be when a
@@ -53,5 +53,5 @@ public interface ResourceVerifier {
 	 *
 	 * @return  <code>true</code> when the resource dependency is already satisfied, otherwise <code>false</code>.
 	 */
-	public boolean isDependencySatisfied(FacesContext facestContext, UIComponent componentResource);
+	public boolean isDependencySatisfied(FacesContext facesContext, UIComponent componentResource);
 }
