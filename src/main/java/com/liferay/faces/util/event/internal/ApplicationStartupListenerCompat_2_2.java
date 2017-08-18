@@ -25,10 +25,24 @@ import javax.faces.context.ExternalContext;
  */
 public abstract class ApplicationStartupListenerCompat_2_2 extends ApplicationStartupListenerCompat {
 
-	@Override
+	/**
+	 * This method is only needed in a JSF 2.2 environment so the return value isn't particularly meaningful in a JSF
+	 * 2.1 environment.
+	 */
 	protected String getApplicationContextPath(ExternalContext externalContext) {
 
-		// TODO return externalContext.getApplicationContextPath();
-		return super.getApplicationContextPath(externalContext);
+		String applicationContextPath = null;
+
+		try {
+			applicationContextPath = externalContext.getRequestContextPath();
+		}
+		catch (UnsupportedOperationException e) {
+			// MyFaces does not support this feature during startup. However, this is OK since the value is only needed
+			// in a JSF 2.2 environment. For more information, see
+			// ApplicationStartupListenerCompat_2_2#getApplicationContextPath(ExternalContext) and
+			// ExternalContextCompat_2_2_Impl#getApplicationContxtPath()
+		}
+
+		return applicationContextPath;
 	}
 }
