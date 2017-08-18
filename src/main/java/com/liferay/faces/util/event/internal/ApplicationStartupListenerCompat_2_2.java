@@ -25,7 +25,6 @@ import javax.faces.context.ExternalContext;
  */
 public abstract class ApplicationStartupListenerCompat_2_2 extends ApplicationStartupListenerCompat {
 
-	@Override
 	protected String getApplicationContextPath(ExternalContext externalContext) {
 		return externalContext.getApplicationContextPath();
 	}
