@@ -18,7 +18,6 @@ package com.liferay.faces.util.event.internal;
 import java.util.EventObject;
 
 import javax.faces.application.Application;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AbortProcessingException;
 import javax.faces.event.SystemEvent;
@@ -43,23 +42,6 @@ public abstract class ApplicationStartupListenerCompat implements SystemEventLis
 
 	public void processEvent(SystemEvent systemEvent) throws AbortProcessingException {
 		processSystemEvent(systemEvent);
-	}
-
-	protected String getApplicationContextPath(ExternalContext externalContext) {
-
-		String applicationContextPath = null;
-
-		try {
-			applicationContextPath = externalContext.getRequestContextPath();
-		}
-		catch (UnsupportedOperationException e) {
-			// MyFaces does not support this feature during startup. However, this is OK since the value is only needed
-			// in a JSF 2.2 environment. For more information, see
-			// ApplicationStartupListenerCompat_2_2#getApplicationContextPath(ExternalContext) and
-			// ExternalContextCompat_2_2_Impl#getApplicationContxtPath()
-		}
-
-		return applicationContextPath;
 	}
 
 	protected void publishEvent(Application application, FacesContext facesContext,
