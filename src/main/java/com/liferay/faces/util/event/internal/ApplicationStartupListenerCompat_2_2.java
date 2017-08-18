@@ -15,6 +15,9 @@
  */
 package com.liferay.faces.util.event.internal;
 
+import javax.faces.context.ExternalContext;
+
+
 /**
  * This class provides a compatibility layer that isolates differences related to JSF 2.2.
  *
@@ -22,4 +25,24 @@ package com.liferay.faces.util.event.internal;
  */
 public abstract class ApplicationStartupListenerCompat_2_2 extends ApplicationStartupListenerCompat {
 
+	/**
+	 * This method is only needed in a JSF 2.2 environment so the return value isn't particularly meaningful in a JSF
+	 * 2.1 environment.
+	 */
+	protected String getApplicationContextPath(ExternalContext externalContext) {
+
+		String applicationContextPath = null;
+
+		try {
+			applicationContextPath = externalContext.getRequestContextPath();
+		}
+		catch (UnsupportedOperationException e) {
+			// MyFaces does not support this feature during startup. However, this is OK since the value is only needed
+			// in a JSF 2.2 environment. For more information, see
+			// ApplicationStartupListenerCompat_2_2#getApplicationContextPath(ExternalContext) and
+			// ExternalContextCompat_2_2_Impl#getApplicationContxtPath()
+		}
+
+		return applicationContextPath;
+	}
 }
