@@ -96,14 +96,14 @@ public class I18nMap extends I18nMapCompat {
 				Cache<String, String> messageCache = getMessageCache(externalContext);
 
 				if (messageCache != null) {
-					message = messageCache.get(messageKey);
+					message = messageCache.getValue(messageKey);
 				}
 
 				if (message == null) {
 					message = i18n.getMessage(facesContext, locale, keyAsString);
 
 					if ((message != null) && (messageCache != null)) {
-						message = messageCache.putIfAbsent(messageKey, message);
+						message = messageCache.putValueIfAbsent(messageKey, message);
 					}
 				}
 			}

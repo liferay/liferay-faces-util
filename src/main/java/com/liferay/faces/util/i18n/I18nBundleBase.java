@@ -28,7 +28,6 @@ import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.cache.Cache;
 import com.liferay.faces.util.cache.CacheFactory;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -60,22 +59,10 @@ public abstract class I18nBundleBase extends I18nWrapper implements Serializable
 
 		// Store the message cache in the application map (as a Servlet Context attribute).
 		if (startupFacesContext != null) {
+
 			ExternalContext externalContext = startupFacesContext.getExternalContext();
+			Cache<String, String> messageCache = newConcurrentMessageCache(externalContext);
 			Map<String, Object> applicationMap = externalContext.getApplicationMap();
-			Integer maxCacheCapacity = getMaxCacheCapacity(externalContext);
-			Cache<String, String> messageCache;
-
-			if (maxCacheCapacity != null) {
-
-				CacheFactory cacheFactory = (CacheFactory) FactoryExtensionFinder.getFactory(externalContext,
-						CacheFactory.class);
-				int initialCacheCapacity = getInitialCacheCapacity(cacheFactory.getDefaultInitialCapacity());
-				messageCache = cacheFactory.getConcurrentCache(initialCacheCapacity, maxCacheCapacity);
-			}
-			else {
-				messageCache = CacheFactory.getConcurrentCacheInstance(externalContext);
-			}
-
 			applicationMap.put(getClass().getName(), messageCache);
 		}
 		else {
@@ -113,7 +100,7 @@ public abstract class I18nBundleBase extends I18nWrapper implements Serializable
 
 		if ((messageCache != null) && messageCache.containsKey(key)) {
 
-			message = messageCache.get(key);
+			message = messageCache.getValue(key);
 
 			if ("".equals(message)) {
 				message = null;
@@ -146,13 +133,13 @@ public abstract class I18nBundleBase extends I18nWrapper implements Serializable
 					message = resourceBundle.getString(messageId);
 
 					if (messageCache != null) {
-						message = messageCache.putIfAbsent(key, message);
+						message = messageCache.putValueIfAbsent(key, message);
 					}
 				}
 				catch (MissingResourceException e) {
 
 					if (messageCache != null) {
-						messageCache.putIfAbsent(key, "");
+						messageCache.putValueIfAbsent(key, "");
 					}
 				}
 			}
@@ -183,24 +170,14 @@ public abstract class I18nBundleBase extends I18nWrapper implements Serializable
 	}
 
 	/**
-	 * Returns the initial cache capacity of the {@link I18nBundleBase}. The default implementation returns the provided
-	 * default value. This method is called from the constructor of I18nBundleBase, so this method must not cause side
-	 * effects and cannot rely on I18nBundleBase being fully initialized. The default return value is null.
+	 * Returns a new message cache to be used by {@link I18nBundleBase}. The default implementation returns a Cache
+	 * instance obtained from {@link CacheFactory#getConcurrentCacheInstance(javax.faces.context.ExternalContext)}. This
+	 * method is called from the constructor of I18nBundleBase, so this method must not cause side effects and should
+	 * not expect I18nBundleBase (or its subclass) to be fully initialized.
 	 *
-	 * @param  defaultInitialCacheCapacity  The default initial capacity of the cache.
+	 * @param  externalContext  The external context associated with the current {@link FacesContext}.
 	 */
-	protected Integer getInitialCacheCapacity(int defaultInitialCacheCapacity) {
-		return defaultInitialCacheCapacity;
-	}
-
-	/**
-	 * Returns the max cache capacity of the {@link I18nBundleBase} or null if the cache should not have a maximum size.
-	 * This method is called from the constructor of I18nBundleBase, so this method must not cause side effects and
-	 * cannot rely on I18nBundleBase being fully initialized. The default return value is null.
-	 *
-	 * @param  externalContext  The external context associated with the current faces context.
-	 */
-	protected Integer getMaxCacheCapacity(ExternalContext externalContext) {
-		return null;
+	protected Cache<String, String> newConcurrentMessageCache(ExternalContext externalContext) {
+		return CacheFactory.getConcurrentCacheInstance(externalContext);
 	}
 }
