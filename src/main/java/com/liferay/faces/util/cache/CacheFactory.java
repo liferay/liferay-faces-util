@@ -31,73 +31,16 @@ public abstract class CacheFactory implements FacesWrapper<CacheFactory> {
 
 	/**
 	 * Returns a new instance of {@link Cache} from the {@link CacheFactory} found by the {@link
-	 * FactoryExtensionFinder}. The returned instance is designed to be used during execution of a request thread, so it
-	 * is not guaranteed to be {@link java.io.Serializable}.
-	 *
-	 * @param  <K>              The type of the cache's keys.
-	 * @param  <V>              The type of the cache's values.
-	 * @param  externalContext  The external context associated with the current faces context. It is needed in order
-	 *                          for the {@link FactoryExtensionFinder} to be able to find the factory.
-	 */
-	public static <K, V> Cache<K, V> getCacheInstance(ExternalContext externalContext) {
-
-		CacheFactory cacheFactory = (CacheFactory) FactoryExtensionFinder.getFactory(externalContext,
-				CacheFactory.class);
-
-		return cacheFactory.<K, V>getCache();
-	}
-
-	/**
-	 * Returns a new instance of {@link Cache} from the {@link CacheFactory} found by the {@link
-	 * FactoryExtensionFinder}. The returned instance is designed to be used during execution of a request thread, so it
-	 * is not guaranteed to be {@link java.io.Serializable}.
-	 *
-	 * @param  <K>              The type of the cache's keys.
-	 * @param  <V>              The type of the cache's values.
-	 * @param  externalContext  The external context associated with the current faces context. It is needed in order
-	 *                          for the {@link FactoryExtensionFinder} to be able to find the factory.
-	 * @param  initialCapacity  The initial capacity of the cache.
-	 */
-	public static <K, V> Cache<K, V> getCacheInstance(ExternalContext externalContext, int initialCapacity) {
-
-		CacheFactory cacheFactory = (CacheFactory) FactoryExtensionFinder.getFactory(externalContext,
-				CacheFactory.class);
-
-		return cacheFactory.<K, V>getCache(initialCapacity);
-	}
-
-	/**
-	 * Returns a new instance of {@link Cache} from the {@link CacheFactory} found by the {@link
-	 * FactoryExtensionFinder}. The returned instance is designed to be used during execution of a request thread, so it
-	 * is not guaranteed to be {@link java.io.Serializable}. The returned cache will avoid exceeding the maximum cache
-	 * capacity. The algorithm used to ensure that the cache size does not exceed the max capacity (for example
-	 * least-recently-used) may cause significant performance differences between the returned cache and a cache
-	 * returned from {@link #getCache()} or {@link #getCache(int)}.
-	 *
-	 * @param  <K>              The type of the cache's keys.
-	 * @param  <V>              The type of the cache's values.
-	 * @param  externalContext  The external context associated with the current faces context. It is needed in order
-	 *                          for the {@link FactoryExtensionFinder} to be able to find the factory.
-	 * @param  initialCapacity  The initial capacity of the cache.
-	 * @param  maxCapacity      The maximum capacity of the cache.
-	 */
-	public static <K, V> Cache<K, V> getCacheInstance(ExternalContext externalContext, int initialCapacity,
-		int maxCapacity) {
-
-		CacheFactory cacheFactory = (CacheFactory) FactoryExtensionFinder.getFactory(externalContext,
-				CacheFactory.class);
-
-		return cacheFactory.<K, V>getCache(initialCapacity, maxCapacity);
-	}
-
-	/**
-	 * Returns a new instance of {@link Cache} from the {@link CacheFactory} found by the {@link
-	 * FactoryExtensionFinder}. The returned instance is designed to be accessed and modified by multiple threads
-	 * concurrently, so it is guaranteed to be {@link java.io.Serializable}.
+	 * FactoryExtensionFinder}. The initial capacity of the Cache is determined by the value of {@link
+	 * com.liferay.faces.util.config.WebConfigParam#DefaultInitialCacheCapacity}. The returned instance is designed to
+	 * be accessed and modified by multiple threads concurrently, so it is guaranteed to be {@link
+	 * java.io.Serializable}.
 	 *
 	 * @param  <K>              The type of the cache's keys.
 	 * @param  <V>              The type of the cache's values.
 	 * @param  externalContext  The external context associated with the current faces context.
+	 *
+	 * @see    #getConcurrentCache()
 	 */
 	public static <K, V> Cache<K, V> getConcurrentCacheInstance(ExternalContext externalContext) {
 
@@ -112,12 +55,17 @@ public abstract class CacheFactory implements FacesWrapper<CacheFactory> {
 	 * FactoryExtensionFinder}. The returned instance is designed to be accessed and modified by multiple threads
 	 * concurrently, so it is guaranteed to be {@link java.io.Serializable}.
 	 *
-	 * @param  <K>              The type of the cache's keys.
-	 * @param  <V>              The type of the cache's values.
-	 * @param  externalContext  The external context associated with the current faces context.
-	 * @param  initialCapacity  The initial capacity of the cache.
+	 * @param   <K>              The type of the cache's keys.
+	 * @param   <V>              The type of the cache's values.
+	 * @param   externalContext  The external context associated with the current faces context.
+	 * @param   initialCapacity  The initial capacity of the cache.
+	 *
+	 * @throws  IllegalArgumentException  if the initial capacity is less than zero.
+	 *
+	 * @see     #getConcurrentCache(int)
 	 */
-	public static <K, V> Cache<K, V> getConcurrentCacheInstance(ExternalContext externalContext, int initialCapacity) {
+	public static <K, V> Cache<K, V> getConcurrentCacheInstance(ExternalContext externalContext, int initialCapacity)
+		throws IllegalArgumentException {
 
 		CacheFactory cacheFactory = (CacheFactory) FactoryExtensionFinder.getFactory(externalContext,
 				CacheFactory.class);
@@ -129,61 +77,35 @@ public abstract class CacheFactory implements FacesWrapper<CacheFactory> {
 	 * Returns a new instance of {@link Cache} from the {@link CacheFactory} found by the {@link
 	 * FactoryExtensionFinder}. The returned instance is designed to be accessed and modified by multiple threads
 	 * concurrently, so it is guaranteed to be {@link java.io.Serializable}. The returned cache will avoid exceeding the
-	 * maximum cache capacity. The algorithm used to ensure that the cache size does not exceed the max capacity (for
-	 * example least-recently-used) may cause significant performance differences between the returned cache and a cache
-	 * returned from {@link #getConcurrentCache()} or {@link #getConcurrentCache(int)}.
+	 * maximum cache capacity by using a least-recently-used algorithm which may cause a significant performance impact
+	 * when compared to a cache that does not enforce a maximum size (for example, a cache returned from {@link
+	 * #getConcurrentCache()} or {@link #getConcurrentCache(int)}).
 	 *
-	 * @param  <K>              The type of the cache's keys.
-	 * @param  <V>              The type of the cache's values.
-	 * @param  externalContext  The external context associated with the current faces context.
-	 * @param  initialCapacity  The initial capacity of the cache.
-	 * @param  maxCapacity      The maximum capacity of the cache.
+	 * @param   <K>              The type of the cache's keys.
+	 * @param   <V>              The type of the cache's values.
+	 * @param   externalContext  The external context associated with the current faces context.
+	 * @param   initialCapacity  The initial capacity of the cache.
+	 * @param   maxCapacity      The maximum capacity of the cache.
+	 *
+	 * @throws  IllegalArgumentException  if the initial capacity is less than zero or the maximum capacity is less than
+	 *                                    1.
+	 *
+	 * @see     #getConcurrentLRUCache(int, int)
 	 */
-	public static <K, V> Cache<K, V> getConcurrentCacheInstance(ExternalContext externalContext, int initialCapacity,
-		int maxCapacity) {
+	public static <K, V> Cache<K, V> getConcurrentLRUCacheInstance(ExternalContext externalContext, int initialCapacity,
+		int maxCapacity) throws IllegalArgumentException {
 
 		CacheFactory cacheFactory = (CacheFactory) FactoryExtensionFinder.getFactory(externalContext,
 				CacheFactory.class);
 
-		return cacheFactory.<K, V>getConcurrentCache(initialCapacity, maxCapacity);
+		return cacheFactory.<K, V>getConcurrentLRUCache(initialCapacity, maxCapacity);
 	}
 
 	/**
-	 * Returns a new instance of {@link Cache}. The returned instance is designed to be used during execution of a
-	 * request thread, so it is not guaranteed to be {@link java.io.Serializable}.
-	 *
-	 * @param  <K>  The type of the cache's keys.
-	 * @param  <V>  The type of the cache's values.
-	 */
-	public abstract <K, V> Cache<K, V> getCache();
-
-	/**
-	 * Returns a new instance of {@link Cache}. The returned instance is designed to be used during execution of a
-	 * request thread, so it is not guaranteed to be {@link java.io.Serializable}.
-	 *
-	 * @param  <K>              The type of the cache's keys.
-	 * @param  <V>              The type of the cache's values.
-	 * @param  initialCapacity  The initial capacity of the cache.
-	 */
-	public abstract <K, V> Cache<K, V> getCache(int initialCapacity);
-
-	/**
-	 * Returns a new instance of {@link Cache}. The returned instance is designed to be used during execution of a
-	 * request thread, so it is not guaranteed to be {@link java.io.Serializable}. The returned cache will avoid
-	 * exceeding the maximum cache capacity. The algorithm used to ensure that the cache size does not exceed the max
-	 * capacity (for example least-recently-used) may cause significant performance differences between the returned
-	 * cache and a cache returned from {@link #getCache()} or {@link #getCache(int)}.
-	 *
-	 * @param  <K>              The type of the cache's keys.
-	 * @param  <V>              The type of the cache's values.
-	 * @param  initialCapacity  The initial capacity of the cache.
-	 * @param  maxCapacity      The maximum capacity of the cache.
-	 */
-	public abstract <K, V> Cache<K, V> getCache(int initialCapacity, int maxCapacity);
-
-	/**
-	 * Returns a new instance of {@link Cache}. The returned instance is designed to be accessed and modified by
-	 * multiple threads concurrently, so it is guaranteed to be {@link java.io.Serializable}.
+	 * Returns a new instance of {@link Cache}. The initial capacity of the Cache is determined by the value of {@link
+	 * com.liferay.faces.util.config.WebConfigParam#DefaultInitialCacheCapacity}. The returned instance is designed to
+	 * be accessed and modified by multiple threads concurrently, so it is guaranteed to be {@link
+	 * java.io.Serializable}.
 	 *
 	 * @param  <K>  The type of the cache's keys.
 	 * @param  <V>  The type of the cache's values.
@@ -194,31 +116,31 @@ public abstract class CacheFactory implements FacesWrapper<CacheFactory> {
 	 * Returns a new instance of {@link Cache}. The returned instance is designed to be accessed and modified by
 	 * multiple threads concurrently, so it is guaranteed to be {@link java.io.Serializable}.
 	 *
-	 * @param  <K>              The type of the cache's keys.
-	 * @param  <V>              The type of the cache's values.
-	 * @param  initialCapacity  The initial capacity of the cache.
+	 * @param   <K>              The type of the cache's keys.
+	 * @param   <V>              The type of the cache's values.
+	 * @param   initialCapacity  The initial capacity of the cache.
+	 *
+	 * @throws  IllegalArgumentException  if the initial capacity is less than zero.
 	 */
-	public abstract <K, V> Cache<K, V> getConcurrentCache(int initialCapacity);
+	public abstract <K, V> Cache<K, V> getConcurrentCache(int initialCapacity) throws IllegalArgumentException;
 
 	/**
 	 * Returns a new instance of {@link Cache}. The returned instance is designed to be accessed and modified by
 	 * multiple threads concurrently, so it is guaranteed to be {@link java.io.Serializable}. The returned cache will
-	 * avoid exceeding the maximum cache capacity. The algorithm used to ensure that the cache size does not exceed the
-	 * max capacity (for example least-recently-used) may cause significant performance differences between the returned
-	 * cache and a cache returned from {@link #getConcurrentCache()} or {@link #getConcurrentCache(int)}.
+	 * avoid exceeding the maximum cache capacity by using a least-recently-used algorithm which may cause a significant
+	 * performance impact when compared to a cache that does not enforce a maximum size (for example, a cache returned
+	 * from {@link #getConcurrentCache()} or {@link #getConcurrentCache(int)}).
 	 *
-	 * @param  <K>              The type of the cache's keys.
-	 * @param  <V>              The type of the cache's values.
-	 * @param  initialCapacity  The initial capacity of the cache.
-	 * @param  maxCapacity      The maximum capacity of the cache.
+	 * @param   <K>              The type of the cache's keys.
+	 * @param   <V>              The type of the cache's values.
+	 * @param   initialCapacity  The initial capacity of the cache.
+	 * @param   maxCapacity      The maximum capacity of the cache.
+	 *
+	 * @throws  IllegalArgumentException  if the initial capacity is less than zero or the maximum capacity is less than
+	 *                                    1.
 	 */
-	public abstract <K, V> Cache<K, V> getConcurrentCache(int initialCapacity, int maxCapacity);
-
-	/**
-	 * Returns the default initial capacity for a cache. This method is provided as a convenience to pass to {@link
-	 * #getCache(int, int)} and {@link #getConcurrentCache(int, int)}. The default implementation returns 16.
-	 */
-	public abstract int getDefaultInitialCapacity();
+	public abstract <K, V> Cache<K, V> getConcurrentLRUCache(int initialCapacity, int maxCapacity)
+		throws IllegalArgumentException;
 
 	/**
 	 * Returns the wrapped factory instance if this factory decorates another. Otherwise, this method returns null.
