@@ -15,8 +15,12 @@
  */
 package com.liferay.faces.util.cache.internal;
 
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+
 import com.liferay.faces.util.cache.Cache;
 import com.liferay.faces.util.cache.CacheFactory;
+import com.liferay.faces.util.config.WebConfigParam;
 
 
 /**
@@ -24,35 +28,33 @@ import com.liferay.faces.util.cache.CacheFactory;
  */
 public class CacheFactoryImpl extends CacheFactory {
 
-	@Override
-	public <K, V> Cache<K, V> getCache() {
-		return new CacheImpl<K, V>();
-	}
+	// Private Final Data Members
+	private final int defaultInitialCacheCapacity;
 
-	@Override
-	public <K, V> Cache<K, V> getCache(int initialCapacity) {
+	public CacheFactoryImpl() {
 
-		validateInitialCapacity(initialCapacity);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
 
-		return new CacheImpl<K, V>(initialCapacity);
-	}
+		if (facesContext != null) {
 
-	@Override
-	public <K, V> Cache<K, V> getCache(int initialCapacity, int maxCapacity) {
+			ExternalContext externalContext = facesContext.getExternalContext();
 
-		validateInitialCapacity(initialCapacity);
-		validateMaxCapacity(maxCapacity);
+			defaultInitialCacheCapacity = WebConfigParam.DefaultInitialCacheCapacity.getIntegerValue(externalContext);
+		}
 
-		return new CacheMaxCapacityLRUImpl<K, V>(initialCapacity, maxCapacity);
+		// Otherwise we are in a test environment so use the default value.
+		else {
+			defaultInitialCacheCapacity = WebConfigParam.DefaultInitialCacheCapacity.getDefaultIntegerValue();
+		}
 	}
 
 	@Override
 	public <K, V> Cache<K, V> getConcurrentCache() {
-		return new ConcurrentCacheImpl<K, V>();
+		return getConcurrentCache(defaultInitialCacheCapacity);
 	}
 
 	@Override
-	public <K, V> Cache<K, V> getConcurrentCache(int initialCapacity) {
+	public <K, V> Cache<K, V> getConcurrentCache(int initialCapacity) throws IllegalArgumentException {
 
 		validateInitialCapacity(initialCapacity);
 
@@ -60,19 +62,13 @@ public class CacheFactoryImpl extends CacheFactory {
 	}
 
 	@Override
-	public <K, V> Cache<K, V> getConcurrentCache(int initialCapacity, int maxCapacity) {
+	public <K, V> Cache<K, V> getConcurrentLRUCache(int initialCapacity, int maxCapacity)
+		throws IllegalArgumentException {
 
 		validateInitialCapacity(initialCapacity);
 		validateMaxCapacity(maxCapacity);
 
-		return new ConcurrentCacheMaxCapacityLRUImpl<K, V>(initialCapacity, maxCapacity);
-	}
-
-	@Override
-	public int getDefaultInitialCapacity() {
-
-		// For more details, see: https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html#HashMap--
-		return 16;
+		return new ConcurrentLRUCacheImpl<K, V>(initialCapacity, maxCapacity);
 	}
 
 	@Override

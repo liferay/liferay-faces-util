@@ -34,42 +34,42 @@ public abstract class CacheWrapper<K, V> implements Cache<K, V>, Wrapper<Cache<K
 	}
 
 	/**
-	 * @see  Cache#get(java.lang.Object)
+	 * @see  Cache#getKeys()
 	 */
 	@Override
-	public V get(K key) {
-		return getWrapped().get(key);
+	public Set<K> getKeys() {
+		return getWrapped().getKeys();
 	}
 
 	/**
-	 * @see  Cache#keySet()
+	 * @see  Cache#getSize()
 	 */
 	@Override
-	public Set<K> keySet() {
-		return getWrapped().keySet();
+	public int getSize() {
+		return getWrapped().getSize();
 	}
 
 	/**
-	 * @see  Cache#put(java.lang.Object, java.lang.Object)
+	 * @see  Cache#getValue(java.lang.Object)
 	 */
 	@Override
-	public V put(K key, V value) {
-		return getWrapped().put(key, value);
+	public V getValue(K key) {
+		return getWrapped().getValue(key);
 	}
 
 	/**
-	 * @see  Cache#putIfAbsent(java.lang.Object, java.lang.Object)
+	 * @see  Cache#putValueIfAbsent(java.lang.Object, java.lang.Object)
 	 */
 	@Override
-	public V putIfAbsent(K key, V value) {
-		return getWrapped().putIfAbsent(key, value);
+	public V putValueIfAbsent(K key, V value) {
+		return getWrapped().putValueIfAbsent(key, value);
 	}
 
 	/**
-	 * @see  Cache#remove(java.lang.Object)
+	 * @see  Cache#removeValue(java.lang.Object)
 	 */
 	@Override
-	public V remove(K key) {
-		return getWrapped().remove(key);
+	public V removeValue(K key) {
+		return getWrapped().removeValue(key);
 	}
 }
