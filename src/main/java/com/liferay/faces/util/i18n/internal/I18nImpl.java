@@ -29,7 +29,7 @@ import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.cache.Cache;
 import com.liferay.faces.util.cache.CacheFactory;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
+import com.liferay.faces.util.config.WebConfigParam;
 import com.liferay.faces.util.i18n.I18n;
 import com.liferay.faces.util.i18n.I18nUtil;
 import com.liferay.faces.util.i18n.UTF8Control;
@@ -57,24 +57,21 @@ public class I18nImpl implements I18n, Serializable {
 		if (startupFacesContext != null) {
 
 			ExternalContext externalContext = startupFacesContext.getExternalContext();
-			Map<String, Object> applicationMap = externalContext.getApplicationMap();
 			Cache<Locale, ResourceBundle> facesResourceBundleCache;
+			WebConfigParam I18nMaxCacheCapacity = WebConfigParam.I18nMaxCacheCapacity;
+			int maxCacheCapacity = I18nMaxCacheCapacity.getIntegerValue(externalContext);
 
-			String maxCacheCapacityString = externalContext.getInitParameter(I18n.class.getName() +
-					".maxCacheCapacity");
+			if (maxCacheCapacity != I18nMaxCacheCapacity.getDefaultIntegerValue()) {
 
-			if (maxCacheCapacityString != null) {
-
-				CacheFactory cacheFactory = (CacheFactory) FactoryExtensionFinder.getFactory(externalContext,
-						CacheFactory.class);
-				int initialCacheCapacity = cacheFactory.getDefaultInitialCapacity();
-				int maxCacheCapacity = Integer.parseInt(maxCacheCapacityString);
-				facesResourceBundleCache = cacheFactory.getConcurrentCache(initialCacheCapacity, maxCacheCapacity);
+				int initialCacheCapacity = WebConfigParam.DefaultInitialCacheCapacity.getIntegerValue(externalContext);
+				facesResourceBundleCache = CacheFactory.getConcurrentLRUCacheInstance(externalContext,
+						initialCacheCapacity, maxCacheCapacity);
 			}
 			else {
 				facesResourceBundleCache = CacheFactory.getConcurrentCacheInstance(externalContext);
 			}
 
+			Map<String, Object> applicationMap = externalContext.getApplicationMap();
 			applicationMap.put(I18nImpl.class.getName(), facesResourceBundleCache);
 		}
 		else {
@@ -151,7 +148,7 @@ public class I18nImpl implements I18n, Serializable {
 		ResourceBundle facesResourceBundle = null;
 
 		if (facesResourceBundleCache != null) {
-			facesResourceBundle = facesResourceBundleCache.get(locale);
+			facesResourceBundle = facesResourceBundleCache.getValue(locale);
 		}
 
 		if (facesResourceBundle == null) {
@@ -167,7 +164,7 @@ public class I18nImpl implements I18n, Serializable {
 			facesResourceBundle = ResourceBundle.getBundle(messageBundle, locale, classLoader, new UTF8Control());
 
 			if (facesResourceBundleCache != null) {
-				facesResourceBundle = facesResourceBundleCache.putIfAbsent(locale, facesResourceBundle);
+				facesResourceBundle = facesResourceBundleCache.putValueIfAbsent(locale, facesResourceBundle);
 			}
 		}
 

@@ -28,7 +28,7 @@ import javax.faces.event.SystemEventListener;
 import com.liferay.faces.util.cache.Cache;
 import com.liferay.faces.util.cache.CacheFactory;
 import com.liferay.faces.util.config.ApplicationConfig;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
+import com.liferay.faces.util.config.WebConfigParam;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -81,17 +81,14 @@ public abstract class I18nMapCompat implements Map<String, Object>, SystemEventL
 			ExternalContext externalContext = startupFacesContext.getExternalContext();
 			Map<String, Object> applicationMap = externalContext.getApplicationMap();
 			Cache<String, String> messageCache;
+			WebConfigParam I18nELMapMaxCacheCapacity = WebConfigParam.I18nELMapMaxCacheCapacity;
+			int maxCacheCapacity = I18nELMapMaxCacheCapacity.getIntegerValue(externalContext);
 
-			String maxCacheCapacityString = externalContext.getInitParameter(
-					"com.liferay.faces.util.el.i18n.maxCacheCapacity");
+			if (maxCacheCapacity != I18nELMapMaxCacheCapacity.getDefaultIntegerValue()) {
 
-			if (maxCacheCapacityString != null) {
-
-				CacheFactory cacheFactory = (CacheFactory) FactoryExtensionFinder.getFactory(externalContext,
-						CacheFactory.class);
-				int initialCacheCapacity = cacheFactory.getDefaultInitialCapacity();
-				int maxCacheCapacity = Integer.parseInt(maxCacheCapacityString);
-				messageCache = cacheFactory.getConcurrentCache(initialCacheCapacity, maxCacheCapacity);
+				int initialCacheCapacity = WebConfigParam.DefaultInitialCacheCapacity.getIntegerValue(externalContext);
+				messageCache = CacheFactory.getConcurrentLRUCacheInstance(externalContext, initialCacheCapacity,
+						maxCacheCapacity);
 			}
 			else {
 				messageCache = CacheFactory.getConcurrentCacheInstance(externalContext);

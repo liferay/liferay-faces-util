@@ -34,25 +34,18 @@ public interface Cache<K, V> {
 	public boolean containsKey(K key);
 
 	/**
+	 * Returns the set of all keys currently in the cache at the time this method was called.
+	 */
+	public Set<K> getKeys();
+
+	public int getSize();
+
+	/**
 	 * Returns the cached value that is mapped to this key or null if the value is not in the cache.
 	 *
 	 * @param  key  The key that the value is mapped to.
 	 */
-	public V get(K key);
-
-	/**
-	 * Returns the set of all keys currently in the cache at the time this method was called.
-	 */
-	public Set<K> keySet();
-
-	/**
-	 * Puts the cached key-value pair into the cache, overwriting any previous value mapped to that key if necessary.
-	 * Returns the passed value for convenience.
-	 *
-	 * @param  key    The key that the value is mapped to.
-	 * @param  value  The value to be cached.
-	 */
-	public V put(K key, V value);
+	public V getValue(K key);
 
 	/**
 	 * Puts the cached key-value pair into the cache if the key does not already exist in the cache. If the key was not
@@ -62,12 +55,12 @@ public interface Cache<K, V> {
 	 * @param  key    The key that the value is mapped to.
 	 * @param  value  The value to be cached.
 	 */
-	public V putIfAbsent(K key, V value);
+	public V putValueIfAbsent(K key, V value);
 
 	/**
 	 * Removes an entry from the cache. Returns the value of the removed key-value pair.
 	 *
 	 * @param  key  The key that the value is mapped to.
 	 */
-	public V remove(K key);
+	public V removeValue(K key);
 }

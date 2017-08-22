@@ -26,6 +26,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.liferay.faces.util.cache.internal.CacheFactoryImpl;
+import com.liferay.faces.util.config.WebConfigParam;
 
 
 /**
@@ -37,68 +38,68 @@ public class CacheTest {
 	private static final Logger logger = LoggerFactory.getLogger(CacheTest.class);
 
 	@Test
-	public void runCacheMaxCapacityLRUTest() throws Exception {
+	public void runCacheFactoryIllegalArgumentExceptionTest() {
 
-		CacheFactoryImpl cacheFactoryImpl = new CacheFactoryImpl();
-		int defaultInitialCacheCapacity = cacheFactoryImpl.getDefaultInitialCapacity();
-		Cache<String, String> cache1 = cacheFactoryImpl.getCache(defaultInitialCacheCapacity, 1000);
-		testCache(cache1, 1000);
+		CacheFactory cacheFactory = new CacheFactoryImpl();
+		int[] invalidInitialCacheCapacityValues = new int[] { -1, -100, Integer.MIN_VALUE };
 
-		Cache<String, String> cache2 = cacheFactoryImpl.getConcurrentCache(defaultInitialCacheCapacity, 10);
+		for (int invalidInitialCacheCapacityValue : invalidInitialCacheCapacityValues) {
 
-		for (int i = 0; i < 100; i++) {
+			try {
 
-			String key = "key" + (i % 25);
-			String value = "value" + i;
-			String cachedString = cache2.get(key);
-
-			if (cachedString == null) {
-				cachedString = cache2.putIfAbsent(key, value);
+				cacheFactory.getConcurrentCache(invalidInitialCacheCapacityValue);
+				throw new AssertionError(
+					"Expected IllegalArgumentException was not thrown when initial cache capacity of " +
+					invalidInitialCacheCapacityValue + " was passed.");
 			}
-
-			Assert.assertNotNull(cachedString);
-			cachedString = cache2.put(key, value);
-			Assert.assertEquals(value, cachedString);
+			catch (IllegalArgumentException e) {
+				// Do nothing.
+			}
 		}
 
-		int maxCacheCapacity = 10;
-		Cache<String, String> cache3 = cacheFactoryImpl.getCache(defaultInitialCacheCapacity, maxCacheCapacity);
+		int defaultInitialCacheCapacity = WebConfigParam.DefaultInitialCacheCapacity.getDefaultIntegerValue();
+		int[] validInitialCacheCapacityValues = new int[] { 0, defaultInitialCacheCapacity, Integer.MAX_VALUE };
 
-		for (int i = 0; i < maxCacheCapacity; i++) {
-			cache3.putIfAbsent("key" + i, "value" + i);
+		for (int validInitialCacheCapacityValue : validInitialCacheCapacityValues) {
+
+			try {
+				cacheFactory.getConcurrentCache(validInitialCacheCapacityValue);
+			}
+			catch (IllegalArgumentException e) {
+				throw new AssertionError(
+					"Unexpected IllegalArgumentException was thrown when initial cache capacity of " +
+					validInitialCacheCapacityValue + " was passed.");
+			}
 		}
 
-		// Verify that get(), put(), and putIfAbsent() all mark the entry as recently used.
-		Assert.assertNotNull(cache3.get("key0"));
-		cache3.putIfAbsent("key1", "value1");
-		cache3.put("key2", "value2");
-		cache3.put("key" + maxCacheCapacity, "value" + maxCacheCapacity);
-		Assert.assertNull(cache3.get("key3"));
-	}
+		int[] invalidMaxCacheCapacityValues = new int[] { 0, -100, Integer.MIN_VALUE };
 
-	@Test
-	public void runCacheTest() {
+		for (int invalidMaxCacheCapacityValue : invalidMaxCacheCapacityValues) {
 
-		CacheFactoryImpl cacheFactoryImpl = new CacheFactoryImpl();
-		Cache<String, String> cache = cacheFactoryImpl.getCache();
-		testCache(cache, 1000);
-	}
+			try {
 
-	@Test
-	public void runConcurrentCacheMaxCapacityLRUTest() throws Exception {
+				cacheFactory.getConcurrentLRUCache(defaultInitialCacheCapacity, invalidMaxCacheCapacityValue);
+				throw new AssertionError(
+					"Expected IllegalArgumentException was not thrown when max cache capacity of " +
+					invalidMaxCacheCapacityValue + " was passed.");
+			}
+			catch (IllegalArgumentException e) {
+				// Do nothing.
+			}
+		}
 
-		CacheFactoryImpl cacheFactoryImpl = new CacheFactoryImpl();
-		int defaultInitialCacheCapacity = cacheFactoryImpl.getDefaultInitialCapacity();
-		Cache<String, String> cache1 = cacheFactoryImpl.getConcurrentCache(defaultInitialCacheCapacity, 1000);
-		testCache(cache1, 1000);
+		int[] validMaxCacheCapacityValues = new int[] { 1, 100, Integer.MAX_VALUE };
 
-		final Cache<String, String> cache2 = cacheFactoryImpl.getConcurrentCache(defaultInitialCacheCapacity, 10);
-		final Queue<Throwable> testErrors = new ConcurrentLinkedQueue<Throwable>();
-		final Queue<AssertionError> testFailures = new ConcurrentLinkedQueue<AssertionError>();
-		testConcurrentCache(cache2, testErrors, testFailures);
+		for (int validMaxCacheCapacityValue : validMaxCacheCapacityValues) {
 
-		final Cache<String, String> cache3 = cacheFactoryImpl.getConcurrentCache(defaultInitialCacheCapacity, 10);
-		testConcurrentMaxCacheCapacityCache(cache3, 10, testErrors, testFailures);
+			try {
+				cacheFactory.getConcurrentLRUCache(defaultInitialCacheCapacity, validMaxCacheCapacityValue);
+			}
+			catch (IllegalArgumentException e) {
+				throw new AssertionError("Unexpected IllegalArgumentException was thrown when max cache capacity of " +
+					validMaxCacheCapacityValue + " was passed.");
+			}
+		}
 	}
 
 	@Test
@@ -114,6 +115,28 @@ public class CacheTest {
 		testConcurrentCache(cache2, testErrors, testFailures);
 	}
 
+	@Test
+	public void runConcurrentLRUCacheTest() throws Exception {
+
+		CacheFactoryImpl cacheFactoryImpl = new CacheFactoryImpl();
+		int defaultInitialCacheCapacity = WebConfigParam.DefaultInitialCacheCapacity.getDefaultIntegerValue();
+		int maxCacheCapacity = 1000;
+		Cache<String, String> cache1 = cacheFactoryImpl.getConcurrentLRUCache(defaultInitialCacheCapacity,
+				maxCacheCapacity);
+		testCache(cache1, maxCacheCapacity);
+
+		final Cache<String, String> cache2 = cacheFactoryImpl.getConcurrentLRUCache(defaultInitialCacheCapacity, 10);
+		final Queue<Throwable> testErrors = new ConcurrentLinkedQueue<Throwable>();
+		final Queue<AssertionError> testFailures = new ConcurrentLinkedQueue<AssertionError>();
+		testConcurrentCache(cache2, testErrors, testFailures);
+
+		maxCacheCapacity = 10;
+
+		final Cache<String, String> cache3 = cacheFactoryImpl.getConcurrentLRUCache(defaultInitialCacheCapacity,
+				maxCacheCapacity);
+		testConcurrentLRUCache(cache3, maxCacheCapacity, testErrors, testFailures);
+	}
+
 	private void errorOrFailTestIfNecessary(final Queue<Throwable> testErrors, final Queue<AssertionError> testFailures)
 		throws AssertionError, Exception {
 
@@ -125,40 +148,41 @@ public class CacheTest {
 			logger.error("", testFailure);
 		}
 
-		int testErrorsCapacity = testErrors.size();
+		int testErrorsSize = testErrors.size();
 
-		if (testErrorsCapacity > 0) {
-			throw new Exception(testErrorsCapacity + " threads threw an error during test execution.");
+		if (testErrorsSize > 0) {
+			throw new Exception(testErrorsSize + " threads threw an error during test execution.");
 		}
 
-		int testFailuresCapacity = testFailures.size();
+		int testFailuresSize = testFailures.size();
 
-		if (testFailuresCapacity > 0) {
-			throw new AssertionError(testFailuresCapacity + " threads reported a failure during test execution.");
+		if (testFailuresSize > 0) {
+			throw new AssertionError(testFailuresSize + " threads reported a failure during test execution.");
 		}
 	}
 
-	private void testCache(Cache cache, int iterations) {
+	private void testCache(Cache<String, String> cache, int iterations) {
 
 		for (int i = 0; i < iterations; i++) {
 
 			String key = "key" + i;
 			String value = "value" + i;
-			Assert.assertNull(cache.get(key));
-			Assert.assertEquals(value, cache.put(key, value));
-			Assert.assertEquals(value, cache.putIfAbsent(key, "different" + value));
-			Assert.assertEquals(value, cache.get(key));
-			Assert.assertEquals("different" + value, cache.put(key, "different" + value));
-			Assert.assertEquals("different" + value, cache.get(key));
+			Assert.assertNull(cache.getValue(key));
+			Assert.assertEquals(value, cache.putValueIfAbsent(key, value));
+			Assert.assertEquals(value, cache.putValueIfAbsent(key, "different" + value));
+			Assert.assertEquals(value, cache.getValue(key));
+			Assert.assertEquals(value, cache.removeValue(key));
+			Assert.assertEquals("different" + value, cache.putValueIfAbsent(key, "different" + value));
+			Assert.assertEquals("different" + value, cache.getValue(key));
 
 			if ((i % 2) == 1) {
 
-				Assert.assertEquals("different" + value, cache.remove(key));
-				Assert.assertNull(cache.get(key));
+				Assert.assertEquals("different" + value, cache.removeValue(key));
+				Assert.assertNull(cache.getValue(key));
 			}
 		}
 
-		Assert.assertEquals(iterations / 2, cache.keySet().size());
+		Assert.assertEquals(iterations / 2, cache.getKeys().size());
 	}
 
 	private void testConcurrentCache(Cache<String, String> cache, Queue<Throwable> testErrors,
@@ -179,12 +203,14 @@ public class CacheTest {
 		errorOrFailTestIfNecessary(testErrors, testFailures);
 	}
 
-	private void testConcurrentMaxCacheCapacityCache(final Cache cache, final int maxCacheCapacity,
+	/**
+	 * This test uses threads to put and access values in the cache to verify that the least-recently-used value will be
+	 * ejected when the cache is full. Although this test utilizes threads, it cannot run them concurrently. Instead it
+	 * calls {@link Thread#run()} to run the threads sequentially to ensure that the least-recently-used value is always
+	 * the same for each test run. A similar non-concurrent version of this test appears in {@link #runLRUCacheTest()}.
+	 */
+	private void testConcurrentLRUCache(final Cache<String, String> cache, final int maxCacheCapacity,
 		Queue<Throwable> testErrors, Queue<AssertionError> testFailures) throws Exception {
-
-		if (maxCacheCapacity < 10) {
-			throw new IllegalArgumentException("This test must be run with at least 10 values.");
-		}
 
 		new TestThreadBase(cache, testFailures, testErrors) {
 
@@ -192,7 +218,7 @@ public class CacheTest {
 				protected void testCache() {
 
 					for (int i = 0; i < maxCacheCapacity; i++) {
-						cache.putIfAbsent("key" + i, "value" + i);
+						cache.putValueIfAbsent("key" + i, "value" + i);
 					}
 				}
 			}.run();
@@ -201,7 +227,7 @@ public class CacheTest {
 
 				@Override
 				protected void testCache() {
-					Assert.assertNotNull(cache.get("key0"));
+					Assert.assertNotNull(cache.getValue("key0"));
 				}
 			}.run();
 
@@ -209,7 +235,7 @@ public class CacheTest {
 
 				@Override
 				protected void testCache() {
-					cache.putIfAbsent("key1", "value1");
+					cache.putValueIfAbsent("key1", "value1");
 				}
 			}.run();
 
@@ -217,7 +243,7 @@ public class CacheTest {
 
 				@Override
 				protected void testCache() {
-					cache.put("key2", "value2");
+					cache.putValueIfAbsent("key" + maxCacheCapacity, "value" + maxCacheCapacity);
 				}
 			}.run();
 
@@ -225,28 +251,21 @@ public class CacheTest {
 
 				@Override
 				protected void testCache() {
-					cache.put("key" + maxCacheCapacity, "value" + maxCacheCapacity);
-				}
-			}.run();
-
-		new TestThreadBase(cache, testFailures, testErrors) {
-
-				@Override
-				protected void testCache() {
-					Assert.assertNull(cache.get("key3"));
+					Assert.assertNull(cache.getValue("key2"));
 				}
 			}.run();
 
 		errorOrFailTestIfNecessary(testErrors, testFailures);
+		Assert.assertEquals(maxCacheCapacity, cache.getSize());
 	}
 
 	private abstract static class TestThreadBase extends Thread {
 
-		// Protected Final Data Members
-		protected final Cache<String, String> cache;
-		protected final Queue<AssertionError> testFailures;
-		protected final Queue<Throwable> testErrors;
-		protected final Integer sleepTimeInMillis;
+		// Final Data Members
+		final Cache<String, String> cache;
+		final Queue<AssertionError> testFailures;
+		final Queue<Throwable> testErrors;
+		final Integer sleepTimeInMillis;
 
 		public TestThreadBase(Cache<String, String> cache, Queue<AssertionError> testFailures,
 			Queue<Throwable> testErrors) {
@@ -290,9 +309,9 @@ public class CacheTest {
 
 	private static final class TestConcurrentCacheThread extends TestThreadBase {
 
-		// Private Final Data Members
-		protected final String key;
-		protected final String value;
+		// Final Data Members
+		final String key;
+		final String value;
 
 		public TestConcurrentCacheThread(Cache<String, String> cache, Queue<AssertionError> testFailures,
 			Queue<Throwable> testErrors, String key, String value, int sleepTimeInMillis) {
@@ -305,15 +324,13 @@ public class CacheTest {
 		@Override
 		protected void testCache() {
 
-			String cachedString = cache.get(key);
+			String cachedString = cache.getValue(key);
 
 			if (cachedString == null) {
-				cachedString = cache.putIfAbsent(key, value);
+				cachedString = cache.putValueIfAbsent(key, value);
 			}
 
 			Assert.assertNotNull(cachedString);
-			cachedString = cache.put(key, value);
-			Assert.assertEquals(value, cachedString);
 		}
 	}
 }

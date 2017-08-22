@@ -25,7 +25,7 @@ import com.liferay.faces.util.cache.Cache;
 /**
  * @author  Kyle Stiemann
  */
-public class ConcurrentCacheImpl<K, V> implements Serializable, Cache<K, V> {
+public class ConcurrentCacheImpl<K, V> implements Cache<K, V>, Serializable {
 
 	// serialVersionUID
 	private static final long serialVersionUID = 2468038135762834477L;
@@ -47,25 +47,22 @@ public class ConcurrentCacheImpl<K, V> implements Serializable, Cache<K, V> {
 	}
 
 	@Override
-	public V get(K key) {
-		return internalCache.get(key);
-	}
-
-	@Override
-	public Set<K> keySet() {
+	public Set<K> getKeys() {
 		return internalCache.keySet();
 	}
 
 	@Override
-	public V put(K key, V value) {
-
-		internalCache.put(key, value);
-
-		return value;
+	public int getSize() {
+		return internalCache.size();
 	}
 
 	@Override
-	public V putIfAbsent(K key, V value) {
+	public V getValue(K key) {
+		return internalCache.get(key);
+	}
+
+	@Override
+	public V putValueIfAbsent(K key, V value) {
 
 		V retValue = internalCache.putIfAbsent(key, value);
 
@@ -77,7 +74,7 @@ public class ConcurrentCacheImpl<K, V> implements Serializable, Cache<K, V> {
 	}
 
 	@Override
-	public V remove(K key) {
+	public V removeValue(K key) {
 		return internalCache.remove(key);
 	}
 }
