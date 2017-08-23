@@ -38,6 +38,9 @@ public interface Cache<K, V> {
 	 */
 	public Set<K> getKeys();
 
+	/**
+	 * Returns the number of key-value pairs in the cache.
+	 */
 	public int getSize();
 
 	/**

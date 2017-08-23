@@ -31,27 +31,6 @@ public abstract class CacheFactory implements FacesWrapper<CacheFactory> {
 
 	/**
 	 * Returns a new instance of {@link Cache} from the {@link CacheFactory} found by the {@link
-	 * FactoryExtensionFinder}. The initial capacity of the Cache is determined by the value of {@link
-	 * com.liferay.faces.util.config.WebConfigParam#DefaultInitialCacheCapacity}. The returned instance is designed to
-	 * be accessed and modified by multiple threads concurrently, so it is guaranteed to be {@link
-	 * java.io.Serializable}.
-	 *
-	 * @param  <K>              The type of the cache's keys.
-	 * @param  <V>              The type of the cache's values.
-	 * @param  externalContext  The external context associated with the current faces context.
-	 *
-	 * @see    #getConcurrentCache()
-	 */
-	public static <K, V> Cache<K, V> getConcurrentCacheInstance(ExternalContext externalContext) {
-
-		CacheFactory cacheFactory = (CacheFactory) FactoryExtensionFinder.getFactory(externalContext,
-				CacheFactory.class);
-
-		return cacheFactory.<K, V>getConcurrentCache();
-	}
-
-	/**
-	 * Returns a new instance of {@link Cache} from the {@link CacheFactory} found by the {@link
 	 * FactoryExtensionFinder}. The returned instance is designed to be accessed and modified by multiple threads
 	 * concurrently, so it is guaranteed to be {@link java.io.Serializable}.
 	 *
@@ -79,7 +58,7 @@ public abstract class CacheFactory implements FacesWrapper<CacheFactory> {
 	 * concurrently, so it is guaranteed to be {@link java.io.Serializable}. The returned cache will avoid exceeding the
 	 * maximum cache capacity by using a least-recently-used algorithm which may cause a significant performance impact
 	 * when compared to a cache that does not enforce a maximum size (for example, a cache returned from {@link
-	 * #getConcurrentCache()} or {@link #getConcurrentCache(int)}).
+	 * #getConcurrentCache(int)}).
 	 *
 	 * @param   <K>              The type of the cache's keys.
 	 * @param   <V>              The type of the cache's values.
@@ -102,17 +81,6 @@ public abstract class CacheFactory implements FacesWrapper<CacheFactory> {
 	}
 
 	/**
-	 * Returns a new instance of {@link Cache}. The initial capacity of the Cache is determined by the value of {@link
-	 * com.liferay.faces.util.config.WebConfigParam#DefaultInitialCacheCapacity}. The returned instance is designed to
-	 * be accessed and modified by multiple threads concurrently, so it is guaranteed to be {@link
-	 * java.io.Serializable}.
-	 *
-	 * @param  <K>  The type of the cache's keys.
-	 * @param  <V>  The type of the cache's values.
-	 */
-	public abstract <K, V> Cache<K, V> getConcurrentCache();
-
-	/**
 	 * Returns a new instance of {@link Cache}. The returned instance is designed to be accessed and modified by
 	 * multiple threads concurrently, so it is guaranteed to be {@link java.io.Serializable}.
 	 *
@@ -129,7 +97,7 @@ public abstract class CacheFactory implements FacesWrapper<CacheFactory> {
 	 * multiple threads concurrently, so it is guaranteed to be {@link java.io.Serializable}. The returned cache will
 	 * avoid exceeding the maximum cache capacity by using a least-recently-used algorithm which may cause a significant
 	 * performance impact when compared to a cache that does not enforce a maximum size (for example, a cache returned
-	 * from {@link #getConcurrentCache()} or {@link #getConcurrentCache(int)}).
+	 * from {@link #getConcurrentCache(int)}).
 	 *
 	 * @param   <K>              The type of the cache's keys.
 	 * @param   <V>              The type of the cache's values.
