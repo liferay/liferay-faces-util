@@ -15,43 +15,14 @@
  */
 package com.liferay.faces.util.cache.internal;
 
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-
 import com.liferay.faces.util.cache.Cache;
 import com.liferay.faces.util.cache.CacheFactory;
-import com.liferay.faces.util.config.WebConfigParam;
 
 
 /**
  * @author  Kyle Stiemann
  */
 public class CacheFactoryImpl extends CacheFactory {
-
-	// Private Final Data Members
-	private final int defaultInitialCacheCapacity;
-
-	public CacheFactoryImpl() {
-
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-
-		if (facesContext != null) {
-
-			ExternalContext externalContext = facesContext.getExternalContext();
-
-			defaultInitialCacheCapacity = WebConfigParam.DefaultInitialCacheCapacity.getIntegerValue(externalContext);
-		}
-
-		// Otherwise we are in a test environment so use the default value.
-		else {
-			defaultInitialCacheCapacity = WebConfigParam.DefaultInitialCacheCapacity.getDefaultIntegerValue();
-		}
-	}
-
-	@Override
-	public <K, V> Cache<K, V> getConcurrentCache() {
-		return getConcurrentCache(defaultInitialCacheCapacity);
-	}
 
 	@Override
 	public <K, V> Cache<K, V> getConcurrentCache(int initialCapacity) throws IllegalArgumentException {

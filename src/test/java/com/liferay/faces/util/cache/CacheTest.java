@@ -37,6 +37,9 @@ public class CacheTest {
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(CacheTest.class);
 
+	// Private Constants
+	private static final int DEFAULT_INITIAL_CACHE_CAPACITY = 16;
+
 	@Test
 	public void runCacheFactoryIllegalArgumentExceptionTest() {
 
@@ -57,8 +60,7 @@ public class CacheTest {
 			}
 		}
 
-		int defaultInitialCacheCapacity = WebConfigParam.DefaultInitialCacheCapacity.getDefaultIntegerValue();
-		int[] validInitialCacheCapacityValues = new int[] { 0, defaultInitialCacheCapacity, Integer.MAX_VALUE };
+		int[] validInitialCacheCapacityValues = new int[] { 0, DEFAULT_INITIAL_CACHE_CAPACITY, Integer.MAX_VALUE };
 
 		for (int validInitialCacheCapacityValue : validInitialCacheCapacityValues) {
 
@@ -78,7 +80,7 @@ public class CacheTest {
 
 			try {
 
-				cacheFactory.getConcurrentLRUCache(defaultInitialCacheCapacity, invalidMaxCacheCapacityValue);
+				cacheFactory.getConcurrentLRUCache(DEFAULT_INITIAL_CACHE_CAPACITY, invalidMaxCacheCapacityValue);
 				throw new AssertionError(
 					"Expected IllegalArgumentException was not thrown when max cache capacity of " +
 					invalidMaxCacheCapacityValue + " was passed.");
@@ -93,7 +95,7 @@ public class CacheTest {
 		for (int validMaxCacheCapacityValue : validMaxCacheCapacityValues) {
 
 			try {
-				cacheFactory.getConcurrentLRUCache(defaultInitialCacheCapacity, validMaxCacheCapacityValue);
+				cacheFactory.getConcurrentLRUCache(DEFAULT_INITIAL_CACHE_CAPACITY, validMaxCacheCapacityValue);
 			}
 			catch (IllegalArgumentException e) {
 				throw new AssertionError("Unexpected IllegalArgumentException was thrown when max cache capacity of " +
@@ -106,10 +108,10 @@ public class CacheTest {
 	public void runConcurrentCacheTest() throws Exception {
 
 		CacheFactoryImpl cacheFactoryImpl = new CacheFactoryImpl();
-		Cache<String, String> cache1 = cacheFactoryImpl.getConcurrentCache();
+		Cache<String, String> cache1 = cacheFactoryImpl.getConcurrentCache(DEFAULT_INITIAL_CACHE_CAPACITY);
 		testCache(cache1, 1000);
 
-		final Cache<String, String> cache2 = cacheFactoryImpl.getConcurrentCache();
+		final Cache<String, String> cache2 = cacheFactoryImpl.getConcurrentCache(DEFAULT_INITIAL_CACHE_CAPACITY);
 		final Queue<AssertionError> testFailures = new ConcurrentLinkedQueue<AssertionError>();
 		final Queue<Throwable> testErrors = new ConcurrentLinkedQueue<Throwable>();
 		testConcurrentCache(cache2, testErrors, testFailures);
@@ -119,20 +121,19 @@ public class CacheTest {
 	public void runConcurrentLRUCacheTest() throws Exception {
 
 		CacheFactoryImpl cacheFactoryImpl = new CacheFactoryImpl();
-		int defaultInitialCacheCapacity = WebConfigParam.DefaultInitialCacheCapacity.getDefaultIntegerValue();
 		int maxCacheCapacity = 1000;
-		Cache<String, String> cache1 = cacheFactoryImpl.getConcurrentLRUCache(defaultInitialCacheCapacity,
+		Cache<String, String> cache1 = cacheFactoryImpl.getConcurrentLRUCache(DEFAULT_INITIAL_CACHE_CAPACITY,
 				maxCacheCapacity);
 		testCache(cache1, maxCacheCapacity);
 
-		final Cache<String, String> cache2 = cacheFactoryImpl.getConcurrentLRUCache(defaultInitialCacheCapacity, 10);
+		final Cache<String, String> cache2 = cacheFactoryImpl.getConcurrentLRUCache(DEFAULT_INITIAL_CACHE_CAPACITY, 10);
 		final Queue<Throwable> testErrors = new ConcurrentLinkedQueue<Throwable>();
 		final Queue<AssertionError> testFailures = new ConcurrentLinkedQueue<AssertionError>();
 		testConcurrentCache(cache2, testErrors, testFailures);
 
 		maxCacheCapacity = 10;
 
-		final Cache<String, String> cache3 = cacheFactoryImpl.getConcurrentLRUCache(defaultInitialCacheCapacity,
+		final Cache<String, String> cache3 = cacheFactoryImpl.getConcurrentLRUCache(DEFAULT_INITIAL_CACHE_CAPACITY,
 				maxCacheCapacity);
 		testConcurrentLRUCache(cache3, maxCacheCapacity, testErrors, testFailures);
 	}
