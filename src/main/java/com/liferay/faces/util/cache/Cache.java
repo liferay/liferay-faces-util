@@ -19,6 +19,8 @@ import java.util.Set;
 
 
 /**
+ * This class contains a minimal set of methods required to manipulate a cache of key+value pairs.
+ *
  * @author  Kyle Stiemann
  * @since   3.1
  * @since   2.1
