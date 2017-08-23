@@ -22,7 +22,7 @@ import javax.faces.context.ExternalContext;
 
 import com.liferay.faces.util.cache.Cache;
 import com.liferay.faces.util.cache.CacheFactory;
-import com.liferay.faces.util.factory.FactoryExtensionFinder;
+import com.liferay.faces.util.config.WebConfigParam;
 
 
 /**
@@ -35,11 +35,11 @@ public abstract class I18nMapCompat implements Map<String, Object>, Serializable
 	// serialVersionUID
 	private static final long serialVersionUID = 170055432633295830L;
 
+	// Static field must be declared volatile in order for the double-check idiom to work (requires JRE 1.5+)
+	private static volatile Cache<String, String> messageCache;
+
 	// Protected Data Members
 	protected boolean cacheEnabled;
-
-	// Instance field must be declared volatile in order for the double-check idiom to work (requires JRE 1.5+)
-	private volatile Boolean cacheInitialized;
 
 	public I18nMapCompat() {
 		this.cacheEnabled = true;
@@ -51,37 +51,31 @@ public abstract class I18nMapCompat implements Map<String, Object>, Serializable
 	 */
 	protected Cache<String, String> getMessageCache(ExternalContext externalContext) {
 
-		Map<String, Object> applicationMap = externalContext.getApplicationMap();
-		Cache<String, String> messageCache = (Cache<String, String>) applicationMap.get(I18nMap.class.getName());
-		Boolean cacheInitialized = this.cacheInitialized;
+		Cache<String, String> messageCache = I18nMapCompat.messageCache;
 
 		// First check without locking (not yet thread-safe)
-		if (cacheInitialized == null) {
+		if (messageCache == null) {
 
-			synchronized (this) {
+			synchronized (I18nMapCompat.class) {
 
-				cacheInitialized = this.cacheInitialized;
+				messageCache = I18nMapCompat.messageCache;
 
 				// Second check with locking (thread-safe)
-				if (cacheInitialized == null) {
+				if (messageCache == null) {
 
-					String maxCacheCapacityString = externalContext.getInitParameter(
-							"com.liferay.faces.util.el.i18n.maxCacheCapacity");
+					int initialCacheCapacity = WebConfigParam.I18nELMapInitialCacheCapacity.getIntegerValue(
+							externalContext);
+					WebConfigParam I18nELMapMaxCacheCapacity = WebConfigParam.I18nELMapMaxCacheCapacity;
+					int maxCacheCapacity = I18nELMapMaxCacheCapacity.getIntegerValue(externalContext);
 
-					if (maxCacheCapacityString != null) {
-
-						CacheFactory cacheFactory = (CacheFactory) FactoryExtensionFinder.getFactory(externalContext,
-								CacheFactory.class);
-						int initialCacheCapacity = cacheFactory.getDefaultInitialCapacity();
-						int maxCacheCapacity = Integer.parseInt(maxCacheCapacityString);
-						messageCache = cacheFactory.getConcurrentCache(initialCacheCapacity, maxCacheCapacity);
+					if (maxCacheCapacity != I18nELMapMaxCacheCapacity.getDefaultIntegerValue()) {
+						messageCache = I18nMapCompat.messageCache = CacheFactory.getConcurrentLRUCacheInstance(
+									externalContext, initialCacheCapacity, maxCacheCapacity);
 					}
 					else {
-						messageCache = CacheFactory.getConcurrentCacheInstance(externalContext);
+						messageCache = I18nMapCompat.messageCache = CacheFactory.getConcurrentCacheInstance(
+									externalContext, initialCacheCapacity);
 					}
-
-					applicationMap.put(I18nMap.class.getName(), messageCache);
-					cacheInitialized = this.cacheInitialized = true;
 				}
 			}
 		}

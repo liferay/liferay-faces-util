@@ -171,13 +171,14 @@ public abstract class I18nBundleBase extends I18nWrapper implements Serializable
 
 	/**
 	 * Returns a new message cache to be used by {@link I18nBundleBase}. The default implementation returns a Cache
-	 * instance obtained from {@link CacheFactory#getConcurrentCacheInstance(javax.faces.context.ExternalContext)}. This
-	 * method is called from the constructor of I18nBundleBase, so this method must not cause side effects and should
-	 * not expect I18nBundleBase (or its subclass) to be fully initialized.
+	 * instance obtained from {@link CacheFactory#getConcurrentCacheInstance(javax.faces.context.ExternalContext, int)}
+	 * (passing 16 as the initial cache capacity). The cache will be stored in the application map. This method is
+	 * called from the constructor of I18nBundleBase, so this method must not cause side effects and should not expect
+	 * I18nBundleBase (or its subclass) to be fully initialized.
 	 *
 	 * @param  externalContext  The external context associated with the current {@link FacesContext}.
 	 */
 	protected Cache<String, String> newConcurrentMessageCache(ExternalContext externalContext) {
-		return CacheFactory.getConcurrentCacheInstance(externalContext);
+		return CacheFactory.getConcurrentCacheInstance(externalContext, 16);
 	}
 }

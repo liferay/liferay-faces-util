@@ -28,37 +28,48 @@ import com.liferay.faces.util.i18n.I18n;
 public enum WebConfigParam implements ConfigParam<ExternalContext> {
 
 	/**
-	 * Integer indicating the default initial cache capacity for {@link com.liferay.faces.util.cache.Cache} instances
-	 * created by {@link CacheFactory}. The default value of this param is 16. For more details, see {@link
-	 * java.util.HashMap#HashMap()}
+	 * Integer indicating the initial cache capacity for the message cache used by the i18n EL utility. The default
+	 * value of this param is 16. For more details, see {@link CacheFactory#getConcurrentCache(int)} and {@link
+	 * java.util.HashMap#HashMap()}.
 	 *
 	 * @since  1.1
 	 * @since  2.1
 	 * @since  3.1
 	 */
-	DefaultInitialCacheCapacity(CacheFactory.class.getName() + ".defaultInitialCacheCapacity", 16),
-
-	/**
-	 * Integer indicating the default maximum cache capacity for the message cache used by the i18n EL utility. The
-	 * default value of this param is -1 which indicates that no maximum should be enforced. For more details, see
-	 * {@link CacheFactory#getConcurrentCache(int, int)}.
-	 *
-	 * @since  1.1
-	 * @since  2.1
-	 * @since  3.1
-	 */
-	I18nELMapMaxCacheCapacity("com.liferay.faces.util.el.i18n.maxCacheCapacity", -1),
+	I18nELMapInitialCacheCapacity("com.liferay.faces.util.el.i18n.INITIAL_CACHE_CAPACITY", 16),
 
 	/**
 	 * Integer indicating the default maximum cache capacity for the resource bundle cache used by the i18n EL utility.
 	 * The default value of this param is -1 which indicates that no maximum should be enforced. For more details, see
-	 * {@link CacheFactory#getConcurrentCache(int, int)}.
+	 * {@link CacheFactory#getConcurrentCache(int)} and {@link java.util.HashMap#HashMap()}.
 	 *
 	 * @since  1.1
 	 * @since  2.1
 	 * @since  3.1
 	 */
-	I18nMaxCacheCapacity(I18n.class.getName() + ".maxCacheCapacity", -1),
+	I18nInitialCacheCapacity(I18n.class.getName() + ".INITIAL_CACHE_CAPACITY", 16),
+
+	/**
+	 * Integer indicating the default maximum cache capacity for the message cache used by the i18n EL utility. The
+	 * default value of this param is -1 which indicates that no maximum should be enforced. For more details, see
+	 * {@link CacheFactory#getConcurrentCache(int)} and {@link CacheFactory#getConcurrentLRUCache(int, int)}.
+	 *
+	 * @since  1.1
+	 * @since  2.1
+	 * @since  3.1
+	 */
+	I18nELMapMaxCacheCapacity("com.liferay.faces.util.el.i18n.MAX_CACHE_CAPACITY", -1),
+
+	/**
+	 * Integer indicating the maximum cache capacity for the resource bundle cache used by the i18n EL utility. The
+	 * default value of this param is -1 which indicates that no maximum should be enforced. For more details, see
+	 * {@link CacheFactory#getConcurrentCache(int)} and {@link CacheFactory#getConcurrentLRUCache(int, int)}.
+	 *
+	 * @since  1.1
+	 * @since  2.1
+	 * @since  3.1
+	 */
+	I18nMaxCacheCapacity(I18n.class.getName() + ".MAX_CACHE_CAPACITY", -1),
 
 	/** Boolean indicating whether or not XML entities should be resolved */
 	ResolveXMLEntities("com.liferay.faces.util.resolveXMLEntities", "com.liferay.faces.bridge.resolveXMLEntities",
