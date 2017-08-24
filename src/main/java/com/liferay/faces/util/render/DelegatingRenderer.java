@@ -43,28 +43,28 @@ public interface DelegatingRenderer {
 	/**
 	 * Convenience method that calls the delegate renderer's {@link Renderer#encodeBegin(FacesContext, UIComponent)},
 	 * {@link Renderer#encodeChildren(FacesContext, UIComponent)}, and {@link Renderer#encodeEnd(FacesContext,
-	 * UIComponent)} methods using the specified {@link DelegationResponseWriter}.
+	 * UIComponent)} methods using the specified {@link ResponseWriter}.
 	 */
 	public void encodeAll(FacesContext facesContext, UIComponent uiComponent, ResponseWriter delegationResponseWriter)
 		throws IOException;
 
 	/**
 	 * Calls the delegate renderer's {@link Renderer#encodeBegin(FacesContext, UIComponent)} method using the specified
-	 * {@link DelegationResponseWriter}.
+	 * {@link ResponseWriter}.
 	 */
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent, ResponseWriter delegationResponseWriter)
 		throws IOException;
 
 	/**
 	 * Calls the delegate renderer's {@link Renderer#encodeChildren(FacesContext, UIComponent)} method using the
-	 * specified {@link DelegationResponseWriter}.
+	 * specified {@link ResponseWriter}.
 	 */
 	public void encodeChildren(FacesContext facesContext, UIComponent uiComponent,
 		ResponseWriter delegationResponseWriter) throws IOException;
 
 	/**
 	 * Calls the delegate renderer's {@link Renderer#encodeEnd(FacesContext, UIComponent)} method using the specified
-	 * {@link DelegationResponseWriter}.
+	 * {@link ResponseWriter}.
 	 */
 	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent, ResponseWriter delegationResponseWriter)
 		throws IOException;

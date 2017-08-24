@@ -16,8 +16,8 @@
 package com.liferay.faces.util.component;
 
 /**
- * This interface should be implemented by classes that extend {@link UIComponent} if they render HTML that is styleable
- * with CSS class names.
+ * This interface should be implemented by classes that extend {@link javax.faces.component.UIComponent} if they render
+ * HTML that is styleable with CSS class names.
  *
  * @author  Neil Griffin
  */

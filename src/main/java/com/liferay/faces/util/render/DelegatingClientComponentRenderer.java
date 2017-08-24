@@ -29,14 +29,14 @@ public interface DelegatingClientComponentRenderer extends DelegatingRenderer, C
 
 	/**
 	 * Calls the delegate renderer's {@link ClientComponentRenderer#encodeMarkupBegin(FacesContext, UIComponent)} method
-	 * with the specified {@link DelegationResponseWriter}.
+	 * with the specified {@link ResponseWriter}.
 	 */
 	public void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent,
 		ResponseWriter delegationResponseWriter) throws IOException;
 
 	/**
 	 * Calls the delegate renderer's {@link ClientComponentRenderer#encodeMarkupEnd(FacesContext, UIComponent)} method
-	 * with the specified {@link DelegationResponseWriter}.
+	 * with the specified {@link ResponseWriter}.
 	 */
 	public void encodeMarkupEnd(FacesContext facesContext, UIComponent uiComponent,
 		ResponseWriter delegationResponseWriter) throws IOException;
