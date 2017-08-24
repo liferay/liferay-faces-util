@@ -70,12 +70,13 @@ public final class ResourceUtil {
 	/**
 	 * Converts a String to an {@link InputStream}.
 	 *
-	 * @param   string  the string to use
-	 * @param   encoding  the encoding to use for the string
+	 * @param   string    The string that is to be encoded and converted into an {@link InputStream}.
+	 * @param   encoding  The character set that is to be used for encoding the string prior to conversion.
 	 *
-	 * @return  the InputStream representation of the String.
+	 * @return  The {@link InputStream} representation of the specified string, after having first been encoded
+	 *          according to the specified character set.
 	 *
-	 * @throws  UnsupportedEncodingException  problem with the encoding
+	 * @throws  UnsupportedEncodingException  If the specified encoding character set is not supported.
 	 */
 	public static InputStream toInputStream(String string, String encoding) throws UnsupportedEncodingException {
 		return new ByteArrayInputStream(string.getBytes(encoding));
@@ -90,9 +91,9 @@ public final class ResourceUtil {
 	 *                       specify this value, use {@link ResourceUtil#toInputStream(java.lang.String,
 	 *                       java.lang.String)} which provides a default of 1024.
 	 *
-	 * @return  the string content of the InputStream.
+	 * @return  The string content of the InputStream.
 	 *
-	 * @throws  IOException  problem with IO
+	 * @throws  IOException  If an error occurs while reading the specified input stream.
 	 */
 	public static String toString(InputStream inputStream, String encoding, int bufferSize) throws IOException {
 
