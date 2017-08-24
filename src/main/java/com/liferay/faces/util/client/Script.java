@@ -16,8 +16,8 @@
 package com.liferay.faces.util.client;
 
 /**
- * A Script which can be rendered on the client via {@link
- * com.liferay.faces.util.context.FacesRequestContext#addScript(com.liferay.faces.util.client.Script)}.
+ * A Script which can be rendered on the client via
+ * com.liferay.faces.util.context.FacesRequestContext#addScript(com.liferay.faces.util.client.Script).
  *
  * @author  Kyle Stiemann
  */

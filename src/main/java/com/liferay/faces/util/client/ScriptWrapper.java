@@ -27,7 +27,7 @@ import com.liferay.faces.util.helper.Wrapper;
 public abstract class ScriptWrapper implements Script, Wrapper<Script> {
 
 	/**
-	 * @see  {@link Script#getModules()}
+	 * @see  Script#getModules()
 	 */
 	// Java 1.6+ @Override
 	public String[] getModules() {
@@ -35,7 +35,7 @@ public abstract class ScriptWrapper implements Script, Wrapper<Script> {
 	}
 
 	/**
-	 * @see  {@link Script#getModulesType()}
+	 * @see  Script#getModulesType()
 	 */
 	@Override
 	public ModulesType getModulesType() {
@@ -43,7 +43,7 @@ public abstract class ScriptWrapper implements Script, Wrapper<Script> {
 	}
 
 	/**
-	 * @see  {@link Script#getSourceCode()}
+	 * @see  Script#getSourceCode()
 	 */
 	// Java 1.6+ @Override
 	public String getSourceCode() {
