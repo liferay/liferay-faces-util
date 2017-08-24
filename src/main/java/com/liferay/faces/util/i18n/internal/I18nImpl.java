@@ -59,10 +59,9 @@ public class I18nImpl implements I18n, Serializable {
 			ExternalContext externalContext = startupFacesContext.getExternalContext();
 			Cache<Locale, ResourceBundle> facesResourceBundleCache;
 			int initialCacheCapacity = WebConfigParam.I18nInitialCacheCapacity.getIntegerValue(externalContext);
-			WebConfigParam I18nMaxCacheCapacity = WebConfigParam.I18nMaxCacheCapacity;
-			int maxCacheCapacity = I18nMaxCacheCapacity.getIntegerValue(externalContext);
+			int maxCacheCapacity = WebConfigParam.I18nMaxCacheCapacity.getIntegerValue(externalContext);
 
-			if (maxCacheCapacity != I18nMaxCacheCapacity.getDefaultIntegerValue()) {
+			if (maxCacheCapacity > -1) {
 				facesResourceBundleCache = CacheFactory.getConcurrentLRUCacheInstance(externalContext,
 						initialCacheCapacity, maxCacheCapacity);
 			}
