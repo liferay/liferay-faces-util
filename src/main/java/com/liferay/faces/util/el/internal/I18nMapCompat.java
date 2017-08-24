@@ -82,10 +82,9 @@ public abstract class I18nMapCompat implements Map<String, Object>, SystemEventL
 			Map<String, Object> applicationMap = externalContext.getApplicationMap();
 			Cache<String, String> messageCache;
 			int initialCacheCapacity = WebConfigParam.I18nELMapInitialCacheCapacity.getIntegerValue(externalContext);
-			WebConfigParam I18nELMapMaxCacheCapacity = WebConfigParam.I18nELMapMaxCacheCapacity;
-			int maxCacheCapacity = I18nELMapMaxCacheCapacity.getIntegerValue(externalContext);
+			int maxCacheCapacity = WebConfigParam.I18nELMapMaxCacheCapacity.getIntegerValue(externalContext);
 
-			if (maxCacheCapacity != I18nELMapMaxCacheCapacity.getDefaultIntegerValue()) {
+			if (maxCacheCapacity > -1) {
 				messageCache = CacheFactory.getConcurrentLRUCacheInstance(externalContext, initialCacheCapacity,
 						maxCacheCapacity);
 			}
