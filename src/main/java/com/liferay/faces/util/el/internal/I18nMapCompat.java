@@ -65,10 +65,9 @@ public abstract class I18nMapCompat implements Map<String, Object>, Serializable
 
 					int initialCacheCapacity = WebConfigParam.I18nELMapInitialCacheCapacity.getIntegerValue(
 							externalContext);
-					WebConfigParam I18nELMapMaxCacheCapacity = WebConfigParam.I18nELMapMaxCacheCapacity;
-					int maxCacheCapacity = I18nELMapMaxCacheCapacity.getIntegerValue(externalContext);
+					int maxCacheCapacity = WebConfigParam.I18nELMapMaxCacheCapacity.getIntegerValue(externalContext);
 
-					if (maxCacheCapacity != I18nELMapMaxCacheCapacity.getDefaultIntegerValue()) {
+					if (maxCacheCapacity > -1) {
 						messageCache = I18nMapCompat.messageCache = CacheFactory.getConcurrentLRUCacheInstance(
 									externalContext, initialCacheCapacity, maxCacheCapacity);
 					}
