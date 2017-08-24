@@ -40,22 +40,22 @@ import com.liferay.faces.util.context.FacesRequestContext;
 public abstract class ClientComponentRendererBase extends Renderer implements ClientComponentRenderer {
 
 	/**
-	 * @see  {@link ClientComponentRenderer#encodeJavaScript(javax.faces.context.FacesContext,
-	 *       javax.faces.component.UIComponent)}
+	 * @see  ClientComponentRenderer#encodeJavaScript(javax.faces.context.FacesContext,
+	 *       javax.faces.component.UIComponent)
 	 */
 	@Override
 	public abstract void encodeJavaScript(FacesContext facesContext, UIComponent uiComponent) throws IOException;
 
 	/**
-	 * @see  {@link ClientComponentRenderer#encodeMarkupBegin(javax.faces.context.FacesContext,
-	 *       javax.faces.component.UIComponent)}
+	 * @see  ClientComponentRenderer#encodeMarkupBegin(javax.faces.context.FacesContext,
+	 *       javax.faces.component.UIComponent)
 	 */
 	@Override
 	public abstract void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException;
 
 	/**
-	 * @see  {@link ClientComponentRenderer#encodeMarkupEnd(javax.faces.context.FacesContext,
-	 *       javax.faces.component.UIComponent)}
+	 * @see  ClientComponentRenderer#encodeMarkupEnd(javax.faces.context.FacesContext,
+	 *       javax.faces.component.UIComponent)
 	 */
 	@Override
 	public abstract void encodeMarkupEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException;
@@ -68,8 +68,8 @@ public abstract class ClientComponentRendererBase extends Renderer implements Cl
 	}
 
 	/**
-	 * @see  {@link ClientComponentRenderer#decodeClientState(javax.faces.context.FacesContext,
-	 *       javax.faces.component.UIComponent)}
+	 * @see  ClientComponentRenderer#decodeClientState(javax.faces.context.FacesContext,
+	 *       javax.faces.component.UIComponent)
 	 */
 	@Override
 	public void decodeClientState(FacesContext facesContext, UIComponent uiComponent) {
@@ -85,8 +85,8 @@ public abstract class ClientComponentRendererBase extends Renderer implements Cl
 	}
 
 	/**
-	 * @see  {@link ClientComponentRenderer#encodeClientState(javax.faces.context.FacesContext,
-	 *       javax.faces.context.ResponseWriter, javax.faces.component.UIComponent)}
+	 * @see  ClientComponentRenderer#encodeClientState(javax.faces.context.FacesContext,
+	 *       javax.faces.context.ResponseWriter, javax.faces.component.UIComponent)
 	 */
 	@Override
 	public void encodeClientState(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent)
