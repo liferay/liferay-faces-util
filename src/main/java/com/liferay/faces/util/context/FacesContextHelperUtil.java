@@ -601,7 +601,7 @@ public class FacesContextHelperUtil {
 	}
 
 	/**
-	 * Returns The request context path. {@link FacesContext#getExternalContext(()} {@link
+	 * Returns The request context path. {@link FacesContext#getExternalContext()} {@link
 	 * ExternalContext#getRequestContextPath()}
 	 */
 	public static String getRequestContextPath() {
@@ -613,7 +613,7 @@ public class FacesContextHelperUtil {
 	}
 
 	/**
-	 * Returns The request context path. {@link FacesContext#getExternalContext(()} {@link
+	 * Returns The request context path. {@link FacesContext#getExternalContext()} {@link
 	 * ExternalContext#getRequestContextPath()}
 	 */
 	public static String getRequestContextPath(FacesContext facesContext) {
@@ -733,7 +733,7 @@ public class FacesContextHelperUtil {
 	/**
 	 * Returns the map of request parameters from the ExternalContext.
 	 *
-	 * @see  {@link ExternalContext#getRequestParameterMap()}.
+	 * @see  ExternalContext#getRequestParameterMap()
 	 */
 	public static Map<String, String> getRequestParameterMap() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -746,7 +746,7 @@ public class FacesContextHelperUtil {
 	/**
 	 * Returns the map of request parameters from the ExternalContext.
 	 *
-	 * @see  {@link ExternalContext#getRequestParameterMap()}.
+	 * @see  ExternalContext#getRequestParameterMap()
 	 */
 	public static Map<String, String> getRequestParameterMap(FacesContext facesContext) {
 		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
@@ -1085,7 +1085,7 @@ public class FacesContextHelperUtil {
 	/**
 	 * Causes the current view's component tree to be discarded and re-rendered.
 	 *
-	 * @see  {@link FacesContextHelper#resetView(boolean)}
+	 * @see  FacesContextHelper#resetView(boolean)
 	 */
 	public static void resetView() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -1113,7 +1113,7 @@ public class FacesContextHelperUtil {
 	/**
 	 * Causes the current view's component tree to be discarded and re-rendered.
 	 *
-	 * @see  {@link FacesContextHelper#resetView(boolean)}
+	 * @see  FacesContextHelper#resetView(boolean)
 	 */
 	public static void resetView(FacesContext facesContext) {
 		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(

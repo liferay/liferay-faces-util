@@ -32,13 +32,13 @@ public abstract class DelegatingClientComponentRendererBase extends ClientCompon
 	implements DelegatingClientComponentRenderer {
 
 	/**
-	 * @see  {@link DelegatingRenderer#getDelegateComponentFamily()}
+	 * @see  DelegatingRenderer#getDelegateComponentFamily()
 	 */
 	@Override
 	public abstract String getDelegateComponentFamily();
 
 	/**
-	 * @see  {@link DelegatingRenderer#getDelegateRendererType()}
+	 * @see  DelegatingRenderer#getDelegateRendererType()
 	 */
 	@Override
 	public abstract String getDelegateRendererType();
@@ -60,7 +60,7 @@ public abstract class DelegatingClientComponentRendererBase extends ClientCompon
 	}
 
 	/**
-	 * @see  {@link DelegatingRenderer#encodeAll(javax.faces.context.FacesContext, javax.faces.component.UIComponent)}
+	 * @see  DelegatingRenderer#encodeAll(javax.faces.context.FacesContext, javax.faces.component.UIComponent)
 	 */
 	@Override
 	public void encodeAll(FacesContext facesContext, UIComponent uiComponent) throws IOException {
@@ -72,8 +72,8 @@ public abstract class DelegatingClientComponentRendererBase extends ClientCompon
 	}
 
 	/**
-	 * @see  {@link DelegatingRenderer#encodeAll(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
-	 *       javax.faces.context.ResponseWriter)}
+	 * @see  DelegatingRenderer#encodeAll(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
+	 *       javax.faces.context.ResponseWriter)
 	 */
 	@Override
 	public void encodeAll(FacesContext facesContext, UIComponent uiComponent, ResponseWriter delegationResponseWriter)
@@ -98,8 +98,8 @@ public abstract class DelegatingClientComponentRendererBase extends ClientCompon
 	}
 
 	/**
-	 * @see  {@link DelegatingRenderer#encodeBegin(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
-	 *       javax.faces.context.ResponseWriter)}
+	 * @see  DelegatingRenderer#encodeBegin(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
+	 *       javax.faces.context.ResponseWriter)
 	 */
 	@Override
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent, ResponseWriter delegationResponseWriter)
@@ -122,8 +122,8 @@ public abstract class DelegatingClientComponentRendererBase extends ClientCompon
 	}
 
 	/**
-	 * @see  {@link DelegatingRenderer#encodeChildren(javax.faces.context.FacesContext,
-	 *       javax.faces.component.UIComponent, javax.faces.context.ResponseWriter)}
+	 * @see  DelegatingRenderer#encodeChildren(javax.faces.context.FacesContext,
+	 *       javax.faces.component.UIComponent, javax.faces.context.ResponseWriter)
 	 */
 	@Override
 	public void encodeChildren(FacesContext facesContext, UIComponent uiComponent,
@@ -146,8 +146,8 @@ public abstract class DelegatingClientComponentRendererBase extends ClientCompon
 	}
 
 	/**
-	 * @see  {@link DelegatingRenderer#encodeEnd(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
-	 *       javax.faces.context.ResponseWriter)}
+	 * @see  DelegatingRenderer#encodeEnd(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
+	 *       javax.faces.context.ResponseWriter)
 	 */
 	@Override
 	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent, ResponseWriter delegationResponseWriter)
@@ -163,8 +163,8 @@ public abstract class DelegatingClientComponentRendererBase extends ClientCompon
 	}
 
 	/**
-	 * @see  {@link ClientComponentRenderer#encodeMarkupBegin(javax.faces.context.FacesContext,
-	 *       javax.faces.component.UIComponent)}
+	 * @see  ClientComponentRenderer#encodeMarkupBegin(javax.faces.context.FacesContext,
+	 *       javax.faces.component.UIComponent)
 	 */
 	@Override
 	public void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
@@ -173,8 +173,8 @@ public abstract class DelegatingClientComponentRendererBase extends ClientCompon
 	}
 
 	/**
-	 * @see  {@link DelegatingClientComponentRenderer#encodeMarkupBegin(javax.faces.context.FacesContext,
-	 *       javax.faces.component.UIComponent, javax.faces.context.ResponseWriter)}
+	 * @see  DelegatingClientComponentRenderer#encodeMarkupBegin(javax.faces.context.FacesContext,
+	 *       javax.faces.component.UIComponent, javax.faces.context.ResponseWriter)
 	 */
 	@Override
 	public void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent,
@@ -189,8 +189,8 @@ public abstract class DelegatingClientComponentRendererBase extends ClientCompon
 	}
 
 	/**
-	 * @see  {@link ClientComponentRenderer#encodeMarkupEnd(javax.faces.context.FacesContext,
-	 *       javax.faces.component.UIComponent)}
+	 * @see  ClientComponentRenderer#encodeMarkupEnd(javax.faces.context.FacesContext,
+	 *       javax.faces.component.UIComponent)
 	 */
 	@Override
 	public void encodeMarkupEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
@@ -199,8 +199,8 @@ public abstract class DelegatingClientComponentRendererBase extends ClientCompon
 	}
 
 	/**
-	 * @see  {@link DelegatingClientComponentRenderer#encodeMarkupEnd(javax.faces.context.FacesContext,
-	 *       javax.faces.component.UIComponent, javax.faces.context.ResponseWriter)}
+	 * @see  DelegatingClientComponentRenderer#encodeMarkupEnd(javax.faces.context.FacesContext,
+	 *       javax.faces.component.UIComponent, javax.faces.context.ResponseWriter)
 	 */
 	@Override
 	public void encodeMarkupEnd(FacesContext facesContext, UIComponent uiComponent,
@@ -225,7 +225,7 @@ public abstract class DelegatingClientComponentRendererBase extends ClientCompon
 	}
 
 	/**
-	 * @see  {@link DelegatingRenderer#getDelegateRenderer(javax.faces.context.FacesContext)}
+	 * @see  DelegatingRenderer#getDelegateRenderer(javax.faces.context.FacesContext)
 	 */
 	@Override
 	public Renderer getDelegateRenderer(FacesContext facesContext) {

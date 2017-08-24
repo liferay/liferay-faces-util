@@ -31,7 +31,7 @@ import javax.faces.context.FacesContext;
 public abstract class ResourceVerifierWrapper implements ResourceVerifier, FacesWrapper<ResourceVerifier> {
 
 	/**
-	 * @see  {@link ResourceVerifier#isDependencySatisfied(UIComponent)}
+	 * @see  ResourceVerifier#isDependencySatisfied(FacesContext, UIComponent)
 	 */
 	@Override
 	public boolean isDependencySatisfied(FacesContext facesContext, UIComponent componentResource) {

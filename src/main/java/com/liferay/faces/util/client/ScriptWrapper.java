@@ -27,7 +27,7 @@ import javax.faces.FacesWrapper;
 public abstract class ScriptWrapper implements Script, FacesWrapper<Script> {
 
 	/**
-	 * @see  {@link Script#getModules()}
+	 * @see  Script#getModules()
 	 */
 	@Override
 	public String[] getModules() {
@@ -35,7 +35,7 @@ public abstract class ScriptWrapper implements Script, FacesWrapper<Script> {
 	}
 
 	/**
-	 * @see  {@link Script#getModulesType()}
+	 * @see  Script#getModulesType()
 	 */
 	@Override
 	public ModulesType getModulesType() {
@@ -43,7 +43,7 @@ public abstract class ScriptWrapper implements Script, FacesWrapper<Script> {
 	}
 
 	/**
-	 * @see  {@link Script#getSourceCode()}
+	 * @see  Script#getSourceCode()
 	 */
 	@Override
 	public String getSourceCode() {

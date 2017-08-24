@@ -65,7 +65,7 @@ public abstract class OnDemandDataModel<E> extends DataModel<E> implements Pagin
 	}
 
 	/**
-	 * @see  {@link javax.faces.model.DataModel#getRowCount()}
+	 * @see  javax.faces.model.DataModel#getRowCount()
 	 */
 	@Override
 	public int getRowCount() {
@@ -78,7 +78,7 @@ public abstract class OnDemandDataModel<E> extends DataModel<E> implements Pagin
 	}
 
 	/**
-	 * @see  {@link javax.faces.model.DataModel#getRowData()}
+	 * @see  javax.faces.model.DataModel#getRowData()
 	 */
 	@Override
 	public E getRowData() {
@@ -103,7 +103,7 @@ public abstract class OnDemandDataModel<E> extends DataModel<E> implements Pagin
 	}
 
 	/**
-	 * @see  {@link javax.faces.model.DataModel#getRowIndex()}
+	 * @see  javax.faces.model.DataModel#getRowIndex()
 	 */
 	@Override
 	public int getRowIndex() {
@@ -111,14 +111,14 @@ public abstract class OnDemandDataModel<E> extends DataModel<E> implements Pagin
 	}
 
 	/**
-	 * @see  {@link Paginated#getRowsPerPage()}
+	 * @see  Paginated#getRowsPerPage()
 	 */
 	public int getRowsPerPage() {
 		return rowsPerPage;
 	}
 
 	/**
-	 * @see  {@link Sortable#getSortCriteria()}
+	 * @see  Sortable#getSortCriteria()
 	 */
 	@Override
 	public List<SortCriterion> getSortCriteria() {
@@ -133,7 +133,7 @@ public abstract class OnDemandDataModel<E> extends DataModel<E> implements Pagin
 	}
 
 	/**
-	 * @see  {@link javax.faces.model.DataModel#getWrappedData()}
+	 * @see  javax.faces.model.DataModel#getWrappedData()
 	 */
 	@Override
 	public List<E> getWrappedData() {
@@ -154,7 +154,7 @@ public abstract class OnDemandDataModel<E> extends DataModel<E> implements Pagin
 	}
 
 	/**
-	 * @see  {@link javax.faces.model.DataModel#isRowAvailable()}
+	 * @see  javax.faces.model.DataModel#isRowAvailable()
 	 */
 	@Override
 	public boolean isRowAvailable() {
@@ -189,7 +189,7 @@ public abstract class OnDemandDataModel<E> extends DataModel<E> implements Pagin
 	}
 
 	/**
-	 * @see  {@link javax.faces.model.DataModel#setRowIndex(int)}
+	 * @see  javax.faces.model.DataModel#setRowIndex(int)
 	 */
 	@Override
 	public void setRowIndex(int rowIndex) {
@@ -222,14 +222,14 @@ public abstract class OnDemandDataModel<E> extends DataModel<E> implements Pagin
 	}
 
 	/**
-	 * @see  {@link Paginated#setRowsPerPage(int)}
+	 * @see  Paginated#setRowsPerPage(int)
 	 */
 	public void setRowsPerPage(int rowsPerPage) {
 		this.rowsPerPage = rowsPerPage;
 	}
 
 	/**
-	 * @see  {@link Sortable#setSortCriteria(java.util.List)}
+	 * @see  Sortable#setSortCriteria(java.util.List)
 	 */
 	@Override
 	public void setSortCriteria(List<SortCriterion> sortCriteria) {
@@ -245,7 +245,7 @@ public abstract class OnDemandDataModel<E> extends DataModel<E> implements Pagin
 	}
 
 	/**
-	 * @see  {@link javax.faces.model.DataModel#setWrappedData(Object)}
+	 * @see  javax.faces.model.DataModel#setWrappedData(Object)
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
