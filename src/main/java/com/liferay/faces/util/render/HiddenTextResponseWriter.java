@@ -23,7 +23,7 @@ import javax.faces.context.ResponseWriterWrapper;
 
 
 /**
- * This class is a {@link DelegationResponseWriter} that is designed to intercept the encoding of a {@link
+ * This class is a {@link ResponseWriter} that is designed to intercept the encoding of a {@link
  * HtmlInputText} component. This class ensures that the "id" attribute is written correctly and that the "type"
  * attribute is "hidden".
  *

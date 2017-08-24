@@ -19,9 +19,8 @@ import javax.faces.component.html.HtmlInputText;
 
 
 /**
- * This abstract class serves as a compatibility layer for file upload components. For JSF 2.2+ this class extends
- * {@link javax.faces.component.html.HtmlInputFile}. For prior versions of JSF it extends {@link
- * javax.faces.component.html.HtmlInputText}.
+ * This abstract class serves as a compatibility layer for file upload components.
+ * For versions prior to 2.2 of JSF it extends {@link javax.faces.component.html.HtmlInputText}.
  *
  * @author  Neil Griffin
  */
