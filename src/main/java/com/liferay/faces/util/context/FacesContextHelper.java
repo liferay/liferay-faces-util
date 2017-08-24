@@ -356,14 +356,14 @@ public interface FacesContextHelper {
 	/**
 	 * Returns the map of request parameters from the ExternalContext.
 	 *
-	 * @see  {@link ExternalContext#getRequestParameterMap()}.
+	 * @see  ExternalContext#getRequestParameterMap()
 	 */
 	public Map<String, String> getRequestParameterMap();
 
 	/**
 	 * Returns the map of request parameters from the ExternalContext.
 	 *
-	 * @see  {@link ExternalContext#getRequestParameterMap()}.
+	 * @see  ExternalContext#getRequestParameterMap()
 	 */
 	public Map<String, String> getRequestParameterMap(FacesContext facesContext);
 
@@ -557,14 +557,14 @@ public interface FacesContextHelper {
 	/**
 	 * Causes the current view's component tree to be discarded and re-rendered.
 	 *
-	 * @see  {@link #resetView(boolean)}.
+	 * @see  #resetView(boolean)
 	 */
 	public void resetView();
 
 	/**
 	 * Causes the current view's component tree to be discarded and re-rendered.
 	 *
-	 * @see  {@link #resetView(boolean)}.
+	 * @see  #resetView(boolean)
 	 */
 	public void resetView(FacesContext facesContext);
 
