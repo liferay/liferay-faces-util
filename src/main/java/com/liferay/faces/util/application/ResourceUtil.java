@@ -70,12 +70,12 @@ public final class ResourceUtil {
 	/**
 	 * Converts a String to an {@link InputStream}.
 	 *
-	 * @param   string
-	 * @param   encoding
+	 * @param   string  the string to use
+	 * @param   encoding  the encoding to use for the string
 	 *
 	 * @return  the InputStream representation of the String.
 	 *
-	 * @throws  UnsupportedEncodingException
+	 * @throws  UnsupportedEncodingException  problem with the encoding
 	 */
 	public static InputStream toInputStream(String string, String encoding) throws UnsupportedEncodingException {
 		return new ByteArrayInputStream(string.getBytes(encoding));
@@ -92,7 +92,7 @@ public final class ResourceUtil {
 	 *
 	 * @return  the string content of the InputStream.
 	 *
-	 * @throws  IOException
+	 * @throws  IOException  problem with IO
 	 */
 	public static String toString(InputStream inputStream, String encoding, int bufferSize) throws IOException {
 
