@@ -23,8 +23,8 @@ import com.liferay.faces.util.helper.Wrapper;
 
 
 /**
- * A factory for creating a {@link Script} which can be rendered on the client via {@link
- * com.liferay.faces.util.context.FacesRequestContext#addScript(com.liferay.faces.util.client.Script)}.
+ * A factory for creating a {@link Script} which can be rendered on the client via
+ * com.liferay.faces.util.context.FacesRequestContext#addScript(com.liferay.faces.util.client.Script).
  *
  * @author  Kyle Stiemann
  */
@@ -109,9 +109,9 @@ public abstract class ScriptFactory implements Wrapper<ScriptFactory> {
 	/**
 	 * Returns a new instance of {@link Script} with the specified source code. The returned instance is guaranteed to
 	 * be {@link java.io.Serializable} but not guaranteed to be thread-safe. The Script can be rendered on the client
-	 * via {@link com.liferay.faces.util.context.FacesRequestContext#addScript(com.liferay.faces.util.client.Script)}.
-	 * As a convenience, it is possible to call {@link
-	 * com.liferay.faces.util.context.FacesRequestContext#addScript(java.lang.String)} instead since it will create the
+	 * via com.liferay.faces.util.context.FacesRequestContext#addScript(com.liferay.faces.util.client.Script).
+	 * As a convenience, it is possible to call
+	 * com.liferay.faces.util.context.FacesRequestContext#addScript(java.lang.String) instead since it will create the
 	 * Script and add it to the list of Scripts which will be rendered to the response.
 	 *
 	 * @param  sourceCode  The source code of the Script.
@@ -121,8 +121,8 @@ public abstract class ScriptFactory implements Wrapper<ScriptFactory> {
 	/**
 	 * Returns a new instance of {@link Script} with the specified source code, modules, and type. The returned instance
 	 * is guaranteed to be {@link java.io.Serializable} but not guaranteed to be thread-safe. The Script can be rendered
-	 * on the client via {@link
-	 * com.liferay.faces.util.context.FacesRequestContext#addScript(com.liferay.faces.util.client.Script)}.
+	 * on the client via
+	 * com.liferay.faces.util.context.FacesRequestContext#addScript(com.liferay.faces.util.client.Script).
 	 *
 	 * @param  sourceCode   The source code of the Script.
 	 * @param  modules      The modules which the Script depends on.
