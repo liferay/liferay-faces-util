@@ -49,28 +49,29 @@ public class RendererUtil {
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(RendererUtil.class);
 
+	/**
+	 * Adds an Ajax behavior to the specified client behavior holder according to its default event. If the Ajax
+	 * behavior already exists, then this method takes no action.
+	 *
+	 * @param  clientBehaviorHolder  The client behavior holder for which to add an Ajax behavior.
+	 * @param  execute               Space delimited list of execute ids. Typically this is the value of the "execute"
+	 *                               attribute of a UI component.
+	 * @param  process               Space delimited list of process ids. Typically this is the value of the "process"
+	 *                               attribute of a UI component.
+	 * @param  defaultExecute        The value for execute in case both the execute and process parameters are <code>
+	 *                               null</code>.
+	 * @param  render                Space delimited list of render ids. Typically this is the value of the "render"
+	 *                               attribute of a UI component.
+	 * @param  update                Space delimited list of update ids. Typically thi sis the value of the "update"
+	 *                               attribute of a UI component.
+	 * @param  defaultRender         The value for render in case both the render and process parameters are <code>
+	 *                               null</code>.
+	 */
 	public static void addDefaultAjaxBehavior(ClientBehaviorHolder clientBehaviorHolder, String execute, String process,
 		String defaultExecute, String render, String update, String defaultRender) {
 
-		Map<String, List<ClientBehavior>> clientBehaviorMap = clientBehaviorHolder.getClientBehaviors();
-		String defaultEventName = clientBehaviorHolder.getDefaultEventName();
-		List<ClientBehavior> clientBehaviors = clientBehaviorMap.get(defaultEventName);
+		if (getDefaultAjaxBehavior(clientBehaviorHolder) == null) {
 
-		boolean doAdd = true;
-
-		if (clientBehaviors != null) {
-
-			for (ClientBehavior clientBehavior : clientBehaviors) {
-
-				if (clientBehavior instanceof AjaxBehavior) {
-					doAdd = false;
-
-					break;
-				}
-			}
-		}
-
-		if (doAdd) {
 			FacesContext facesContext = FacesContext.getCurrentInstance();
 			Application application = facesContext.getApplication();
 			AjaxBehavior ajaxBehavior = (AjaxBehavior) application.createBehavior(AjaxBehavior.BEHAVIOR_ID);
@@ -79,6 +80,8 @@ public class RendererUtil {
 
 			Collection<String> renderIds = getRenderIds(render, update, defaultRender);
 			ajaxBehavior.setRender(renderIds);
+
+			String defaultEventName = clientBehaviorHolder.getDefaultEventName();
 			clientBehaviorHolder.addClientBehavior(defaultEventName, ajaxBehavior);
 		}
 	}
@@ -184,6 +187,36 @@ public class RendererUtil {
 		}
 
 		return javaScript;
+	}
+
+	/**
+	 * Gets the Ajax behavior associated with the default event of the specified client behavior holder. If not found,
+	 * then returns <code>null</code>.
+	 *
+	 * @param  clientBehaviorHolder  The client behavior holder that potentially has an Ajax behavior associated with
+	 *                               its default event.
+	 *
+	 * @since  1.1
+	 * @since  2.1
+	 * @since  3.1
+	 */
+	public static AjaxBehavior getDefaultAjaxBehavior(ClientBehaviorHolder clientBehaviorHolder) {
+
+		Map<String, List<ClientBehavior>> clientBehaviorMap = clientBehaviorHolder.getClientBehaviors();
+		String defaultEventName = clientBehaviorHolder.getDefaultEventName();
+		List<ClientBehavior> clientBehaviors = clientBehaviorMap.get(defaultEventName);
+
+		if (clientBehaviors != null) {
+
+			for (ClientBehavior clientBehavior : clientBehaviors) {
+
+				if (clientBehavior instanceof AjaxBehavior) {
+					return (AjaxBehavior) clientBehavior;
+				}
+			}
+		}
+
+		return null;
 	}
 
 	private static Collection<String> getExecuteIds(String execute, String process, String defaultValue) {
