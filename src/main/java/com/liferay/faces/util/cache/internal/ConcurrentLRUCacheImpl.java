@@ -80,9 +80,16 @@ public class ConcurrentLRUCacheImpl<K, V> implements Cache<K, V>, Serializable {
 	@Override
 	public V putValueIfAbsent(K key, V value) {
 
-		removeLeastRecentlyUsedCacheValueIfNecessary(key);
+		CachedValue<V> cachedValue;
 
-		CachedValue<V> cachedValue = internalCache.putIfAbsent(key, new CachedValue<V>(value));
+		// Don't synchronize on the ConcurrentHashMap in case it synchronizes on itself internally (avoid locking on
+		// reads). See the removeLeastRecentlyUsedCacheValueIfNecessary(K) JavaDoc for more details.
+		synchronized (maxCapacity) {
+
+			removeLeastRecentlyUsedCacheValueIfNecessary(key);
+			cachedValue = internalCache.putIfAbsent(key, new CachedValue<V>(value));
+		}
+
 		V retValue;
 
 		if (cachedValue != null) {
@@ -109,42 +116,47 @@ public class ConcurrentLRUCacheImpl<K, V> implements Cache<K, V>, Serializable {
 	}
 
 	/**
-	 * This method must be called before putting values into the map. It ensures that if the map is full and we are
-	 * trying to add a new key, the least recently used value will be removed. This method must ensure that at most one
-	 * thread will removeValue a value at a time. Otherwise, thread A might removeValue a value causing threads B, C, D,
-	 * E, F,... and Z all to see that the map is not full and add their values at the same time. This would cause the
-	 * map to expand past its set max size (potentially infinitely).
+	 * This method must be called before any operations that might add values into the map. It ensures that if the map
+	 * is full and a new key is being added, the least recently used value will be removed. Callers must ensure that at
+	 * most one thread will remove a value at a time and that this logic will be performed atomically with the put or
+	 * add operation by synchronizing (or locking) on {@link #maxCapacity}. Otherwise, thread A might remove a value
+	 * causing threads B, C, D, E, F,... and Z all to see that the map is not full and add their values at the same
+	 * time. This could cause the map to expand past its set max size (potentially infinitely). For example usage, see
+	 * {@link #putValueIfAbsent(java.lang.Object, java.lang.Object)}.
 	 */
 	private void removeLeastRecentlyUsedCacheValueIfNecessary(K key) {
 
-		// Don't synchronize on the ConcurrentHashMap in case it synchronizes on itself internally (avoid locking on
-		// reads).
-		synchronized (maxCapacity) {
+		if ((internalCache.size() >= maxCapacity) && !internalCache.containsKey(key)) {
 
-			if ((internalCache.size() >= maxCapacity) && !internalCache.containsKey(key)) {
+			Set<Map.Entry<K, CachedValue<V>>> entrySet = internalCache.entrySet();
+			Map.Entry<K, CachedValue<V>> leastRecentlyAccessedEntry = null;
 
-				Set<Map.Entry<K, CachedValue<V>>> entrySet = internalCache.entrySet();
-				Map.Entry<K, CachedValue<V>> leastRecentlyAccessedEntry = null;
+			for (Map.Entry<K, CachedValue<V>> entry : entrySet) {
 
-				for (Map.Entry<K, CachedValue<V>> entry : entrySet) {
+				if (internalCache.size() < maxCapacity) {
 
-					if (leastRecentlyAccessedEntry != null) {
+					// Remove was called by another thread, so there's no need to remove an entry.
+					leastRecentlyAccessedEntry = null;
 
-						CachedValue<V> cachedValue = entry.getValue();
-						CachedValue<V> leastRecentlyAccessedCacheValue = leastRecentlyAccessedEntry.getValue();
-
-						if (cachedValue.wasAccessedLessRecentlyThan(leastRecentlyAccessedCacheValue)) {
-							leastRecentlyAccessedEntry = entry;
-						}
-					}
-					else {
-						leastRecentlyAccessedEntry = entry;
-					}
+					break;
 				}
 
 				if (leastRecentlyAccessedEntry != null) {
-					internalCache.remove(leastRecentlyAccessedEntry.getKey());
+
+					CachedValue<V> cachedValue = entry.getValue();
+					CachedValue<V> leastRecentlyAccessedCacheValue = leastRecentlyAccessedEntry.getValue();
+
+					if (cachedValue.wasAccessedLessRecentlyThan(leastRecentlyAccessedCacheValue)) {
+						leastRecentlyAccessedEntry = entry;
+					}
 				}
+				else {
+					leastRecentlyAccessedEntry = entry;
+				}
+			}
+
+			if (leastRecentlyAccessedEntry != null) {
+				internalCache.remove(leastRecentlyAccessedEntry.getKey());
 			}
 		}
 	}
