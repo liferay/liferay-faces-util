@@ -84,7 +84,7 @@ public class ConcurrentLRUCacheImpl<K, V> implements Cache<K, V>, Serializable {
 
 		// Don't synchronize on the ConcurrentHashMap in case it synchronizes on itself internally (avoid locking on
 		// reads). See the removeLeastRecentlyUsedCacheValueIfNecessary(K) JavaDoc for more details.
-		synchronized (maxCapacity) {
+		synchronized (this) {
 
 			removeLeastRecentlyUsedCacheValueIfNecessary(key);
 			cachedValue = internalCache.putIfAbsent(key, new CachedValue<V>(value));
@@ -116,13 +116,14 @@ public class ConcurrentLRUCacheImpl<K, V> implements Cache<K, V>, Serializable {
 	}
 
 	/**
-	 * This method must be called before any operations that might add values into the map. It ensures that if the map
-	 * is full and a new key is being added, the least recently used value will be removed. Callers must ensure that at
-	 * most one thread will remove a value at a time and that this logic will be performed atomically with the put or
-	 * add operation by synchronizing (or locking) on {@link #maxCapacity}. Otherwise, thread A might remove a value
-	 * causing threads B, C, D, E, F,... and Z all to see that the map is not full and add their values at the same
-	 * time. This could cause the map to expand past its set max size (potentially infinitely). For example usage, see
-	 * {@link #putValueIfAbsent(java.lang.Object, java.lang.Object)}.
+	 * Although this is a private method, for the sake of maintenance it is necessary to understand when it must be
+	 * called. Specifically, it must be called before any operations that might add values to the map. It ensures that
+	 * if the map is full and a new key is being added, the least recently used value will be removed. Callers must
+	 * ensure that at most one thread will remove a value at a time and that this logic will be performed atomically
+	 * with the put or add operation by synchronizing (or locking) on <code>this</code>. Otherwise, thread A might
+	 * remove a value causing threads B, C, D, E, F,... and Z all to see that the map is not full and add their values
+	 * at the same time. This could cause the map to expand past its set max size (potentially infinitely). For example
+	 * usage, see {@link #putValueIfAbsent(java.lang.Object, java.lang.Object)}.
 	 */
 	private void removeLeastRecentlyUsedCacheValueIfNecessary(K key) {
 
