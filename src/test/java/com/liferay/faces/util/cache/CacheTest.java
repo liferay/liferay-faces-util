@@ -59,7 +59,20 @@ public class CacheTest {
 			}
 		}
 
-		int[] validInitialCacheCapacities = { 0, DEFAULT_INITIAL_CACHE_CAPACITY, Integer.MAX_VALUE };
+		int maxCapacity = Integer.MAX_VALUE;
+		String[] javaVersionParts = System.getProperty("java.specification.version").split("[.]");
+
+		if (javaVersionParts.length > 1) {
+			int javaMajorVersion = Integer.parseInt(javaVersionParts[0]);
+			int javaMinorVersion = Integer.parseInt(javaVersionParts[1]);
+
+			// Avoid "java.lang.OutOfMemoryError: Java heap space" in JVMs prior to Java 1.7
+			if ((javaMajorVersion == 1) && (javaMinorVersion <= 6)) {
+				maxCapacity = maxCapacity / 128;
+			}
+		}
+
+		int[] validInitialCacheCapacities = { 0, DEFAULT_INITIAL_CACHE_CAPACITY, maxCapacity };
 
 		for (int validInitialCacheCapacity : validInitialCacheCapacities) {
 
