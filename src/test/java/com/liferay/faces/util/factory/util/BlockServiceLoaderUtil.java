@@ -91,7 +91,7 @@ public final class BlockServiceLoaderUtil extends BlockServiceLoaderUtilCompat {
 		}
 		catch (Throwable t) {
 			throw new AssertionError("Unable to load " + factoryClazzSimpleName +
-				" service when services directory unavailable.", t);
+				" service when services directory unavailable." + t.getMessage());
 		}
 		finally {
 
