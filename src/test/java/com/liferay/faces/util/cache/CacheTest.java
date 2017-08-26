@@ -59,30 +59,30 @@ public class CacheTest {
 			}
 		}
 
-		int[] validInitialCacheCapacityValues = new int[] { 0, DEFAULT_INITIAL_CACHE_CAPACITY, Integer.MAX_VALUE };
+		int[] validInitialCacheCapacities = { 0, DEFAULT_INITIAL_CACHE_CAPACITY, Integer.MAX_VALUE };
 
-		for (int validInitialCacheCapacityValue : validInitialCacheCapacityValues) {
+		for (int validInitialCacheCapacity : validInitialCacheCapacities) {
 
 			try {
-				cacheFactory.getConcurrentCache(validInitialCacheCapacityValue);
+				cacheFactory.getConcurrentCache(validInitialCacheCapacity);
 			}
 			catch (IllegalArgumentException e) {
 				throw new AssertionError(
 					"Unexpected IllegalArgumentException was thrown when initial cache capacity of " +
-					validInitialCacheCapacityValue + " was passed.");
+					validInitialCacheCapacity + " was passed.");
 			}
 		}
 
-		int[] invalidMaxCacheCapacityValues = new int[] { 0, -100, Integer.MIN_VALUE };
+		int[] invalidMaxCacheCapacities = new int[] { 0, -100, Integer.MIN_VALUE };
 
-		for (int invalidMaxCacheCapacityValue : invalidMaxCacheCapacityValues) {
+		for (int invalidMaxCacheCapacity : invalidMaxCacheCapacities) {
 
 			try {
 
-				cacheFactory.getConcurrentLRUCache(DEFAULT_INITIAL_CACHE_CAPACITY, invalidMaxCacheCapacityValue);
+				cacheFactory.getConcurrentLRUCache(DEFAULT_INITIAL_CACHE_CAPACITY, invalidMaxCacheCapacity);
 				throw new AssertionError(
 					"Expected IllegalArgumentException was not thrown when max cache capacity of " +
-					invalidMaxCacheCapacityValue + " was passed.");
+					invalidMaxCacheCapacity + " was passed.");
 			}
 			catch (IllegalArgumentException e) {
 				// Do nothing.
@@ -207,7 +207,8 @@ public class CacheTest {
 	 * This test uses threads to put and access values in the cache to verify that the least-recently-used value will be
 	 * ejected when the cache is full. Although this test utilizes threads, it cannot run them concurrently. Instead it
 	 * calls {@link Thread#run()} to run the threads sequentially to ensure that the least-recently-used value is always
-	 * the same for each test run. A similar non-concurrent version of this test appears in {@link #runLRUCacheTest()}.
+	 * the same for each test run. A similar non-concurrent version of this test appears in {@link
+	 * #runConcurrentLRUCacheTest()}.
 	 */
 	private void testConcurrentLRUCache(final Cache<String, String> cache, final int maxCacheCapacity,
 		Queue<Throwable> testErrors, Queue<AssertionError> testFailures) throws Exception {
