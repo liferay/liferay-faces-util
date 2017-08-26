@@ -77,7 +77,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
 				attemptsToAccessServiceFile++;
 			}
 
-			return Collections.<URL>emptyEnumeration();
+			return Collections.enumeration(Collections.<URL>emptyList());
 		}
 		else {
 			return super.findResources(name);
@@ -125,7 +125,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
 				attemptsToAccessServiceFile++;
 			}
 
-			return Collections.<URL>emptyEnumeration();
+			return Collections.enumeration(Collections.<URL>emptyList());
 		}
 		else {
 			return super.getResources(name);
