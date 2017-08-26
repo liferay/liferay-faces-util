@@ -62,7 +62,7 @@ public final class BlockServiceLoaderUtil extends BlockServiceLoaderUtilCompat {
 			String factoryClassFileName = factoryClazzSimpleName + ".class";
 			factoryClassFileInputStream = factoryClazz.getResourceAsStream(factoryClassFileName);
 
-			// Load or reload the factoryClazz (and any of its innner classes) with blockServiceLoaderClassLoader to
+			// Load or reload the factoryClazz (and any of its inner classes) with blockServiceLoaderClassLoader to
 			// ensure that ServiceLoader cannot be used to initialize the ProductFactory.
 			loadFactoryClassInnerClasses(factoryClassName, factoryClazzSimpleName, factoryClazz,
 				blockServiceLoaderClassLoader);
