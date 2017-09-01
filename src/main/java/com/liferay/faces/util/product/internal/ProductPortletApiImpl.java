@@ -15,6 +15,8 @@
  */
 package com.liferay.faces.util.product.internal;
 
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.product.Product;
 
 
@@ -23,14 +25,21 @@ import com.liferay.faces.util.product.Product;
  */
 public class ProductPortletApiImpl extends ProductBaseImpl {
 
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(ProductPortletApiImpl.class);
+
 	public ProductPortletApiImpl(Product liferayPortal, Product pluto) {
 
 		this.title = "Portlet API";
 
+		int liferayPortalMajorVersion = liferayPortal.getMajorVersion();
+		int liferayPortalMinorVersion = liferayPortal.getMinorVersion();
+		boolean liferayPortalDetected = liferayPortal.isDetected();
+
 		// Liferay 6.2.0 through 6.2.4 and Pluto 2.0 rely on the Portlet 2.0 API jar which does not contain the
 		// correct version information.
-		if ((liferayPortal.isDetected() && (liferayPortal.getMajorVersion() == 6) &&
-					(liferayPortal.getMinorVersion() == 2) && (liferayPortal.getPatchVersion() < 5)) ||
+		if ((liferayPortalDetected && (liferayPortalMajorVersion == 6) && (liferayPortalMinorVersion == 2) &&
+					(liferayPortal.getPatchVersion() < 5)) ||
 				(pluto.isDetected() && (pluto.getMajorVersion() == 2) && (pluto.getMinorVersion() == 0))) {
 
 			this.detected = true;
@@ -41,7 +50,22 @@ public class ProductPortletApiImpl extends ProductBaseImpl {
 			try {
 
 				Class<?> clazz = Class.forName("javax.portlet.PortletContext");
-				init(clazz, "Portlet API");
+				init(clazz, "Portlet API", null, false);
+
+				if ((this.majorVersion == 0) && liferayPortalDetected) {
+
+					if (((liferayPortalMajorVersion == 7) && (liferayPortalMinorVersion == 0)) ||
+							(liferayPortalMajorVersion == 6)) {
+						initVersionInfo("2.0");
+					}
+					else {
+						initVersionInfo("3.0");
+					}
+				}
+
+				if (this.majorVersion == 0) {
+					logger.warn("Unable to obtain version information for {0}.", this.title);
+				}
 			}
 			catch (Exception e) {
 				// Ignore -- the Portlet API is likely not present.
