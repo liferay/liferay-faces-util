@@ -95,10 +95,14 @@ public class ProductBaseImpl implements Product {
 	}
 
 	protected void init(Class<?> clazz, String expectedTitle) {
-		init(clazz, expectedTitle, null);
+		init(clazz, expectedTitle, null, true);
 	}
 
 	protected void init(Class<?> clazz, String expectedTitle, String pomPropertiesFile) {
+		init(clazz, expectedTitle, pomPropertiesFile, true);
+	}
+
+	protected void init(Class<?> clazz, String expectedTitle, String pomPropertiesFile, boolean warnOnFail) {
 
 		detected = true;
 
@@ -132,7 +136,10 @@ public class ProductBaseImpl implements Product {
 			initVersionInfo(implementationVersion);
 		}
 		else {
-			logger.warn("Unable to obtain version information for {0}.", this.title);
+
+			if (warnOnFail) {
+				logger.warn("Unable to obtain version information for {0}.", this.title);
+			}
 		}
 	}
 
