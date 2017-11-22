@@ -152,6 +152,10 @@
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>${surefire.version}</version>
 					<configuration>
+						<systemProperties>
+							<javax.portlet:portlet-api:jar>${javax.portlet:portlet-api:jar}</javax.portlet:portlet-api:jar>
+							<org.apache.portals:portlet-api_2.1.0_spec:jar>${org.apache.portals:portlet-api_2.1.0_spec:jar}</org.apache.portals:portlet-api_2.1.0_spec:jar>
+						</systemProperties>
 						<useFile>false</useFile>
 					</configuration>
 				</plugin>
@@ -199,6 +203,18 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>buildnumber-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.10</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>properties</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
@@ -288,12 +304,6 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.10</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.14</version>
@@ -301,6 +311,12 @@
 			<scope>provided</scope>
 		</dependency>
 		<!-- BEGIN: Test dependencies -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.10</version>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -311,6 +327,18 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.7.25</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.portlet</groupId>
+			<artifactId>portlet-api</artifactId>
+			<version>2.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.portals</groupId>
+			<artifactId>portlet-api_2.1.0_spec</artifactId>
+			<version>1.0</version>
 			<scope>test</scope>
 		</dependency>
 		<!-- END Test dependencies -->

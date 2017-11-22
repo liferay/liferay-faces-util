@@ -15,13 +15,13 @@
  */
 package com.liferay.faces.util.factory.util;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Collections;
 import java.util.Enumeration;
 
+import com.liferay.faces.util.classloader.TestClassLoader;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -29,7 +29,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
 /**
  * @author  Kyle Stiemann
  */
-/* package-private */ class BlockServiceLoaderClassLoader extends ClassLoader {
+/* package-private */ class BlockServiceLoaderClassLoader extends TestClassLoader {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BlockServiceLoaderClassLoader.class);
@@ -130,30 +130,5 @@ import com.liferay.faces.util.logging.LoggerFactory;
 		else {
 			return super.getResources(name);
 		}
-	}
-
-	public Class<?> loadClass(String name, InputStream inputStream) throws ClassNotFoundException, IOException {
-
-		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-
-		int length = 0;
-		byte[] data = new byte[1024];
-
-		while (length > -1) {
-
-			length = inputStream.read(data, 0, data.length);
-
-			if (length > -1) {
-				buffer.write(data, 0, length);
-			}
-		}
-
-		buffer.flush();
-
-		byte[] bytes = buffer.toByteArray();
-		Class<?> clazz = defineClass(name, bytes, 0, bytes.length);
-		resolveClass(clazz);
-
-		return clazz;
 	}
 }
