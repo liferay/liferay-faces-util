@@ -15,18 +15,8 @@
  */
 package com.liferay.faces.util.product;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.Iterator;
-import java.util.List;
-
-import com.liferay.faces.util.logging.Logger;
-import com.liferay.faces.util.logging.LoggerFactory;
+import java.util.ServiceLoader;
 
 
 /**
@@ -38,7 +28,7 @@ public abstract class ProductFactory {
 
 	static {
 
-		ServiceFinder<ProductFactory> serviceLoader = ServiceFinder.load(ProductFactory.class);
+		ServiceLoader<ProductFactory> serviceLoader = ServiceLoader.load(ProductFactory.class);
 
 		if (serviceLoader != null) {
 
@@ -82,93 +72,4 @@ public abstract class ProductFactory {
 	}
 
 	public abstract Product getProductImplementation(Product.Name product);
-
-	private static final class ServiceFinder<S> implements Iterable<S> {
-
-		private static final Logger logger = LoggerFactory.getLogger(ServiceFinder.class);
-
-		private Class<S> serviceClass;
-
-		private ServiceFinder(Class<S> serviceClass) {
-			this.serviceClass = serviceClass;
-		}
-
-		private static <S> ServiceFinder<S> load(Class<S> serviceClass) {
-			return new ServiceFinder(serviceClass);
-		}
-
-		public Iterator<S> iterator() {
-
-			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-			List<S> instances = new ArrayList<S>();
-			Enumeration<URL> resources = null;
-
-			try {
-				resources = classLoader.getResources("META-INF/services/" + serviceClass.getName());
-			}
-			catch (IOException e) {
-
-				logger.error("Unable to obtain resources via path=[META-INF/services/" + serviceClass.getName() + "]:");
-				logger.error(e);
-			}
-
-			while ((resources != null) && resources.hasMoreElements()) {
-
-				URL resource = resources.nextElement();
-				InputStream inputStream = null;
-				InputStreamReader inputStreamReader = null;
-				BufferedReader bufferedReader = null;
-				String className = null;
-
-				try {
-
-					inputStream = resource.openStream();
-					inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
-					bufferedReader = new BufferedReader(inputStreamReader);
-					className = bufferedReader.readLine();
-
-				}
-				catch (IOException e) {
-					logger.error("Unable to read contents of resource=[" + resource.getPath() + "]");
-				}
-				finally {
-
-					try {
-
-						if (bufferedReader != null) {
-							bufferedReader.close();
-						}
-
-						if (inputStreamReader != null) {
-							inputStreamReader.close();
-						}
-
-						if (inputStream != null) {
-							inputStream.close();
-						}
-					}
-					catch (IOException e) {
-						// ignore
-					}
-				}
-
-				if (className != null) {
-
-					try {
-
-						Class<?> clazz = Class.forName(className);
-						S instance = (S) clazz.newInstance();
-						instances.add(instance);
-					}
-					catch (Exception e) {
-
-						logger.error("Unable to instantiate class=[" + className + "]:");
-						logger.error(e);
-					}
-				}
-			}
-
-			return instances.iterator();
-		}
-	}
 }

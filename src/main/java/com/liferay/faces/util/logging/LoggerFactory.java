@@ -15,15 +15,8 @@
  */
 package com.liferay.faces.util.logging;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.Iterator;
-import java.util.List;
+import java.util.ServiceLoader;
 
 
 /**
@@ -38,7 +31,7 @@ public abstract class LoggerFactory {
 
 	static {
 
-		ServiceFinder<LoggerFactory> serviceLoader = ServiceFinder.load(LoggerFactory.class);
+		ServiceLoader<LoggerFactory> serviceLoader = ServiceLoader.load(LoggerFactory.class);
 
 		if (serviceLoader != null) {
 
@@ -97,98 +90,4 @@ public abstract class LoggerFactory {
 	}
 
 	public abstract Logger getLoggerImplementation(String name);
-
-	private static final class ServiceFinder<S> implements Iterable<S> {
-
-		private Class<S> serviceClass;
-
-		private ServiceFinder(Class<S> serviceClass) {
-			this.serviceClass = serviceClass;
-		}
-
-		private static <S> ServiceFinder<S> load(Class<S> serviceClass) {
-			return new ServiceFinder(serviceClass);
-		}
-
-		public Iterator<S> iterator() {
-
-			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-			List<S> instances = new ArrayList<S>();
-			Enumeration<URL> resources = null;
-
-			try {
-				resources = classLoader.getResources("META-INF/services/" + serviceClass.getName());
-			}
-			catch (IOException e) {
-
-				// Since the logging hasn't been initialized, the best we can do is print to stderr.
-				System.err.println(LoggerFactory.class.getName() +
-					" (ERROR): Unable to obtain resources via path=[META-INF/services/" + serviceClass.getName() +
-					"]:");
-				e.printStackTrace();
-			}
-
-			while ((resources != null) && resources.hasMoreElements()) {
-
-				URL resource = resources.nextElement();
-				InputStream inputStream = null;
-				InputStreamReader inputStreamReader = null;
-				BufferedReader bufferedReader = null;
-				String className = null;
-
-				try {
-
-					inputStream = resource.openStream();
-					inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
-					bufferedReader = new BufferedReader(inputStreamReader);
-					className = bufferedReader.readLine();
-
-				}
-				catch (IOException e) {
-
-					// Since logging hasn't been initialized, the best we can do is print to stderr.
-					System.err.println("Unable to read contents of resource=[" + resource.getPath() + "]");
-				}
-				finally {
-
-					try {
-
-						if (bufferedReader != null) {
-							bufferedReader.close();
-						}
-
-						if (inputStreamReader != null) {
-							inputStreamReader.close();
-						}
-
-						if (inputStream != null) {
-							inputStream.close();
-						}
-					}
-					catch (IOException e) {
-						// ignore
-					}
-				}
-
-				if (className != null) {
-
-					try {
-
-						Class<?> clazz = Class.forName(className);
-						S instance = (S) clazz.newInstance();
-						instances.add(instance);
-					}
-					catch (Exception e) {
-
-						// Since logging hasn't been initialized, the best we can do is print to stderr.
-						System.err.println(LoggerFactory.class.getName() + " (ERROR): Unable to instantiate class=[" +
-							className + "]:");
-						e.printStackTrace();
-					}
-				}
-			}
-
-			return instances.iterator();
-		}
-	}
 }

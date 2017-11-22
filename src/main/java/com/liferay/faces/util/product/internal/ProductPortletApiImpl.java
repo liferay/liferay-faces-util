@@ -52,11 +52,21 @@ public class ProductPortletApiImpl extends ProductBaseImpl {
 				Class<?> clazz = Class.forName("javax.portlet.PortletContext");
 				init(clazz, "Portlet API", null, false);
 
-				if ((this.majorVersion == 0) && liferayPortalDetected) {
+				if (liferayPortalDetected) {
 
-					if (((liferayPortalMajorVersion == 7) && (liferayPortalMinorVersion == 0)) ||
-							(liferayPortalMajorVersion == 6)) {
-						initVersionInfo("2.0");
+					boolean liferay_7_0_detected = (liferayPortalMajorVersion == 7) && (liferayPortalMinorVersion == 0);
+
+					if (liferay_7_0_detected || (liferayPortalMajorVersion == 6)) {
+
+						if (this.majorVersion == 0) {
+							initVersionInfo("2.0");
+						}
+						else if (liferay_7_0_detected && (this.majorVersion == 1)) {
+
+							// FACES-3238 Util's PORTLET_API incorrectly reports Portlet 2.1 API version as 1.0 when
+							// running in Liferay 7.0 GA5 causing BridgeDependencyVerifier error message
+							initVersionInfo("2.1.0");
+						}
 					}
 					else {
 						initVersionInfo("3.0");

@@ -15,15 +15,8 @@
  */
 package com.liferay.faces.util.factory;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.Iterator;
-import java.util.List;
+import java.util.ServiceLoader;
 
 import javax.faces.FacesException;
 import javax.faces.context.ExternalContext;
@@ -78,7 +71,7 @@ public abstract class FactoryExtensionFinder {
 		// before multiple threads have the opportunity to concurrently access the FactoryExtensionFinder.
 		if (instance == null) {
 
-			ServiceFinder<FactoryExtensionFinder> serviceLoader = ServiceFinder.load(FactoryExtensionFinder.class);
+			ServiceLoader<FactoryExtensionFinder> serviceLoader = ServiceLoader.load(FactoryExtensionFinder.class);
 
 			if (serviceLoader != null) {
 
@@ -133,12 +126,6 @@ public abstract class FactoryExtensionFinder {
 	public abstract void registerFactory(ConfiguredElement configuredFactoryExtension);
 
 	/**
-	 * Releases all of the factories that were registered via the {@link #registerFactory(ExternalContext,
-	 * ConfiguredElement)} method. It is designed to be called when a webapp context is destroyed.
-	 */
-	public abstract void releaseFactories(ExternalContext externalContext);
-
-	/**
 	 * Registers the specified configured factory extension by storing it as an attribute in the specified {@link
 	 * ExternalContext#getApplicationMap()}. Since this method is designed to be called during application
 	 * initialization, it is not guaranteed to be thread-safe.
@@ -148,91 +135,9 @@ public abstract class FactoryExtensionFinder {
 	 */
 	public abstract void registerFactory(ExternalContext externalContext, ConfiguredElement configuredFactoryExtension);
 
-	private static final class ServiceFinder<S> implements Iterable<S> {
-
-		private Class<S> serviceClass;
-
-		private ServiceFinder(Class<S> serviceClass) {
-			this.serviceClass = serviceClass;
-		}
-
-		private static <S> ServiceFinder<S> load(Class<S> serviceClass) {
-			return new ServiceFinder(serviceClass);
-		}
-
-		public Iterator<S> iterator() {
-
-			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-			List<S> instances = new ArrayList<S>();
-			Enumeration<URL> resources = null;
-
-			try {
-				resources = classLoader.getResources("META-INF/services/" + serviceClass.getName());
-			}
-			catch (IOException e) {
-
-				System.err.println("Unable to obtain resources via path=[META-INF/services/" + serviceClass.getName() +
-					"]:");
-				System.err.println(e);
-			}
-
-			while ((resources != null) && resources.hasMoreElements()) {
-
-				URL resource = resources.nextElement();
-				InputStream inputStream = null;
-				InputStreamReader inputStreamReader = null;
-				BufferedReader bufferedReader = null;
-				String className = null;
-
-				try {
-
-					inputStream = resource.openStream();
-					inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
-					bufferedReader = new BufferedReader(inputStreamReader);
-					className = bufferedReader.readLine();
-
-				}
-				catch (IOException e) {
-					System.err.println("Unable to read contents of resource=[" + resource.getPath() + "]");
-				}
-				finally {
-
-					try {
-
-						if (bufferedReader != null) {
-							bufferedReader.close();
-						}
-
-						if (inputStreamReader != null) {
-							inputStreamReader.close();
-						}
-
-						if (inputStream != null) {
-							inputStream.close();
-						}
-					}
-					catch (IOException e) {
-						// ignore
-					}
-				}
-
-				if (className != null) {
-
-					try {
-
-						Class<?> clazz = Class.forName(className);
-						S instance = (S) clazz.newInstance();
-						instances.add(instance);
-					}
-					catch (Exception e) {
-
-						System.err.println("Unable to instantiate class=[" + className + "]:");
-						System.err.println(e);
-					}
-				}
-			}
-
-			return instances.iterator();
-		}
-	}
+	/**
+	 * Releases all of the factories that were registered via the {@link #registerFactory(ExternalContext,
+	 * ConfiguredElement)} method. It is designed to be called when a webapp context is destroyed.
+	 */
+	public abstract void releaseFactories(ExternalContext externalContext);
 }
