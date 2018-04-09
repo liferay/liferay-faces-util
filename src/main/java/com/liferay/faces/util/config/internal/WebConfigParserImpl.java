@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,9 +46,12 @@ public class WebConfigParserImpl extends SAXHandlerBase implements WebConfigPars
 	private static final Logger logger = LoggerFactory.getLogger(WebConfigParserImpl.class);
 
 	// Private Constants
+	private static final String CONTEXT_PARAM = "context-param";
 	private static final String LOCATION = "location";
 	private static final String MAX_FILE_SIZE = "max-file-size";
 	private static final String MULTIPART_CONFIG = "multipart-config";
+	private static final String PARAM_NAME = "param-name";
+	private static final String PARAM_VALUE = "param-value";
 	private static final String SERVLET = "servlet";
 	private static final String SERVLET_CLASS = "servlet-class";
 	private static final String SERVLET_MAPPING = "servlet-mapping";
@@ -62,6 +65,9 @@ public class WebConfigParserImpl extends SAXHandlerBase implements WebConfigPars
 	private String location;
 	private long maxFileSize;
 	private MultiPartConfig multiPartConfig;
+	private boolean parsingContextParam;
+	private boolean parsingContextParamName;
+	private boolean parsingContextParamValue;
 	private boolean parsingLocation;
 	private boolean parsingMaxFileSize;
 	private boolean parsingMultiPartConfig;
@@ -73,6 +79,8 @@ public class WebConfigParserImpl extends SAXHandlerBase implements WebConfigPars
 	private SAXParser saxParser;
 	private String servletClass;
 	private String servletName;
+	private String paramName;
+	private String paramValue;
 
 	public WebConfigParserImpl(SAXParser saxParser, boolean resolveEntities) {
 		super(resolveEntities);
@@ -137,6 +145,27 @@ public class WebConfigParserImpl extends SAXHandlerBase implements WebConfigPars
 				parsingServletMapping = false;
 			}
 		}
+		else if (parsingContextParam) {
+
+			if (parsingContextParamName) {
+
+				paramName = content.toString().trim();
+				parsingContextParamName = false;
+			}
+			else if (parsingContextParamValue) {
+
+				paramValue = content.toString().trim();
+				parsingContextParamValue = false;
+			}
+
+			if (CONTEXT_PARAM.equals(qName)) {
+
+				configuredContextParams.put(paramName, paramValue);
+				paramName = null;
+				paramValue = null;
+				parsingContextParam = false;
+			}
+		}
 
 		content = null;
 	}
@@ -197,6 +226,15 @@ public class WebConfigParserImpl extends SAXHandlerBase implements WebConfigPars
 		}
 		else if (localName.equals(MAX_FILE_SIZE)) {
 			parsingMaxFileSize = true;
+		}
+		else if (localName.equals(CONTEXT_PARAM)) {
+			parsingContextParam = true;
+		}
+		else if (localName.equals(PARAM_NAME)) {
+			parsingContextParamName = true;
+		}
+		else if (localName.equals(PARAM_VALUE)) {
+			parsingContextParamValue = true;
 		}
 	}
 }
