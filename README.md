@@ -1,5 +1,13 @@
 # Liferay Faces Util
 
+---
+
+## Notice:
+
+**This branch supports Liferay 6.2 which has entered the [*Limited Support Phase*](https://www.liferay.com/subscription-services/end-of-life/liferay-portal). Only security fixes will be applied to this branch. This branch stopped receiving backports after 4/5/2018. The last commit backported to this branch was [13af1ad59bd4475cb6fd60569e852cbdbe6b2880](https://github.com/liferay/liferay-faces-util/commit/13af1ad59bd4475cb6fd60569e852cbdbe6b2880).  The first commit not backported to this branch was [3acabda7cd634aeda28b2bbbad40ba92b509b5b7](https://github.com/liferay/liferay-faces-util/commit/3acabda7cd634aeda28b2bbbad40ba92b509b5b7). The last tested commit on this branch was [d603c4b25ca8f8905ac4854554c80acd2fc76be6](https://github.com/liferay/liferay-faces-util/commit/d603c4b25ca8f8905ac4854554c80acd2fc76be6).**
+
+---
+
 This is a library that contains general purpose JSF utilities to support many of the sub-projects that comprise
 [Liferay Faces](http://www.liferay.com/community/liferay-projects/liferay-faces/overview).
 
