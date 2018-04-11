@@ -4,7 +4,7 @@
 
 ## Notice:
 
-**This branch supports Liferay 6.2 which has entered the [*Limited Support Phase*](https://www.liferay.com/subscription-services/end-of-life/liferay-portal). Only security fixes will be applied to this branch. This branch stopped receiving backports after 4/5/2018. The last commit backported to this branch was [13af1ad59bd4475cb6fd60569e852cbdbe6b2880](https://github.com/liferay/liferay-faces-util/commit/13af1ad59bd4475cb6fd60569e852cbdbe6b2880).  The first commit not backported to this branch was [3acabda7cd634aeda28b2bbbad40ba92b509b5b7](https://github.com/liferay/liferay-faces-util/commit/3acabda7cd634aeda28b2bbbad40ba92b509b5b7). The last tested commit on this branch was [69da9a28cf814b4b656c25364a17f7c17d6fd414](https://github.com/liferay/liferay-faces-util/commit/69da9a28cf814b4b656c25364a17f7c17d6fd414).**
+**This branch supports Liferay 6.2 which has entered the [*Limited Support Phase*](https://www.liferay.com/subscription-services/end-of-life/liferay-portal). Only security fixes will be applied to this branch. This branch stopped receiving backports after 4/11/2018. The last commit backported to this branch was [13af1ad59bd4475cb6fd60569e852cbdbe6b2880](https://github.com/liferay/liferay-faces-util/commit/13af1ad59bd4475cb6fd60569e852cbdbe6b2880).  The first commit not backported to this branch was [3acabda7cd634aeda28b2bbbad40ba92b509b5b7](https://github.com/liferay/liferay-faces-util/commit/3acabda7cd634aeda28b2bbbad40ba92b509b5b7). The last tested commit on this branch was [69da9a28cf814b4b656c25364a17f7c17d6fd414](https://github.com/liferay/liferay-faces-util/commit/69da9a28cf814b4b656c25364a17f7c17d6fd414).**
 
 ---
 
