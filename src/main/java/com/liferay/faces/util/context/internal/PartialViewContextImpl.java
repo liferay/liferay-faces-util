@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ import javax.faces.context.PartialViewContextWrapper;
 import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.client.ScriptsEncoder;
 import com.liferay.faces.util.client.ScriptsEncoderFactory;
+import com.liferay.faces.util.context.FacesContextHelperUtil;
 import com.liferay.faces.util.context.FacesRequestContext;
 import com.liferay.faces.util.context.PartialResponseWriterWrapper;
 
@@ -91,13 +92,12 @@ public class PartialViewContextImpl extends PartialViewContextWrapper {
 
 			if (!wroteEval) {
 
-				FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
-				List<Script> scripts = facesRequestContext.getScripts();
+				FacesContext facesContext = FacesContext.getCurrentInstance();
+				List<Script> scripts = FacesContextHelperUtil.getScripts(facesContext);
 
 				if (!scripts.isEmpty()) {
 
 					super.startEval();
-					FacesContext facesContext = FacesContext.getCurrentInstance();
 					encodeScripts(facesContext, scripts);
 					super.endEval();
 				}
@@ -109,11 +109,10 @@ public class PartialViewContextImpl extends PartialViewContextWrapper {
 		@Override
 		public void endEval() throws IOException {
 
-			FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
-			List<Script> scripts = facesRequestContext.getScripts();
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			List<Script> scripts = FacesContextHelperUtil.getScripts(facesContext);
 
 			if (!scripts.isEmpty()) {
-				FacesContext facesContext = FacesContext.getCurrentInstance();
 				encodeScripts(facesContext, scripts);
 			}
 

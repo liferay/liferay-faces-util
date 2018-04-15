@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@
 package com.liferay.faces.util.context.internal;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -40,6 +42,8 @@ import javax.faces.event.PhaseListener;
 import javax.faces.lifecycle.LifecycleFactory;
 import javax.servlet.http.HttpServletRequest;
 
+import com.liferay.faces.util.client.Script;
+import com.liferay.faces.util.client.ScriptFactory;
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.context.FacesContextHelper;
 import com.liferay.faces.util.helper.BooleanHelper;
@@ -59,6 +63,7 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 
 	// Private Constants
 	private static final String UNEXPECTED_ERROR_MSG_ID = "an-unexpected-error-occurred";
+	private static final String SCRIPTS_KEY = FacesContextHelperImpl.class.getName() + "_SCRIPTS";
 	private static final String SUCCESS_INFO_MSG_ID = "your-request-processed-successfully";
 
 	@Override
@@ -202,6 +207,29 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		I18n i18n = getI18n(facesContext);
 		FacesMessage facesMessage = i18n.getFacesMessage(facesContext, locale, severity, messageId, arguments);
 		facesContext.addMessage(clientId, facesMessage);
+	}
+
+	@Override
+	public void addScript(Script script) {
+		addScript(FacesContext.getCurrentInstance(), script);
+	}
+
+	@Override
+	public void addScript(String scriptString) {
+		addScript(FacesContext.getCurrentInstance(), scriptString);
+	}
+
+	@Override
+	public void addScript(FacesContext facesContext, Script script) {
+		getModifiableScriptsList(facesContext).add(script);
+	}
+
+	@Override
+	public void addScript(FacesContext facesContext, String scriptString) {
+
+		ExternalContext externalContext = facesContext.getExternalContext();
+		Script script = ScriptFactory.getScriptInstance(externalContext, scriptString);
+		addScript(facesContext, script);
 	}
 
 	@Override
@@ -443,6 +471,16 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		}
 
 		return value;
+	}
+
+	@Override
+	public List<Script> getScripts() {
+		return getScripts(FacesContext.getCurrentInstance());
+	}
+
+	@Override
+	public List<Script> getScripts(FacesContext facesContext) {
+		return Collections.unmodifiableList(getModifiableScriptsList(facesContext));
 	}
 
 	@Override
@@ -707,5 +745,19 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 		ExternalContext externalContext = facesContext.getExternalContext();
 
 		return I18nFactory.getI18nInstance(externalContext);
+	}
+
+	private List<Script> getModifiableScriptsList(FacesContext facesContext) {
+
+		Map<Object, Object> attributes = facesContext.getAttributes();
+		List<Script> scripts = (List<Script>) attributes.get(SCRIPTS_KEY);
+
+		if (scripts == null) {
+
+			scripts = new ArrayList<Script>();
+			attributes.put(SCRIPTS_KEY, scripts);
+		}
+
+		return scripts;
 	}
 }

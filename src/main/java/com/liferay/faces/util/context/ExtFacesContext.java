@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,7 +45,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
  * This class is deprecated and has been replaced by {@link com.liferay.faces.util.context.FacesContextHelperUtil}. For
  * more information, see <a href="https://issues.liferay.com/browse/FACES-2502">FACES-2502</a>.
  *
- * @deprecated  Please use {@link com.liferay.faces.util.context.FacesContextHelperUtil} Instead.
+ * @deprecated  Please use {@link com.liferay.faces.util.context.FacesContextHelperUtil} instead.
  * @author      Neil Griffin
  */
 @Deprecated

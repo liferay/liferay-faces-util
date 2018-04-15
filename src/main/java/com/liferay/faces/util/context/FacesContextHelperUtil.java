@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
  */
 package com.liferay.faces.util.context;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -26,6 +27,8 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseListener;
 
+import com.liferay.faces.util.client.Script;
+
 
 /**
  * This class contains a set of static convenience methods that delegate to the corresponding methods on {@link
@@ -33,7 +36,7 @@ import javax.faces.event.PhaseListener;
  *
  * @author  Neil Griffin
  */
-public class FacesContextHelperUtil {
+public final class FacesContextHelperUtil {
 
 	/**
 	 * Adds the specified key as a message to the FacesContext with severity <code>
@@ -431,6 +434,66 @@ public class FacesContextHelperUtil {
 	}
 
 	/**
+	 * Adds the specified {@link Script} to the list of scripts that are to be executed on the client.
+	 *
+	 * @param  script  The script that is to be added.
+	 *
+	 * @since  3.2
+	 */
+	public static void addScript(Script script) {
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addScript(script);
+	}
+
+	/**
+	 * Adds the specified script to the list of scripts that are to be executed on the client.
+	 *
+	 * @param  scriptString  The script that is to be added.
+	 *
+	 * @since  3.2
+	 */
+	public static void addScript(String scriptString) {
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addScript(scriptString);
+	}
+
+	/**
+	 * Adds the specified {@link Script} to the list of scripts that are to be executed on the client.
+	 *
+	 * @param  facesContext  The current faces context.
+	 * @param  script        The script that is to be added.
+	 *
+	 * @since  3.2
+	 */
+	public static void addScript(FacesContext facesContext, Script script) {
+
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addScript(facesContext, script);
+	}
+
+	/**
+	 * Adds the specified script to the list of scripts that are to be executed on the client.
+	 *
+	 * @param  facesContext  The current faces context.
+	 * @param  scriptString  The script that is to be added.
+	 *
+	 * @since  3.2
+	 */
+	public static void addScript(FacesContext facesContext, String scriptString) {
+
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+		facesContextHelper.addScript(facesContext, scriptString);
+	}
+
+	/**
 	 * Returns the locale of the viewRoot of the current JSF FacesContext
 	 */
 	public static Locale getLocale() {
@@ -797,6 +860,37 @@ public class FacesContextHelperUtil {
 				facesContext.getExternalContext());
 
 		return facesContextHelper.getRequestQueryStringParameter(facesContext, name);
+	}
+
+	/**
+	 * Returns an immutable list of scripts that were added via the {@link #addScript(FacesContext,Script)} or {@link
+	 * #addScript(FacesContext,String)} method.
+	 *
+	 * @since  3.2
+	 */
+	public static List<Script> getScripts() {
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getScripts();
+	}
+
+	/**
+	 * Returns an immutable list of scripts that were added via the {@link #addScript(FacesContext,Script)} or {@link
+	 * #addScript(FacesContext,String)} method.
+	 *
+	 * @param  facesContext  The current faces context.
+	 *
+	 * @since  3.2
+	 */
+	public static List<Script> getScripts(FacesContext facesContext) {
+
+		FacesContextHelper facesContextHelper = FacesContextHelperFactory.getFacesContextHelperInstance(
+				facesContext.getExternalContext());
+
+		return facesContextHelper.getScripts();
 	}
 
 	/**
@@ -1197,7 +1291,10 @@ public class FacesContextHelperUtil {
 
 	/**
 	 * Gets the underlying/wrapped FacesContext ThreadLocal singleton instance.
+	 *
+	 * @deprecated  Call {@link FacesContext.getCurrentInstance()} instead.
 	 */
+	@Deprecated
 	public FacesContext getFacesContext() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		FacesContextHelper facesContextHelperInstance = FacesContextHelperFactory.getFacesContextHelperInstance(

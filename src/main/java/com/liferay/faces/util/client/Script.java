@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,8 @@ package com.liferay.faces.util.client;
 
 /**
  * A Script which can be rendered on the client via {@link
- * com.liferay.faces.util.context.FacesRequestContext#addScript(com.liferay.faces.util.client.Script)}.
+ * com.liferay.faces.util.context.FacesContextHelperUtil#addScript(javax.faces.context.FacesContext,
+ * com.liferay.faces.util.client.Script)}.
  *
  * @author  Kyle Stiemann
  */
