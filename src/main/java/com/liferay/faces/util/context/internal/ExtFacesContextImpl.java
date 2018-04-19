@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,6 +41,7 @@ import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
 import javax.faces.render.RenderKit;
 
+import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.context.ExtFacesContext;
 import com.liferay.faces.util.context.FacesContextHelper;
 import com.liferay.faces.util.context.FacesContextHelperUtil;
@@ -263,6 +264,26 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	public void addMessage(FacesContext facesContext, String clientId, Severity severity, String messageId,
 		Object... arguments) {
 		FacesContextHelperUtil.addMessage(facesContext, clientId, severity, messageId, arguments);
+	}
+
+	@Override
+	public void addScript(Script script) {
+		FacesContextHelperUtil.addScript(script);
+	}
+
+	@Override
+	public void addScript(String scriptString) {
+		FacesContextHelperUtil.addScript(scriptString);
+	}
+
+	@Override
+	public void addScript(FacesContext facesContext, Script script) {
+		FacesContextHelperUtil.addScript(facesContext, script);
+	}
+
+	@Override
+	public void addScript(FacesContext facesContext, String scriptString) {
+		FacesContextHelperUtil.addScript(facesContext, scriptString);
 	}
 
 	/**
@@ -695,6 +716,16 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	@Override
 	public ResponseWriter getResponseWriter() {
 		return FacesContext.getCurrentInstance().getResponseWriter();
+	}
+
+	@Override
+	public List<Script> getScripts() {
+		return FacesContextHelperUtil.getScripts();
+	}
+
+	@Override
+	public List<Script> getScripts(FacesContext facesContext) {
+		return FacesContextHelperUtil.getScripts(facesContext);
 	}
 
 	/**

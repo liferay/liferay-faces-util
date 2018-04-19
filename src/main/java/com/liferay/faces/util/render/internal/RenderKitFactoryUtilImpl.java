@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,6 @@ import javax.faces.render.RenderKit;
 import javax.faces.render.RenderKitFactory;
 
 import com.liferay.faces.util.application.ApplicationUtil;
-import com.liferay.faces.util.context.FacesRequestContext;
 
 
 /**
@@ -31,9 +30,10 @@ import com.liferay.faces.util.context.FacesRequestContext;
  * the JSF implementation. As a result, factories registered by Non-Liferay/3rd-Party component suites like ICEfaces,
  * PrimeFaces, and RichFaces will end up decorating the factories registered by this module.</p>
  *
- * <p>However, in order to ensure that scripts contained in {@link FacesRequestContext#getScripts()} are encoded before
- * the closing <code>&lt;/body&gt;</code> element, {@link BodyRendererUtilImpl} needs to decorate body renderers
- * provided by any of the aforementioned component suites. This could be accomplished in one of two ways:
+ * <p>However, in order to ensure that scripts contained in {@link
+ * FacesContextHelperUtil#getScripts(javax.faces.context.FacesContext)} are encoded before the closing <code>
+ * &lt;/body&gt;</code> element, {@link BodyRendererUtilImpl} needs to decorate body renderers provided by any of the
+ * aforementioned component suites. This could be accomplished in one of two ways:
  *
  * <ol>
  *   <li>The {@link RenderKitUtilImpl} class from this module could exist in a separate module that specifies

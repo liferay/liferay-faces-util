@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,8 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
 /**
  * A factory for creating a {@link Script} which can be rendered on the client via {@link
- * com.liferay.faces.util.context.FacesRequestContext#addScript(com.liferay.faces.util.client.Script)}.
+ * com.liferay.faces.util.context.FacesContextHelperUtil#addScript(javax.faces.context.FacesContext,
+ * com.liferay.faces.util.client.Script)}.
  *
  * @author  Kyle Stiemann
  */
@@ -109,10 +110,11 @@ public abstract class ScriptFactory implements FacesWrapper<ScriptFactory> {
 	/**
 	 * Returns a new instance of {@link Script} with the specified source code. The returned instance is guaranteed to
 	 * be {@link java.io.Serializable} but not guaranteed to be thread-safe. The Script can be rendered on the client
-	 * via {@link com.liferay.faces.util.context.FacesRequestContext#addScript(com.liferay.faces.util.client.Script)}.
-	 * As a convenience, it is possible to call {@link
-	 * com.liferay.faces.util.context.FacesRequestContext#addScript(java.lang.String)} instead since it will create the
-	 * Script and add it to the list of Scripts which will be rendered to the response.
+	 * via {@link com.liferay.faces.util.context.FacesContextHelperUtil#addScript(javax.faces.context.FacesContext,
+	 * com.liferay.faces.util.client.Script)}. As a convenience, it is possible to call {@link
+	 * com.liferay.faces.util.context.FacesContextHelperUtil#addScript(javax.faces.context.FacesContext,
+	 * com.liferay.faces.util.client.Script)} instead since it will create the Script and add it to the list of Scripts
+	 * which will be rendered to the response.
 	 *
 	 * @param  sourceCode  The source code of the Script.
 	 */
@@ -122,7 +124,8 @@ public abstract class ScriptFactory implements FacesWrapper<ScriptFactory> {
 	 * Returns a new instance of {@link Script} with the specified source code, modules, and type. The returned instance
 	 * is guaranteed to be {@link java.io.Serializable} but not guaranteed to be thread-safe. The Script can be rendered
 	 * on the client via {@link
-	 * com.liferay.faces.util.context.FacesRequestContext#addScript(com.liferay.faces.util.client.Script)}.
+	 * com.liferay.faces.util.context.FacesContextHelperUtil#addScript(javax.faces.context.FacesContext,
+	 * com.liferay.faces.util.client.Script)}.
 	 *
 	 * @param  sourceCode   The source code of the Script.
 	 * @param  modules      The modules which the Script depends on.

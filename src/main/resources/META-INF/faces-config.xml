@@ -21,13 +21,11 @@
 	</application>
 	<factory>
 		<partial-view-context-factory>com.liferay.faces.util.context.internal.PartialViewContextFactoryImpl</partial-view-context-factory>
-		<faces-context-factory>com.liferay.faces.util.context.internal.FacesContextFactoryUtilImpl</faces-context-factory>
 		<render-kit-factory>com.liferay.faces.util.render.internal.RenderKitFactoryUtilImpl</render-kit-factory>
 		<factory-extension>
 			<util:browser-sniffer-factory>com.liferay.faces.util.client.internal.BrowserSnifferFactoryImpl</util:browser-sniffer-factory>
 			<util:cache-factory>com.liferay.faces.util.cache.internal.CacheFactoryImpl</util:cache-factory>
 			<util:faces-context-helper-factory>com.liferay.faces.util.context.internal.FacesContextHelperFactoryImpl</util:faces-context-helper-factory>
-			<util:faces-request-context-factory>com.liferay.faces.util.context.internal.FacesRequestContextFactoryImpl</util:faces-request-context-factory>
 			<util:faces-url-encoder-factory>com.liferay.faces.util.render.internal.FacesURLEncoderFactoryImpl</util:faces-url-encoder-factory>
 			<util:i18n-factory>com.liferay.faces.util.i18n.internal.I18nFactoryImpl</util:i18n-factory>
 			<util:resource-validator-factory>com.liferay.faces.util.application.internal.ResourceValidatorFactoryImpl</util:resource-validator-factory>

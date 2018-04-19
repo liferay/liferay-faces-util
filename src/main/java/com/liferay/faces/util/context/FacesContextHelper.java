@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
  */
 package com.liferay.faces.util.context;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -25,6 +26,8 @@ import javax.faces.component.UIInput;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseListener;
+
+import com.liferay.faces.util.client.Script;
 
 
 /**
@@ -196,6 +199,44 @@ public interface FacesContextHelper {
 	 */
 	public void addMessage(FacesContext facesContext, String clientId, Severity severity, String messageId,
 		Object... arguments);
+
+	/**
+	 * Adds the specified {@link Script} to the list of scripts that are to be executed on the client.
+	 *
+	 * @param  script  The script that is to be added.
+	 *
+	 * @since  3.2
+	 */
+	public void addScript(Script script);
+
+	/**
+	 * Adds the specified script to the list of scripts that are to be executed on the client.
+	 *
+	 * @param  scriptString  The script that is to be added.
+	 *
+	 * @since  3.2
+	 */
+	public void addScript(String scriptString);
+
+	/**
+	 * Adds the specified {@link Script} to the list of scripts that are to be executed on the client.
+	 *
+	 * @param  facesContext  The current faces context.
+	 * @param  script        The script that is to be added.
+	 *
+	 * @since  3.2
+	 */
+	public void addScript(FacesContext facesContext, Script script);
+
+	/**
+	 * Adds the specified script to the list of scripts that are to be executed on the client.
+	 *
+	 * @param  facesContext  The current faces context.
+	 * @param  scriptString  The script that is to be added.
+	 *
+	 * @since  3.2
+	 */
+	public void addScript(FacesContext facesContext, String scriptString);
 
 	/**
 	 * Gets the underlying/wrapped FacesContext ThreadLocal singleton instance.
@@ -388,6 +429,24 @@ public interface FacesContextHelper {
 	 * request attribute.
 	 */
 	public String getRequestQueryStringParameter(FacesContext facesContext, String name);
+
+	/**
+	 * Returns an immutable list of scripts that were added via the {@link #addScript(FacesContext,Script)} or {@link
+	 * #addScript(FacesContext,String)} method.
+	 *
+	 * @since  3.2
+	 */
+	public List<Script> getScripts();
+
+	/**
+	 * Returns an immutable list of scripts that were added via the {@link #addScript(FacesContext,Script)} or {@link
+	 * #addScript(FacesContext,String)} method.
+	 *
+	 * @param  facesContext  The current faces context.
+	 *
+	 * @since  3.2
+	 */
+	public List<Script> getScripts(FacesContext facesContext);
 
 	/**
 	 * Returns the session object associated with the current FacesContext.

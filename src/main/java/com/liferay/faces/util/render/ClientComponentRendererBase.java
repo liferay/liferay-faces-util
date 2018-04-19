@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.client.ScriptFactory;
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.ComponentUtil;
-import com.liferay.faces.util.context.FacesRequestContext;
+import com.liferay.faces.util.context.FacesContextHelperUtil;
 
 
 /**
@@ -216,14 +216,14 @@ public abstract class ClientComponentRendererBase extends Renderer implements Cl
 		Script script;
 
 		if (modules != null) {
-			script = ScriptFactory.getScriptInstance(facesContext.getExternalContext(), bufferedScriptString, modules, modulesType);
+			script = ScriptFactory.getScriptInstance(facesContext.getExternalContext(), bufferedScriptString, modules,
+					modulesType);
 		}
 		else {
 			script = ScriptFactory.getScriptInstance(facesContext.getExternalContext(), bufferedScriptString);
 		}
 
-		FacesRequestContext facesRequestContext = FacesRequestContext.getCurrentInstance();
-		facesRequestContext.addScript(script);
+		FacesContextHelperUtil.addScript(facesContext, script);
 	}
 
 	private void encodeFunctionParameter(ResponseWriter responseWriter, Object parameter) throws IOException {

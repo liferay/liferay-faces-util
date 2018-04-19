@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,12 +31,12 @@ import javax.faces.context.ResponseWriterWrapper;
 import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.client.ScriptsEncoder;
 import com.liferay.faces.util.client.ScriptsEncoderFactory;
-import com.liferay.faces.util.context.FacesRequestContext;
+import com.liferay.faces.util.context.FacesContextHelperUtil;
 
 
 /**
  * The purpose of this class is to render target="body" scripts, external Library scripts (e.g. PrimeFaces
- * RequestContext scripts), and {@link FacesRequestContext} scripts before the closing &lt;body&gt; tag in a single
+ * RequestContext scripts), and {@link FacesContextHelperUtil} scripts before the closing &lt;body&gt; tag in a single
  * &lt;script&gt; tag. All other functionality is delegated to the wrapped {@link ResponseWriter}, so all other content
  * will be rendered normally.
  *
@@ -46,14 +46,12 @@ public class BodyScriptEncodingResponseWriter extends ResponseWriterWrapper {
 
 	// Private Members
 	private FacesContext facesContext;
-	private FacesRequestContext facesRequestContext;
 	private ResponseWriter wrappedResponseWriter;
 	private BufferedScript bufferedScript;
 
 	public BodyScriptEncodingResponseWriter(ResponseWriter wrappedResponseWriter, FacesContext facesContext) {
 
 		this.facesContext = facesContext;
-		this.facesRequestContext = FacesRequestContext.getCurrentInstance();
 		this.wrappedResponseWriter = wrappedResponseWriter;
 		this.bufferedScript = new BufferedScript();
 	}
@@ -72,7 +70,7 @@ public class BodyScriptEncodingResponseWriter extends ResponseWriterWrapper {
 			else {
 
 				String scriptSource = bufferedScript.toString();
-				facesRequestContext.addScript(scriptSource);
+				FacesContextHelperUtil.addScript(facesContext, scriptSource);
 			}
 
 			bufferedScript.clear();
@@ -81,7 +79,7 @@ public class BodyScriptEncodingResponseWriter extends ResponseWriterWrapper {
 
 			if ("body".equals(name)) {
 
-				List<Script> scripts = facesRequestContext.getScripts();
+				List<Script> scripts = FacesContextHelperUtil.getScripts(facesContext);
 
 				if (!scripts.isEmpty()) {
 
