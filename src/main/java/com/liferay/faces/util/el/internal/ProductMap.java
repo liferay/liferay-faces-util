@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,9 @@ import java.util.Map;
 import java.util.Set;
 
 import com.liferay.faces.util.product.Product;
-import com.liferay.faces.util.product.ProductFactory;
+import com.liferay.faces.util.product.info.ProductInfo;
+import com.liferay.faces.util.product.info.ProductInfoFactory;
+import com.liferay.faces.util.product.internal.ProductAdapterImpl;
 
 
 /**
@@ -31,6 +33,13 @@ public class ProductMap implements Map<Product.Name, Product>, Serializable {
 
 	// serialVersionUID
 	private static final long serialVersionUID = 8051373438471283130L;
+
+	// Private Final Data Members
+	private final ProductInfoFactory productInfoFactory;
+
+	public ProductMap(ProductInfoFactory productInfoFactory) {
+		this.productInfoFactory = productInfoFactory;
+	}
 
 	@Override
 	public void clear() {
@@ -55,16 +64,9 @@ public class ProductMap implements Map<Product.Name, Product>, Serializable {
 	@Override
 	public Product get(Object key) {
 
-		Product.Name productName = null;
+		ProductInfo productInfo = ProductInfoMap.getProductInfo(productInfoFactory, key);
 
-		if (key instanceof Product.Name) {
-			productName = (Product.Name) key;
-		}
-		else if (key != null) {
-			productName = Product.Name.valueOf(key.toString());
-		}
-
-		return ProductFactory.getProduct(productName);
+		return new ProductAdapterImpl(productInfo);
 	}
 
 	@Override

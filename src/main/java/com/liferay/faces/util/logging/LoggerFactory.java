@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,8 @@ import java.util.ServiceLoader;
  */
 public abstract class LoggerFactory {
 
-	private static final LoggerFactory loggerFactory;
+	// Private Constants
+	private static final LoggerFactory LOGGER_FACTORY;
 
 	static {
 
@@ -56,7 +57,7 @@ public abstract class LoggerFactory {
 				}
 			}
 
-			loggerFactory = loggerFactoryImpl;
+			LOGGER_FACTORY = loggerFactoryImpl;
 		}
 		else {
 			throw new NullPointerException("Unable to acquire ServiceLoader for " + LoggerFactory.class.getName());
@@ -73,7 +74,7 @@ public abstract class LoggerFactory {
 	 * @return  The logger associated with the specified name.
 	 */
 	public static final Logger getLogger(String name) {
-		return loggerFactory.getLoggerImplementation(name);
+		return LOGGER_FACTORY.getLoggerImplementation(name);
 	}
 
 	/**
