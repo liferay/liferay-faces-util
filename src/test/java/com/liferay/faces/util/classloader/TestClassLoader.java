@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
+import com.liferay.faces.util.internal.CloseableUtil;
+
 
 /**
  * This {@link ClassLoader} assumes that it is operating in a single-threaded environment (specifically to make {@link
@@ -39,19 +41,6 @@ public class TestClassLoader extends ClassLoader {
 
 	public TestClassLoader(ClassLoader parent) {
 		super(parent);
-	}
-
-	private static void close(InputStream inputStream) {
-
-		if (inputStream != null) {
-
-			try {
-				inputStream.close();
-			}
-			catch (IOException e) {
-				// Do nothing.
-			}
-		}
 	}
 
 	public Class<?> loadClassFromJar(Class<?> clazz, URL jarURL) throws ClassNotFoundException, MalformedURLException {
@@ -109,7 +98,7 @@ public class TestClassLoader extends ClassLoader {
 		finally {
 
 			packageBeingDefinedFromJar = null;
-			close(manifestInputStream);
+			CloseableUtil.close(manifestInputStream);
 		}
 
 		return loadClassWithoutParentLoader(clazz, url);
@@ -192,7 +181,7 @@ public class TestClassLoader extends ClassLoader {
 			throw new ClassNotFoundException("Failed to load class " + className + " without parent classloader.", e);
 		}
 		finally {
-			close(inputStream);
+			CloseableUtil.close(inputStream);
 		}
 
 		return reloadedClass;
