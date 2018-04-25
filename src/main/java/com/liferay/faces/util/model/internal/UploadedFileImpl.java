@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import com.liferay.faces.util.internal.CloseableUtil;
 import com.liferay.faces.util.model.UploadedFile;
 
 
@@ -82,6 +83,7 @@ public class UploadedFileImpl implements Serializable, UploadedFile {
 
 	public byte[] getBytes() throws IOException {
 
+		RandomAccessFile randomAccessFile = null;
 		byte[] bytes = null;
 
 		try {
@@ -90,15 +92,18 @@ public class UploadedFileImpl implements Serializable, UploadedFile {
 				File file = new File(absolutePath);
 
 				if (file.exists()) {
-					RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r");
+
+					randomAccessFile = new RandomAccessFile(file, "r");
 					bytes = new byte[(int) randomAccessFile.length()];
 					randomAccessFile.readFully(bytes);
-					randomAccessFile.close();
 				}
 			}
 		}
 		catch (Exception e) {
-			throw new IOException(e.getMessage());
+			throw new IOException(e);
+		}
+		finally {
+			CloseableUtil.close(randomAccessFile);
 		}
 
 		return bytes;

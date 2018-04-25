@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import java.util.Enumeration;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
+import com.liferay.faces.util.internal.CloseableUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -46,6 +47,8 @@ public class PackageManifest {
 
 	public PackageManifest(Class<?> clazz, String expectedImplementationTitle) {
 
+		InputStream inputStream = null;
+
 		try {
 
 			// For each of the "META-INF/MANIFEST.MF" resources found by the ClassLoader:
@@ -54,7 +57,8 @@ public class PackageManifest {
 
 			while (manifestURLs.hasMoreElements() && !found) {
 				URL manifestURL = manifestURLs.nextElement();
-				InputStream inputStream = manifestURL.openStream();
+				inputStream = manifestURL.openStream();
+
 				Manifest manifest = new Manifest(inputStream);
 				Attributes mainAttributes = manifest.getMainAttributes();
 
@@ -69,6 +73,9 @@ public class PackageManifest {
 		}
 		catch (IOException e) {
 			logger.error(e);
+		}
+		finally {
+			CloseableUtil.close(inputStream);
 		}
 	}
 
