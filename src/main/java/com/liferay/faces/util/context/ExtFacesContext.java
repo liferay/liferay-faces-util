@@ -54,26 +54,36 @@ public abstract class ExtFacesContext extends FacesContext implements FacesConte
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(ExtFacesContext.class);
 
-	// Singleton Instance
-	private static transient ExtFacesContext instance;
-
 	/**
-	 * Returns the implementation singleton instance.
+	 * Returns the implementation {@link javax.faces.bean.ApplicationScoped} instance.
 	 */
 	public static ExtFacesContext getInstance() {
 
-		if (instance == null) {
+		Map<String, Object> applicationMap = getApplicationMap();
+		ExtFacesContext extFacesContext = (ExtFacesContext) applicationMap.get("extFacesContext");
+
+		if (extFacesContext == null) {
 			logger.error("Instance not initialized -- caller might be static");
 		}
 
-		return instance;
+		return extFacesContext;
 	}
 
 	/**
-	 * Sets the implementation singleton instance.
+	 * Sets the implementation {@link javax.faces.bean.ApplicationScoped} instance.
 	 */
 	public static void setInstance(ExtFacesContext extFacesContext) {
-		instance = extFacesContext;
+
+		Map<String, Object> applicationMap = getApplicationMap();
+		applicationMap.put("extFacesContext", extFacesContext);
+	}
+
+	private static Map<String, Object> getApplicationMap() {
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+
+		return externalContext.getApplicationMap();
 	}
 
 	/**

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,11 +51,7 @@ public class ResourceValidatorImpl implements ResourceValidator, Serializable {
 	private static final String[] BANNED_SEQUENCES = new String[] {
 			"//", "\\\\", "/\\", "\\/", "..", "./", ".\\", "%"
 		};
-	protected static final String DEFAULT_FACELETS_SUFFIX = ViewHandler.DEFAULT_FACELETS_SUFFIX;
-	protected static final String FACELETS_SUFFIX_PARAM_NAME = ViewHandler.FACELETS_SUFFIX_PARAM_NAME;
-	protected static final String[] VIEW_MAPPINGS_PARAM_NAMES = new String[] {
-			ViewHandler.FACELETS_VIEW_MAPPINGS_PARAM_NAME, "facelets.VIEW_MAPPINGS"
-		};
+	private static final String LEGACY_FACELETS_VIEW_MAPPINGS_PARAM_NAME = "facelets.VIEW_MAPPINGS";
 
 	// Final Data Members
 	private final List<Pattern> excludeResourcePatterns;
@@ -81,6 +77,25 @@ public class ResourceValidatorImpl implements ResourceValidator, Serializable {
 		else {
 			this.excludeLibraryPatterns = null;
 		}
+	}
+
+	private static List<String> getViewMappings(ExternalContext externalContext, String... viewMappingsParamNames) {
+
+		List<String> viewMappings = new ArrayList<String>();
+
+		for (String viewMappingsParamName : viewMappingsParamNames) {
+
+			String configuredMappings = externalContext.getInitParameter(viewMappingsParamName);
+
+			if (configuredMappings != null) {
+
+				String[] mappings = configuredMappings.split(";");
+
+				Collections.addAll(viewMappings, mappings);
+			}
+		}
+
+		return Collections.unmodifiableList(viewMappings);
 	}
 
 	@Override
@@ -125,27 +140,17 @@ public class ResourceValidatorImpl implements ResourceValidator, Serializable {
 
 		List<String> faceletExtensions = new ArrayList<String>();
 		List<String> faceletPathMappings = new ArrayList<String>();
-		faceletExtensions.add(DEFAULT_FACELETS_SUFFIX);
+		faceletExtensions.add(ViewHandler.DEFAULT_FACELETS_SUFFIX);
 
 		ExternalContext externalContext = facesContext.getExternalContext();
-		String configuredExtension = externalContext.getInitParameter(FACELETS_SUFFIX_PARAM_NAME);
+		String configuredExtension = externalContext.getInitParameter(ViewHandler.FACELETS_SUFFIX_PARAM_NAME);
 
 		if ((configuredExtension != null) && !faceletExtensions.contains(configuredExtension)) {
 			faceletExtensions.add(configuredExtension);
 		}
 
-		List<String> viewMappings = new ArrayList<String>();
-
-		for (String viewMappingsParamName : VIEW_MAPPINGS_PARAM_NAMES) {
-			String configuredMappings = externalContext.getInitParameter(viewMappingsParamName);
-
-			if (configuredMappings != null) {
-
-				String[] mappings = configuredMappings.split(";");
-
-				Collections.addAll(viewMappings, mappings);
-			}
-		}
+		List<String> viewMappings = getViewMappings(externalContext, ViewHandler.FACELETS_VIEW_MAPPINGS_PARAM_NAME,
+				LEGACY_FACELETS_VIEW_MAPPINGS_PARAM_NAME);
 
 		for (String viewMapping : viewMappings) {
 

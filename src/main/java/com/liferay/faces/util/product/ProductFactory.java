@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,11 +20,14 @@ import java.util.ServiceLoader;
 
 
 /**
- * @author  Kyle Stiemann
+ * @deprecated  Please use {@link com.liferay.faces.util.product.info.ProductInfoFactory} instead.
+ * @author      Kyle Stiemann
  */
+@Deprecated
 public abstract class ProductFactory {
 
-	private static final ProductFactory productFactory;
+	// Private Constants
+	private static final ProductFactory PRODUCT_FACTORY;
 
 	static {
 
@@ -53,7 +56,7 @@ public abstract class ProductFactory {
 				}
 			}
 
-			productFactory = productFactoryImpl;
+			PRODUCT_FACTORY = productFactoryImpl;
 		}
 		else {
 			throw new NullPointerException("Unable to acquire ServiceLoader for " + ProductFactory.class.getName());
@@ -61,15 +64,24 @@ public abstract class ProductFactory {
 	}
 
 	/**
-	 * Returns the product associated with the specified productId.
+	 * @deprecated  Call {@link ProductUtil#getProduct(javax.faces.context.FacesContext,
+	 *              com.liferay.faces.util.product.Product.Name)} instead.
 	 *
-	 * @param   productId  The id of the product.
+	 *              <p>Returns the product associated with the specified productId.</p>
 	 *
-	 * @return  The product associated with the specified productId.
+	 * @param       productId  The id of the product.
+	 *
+	 * @return      The product associated with the specified productId.
 	 */
+	@Deprecated
 	public static final Product getProduct(Product.Name productId) {
-		return productFactory.getProductImplementation(productId);
+		return PRODUCT_FACTORY.getProductImplementation(productId);
 	}
 
+	/**
+	 * @deprecated  Call {@link ProductUtil#getProduct(javax.faces.context.FacesContext,
+	 *              com.liferay.faces.util.product.Product.Name)} instead.
+	 */
+	@Deprecated
 	public abstract Product getProductImplementation(Product.Name product);
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -486,12 +486,12 @@ public class LiferayPortalBrowserSnifferImpl extends LiferayPortalBrowserSniffer
 		return false;
 	}
 
-	protected static String[] revisionLeadings = {"rv", "it", "ra", "ie"};
-	protected static char[] revisionSeparators =
+	protected static final String[] revisionLeadings = {"rv", "it", "ra", "ie"};
+	protected static final char[] revisionSeparators =
 		{CharPool.BACK_SLASH, CharPool.COLON, CharPool.SLASH, CharPool.SPACE};
-	protected static String[] versionLeadings =
+	protected static final String[] versionLeadings =
 		{"version", "firefox", "minefield", "chrome"};
-	protected static char[] versionSeparators =
+	protected static final char[] versionSeparators =
 		{CharPool.BACK_SLASH, CharPool.SLASH};
 
 	private static final String[] _FIREFOX_ALIASES = {
