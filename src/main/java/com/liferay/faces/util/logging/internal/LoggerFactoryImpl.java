@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,7 +45,7 @@ public class LoggerFactoryImpl extends LoggerFactory {
 			catch (NoClassDefFoundError e) {
 
 				System.err.println(LoggerFactory.class.getName() +
-					" (WARN): Incompatible version of log4j.jar in the classpath. If you are using JBoss/Wildfly Server, add WEB-INF/log4j.jar to activate Log4J logging.");
+					" (WARN): Incompatible version of log4j.jar in the classpath. If you are using JBoss/Wildfly Server, add WEB-INF/lib/log4j.jar to activate Log4J logging.");
 				System.err.println(e.getMessage());
 				log4jAvailable = false;
 			}
