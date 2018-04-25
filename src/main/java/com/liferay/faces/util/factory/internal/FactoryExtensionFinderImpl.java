@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ public class FactoryExtensionFinderImpl extends FactoryExtensionFinder {
 	private static final Logger logger = LoggerFactory.getLogger(FactoryExtensionFinderImpl.class);
 
 	// Private Constants
-	private static final String FACTORY_EXTENSION_CACHE_KEY = FactoryExtensionFinderImpl.class.getName();
+	private static final String FACTORY_EXTENSION_CACHE = FactoryExtensionFinderImpl.class.getName();
 
 	@Override
 	@Deprecated
@@ -101,11 +101,11 @@ public class FactoryExtensionFinderImpl extends FactoryExtensionFinder {
 
 		Map<String, Object> applicationMap = externalContext.getApplicationMap();
 		Map<Class<?>, Object> factoryExtensionCache = (Map<Class<?>, Object>) applicationMap.get(
-				FACTORY_EXTENSION_CACHE_KEY);
+				FACTORY_EXTENSION_CACHE);
 
 		if (factoryExtensionCache != null) {
 			factoryExtensionCache.clear();
-			applicationMap.remove(FACTORY_EXTENSION_CACHE_KEY);
+			applicationMap.remove(FACTORY_EXTENSION_CACHE);
 		}
 	}
 
@@ -127,11 +127,11 @@ public class FactoryExtensionFinderImpl extends FactoryExtensionFinder {
 
 		Map<String, Object> applicationMap = externalContext.getApplicationMap();
 		Map<Class<?>, Object> factoryExtensionCache = (Map<Class<?>, Object>) applicationMap.get(
-				FACTORY_EXTENSION_CACHE_KEY);
+				FACTORY_EXTENSION_CACHE);
 
 		if (factoryExtensionCache == null) {
 			factoryExtensionCache = new HashMap<Class<?>, Object>();
-			applicationMap.put(FACTORY_EXTENSION_CACHE_KEY, factoryExtensionCache);
+			applicationMap.put(FACTORY_EXTENSION_CACHE, factoryExtensionCache);
 		}
 
 		return factoryExtensionCache;

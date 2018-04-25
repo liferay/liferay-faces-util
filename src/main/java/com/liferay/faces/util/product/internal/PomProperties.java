@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import com.liferay.faces.util.internal.CloseableUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -55,7 +54,16 @@ public class PomProperties {
 			logger.error(e);
 		}
 		finally {
-			CloseableUtil.close(inputStream);
+
+			if (inputStream != null) {
+
+				try {
+					inputStream.close();
+				}
+				catch (IOException e) {
+					// do nothing.
+				}
+			}
 		}
 	}
 
