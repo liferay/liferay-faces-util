@@ -186,7 +186,7 @@ public class BodyScriptEncodingResponseWriter extends ResponseWriterWrapper {
 		}
 	}
 
-	private static class BufferedScript {
+	private static final class BufferedScript {
 
 		// Private Members
 		private Map<String, BufferedScriptAttribute> attributes;
@@ -266,7 +266,7 @@ public class BodyScriptEncodingResponseWriter extends ResponseWriterWrapper {
 			responseWriter.endElement("script");
 		}
 
-		private static class BufferedScriptAttribute {
+		private static final class BufferedScriptAttribute {
 
 			// Private Members
 			private Object value;
