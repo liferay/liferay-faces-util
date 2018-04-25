@@ -13,27 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.liferay.faces.util.logging;
+package com.liferay.faces.util.logging.factory;
 
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
+import com.liferay.faces.util.factory.internal.FactoryExtensionFinderImpl;
 import com.liferay.faces.util.factory.util.BlockServiceLoaderUtil;
-import com.liferay.faces.util.logging.internal.LoggerFactoryImpl;
 
 
 /**
  * @author  Kyle Stiemann
  */
-public class LoggerTest {
+public class FactoryExtensionFinderTest {
 
 	@Test
-	public void loadLoggerFactoryWhenServicesDirectoryInaccessibleFACES_2966() {
+	public void getFactoryExtensionFinderWhenServicesDirectoryInaccessibleFACES_2966() {
 
 		// FACES-2966 Netbeans auto completion fails for Liferay Faces components
-		Logger logger = BlockServiceLoaderUtil.<Logger>getFactoryOutputWithBlockedServiceLoader(LoggerFactory.class,
-				LoggerFactoryImpl.class, LoggerTest.class);
-		Assert.assertNotNull(logger);
-		Assert.assertTrue(logger.isErrorEnabled());
+		Object factoryExtensionFinder = BlockServiceLoaderUtil.callFactoryMethodWithBlockedServiceLoader(
+				FactoryExtensionFinder.class, FactoryExtensionFinderImpl.class, "getInstance", null);
+		Assert.assertNotNull(factoryExtensionFinder);
+		Assert.assertEquals(FactoryExtensionFinderImpl.class.getName(), factoryExtensionFinder.getClass().getName());
 	}
 }

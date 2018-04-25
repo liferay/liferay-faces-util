@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,11 +37,12 @@ public class BufferedScriptResponseWriter extends ResponseWriter {
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(BufferedScriptResponseWriter.class);
 
-	StringWriter stringWriter = null;
+	// Package-Private Data Members
+	@Deprecated
+	/* package-private */ StringWriter stringWriter = new StringWriter();
 
-	public BufferedScriptResponseWriter() {
-		this.stringWriter = new StringWriter();
-	}
+	// Private Final Data Members
+	private final StringWriter _stringWriter = new StringWriter();
 
 	@Override
 	public ResponseWriter cloneWithWriter(Writer writer) {
@@ -55,7 +56,7 @@ public class BufferedScriptResponseWriter extends ResponseWriter {
 
 	@Override
 	public void close() throws IOException {
-		stringWriter.close();
+		_stringWriter.close();
 	}
 
 	@Override
@@ -73,7 +74,7 @@ public class BufferedScriptResponseWriter extends ResponseWriter {
 
 	@Override
 	public void flush() throws IOException {
-		stringWriter.flush();
+		_stringWriter.flush();
 	}
 
 	@Override
@@ -109,12 +110,12 @@ public class BufferedScriptResponseWriter extends ResponseWriter {
 
 	@Override
 	public String toString() {
-		return stringWriter.toString();
+		return _stringWriter.toString();
 	}
 
 	@Override
 	public void write(char[] text, int off, int len) throws IOException {
-		stringWriter.write(text, off, len);
+		_stringWriter.write(text, off, len);
 	}
 
 	@Override
@@ -129,9 +130,9 @@ public class BufferedScriptResponseWriter extends ResponseWriter {
 
 		if (comment != null) {
 
-			stringWriter.write("/*");
-			stringWriter.write(comment.toString());
-			stringWriter.write("*/");
+			_stringWriter.write("/*");
+			_stringWriter.write(comment.toString());
+			_stringWriter.write("*/");
 		}
 	}
 
@@ -142,7 +143,7 @@ public class BufferedScriptResponseWriter extends ResponseWriter {
 		// https://github.com/javaserverfaces/mojarra/blob/2.2.12/jsf-ri/src/main/java/com/sun/faces/renderkit/html_basic/HtmlResponseWriter.java#L1280-L1283
 		// for more details.
 		if (text != null) {
-			stringWriter.write(text.toString());
+			_stringWriter.write(text.toString());
 		}
 	}
 
@@ -153,7 +154,7 @@ public class BufferedScriptResponseWriter extends ResponseWriter {
 		// https://github.com/javaserverfaces/mojarra/blob/2.2.12/jsf-ri/src/main/java/com/sun/faces/renderkit/html_basic/HtmlResponseWriter.java#L1280-L1283
 		// for more details.
 		if (text != null) {
-			stringWriter.write(text, off, len);
+			_stringWriter.write(text, off, len);
 		}
 	}
 

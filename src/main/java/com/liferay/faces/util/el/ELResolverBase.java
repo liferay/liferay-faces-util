@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,12 +17,17 @@ package com.liferay.faces.util.el;
 
 import java.beans.FeatureDescriptor;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.el.ELContext;
 import javax.el.ELResolver;
 import javax.faces.application.Application;
+
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
@@ -37,13 +42,38 @@ import javax.faces.application.Application;
  */
 public abstract class ELResolverBase extends ELResolver implements Serializable {
 
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(ELResolverBase.class);
+
 	// serialVersionUID
 	private static final long serialVersionUID = 8075201303544048292L;
 
 	// Private Constants
-	private static final ArrayList<FeatureDescriptor> FEATURE_DESCRIPTORS = new ArrayList<FeatureDescriptor>();
+	private final List<FeatureDescriptor> featureDescriptors;
 
+	public ELResolverBase() {
+		this.featureDescriptors = Collections.emptyList();
+	}
+
+	protected ELResolverBase(FeatureDescriptor... featureDescriptors) {
+		this.featureDescriptors = Collections.unmodifiableList(Arrays.asList(featureDescriptors));
+	}
+
+	/**
+	 * @param       featureName
+	 * @param       classType
+	 *
+	 * @deprecated  Use {@link #getFeatureDescriptor(java.lang.String, java.lang.Class)} and {@link
+	 *              #ELResolverBase(java.beans.FeatureDescriptor...)} instead.
+	 */
+	@Deprecated
 	protected static void addFeatureDescriptor(String featureName, Class<?> classType) {
+		logger.warn(
+			"Ignoring static call to addFeatureDescriptor(). To add feature descriptors use the protected constructor instead.");
+	}
+
+	protected static FeatureDescriptor getFeatureDescriptor(String featureName, Class<?> classType) {
+
 		FeatureDescriptor featureDescriptor = new FeatureDescriptor();
 		featureDescriptor.setName(featureName);
 		featureDescriptor.setDisplayName(featureName);
@@ -53,12 +83,13 @@ public abstract class ELResolverBase extends ELResolver implements Serializable 
 		featureDescriptor.setPreferred(true);
 		featureDescriptor.setValue(ELResolver.TYPE, classType);
 		featureDescriptor.setValue(ELResolver.RESOLVABLE_AT_DESIGN_TIME, true);
-		FEATURE_DESCRIPTORS.add(featureDescriptor);
+
+		return featureDescriptor;
 	}
 
 	@Override
 	public Iterator<FeatureDescriptor> getFeatureDescriptors(ELContext elContext, Object base) {
-		return FEATURE_DESCRIPTORS.iterator();
+		return featureDescriptors.iterator();
 	}
 
 	@Override

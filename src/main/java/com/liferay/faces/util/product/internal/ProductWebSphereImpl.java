@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,23 +15,19 @@
  */
 package com.liferay.faces.util.product.internal;
 
-import com.liferay.faces.util.logging.Logger;
-import com.liferay.faces.util.logging.LoggerFactory;
-
-
 /**
  * @author  Neil Griffin
  */
 public class ProductWebSphereImpl extends ProductBaseImpl {
 
-	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(ProductWebSphereImpl.class);
-
 	public ProductWebSphereImpl() {
 
 		try {
+
 			this.title = "WebSphere";
+
 			// TODO: FACES-2859 - Unable to detect the version of WebSphere
+			initStringValue(version);
 		}
 		catch (Exception e) {
 			// Ignore -- WebSphere is likely not present.

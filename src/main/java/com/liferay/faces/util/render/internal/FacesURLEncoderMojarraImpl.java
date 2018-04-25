@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,11 +35,11 @@ public class FacesURLEncoderMojarraImpl implements FacesURLEncoder, Serializable
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(FacesURLEncoderMojarraImpl.class);
 
-	// Private Constants
-	private final Method MOJARRA_METHOD_WRITE_URL;
+	// Private Final Data Members
+	private final Method mojarraMethodWriteURL;
 
 	public FacesURLEncoderMojarraImpl(Method mojarraMethodWriteURL) {
-		this.MOJARRA_METHOD_WRITE_URL = mojarraMethodWriteURL;
+		this.mojarraMethodWriteURL = mojarraMethodWriteURL;
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class FacesURLEncoderMojarraImpl implements FacesURLEncoder, Serializable
 
 				StringWriter stringWriter = new StringWriter();
 				char[] urlBuf = new char[url.length() * 2];
-				MOJARRA_METHOD_WRITE_URL.invoke(null, stringWriter, url, urlBuf, encoding);
+				mojarraMethodWriteURL.invoke(null, stringWriter, url, urlBuf, encoding);
 				stringWriter.flush();
 				encodedURL = stringWriter.toString();
 			}

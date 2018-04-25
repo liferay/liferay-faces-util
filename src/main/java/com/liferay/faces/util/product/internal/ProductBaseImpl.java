@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,9 @@ import com.liferay.faces.util.product.Product;
 
 
 /**
+ * All data in this class and any subclasses must be effectively immutable. In other words, the data must only be
+ * modified in the constructor (and the init methods must only be called from a constructor).
+ *
  * @author  Neil Griffin
  */
 public class ProductBaseImpl implements Product {
@@ -41,30 +44,37 @@ public class ProductBaseImpl implements Product {
 	protected String title;
 	protected String version = "0.0.0";
 
+	@Override
 	public int getBuildId() {
 		return buildId;
 	}
 
+	@Override
 	public int getMajorVersion() {
 		return majorVersion;
 	}
 
+	@Override
 	public int getMinorVersion() {
 		return minorVersion;
 	}
 
+	@Override
 	public int getPatchVersion() {
 		return patchVersion;
 	}
 
+	@Override
 	public String getTitle() {
 		return title;
 	}
 
+	@Override
 	public String getVersion() {
 		return version;
 	}
 
+	@Override
 	public boolean isDetected() {
 		return detected;
 	}
@@ -72,19 +82,13 @@ public class ProductBaseImpl implements Product {
 	@Override
 	public String toString() {
 
-		if (stringValue == null) {
-			StringBuilder buf = new StringBuilder();
+		String stringValue;
 
-			if (title != null) {
-				buf.append(title);
-				buf.append(" ");
-			}
-
-			if (version != null) {
-				buf.append(version);
-			}
-
-			stringValue = buf.toString();
+		if (this.stringValue != null) {
+			stringValue = this.stringValue;
+		}
+		else {
+			stringValue = title + " " + version;
 		}
 
 		return stringValue;
@@ -98,11 +102,11 @@ public class ProductBaseImpl implements Product {
 		init(clazz, expectedTitle, null, true);
 	}
 
-	protected void init(Class<?> clazz, String expectedTitle, String pomPropertiesFile) {
+	protected final void init(Class<?> clazz, String expectedTitle, String pomPropertiesFile) {
 		init(clazz, expectedTitle, pomPropertiesFile, true);
 	}
 
-	protected void init(Class<?> clazz, String expectedTitle, String pomPropertiesFile, boolean warnOnFail) {
+	protected final void init(Class<?> clazz, String expectedTitle, String pomPropertiesFile, boolean warnOnFail) {
 
 		detected = true;
 
@@ -141,9 +145,28 @@ public class ProductBaseImpl implements Product {
 				logger.warn("Unable to obtain version information for {0}.", this.title);
 			}
 		}
+
+		initStringValue(version);
 	}
 
-	protected void initVersionInfo(String version) {
+	protected final void initStringValue(String version) {
+
+		StringBuilder buf = new StringBuilder();
+
+		if (title != null) {
+			buf.append(title);
+		}
+
+		if (version != null) {
+
+			buf.append(" ");
+			buf.append(version);
+		}
+
+		stringValue = buf.toString();
+	}
+
+	protected final void initVersionInfo(String version) {
 
 		this.version = version;
 
@@ -162,7 +185,7 @@ public class ProductBaseImpl implements Product {
 		}
 	}
 
-	protected int parseInt(String value) {
+	protected final int parseInt(String value) {
 		int intValue = 0;
 
 		try {

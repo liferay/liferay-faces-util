@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,6 +42,7 @@ public class ProductWeldImpl extends ProductBaseImpl {
 					// The precise version of Weld is found in the Specification-Version rather than the
 					// Implementation-Version in META-INF/MANIFEST.MF
 					initVersionInfo(pkg.getSpecificationVersion());
+					initStringValue(version);
 				}
 			}
 		}

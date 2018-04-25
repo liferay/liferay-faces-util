@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,61 +15,88 @@
  */
 package com.liferay.faces.util.product;
 
-import java.util.Iterator;
-import java.util.ServiceLoader;
+import javax.faces.FacesWrapper;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+
+import com.liferay.faces.util.factory.FactoryExtensionFinder;
+import com.liferay.faces.util.product.internal.ProductFactoryImpl;
 
 
 /**
  * @author  Kyle Stiemann
  */
-public abstract class ProductFactory {
+public abstract class ProductFactory implements FacesWrapper<ProductFactory> {
 
-	private static final ProductFactory productFactory;
+	/**
+	 * Returns the thread-safe singleton instance of {@link Product} associated with the specified {@link Product#Name}
+	 * from the {@link ProductFactory} found by the {@link FactoryExtensionFinder}. The returned instance is not
+	 * guaranteed to be {@link javax.io.Serializable}.
+	 *
+	 * @param       productName  The name of the product.
+	 *
+	 * @deprecated  Use {@link #getProductInstance(javax.faces.context.ExternalContext,
+	 *              com.liferay.faces.util.product.Product.Name)} instead.
+	 */
+	@Deprecated
+	public static final Product getProduct(Product.Name productName) {
 
-	static {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ProductFactory productFactory = null;
 
-		ServiceLoader<ProductFactory> serviceLoader = ServiceLoader.load(ProductFactory.class);
+		if (facesContext != null) {
 
-		if (serviceLoader != null) {
-
-			Iterator<ProductFactory> iterator = serviceLoader.iterator();
-
-			ProductFactory productFactoryImpl = null;
-
-			while ((productFactoryImpl == null) && iterator.hasNext()) {
-				productFactoryImpl = iterator.next();
-			}
-
-			if (productFactoryImpl == null) {
-
-				try {
-
-					// FACES-2966 Netbeans auto completion fails for Liferay Faces components
-					Class<?> clazz = Class.forName("com.liferay.faces.util.product.internal.ProductFactoryImpl");
-					productFactoryImpl = (ProductFactory) clazz.getConstructor().newInstance();
-				}
-				catch (Exception e) {
-					throw new RuntimeException("Unable locate service for " + ProductFactory.class.getName(), e);
-				}
-			}
-
-			productFactory = productFactoryImpl;
+			ExternalContext externalContext = facesContext.getExternalContext();
+			productFactory = (ProductFactory) FactoryExtensionFinder.getFactory(externalContext, ProductFactory.class);
 		}
-		else {
-			throw new NullPointerException("Unable to acquire ServiceLoader for " + ProductFactory.class.getName());
+
+		// If the singleton ProductFactory cannot be obtained from the FactoryExtensionFinder, then create a new
+		// ProductFactoryImpl. This allows ProductFactory to remain backwards compatible for use cases where
+		// the developer has used ProductFactory before Util's factories are initialized (and even before the
+		// FacesContext is initialized).
+		if (productFactory == null) {
+			productFactory = new ProductFactoryImpl();
 		}
+
+		return productFactory.getProductInfo(productName);
 	}
 
 	/**
-	 * Returns the product associated with the specified productId.
+	 * Returns the thread-safe singleton instance of {@link Product} associated with the specified {@link Product#Name}
+	 * from the {@link ProductFactory} found by the {@link FactoryExtensionFinder}. The returned instance is not
+	 * guaranteed to be {@link javax.io.Serializable}.
 	 *
-	 * @param   productId  The id of the product.
-	 *
-	 * @return  The product associated with the specified productId.
+	 * @param  productName  The name of the product.
 	 */
-	public static final Product getProduct(Product.Name productId) {
-		return productFactory.getProductImplementation(productId);
+	public static Product getProductInstance(ExternalContext externalContext, Product.Name productName) {
+
+		ProductFactory productFactory = (ProductFactory) FactoryExtensionFinder.getFactory(externalContext,
+				ProductFactory.class);
+
+		return productFactory.getProductInfo(productName);
 	}
 
-	public abstract Product getProductImplementation(Product.Name product);
+	/**
+	 * Returns the thread-safe singleton instance of {@link Product} associated with the specified {@link Product#Name}.
+	 * The returned instance is not guaranteed to be {@link javax.io.Serializable}.
+	 *
+	 * @param  productName  The name of the product.
+	 */
+	public abstract Product getProductInfo(Product.Name productName);
+
+	@Override
+	public abstract ProductFactory getWrapped();
+
+	/**
+	 * Returns the thread-safe singleton instance of {@link Product} associated with the specified {@link Product#Name}.
+	 * The returned instance is not guaranteed to be {@link javax.io.Serializable}.
+	 *
+	 * @param       productName
+	 *
+	 * @deprecated  Use {@link #getProductInfo(com.liferay.faces.util.product.Product.Name)} instead.
+	 */
+	@Deprecated
+	public Product getProductImplementation(Product.Name productName) {
+		return getProduct(productName);
+	}
 }
