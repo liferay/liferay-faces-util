@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ public class LiferayPortalBrowserSnifferCompat {
 	protected static final String[] WEBKIT_ALIASES = { "khtml", "applewebkit" };
 	protected static final String[] WINDOWS_ALIASES = { "windows", "win32", "16bit" };
 
-	protected static class CharPool {
+	protected static final class CharPool {
 
 		public static final char BACK_SLASH = '\\';
 		public static final char COLON = ':';
@@ -50,7 +50,7 @@ public class LiferayPortalBrowserSnifferCompat {
 		public static final char SPACE = ' ';
 	}
 
-	protected static class GetterUtil {
+	protected static final class GetterUtil {
 
 		public static float getFloat(String value) {
 
@@ -67,14 +67,14 @@ public class LiferayPortalBrowserSnifferCompat {
 		}
 	}
 
-	protected static class StringUtil {
+	protected static final class StringUtil {
 
 		public static String toLowerCase(String value) {
 			return value.toLowerCase();
 		}
 	}
 
-	protected static class Validator {
+	protected static final class Validator {
 
 		public static boolean isNotNull(String s) {
 			return (!isNull(s));
@@ -128,7 +128,7 @@ public class LiferayPortalBrowserSnifferCompat {
 		}
 	}
 
-	protected static class WebKeys {
+	protected static final class WebKeys {
 
 		public static final String BROWSER_SNIFFER_REVISION = "BROWSER_SNIFFER_REVISION";
 

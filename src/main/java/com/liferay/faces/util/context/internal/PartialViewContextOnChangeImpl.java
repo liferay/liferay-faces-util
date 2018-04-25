@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -119,7 +119,7 @@ public class PartialViewContextOnChangeImpl extends PartialViewContextWrapper {
 		wrappedPartialViewContext.setPartialRequest(isPartialRequest);
 	}
 
-	private static class VisitCallbackApplyRequestValuesImpl implements VisitCallback {
+	private static final class VisitCallbackApplyRequestValuesImpl implements VisitCallback {
 
 		private Map<String, Object> valueMap;
 		private Map<String, Boolean> validMap;
@@ -145,7 +145,7 @@ public class PartialViewContextOnChangeImpl extends PartialViewContextWrapper {
 
 	}
 
-	private static class VisitCallbackRenderResponseImpl implements VisitCallback {
+	private static final class VisitCallbackRenderResponseImpl implements VisitCallback {
 
 		private FacesContext facesContext;
 		private Map<String, Object> valueMap;
