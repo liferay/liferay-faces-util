@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,14 +24,14 @@ import com.liferay.faces.util.product.ProductFactory;
 
 
 /**
- * @author  Neil Griffin
  * @author  Kyle Stiemann
  */
 public class ProductFactoryImpl extends ProductFactory {
 
-	private static final Map<Product.Name, Product> PRODUCTS;
+	// Private Final Data Members
+	private final Map<Product.Name, Product> productMap;
 
-	static {
+	public ProductFactoryImpl() {
 
 		Map<Product.Name, Product> productMap = new EnumMap<Product.Name, Product>(Product.Name.class);
 		productMap.put(Product.Name.ANGULARBEANS, new ProductAngularBeansImpl());
@@ -55,6 +55,7 @@ public class ProductFactoryImpl extends ProductFactory {
 		productMap.put(Product.Name.LIFERAY_FACES_BRIDGE, new ProductLiferayFacesBridgeImpl());
 		productMap.put(Product.Name.LIFERAY_FACES_BRIDGE_EXT, new ProductLiferayFacesBridgeExtImpl());
 		productMap.put(Product.Name.LIFERAY_FACES_METAL, new ProductLiferayFacesMetalImpl());
+		productMap.put(Product.Name.LIFERAY_FACES_CLAY, new ProductLiferayFacesClayImpl());
 		productMap.put(Product.Name.LIFERAY_FACES_PORTAL, new ProductLiferayFacesPortalImpl());
 		productMap.put(Product.Name.LIFERAY_FACES_SHOWCASE, new ProductLiferayFacesShowcaseImpl());
 		productMap.put(Product.Name.LIFERAY_FACES_UTIL, new ProductLiferayFacesUtilImpl());
@@ -121,11 +122,18 @@ public class ProductFactoryImpl extends ProductFactory {
 				new ProductSpecImpl("Servlet", tomcat, wildfly, resin, glassfish, weblogic, websphere, jetty));
 		}
 
-		PRODUCTS = Collections.unmodifiableMap(productMap);
+		this.productMap = Collections.unmodifiableMap(productMap);
 	}
 
 	@Override
-	public Product getProductImplementation(Product.Name productId) {
-		return PRODUCTS.get(productId);
+	public Product getProductInfo(Product.Name productName) {
+		return productMap.get(productName);
+	}
+
+	@Override
+	public ProductFactory getWrapped() {
+
+		// Since this is the default factory instance, it will never wrap another factory.
+		return null;
 	}
 }

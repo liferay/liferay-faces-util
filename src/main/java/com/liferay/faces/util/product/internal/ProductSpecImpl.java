@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,18 +16,18 @@
 package com.liferay.faces.util.product.internal;
 
 import com.liferay.faces.util.product.Product;
+import com.liferay.faces.util.product.ProductWrapper;
 
 
 /**
  * @author  Kyle Stiemann
  */
-public class ProductSpecImpl implements Product {
+public class ProductSpecImpl extends ProductWrapper {
 
-	// Private Members
-	private String specTitle;
+	// Private Data Members
 	private Product wrappedProduct;
 
-	public ProductSpecImpl(String specTitle, Product... specImplProducts) {
+	public ProductSpecImpl(String fallbackSpecTitle, Product... specImplProducts) {
 
 		for (int i = 0; i < specImplProducts.length; i++) {
 
@@ -36,55 +36,21 @@ public class ProductSpecImpl implements Product {
 			if (specImplProduct.isDetected() || (i == (specImplProducts.length - 1))) {
 
 				this.wrappedProduct = specImplProduct;
-				this.specTitle = specImplProduct.getTitle();
+
 				break;
 			}
 		}
 
 		if (this.wrappedProduct == null) {
 
-			this.wrappedProduct = new ProductBaseImpl();
-			this.specTitle = specTitle;
+			ProductBaseImpl productBaseImpl = new ProductBaseImpl();
+			productBaseImpl.title = fallbackSpecTitle;
+			this.wrappedProduct = productBaseImpl;
 		}
 	}
 
 	@Override
-	public int getBuildId() {
-		return wrappedProduct.getBuildId();
-	}
-
-	@Override
-	public int getMajorVersion() {
-		return wrappedProduct.getMajorVersion();
-	}
-
-	@Override
-	public int getMinorVersion() {
-		return wrappedProduct.getMinorVersion();
-	}
-
-	@Override
-	public int getPatchVersion() {
-		return wrappedProduct.getPatchVersion();
-	}
-
-	@Override
-	public String getTitle() {
-		return specTitle;
-	}
-
-	@Override
-	public String getVersion() {
-		return wrappedProduct.getVersion();
-	}
-
-	@Override
-	public boolean isDetected() {
-		return wrappedProduct.isDetected();
-	}
-
-	@Override
-	public String toString() {
-		return wrappedProduct.toString();
+	public Product getWrapped() {
+		return wrappedProduct;
 	}
 }

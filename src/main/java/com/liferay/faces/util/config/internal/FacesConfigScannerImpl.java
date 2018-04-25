@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,8 +31,11 @@ import com.liferay.faces.util.config.ConfiguredServlet;
 import com.liferay.faces.util.config.ConfiguredServletMapping;
 import com.liferay.faces.util.config.FacesConfig;
 import com.liferay.faces.util.config.WebConfig;
+import com.liferay.faces.util.internal.CloseableUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.product.Product;
+import com.liferay.faces.util.product.internal.ProductMojarraImpl;
 
 
 /**
@@ -137,6 +140,7 @@ public class FacesConfigScannerImpl implements FacesConfigScanner {
 		}
 
 		FacesConfig facesConfig = new FacesConfigImpl(facesServletMappings, configuredSuffixes);
+		InputStream inputStream = null;
 
 		try {
 
@@ -144,14 +148,23 @@ public class FacesConfigScannerImpl implements FacesConfigScanner {
 
 			// Parse the WEB-INF/faces-config.xml descriptor. Gathering absolute-ordering, if any.
 			FacesConfigDescriptor webInfFacesConfigDescriptor;
-			InputStream inputStream = resourceReader.getResourceAsStream(FACES_CONFIG_WEB_INF_PATH);
+			inputStream = resourceReader.getResourceAsStream(FACES_CONFIG_WEB_INF_PATH);
 			webInfFacesConfigDescriptor = facesConfigDescriptorParser.parse(inputStream, FACES_CONFIG_WEB_INF_PATH);
 			inputStream.close();
 
 			// First, parse the Mojarra configuration found in the classpath.
 			Enumeration<URL> mojarraConfigURLs = classLoader.getResources(MOJARRA_CONFIG_PATH);
 
+			// Since the FactoryExtensionFinder has not been initialized, create a new Mojarra Product manually,
+			// to determine if Mojarra is present.
+			final Product MOJARRA = new ProductMojarraImpl();
+
+			if (MOJARRA.isDetected() && ((mojarraConfigURLs == null) || !mojarraConfigURLs.hasMoreElements())) {
+				logger.warn("{0} not found.", MOJARRA_CONFIG_PATH);
+			}
+
 			if (mojarraConfigURLs != null) {
+
 				boolean processedMojarraConfig = false;
 
 				while (mojarraConfigURLs.hasMoreElements()) {
@@ -248,6 +261,9 @@ public class FacesConfigScannerImpl implements FacesConfigScanner {
 		}
 		catch (Exception e) {
 			logger.error(e.getMessage(), e);
+		}
+		finally {
+			CloseableUtil.close(inputStream);
 		}
 
 		return facesConfig;

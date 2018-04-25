@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package com.liferay.faces.util.el.internal;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import com.liferay.faces.util.product.Product;
@@ -30,7 +31,14 @@ import com.liferay.faces.util.product.ProductFactory;
 public class ProductMap implements Map<Product.Name, Product>, Serializable {
 
 	// serialVersionUID
-	private static final long serialVersionUID = 8051373438471283130L;
+	private static final long serialVersionUID = 2730600575388304439L;
+
+	// Private Final Data Members
+	private final ProductFactory productFactory;
+
+	public ProductMap(ProductFactory productFactory) {
+		this.productFactory = productFactory;
+	}
 
 	@Override
 	public void clear() {
@@ -64,7 +72,7 @@ public class ProductMap implements Map<Product.Name, Product>, Serializable {
 			productName = Product.Name.valueOf(key.toString());
 		}
 
-		return ProductFactory.getProduct(productName);
+		return productFactory.getProductInfo(productName);
 	}
 
 	@Override

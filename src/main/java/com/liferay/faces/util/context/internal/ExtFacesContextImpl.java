@@ -59,10 +59,6 @@ public class ExtFacesContextImpl extends ExtFacesContext implements Serializable
 	// by Mojarra.
 	private static final long serialVersionUID = 102195020822157073L;
 
-	public ExtFacesContextImpl() {
-		setInstance(this);
-	}
-
 	/**
 	 * @see  FacesContextHelper#addComponentErrorMessage(String, String)
 	 */

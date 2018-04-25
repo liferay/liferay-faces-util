@@ -11,10 +11,6 @@
 	<application>
 		<el-resolver>com.liferay.faces.util.el.internal.UtilELResolver</el-resolver>
 		<system-event-listener>
-			<system-event-listener-class>com.liferay.faces.util.el.internal.I18nMap</system-event-listener-class>
-			<system-event-class>com.liferay.faces.util.event.PostConstructApplicationConfigEvent</system-event-class>
-		</system-event-listener>
-		<system-event-listener>
 			<system-event-listener-class>com.liferay.faces.util.event.internal.ApplicationStartupListener</system-event-listener-class>
 			<system-event-class>javax.faces.event.PostConstructApplicationEvent</system-event-class>
 		</system-event-listener>
@@ -28,6 +24,7 @@
 			<util:faces-context-helper-factory>com.liferay.faces.util.context.internal.FacesContextHelperFactoryImpl</util:faces-context-helper-factory>
 			<util:faces-url-encoder-factory>com.liferay.faces.util.render.internal.FacesURLEncoderFactoryImpl</util:faces-url-encoder-factory>
 			<util:i18n-factory>com.liferay.faces.util.i18n.internal.I18nFactoryImpl</util:i18n-factory>
+			<util:product-factory>com.liferay.faces.util.product.internal.ProductFactoryImpl</util:product-factory>
 			<util:resource-validator-factory>com.liferay.faces.util.application.internal.ResourceValidatorFactoryImpl</util:resource-validator-factory>
 			<util:resource-verifier-factory>com.liferay.faces.util.application.internal.ResourceVerifierFactoryImpl</util:resource-verifier-factory>
 			<util:script-factory>com.liferay.faces.util.client.internal.ScriptFactoryImpl</util:script-factory>

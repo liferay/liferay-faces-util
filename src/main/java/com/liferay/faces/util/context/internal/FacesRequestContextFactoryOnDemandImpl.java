@@ -40,8 +40,9 @@ public class FacesRequestContextFactoryOnDemandImpl extends FacesRequestContextF
 	// FacesRequestContext instance will be lazily initialized if/when FacesRequestContext.getCurrentInstance() is
 	// called. Lazy class initialization is thread-safe. For more details on this pattern, see
 	// http://stackoverflow.com/questions/7420504/threading-lazy-initialization-vs-static-lazy-initialization and
-	// http://docs.oracle.com/javase/specs/jls/se7/html/jls-12.html#jls-12.4.2
-	public static final FacesRequestContext FACES_REQUEST_CONTEXT = new FacesRequestContextImpl();
+	// http://docs.oracle.com/javase/specs/jls/se7/html/jls-12.html#jls-12.4.2. The use of a static constant here is
+	// valid since FacesRequestContextStatelessImpl is stateless and calls through to FacesContextHelperUtil methods.
+	public static final FacesRequestContext FACES_REQUEST_CONTEXT = new FacesRequestContextStatelessImpl();
 
 	@Override
 	public FacesRequestContext getFacesRequestContext() {
@@ -55,12 +56,12 @@ public class FacesRequestContextFactoryOnDemandImpl extends FacesRequestContextF
 		return null;
 	}
 
-	private static final class FacesRequestContextImpl extends FacesRequestContext {
+	private static final class FacesRequestContextStatelessImpl extends FacesRequestContext {
 
 		// Logger
-		private static final Logger logger = LoggerFactory.getLogger(FacesRequestContextImpl.class);
+		private static final Logger logger = LoggerFactory.getLogger(FacesRequestContextStatelessImpl.class);
 
-		private FacesRequestContextImpl() {
+		private FacesRequestContextStatelessImpl() {
 			// no-op
 		}
 

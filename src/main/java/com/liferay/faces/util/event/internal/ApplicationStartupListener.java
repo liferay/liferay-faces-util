@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@ import com.liferay.faces.util.config.FacesConfig;
 import com.liferay.faces.util.config.WebConfigParam;
 import com.liferay.faces.util.config.internal.ApplicationConfigInitializer;
 import com.liferay.faces.util.config.internal.ApplicationConfigInitializerImpl;
+import com.liferay.faces.util.el.internal.I18nMap;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
 
@@ -41,8 +42,6 @@ public class ApplicationStartupListener extends ApplicationStartupListenerCompat
 
 	@Override
 	public void processSystemEvent(EventObject systemEvent) throws AbortProcessingException {
-
-		UtilDependencyVerifier.verify();
 
 		Application application = (Application) systemEvent.getSource();
 		FacesContext initFacesContext = FacesContext.getCurrentInstance();
@@ -80,6 +79,8 @@ public class ApplicationStartupListener extends ApplicationStartupListenerCompat
 				throw new AbortProcessingException(e);
 			}
 
+			UtilDependencyVerifier.verify(initExternalContext);
+			I18nMap.initMessageCache(initFacesContext);
 			publishEvent(application, initFacesContext, applicationConfig);
 		}
 	}

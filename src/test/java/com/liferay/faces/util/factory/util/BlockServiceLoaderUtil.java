@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,6 @@
 package com.liferay.faces.util.factory.util;
 
 import java.lang.reflect.Method;
-import java.net.URL;
-
-import com.liferay.faces.util.logging.LoggerTest;
-import com.liferay.faces.util.product.ProductTest;
 
 import junit.framework.Assert;
 
@@ -33,17 +29,8 @@ public final class BlockServiceLoaderUtil {
 		throw new AssertionError();
 	}
 
-	/**
-	 * This method loads (or reloads if necessary) the given factory in a separate ClassLoader which disables
-	 * ServiceLoader. Since the factories which use ServiceLoader are initialized in a static block, their classes may
-	 * need to be reloaded in order to re-run their static initialization. See {@link
-	 * ProductTest#loadProductFactoryWhenServicesDirectoryInaccessibleFACES_2966()}, {@link
-	 * LoggerTest#loadLoggerFactoryWhenServicesDirectoryInaccessibleFACES_2966()}, {@link
-	 * BlockServiceLoaderClassLoader}, and <a href="https://issues.liferay.com/browse/FACES-2966">FACES-2966 Netbeans
-	 * auto completion fails for Liferay Faces components</a> for more details.
-	 */
-	public static <T> T getFactoryOutputWithBlockedServiceLoader(Object factoryInput, Class<?> factoryClazz,
-		Class<?> factoryImplClazz) {
+	public static <T> T callFactoryMethodWithBlockedServiceLoader(Class<?> factoryClazz, Class<?> factoryImplClazz,
+		String methodName, Object factoryInput) {
 
 		String factoryClazzSimpleName = factoryClazz.getSimpleName();
 		T factoryOutput = null;
@@ -65,13 +52,18 @@ public final class BlockServiceLoaderUtil {
 			// occur).
 			blockServiceLoaderClassLoader.loadClassWithoutParentLoader(factoryImplClazz);
 
-			String factoryMethodName = "get" + factoryClazzSimpleName.replace("Factory", "");
-			Method getProductMethod = factoryClazzWithDisabledServiceLoader.getMethod(factoryMethodName,
-					factoryInput.getClass());
+			if (factoryInput != null) {
 
-			@SuppressWarnings("unchecked")
-			T t = (T) getProductMethod.invoke(null, factoryInput);
-			factoryOutput = t;
+				Method getProductMethod = factoryClazzWithDisabledServiceLoader.getMethod(methodName,
+						factoryInput.getClass());
+				factoryOutput = (T) getProductMethod.invoke(null, factoryInput);
+			}
+			else {
+
+				Method getProductMethod = factoryClazzWithDisabledServiceLoader.getMethod(methodName);
+				factoryOutput = (T) getProductMethod.invoke(null);
+			}
+
 			Assert.assertTrue("Invalid test: no class attempted to access service file \"/META-INF/services/" +
 				factoryClassName +
 				".class\" via the blockServiceLoaderClassLoader. The file may have been accessed by another classloader.",
@@ -86,5 +78,23 @@ public final class BlockServiceLoaderUtil {
 		}
 
 		return factoryOutput;
+	}
+
+	/**
+	 * This method loads (or reloads if necessary) the given factory in a separate ClassLoader which disables
+	 * ServiceLoader. Since the factories which use ServiceLoader are initialized in a static block, their classes may
+	 * need to be reloaded in order to re-run their static initialization. See {@link
+	 * LoggerTest#loadLoggerFactoryWhenServicesDirectoryInaccessibleFACES_2966()}, {@link
+	 * BlockServiceLoaderClassLoader}, and <a href="https://issues.liferay.com/browse/FACES-2966">FACES-2966 Netbeans
+	 * auto completion fails for Liferay Faces components</a> for more details.
+	 */
+	public static <T> T getFactoryOutputWithBlockedServiceLoader(Class<?> factoryClazz, Class<?> factoryImplClazz,
+		Object factoryInput) {
+
+		String factoryClazzSimpleName = factoryClazz.getSimpleName();
+		String factoryMethodName = "get" + factoryClazzSimpleName.replace("Factory", "");
+
+		return callFactoryMethodWithBlockedServiceLoader(factoryClazz, factoryImplClazz, factoryMethodName,
+				factoryInput);
 	}
 }

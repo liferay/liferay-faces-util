@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,17 +15,21 @@
  */
 package com.liferay.faces.util.el.internal;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
 import javax.faces.application.Application;
+import javax.faces.application.ProjectStage;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.cache.Cache;
+import com.liferay.faces.util.cache.CacheFactory;
+import com.liferay.faces.util.config.WebConfigParam;
 import com.liferay.faces.util.i18n.I18n;
 import com.liferay.faces.util.i18n.I18nFactory;
 import com.liferay.faces.util.logging.Logger;
@@ -35,13 +39,52 @@ import com.liferay.faces.util.logging.LoggerFactory;
 /**
  * @author  Neil Griffin
  */
-public class I18nMap extends I18nMapCompat {
+public class I18nMap implements Map<String, Object>, Serializable {
 
 	// serialVersionUID
 	private static final long serialVersionUID = 5549598732411060854L;
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(I18nMap.class);
+
+	/**
+	 * This method initializes the message cache for I18nMap. The initialization cannot be performed in the constructor
+	 * since this class is created by {@link UtilELResolver} before the {@link CacheFactory} has been created. This
+	 * method is called in {@link
+	 * com.liferay.faces.util.event.internal.ApplicationStartupListener#processSystemEvent(java.util.EventObject)} to
+	 * ensure that the CacheFactory has been created.
+	 *
+	 * @param  facesContext
+	 */
+	public static void initMessageCache(FacesContext facesContext) {
+
+		if (!facesContext.isProjectStage(ProjectStage.Development)) {
+
+			// Store the i18n message cache in the application map (as a Servlet Context attribute).
+			ExternalContext externalContext = facesContext.getExternalContext();
+			Cache<String, String> messageCache;
+			int initialCacheCapacity = WebConfigParam.I18nELMapInitialCacheCapacity.getIntegerValue(externalContext);
+			int maxCacheCapacity = WebConfigParam.I18nELMapMaxCacheCapacity.getIntegerValue(externalContext);
+
+			if (maxCacheCapacity > -1) {
+				messageCache = CacheFactory.getConcurrentLRUCacheInstance(externalContext, initialCacheCapacity,
+						maxCacheCapacity);
+			}
+			else {
+				messageCache = CacheFactory.getConcurrentCacheInstance(externalContext, initialCacheCapacity);
+			}
+
+			Map<String, Object> applicationMap = externalContext.getApplicationMap();
+			applicationMap.put(I18nMap.class.getName(), messageCache);
+		}
+	}
+
+	private static Cache<String, String> getMessageCache(ExternalContext externalContext) {
+
+		Map<String, Object> applicationMap = externalContext.getApplicationMap();
+
+		return (Cache<String, String>) applicationMap.get(I18nMap.class.getName());
+	}
 
 	@Override
 	public void clear() {
@@ -84,8 +127,9 @@ public class I18nMap extends I18nMapCompat {
 			I18n i18n = I18nFactory.getI18nInstance(externalContext);
 
 			String keyAsString = key.toString();
+			Cache<String, String> messageCache = getMessageCache(externalContext);
 
-			if (cacheEnabled) {
+			if (messageCache != null) {
 
 				String messageKey = keyAsString;
 
@@ -93,16 +137,13 @@ public class I18nMap extends I18nMapCompat {
 					messageKey = locale.toString().concat(keyAsString);
 				}
 
-				Cache<String, String> messageCache = getMessageCache(externalContext);
-
-				if (messageCache != null) {
-					message = messageCache.getValue(messageKey);
-				}
+				message = messageCache.getValue(messageKey);
 
 				if (message == null) {
+
 					message = i18n.getMessage(facesContext, locale, keyAsString);
 
-					if ((message != null) && (messageCache != null)) {
+					if (message != null) {
 						message = messageCache.putValueIfAbsent(messageKey, message);
 					}
 				}

@@ -106,8 +106,8 @@ public class TestClassLoader extends ClassLoader {
 
 	public Class<?> loadClassWithoutParentLoader(Class<?> clazz) throws ClassNotFoundException {
 
-		String simpleName = clazz.getSimpleName();
-		URL url = clazz.getResource(simpleName + ".class");
+		String classFileName = "/" + clazz.getName().replace(".", "/") + ".class";
+		URL url = clazz.getResource(classFileName);
 
 		return loadClassWithoutParentLoader(clazz, url);
 	}

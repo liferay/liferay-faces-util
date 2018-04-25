@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.liferay.faces.util.classloader.TestClassLoader;
-import com.liferay.faces.util.factory.util.BlockServiceLoaderUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.product.internal.ProductBaseImpl;
@@ -113,16 +112,6 @@ public class ProductTest {
 	}
 
 	@Test
-	public void loadProductFactoryWhenServicesDirectoryInaccessibleFACES_2966() {
-
-		// FACES-2966 Netbeans auto completion fails for Liferay Faces components
-		Product product = BlockServiceLoaderUtil.<Product>getFactoryOutputWithBlockedServiceLoader(
-				Product.Name.LIFERAY_FACES_UTIL, ProductFactory.class, ProductFactoryImpl.class);
-		Assert.assertNotNull(product);
-		Assert.assertTrue(product.isDetected());
-	}
-
-	@Test
 	public void portletApiVersionsDetected() throws Exception {
 
 		ClassLoader parentClassLoader = this.getClass().getClassLoader();
@@ -177,9 +166,11 @@ public class ProductTest {
 	@Test
 	public void productFactoryCanCreateAllProducts() {
 
+		ProductFactory productFactory = new ProductFactoryImpl();
+
 		for (Product.Name productName : Product.Name.values()) {
 
-			Product product = ProductFactory.getProduct(productName);
+			Product product = productFactory.getProductInfo(productName);
 			Assert.assertNotNull("ProductFactory.get(Product.Name." + productName +
 				") did not return a Product implementation. Instead it returned null.", product);
 		}
@@ -190,9 +181,12 @@ public class ProductTest {
 	@Test
 	public void productNotDetected() {
 
-		// Note: This product could be replaced with any other product except Liferay Faces Util for this test.
-		Product.Name productName = Product.Name.MOJARRA;
-		Product product = ProductFactory.getProduct(productName);
+		ProductFactory productFactory = new ProductFactoryImpl();
+
+		// Note: This product could be replaced with any other product except Liferay Faces Util and Mojarra for
+		// this test.
+		Product.Name productName = Product.Name.PRIMEFACES;
+		Product product = productFactory.getProductInfo(productName);
 		Assert.assertNotNull("ProductFactory.get(Product.Name." + productName +
 			") did not return a Product implementation. Instead it returned null.", product);
 		Assert.assertFalse("ProductFactory.get(Product.Name." + productName +
@@ -230,12 +224,21 @@ public class ProductTest {
 	}
 
 	@Test
+	public void testProductFactoryWorksWithoutFacesContext() {
+
+		Assert.assertNotNull(StaticProductHolder.LIFERAY_FACES_UTIL);
+		Assert.assertTrue(StaticProductHolder.LIFERAY_FACES_UTIL.isDetected());
+	}
+
+	@Test
 	public void utilDetected() {
+
+		ProductFactory productFactory = new ProductFactoryImpl();
 
 		// Note: Util's version cannot be obtained at test time (likely because the MANIFEST.MF cannot be found), so
 		// we cannot test that feature here. However, the version can be obtained normally when running in a servlet or
 		// portlet container.
-		Product utilProduct = ProductFactory.getProduct(Product.Name.LIFERAY_FACES_UTIL);
+		Product utilProduct = productFactory.getProductInfo(Product.Name.LIFERAY_FACES_UTIL);
 		Assert.assertNotNull(
 			"ProductFactory.get(Product.Name.LIFERAY_FACES_UTIL) did not return a Product implementation. Instead it returned null.",
 			utilProduct);
@@ -265,5 +268,11 @@ public class ProductTest {
 				initVersionInfo(version);
 			}
 		}
+	}
+
+	private static final class StaticProductHolder {
+
+		// Private Constants
+		private static final Product LIFERAY_FACES_UTIL = ProductFactory.getProduct(Product.Name.LIFERAY_FACES_UTIL);
 	}
 }

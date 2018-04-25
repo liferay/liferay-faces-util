@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,11 +34,11 @@ public class FacesURLEncoderMyFacesImpl implements FacesURLEncoder, Serializable
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(FacesURLEncoderMyFacesImpl.class);
 
-	// Private Constants
-	private final Method MYFACES_METHOD_ENCODE_URI_ATTRIBUTE;
+	// Private Final Data Members
+	private final Method myfacesMethodEncodeURIAttribute;
 
 	public FacesURLEncoderMyFacesImpl(Method myFacesMethodEncodeURIAtribute) {
-		this.MYFACES_METHOD_ENCODE_URI_ATTRIBUTE = myFacesMethodEncodeURIAtribute;
+		this.myfacesMethodEncodeURIAttribute = myFacesMethodEncodeURIAtribute;
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class FacesURLEncoderMyFacesImpl implements FacesURLEncoder, Serializable
 		if (url != null) {
 
 			try {
-				encodedURL = (String) MYFACES_METHOD_ENCODE_URI_ATTRIBUTE.invoke(null, url, encoding);
+				encodedURL = (String) myfacesMethodEncodeURIAttribute.invoke(null, url, encoding);
 			}
 			catch (Exception e) {
 				logger.error(e);

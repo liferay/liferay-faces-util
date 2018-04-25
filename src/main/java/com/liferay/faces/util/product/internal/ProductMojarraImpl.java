@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,12 +21,10 @@ package com.liferay.faces.util.product.internal;
  */
 public class ProductMojarraImpl extends ProductBaseImpl {
 
-	// Private Data Members
-	private String toStringValue;
-
 	public ProductMojarraImpl() {
 
 		try {
+
 			this.title = "Mojarra";
 
 			Class<?> jsfImplClass = Class.forName("com.sun.faces.RIConstants");
@@ -40,29 +38,21 @@ public class ProductMojarraImpl extends ProductBaseImpl {
 				version = version.substring("x.0.0.0_".length()).replaceAll("[-]", ".");
 				initVersionInfo(version);
 			}
+
+			initStringValue(version);
+
+			// Some versions of Mojarra are mislabeled "-SNAPSHOT" (i.e.: "1.2_15-20100816-SNAPSHOT")
+			if (stringValue != null) {
+
+				int pos = stringValue.indexOf("-SNAPSHOT");
+
+				if (pos > 0) {
+					stringValue = stringValue.substring(0, pos);
+				}
+			}
 		}
 		catch (Exception e) {
 			// Ignore -- JSF implementation is likely not present.
 		}
-	}
-
-	@Override
-	public String toString() {
-
-		if (toStringValue == null) {
-			toStringValue = super.toString();
-
-			// Some versions of Mojarra are mislabeled "-SNAPSHOT" (i.e.: "1.2_15-20100816-SNAPSHOT")
-			if (toStringValue != null) {
-				int pos = toStringValue.indexOf("-SNAPSHOT");
-
-				if (pos > 0) {
-					toStringValue = toStringValue.substring(0, pos);
-				}
-			}
-		}
-
-		return toStringValue;
-
 	}
 }

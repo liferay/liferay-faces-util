@@ -18,18 +18,18 @@ package com.liferay.faces.util.product.internal;
 /**
  * @author  Neil Griffin
  */
-public class ProductWebLogicImpl extends ProductBaseImpl {
+public class ProductLiferayFacesClayImpl extends ProductBaseImpl {
 
-	public ProductWebLogicImpl() {
+	public ProductLiferayFacesClayImpl() {
 
 		try {
-			this.title = "WebLogic";
+			this.title = "Liferay Faces Clay";
 
-			Class<?> clazz = Class.forName("weblogic.deploy.api.shared.PlanConstants");
-			init(clazz, "WebLogic");
+			Class<?> clazz = Class.forName("com.liferay.faces.clay.component.inputtext.InputText");
+			init(clazz, "Liferay Faces Clay");
 		}
 		catch (Exception e) {
-			// Ignore -- WebLogic is likely not present.
+			// Ignore -- Liferay Faces Metal is likely not present.
 		}
 	}
 }
