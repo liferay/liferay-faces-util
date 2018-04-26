@@ -15,6 +15,8 @@
  */
 package com.liferay.faces.util.el.internal;
 
+import java.util.Map;
+
 import javax.el.ELContext;
 import javax.el.ELException;
 import javax.el.PropertyNotWritableException;
@@ -25,6 +27,7 @@ import com.liferay.faces.util.client.BrowserSniffer;
 import com.liferay.faces.util.client.BrowserSnifferFactory;
 import com.liferay.faces.util.el.ELResolverBase;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
+import com.liferay.faces.util.lang.OnDemand;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.product.Product;
@@ -44,9 +47,7 @@ public class UtilELResolver extends ELResolverBase {
 
 	// Private Data Members
 	private final I18nMap i18nMap = new I18nMap();
-
-	// Instance field must be declared volatile in order for the double-check idiom to work (requires JRE 1.5+)
-	private volatile ProductMap productMap;
+	private final OnDemandProductMap onDemandProductMap = new OnDemandProductMap();
 
 	public UtilELResolver() {
 		super(getFeatureDescriptor("browserSniffer", BrowserSniffer.class), getFeatureDescriptor("i18n", String.class),
@@ -108,7 +109,7 @@ public class UtilELResolver extends ELResolverBase {
 			else if (varName.equals("product")) {
 
 				FacesContext facesContext = FacesContext.getCurrentInstance();
-				value = getProductMap(facesContext);
+				value = onDemandProductMap.get(facesContext);
 			}
 		}
 		catch (Exception e) {
@@ -125,28 +126,16 @@ public class UtilELResolver extends ELResolverBase {
 		return value;
 	}
 
-	private ProductMap getProductMap(FacesContext facesContext) {
+	private static final class OnDemandProductMap extends OnDemand<ProductMap, FacesContext> {
 
-		ProductMap productMap = this.productMap;
+		@Override
+		protected ProductMap computeInitialValue(FacesContext facesContext) {
 
-		// First check without locking (not yet thread-safe)
-		if (productMap == null) {
+			ExternalContext externalContext = facesContext.getExternalContext();
+			ProductFactory productFactory = (ProductFactory) FactoryExtensionFinder.getFactory(externalContext,
+					ProductFactory.class);
 
-			synchronized (this) {
-
-				productMap = this.productMap;
-
-				// Second check with locking (thread-safe)
-				if (productMap == null) {
-
-					ExternalContext externalContext = facesContext.getExternalContext();
-					ProductFactory productFactory = (ProductFactory) FactoryExtensionFinder.getFactory(externalContext,
-							ProductFactory.class);
-					productMap = this.productMap = new ProductMap(productFactory);
-				}
-			}
+			return new ProductMap(productFactory);
 		}
-
-		return productMap;
 	}
 }
