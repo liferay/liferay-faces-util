@@ -96,7 +96,7 @@ public class OrderingTest {
 			}
 		}
 		catch (Exception e) {
-			throw new AssertionError("An unexpected exception was thrown: " + e.getMessage());
+			throw new AssertionError("An unexpected exception was thrown: ", e);
 		}
 	}
 
@@ -780,8 +780,8 @@ public class OrderingTest {
 			}
 			else {
 				throw new AssertionError(
-					"An exception stating 'circular dependencies detected' or 'both before and after' should have been thrown. Instead, got: " +
-					e.getMessage());
+					"An exception stating 'circular dependencies detected' or 'both before and after' should have been thrown. Instead, got: ",
+					e);
 			}
 		}
 
@@ -823,8 +823,8 @@ public class OrderingTest {
 			}
 			else {
 				throw new AssertionError(
-					"An exception stating 'circular dependencies detected' or 'both before and after' should have been thrown. Instead, got: " +
-					e.getMessage());
+					"An exception stating 'circular dependencies detected' or 'both before and after' should have been thrown. Instead, got: ",
+					e);
 			}
 		}
 

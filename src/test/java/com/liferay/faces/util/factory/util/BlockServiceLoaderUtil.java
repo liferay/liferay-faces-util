@@ -71,7 +71,7 @@ public final class BlockServiceLoaderUtil {
 		}
 		catch (Throwable t) {
 			throw new AssertionError("Unable to load " + factoryClazzSimpleName +
-				" service when services directory unavailable." + t.getMessage());
+				" service when services directory unavailable.", t);
 		}
 		finally {
 			Thread.currentThread().setContextClassLoader(contextClassLoader);
