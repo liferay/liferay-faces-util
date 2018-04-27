@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,16 +21,8 @@ package com.liferay.faces.util.product.internal;
 public class ProductGlassfishImpl extends ProductBaseImpl {
 
 	public ProductGlassfishImpl() {
-
-		try {
-			this.title = "Glassfish";
-
-			Class<?> clazz = Class.forName("org.glassfish.api.web.Constants");
-			init(clazz, "Glassfish", "META-INF/maven/org.glassfish.main.common/glassfish-api/pom.properties");
-		}
-		catch (Exception e) {
-			// Ignore -- Glassfish is likely not present.
-		}
+		super(ProductInfo.obtainProductInfo("Glassfish", "org.glassfish.api.web.Constants",
+				"META-INF/maven/org.glassfish.main.common/glassfish-api/pom.properties"));
 	}
 
 }

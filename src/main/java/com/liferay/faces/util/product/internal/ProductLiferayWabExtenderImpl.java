@@ -20,15 +20,9 @@ package com.liferay.faces.util.product.internal;
  */
 public class ProductLiferayWabExtenderImpl extends ProductBaseImpl {
 
-	public ProductLiferayWabExtenderImpl(int buildId, int majorVersion, int minorVersion, int patchVersion,
-		String version, boolean detected) {
-		this.buildId = buildId;
-		this.majorVersion = majorVersion;
-		this.minorVersion = minorVersion;
-		this.patchVersion = patchVersion;
-		this.version = version;
-		this.detected = detected;
-		this.title = "Liferay WAB Extender";
-		initStringValue(version);
+	public ProductLiferayWabExtenderImpl(boolean detected, String version, int majorVersion, int minorVersion,
+		int patchVersion, int buildId) {
+		super(new ProductInfo(detected, "Liferay WAB Extender", version, null, majorVersion, minorVersion, patchVersion,
+				buildId));
 	}
 }

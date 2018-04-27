@@ -29,9 +29,13 @@ public class ProductPortletApiImpl extends ProductBaseImpl {
 	private static final Logger logger = LoggerFactory.getLogger(ProductPortletApiImpl.class);
 
 	public ProductPortletApiImpl(Product liferayPortal, Product pluto) {
+		super(obtainProductInfo(liferayPortal, pluto));
+	}
 
-		this.title = "Portlet API";
+	private static ProductInfo obtainProductInfo(Product liferayPortal, Product pluto) {
 
+		ProductInfo productInfo = null;
+		String title = "Portlet API";
 		int liferayPortalMajorVersion = liferayPortal.getMajorVersion();
 		int liferayPortalMinorVersion = liferayPortal.getMinorVersion();
 		boolean liferayPortalDetected = liferayPortal.isDetected();
@@ -41,16 +45,13 @@ public class ProductPortletApiImpl extends ProductBaseImpl {
 		if ((liferayPortalDetected && (liferayPortalMajorVersion == 6) && (liferayPortalMinorVersion == 2) &&
 					(liferayPortal.getPatchVersion() < 5)) ||
 				(pluto.isDetected() && (pluto.getMajorVersion() == 2) && (pluto.getMinorVersion() == 0))) {
-
-			this.detected = true;
-			initVersionInfo("2.0");
+			productInfo = new ProductInfo(true, title, "2.0");
 		}
 		else {
 
 			try {
 
-				Class<?> clazz = Class.forName("javax.portlet.PortletContext");
-				init(clazz, "Portlet API", null, false);
+				productInfo = ProductInfo.obtainProductInfo(title, "javax.portlet.PortletContext", false);
 
 				if (liferayPortalDetected) {
 
@@ -58,23 +59,23 @@ public class ProductPortletApiImpl extends ProductBaseImpl {
 
 					if (liferay_7_0_detected || (liferayPortalMajorVersion == 6)) {
 
-						if (this.majorVersion == 0) {
-							initVersionInfo("2.0");
+						if (productInfo.majorVersion == 0) {
+							productInfo = new ProductInfo(productInfo.detected, productInfo.title, "2.0");
 						}
-						else if (liferay_7_0_detected && (this.majorVersion == 1)) {
+						else if (liferay_7_0_detected && (productInfo.majorVersion == 1)) {
 
 							// FACES-3238 Util's PORTLET_API incorrectly reports Portlet 2.1 API version as 1.0 when
 							// running in Liferay 7.0 GA5 causing BridgeDependencyVerifier error message
-							initVersionInfo("2.1.0");
+							productInfo = new ProductInfo(productInfo.detected, productInfo.title, "2.1.0");
 						}
 					}
 					else {
-						initVersionInfo("3.0");
+						productInfo = new ProductInfo(productInfo.detected, productInfo.title, "3.0");
 					}
 				}
 
-				if (this.majorVersion == 0) {
-					logger.warn("Unable to obtain version information for {0}.", this.title);
+				if (productInfo.majorVersion == 0) {
+					logger.warn("Unable to obtain version information for {0}.", productInfo.title);
 				}
 			}
 			catch (Exception e) {
@@ -82,6 +83,10 @@ public class ProductPortletApiImpl extends ProductBaseImpl {
 			}
 		}
 
-		initStringValue(version);
+		if (productInfo == null) {
+			productInfo = new ProductInfo(false, title);
+		}
+
+		return productInfo;
 	}
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,15 +22,6 @@ package com.liferay.faces.util.product.internal;
 public class ProductOpenWebBeansImpl extends ProductBaseImpl {
 
 	public ProductOpenWebBeansImpl() {
-
-		try {
-			this.title = "OpenWebBeans";
-
-			Class<?> cdiImplClass = Class.forName("org.apache.webbeans.util.WebBeansConstants");
-			init(cdiImplClass, "OpenWebBeans Core");
-		}
-		catch (Exception e) {
-			// Ignore -- OpenWebBeans is likely not present.
-		}
+		super(ProductInfo.obtainProductInfo("OpenWebBeans", "org.apache.webbeans.util.WebBeansConstants"));
 	}
 }

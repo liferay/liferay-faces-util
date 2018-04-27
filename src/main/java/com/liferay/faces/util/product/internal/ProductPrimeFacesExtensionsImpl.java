@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,15 +21,6 @@ package com.liferay.faces.util.product.internal;
 public class ProductPrimeFacesExtensionsImpl extends ProductBaseImpl {
 
 	public ProductPrimeFacesExtensionsImpl() {
-
-		try {
-			this.title = "PrimeFaces Extensions";
-
-			Class<?> clazz = Class.forName("org.primefaces.extensions.util.Constants");
-			init(clazz, "PrimeFaces Extensions");
-		}
-		catch (Exception e) {
-			// Ignore -- PrimeFaces Extensions is likely not present.
-		}
+		super(ProductInfo.obtainProductInfo("PrimeFaces Extensions", "org.primefaces.extensions.util.Constants"));
 	}
 }

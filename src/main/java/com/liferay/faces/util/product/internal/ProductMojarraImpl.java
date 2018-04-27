@@ -22,37 +22,45 @@ package com.liferay.faces.util.product.internal;
 public class ProductMojarraImpl extends ProductBaseImpl {
 
 	public ProductMojarraImpl() {
+		super(obtainProductInfo());
+	}
+
+	private static ProductInfo obtainProductInfo() {
+
+		String title = "Mojarra";
+		ProductInfo productInfo = null;
 
 		try {
 
-			this.title = "Mojarra";
-
-			Class<?> jsfImplClass = Class.forName("com.sun.faces.RIConstants");
-			init(jsfImplClass, "Mojarra");
+			productInfo = ProductInfo.obtainProductInfo(title, "com.sun.faces.RIConstants");
 
 			// If running on WebLogic 12c (12.1.x), then the version typically looks like "1.0.0.0_2-1-20" or
 			// "2.0.0.0_2-1-20"
-			String version = getVersion();
+			String version = productInfo.version;
 
-			if ((version != null) && (version.startsWith("1.0.0.0_") || version.startsWith("2.0.0.0_"))) {
+			if ((version.startsWith("1.0.0.0_") || version.startsWith("2.0.0.0_"))) {
 				version = version.substring("x.0.0.0_".length()).replaceAll("[-]", ".");
-				initVersionInfo(version);
 			}
 
-			initStringValue(version);
+			String stringValue = productInfo.stringValue;
 
 			// Some versions of Mojarra are mislabeled "-SNAPSHOT" (i.e.: "1.2_15-20100816-SNAPSHOT")
-			if (stringValue != null) {
+			int pos = stringValue.indexOf("-SNAPSHOT");
 
-				int pos = stringValue.indexOf("-SNAPSHOT");
-
-				if (pos > 0) {
-					stringValue = stringValue.substring(0, pos);
-				}
+			if (pos > 0) {
+				stringValue = stringValue.substring(0, pos);
 			}
+
+			productInfo = new ProductInfo(title, version, stringValue);
 		}
 		catch (Exception e) {
 			// Ignore -- JSF implementation is likely not present.
 		}
+
+		if (productInfo == null) {
+			productInfo = new ProductInfo(false, title);
+		}
+
+		return productInfo;
 	}
 }

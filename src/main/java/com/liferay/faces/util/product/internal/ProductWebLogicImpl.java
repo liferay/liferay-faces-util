@@ -21,15 +21,6 @@ package com.liferay.faces.util.product.internal;
 public class ProductWebLogicImpl extends ProductBaseImpl {
 
 	public ProductWebLogicImpl() {
-
-		try {
-			this.title = "WebLogic";
-
-			Class<?> clazz = Class.forName("weblogic.deploy.api.shared.PlanConstants");
-			init(clazz, "WebLogic");
-		}
-		catch (Exception e) {
-			// Ignore -- WebLogic is likely not present.
-		}
+		super(ProductInfo.obtainProductInfo("WebLogic", "weblogic.deploy.api.shared.PlanConstants"));
 	}
 }

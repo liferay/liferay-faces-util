@@ -113,9 +113,9 @@ public class ProductFactoryImpl extends ProductFactory {
 		if (liferayPortal.isDetected() && (liferayPortal.getMajorVersion() >= 7)) {
 			productMap.put(Product.Name.SERVLET_CONTAINER,
 				new ProductSpecImpl("Servlet",
-					new ProductLiferayWabExtenderImpl(liferayPortal.getBuildId(), liferayPortal.getMajorVersion(),
-						liferayPortal.getMinorVersion(), liferayPortal.getPatchVersion(), liferayPortal.getVersion(),
-						liferayPortal.isDetected())));
+					new ProductLiferayWabExtenderImpl(liferayPortal.isDetected(), liferayPortal.getVersion(),
+						liferayPortal.getMajorVersion(), liferayPortal.getMinorVersion(),
+						liferayPortal.getPatchVersion(), liferayPortal.getBuildId())));
 		}
 		else {
 			productMap.put(Product.Name.SERVLET_CONTAINER,

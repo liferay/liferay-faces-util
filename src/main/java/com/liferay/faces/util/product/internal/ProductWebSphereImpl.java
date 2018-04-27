@@ -21,16 +21,6 @@ package com.liferay.faces.util.product.internal;
 public class ProductWebSphereImpl extends ProductBaseImpl {
 
 	public ProductWebSphereImpl() {
-
-		try {
-
-			this.title = "WebSphere";
-
-			// TODO: FACES-2859 - Unable to detect the version of WebSphere
-			initStringValue(version);
-		}
-		catch (Exception e) {
-			// Ignore -- WebSphere is likely not present.
-		}
+		super(new ProductInfo("WebSphere"));
 	}
 }

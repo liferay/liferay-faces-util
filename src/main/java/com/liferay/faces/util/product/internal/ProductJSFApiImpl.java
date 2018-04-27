@@ -24,8 +24,10 @@ import com.liferay.faces.util.product.Product;
 public class ProductJSFApiImpl extends ProductBaseImpl {
 
 	public ProductJSFApiImpl(Product mojarra, Product myFaces) {
+		super(obtainProductInfo(mojarra, myFaces));
+	}
 
-		this.title = "JSF API";
+	private static ProductInfo obtainProductInfo(Product mojarra, Product myFaces) {
 
 		Product jsfRuntime;
 
@@ -36,8 +38,9 @@ public class ProductJSFApiImpl extends ProductBaseImpl {
 			jsfRuntime = mojarra;
 		}
 
-		this.detected = jsfRuntime.isDetected();
-		initVersionInfo(jsfRuntime.getMajorVersion() + "." + jsfRuntime.getMinorVersion());
-		initStringValue(version);
+		boolean detected = jsfRuntime.isDetected();
+		String version = jsfRuntime.getMajorVersion() + "." + jsfRuntime.getMinorVersion();
+
+		return new ProductInfo(detected, "JSF API", version);
 	}
 }

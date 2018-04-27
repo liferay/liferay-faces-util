@@ -22,18 +22,24 @@ package com.liferay.faces.util.product.internal;
 public class ProductWeldImpl extends ProductBaseImpl {
 
 	public ProductWeldImpl() {
+		super(obtainProductInfo());
+	}
+
+	private static ProductInfo obtainProductInfo() {
+
+		String title = "Weld";
+		ProductInfo productInfo = null;
 
 		try {
-			this.title = "Weld";
 
 			Class<?> cdiImplClass = Class.forName("org.jboss.weld.util.Types");
-			init(cdiImplClass, "Weld Servlet (Uber Jar)");
+			productInfo = ProductInfo.obtainProductInfo("Weld Servlet (Uber Jar)", cdiImplClass);
 
-			if (!isDetected()) {
-				init(cdiImplClass, "Weld Implementation");
+			if (!productInfo.detected) {
+				productInfo = new ProductInfo(false, "Weld Implementation", productInfo.version);
 			}
 
-			if (isDetected()) {
+			if (productInfo.detected) {
 
 				Package pkg = cdiImplClass.getPackage();
 
@@ -41,13 +47,18 @@ public class ProductWeldImpl extends ProductBaseImpl {
 
 					// The precise version of Weld is found in the Specification-Version rather than the
 					// Implementation-Version in META-INF/MANIFEST.MF
-					initVersionInfo(pkg.getSpecificationVersion());
-					initStringValue(version);
+					productInfo = new ProductInfo(productInfo.title, pkg.getSpecificationVersion());
 				}
 			}
 		}
 		catch (Exception e) {
 			// Ignore -- Weld is likely not present.
 		}
+
+		if (productInfo == null) {
+			productInfo = new ProductInfo(false, title);
+		}
+
+		return productInfo;
 	}
 }
