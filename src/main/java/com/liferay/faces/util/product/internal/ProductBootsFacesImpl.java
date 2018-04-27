@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,15 +21,7 @@ package com.liferay.faces.util.product.internal;
 public class ProductBootsFacesImpl extends ProductBaseImpl {
 
 	public ProductBootsFacesImpl() {
-
-		try {
-			this.title = "BootsFaces";
-
-			Class<?> clazz = Class.forName("net.bootsfaces.C");
-			init(clazz, "BootsFaces", "META-INF/maven/net.bootsfaces/bootsfaces/pom.properties");
-		}
-		catch (Exception e) {
-			// Ignore -- BootsFaces is likely not present.
-		}
+		super(ProductInfo.obtainProductInfo("BootsFaces", "net.bootsfaces.C",
+				"META-INF/maven/net.bootsfaces/bootsfaces/pom.properties"));
 	}
 }

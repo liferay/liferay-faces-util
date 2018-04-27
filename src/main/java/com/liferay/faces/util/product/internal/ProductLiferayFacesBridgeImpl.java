@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,15 +21,7 @@ package com.liferay.faces.util.product.internal;
 public class ProductLiferayFacesBridgeImpl extends ProductBaseImpl {
 
 	public ProductLiferayFacesBridgeImpl() {
-
-		try {
-			this.title = "Liferay Faces Bridge";
-
-			Class<?> clazz = Class.forName("com.liferay.faces.bridge.servlet.BridgeSessionListener");
-			init(clazz, "Liferay Faces Bridge");
-		}
-		catch (Exception e) {
-			// Ignore -- Liferay Faces Bridge is likely not present.
-		}
+		super(ProductInfo.obtainProductInfo("Liferay Faces Bridge",
+				"com.liferay.faces.bridge.servlet.BridgeSessionListener"));
 	}
 }

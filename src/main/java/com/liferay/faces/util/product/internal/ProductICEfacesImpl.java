@@ -15,16 +15,23 @@
  */
 package com.liferay.faces.util.product.internal;
 
+import com.liferay.faces.util.helper.IntegerHelper;
+
+
 /**
  * @author  Neil Griffin
  */
 public class ProductICEfacesImpl extends ProductBaseImpl {
 
 	public ProductICEfacesImpl() {
+		super(obtainProductInfo());
+	}
+
+	private static ProductInfo obtainProductInfo() {
+
+		ProductInfo productInfo = null;
 
 		try {
-
-			this.title = "ICEfaces";
 
 			Class<?> productInfoClass;
 
@@ -35,28 +42,45 @@ public class ProductICEfacesImpl extends ProductBaseImpl {
 				productInfoClass = Class.forName("com.icesoft.faces.application.ProductInfo");
 			}
 
-			this.buildId = parseInt((String) productInfoClass.getDeclaredField("REVISION").get(String.class));
-			this.majorVersion = parseInt((String) productInfoClass.getDeclaredField("PRIMARY").get(String.class));
-			this.minorVersion = parseInt((String) productInfoClass.getDeclaredField("SECONDARY").get(String.class));
-			this.patchVersion = parseInt((String) productInfoClass.getDeclaredField("TERTIARY").get(String.class));
-			this.title = (String) productInfoClass.getDeclaredField("PRODUCT").get(String.class);
+			int buildId = IntegerHelper.toInteger((String) productInfoClass.getDeclaredField("REVISION").get(
+						String.class));
+			int majorVersion = IntegerHelper.toInteger((String) productInfoClass.getDeclaredField("PRIMARY").get(
+						String.class));
+			int minorVersion = IntegerHelper.toInteger((String) productInfoClass.getDeclaredField("SECONDARY").get(
+						String.class));
+			int patchVersion = IntegerHelper.toInteger((String) productInfoClass.getDeclaredField("TERTIARY").get(
+						String.class));
+			String title = (String) productInfoClass.getDeclaredField("PRODUCT").get(String.class);
 
-			StringBuilder buf = new StringBuilder();
-			buf.append(this.majorVersion);
-			buf.append(".");
-			buf.append(this.minorVersion);
-			buf.append(".");
-			buf.append(this.patchVersion);
-			this.version = buf.toString();
-
-			if (this.majorVersion > 0) {
-				this.detected = true;
+			if (title == null) {
+				title = "ICEfaces";
 			}
 
-			initStringValue(version);
+			boolean detected = false;
+
+			if (majorVersion > 0) {
+				detected = true;
+			}
+
+			StringBuilder buf = new StringBuilder();
+			buf.append(majorVersion);
+			buf.append(".");
+			buf.append(minorVersion);
+			buf.append(".");
+			buf.append(patchVersion);
+
+			String version = buf.toString();
+
+			productInfo = new ProductInfo(detected, title, version, majorVersion, minorVersion, patchVersion, buildId);
 		}
 		catch (Exception e) {
 			// Ignore -- ICEfaces is likely not present.
 		}
+
+		if (productInfo == null) {
+			productInfo = new ProductInfo(false, "ICEfaces");
+		}
+
+		return productInfo;
 	}
 }

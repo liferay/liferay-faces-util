@@ -21,15 +21,18 @@ package com.liferay.faces.util.product.internal;
 public class ProductPrimeFacesImpl extends ProductBaseImpl {
 
 	public ProductPrimeFacesImpl() {
+		super(obtainProductInfo());
+	}
+
+	private static ProductInfo obtainProductInfo() {
+
+		boolean detected = false;
+		String version = null;
 
 		try {
 
-			this.title = "PrimeFaces";
-
 			Class<?> constantsClass = Class.forName("org.primefaces.util.Constants");
-			this.detected = true;
-
-			String version;
+			detected = true;
 
 			try {
 				version = (String) constantsClass.getDeclaredField("VERSION").get(String.class);
@@ -40,17 +43,11 @@ public class ProductPrimeFacesImpl extends ProductBaseImpl {
 						"META-INF/maven/org.primefaces/primefaces/pom.properties");
 				version = pomProperties.getVersion();
 			}
-
-			if (version != null) {
-
-				initVersionInfo(version);
-				this.buildId = (this.majorVersion * 100) + (this.minorVersion * 10) + this.patchVersion;
-			}
 		}
 		catch (Exception e) {
 			// Ignore -- PrimeFaces is likely not present.
 		}
 
-		initStringValue(version);
+		return new ProductInfo(detected, "PrimeFaces", version);
 	}
 }

@@ -28,9 +28,16 @@ import javax.management.ObjectName;
 public class ProductWildFlyImpl extends ProductBaseImpl {
 
 	public ProductWildFlyImpl() {
+		super(obtainProductInfo());
+	}
+
+	private static ProductInfo obtainProductInfo() {
+
+		boolean detected = false;
+		String title = "Wildfly";
+		String releaseVersion = null;
 
 		try {
-			this.title = "Wildfly";
 
 			List<MBeanServer> mBeanServers = MBeanServerFactory.findMBeanServer(null);
 
@@ -38,14 +45,14 @@ public class ProductWildFlyImpl extends ProductBaseImpl {
 
 				ObjectName objectName = new ObjectName("jboss.as:management-root=server");
 
-				String releaseVersion = (String) mBeanServer.getAttribute(objectName, "releaseVersion");
+				releaseVersion = (String) mBeanServer.getAttribute(objectName, "releaseVersion");
 
 				if (releaseVersion != null) {
-					detected = true;
-					initVersionInfo(releaseVersion);
 
-					if (getMajorVersion() < 8) {
-						this.title = "JBoss AS";
+					detected = true;
+
+					if (ProductInfo.getMajorVersion(releaseVersion) < 8) {
+						title = "JBoss AS";
 					}
 
 					break;
@@ -56,6 +63,6 @@ public class ProductWildFlyImpl extends ProductBaseImpl {
 			// Ignore -- WildFly is likely not present.
 		}
 
-		initStringValue(version);
+		return new ProductInfo(detected, title, releaseVersion);
 	}
 }

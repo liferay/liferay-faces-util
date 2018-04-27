@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,15 +21,7 @@ package com.liferay.faces.util.product.internal;
 public class ProductAngularFacesImpl extends ProductBaseImpl {
 
 	public ProductAngularFacesImpl() {
-
-		try {
-			this.title = "AngularFaces";
-
-			Class<?> clazz = Class.forName("de.beyondjava.angularFaces.core.ELTools");
-			init(clazz, "AngularFaces", "META-INF/maven/de.beyondjava/angularFaces-core/pom.properties");
-		}
-		catch (Exception e) {
-			// Ignore -- AngularFaces is likely not present.
-		}
+		super(ProductInfo.obtainProductInfo("AngularFaces", "de.beyondjava.angularFaces.core.ELTools",
+				"META-INF/maven/de.beyondjava/angularFaces-core/pom.properties"));
 	}
 }

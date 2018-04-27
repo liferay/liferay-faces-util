@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,16 +21,6 @@ package com.liferay.faces.util.product.internal;
 public class ProductSpringFrameworkImpl extends ProductBaseImpl {
 
 	public ProductSpringFrameworkImpl() {
-
-		try {
-			this.title = "Spring Framework";
-
-			Class<?> springClass = Class.forName("org.springframework.core.SpringVersion");
-			init(springClass, "org.springframework.core");
-			this.title = "Spring Framework";
-		}
-		catch (Exception e) {
-			// Ignore -- Spring Framework is likely not present.
-		}
+		super(ProductInfo.obtainProductInfo("Spring Framework", "org.springframework.core.SpringVersion"));
 	}
 }

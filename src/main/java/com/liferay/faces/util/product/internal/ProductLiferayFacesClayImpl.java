@@ -21,15 +21,7 @@ package com.liferay.faces.util.product.internal;
 public class ProductLiferayFacesClayImpl extends ProductBaseImpl {
 
 	public ProductLiferayFacesClayImpl() {
-
-		try {
-			this.title = "Liferay Faces Clay";
-
-			Class<?> clazz = Class.forName("com.liferay.faces.clay.component.inputtext.InputText");
-			init(clazz, "Liferay Faces Clay");
-		}
-		catch (Exception e) {
-			// Ignore -- Liferay Faces Metal is likely not present.
-		}
+		super(ProductInfo.obtainProductInfo("Liferay Faces Clay",
+				"com.liferay.faces.clay.component.inputtext.InputText"));
 	}
 }
