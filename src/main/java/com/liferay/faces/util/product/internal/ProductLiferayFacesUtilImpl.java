@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,14 +21,25 @@ package com.liferay.faces.util.product.internal;
 public class ProductLiferayFacesUtilImpl extends ProductBaseImpl {
 
 	public ProductLiferayFacesUtilImpl() {
+		super(new ProductInfo(getImplTitle(), getImplVersion()));
+	}
 
-		try {
+	private static String getImplTitle() {
 
-			this.title = "Liferay Faces Util";
-			init(this.getClass(), "Liferay Faces Util");
+		Package _package = ProductLiferayFacesUtilImpl.class.getPackage();
+		String implTitle = _package.getImplementationTitle();
+
+		if (implTitle == null) {
+			implTitle = "Liferay Faces Util";
 		}
-		catch (Exception e) {
-			// Ignore
-		}
+
+		return implTitle;
+	}
+
+	private static String getImplVersion() {
+
+		Package _package = ProductLiferayFacesUtilImpl.class.getPackage();
+
+		return _package.getImplementationVersion();
 	}
 }

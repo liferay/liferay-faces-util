@@ -43,8 +43,7 @@ public class ProductSpecImpl extends ProductWrapper {
 
 		if (this.wrappedProduct == null) {
 
-			ProductBaseImpl productBaseImpl = new ProductBaseImpl();
-			productBaseImpl.title = fallbackSpecTitle;
+			ProductBaseImpl productBaseImpl = new ProductBaseImpl(new ProductInfo(false, fallbackSpecTitle));
 			this.wrappedProduct = productBaseImpl;
 		}
 	}

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,15 +22,6 @@ package com.liferay.faces.util.product.internal;
 public class ProductMyfacesImpl extends ProductBaseImpl {
 
 	public ProductMyfacesImpl() {
-
-		try {
-			this.title = "MyFaces";
-
-			Class<?> jsfImplClass = Class.forName("org.apache.myfaces.util.ContainerUtils");
-			init(jsfImplClass, "MyFaces");
-		}
-		catch (Exception e) {
-			// Ignore -- JSF implementation is likely not present.
-		}
+		super(ProductInfo.obtainProductInfo("MyFaces", "org.apache.myfaces.util.ContainerUtils"));
 	}
 }

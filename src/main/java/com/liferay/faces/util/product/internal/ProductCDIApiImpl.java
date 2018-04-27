@@ -15,42 +15,13 @@
  */
 package com.liferay.faces.util.product.internal;
 
-import com.liferay.faces.util.logging.Logger;
-import com.liferay.faces.util.logging.LoggerFactory;
-
-
 /**
  * @author  Neil Griffin
  */
 public class ProductCDIApiImpl extends ProductBaseImpl {
 
-	// Logger
-	private static final Logger logger = LoggerFactory.getLogger(ProductCDIApiImpl.class);
-
 	public ProductCDIApiImpl() {
-
-		try {
-			this.title = "CDI API";
-
-			Class<?> clazz = Class.forName("javax.enterprise.context.SessionScoped");
-			detected = true;
-
-			PomProperties pomProperties = new PomProperties(clazz,
-					"META-INF/maven/javax.enterprise/cdi-api/pom.properties");
-			String implementationVersion = pomProperties.getVersion();
-
-			if (implementationVersion != null) {
-				initVersionInfo(implementationVersion);
-			}
-			else {
-				logger.warn("Unable to obtain version information for {0}.", this.title);
-			}
-
-			initStringValue(version);
-		}
-		catch (Exception e) {
-			// Ignore -- CDI API is likely not present.
-		}
+		super(ProductInfo.obtainProductInfo("CDI API", "javax.enterprise.context.SessionScoped",
+				"META-INF/maven/javax.enterprise/cdi-api/pom.properties"));
 	}
-
 }

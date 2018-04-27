@@ -24,27 +24,38 @@ import java.lang.reflect.Method;
 public class ProductLiferayPortalImpl extends ProductBaseImpl {
 
 	public ProductLiferayPortalImpl() {
+		super(obtainProductInfo());
+	}
+
+	private static ProductInfo obtainProductInfo() {
+
+		ProductInfo productInfo = null;
+		String title = "Liferay Portal";
 
 		try {
-			this.title = "Liferay Portal";
 
 			Class<?> releaseInfoClass = Class.forName("com.liferay.portal.kernel.util.ReleaseInfo");
 			Class<?>[] emptyClassArray = new Class[] {};
 			Object[] emptyObjectArray = new Object[] {};
 			Method method = releaseInfoClass.getMethod("getBuildNumber", emptyClassArray);
-			this.buildId = (Integer) method.invoke(null, emptyObjectArray);
+			int buildId = (Integer) method.invoke(null, emptyObjectArray);
 			method = releaseInfoClass.getMethod("getVersion", emptyClassArray);
-			initVersionInfo((String) method.invoke(null, emptyObjectArray));
 
-			if (this.majorVersion > 0) {
-				this.detected = true;
+			String version = (String) method.invoke(null, emptyObjectArray);
+			productInfo = new ProductInfo(title, version, buildId);
+
+			if (productInfo.majorVersion <= 0) {
+				productInfo = new ProductInfo(title, version, buildId);
 			}
-
-			initStringValue(version);
 		}
 		catch (Exception e) {
 			// Ignore -- Liferay Portal is likely not present.
 		}
 
+		if (productInfo == null) {
+			productInfo = new ProductInfo(false, title);
+		}
+
+		return productInfo;
 	}
 }

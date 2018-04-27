@@ -31,6 +31,7 @@ import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.product.internal.ProductBaseImpl;
 import com.liferay.faces.util.product.internal.ProductFactoryImpl;
+import com.liferay.faces.util.product.internal.ProductInfo;
 import com.liferay.faces.util.product.internal.ProductPortletApiImpl;
 
 
@@ -47,6 +48,17 @@ public class ProductTest {
 			"Liferay Faces Util's version cannot be obtained at test time (likely because the MANIFEST.MF cannot be found).");
 		logger.info(
 			"However, Liferay Faces Util's version can be obtained normally when running in a servlet or portlet container.");
+	}
+
+	public static ProductInfo createProductInfo(String title, String version) {
+
+		boolean detected = false;
+
+		if (version != null) {
+			detected = true;
+		}
+
+		return new ProductInfo(detected, title, version);
 	}
 
 	private static void assertPortletApiMajorMinorVersionDetected(int expectedMajorVersion, int expectedMinorVersion,
@@ -83,6 +95,15 @@ public class ProductTest {
 		return (T) isDetectedMethod.invoke(object);
 	}
 
+	private static Class<?> loadPortletApiProductImplWithoutParentLoader(TestClassLoader testClassLoader)
+		throws ClassNotFoundException {
+
+		testClassLoader.loadClassWithoutParentLoader(ProductInfo.class);
+		testClassLoader.loadClassWithoutParentLoader(ProductBaseImpl.class);
+
+		return testClassLoader.loadClassWithoutParentLoader(ProductPortletApiImpl.class);
+	}
+
 	private static Class<?> loadPortletApiWithInfoFromJar(String pathToJarProperty, ClassLoader parentClassLoader)
 		throws Exception {
 		return loadPortletApiWithInfoFromJar(pathToJarProperty, parentClassLoader, null);
@@ -108,7 +129,7 @@ public class ProductTest {
 
 		Assert.assertFalse(PortletContext.class.equals(portletContextClass));
 
-		return classLoader.loadClassWithoutParentLoader(ProductPortletApiImpl.class);
+		return loadPortletApiProductImplWithoutParentLoader(classLoader);
 	}
 
 	@Test
@@ -129,8 +150,7 @@ public class ProductTest {
 			// continue
 		}
 
-		Class<?> productPortletApiImplClass = utilOnlyClassLoader.loadClassWithoutParentLoader(
-				ProductPortletApiImpl.class);
+		Class<?> productPortletApiImplClass = loadPortletApiProductImplWithoutParentLoader(utilOnlyClassLoader);
 		Object productPortletApiImpl = createPortletApiImplObject(productPortletApiImplClass, null, null);
 		boolean portletApiDetected = ProductTest.<Boolean>invokeMethod(productPortletApiImplClass,
 				productPortletApiImpl, "isDetected");
@@ -249,24 +269,14 @@ public class ProductTest {
 	private static final class ProductLiferayPortalMockImpl extends ProductBaseImpl {
 
 		public ProductLiferayPortalMockImpl(String version) {
-
-			if (version != null) {
-
-				this.detected = true;
-				initVersionInfo(version);
-			}
+			super(createProductInfo("Liferay Portal", version));
 		}
 	}
 
 	private static final class ProductPlutoMockImpl extends ProductBaseImpl {
 
 		public ProductPlutoMockImpl(String version) {
-
-			if (version != null) {
-
-				this.detected = true;
-				initVersionInfo(version);
-			}
+			super(createProductInfo("Pluto Portal", version));
 		}
 	}
 

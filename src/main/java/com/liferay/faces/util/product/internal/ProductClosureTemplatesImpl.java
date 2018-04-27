@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,15 +21,7 @@ package com.liferay.faces.util.product.internal;
 public class ProductClosureTemplatesImpl extends ProductBaseImpl {
 
 	public ProductClosureTemplatesImpl() {
-
-		try {
-			this.title = "Closure Templates";
-
-			Class<?> clazz = Class.forName("com.google.template.soy.SoyUtils");
-			init(clazz, "Closure Templates", "META-INF/maven/com.google.template/soy/pom.properties");
-		}
-		catch (Exception e) {
-			// Ignore -- Closure Templates is likely not present.
-		}
+		super(ProductInfo.obtainProductInfo("Closure Templates", "com.google.template.soy.SoyUtils",
+				"META-INF/maven/com.google.template/soy/pom.properties"));
 	}
 }

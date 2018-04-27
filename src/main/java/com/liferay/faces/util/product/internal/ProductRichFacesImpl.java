@@ -17,6 +17,8 @@ package com.liferay.faces.util.product.internal;
 
 import java.lang.reflect.Method;
 
+import com.liferay.faces.util.helper.IntegerHelper;
+
 
 /**
  * @author  Neil Griffin
@@ -24,37 +26,54 @@ import java.lang.reflect.Method;
 public class ProductRichFacesImpl extends ProductBaseImpl {
 
 	public ProductRichFacesImpl() {
+		super(obtainProductInfo());
+	}
+
+	private static ProductInfo obtainProductInfo() {
+
+		boolean detected = false;
+		String version = null;
+		ProductInfo productInfo = null;
 
 		try {
-			this.title = "RichFaces";
 
 			try {
+
 				Class<?> versionBeanClass = Class.forName("org.richfaces.VersionBean");
 				Object versionObj = versionBeanClass.getDeclaredField("VERSION").get(Object.class);
 				Method method = versionObj.getClass().getMethod("getVersion");
-				String version = (String) method.invoke(versionObj, (Object[]) null);
+				version = (String) method.invoke(versionObj, (Object[]) null);
 
 				if (version != null) {
-					version = version.replaceFirst("[^0-9]*", "");
-					initVersionInfo(version);
-				}
 
-				if (this.majorVersion > 0) {
-					this.detected = true;
+					version = version.replaceFirst("[^0-9]*", "");
+
+					String[] versionParts = version.split(ProductInfo.REGEX_VERSION_DELIMITER);
+					int majorVersion = 0;
+
+					if (versionParts.length > 0) {
+						majorVersion = IntegerHelper.toInteger(versionParts[0]);
+					}
+
+					if (majorVersion > 0) {
+						detected = true;
+					}
 				}
 			}
 			catch (SecurityException e) {
 
 				// Workaround for https://issues.jboss.org/browse/RF-12805
-				Class<?> utilClass = Class.forName("org.richfaces.util.Util");
-				init(utilClass, "RichFaces Core Implementation");
-				this.title = "RichFaces";
+				productInfo = ProductInfo.obtainProductInfo("RichFaces", "org.richfaces.util.Util");
 			}
 		}
 		catch (Exception e) {
 			// Ignore -- RichFaces is likely not present.
 		}
 
-		initStringValue(version);
+		if (productInfo == null) {
+			productInfo = new ProductInfo(detected, "RichFaces", version);
+		}
+
+		return productInfo;
 	}
 }
