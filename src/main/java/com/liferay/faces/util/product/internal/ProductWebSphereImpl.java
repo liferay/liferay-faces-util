@@ -18,7 +18,7 @@ package com.liferay.faces.util.product.internal;
 /**
  * @author  Neil Griffin
  */
-public class ProductWebSphereImpl extends ProductBaseImpl {
+public class ProductWebSphereImpl extends ProductBase {
 
 	public ProductWebSphereImpl() {
 		super(new ProductInfo("WebSphere"));

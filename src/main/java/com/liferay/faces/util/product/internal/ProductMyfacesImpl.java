@@ -19,9 +19,9 @@ package com.liferay.faces.util.product.internal;
  * @author  Neil Griffin
  * @author  Kyle Stiemann
  */
-public class ProductMyfacesImpl extends ProductBaseImpl {
+public class ProductMyfacesImpl extends ProductBase {
 
 	public ProductMyfacesImpl() {
-		super(ProductInfo.obtainProductInfo("MyFaces", "org.apache.myfaces.util.ContainerUtils"));
+		super(ProductInfo.newInstance("MyFaces", "org.apache.myfaces.util.ContainerUtils"));
 	}
 }

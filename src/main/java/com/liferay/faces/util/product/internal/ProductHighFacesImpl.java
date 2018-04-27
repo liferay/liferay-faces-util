@@ -18,9 +18,9 @@ package com.liferay.faces.util.product.internal;
 /**
  * @author  Kyle Stiemann
  */
-public class ProductHighFacesImpl extends ProductBaseImpl {
+public class ProductHighFacesImpl extends ProductBase {
 
 	public ProductHighFacesImpl() {
-		super(ProductInfo.obtainProductInfo("HighFaces", "org.highfaces.util.HighFaces"));
+		super(ProductInfo.newInstance("HighFaces", "org.highfaces.util.HighFaces"));
 	}
 }

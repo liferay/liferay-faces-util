@@ -18,9 +18,9 @@ package com.liferay.faces.util.product.internal;
 /**
  * @author  Neil Griffin
  */
-public class ProductWebLogicImpl extends ProductBaseImpl {
+public class ProductWebLogicImpl extends ProductBase {
 
 	public ProductWebLogicImpl() {
-		super(ProductInfo.obtainProductInfo("WebLogic", "weblogic.deploy.api.shared.PlanConstants"));
+		super(ProductInfo.newInstance("WebLogic", "weblogic.deploy.api.shared.PlanConstants"));
 	}
 }

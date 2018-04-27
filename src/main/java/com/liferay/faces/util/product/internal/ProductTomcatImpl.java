@@ -18,10 +18,10 @@ package com.liferay.faces.util.product.internal;
 /**
  * @author  Neil Griffin
  */
-public class ProductTomcatImpl extends ProductBaseImpl {
+public class ProductTomcatImpl extends ProductBase {
 
 	public ProductTomcatImpl() {
-		super(ProductInfo.obtainProductInfo("Tomcat", "org.apache.tomcat.util.buf.Constants"));
+		super(ProductInfo.newInstance("Tomcat", "org.apache.tomcat.util.buf.Constants"));
 	}
 
 }

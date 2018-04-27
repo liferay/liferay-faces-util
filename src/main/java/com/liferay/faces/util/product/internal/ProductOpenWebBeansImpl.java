@@ -19,9 +19,9 @@ package com.liferay.faces.util.product.internal;
  * @author  Neil Griffin
  * @author  Kyle Stiemann
  */
-public class ProductOpenWebBeansImpl extends ProductBaseImpl {
+public class ProductOpenWebBeansImpl extends ProductBase {
 
 	public ProductOpenWebBeansImpl() {
-		super(ProductInfo.obtainProductInfo("OpenWebBeans", "org.apache.webbeans.util.WebBeansConstants"));
+		super(ProductInfo.newInstance("OpenWebBeans", "org.apache.webbeans.util.WebBeansConstants"));
 	}
 }

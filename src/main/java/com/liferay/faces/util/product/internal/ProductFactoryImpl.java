@@ -39,17 +39,17 @@ public class ProductFactoryImpl extends ProductFactory {
 		productMap.put(Product.Name.BOOTSFACES, new ProductBootsFacesImpl());
 		productMap.put(Product.Name.BUTTERFACES, new ProductButterFacesImpl());
 
-		Product cdiApi = new ProductCDIApiImpl();
+		ProductBase cdiApi = new ProductCDIApiImpl();
 		productMap.put(Product.Name.CDI_API, cdiApi);
 		productMap.put(Product.Name.CLOSURE_TEMPLATES, new ProductClosureTemplatesImpl());
 		productMap.put(Product.Name.DELTASPIKE, new ProductDeltaSpikeImpl());
 
-		Product glassfish = new ProductGlassfishImpl();
+		ProductBase glassfish = new ProductGlassfishImpl();
 		productMap.put(Product.Name.GLASSFISH, glassfish);
 		productMap.put(Product.Name.HIGHFACES, new ProductHighFacesImpl());
 		productMap.put(Product.Name.ICEFACES, new ProductICEfacesImpl());
 
-		Product jetty = new ProductJettyImpl();
+		ProductBase jetty = new ProductJettyImpl();
 		productMap.put(Product.Name.JETTY, jetty);
 		productMap.put(Product.Name.LIFERAY_FACES_ALLOY, new ProductLiferayFacesAlloyImpl());
 		productMap.put(Product.Name.LIFERAY_FACES_BRIDGE, new ProductLiferayFacesBridgeImpl());
@@ -60,54 +60,54 @@ public class ProductFactoryImpl extends ProductFactory {
 		productMap.put(Product.Name.LIFERAY_FACES_SHOWCASE, new ProductLiferayFacesShowcaseImpl());
 		productMap.put(Product.Name.LIFERAY_FACES_UTIL, new ProductLiferayFacesUtilImpl());
 
-		Product liferayPortal = new ProductLiferayPortalImpl();
+		ProductBase liferayPortal = new ProductLiferayPortalImpl();
 		productMap.put(Product.Name.LIFERAY_PORTAL, liferayPortal);
 
-		Product mojarra = new ProductMojarraImpl();
+		ProductBase mojarra = new ProductMojarraImpl();
 		productMap.put(Product.Name.MOJARRA, mojarra);
 
-		Product myFaces = new ProductMyfacesImpl();
+		ProductBase myFaces = new ProductMyfacesImpl();
 		productMap.put(Product.Name.MYFACES, myFaces);
 
-		Product jsfApi = new ProductJSFApiImpl(mojarra, myFaces);
+		ProductBase jsfApi = new ProductJSFApiImpl(mojarra, myFaces);
 		productMap.put(Product.Name.JSF_API, jsfApi);
 		productMap.put(Product.Name.JSF, new ProductSpecImpl("JSF", mojarra, myFaces, jsfApi));
 		productMap.put(Product.Name.OMNIFACES, new ProductOmniFacesImpl());
 
-		Product openWebBeans = new ProductOpenWebBeansImpl();
+		ProductBase openWebBeans = new ProductOpenWebBeansImpl();
 		productMap.put(Product.Name.OPEN_WEB_BEANS, openWebBeans);
 
-		Product pluto = new ProductPlutoImpl();
+		ProductBase pluto = new ProductPlutoImpl();
 		productMap.put(Product.Name.PLUTO, pluto);
 
-		Product portletApi = new ProductPortletApiImpl(liferayPortal, pluto);
+		ProductBase portletApi = new ProductPortletApiImpl(liferayPortal, pluto);
 		productMap.put(Product.Name.PORTLET_API, portletApi);
 		productMap.put(Product.Name.PORTLET_CONTAINER, new ProductSpecImpl("Portlet", liferayPortal, pluto));
 		productMap.put(Product.Name.PRIMEFACES, new ProductPrimeFacesImpl());
 		productMap.put(Product.Name.PRIMEFACES_EXTENSIONS, new ProductPrimeFacesExtensionsImpl());
 
-		Product resin = new ProductResinImpl();
+		ProductBase resin = new ProductResinImpl();
 		productMap.put(Product.Name.RESIN, resin);
 		productMap.put(Product.Name.RICHFACES, new ProductRichFacesImpl());
 
-		Product servletApi = new ProductServletApiImpl();
+		ProductBase servletApi = new ProductServletApiImpl();
 		productMap.put(Product.Name.SERVLET_API, servletApi);
 		productMap.put(Product.Name.SPRING_FRAMEWORK, new ProductSpringFrameworkImpl());
 
-		Product tomcat = new ProductTomcatImpl();
+		ProductBase tomcat = new ProductTomcatImpl();
 		productMap.put(Product.Name.TOMCAT, tomcat);
 
-		Product weld = new ProductWeldImpl();
+		ProductBase weld = new ProductWeldImpl();
 		productMap.put(Product.Name.WELD, weld);
 		productMap.put(Product.Name.CDI, new ProductSpecImpl("CDI", weld, openWebBeans));
 
-		Product weblogic = new ProductWebLogicImpl();
+		ProductBase weblogic = new ProductWebLogicImpl();
 		productMap.put(Product.Name.WEBLOGIC, weblogic);
 
-		Product websphere = new ProductWebSphereImpl();
+		ProductBase websphere = new ProductWebSphereImpl();
 		productMap.put(Product.Name.WEBSPHERE, websphere);
 
-		Product wildfly = new ProductWildFlyImpl();
+		ProductBase wildfly = new ProductWildFlyImpl();
 		productMap.put(Product.Name.WILDFLY, wildfly);
 
 		if (liferayPortal.isDetected() && (liferayPortal.getMajorVersion() >= 7)) {

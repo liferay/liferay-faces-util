@@ -18,10 +18,10 @@ package com.liferay.faces.util.product.internal;
 /**
  * @author  Neil Griffin
  */
-public class ProductPlutoImpl extends ProductBaseImpl {
+public class ProductPlutoImpl extends ProductBase {
 
 	public ProductPlutoImpl() {
-		super(ProductInfo.obtainProductInfo("Pluto", "org.apache.pluto.container.ContainerInfo"));
+		super(ProductInfo.newInstance("Pluto", "org.apache.pluto.container.ContainerInfo"));
 	}
 
 }

@@ -18,10 +18,10 @@ package com.liferay.faces.util.product.internal;
 /**
  * @author  Neil Griffin
  */
-public class ProductLiferayFacesBridgeImpl extends ProductBaseImpl {
+public class ProductLiferayFacesBridgeImpl extends ProductBase {
 
 	public ProductLiferayFacesBridgeImpl() {
-		super(ProductInfo.obtainProductInfo("Liferay Faces Bridge",
+		super(ProductInfo.newInstance("Liferay Faces Bridge",
 				"com.liferay.faces.bridge.servlet.BridgeSessionListener"));
 	}
 }

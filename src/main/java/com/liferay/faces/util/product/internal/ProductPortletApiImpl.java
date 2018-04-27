@@ -23,16 +23,16 @@ import com.liferay.faces.util.product.Product;
 /**
  * @author  Neil Griffin
  */
-public class ProductPortletApiImpl extends ProductBaseImpl {
+public class ProductPortletApiImpl extends ProductBase {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(ProductPortletApiImpl.class);
 
 	public ProductPortletApiImpl(Product liferayPortal, Product pluto) {
-		super(obtainProductInfo(liferayPortal, pluto));
+		super(newInstance(liferayPortal, pluto));
 	}
 
-	private static ProductInfo obtainProductInfo(Product liferayPortal, Product pluto) {
+	private static ProductInfo newInstance(Product liferayPortal, Product pluto) {
 
 		ProductInfo productInfo = null;
 		String title = "Portlet API";
@@ -51,7 +51,7 @@ public class ProductPortletApiImpl extends ProductBaseImpl {
 
 			try {
 
-				productInfo = ProductInfo.obtainProductInfo(title, "javax.portlet.PortletContext", false);
+				productInfo = ProductInfo.newInstance(title, "javax.portlet.PortletContext", false);
 
 				if (liferayPortalDetected) {
 

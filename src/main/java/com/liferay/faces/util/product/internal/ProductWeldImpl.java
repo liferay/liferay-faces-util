@@ -19,13 +19,13 @@ package com.liferay.faces.util.product.internal;
  * @author  Neil Griffin
  * @author  Kyle Stiemann
  */
-public class ProductWeldImpl extends ProductBaseImpl {
+public class ProductWeldImpl extends ProductBase {
 
 	public ProductWeldImpl() {
-		super(obtainProductInfo());
+		super(newInstance());
 	}
 
-	private static ProductInfo obtainProductInfo() {
+	private static ProductInfo newInstance() {
 
 		String title = "Weld";
 		ProductInfo productInfo = null;
@@ -33,7 +33,7 @@ public class ProductWeldImpl extends ProductBaseImpl {
 		try {
 
 			Class<?> cdiImplClass = Class.forName("org.jboss.weld.util.Types");
-			productInfo = ProductInfo.obtainProductInfo("Weld Servlet (Uber Jar)", cdiImplClass);
+			productInfo = ProductInfo.newInstance("Weld Servlet (Uber Jar)", cdiImplClass);
 
 			if (!productInfo.detected) {
 				productInfo = new ProductInfo(false, "Weld Implementation", productInfo.version);

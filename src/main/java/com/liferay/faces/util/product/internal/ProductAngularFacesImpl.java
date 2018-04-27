@@ -18,10 +18,10 @@ package com.liferay.faces.util.product.internal;
 /**
  * @author  Kyle Stiemann
  */
-public class ProductAngularFacesImpl extends ProductBaseImpl {
+public class ProductAngularFacesImpl extends ProductBase {
 
 	public ProductAngularFacesImpl() {
-		super(ProductInfo.obtainProductInfo("AngularFaces", "de.beyondjava.angularFaces.core.ELTools",
+		super(ProductInfo.newInstance("AngularFaces", "de.beyondjava.angularFaces.core.ELTools",
 				"META-INF/maven/de.beyondjava/angularFaces-core/pom.properties"));
 	}
 }

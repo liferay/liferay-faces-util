@@ -18,10 +18,10 @@ package com.liferay.faces.util.product.internal;
 /**
  * @author  Neil Griffin
  */
-public class ProductCDIApiImpl extends ProductBaseImpl {
+public class ProductCDIApiImpl extends ProductBase {
 
 	public ProductCDIApiImpl() {
-		super(ProductInfo.obtainProductInfo("CDI API", "javax.enterprise.context.SessionScoped",
+		super(ProductInfo.newInstance("CDI API", "javax.enterprise.context.SessionScoped",
 				"META-INF/maven/javax.enterprise/cdi-api/pom.properties"));
 	}
 }

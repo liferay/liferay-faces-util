@@ -25,13 +25,13 @@ import javax.management.ObjectName;
 /**
  * @author  Neil Griffin
  */
-public class ProductWildFlyImpl extends ProductBaseImpl {
+public class ProductWildFlyImpl extends ProductBase {
 
 	public ProductWildFlyImpl() {
-		super(obtainProductInfo());
+		super(newInstance());
 	}
 
-	private static ProductInfo obtainProductInfo() {
+	private static ProductInfo newInstance() {
 
 		boolean detected = false;
 		String title = "Wildfly";

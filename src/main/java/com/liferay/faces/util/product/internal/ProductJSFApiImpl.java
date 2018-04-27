@@ -21,13 +21,13 @@ import com.liferay.faces.util.product.Product;
 /**
  * @author  Neil Griffin
  */
-public class ProductJSFApiImpl extends ProductBaseImpl {
+public class ProductJSFApiImpl extends ProductBase {
 
 	public ProductJSFApiImpl(Product mojarra, Product myFaces) {
-		super(obtainProductInfo(mojarra, myFaces));
+		super(newInstance(mojarra, myFaces));
 	}
 
-	private static ProductInfo obtainProductInfo(Product mojarra, Product myFaces) {
+	private static ProductInfo newInstance(Product mojarra, Product myFaces) {
 
 		Product jsfRuntime;
 

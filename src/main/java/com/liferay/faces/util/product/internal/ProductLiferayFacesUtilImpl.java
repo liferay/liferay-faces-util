@@ -18,7 +18,7 @@ package com.liferay.faces.util.product.internal;
 /**
  * @author  Neil Griffin
  */
-public class ProductLiferayFacesUtilImpl extends ProductBaseImpl {
+public class ProductLiferayFacesUtilImpl extends ProductBase {
 
 	public ProductLiferayFacesUtilImpl() {
 		super(new ProductInfo(getImplTitle(), getImplVersion()));

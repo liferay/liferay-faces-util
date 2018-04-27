@@ -21,13 +21,13 @@ import java.lang.reflect.Method;
 /**
  * @author  Neil Griffin
  */
-public class ProductLiferayPortalImpl extends ProductBaseImpl {
+public class ProductLiferayPortalImpl extends ProductBase {
 
 	public ProductLiferayPortalImpl() {
-		super(obtainProductInfo());
+		super(newInstance());
 	}
 
-	private static ProductInfo obtainProductInfo() {
+	private static ProductInfo newInstance() {
 
 		ProductInfo productInfo = null;
 		String title = "Liferay Portal";

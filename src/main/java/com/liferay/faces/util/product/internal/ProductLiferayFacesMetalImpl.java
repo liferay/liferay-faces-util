@@ -18,10 +18,9 @@ package com.liferay.faces.util.product.internal;
 /**
  * @author  Neil Griffin
  */
-public class ProductLiferayFacesMetalImpl extends ProductBaseImpl {
+public class ProductLiferayFacesMetalImpl extends ProductBase {
 
 	public ProductLiferayFacesMetalImpl() {
-		super(ProductInfo.obtainProductInfo("Liferay Faces Metal",
-				"com.liferay.faces.metal.component.inputtext.InputText"));
+		super(ProductInfo.newInstance("Liferay Faces Metal", "com.liferay.faces.metal.component.inputtext.InputText"));
 	}
 }

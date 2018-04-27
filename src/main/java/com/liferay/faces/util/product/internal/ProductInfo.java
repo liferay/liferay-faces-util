@@ -116,20 +116,20 @@ public class ProductInfo {
 		return getSubVersion(versionParts, 0);
 	}
 
-	public static ProductInfo obtainProductInfo(String expectedTitle, String className) {
-		return obtainProductInfo(expectedTitle, className, null);
+	public static ProductInfo newInstance(String expectedTitle, String className) {
+		return newInstance(expectedTitle, className, null);
 	}
 
-	public static ProductInfo obtainProductInfo(String expectedTitle, Class<?> clazz) {
-		return obtainProductInfo(true, expectedTitle, clazz, null, null, true);
+	public static ProductInfo newInstance(String expectedTitle, Class<?> clazz) {
+		return newInstance(true, expectedTitle, clazz, null, null, true);
 	}
 
-	public static ProductInfo obtainProductInfo(String expectedTitle, String className, String pomPropertiesFile) {
-		return obtainProductInfo(expectedTitle, className, pomPropertiesFile, null, true);
+	public static ProductInfo newInstance(String expectedTitle, String className, String pomPropertiesFile) {
+		return newInstance(expectedTitle, className, pomPropertiesFile, null, true);
 	}
 
-	public static ProductInfo obtainProductInfo(String expectedTitle, String className, boolean warnOnFail) {
-		return obtainProductInfo(expectedTitle, className, null, null, warnOnFail);
+	public static ProductInfo newInstance(String expectedTitle, String className, boolean warnOnFail) {
+		return newInstance(expectedTitle, className, null, null, warnOnFail);
 	}
 
 	private static int getSubVersion(String[] versionParts, int index) {
@@ -143,7 +143,7 @@ public class ProductInfo {
 		return subVersion;
 	}
 
-	private static ProductInfo obtainProductInfo(String expectedTitle, String className, String pomPropertiesFile,
+	private static ProductInfo newInstance(String expectedTitle, String className, String pomPropertiesFile,
 		Integer buildId, boolean warnOnFail) {
 
 		ProductInfo productInfo = null;
@@ -154,7 +154,7 @@ public class ProductInfo {
 
 			Class<?> clazz = Class.forName(className);
 			detected = true;
-			productInfo = obtainProductInfo(detected, title, clazz, pomPropertiesFile, buildId, warnOnFail);
+			productInfo = newInstance(detected, title, clazz, pomPropertiesFile, buildId, warnOnFail);
 		}
 		catch (Exception e) {
 			// Ignore -- product likely not present.
@@ -167,7 +167,7 @@ public class ProductInfo {
 		return productInfo;
 	}
 
-	private static ProductInfo obtainProductInfo(boolean detected, String expectedTitle, Class<?> clazz,
+	private static ProductInfo newInstance(boolean detected, String expectedTitle, Class<?> clazz,
 		String pomPropertiesFile, Integer buildId, boolean warnOnFail) {
 
 		String title = expectedTitle;

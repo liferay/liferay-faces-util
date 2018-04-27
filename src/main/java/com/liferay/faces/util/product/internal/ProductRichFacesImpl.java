@@ -23,13 +23,13 @@ import com.liferay.faces.util.helper.IntegerHelper;
 /**
  * @author  Neil Griffin
  */
-public class ProductRichFacesImpl extends ProductBaseImpl {
+public class ProductRichFacesImpl extends ProductBase {
 
 	public ProductRichFacesImpl() {
-		super(obtainProductInfo());
+		super(newInstance());
 	}
 
-	private static ProductInfo obtainProductInfo() {
+	private static ProductInfo newInstance() {
 
 		boolean detected = false;
 		String version = null;
@@ -63,7 +63,7 @@ public class ProductRichFacesImpl extends ProductBaseImpl {
 			catch (SecurityException e) {
 
 				// Workaround for https://issues.jboss.org/browse/RF-12805
-				productInfo = ProductInfo.obtainProductInfo("RichFaces", "org.richfaces.util.Util");
+				productInfo = ProductInfo.newInstance("RichFaces", "org.richfaces.util.Util");
 			}
 		}
 		catch (Exception e) {
