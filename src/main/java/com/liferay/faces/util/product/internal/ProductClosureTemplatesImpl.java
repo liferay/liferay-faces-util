@@ -18,10 +18,10 @@ package com.liferay.faces.util.product.internal;
 /**
  * @author  Kyle Stiemann
  */
-public class ProductClosureTemplatesImpl extends ProductBaseImpl {
+public class ProductClosureTemplatesImpl extends ProductBase {
 
 	public ProductClosureTemplatesImpl() {
-		super(ProductInfo.obtainProductInfo("Closure Templates", "com.google.template.soy.SoyUtils",
+		super(ProductInfo.newInstance("Closure Templates", "com.google.template.soy.SoyUtils",
 				"META-INF/maven/com.google.template/soy/pom.properties"));
 	}
 }

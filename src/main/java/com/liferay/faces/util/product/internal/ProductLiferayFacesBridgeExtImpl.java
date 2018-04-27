@@ -18,10 +18,10 @@ package com.liferay.faces.util.product.internal;
 /**
  * @author  Kyle Stiemann
  */
-public class ProductLiferayFacesBridgeExtImpl extends ProductBaseImpl {
+public class ProductLiferayFacesBridgeExtImpl extends ProductBase {
 
 	public ProductLiferayFacesBridgeExtImpl() {
-		super(ProductInfo.obtainProductInfo("Liferay Faces Bridge Ext",
+		super(ProductInfo.newInstance("Liferay Faces Bridge Ext",
 				"com.liferay.faces.bridge.ext.GenericLiferayFacesPortlet"));
 	}
 }

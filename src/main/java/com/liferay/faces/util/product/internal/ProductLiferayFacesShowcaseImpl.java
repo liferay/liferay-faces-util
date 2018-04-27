@@ -18,9 +18,9 @@ package com.liferay.faces.util.product.internal;
 /**
  * @author  Neil Griffin
  */
-public class ProductLiferayFacesShowcaseImpl extends ProductBaseImpl {
+public class ProductLiferayFacesShowcaseImpl extends ProductBase {
 
 	public ProductLiferayFacesShowcaseImpl() {
-		super(ProductInfo.obtainProductInfo("Showcase Common", "com.liferay.faces.showcase.dto.ShowcaseComponent"));
+		super(ProductInfo.newInstance("Showcase Common", "com.liferay.faces.showcase.dto.ShowcaseComponent"));
 	}
 }

@@ -18,10 +18,10 @@ package com.liferay.faces.util.product.internal;
 /**
  * @author  Neil Griffin
  */
-public class ProductJettyImpl extends ProductBaseImpl {
+public class ProductJettyImpl extends ProductBase {
 
 	public ProductJettyImpl() {
-		super(ProductInfo.obtainProductInfo("Jetty", "org.eclipse.jetty.util.URIUtil"));
+		super(ProductInfo.newInstance("Jetty", "org.eclipse.jetty.util.URIUtil"));
 	}
 
 }

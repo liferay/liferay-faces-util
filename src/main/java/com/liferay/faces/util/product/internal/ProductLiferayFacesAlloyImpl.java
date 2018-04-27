@@ -18,9 +18,9 @@ package com.liferay.faces.util.product.internal;
 /**
  * @author  Neil Griffin
  */
-public class ProductLiferayFacesAlloyImpl extends ProductBaseImpl {
+public class ProductLiferayFacesAlloyImpl extends ProductBase {
 
 	public ProductLiferayFacesAlloyImpl() {
-		super(ProductInfo.obtainProductInfo("Liferay Faces Alloy", "com.liferay.faces.alloy.component.column.Column"));
+		super(ProductInfo.newInstance("Liferay Faces Alloy", "com.liferay.faces.alloy.component.column.Column"));
 	}
 }

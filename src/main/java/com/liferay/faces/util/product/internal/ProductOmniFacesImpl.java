@@ -18,9 +18,9 @@ package com.liferay.faces.util.product.internal;
 /**
  * @author  Kyle Stiemann
  */
-public class ProductOmniFacesImpl extends ProductBaseImpl {
+public class ProductOmniFacesImpl extends ProductBase {
 
 	public ProductOmniFacesImpl() {
-		super(ProductInfo.obtainProductInfo("OmniFaces", "org.omnifaces.util.Utils"));
+		super(ProductInfo.newInstance("OmniFaces", "org.omnifaces.util.Utils"));
 	}
 }

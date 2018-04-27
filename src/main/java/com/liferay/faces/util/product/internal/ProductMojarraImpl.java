@@ -19,20 +19,20 @@ package com.liferay.faces.util.product.internal;
  * @author  Neil Griffin
  * @author  Kyle Stiemann
  */
-public class ProductMojarraImpl extends ProductBaseImpl {
+public class ProductMojarraImpl extends ProductBase {
 
 	public ProductMojarraImpl() {
-		super(obtainProductInfo());
+		super(newInstance());
 	}
 
-	private static ProductInfo obtainProductInfo() {
+	private static ProductInfo newInstance() {
 
 		String title = "Mojarra";
 		ProductInfo productInfo = null;
 
 		try {
 
-			productInfo = ProductInfo.obtainProductInfo(title, "com.sun.faces.RIConstants");
+			productInfo = ProductInfo.newInstance(title, "com.sun.faces.RIConstants");
 
 			// If running on WebLogic 12c (12.1.x), then the version typically looks like "1.0.0.0_2-1-20" or
 			// "2.0.0.0_2-1-20"

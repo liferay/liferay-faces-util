@@ -18,9 +18,9 @@ package com.liferay.faces.util.product.internal;
 /**
  * @author  Kyle Stiemann
  */
-public class ProductPrimeFacesExtensionsImpl extends ProductBaseImpl {
+public class ProductPrimeFacesExtensionsImpl extends ProductBase {
 
 	public ProductPrimeFacesExtensionsImpl() {
-		super(ProductInfo.obtainProductInfo("PrimeFaces Extensions", "org.primefaces.extensions.util.Constants"));
+		super(ProductInfo.newInstance("PrimeFaces Extensions", "org.primefaces.extensions.util.Constants"));
 	}
 }

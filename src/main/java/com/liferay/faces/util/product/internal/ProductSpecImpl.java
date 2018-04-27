@@ -15,41 +15,35 @@
  */
 package com.liferay.faces.util.product.internal;
 
-import com.liferay.faces.util.product.Product;
-import com.liferay.faces.util.product.ProductWrapper;
-
-
 /**
  * @author  Kyle Stiemann
  */
-public class ProductSpecImpl extends ProductWrapper {
+public class ProductSpecImpl extends ProductBase {
 
-	// Private Data Members
-	private Product wrappedProduct;
+	public ProductSpecImpl(String fallbackSpecTitle, ProductBase... specImplProducts) {
+		super(getProductInfo(fallbackSpecTitle, specImplProducts));
+	}
 
-	public ProductSpecImpl(String fallbackSpecTitle, Product... specImplProducts) {
+	private static ProductInfo getProductInfo(String fallbackSpecTitle, ProductBase... specImplProducts) {
+
+		ProductInfo productInfo = null;
 
 		for (int i = 0; i < specImplProducts.length; i++) {
 
-			Product specImplProduct = specImplProducts[i];
+			ProductBase specImplProduct = specImplProducts[i];
 
 			if (specImplProduct.isDetected() || (i == (specImplProducts.length - 1))) {
 
-				this.wrappedProduct = specImplProduct;
+				productInfo = specImplProduct.getProductInfo();
 
 				break;
 			}
 		}
 
-		if (this.wrappedProduct == null) {
-
-			ProductBaseImpl productBaseImpl = new ProductBaseImpl(new ProductInfo(false, fallbackSpecTitle));
-			this.wrappedProduct = productBaseImpl;
+		if (productInfo == null) {
+			productInfo = new ProductInfo(false, fallbackSpecTitle);
 		}
-	}
 
-	@Override
-	public Product getWrapped() {
-		return wrappedProduct;
+		return productInfo;
 	}
 }

@@ -21,13 +21,13 @@ import com.liferay.faces.util.helper.IntegerHelper;
 /**
  * @author  Neil Griffin
  */
-public class ProductICEfacesImpl extends ProductBaseImpl {
+public class ProductICEfacesImpl extends ProductBase {
 
 	public ProductICEfacesImpl() {
-		super(obtainProductInfo());
+		super(newInstance());
 	}
 
-	private static ProductInfo obtainProductInfo() {
+	private static ProductInfo newInstance() {
 
 		ProductInfo productInfo = null;
 

@@ -18,9 +18,9 @@ package com.liferay.faces.util.product.internal;
 /**
  * @author  Kyle Stiemann
  */
-public class ProductDeltaSpikeImpl extends ProductBaseImpl {
+public class ProductDeltaSpikeImpl extends ProductBase {
 
 	public ProductDeltaSpikeImpl() {
-		super(ProductInfo.obtainProductInfo("DeltaSpike", "org.apache.deltaspike.core.util.ClassUtils"));
+		super(ProductInfo.newInstance("DeltaSpike", "org.apache.deltaspike.core.util.ClassUtils"));
 	}
 }

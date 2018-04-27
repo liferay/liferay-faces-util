@@ -18,9 +18,9 @@ package com.liferay.faces.util.product.internal;
 /**
  * @author  Neil Griffin
  */
-public class ProductServletApiImpl extends ProductBaseImpl {
+public class ProductServletApiImpl extends ProductBase {
 
 	public ProductServletApiImpl() {
-		super(ProductInfo.obtainProductInfo("Servlet API", "javax.servlet.ServletContext"));
+		super(ProductInfo.newInstance("Servlet API", "javax.servlet.ServletContext"));
 	}
 }

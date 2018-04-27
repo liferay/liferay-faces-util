@@ -18,13 +18,13 @@ package com.liferay.faces.util.product.internal;
 /**
  * @author  Neil Griffin
  */
-public class ProductPrimeFacesImpl extends ProductBaseImpl {
+public class ProductPrimeFacesImpl extends ProductBase {
 
 	public ProductPrimeFacesImpl() {
-		super(obtainProductInfo());
+		super(newInstance());
 	}
 
-	private static ProductInfo obtainProductInfo() {
+	private static ProductInfo newInstance() {
 
 		boolean detected = false;
 		String version = null;

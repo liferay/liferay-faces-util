@@ -18,9 +18,9 @@ package com.liferay.faces.util.product.internal;
 /**
  * @author  Neil Griffin
  */
-public class ProductResinImpl extends ProductBaseImpl {
+public class ProductResinImpl extends ProductBase {
 
 	public ProductResinImpl() {
-		super(ProductInfo.obtainProductInfo("Resin", "com.caucho.server.resin.JavaVar"));
+		super(ProductInfo.newInstance("Resin", "com.caucho.server.resin.JavaVar"));
 	}
 }

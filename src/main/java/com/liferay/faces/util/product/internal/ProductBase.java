@@ -21,12 +21,12 @@ import com.liferay.faces.util.product.Product;
 /**
  * @author  Neil Griffin
  */
-public class ProductBaseImpl implements Product {
+public abstract class ProductBase implements Product {
 
 	// Private Final Data Members
 	private final ProductInfo productInfo;
 
-	protected ProductBaseImpl(ProductInfo productInfo) {
+	protected ProductBase(ProductInfo productInfo) {
 		this.productInfo = productInfo;
 	}
 
@@ -48,6 +48,10 @@ public class ProductBaseImpl implements Product {
 	@Override
 	public int getPatchVersion() {
 		return productInfo.patchVersion;
+	}
+
+	public final ProductInfo getProductInfo() {
+		return productInfo;
 	}
 
 	@Override

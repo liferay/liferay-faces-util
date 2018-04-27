@@ -29,7 +29,7 @@ import org.junit.Test;
 import com.liferay.faces.util.classloader.TestClassLoader;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.util.product.internal.ProductBaseImpl;
+import com.liferay.faces.util.product.internal.ProductBase;
 import com.liferay.faces.util.product.internal.ProductFactoryImpl;
 import com.liferay.faces.util.product.internal.ProductInfo;
 import com.liferay.faces.util.product.internal.ProductPortletApiImpl;
@@ -50,7 +50,7 @@ public class ProductTest {
 			"However, Liferay Faces Util's version can be obtained normally when running in a servlet or portlet container.");
 	}
 
-	public static ProductInfo createProductInfo(String title, String version) {
+	public static ProductInfo newProductInfo(String title, String version) {
 
 		boolean detected = false;
 
@@ -99,7 +99,7 @@ public class ProductTest {
 		throws ClassNotFoundException {
 
 		testClassLoader.loadClassWithoutParentLoader(ProductInfo.class);
-		testClassLoader.loadClassWithoutParentLoader(ProductBaseImpl.class);
+		testClassLoader.loadClassWithoutParentLoader(ProductBase.class);
 
 		return testClassLoader.loadClassWithoutParentLoader(ProductPortletApiImpl.class);
 	}
@@ -266,17 +266,17 @@ public class ProductTest {
 		logger.info("Liferay Faces Util was correctly detected.");
 	}
 
-	private static final class ProductLiferayPortalMockImpl extends ProductBaseImpl {
+	private static final class ProductLiferayPortalMockImpl extends ProductBase {
 
 		public ProductLiferayPortalMockImpl(String version) {
-			super(createProductInfo("Liferay Portal", version));
+			super(newProductInfo("Liferay Portal", version));
 		}
 	}
 
-	private static final class ProductPlutoMockImpl extends ProductBaseImpl {
+	private static final class ProductPlutoMockImpl extends ProductBase {
 
 		public ProductPlutoMockImpl(String version) {
-			super(createProductInfo("Pluto Portal", version));
+			super(newProductInfo("Pluto Portal", version));
 		}
 	}
 

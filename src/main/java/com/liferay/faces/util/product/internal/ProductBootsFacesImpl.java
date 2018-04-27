@@ -18,10 +18,10 @@ package com.liferay.faces.util.product.internal;
 /**
  * @author  Kyle Stiemann
  */
-public class ProductBootsFacesImpl extends ProductBaseImpl {
+public class ProductBootsFacesImpl extends ProductBase {
 
 	public ProductBootsFacesImpl() {
-		super(ProductInfo.obtainProductInfo("BootsFaces", "net.bootsfaces.C",
+		super(ProductInfo.newInstance("BootsFaces", "net.bootsfaces.C",
 				"META-INF/maven/net.bootsfaces/bootsfaces/pom.properties"));
 	}
 }
