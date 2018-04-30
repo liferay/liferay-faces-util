@@ -20,13 +20,17 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
-import com.liferay.faces.util.product.internal.ProductFactoryImpl;
+import com.liferay.faces.util.logging.Logger;
+import com.liferay.faces.util.logging.LoggerFactory;
 
 
 /**
  * @author  Kyle Stiemann
  */
 public abstract class ProductFactory implements FacesWrapper<ProductFactory> {
+
+	// Logger
+	private static final Logger logger = LoggerFactory.getLogger(ProductFactory.class);
 
 	/**
 	 * Returns the thread-safe singleton instance of {@link Product} associated with the specified {@link Product#Name}
@@ -42,6 +46,7 @@ public abstract class ProductFactory implements FacesWrapper<ProductFactory> {
 	public static final Product getProduct(Product.Name productName) {
 
 		FacesContext facesContext = FacesContext.getCurrentInstance();
+		Product product = null;
 		ProductFactory productFactory = null;
 
 		if (facesContext != null) {
@@ -55,10 +60,22 @@ public abstract class ProductFactory implements FacesWrapper<ProductFactory> {
 		// the developer has used ProductFactory before Util's factories are initialized (and even before the
 		// FacesContext is initialized).
 		if (productFactory == null) {
-			productFactory = new ProductFactoryImpl();
+
+			try {
+				Class<?> productFactoryImplClass = Class.forName(
+						"com.liferay.faces.util.product.internal.ProductFactoryImpl");
+				productFactory = (ProductFactory) productFactoryImplClass.newInstance();
+			}
+			catch (Exception e) {
+				logger.error(e);
+			}
 		}
 
-		return productFactory.getProductInfo(productName);
+		if (productFactory != null) {
+			product = productFactory.getProductInfo(productName);
+		}
+
+		return product;
 	}
 
 	/**
