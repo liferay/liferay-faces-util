@@ -15,6 +15,9 @@
  */
 package com.liferay.faces.util.lang;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
+
 /**
  * This class represents a lazily initialized, effectively immutable value. The value is initialized in a thread-safe
  * way such that {@link #computeValue(java.lang.Object)} is only called once by a single thread.
@@ -26,6 +29,7 @@ package com.liferay.faces.util.lang;
  *
  * @author  Kyle Stiemann
  */
+@ConsumerType
 public abstract class ThreadSafeAccessor<T, X> {
 
 	// Instance field must be declared volatile in order for the double-check idiom to work (requires JRE 1.5+)

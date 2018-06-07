@@ -19,6 +19,8 @@ import java.util.List;
 
 import javax.faces.context.FacesContext;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.context.internal.FacesRequestContextFactoryOnDemandImpl;
 import com.liferay.faces.util.logging.Logger;
@@ -32,6 +34,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
  * @author      Kyle Stiemann
  */
 @Deprecated
+@ProviderType
 public abstract class FacesRequestContext {
 
 	// Logger

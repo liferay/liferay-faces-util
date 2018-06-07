@@ -15,11 +15,15 @@
  */
 package com.liferay.faces.util.config;
 
+import org.osgi.annotation.versioning.ProviderType;
+
+
 /**
  * This is a generic interface that defines the contract for getting configuration param values.
  *
  * @author  Neil Griffin
  */
+@ProviderType
 public interface ConfigParam<T> {
 
 	/**

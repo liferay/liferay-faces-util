@@ -19,10 +19,13 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * @author  Neil Griffin
  */
+@ProviderType
 public class PropertyMapEntrySet<V> extends HashSet<Map.Entry<String, V>> {
 
 	// serialVersionUID

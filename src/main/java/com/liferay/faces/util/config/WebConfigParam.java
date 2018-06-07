@@ -17,6 +17,8 @@ package com.liferay.faces.util.config;
 
 import javax.faces.context.ExternalContext;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.i18n.I18n;
 
@@ -24,6 +26,7 @@ import com.liferay.faces.util.i18n.I18n;
 /**
  * @author  Neil Griffin
  */
+@ProviderType
 public enum WebConfigParam implements ConfigParam<ExternalContext> {
 
 	/**

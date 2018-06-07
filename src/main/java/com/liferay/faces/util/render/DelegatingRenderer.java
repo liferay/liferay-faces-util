@@ -23,6 +23,8 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.RenderKit;
 import javax.faces.render.Renderer;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * This interface defines a contract for a {@link Renderer} that has the ability to delegate to the corresponding
@@ -31,6 +33,7 @@ import javax.faces.render.Renderer;
  *
  * @author  Neil Griffin
  */
+@ProviderType
 public interface DelegatingRenderer {
 
 	/**

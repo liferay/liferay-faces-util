@@ -29,6 +29,8 @@ import javax.faces.component.behavior.ClientBehaviorHolder;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 import com.liferay.faces.util.component.ComponentUtil;
 import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.logging.Logger;
@@ -38,6 +40,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
 /**
  * @author  Neil Griffin
  */
+@ProviderType
 public class RendererUtil {
 
 	// Private Constants

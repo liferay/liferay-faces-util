@@ -17,10 +17,13 @@ package com.liferay.faces.util.application;
 
 import javax.faces.context.FacesContext;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * @author  Neil Griffin
  */
+@ProviderType
 public interface ResourceValidator {
 
 	public boolean containsBannedPath(String resourceId);

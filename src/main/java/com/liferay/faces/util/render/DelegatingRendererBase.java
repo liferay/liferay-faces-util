@@ -24,6 +24,8 @@ import javax.faces.convert.ConverterException;
 import javax.faces.render.RenderKit;
 import javax.faces.render.Renderer;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * This is an abstract class that implements the {@link DelegatingRenderer} interface in order to provide base
@@ -31,6 +33,7 @@ import javax.faces.render.Renderer;
  *
  * @author  Neil Griffin
  */
+@ProviderType
 public abstract class DelegatingRendererBase extends Renderer implements DelegatingRenderer {
 
 	/**

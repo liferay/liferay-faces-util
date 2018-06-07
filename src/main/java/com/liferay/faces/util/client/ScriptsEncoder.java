@@ -20,10 +20,13 @@ import java.util.List;
 
 import javax.faces.context.FacesContext;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * @author  Neil Griffin
  */
+@ProviderType
 public interface ScriptsEncoder {
 
 	public void encodeBodyScripts(FacesContext facesContext, List<Script> scripts) throws IOException;

@@ -24,6 +24,8 @@ import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * Control for getting resource bundles with UTF-8 encoding.
@@ -32,6 +34,7 @@ import java.util.ResourceBundle;
  * @author      Juan Gonzalez
  */
 @Deprecated
+@ProviderType
 public class UTF8Control extends ResourceBundle.Control {
 
 	/**

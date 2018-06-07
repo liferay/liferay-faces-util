@@ -18,6 +18,8 @@ package com.liferay.faces.util.logging;
 import java.util.Iterator;
 import java.util.ServiceLoader;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * In order to minimize dependencies, this class provides a layer of abstraction over different logging mechanisms
@@ -25,6 +27,7 @@ import java.util.ServiceLoader;
  *
  * @author  Neil Griffin
  */
+@ProviderType
 public abstract class LoggerFactory {
 
 	// Private Constants

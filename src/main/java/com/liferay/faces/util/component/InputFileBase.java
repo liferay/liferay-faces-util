@@ -17,6 +17,8 @@ package com.liferay.faces.util.component;
 
 import javax.faces.component.html.HtmlInputFile;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * This abstract class serves as a compatibility layer for file upload components. For JSF 2.2+ this class extends
@@ -25,5 +27,6 @@ import javax.faces.component.html.HtmlInputFile;
  *
  * @author  Neil Griffin
  */
+@ProviderType
 public abstract class InputFileBase extends HtmlInputFile {
 }

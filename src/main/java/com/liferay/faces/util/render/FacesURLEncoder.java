@@ -15,9 +15,13 @@
  */
 package com.liferay.faces.util.render;
 
+import org.osgi.annotation.versioning.ProviderType;
+
+
 /**
  * @author  Neil Griffin
  */
+@ProviderType
 public interface FacesURLEncoder {
 
 	public String encode(String url, String encoding);

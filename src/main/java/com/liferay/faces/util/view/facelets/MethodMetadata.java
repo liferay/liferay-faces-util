@@ -24,10 +24,13 @@ import javax.faces.view.facelets.Metadata;
 import javax.faces.view.facelets.TagAttribute;
 import javax.faces.view.facelets.TagAttributeException;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * @author  Neil Griffin
  */
+@ProviderType
 public class MethodMetadata extends Metadata {
 
 	// Private Data Members
@@ -55,5 +58,4 @@ public class MethodMetadata extends Metadata {
 			throw new TagAttributeException(tagAttribute, e);
 		}
 	}
-
 }

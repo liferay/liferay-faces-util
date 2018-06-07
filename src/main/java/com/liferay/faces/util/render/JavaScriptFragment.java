@@ -17,6 +17,8 @@ package com.liferay.faces.util.render;
 
 import java.io.Serializable;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * This is a simple marker class that wraps a String. It marks the fact that the wrapped string is a fragment of
@@ -24,6 +26,7 @@ import java.io.Serializable;
  *
  * @author  Neil Griffin
  */
+@ProviderType
 public final class JavaScriptFragment implements Serializable {
 
 	// serialVersionUID

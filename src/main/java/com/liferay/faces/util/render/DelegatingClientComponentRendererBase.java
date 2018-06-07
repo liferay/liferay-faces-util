@@ -24,10 +24,13 @@ import javax.faces.convert.ConverterException;
 import javax.faces.render.RenderKit;
 import javax.faces.render.Renderer;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * @author  Neil Griffin
  */
+@ProviderType
 public abstract class DelegatingClientComponentRendererBase extends ClientComponentRendererBase
 	implements DelegatingClientComponentRenderer {
 

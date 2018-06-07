@@ -23,6 +23,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.client.ScriptFactory;
 import com.liferay.faces.util.component.ClientComponent;
@@ -37,6 +39,7 @@ import com.liferay.faces.util.context.FacesContextHelperUtil;
  *
  * @author  Neil Griffin
  */
+@ProviderType
 public abstract class ClientComponentRendererBase extends Renderer implements ClientComponentRenderer {
 
 	/**

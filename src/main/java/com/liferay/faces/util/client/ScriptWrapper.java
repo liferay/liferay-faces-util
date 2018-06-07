@@ -17,6 +17,8 @@ package com.liferay.faces.util.client;
 
 import javax.faces.FacesWrapper;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * Provides a simple implementation of {@link Script} that can be subclassed in order to decorate another instance of
@@ -24,6 +26,7 @@ import javax.faces.FacesWrapper;
  *
  * @author  Kyle Stiemann
  */
+@ConsumerType
 public abstract class ScriptWrapper implements Script, FacesWrapper<Script> {
 
 	/**

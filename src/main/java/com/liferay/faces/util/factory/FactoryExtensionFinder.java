@@ -21,6 +21,8 @@ import java.util.ServiceLoader;
 import javax.faces.FacesException;
 import javax.faces.context.ExternalContext;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 import com.liferay.faces.util.config.ConfiguredElement;
 
 
@@ -30,6 +32,7 @@ import com.liferay.faces.util.config.ConfiguredElement;
  *
  * @author  Neil Griffin
  */
+@ProviderType
 public abstract class FactoryExtensionFinder {
 
 	// Private Static Data Members

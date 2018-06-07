@@ -21,6 +21,8 @@ import javax.faces.component.html.HtmlInputText;
 import javax.faces.context.ResponseWriter;
 import javax.faces.context.ResponseWriterWrapper;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * This class is a {@link ResponseWriter} that is designed to intercept the encoding of a {@link HtmlInputText}
@@ -28,6 +30,7 @@ import javax.faces.context.ResponseWriterWrapper;
  *
  * @author  Neil Griffin
  */
+@ProviderType
 public class HiddenTextResponseWriter extends ResponseWriterWrapper {
 
 	// Private Data Members

@@ -18,10 +18,13 @@ package com.liferay.faces.util.event;
 import javax.faces.event.AbortProcessingException;
 import javax.faces.event.PreRenderComponentEvent;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * @author  Neil Griffin
  */
+@ProviderType
 public interface PreRenderComponentEventListener {
 
 	public void processEvent(PreRenderComponentEvent preRenderComponentEvent) throws AbortProcessingException;

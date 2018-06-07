@@ -20,10 +20,13 @@ import java.io.InputStream;
 import java.util.Collection;
 import java.util.Map;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * @author  Neil Griffin
  */
+@ProviderType
 public interface UploadedFile {
 
 	/**

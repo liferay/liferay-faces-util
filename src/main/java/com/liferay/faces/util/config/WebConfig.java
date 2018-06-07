@@ -18,10 +18,13 @@ package com.liferay.faces.util.config;
 import java.util.List;
 import java.util.Map;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * @author  Neil Griffin
  */
+@ProviderType
 public interface WebConfig {
 
 	public Map<String, String> getConfiguredContextParams();

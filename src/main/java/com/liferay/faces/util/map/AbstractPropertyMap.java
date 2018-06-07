@@ -21,10 +21,13 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * @author  Neil Griffin
  */
+@ProviderType
 public abstract class AbstractPropertyMap<V> implements Map<String, V> {
 
 	public void clear() {

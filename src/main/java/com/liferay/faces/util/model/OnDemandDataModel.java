@@ -20,6 +20,8 @@ import java.util.List;
 
 import javax.faces.model.DataModel;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -27,6 +29,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
 /**
  * @author  Neil Griffin
  */
+@ConsumerType
 public abstract class OnDemandDataModel<E> extends DataModel<E> implements Paginated, Sortable {
 
 	// Logger

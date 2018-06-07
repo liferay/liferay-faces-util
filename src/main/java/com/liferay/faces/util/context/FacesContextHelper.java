@@ -27,12 +27,15 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseListener;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 import com.liferay.faces.util.client.Script;
 
 
 /**
  * @author  Neil Griffin
  */
+@ProviderType
 public interface FacesContextHelper {
 
 	/**

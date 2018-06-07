@@ -15,9 +15,13 @@
  */
 package com.liferay.faces.util.model;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
+
 /**
  * @author  Neil Griffin
  */
+@ConsumerType
 public class SortCriterion {
 
 	/**

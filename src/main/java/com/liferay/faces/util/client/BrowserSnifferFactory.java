@@ -19,12 +19,15 @@ import javax.faces.FacesWrapper;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
 
 /**
  * @author  Neil Griffin
  */
+@ProviderType
 public abstract class BrowserSnifferFactory implements FacesWrapper<BrowserSnifferFactory> {
 
 	/**
