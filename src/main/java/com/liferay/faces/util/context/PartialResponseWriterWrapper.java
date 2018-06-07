@@ -20,10 +20,13 @@ import java.util.Map;
 
 import javax.faces.context.PartialResponseWriter;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * @author  Neil Griffin
  */
+@ProviderType
 public class PartialResponseWriterWrapper extends PartialResponseWriter {
 
 	// Private Data Members

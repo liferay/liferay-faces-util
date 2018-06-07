@@ -15,9 +15,13 @@
  */
 package com.liferay.faces.util.helper;
 
+import org.osgi.annotation.versioning.ProviderType;
+
+
 /**
  * @author  Neil Griffin
  */
+@ProviderType
 public class StringHelper {
 
 	public static String[] append(String[] array, String... values) {

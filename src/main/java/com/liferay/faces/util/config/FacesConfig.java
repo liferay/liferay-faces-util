@@ -17,10 +17,13 @@ package com.liferay.faces.util.config;
 
 import java.util.List;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * @author  Neil Griffin
  */
+@ProviderType
 public interface FacesConfig {
 
 	public List<ConfiguredElement> getConfiguredApplicationExtensions();

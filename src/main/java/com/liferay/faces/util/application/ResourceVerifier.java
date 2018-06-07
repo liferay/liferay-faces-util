@@ -19,6 +19,8 @@ import javax.faces.application.ResourceDependency;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * This interface provides a contract for verifying whether or not a resource dependency is already satisfied.
@@ -39,6 +41,7 @@ import javax.faces.context.FacesContext;
  *
  * @author  Kyle Stiemann
  */
+@ProviderType
 public interface ResourceVerifier {
 
 	/**

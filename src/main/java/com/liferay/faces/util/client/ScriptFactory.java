@@ -19,6 +19,8 @@ import javax.faces.FacesWrapper;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
 
@@ -29,6 +31,7 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
  *
  * @author  Kyle Stiemann
  */
+@ProviderType
 public abstract class ScriptFactory implements FacesWrapper<ScriptFactory> {
 
 	/**

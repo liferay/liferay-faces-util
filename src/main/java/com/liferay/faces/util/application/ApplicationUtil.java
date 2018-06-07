@@ -18,10 +18,13 @@ package com.liferay.faces.util.application;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * @author  Kyle Stiemann
  */
+@ProviderType
 public final class ApplicationUtil {
 
 	// Prevent instantiation since this is a static utility class.

@@ -21,10 +21,13 @@ import javax.faces.FacesWrapper;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Neil Griffin
  */
+@ConsumerType
 public abstract class I18nWrapper implements I18n, FacesWrapper<I18n> {
 
 	@Override

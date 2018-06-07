@@ -20,6 +20,8 @@ import java.util.Locale;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * This interface defines a contract for obtaining internationalized messages of type {@link String} or {@link
@@ -27,6 +29,7 @@ import javax.faces.context.FacesContext;
  *
  * @author  Neil Griffin
  */
+@ProviderType
 public interface I18n {
 
 	/**

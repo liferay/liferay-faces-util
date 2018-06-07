@@ -17,6 +17,8 @@ package com.liferay.faces.util.event;
 
 import javax.faces.event.SystemEvent;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 import com.liferay.faces.util.config.ApplicationConfig;
 
 
@@ -28,6 +30,7 @@ import com.liferay.faces.util.config.ApplicationConfig;
  *
  * @author  Neil Griffin
  */
+@ProviderType
 public class PostConstructApplicationConfigEvent extends SystemEvent {
 
 	// serialVersionUID

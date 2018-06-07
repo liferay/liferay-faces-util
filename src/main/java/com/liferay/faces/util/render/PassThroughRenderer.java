@@ -22,10 +22,13 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * @author  Kyle Stiemann
  */
+@ProviderType
 public class PassThroughRenderer extends Renderer {
 
 	// Protected Constants

@@ -22,6 +22,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * This interface defines a contract for a contract for a {@link Renderer} that manifests a "client component", meaning
@@ -29,6 +31,7 @@ import javax.faces.render.Renderer;
  *
  * @author  Neil Griffin
  */
+@ProviderType
 public interface ClientComponentRenderer {
 
 	public void decodeClientState(FacesContext facesContext, UIComponent uiComponent);

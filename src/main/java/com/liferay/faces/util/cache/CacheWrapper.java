@@ -19,10 +19,13 @@ import java.util.Set;
 
 import javax.faces.FacesWrapper;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Kyle Stiemann
  */
+@ConsumerType
 public abstract class CacheWrapper<K, V> implements Cache<K, V>, FacesWrapper<Cache<K, V>> {
 
 	/**

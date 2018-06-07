@@ -24,10 +24,13 @@ import java.util.Map;
 
 import javax.faces.component.UIComponent;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * @author  Neil Griffin
  */
+@ProviderType
 public final class ResourceUtil {
 
 	// Prevent instantiation since this is a static utility class.

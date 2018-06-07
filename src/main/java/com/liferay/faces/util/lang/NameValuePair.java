@@ -15,9 +15,13 @@
  */
 package com.liferay.faces.util.lang;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
+
 /**
  * @author  Neil Griffin
  */
+@ConsumerType
 public class NameValuePair<N, V> {
 
 	private N name;

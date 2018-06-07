@@ -17,12 +17,15 @@ package com.liferay.faces.util.context.map;
 
 import java.util.Map;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * This interface defines a mutable {@link Map} of request parameters for a Faces request.
  *
  * @author  Neil Griffin
  */
+@ProviderType
 public interface FacesRequestParameterMap extends Map<String, String[]> {
 
 	public void addValue(String key, String value);

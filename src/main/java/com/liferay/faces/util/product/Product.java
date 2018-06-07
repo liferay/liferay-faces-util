@@ -15,12 +15,16 @@
  */
 package com.liferay.faces.util.product;
 
+import org.osgi.annotation.versioning.ProviderType;
+
+
 /**
  * This interface represents a product that a Liferay Faces project depends on. Implementations of this interface must
  * be thread-safe and immutable.
  *
  * @author  Neil Griffin
  */
+@ProviderType
 public interface Product {
 
 	/**

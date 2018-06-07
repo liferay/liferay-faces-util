@@ -20,10 +20,13 @@ import java.util.Locale;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * @author  Neil Griffin
  */
+@ProviderType
 public class I18nUtil {
 
 	public static FacesMessage getFacesMessage(I18n i18n, FacesContext facesContext, Locale locale,

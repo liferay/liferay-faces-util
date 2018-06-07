@@ -37,6 +37,8 @@ import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
 import javax.faces.render.RenderKit;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -49,6 +51,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
  * @author      Neil Griffin
  */
 @Deprecated
+@ProviderType
 public abstract class ExtFacesContext extends FacesContext implements FacesContextHelper {
 
 	// Logger

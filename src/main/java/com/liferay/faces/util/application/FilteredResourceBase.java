@@ -21,6 +21,8 @@ import java.util.Map;
 
 import javax.faces.application.ResourceWrapper;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -30,6 +32,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
  *
  * @author  Kyle Stiemann
  */
+@ConsumerType
 public abstract class FilteredResourceBase extends ResourceWrapper {
 
 	// Logger

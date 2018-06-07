@@ -21,10 +21,13 @@ import java.util.List;
 import javax.faces.FacesWrapper;
 import javax.faces.context.FacesContext;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Neil Griffin
  */
+@ConsumerType
 public abstract class ScriptsEncoderWrapper implements ScriptsEncoder, FacesWrapper<ScriptsEncoder> {
 
 	public abstract ScriptsEncoder getWrapped();

@@ -21,6 +21,8 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.ResponseWriter;
 import javax.faces.context.ResponseWriterWrapper;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * This class is a {@link ResponseWriter} that ensures the "id" attribute is always written to a particular element.
@@ -29,6 +31,7 @@ import javax.faces.context.ResponseWriterWrapper;
  *
  * @author  Neil Griffin
  */
+@ProviderType
 public class IdResponseWriter extends ResponseWriterWrapper {
 
 	// Private Data Members

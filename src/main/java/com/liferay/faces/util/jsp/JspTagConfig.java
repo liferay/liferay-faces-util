@@ -19,6 +19,8 @@ import javax.faces.view.facelets.FaceletHandler;
 import javax.faces.view.facelets.Tag;
 import javax.faces.view.facelets.TagConfig;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * This is a dummy class that exists in order to prevent an exception from being thrown during startup on JBoss AS. For
@@ -26,6 +28,7 @@ import javax.faces.view.facelets.TagConfig;
  *
  * @author  Neil Griffin
  */
+@ProviderType
 public class JspTagConfig implements TagConfig {
 
 	// Private Data Members
@@ -56,5 +59,4 @@ public class JspTagConfig implements TagConfig {
 	public void setTagId(String tagId) {
 		this.tagId = tagId;
 	}
-
 }

@@ -18,12 +18,15 @@ package com.liferay.faces.util.context;
 import javax.faces.FacesWrapper;
 import javax.faces.context.ExternalContext;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * @author      Kyle Stiemann
  * @deprecated  Please use {@link FacesContextHelperFactory} instead.
  */
 @Deprecated
+@ProviderType
 public abstract class FacesRequestContextFactory implements FacesWrapper<FacesRequestContextFactory> {
 
 	/**

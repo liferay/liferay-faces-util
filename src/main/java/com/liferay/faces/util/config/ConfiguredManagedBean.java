@@ -15,12 +15,16 @@
  */
 package com.liferay.faces.util.config;
 
+import org.osgi.annotation.versioning.ProviderType;
+
+
 /**
  * This interface defines the properties for a configured managed-bean that is discovered in META-INF/faces-config.xml
  * or WEB-INF/faces-config.xml descriptors.
  *
  * @author  Neil Griffin
  */
+@ProviderType
 public interface ConfiguredManagedBean {
 
 	/**

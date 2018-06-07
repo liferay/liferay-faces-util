@@ -18,6 +18,8 @@ package com.liferay.faces.util.cache;
 import javax.faces.FacesWrapper;
 import javax.faces.context.ExternalContext;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
 
@@ -27,6 +29,7 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
  * @since   2.1
  * @since   1.1
  */
+@ProviderType
 public abstract class CacheFactory implements FacesWrapper<CacheFactory> {
 
 	/**

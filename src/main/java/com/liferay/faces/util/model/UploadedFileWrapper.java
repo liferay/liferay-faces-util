@@ -22,10 +22,13 @@ import java.util.Map;
 
 import javax.faces.FacesWrapper;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Neil Griffin
  */
+@ConsumerType
 public abstract class UploadedFileWrapper implements UploadedFile, FacesWrapper<UploadedFile> {
 
 	public abstract UploadedFile getWrapped();

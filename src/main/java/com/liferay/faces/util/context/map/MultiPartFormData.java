@@ -18,6 +18,8 @@ package com.liferay.faces.util.context.map;
 import java.util.List;
 import java.util.Map;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 import com.liferay.faces.util.model.UploadedFile;
 
 
@@ -27,6 +29,7 @@ import com.liferay.faces.util.model.UploadedFile;
  *
  * @author  Neil Griffin
  */
+@ProviderType
 public interface MultiPartFormData {
 
 	public FacesRequestParameterMap getFacesRequestParameterMap();

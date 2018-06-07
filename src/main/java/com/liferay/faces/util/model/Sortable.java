@@ -17,10 +17,13 @@ package com.liferay.faces.util.model;
 
 import java.util.List;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * @author  Neil Griffin
  */
+@ProviderType
 public interface Sortable {
 
 	public List<SortCriterion> getSortCriteria();

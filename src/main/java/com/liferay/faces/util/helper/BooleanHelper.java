@@ -15,9 +15,13 @@
  */
 package com.liferay.faces.util.helper;
 
+import org.osgi.annotation.versioning.ProviderType;
+
+
 /**
  * This class provides additional methods that operate against the javax.lang.Boolean system class.
  */
+@ProviderType
 public class BooleanHelper {
 
 	public static final String[] TRUE_VALUES = { "true", "1", "t", "y", "yes", "on", "checked" };
@@ -92,6 +96,5 @@ public class BooleanHelper {
 			}
 
 		}
-
 	}
 }

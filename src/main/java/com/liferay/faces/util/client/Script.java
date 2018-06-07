@@ -15,6 +15,9 @@
  */
 package com.liferay.faces.util.client;
 
+import org.osgi.annotation.versioning.ProviderType;
+
+
 /**
  * A Script which can be rendered on the client via {@link
  * com.liferay.faces.util.context.FacesContextHelperUtil#addScript(javax.faces.context.FacesContext,
@@ -22,6 +25,7 @@ package com.liferay.faces.util.client;
  *
  * @author  Kyle Stiemann
  */
+@ProviderType
 public interface Script {
 
 	/**

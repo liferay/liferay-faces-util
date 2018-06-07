@@ -18,6 +18,8 @@ package com.liferay.faces.util.config;
 import javax.faces.context.ExternalContext;
 import javax.servlet.ServletContext;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.helper.IntegerHelper;
 import com.liferay.faces.util.helper.LongHelper;
@@ -29,6 +31,7 @@ import com.liferay.faces.util.helper.LongHelper;
  *
  * @author  Neil Griffin
  */
+@ProviderType
 public class WebConfigParamUtil {
 
 	public static boolean getBooleanValue(ExternalContext externalContext, String name, String alternateName,

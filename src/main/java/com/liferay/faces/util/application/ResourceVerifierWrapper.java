@@ -21,6 +21,8 @@ import javax.faces.FacesWrapper;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * Provides a simple implementation of {@link ResourceVerifier} that can be subclassed in order to decorate another
@@ -28,6 +30,7 @@ import javax.faces.context.FacesContext;
  *
  * @author  Kyle Stiemann
  */
+@ConsumerType
 public abstract class ResourceVerifierWrapper implements ResourceVerifier, FacesWrapper<ResourceVerifier> {
 
 	/**

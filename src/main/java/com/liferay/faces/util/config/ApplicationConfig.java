@@ -15,9 +15,13 @@
  */
 package com.liferay.faces.util.config;
 
+import org.osgi.annotation.versioning.ProviderType;
+
+
 /**
  * @author  Neil Griffin
  */
+@ProviderType
 public interface ApplicationConfig {
 
 	public String getContextPath();

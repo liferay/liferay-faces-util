@@ -18,10 +18,13 @@ package com.liferay.faces.util.application;
 import javax.faces.FacesWrapper;
 import javax.faces.context.FacesContext;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Neil Griffin
  */
+@ConsumerType
 public abstract class ResourceValidatorWrapper implements ResourceValidator, FacesWrapper<ResourceValidator> {
 
 	@Override
