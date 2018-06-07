@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.liferay.faces.util.i18n;
+package com.liferay.faces.util.i18n.internal;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,13 +26,9 @@ import java.util.ResourceBundle;
 
 
 /**
- * Control for getting resource bundles with UTF-8 encoding.
- *
- * @deprecated  No replacement available.
- * @author      Juan Gonzalez
+ * @author  Kyle Stiemann
  */
-@Deprecated
-public class UTF8Control extends ResourceBundle.Control {
+public final class UTF8Control extends ResourceBundle.Control {
 
 	/**
 	 * See {@link ResourceBundle.Control#newBundle(String, Locale, String, ClassLoader, boolean)}.

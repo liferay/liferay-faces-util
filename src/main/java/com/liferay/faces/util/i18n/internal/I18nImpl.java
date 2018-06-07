@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,7 +32,6 @@ import com.liferay.faces.util.cache.CacheFactory;
 import com.liferay.faces.util.config.WebConfigParam;
 import com.liferay.faces.util.i18n.I18n;
 import com.liferay.faces.util.i18n.I18nUtil;
-import com.liferay.faces.util.i18n.UTF8Control;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
