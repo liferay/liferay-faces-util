@@ -26,7 +26,7 @@ import java.util.ResourceBundle;
 
 
 /**
- * @author  Kyle Stiemann
+ * @author  Juan Gonzalez
  */
 public final class UTF8Control extends ResourceBundle.Control {
 
