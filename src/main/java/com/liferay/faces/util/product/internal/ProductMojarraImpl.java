@@ -47,8 +47,8 @@ public class ProductMojarraImpl extends ProductBase {
 			stringValue = stringValue.substring(0, pos);
 		}
 
-		productInfo = new ProductInfo(productInfo.detected, title, version, stringValue, productInfo.majorVersion,
-				productInfo.minorVersion, productInfo.patchVersion, productInfo.buildId);
+		productInfo = new ProductInfo(productInfo.detected, title, version, stringValue, null, null, null,
+				productInfo.buildId);
 
 		return productInfo;
 	}
