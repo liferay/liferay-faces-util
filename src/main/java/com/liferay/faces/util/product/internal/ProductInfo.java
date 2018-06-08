@@ -54,7 +54,7 @@ public class ProductInfo {
 	}
 
 	public ProductInfo(String title, String version, String stringValue) {
-		this(false, title, version, stringValue, null, null, null, null);
+		this(true, title, version, stringValue, null, null, null, null);
 	}
 
 	public ProductInfo(boolean detected, String title, String version) {
