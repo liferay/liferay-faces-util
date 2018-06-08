@@ -28,38 +28,27 @@ public class ProductMojarraImpl extends ProductBase {
 	private static ProductInfo newInstance() {
 
 		String title = "Mojarra";
-		ProductInfo productInfo = null;
+		ProductInfo productInfo = ProductInfo.newInstance(title, "com.sun.faces.RIConstants");
 
-		try {
+		// If running on WebLogic 12c (12.1.x), then the version typically looks like "1.0.0.0_2-1-20" or
+		// "2.0.0.0_2-1-20"
+		String version = productInfo.version;
 
-			productInfo = ProductInfo.newInstance(title, "com.sun.faces.RIConstants");
-
-			// If running on WebLogic 12c (12.1.x), then the version typically looks like "1.0.0.0_2-1-20" or
-			// "2.0.0.0_2-1-20"
-			String version = productInfo.version;
-
-			if ((version.startsWith("1.0.0.0_") || version.startsWith("2.0.0.0_"))) {
-				version = version.substring("x.0.0.0_".length()).replaceAll("[-]", ".");
-			}
-
-			String stringValue = productInfo.stringValue;
-
-			// Some versions of Mojarra are mislabeled "-SNAPSHOT" (i.e.: "1.2_15-20100816-SNAPSHOT")
-			int pos = stringValue.indexOf("-SNAPSHOT");
-
-			if (pos > 0) {
-				stringValue = stringValue.substring(0, pos);
-			}
-
-			productInfo = new ProductInfo(title, version, stringValue);
-		}
-		catch (Exception e) {
-			// Ignore -- JSF implementation is likely not present.
+		if ((version.startsWith("1.0.0.0_") || version.startsWith("2.0.0.0_"))) {
+			version = version.substring("x.0.0.0_".length()).replaceAll("[-]", ".");
 		}
 
-		if (productInfo == null) {
-			productInfo = new ProductInfo(false, title);
+		String stringValue = productInfo.stringValue;
+
+		// Some versions of Mojarra are mislabeled "-SNAPSHOT" (i.e.: "1.2_15-20100816-SNAPSHOT")
+		int pos = stringValue.indexOf("-SNAPSHOT");
+
+		if (pos > 0) {
+			stringValue = stringValue.substring(0, pos);
 		}
+
+		productInfo = new ProductInfo(productInfo.detected, title, version, stringValue, productInfo.majorVersion,
+				productInfo.minorVersion, productInfo.patchVersion, productInfo.buildId);
 
 		return productInfo;
 	}
