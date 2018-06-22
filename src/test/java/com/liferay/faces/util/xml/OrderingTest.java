@@ -159,7 +159,8 @@ public class OrderingTest {
 		String[] originalOrder = extractNames(facesConfigDescriptors);
 		Assert.assertNull("test00_0: absoluteOrdering != null. It should be null.", absoluteOrdering);
 
-		List<FacesConfigDescriptor> order = OrderingUtil.getOrder(facesConfigDescriptors);
+		List<FacesConfigDescriptor> order = OrderingUtil.getRelativeOrderedFacesConfigDescriptors(
+				facesConfigDescriptors);
 
 		// Append facesConfig from the applicationFacesConfig
 		order.add(facesConfig);
@@ -209,7 +210,8 @@ public class OrderingTest {
 		String[] originalOrder = extractNames(facesConfigDescriptors);
 		Assert.assertNull("test00_1: absoluteOrdering != null. It should be null.", absoluteOrdering);
 
-		List<FacesConfigDescriptor> order = OrderingUtil.getOrder(facesConfigDescriptors);
+		List<FacesConfigDescriptor> order = OrderingUtil.getRelativeOrderedFacesConfigDescriptors(
+				facesConfigDescriptors);
 
 		// Append facesConfig from the applicationFacesConfig
 		order.add(facesConfig);
@@ -264,7 +266,8 @@ public class OrderingTest {
 		String[] originalOrder = extractNames(facesConfigDescriptors);
 		Assert.assertNull("test00_2: absoluteOrdering != null. It should be null.", absoluteOrdering);
 
-		List<FacesConfigDescriptor> order = OrderingUtil.getOrder(facesConfigDescriptors);
+		List<FacesConfigDescriptor> order = OrderingUtil.getRelativeOrderedFacesConfigDescriptors(
+				facesConfigDescriptors);
 
 		// Append facesConfig from the applicationFacesConfig
 		order.add(facesConfig);
@@ -322,7 +325,8 @@ public class OrderingTest {
 		String[] originalOrder = extractNames(facesConfigDescriptors);
 		Assert.assertNull("test00_1: absoluteOrdering != null. It should be null.", absoluteOrdering);
 
-		List<FacesConfigDescriptor> order = OrderingUtil.getOrder(facesConfigDescriptors);
+		List<FacesConfigDescriptor> order = OrderingUtil.getRelativeOrderedFacesConfigDescriptors(
+				facesConfigDescriptors);
 
 		// Append facesConfig from the applicationFacesConfig
 		order.add(facesConfig);
@@ -366,7 +370,8 @@ public class OrderingTest {
 		String[] originalOrder = extractNames(facesConfigDescriptors);
 		Assert.assertNull("test01_fromSpec: absoluteOrdering != null. It should be null.", absoluteOrdering);
 
-		List<FacesConfigDescriptor> order = OrderingUtil.getOrder(facesConfigDescriptors);
+		List<FacesConfigDescriptor> order = OrderingUtil.getRelativeOrderedFacesConfigDescriptors(
+				facesConfigDescriptors);
 
 		// Append facesConfig from the applicationFacesConfig
 		order.add(facesConfig);
@@ -402,7 +407,8 @@ public class OrderingTest {
 		String[] originalOrder = extractNames(facesConfigDescriptors);
 		Assert.assertNotNull("test02_fromSpec: absoluteOrdering == null. It should not be null.", absoluteOrdering);
 
-		List<FacesConfigDescriptor> order = OrderingUtil.getOrder(facesConfigDescriptors, absoluteOrdering);
+		List<FacesConfigDescriptor> order = OrderingUtil.getAbsoluteOrderedFacesConfigDescriptors(
+				facesConfigDescriptors, absoluteOrdering);
 
 		// Append facesConfig from the applicationFacesConfig
 		order.add(facesConfig);
@@ -490,7 +496,8 @@ public class OrderingTest {
 		Assert.assertNotNull("test04_absoluteOrdering: absoluteOrdering == null. It should not be null.",
 			absoluteOrdering);
 
-		List<FacesConfigDescriptor> order = OrderingUtil.getOrder(facesConfigDescriptors, absoluteOrdering);
+		List<FacesConfigDescriptor> order = OrderingUtil.getAbsoluteOrderedFacesConfigDescriptors(
+				facesConfigDescriptors, absoluteOrdering);
 		String[] orderedNames = extractNames(order);
 
 		List<String> original = Arrays.asList(originalOrder);
@@ -513,7 +520,7 @@ public class OrderingTest {
 		Assert.assertNotNull("test04_absoluteOrdering: absoluteOrdering == null. It should not be null.",
 			absoluteOrdering);
 		logger.trace("test04_absoluteOrdering: absoluteOrdering = " + absoluteOrdering);
-		order = OrderingUtil.getOrder(facesConfigDescriptors, absoluteOrdering);
+		order = OrderingUtil.getAbsoluteOrderedFacesConfigDescriptors(facesConfigDescriptors, absoluteOrdering);
 
 		orderedNames = extractNames(order);
 
@@ -559,7 +566,7 @@ public class OrderingTest {
 
 		String[] originalOrder = extractNames(facesConfigDescriptors);
 
-		facesConfigDescriptors = OrderingUtil.getOrder(facesConfigDescriptors);
+		facesConfigDescriptors = OrderingUtil.getRelativeOrderedFacesConfigDescriptors(facesConfigDescriptors);
 
 		String[] orderedNames = extractNames(facesConfigDescriptors);
 
@@ -596,7 +603,7 @@ public class OrderingTest {
 
 		String[] originalOrder = extractNames(facesConfigDescriptors);
 
-		facesConfigDescriptors = OrderingUtil.getOrder(facesConfigDescriptors);
+		facesConfigDescriptors = OrderingUtil.getRelativeOrderedFacesConfigDescriptors(facesConfigDescriptors);
 
 		String[] orderedNames = extractNames(facesConfigDescriptors);
 
@@ -628,7 +635,7 @@ public class OrderingTest {
 
 		String[] originalOrder = extractNames(facesConfigDescriptors);
 
-		facesConfigDescriptors = OrderingUtil.getOrder(facesConfigDescriptors);
+		facesConfigDescriptors = OrderingUtil.getRelativeOrderedFacesConfigDescriptors(facesConfigDescriptors);
 
 		String[] orderedNames = extractNames(facesConfigDescriptors);
 
@@ -654,7 +661,7 @@ public class OrderingTest {
 
 		String[] originalOrder = extractNames(facesConfigDescriptors);
 
-		facesConfigDescriptors = OrderingUtil.getOrder(facesConfigDescriptors);
+		facesConfigDescriptors = OrderingUtil.getRelativeOrderedFacesConfigDescriptors(facesConfigDescriptors);
 
 		String[] orderedNames = extractNames(facesConfigDescriptors);
 
@@ -678,7 +685,7 @@ public class OrderingTest {
 		Collections.shuffle(facesConfigDescriptors);
 
 		try {
-			OrderingUtil.getOrder(facesConfigDescriptors);
+			OrderingUtil.getRelativeOrderedFacesConfigDescriptors(facesConfigDescriptors);
 			Assert.fail("Before and after exception should have been thrown");
 		}
 		catch (Exception e) {
@@ -700,7 +707,7 @@ public class OrderingTest {
 
 		String[] originalOrder = extractNames(facesConfigDescriptors);
 
-		facesConfigDescriptors = OrderingUtil.getOrder(facesConfigDescriptors);
+		facesConfigDescriptors = OrderingUtil.getRelativeOrderedFacesConfigDescriptors(facesConfigDescriptors);
 
 		String[] orderedNames = extractNames(facesConfigDescriptors);
 
@@ -730,7 +737,7 @@ public class OrderingTest {
 		Collections.shuffle(facesConfigDescriptors);
 
 		try {
-			OrderingUtil.getOrder(facesConfigDescriptors);
+			OrderingUtil.getRelativeOrderedFacesConfigDescriptors(facesConfigDescriptors);
 			Assert.fail("Circular ordering exception should have been thrown");
 		}
 		catch (Exception e) {
@@ -759,7 +766,7 @@ public class OrderingTest {
 		// temp.add(configMap.get("c")); temp.add(configMap.get("a")); facesConfigDescriptors = temp;
 
 		try {
-			OrderingUtil.getOrder(facesConfigDescriptors);
+			OrderingUtil.getRelativeOrderedFacesConfigDescriptors(facesConfigDescriptors);
 			Assert.fail("Circular ordering exception should have been thrown");
 		}
 		catch (Exception e) {
@@ -802,7 +809,7 @@ public class OrderingTest {
 		// temp.add(configMap.get("a")); temp.add(configMap.get("c")); facesConfigDescriptors = temp;
 
 		try {
-			OrderingUtil.getOrder(facesConfigDescriptors);
+			OrderingUtil.getRelativeOrderedFacesConfigDescriptors(facesConfigDescriptors);
 			Assert.fail("Circular ordering exception should have been thrown");
 		}
 		catch (Exception e) {
@@ -839,7 +846,7 @@ public class OrderingTest {
 
 		String[] originalOrder = extractNames(facesConfigDescriptors);
 
-		facesConfigDescriptors = OrderingUtil.getOrder(facesConfigDescriptors);
+		facesConfigDescriptors = OrderingUtil.getRelativeOrderedFacesConfigDescriptors(facesConfigDescriptors);
 
 		String[] orderedNames = extractNames(facesConfigDescriptors);
 
@@ -875,7 +882,7 @@ public class OrderingTest {
 
 		String[] originalOrder = extractNames(facesConfigDescriptors);
 
-		facesConfigDescriptors = OrderingUtil.getOrder(facesConfigDescriptors);
+		facesConfigDescriptors = OrderingUtil.getRelativeOrderedFacesConfigDescriptors(facesConfigDescriptors);
 
 		String[] orderedNames = extractNames(facesConfigDescriptors);
 
@@ -920,7 +927,7 @@ public class OrderingTest {
 
 		String[] originalOrder = extractNames(facesConfigDescriptors);
 
-		facesConfigDescriptors = OrderingUtil.getOrder(facesConfigDescriptors);
+		facesConfigDescriptors = OrderingUtil.getRelativeOrderedFacesConfigDescriptors(facesConfigDescriptors);
 
 		String[] orderedNames = extractNames(facesConfigDescriptors);
 
@@ -959,7 +966,7 @@ public class OrderingTest {
 
 		String[] originalOrder = extractNames(facesConfigDescriptors);
 
-		facesConfigDescriptors = OrderingUtil.getOrder(facesConfigDescriptors);
+		facesConfigDescriptors = OrderingUtil.getRelativeOrderedFacesConfigDescriptors(facesConfigDescriptors);
 
 		// some solutions:
 		// [f, e, d, b, a, c]
@@ -1018,7 +1025,7 @@ public class OrderingTest {
 			facesConfigDescriptors = temp;
 
 			String[] originalOrder = extractNames(facesConfigDescriptors);
-			facesConfigDescriptors = OrderingUtil.getOrder(facesConfigDescriptors);
+			facesConfigDescriptors = OrderingUtil.getRelativeOrderedFacesConfigDescriptors(facesConfigDescriptors);
 
 			// some solutions:
 			// [B, E, F, , C, D]
@@ -1079,7 +1086,7 @@ public class OrderingTest {
 			facesConfigDescriptors = temp;
 
 			String[] originalOrder = extractNames(facesConfigDescriptors);
-			facesConfigDescriptors = OrderingUtil.getOrder(facesConfigDescriptors);
+			facesConfigDescriptors = OrderingUtil.getRelativeOrderedFacesConfigDescriptors(facesConfigDescriptors);
 
 			// some solutions:
 			// [B, C, E, F, A, D]
@@ -1127,7 +1134,7 @@ public class OrderingTest {
 
 		String[] originalOrder = extractNames(facesConfigDescriptors);
 
-		facesConfigDescriptors = OrderingUtil.getOrder(facesConfigDescriptors);
+		facesConfigDescriptors = OrderingUtil.getRelativeOrderedFacesConfigDescriptors(facesConfigDescriptors);
 
 		String[] orderedNames = extractNames(facesConfigDescriptors);
 
@@ -1162,7 +1169,7 @@ public class OrderingTest {
 
 		String[] originalOrder = extractNames(facesConfigDescriptors);
 
-		facesConfigDescriptors = OrderingUtil.getOrder(facesConfigDescriptors);
+		facesConfigDescriptors = OrderingUtil.getRelativeOrderedFacesConfigDescriptors(facesConfigDescriptors);
 
 		String[] orderedNames = extractNames(facesConfigDescriptors);
 
@@ -1196,7 +1203,7 @@ public class OrderingTest {
 
 		String[] originalOrder = extractNames(facesConfigDescriptors);
 
-		facesConfigDescriptors = OrderingUtil.getOrder(facesConfigDescriptors);
+		facesConfigDescriptors = OrderingUtil.getRelativeOrderedFacesConfigDescriptors(facesConfigDescriptors);
 
 		String[] orderedNames = extractNames(facesConfigDescriptors);
 
@@ -1234,7 +1241,7 @@ public class OrderingTest {
 
 		String[] originalOrder = extractNames(facesConfigDescriptors);
 
-		facesConfigDescriptors = OrderingUtil.getOrder(facesConfigDescriptors);
+		facesConfigDescriptors = OrderingUtil.getRelativeOrderedFacesConfigDescriptors(facesConfigDescriptors);
 
 		String[] orderedNames = extractNames(facesConfigDescriptors);
 

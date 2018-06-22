@@ -35,13 +35,27 @@ import com.liferay.faces.util.logging.LoggerFactory;
 /**
  * @author  Vernon Singleton
  */
-public class OrderingUtil {
+public final class OrderingUtil {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(OrderingUtil.class);
 
 	// Private Constants
-	private static final int MAX_ATTEMPTS = (Integer.MAX_VALUE / (Byte.MAX_VALUE * Byte.MAX_VALUE * Byte.MAX_VALUE)); // 1048
+	// private static final int MAX_ATTEMPTS = 1048;
+	private static final int MAX_ATTEMPTS = (Integer.MAX_VALUE / (Byte.MAX_VALUE * Byte.MAX_VALUE * Byte.MAX_VALUE));
+
+	private OrderingUtil() {
+		throw new AssertionError();
+	}
+
+	/**
+	 * This method returns an ordered version of the specified list of faces-config.xml descriptors, taking the
+	 * specified absolute ordering into account.
+	 */
+	public static List<FacesConfigDescriptor> getAbsoluteOrderedFacesConfigDescriptors(
+		List<FacesConfigDescriptor> configs, List<String> absoluteOrder) {
+		return getAbsoluteOrderedFacesConfigDescriptors_(configs, absoluteOrder);
+	}
 
 	public static Map<String, FacesConfigDescriptor> getConfigMap(List<FacesConfigDescriptor> facesConfigDescriptors) {
 
@@ -59,142 +73,10 @@ public class OrderingUtil {
 	 * This method returns an ordered version of the specified list of faces-config.xml descriptors and assumes that
 	 * there is no absolute ordering.
 	 */
-	public static List<FacesConfigDescriptor> getOrder(List<FacesConfigDescriptor> configList)
-		throws OrderingBeforeAndAfterException, OrderingCircularDependencyException, OrderingMaxAttemptsException {
-
-		if (logger.isTraceEnabled()) {
-
-			for (FacesConfigDescriptor config : configList) {
-				String name = config.getName();
-				Ordering ordering = config.getOrdering();
-
-				if (ordering != null) {
-					EnumMap<Ordering.Path, String[]> routes = ordering.getRoutes();
-
-					if (routes != null) {
-
-						String[] beforeRoutes = routes.get(Ordering.Path.BEFORE);
-
-						if (beforeRoutes.length != 0) {
-							logger.trace("before name=[{0}] b routes=[{1}] beforeOthers=[{2}]", name,
-								Arrays.asList(beforeRoutes).toString(), ordering.isBeforeOthers());
-						}
-
-						String[] afterRoutes = routes.get(Ordering.Path.AFTER);
-
-						if (afterRoutes.length != 0) {
-							logger.trace("before name=[{0}] a routes=[{1}] afterOthers=[{2}]", name,
-								Arrays.asList(afterRoutes).toString(), ordering.isAfterOthers());
-						}
-					}
-				}
-			}
-		}
-
-		// Check for "duplicate name exception" and "circular references" as described in 11.4.8 Ordering of Artifacts
-		checkForSpecExceptions(configList);
-
-		if (logger.isTraceEnabled()) {
-
-			for (FacesConfigDescriptor config : configList) {
-				String name = config.getName();
-				Ordering ordering = config.getOrdering();
-
-				if (ordering != null) {
-					EnumMap<Ordering.Path, String[]> routes = ordering.getRoutes();
-
-					if (routes != null) {
-
-						String[] beforeRoutes = routes.get(Ordering.Path.BEFORE);
-
-						if (beforeRoutes.length != 0) {
-							logger.trace("after name=[{0}] b routes=[{1}] beforeOthers=[{2}]", name,
-								Arrays.asList(beforeRoutes).toString(), ordering.isBeforeOthers());
-						}
-
-						String[] afterRoutes = routes.get(Ordering.Path.AFTER);
-
-						if (afterRoutes.length != 0) {
-							logger.trace("after name=[{0}] b routes=[{1}] afterOthers=[{2}]", name,
-								Arrays.asList(afterRoutes).toString(), ordering.isAfterOthers());
-						}
-					}
-				}
-			}
-		}
-
-		// Sort the documents such that specified ordering will be considered.
-		//
-		// It turns out that some of the specified ordering, if it was not discovered by the sort routine
-		// until later in its processing, was not being considered correctly in the ordering algorithm.
-		//
-		// This preSort method puts all of the documents with specified ordering as early on in the
-		// list of documents as possible for to consider it quickly, and be
-		// able to use its ordering algorithm to the best of its ability to achieve the specified ordering.
-		configList = preSort(configList);
-
-		FacesConfigDescriptor[] configs = configList.toArray(new FacesConfigDescriptor[configList.size()]);
-
-		// This is a multiple pass sorting routine which gets the documents close to the order they need to be in
-		innerSort(configs);
-
-		// This is the final sort which checks the list from left to right to see if they are in the specified order and
-		// if they are not, it moves the incorrectly placed document(s) to the right into its proper place, and shifts
-		// others left as necessary.
-		postSort(configs);
-
-		return new ArrayList<FacesConfigDescriptor>(Arrays.asList(configs));
-	}
-
-	/**
-	 * This method returns an ordered version of the specified list of faces-config.xml descriptors, taking the
-	 * specified absolute ordering into account.
-	 */
-	public static List<FacesConfigDescriptor> getOrder(List<FacesConfigDescriptor> configs,
-		List<String> absoluteOrder) {
-
-		List<FacesConfigDescriptor> orderedList = new ArrayList<FacesConfigDescriptor>();
-
-		List<FacesConfigDescriptor> configList = new CopyOnWriteArrayList<FacesConfigDescriptor>();
-		configList.addAll(configs);
-
-		for (String name : absoluteOrder) {
-
-			if (Ordering.OTHERS.equals(name)) {
-				continue;
-			}
-
-			boolean found = false;
-
-			for (FacesConfigDescriptor config : configList) {
-
-				if (!found && name.equals(config.getName())) {
-					found = true;
-					orderedList.add(config);
-					configList.remove(config);
-				}
-				else if (found && name.equals(config.getName())) {
-					logger.warn("name=[{0}] found more than once", name);
-
-					break;
-				}
-			}
-
-			if (!found) {
-				logger.warn("name=[{0}] specified in absolute-ordering was not found", name);
-			}
-		}
-
-		int othersIndex = absoluteOrder.indexOf(Ordering.OTHERS);
-
-		if (othersIndex != -1) {
-
-			for (FacesConfigDescriptor config : configList) {
-				orderedList.add(othersIndex, config);
-			}
-		}
-
-		return orderedList;
+	public static List<FacesConfigDescriptor> getRelativeOrderedFacesConfigDescriptors(
+		List<FacesConfigDescriptor> configList) throws OrderingBeforeAndAfterException,
+		OrderingCircularDependencyException, OrderingMaxAttemptsException {
+		return getRelativeOrderedFacesConfigDescriptors_(configList);
 	}
 
 	private static String[] appendAndSort(String[]... groups) {
@@ -321,6 +203,141 @@ public class OrderingUtil {
 		}
 
 		return names;
+	}
+
+	private static List<FacesConfigDescriptor> getAbsoluteOrderedFacesConfigDescriptors_(
+		List<FacesConfigDescriptor> configs, List<String> absoluteOrder) {
+
+		List<FacesConfigDescriptor> orderedList = new ArrayList<FacesConfigDescriptor>();
+
+		List<FacesConfigDescriptor> configList = new CopyOnWriteArrayList<FacesConfigDescriptor>();
+		configList.addAll(configs);
+
+		for (String name : absoluteOrder) {
+
+			if (Ordering.OTHERS.equals(name)) {
+				continue;
+			}
+
+			boolean found = false;
+
+			for (FacesConfigDescriptor config : configList) {
+
+				if (!found && name.equals(config.getName())) {
+					found = true;
+					orderedList.add(config);
+					configList.remove(config);
+				}
+				else if (found && name.equals(config.getName())) {
+					logger.warn("name=[{0}] found more than once", name);
+
+					break;
+				}
+			}
+
+			if (!found) {
+				logger.warn("name=[{0}] specified in absolute-ordering was not found", name);
+			}
+		}
+
+		int othersIndex = absoluteOrder.indexOf(Ordering.OTHERS);
+
+		if (othersIndex != -1) {
+
+			for (FacesConfigDescriptor config : configList) {
+				orderedList.add(othersIndex, config);
+			}
+		}
+
+		return orderedList;
+	}
+
+	private static List<FacesConfigDescriptor> getRelativeOrderedFacesConfigDescriptors_(
+		List<FacesConfigDescriptor> configList) throws OrderingBeforeAndAfterException,
+		OrderingCircularDependencyException, OrderingMaxAttemptsException {
+
+		if (logger.isTraceEnabled()) {
+
+			for (FacesConfigDescriptor config : configList) {
+				String name = config.getName();
+				Ordering ordering = config.getOrdering();
+
+				if (ordering != null) {
+					EnumMap<Ordering.Path, String[]> routes = ordering.getRoutes();
+
+					if (routes != null) {
+
+						String[] beforeRoutes = routes.get(Ordering.Path.BEFORE);
+
+						if (beforeRoutes.length != 0) {
+							logger.trace("before name=[{0}] b routes=[{1}] beforeOthers=[{2}]", name,
+								Arrays.asList(beforeRoutes).toString(), ordering.isBeforeOthers());
+						}
+
+						String[] afterRoutes = routes.get(Ordering.Path.AFTER);
+
+						if (afterRoutes.length != 0) {
+							logger.trace("before name=[{0}] a routes=[{1}] afterOthers=[{2}]", name,
+								Arrays.asList(afterRoutes).toString(), ordering.isAfterOthers());
+						}
+					}
+				}
+			}
+		}
+
+		// Check for "duplicate name exception" and "circular references" as described in 11.4.8 Ordering of Artifacts
+		checkForSpecExceptions(configList);
+
+		if (logger.isTraceEnabled()) {
+
+			for (FacesConfigDescriptor config : configList) {
+				String name = config.getName();
+				Ordering ordering = config.getOrdering();
+
+				if (ordering != null) {
+					EnumMap<Ordering.Path, String[]> routes = ordering.getRoutes();
+
+					if (routes != null) {
+
+						String[] beforeRoutes = routes.get(Ordering.Path.BEFORE);
+
+						if (beforeRoutes.length != 0) {
+							logger.trace("after name=[{0}] b routes=[{1}] beforeOthers=[{2}]", name,
+								Arrays.asList(beforeRoutes).toString(), ordering.isBeforeOthers());
+						}
+
+						String[] afterRoutes = routes.get(Ordering.Path.AFTER);
+
+						if (afterRoutes.length != 0) {
+							logger.trace("after name=[{0}] b routes=[{1}] afterOthers=[{2}]", name,
+								Arrays.asList(afterRoutes).toString(), ordering.isAfterOthers());
+						}
+					}
+				}
+			}
+		}
+
+		// Sort the documents such that specified ordering will be considered.
+		//
+		// It turns out that some of the specified ordering, if it was not discovered by the sort routine
+		// until later in its processing, was not being considered correctly in the ordering algorithm.
+		//
+		// This preSort method puts all of the documents with specified ordering as early on in the
+		// list of documents as possible for to consider it quickly, and be
+		// able to use its ordering algorithm to the best of its ability to achieve the specified ordering.
+		configList = preSort(configList);
+
+		FacesConfigDescriptor[] configs = configList.toArray(new FacesConfigDescriptor[configList.size()]);
+
+		// This is a multiple pass sorting routine which gets the documents close to the order they need to be in
+		innerSort(configs);
+
+		// This is the final sort which checks the list from left to right to see if they are in the specified order and
+		// if they are not, it moves the incorrectly placed document(s) to the right into its proper place, and shifts
+		// others left as necessary.
+		postSort(configs);
+
+		return new ArrayList<FacesConfigDescriptor>(Arrays.asList(configs));
 	}
 
 	private static int innerSort(FacesConfigDescriptor[] configs) throws OrderingMaxAttemptsException {
