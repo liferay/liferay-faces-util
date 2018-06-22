@@ -278,11 +278,12 @@ public class FacesConfigScannerImpl implements FacesConfigScanner {
 
 			if (absoluteOrdering == null) {
 				logger.debug("Ordering faces-config descriptors");
-				facesConfigDescriptors = OrderingUtil.getOrder(facesConfigDescriptors);
+				facesConfigDescriptors = OrderingUtil.getRelativeOrderedFacesConfigDescriptors(facesConfigDescriptors);
 			}
 			else {
 				logger.debug("Ordering faces-config descriptors: absoluteOrdering=[{0}]", absoluteOrdering);
-				facesConfigDescriptors = OrderingUtil.getOrder(facesConfigDescriptors, absoluteOrdering);
+				facesConfigDescriptors = OrderingUtil.getAbsoluteOrderedFacesConfigDescriptors(facesConfigDescriptors,
+						absoluteOrdering);
 			}
 		}
 
