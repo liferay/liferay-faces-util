@@ -46,8 +46,8 @@ public class UtilELResolver extends ELResolverBase {
 	private final I18nMap i18nMap = new I18nMap();
 
 	public UtilELResolver() {
-		super(getFeatureDescriptor("browserSniffer", BrowserSniffer.class), getFeatureDescriptor("i18n", String.class),
-			getFeatureDescriptor("product", Product.class), getFeatureDescriptor("product", Product.class));
+		super(newFeatureDescriptor("browserSniffer", BrowserSniffer.class), newFeatureDescriptor("i18n", String.class),
+			newFeatureDescriptor("product", Product.class), newFeatureDescriptor("product", Product.class));
 	}
 
 	@Override
