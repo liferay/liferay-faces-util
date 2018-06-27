@@ -72,7 +72,7 @@ public abstract class ELResolverBase extends ELResolver implements Serializable 
 			"Ignoring static call to addFeatureDescriptor(). To add feature descriptors use the protected constructor instead.");
 	}
 
-	protected static FeatureDescriptor getFeatureDescriptor(String featureName, Class<?> classType) {
+	protected static FeatureDescriptor newFeatureDescriptor(String featureName, Class<?> classType) {
 
 		FeatureDescriptor featureDescriptor = new FeatureDescriptor();
 		featureDescriptor.setName(featureName);
