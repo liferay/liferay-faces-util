@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -150,6 +150,38 @@ public class SAXParserTest {
 			throw new UnsupportedOperationException();
 		}
 
+		public int getTotalAttributes() {
+			return totalAttributes;
+		}
+
+		public int getTotalComments() {
+			return totalComments;
+		}
+
+		public int getTotalEndElements() {
+			return totalEndElements;
+		}
+
+		public int getTotalHeadingText() {
+			return totalHeadingText;
+		}
+
+		public int getTotalInlineScripts() {
+			return totalInlineScripts;
+		}
+
+		public int getTotalPlainText() {
+			return totalPlainText;
+		}
+
+		public int getTotalSpanText() {
+			return totalSpanText;
+		}
+
+		public int getTotalStartElements() {
+			return totalStartElements;
+		}
+
 		public void startCDATA() throws SAXException {
 			throw new UnsupportedOperationException();
 		}
@@ -219,38 +251,6 @@ public class SAXParserTest {
 			else if (localName.equals("hr")) {
 				Assert.assertEquals(uri, "");
 			}
-		}
-
-		public int getTotalAttributes() {
-			return totalAttributes;
-		}
-
-		public int getTotalComments() {
-			return totalComments;
-		}
-
-		public int getTotalEndElements() {
-			return totalEndElements;
-		}
-
-		public int getTotalHeadingText() {
-			return totalHeadingText;
-		}
-
-		public int getTotalInlineScripts() {
-			return totalInlineScripts;
-		}
-
-		public int getTotalPlainText() {
-			return totalPlainText;
-		}
-
-		public int getTotalSpanText() {
-			return totalSpanText;
-		}
-
-		public int getTotalStartElements() {
-			return totalStartElements;
 		}
 	}
 }
