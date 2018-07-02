@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -75,6 +75,7 @@ public class ResourceRendererUtilImpl extends RendererWrapper implements Compone
 
 		ExternalContext externalContext = facesContext.getExternalContext();
 		ResourceVerifier resourceVerifier = ResourceVerifierFactory.getResourceVerifierInstance(externalContext);
+
 		if (resourceVerifier.isDependencySatisfied(facesContext, uiComponent)) {
 
 			if (logger.isDebugEnabled()) {
@@ -97,6 +98,7 @@ public class ResourceRendererUtilImpl extends RendererWrapper implements Compone
 
 		ExternalContext externalContext = facesContext.getExternalContext();
 		ResourceVerifier resourceVerifier = ResourceVerifierFactory.getResourceVerifierInstance(externalContext);
+
 		if (resourceVerifier.isDependencySatisfied(facesContext, uiComponent)) {
 
 			if (logger.isDebugEnabled()) {
@@ -119,6 +121,7 @@ public class ResourceRendererUtilImpl extends RendererWrapper implements Compone
 
 		ExternalContext externalContext = facesContext.getExternalContext();
 		ResourceVerifier resourceVerifier = ResourceVerifierFactory.getResourceVerifierInstance(externalContext);
+
 		if (resourceVerifier.isDependencySatisfied(facesContext, uiComponent)) {
 
 			if (logger.isDebugEnabled()) {
