@@ -63,7 +63,7 @@ public abstract class ELResolverBase extends ELResolver implements Serializable 
 	 * @param       featureName
 	 * @param       classType
 	 *
-	 * @deprecated  Use {@link #getFeatureDescriptor(java.lang.String, java.lang.Class)} and {@link
+	 * @deprecated  Use {@link #newFeatureDescriptor(java.lang.String, java.lang.Class)} and {@link
 	 *              #ELResolverBase(java.beans.FeatureDescriptor...)} instead.
 	 */
 	@Deprecated
