@@ -153,8 +153,8 @@
 					<version>${surefire.version}</version>
 					<configuration>
 						<systemProperties>
-							<javax.portlet:portlet-api:jar>${javax.portlet:portlet-api:jar}</javax.portlet:portlet-api:jar>
-							<org.apache.portals:portlet-api_2.1.0_spec:jar>${org.apache.portals:portlet-api_2.1.0_spec:jar}</org.apache.portals:portlet-api_2.1.0_spec:jar>
+							<javax.portlet_portlet-api_jar>${javax.portlet:portlet-api:jar}</javax.portlet_portlet-api_jar>
+							<org.apache.portals_portlet-api_2.1.0_spec_jar>${org.apache.portals:portlet-api_2.1.0_spec:jar}</org.apache.portals_portlet-api_2.1.0_spec_jar>
 						</systemProperties>
 						<useFile>false</useFile>
 					</configuration>

@@ -47,7 +47,7 @@ public class UtilELResolver extends ELResolverBase {
 
 	public UtilELResolver() {
 		super(newFeatureDescriptor("browserSniffer", BrowserSniffer.class), newFeatureDescriptor("i18n", String.class),
-			newFeatureDescriptor("product", Product.class), newFeatureDescriptor("product", Product.class));
+			newFeatureDescriptor("product", Product.class));
 	}
 
 	@Override
