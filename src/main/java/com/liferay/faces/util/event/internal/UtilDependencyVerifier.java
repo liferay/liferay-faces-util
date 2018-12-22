@@ -40,7 +40,7 @@ public class UtilDependencyVerifier {
 		String implementationTitle = utilPackage.getImplementationTitle();
 		String implementationVersion = utilPackage.getImplementationVersion();
 
-		if (!((JSF_MAJOR_VERSION >= 2) && (JSF_MINOR_VERSION >= 2))) {
+		if (!((JSF_MAJOR_VERSION > 2) || ((JSF_MAJOR_VERSION == 2) && (JSF_MINOR_VERSION >= 2)))) {
 			logger.error("{0} {1} is designed to be used with JSF 2.2+ but detected {2}.{3}", implementationTitle,
 				implementationVersion, JSF_MAJOR_VERSION, JSF_MINOR_VERSION);
 		}
