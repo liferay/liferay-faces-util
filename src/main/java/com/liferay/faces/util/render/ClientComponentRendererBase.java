@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2019 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -259,8 +259,8 @@ public abstract class ClientComponentRendererBase extends Renderer implements Cl
 					responseWriter.write("]");
 				}
 			}
-			else if (parameter instanceof String) {
-				responseWriter.write("'" + parameter.toString() + "'");
+			else if (parameter instanceof CharSequence) {
+				responseWriter.write("'" + RendererUtil.escapeJavaScript(parameter.toString()) + "'");
 			}
 			else {
 				responseWriter.write(parameter.toString());
