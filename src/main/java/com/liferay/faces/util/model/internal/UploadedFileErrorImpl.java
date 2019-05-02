@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2019 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,11 +23,11 @@ public class UploadedFileErrorImpl extends UploadedFileImpl {
 	// serialVersionUID
 	private static final long serialVersionUID = 2524509050866448224L;
 
-	public UploadedFileErrorImpl(String message) {
-		this(message, Status.ERROR);
+	public UploadedFileErrorImpl(Exception e) {
+		this(e, Status.ERROR);
 	}
 
-	public UploadedFileErrorImpl(String message, Status status) {
-		super(null, null, null, null, null, null, message, null, 0L, status);
+	public UploadedFileErrorImpl(Exception e, Status status) {
+		super(null, null, null, null, null, null, e.getMessage(), null, 0L, status);
 	}
 }
