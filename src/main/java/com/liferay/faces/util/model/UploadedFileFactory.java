@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2019 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -63,6 +63,27 @@ public abstract class UploadedFileFactory implements FacesWrapper<UploadedFileFa
 				externalContext, UploadedFileFactory.class);
 
 		return uploadedFileFactory.getUploadedFile(e);
+	}
+
+	/**
+	 * Returns a new instance of {@link UploadedFile} from the {@link UploadedFileFactory} found by the {@link
+	 * FactoryExtensionFinder}. The returned instance is guaranteed to be {@link java.io.Serializable} but not
+	 * guaranteed to be thread-safe.
+	 *
+	 * @param  externalContext     The external context associated with the current faces context. It is needed in order
+	 *                             for the {@link FactoryExtensionFinder} to be able to find the factory.
+	 * @param  e                   The exception associated with the failed file upload.
+	 * @param  uploadedFileStatus  The status of the failed file upload.
+	 *
+	 * @since  3.2
+	 */
+	public static UploadedFile getUploadedFileInstance(ExternalContext externalContext, Exception e,
+		UploadedFile.Status uploadedFileStatus) {
+
+		UploadedFileFactory uploadedFileFactory = (UploadedFileFactory) FactoryExtensionFinder.getFactory(
+				externalContext, UploadedFileFactory.class);
+
+		return uploadedFileFactory.getUploadedFile(e, uploadedFileStatus);
 	}
 
 	/**
@@ -132,6 +153,17 @@ public abstract class UploadedFileFactory implements FacesWrapper<UploadedFileFa
 	 * @param  e  The exception associated with the failed file upload.
 	 */
 	public abstract UploadedFile getUploadedFile(Exception e);
+
+	/**
+	 * Returns a new instance of {@link UploadedFile}. The returned instance is guaranteed to be {@link
+	 * java.io.Serializable} but not guaranteed to be thread-safe.
+	 *
+	 * @param  e                   The exception associated with the failed file upload.
+	 * @param  uploadedFileStatus  The status of the failed file upload.
+	 *
+	 * @since  3.2
+	 */
+	public abstract UploadedFile getUploadedFile(Exception e, UploadedFile.Status uploadedFileStatus);
 
 	/**
 	 * Returns a new instance of {@link UploadedFile}. The returned instance is guaranteed to be {@link

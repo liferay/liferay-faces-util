@@ -52,6 +52,11 @@ public class UploadedFileFactoryImpl extends UploadedFileFactory implements Seri
 	}
 
 	@Override
+	public UploadedFile getUploadedFile(Exception e, UploadedFile.Status uploadedFileStatus) {
+		return new UploadedFileErrorImpl(e, uploadedFileStatus);
+	}
+
+	@Override
 	public UploadedFile getUploadedFile(String absolutePath, Map<String, Object> attributes, String charSet,
 		String contentType, Map<String, List<String>> headers, String id, String message, String name, long size,
 		UploadedFile.Status status) {
