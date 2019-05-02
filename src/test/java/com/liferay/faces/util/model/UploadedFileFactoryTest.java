@@ -25,6 +25,8 @@ import org.junit.Test;
 
 import com.liferay.faces.util.model.internal.UploadedFileFactoryImpl;
 
+import junit.framework.Assert;
+
 
 /**
  * @author  Kyle Stiemann
@@ -63,6 +65,24 @@ public final class UploadedFileFactoryTest {
 			else {
 				throw t;
 			}
+		}
+	}
+
+	@Test
+	public void testGetUploadedFileExceptionStatusTest() {
+
+		UploadedFileFactory uploadedFileFactory = new UploadedFileFactoryImpl();
+
+		for (UploadedFile.Status expectedStatus : UploadedFile.Status.values()) {
+
+			String expectedMessage = "expected message";
+			Exception e = new IOException(expectedMessage);
+			UploadedFile uploadedFile = uploadedFileFactory.getUploadedFile(e, expectedStatus);
+			String message = uploadedFile.getMessage();
+			Assert.assertEquals(expectedMessage, message);
+
+			UploadedFile.Status status = uploadedFile.getStatus();
+			Assert.assertEquals(expectedStatus, status);
 		}
 	}
 
