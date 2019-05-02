@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2019 Liferay, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,37 +39,13 @@ public class UploadedFileFactoryImpl extends UploadedFileFactory implements Seri
 	@Override
 	public UploadedFile getUploadedFile(Exception e) {
 
-		UploadedFile uploadedFile = null;
-		FileUploadException fileUploadException = null;
+		UploadedFile uploadedFile;
 
-		if (e instanceof FileUploadException) {
-			fileUploadException = (FileUploadException) e;
-		}
-
-		if (e instanceof FileUploadIOException) {
-			Throwable causeThrowable = e.getCause();
-
-			if (causeThrowable instanceof FileUploadException) {
-				fileUploadException = (FileUploadException) causeThrowable;
-			}
-		}
-
-		if (fileUploadException != null) {
-
-			if (fileUploadException instanceof SizeLimitExceededException) {
-				uploadedFile = new UploadedFileErrorImpl(fileUploadException.getMessage(),
-						UploadedFile.Status.REQUEST_SIZE_LIMIT_EXCEEDED);
-			}
-			else if (fileUploadException instanceof FileSizeLimitExceededException) {
-				uploadedFile = new UploadedFileErrorImpl(fileUploadException.getMessage(),
-						UploadedFile.Status.FILE_SIZE_LIMIT_EXCEEDED);
-			}
-			else {
-				uploadedFile = new UploadedFileErrorImpl(fileUploadException.getMessage());
-			}
+		if (e.getClass().getName().startsWith("org.apache.commons.fileupload.")) {
+			uploadedFile = CommonsFileUploadErrorUtil.getUploadedFile(e);
 		}
 		else {
-			uploadedFile = new UploadedFileErrorImpl(e.getMessage());
+			uploadedFile = new UploadedFileErrorImpl(e);
 		}
 
 		return uploadedFile;
@@ -79,20 +55,63 @@ public class UploadedFileFactoryImpl extends UploadedFileFactory implements Seri
 	public UploadedFile getUploadedFile(String absolutePath, Map<String, Object> attributes, String charSet,
 		String contentType, Map<String, List<String>> headers, String id, String message, String name, long size,
 		UploadedFile.Status status) {
-
-		UploadedFile uploadedFile = null;
-
-		if (uploadedFile == null) {
-			uploadedFile = new UploadedFileImpl(absolutePath, attributes, charSet, contentType, headers, id, message,
-					name, size, status);
-		}
-
-		return uploadedFile;
+		return new UploadedFileImpl(absolutePath, attributes, charSet, contentType, headers, id, message, name, size,
+				status);
 	}
 
+	@Override
 	public UploadedFileFactory getWrapped() {
 
 		// Since this is the factory instance provided by the bridge, it will never wrap another factory.
 		return null;
+	}
+
+	private static final class CommonsFileUploadErrorUtil {
+
+		private CommonsFileUploadErrorUtil() {
+			throw new AssertionError();
+		}
+
+		private static UploadedFile getUploadedFile(Exception e) {
+
+			FileUploadException fileUploadException = null;
+
+			if (e instanceof FileUploadException) {
+				fileUploadException = (FileUploadException) e;
+			}
+			else if (e instanceof FileUploadIOException) {
+
+				Throwable causeThrowable = e.getCause();
+
+				if (causeThrowable instanceof FileUploadException) {
+					fileUploadException = (FileUploadException) causeThrowable;
+				}
+			}
+			else {
+				throw new UnsupportedOperationException();
+			}
+
+			UploadedFile uploadedFile;
+
+			if (fileUploadException != null) {
+
+				if (fileUploadException instanceof SizeLimitExceededException) {
+					uploadedFile = new UploadedFileErrorImpl(fileUploadException,
+							UploadedFile.Status.REQUEST_SIZE_LIMIT_EXCEEDED);
+				}
+				else if (fileUploadException instanceof FileSizeLimitExceededException) {
+					uploadedFile = new UploadedFileErrorImpl(fileUploadException,
+							UploadedFile.Status.FILE_SIZE_LIMIT_EXCEEDED);
+				}
+				else {
+					uploadedFile = new UploadedFileErrorImpl(fileUploadException);
+				}
+			}
+			else {
+				uploadedFile = new UploadedFileErrorImpl(fileUploadException);
+			}
+
+			return uploadedFile;
+		}
 	}
 }
