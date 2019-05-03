@@ -60,7 +60,7 @@ public final class UploadedFileFactoryTest {
 		catch (Throwable t) {
 
 			if (isCommonsClassNotFound(t)) {
-				throw new AssertionError("", t);
+				throw new AssertionError(t);
 			}
 			else {
 				throw t;
