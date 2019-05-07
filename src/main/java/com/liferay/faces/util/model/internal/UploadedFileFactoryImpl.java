@@ -19,10 +19,12 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.FileUploadBase.FileSizeLimitExceededException;
 import org.apache.commons.fileupload.FileUploadBase.FileUploadIOException;
 import org.apache.commons.fileupload.FileUploadBase.SizeLimitExceededException;
 import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.InvalidFileNameException;
 
 import com.liferay.faces.util.model.UploadedFile;
 import com.liferay.faces.util.model.UploadedFileFactory;
@@ -77,43 +79,44 @@ public class UploadedFileFactoryImpl extends UploadedFileFactory implements Seri
 			throw new AssertionError();
 		}
 
-		private static UploadedFile getUploadedFile(Exception e) {
+		private static UploadedFile getUploadedFile(Throwable t) {
 
 			FileUploadException fileUploadException = null;
 
-			if (e instanceof FileUploadException) {
-				fileUploadException = (FileUploadException) e;
-			}
-			else if (e instanceof FileUploadIOException) {
+			if ((t instanceof FileUploadBase.IOFileUploadException) || (t instanceof FileUploadIOException)) {
 
-				Throwable causeThrowable = e.getCause();
+				Throwable causeThrowable = t.getCause();
 
-				if (causeThrowable instanceof FileUploadException) {
-					fileUploadException = (FileUploadException) causeThrowable;
+				if (causeThrowable != null) {
+					t = causeThrowable;
+				}
+
+				if (t instanceof FileUploadException) {
+					fileUploadException = (FileUploadException) t;
 				}
 			}
-			else {
-				throw new UnsupportedOperationException();
+			else if (t instanceof FileUploadException) {
+				fileUploadException = (FileUploadException) t;
 			}
 
 			UploadedFile uploadedFile;
 
-			if (fileUploadException != null) {
-
-				if (fileUploadException instanceof SizeLimitExceededException) {
-					uploadedFile = new UploadedFileErrorImpl(fileUploadException,
-							UploadedFile.Status.REQUEST_SIZE_LIMIT_EXCEEDED);
-				}
-				else if (fileUploadException instanceof FileSizeLimitExceededException) {
-					uploadedFile = new UploadedFileErrorImpl(fileUploadException,
-							UploadedFile.Status.FILE_SIZE_LIMIT_EXCEEDED);
-				}
-				else {
-					uploadedFile = new UploadedFileErrorImpl(fileUploadException);
-				}
+			if (fileUploadException instanceof SizeLimitExceededException) {
+				uploadedFile = new UploadedFileErrorImpl(fileUploadException,
+						UploadedFile.Status.REQUEST_SIZE_LIMIT_EXCEEDED);
+			}
+			else if (fileUploadException instanceof FileSizeLimitExceededException) {
+				uploadedFile = new UploadedFileErrorImpl(fileUploadException,
+						UploadedFile.Status.FILE_SIZE_LIMIT_EXCEEDED);
+			}
+			else if (t instanceof InvalidFileNameException) {
+				uploadedFile = new UploadedFileErrorImpl(t, UploadedFile.Status.FILE_INVALID_NAME_PATTERN);
+			}
+			else if (fileUploadException != null) {
+				uploadedFile = new UploadedFileErrorImpl(fileUploadException);
 			}
 			else {
-				uploadedFile = new UploadedFileErrorImpl(fileUploadException);
+				uploadedFile = new UploadedFileErrorImpl(t);
 			}
 
 			return uploadedFile;
