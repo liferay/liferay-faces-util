@@ -23,11 +23,11 @@ public class UploadedFileErrorImpl extends UploadedFileImpl {
 	// serialVersionUID
 	private static final long serialVersionUID = 2524509050866448224L;
 
-	public UploadedFileErrorImpl(Exception e) {
-		this(e, Status.ERROR);
+	public UploadedFileErrorImpl(Throwable t) {
+		this(t, Status.ERROR);
 	}
 
-	public UploadedFileErrorImpl(Exception e, Status status) {
-		super(null, null, null, null, null, null, e.getMessage(), null, 0L, status);
+	public UploadedFileErrorImpl(Throwable t, Status status) {
+		super(null, null, null, null, null, null, t.getMessage(), null, 0L, status);
 	}
 }
