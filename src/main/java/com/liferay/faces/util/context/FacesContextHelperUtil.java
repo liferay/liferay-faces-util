@@ -1292,7 +1292,7 @@ public final class FacesContextHelperUtil {
 	/**
 	 * Gets the underlying/wrapped FacesContext ThreadLocal singleton instance.
 	 *
-	 * @deprecated  Call {@link FacesContext.getCurrentInstance()} instead.
+	 * @deprecated  Call {@link FacesContext#getCurrentInstance()} instead.
 	 */
 	@Deprecated
 	public FacesContext getFacesContext() {

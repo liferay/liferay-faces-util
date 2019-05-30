@@ -29,9 +29,9 @@ import com.liferay.faces.util.product.internal.ProductFactoryImpl;
 public abstract class ProductFactory implements FacesWrapper<ProductFactory> {
 
 	/**
-	 * Returns the thread-safe singleton instance of {@link Product} associated with the specified {@link Product#Name}
+	 * Returns the thread-safe singleton instance of {@link Product} associated with the specified {@link Product.Name}
 	 * from the {@link ProductFactory} found by the {@link FactoryExtensionFinder}. The returned instance is not
-	 * guaranteed to be {@link javax.io.Serializable}.
+	 * guaranteed to be {@link java.io.Serializable}.
 	 *
 	 * @param       productName  The name of the product.
 	 *
@@ -62,9 +62,9 @@ public abstract class ProductFactory implements FacesWrapper<ProductFactory> {
 	}
 
 	/**
-	 * Returns the thread-safe singleton instance of {@link Product} associated with the specified {@link Product#Name}
+	 * Returns the thread-safe singleton instance of {@link Product} associated with the specified {@link Product.Name}
 	 * from the {@link ProductFactory} found by the {@link FactoryExtensionFinder}. The returned instance is not
-	 * guaranteed to be {@link javax.io.Serializable}.
+	 * guaranteed to be {@link java.io.Serializable}.
 	 *
 	 * @param  productName  The name of the product.
 	 */
@@ -77,8 +77,8 @@ public abstract class ProductFactory implements FacesWrapper<ProductFactory> {
 	}
 
 	/**
-	 * Returns the thread-safe singleton instance of {@link Product} associated with the specified {@link Product#Name}.
-	 * The returned instance is not guaranteed to be {@link javax.io.Serializable}.
+	 * Returns the thread-safe singleton instance of {@link Product} associated with the specified {@link Product.Name}.
+	 * The returned instance is not guaranteed to be {@link java.io.Serializable}.
 	 *
 	 * @param  productName  The name of the product.
 	 */
@@ -88,8 +88,8 @@ public abstract class ProductFactory implements FacesWrapper<ProductFactory> {
 	public abstract ProductFactory getWrapped();
 
 	/**
-	 * Returns the thread-safe singleton instance of {@link Product} associated with the specified {@link Product#Name}.
-	 * The returned instance is not guaranteed to be {@link javax.io.Serializable}.
+	 * Returns the thread-safe singleton instance of {@link Product} associated with the specified {@link Product.Name}.
+	 * The returned instance is not guaranteed to be {@link java.io.Serializable}.
 	 *
 	 * @param       productName
 	 *

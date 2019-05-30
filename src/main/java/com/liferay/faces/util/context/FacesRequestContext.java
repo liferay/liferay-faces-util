@@ -102,7 +102,7 @@ public abstract class FacesRequestContext {
 	 * Returns an immutable list of scripts that were added via the {@link #addScript(Script)} or {@link
 	 * #addScript(FacesContext,String)} method.
 	 *
-	 * @deprecated  Call {@link FacesContextHelperUtil#getScripts(javax.faces.context.FacesContext} instead.
+	 * @deprecated  Call {@link FacesContextHelperUtil#getScripts(javax.faces.context.FacesContext)} instead.
 	 */
 	@Deprecated
 	public abstract List<Script> getScripts();

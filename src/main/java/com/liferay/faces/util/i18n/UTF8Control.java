@@ -35,7 +35,8 @@ import java.util.ResourceBundle;
 public class UTF8Control extends ResourceBundle.Control {
 
 	/**
-	 * See {@link ResourceBundle.Control#newBundle(String, Locale, String, ClassLoader, boolean)}.
+	 * @see  java.util.ResourceBundle.Control#newBundle(java.lang.String, java.util.Locale, java.lang.String,
+	 *       java.lang.ClassLoader, boolean)
 	 */
 	@Override
 	public ResourceBundle newBundle(String baseName, Locale locale, String format, ClassLoader classLoader,
