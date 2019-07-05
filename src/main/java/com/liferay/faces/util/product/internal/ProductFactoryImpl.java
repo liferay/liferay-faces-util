@@ -34,6 +34,7 @@ public class ProductFactoryImpl extends ProductFactory {
 	public ProductFactoryImpl() {
 
 		Map<Product.Name, Product> productMap = new EnumMap<Product.Name, Product>(Product.Name.class);
+		productMap.put(Product.Name.ADF_FACES, new ProductADFFacesImpl());
 		productMap.put(Product.Name.ANGULARBEANS, new ProductAngularBeansImpl());
 		productMap.put(Product.Name.ANGULARFACES, new ProductAngularFacesImpl());
 		productMap.put(Product.Name.BOOTSFACES, new ProductBootsFacesImpl());
