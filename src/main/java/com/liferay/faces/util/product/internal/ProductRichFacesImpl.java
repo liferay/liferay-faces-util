@@ -18,6 +18,7 @@ package com.liferay.faces.util.product.internal;
 import java.lang.reflect.Method;
 
 import com.liferay.faces.util.helper.IntegerHelper;
+import com.liferay.faces.util.internal.TCCLUtil;
 
 
 /**
@@ -39,7 +40,8 @@ public class ProductRichFacesImpl extends ProductBase {
 
 			try {
 
-				Class<?> versionBeanClass = Class.forName("org.richfaces.VersionBean");
+				Class<?> versionBeanClass = TCCLUtil.loadClassFromContext(ProductRichFacesImpl.class,
+						"org.richfaces.VersionBean");
 				Object versionObj = versionBeanClass.getDeclaredField("VERSION").get(Object.class);
 				Method method = versionObj.getClass().getMethod("getVersion");
 				version = (String) method.invoke(versionObj, (Object[]) null);

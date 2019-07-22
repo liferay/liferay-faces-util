@@ -25,6 +25,7 @@ import javax.xml.parsers.SAXParserFactory;
 import com.liferay.faces.util.config.ApplicationConfig;
 import com.liferay.faces.util.config.FacesConfig;
 import com.liferay.faces.util.config.WebConfig;
+import com.liferay.faces.util.internal.TCCLUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.xml.ConcurrentSAXParserFactory;
@@ -50,7 +51,7 @@ public class ApplicationConfigInitializerImpl implements ApplicationConfigInitia
 	public ApplicationConfig initialize() throws IOException {
 
 		// Obtain the current ClassLoader
-		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		ClassLoader classLoader = TCCLUtil.getThreadContextClassLoaderOrDefault(getClass());
 
 		// Obtain a ResourceReader that is compatible with a startup ExternalContext
 		ResourceReader resourceReader = newResourceReader();

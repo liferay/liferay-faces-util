@@ -29,6 +29,7 @@ import javax.faces.context.FacesContext;
 import com.liferay.faces.util.cache.Cache;
 import com.liferay.faces.util.cache.CacheFactory;
 import com.liferay.faces.util.i18n.internal.UTF8Control;
+import com.liferay.faces.util.internal.TCCLUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -113,7 +114,7 @@ public abstract class I18nBundleBase extends I18nWrapper implements Serializable
 
 			try {
 				String bundleKey = getBundleKey();
-				ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+				ClassLoader classLoader = TCCLUtil.getThreadContextClassLoaderOrDefault(getClass());
 
 				if (locale == null) {
 					resourceBundle = ResourceBundle.getBundle(bundleKey, Locale.getDefault(), classLoader,

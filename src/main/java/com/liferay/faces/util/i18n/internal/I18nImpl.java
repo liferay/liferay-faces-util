@@ -32,6 +32,7 @@ import com.liferay.faces.util.cache.CacheFactory;
 import com.liferay.faces.util.config.WebConfigParam;
 import com.liferay.faces.util.i18n.I18n;
 import com.liferay.faces.util.i18n.I18nUtil;
+import com.liferay.faces.util.internal.TCCLUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -100,7 +101,7 @@ public class I18nImpl implements I18n, Serializable {
 		String message = null;
 
 		try {
-			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+			ClassLoader classLoader = TCCLUtil.getThreadContextClassLoaderOrDefault(getClass());
 			ResourceBundle resourceBundle = ResourceBundle.getBundle("i18n", locale, classLoader, new UTF8Control());
 			message = resourceBundle.getString(messageId);
 		}
@@ -158,7 +159,7 @@ public class I18nImpl implements I18n, Serializable {
 				messageBundle = FacesMessage.FACES_MESSAGES;
 			}
 
-			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+			ClassLoader classLoader = TCCLUtil.getThreadContextClassLoaderOrDefault(getClass());
 			facesResourceBundle = ResourceBundle.getBundle(messageBundle, locale, classLoader, new UTF8Control());
 
 			if (facesResourceBundleCache != null) {

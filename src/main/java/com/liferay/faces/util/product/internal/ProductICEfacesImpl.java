@@ -16,6 +16,7 @@
 package com.liferay.faces.util.product.internal;
 
 import com.liferay.faces.util.helper.IntegerHelper;
+import com.liferay.faces.util.internal.TCCLUtil;
 
 
 /**
@@ -36,10 +37,12 @@ public class ProductICEfacesImpl extends ProductBase {
 			Class<?> productInfoClass;
 
 			try {
-				productInfoClass = Class.forName("org.icefaces.application.ProductInfo");
+				productInfoClass = TCCLUtil.loadClassFromContext(ProductICEfacesImpl.class,
+						"org.icefaces.application.ProductInfo");
 			}
 			catch (ClassNotFoundException e) {
-				productInfoClass = Class.forName("com.icesoft.faces.application.ProductInfo");
+				productInfoClass = TCCLUtil.loadClassFromContext(ProductICEfacesImpl.class,
+						"com.icesoft.faces.application.ProductInfo");
 			}
 
 			int buildId = IntegerHelper.toInteger((String) productInfoClass.getDeclaredField("REVISION").get(
