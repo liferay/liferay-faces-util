@@ -15,6 +15,9 @@
  */
 package com.liferay.faces.util.product.internal;
 
+import com.liferay.faces.util.internal.TCCLUtil;
+
+
 /**
  * @author  Neil Griffin
  */
@@ -31,7 +34,8 @@ public class ProductPrimeFacesImpl extends ProductBase {
 
 		try {
 
-			Class<?> constantsClass = Class.forName("org.primefaces.util.Constants");
+			Class<?> constantsClass = TCCLUtil.loadClassFromContext(ProductPrimeFacesImpl.class,
+					"org.primefaces.util.Constants");
 			detected = true;
 
 			try {

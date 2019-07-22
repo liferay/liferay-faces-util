@@ -16,6 +16,7 @@
 package com.liferay.faces.util.product.internal;
 
 import com.liferay.faces.util.helper.IntegerHelper;
+import com.liferay.faces.util.internal.TCCLUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -148,7 +149,7 @@ public class ProductInfo {
 
 		try {
 
-			Class<?> clazz = Class.forName(className);
+			Class<?> clazz = TCCLUtil.loadClassFromContext(ProductInfo.class, className);
 			detected = true;
 			productInfo = newInstance(detected, title, clazz, pomPropertiesFile, buildId, warnOnFail);
 		}

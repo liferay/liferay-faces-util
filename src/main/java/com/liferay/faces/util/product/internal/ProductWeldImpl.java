@@ -15,6 +15,9 @@
  */
 package com.liferay.faces.util.product.internal;
 
+import com.liferay.faces.util.internal.TCCLUtil;
+
+
 /**
  * @author  Neil Griffin
  * @author  Kyle Stiemann
@@ -32,7 +35,7 @@ public class ProductWeldImpl extends ProductBase {
 
 		try {
 
-			Class<?> cdiImplClass = Class.forName("org.jboss.weld.util.Types");
+			Class<?> cdiImplClass = TCCLUtil.loadClassFromContext(ProductWeldImpl.class, "org.jboss.weld.util.Types");
 			productInfo = ProductInfo.newInstance("Weld Servlet (Uber Jar)", cdiImplClass);
 
 			if (!productInfo.detected) {

@@ -15,6 +15,7 @@
  */
 package com.liferay.faces.util.logging.internal;
 
+import com.liferay.faces.util.internal.TCCLUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -33,7 +34,7 @@ public class LoggerFactoryImpl extends LoggerFactory {
 		boolean log4jAvailable;
 
 		try {
-			Class.forName(CLASS_NAME_LOG4J_LOGGER);
+			TCCLUtil.loadClassFromContext(LoggerFactoryImpl.class, CLASS_NAME_LOG4J_LOGGER);
 			log4jAvailable = true;
 
 			try {

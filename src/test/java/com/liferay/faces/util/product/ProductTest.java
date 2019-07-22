@@ -16,8 +16,6 @@
 package com.liferay.faces.util.product;
 
 import java.io.File;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
 import java.net.URI;
 import java.net.URL;
 
@@ -62,54 +60,23 @@ public class ProductTest {
 	}
 
 	private static void assertPortletApiMajorMinorVersionDetected(int expectedMajorVersion, int expectedMinorVersion,
-		Class<?> productPortletApiImplClass, String liferayPortalVersion, String plutoVersion) throws Exception {
+		ClassLoader portletApiJarClassLoader, String liferayPortalVersion, String plutoVersion) throws Exception {
 
-		Object productPortletApiImpl = createPortletApiImplObject(productPortletApiImplClass, liferayPortalVersion,
-				plutoVersion);
-		boolean portletApiDetected = ProductTest.<Boolean>invokeMethod(productPortletApiImplClass,
-				productPortletApiImpl, "isDetected");
-		Assert.assertTrue("Portlet API was not detected.", portletApiDetected);
+		Thread.currentThread().setContextClassLoader(portletApiJarClassLoader);
 
-		int portletApiMajorVersion = ProductTest.<Integer>invokeMethod(productPortletApiImplClass,
-				productPortletApiImpl, "getMajorVersion");
-		Assert.assertEquals(expectedMajorVersion, portletApiMajorVersion);
-
-		int portletApiMinorVersion = ProductTest.<Integer>invokeMethod(productPortletApiImplClass,
-				productPortletApiImpl, "getMinorVersion");
-		Assert.assertEquals(expectedMinorVersion, portletApiMinorVersion);
+		ProductPortletApiImpl productPortletApiImpl = new ProductPortletApiImpl(new ProductLiferayPortalMockImpl(
+					liferayPortalVersion), new ProductPlutoMockImpl(plutoVersion));
+		Assert.assertTrue(productPortletApiImpl.isDetected());
+		Assert.assertEquals(expectedMajorVersion, productPortletApiImpl.getMajorVersion());
+		Assert.assertEquals(expectedMinorVersion, productPortletApiImpl.getMinorVersion());
 	}
 
-	private static Object createPortletApiImplObject(Class<?> productPortletApiImplClass, String liferayPortalVersion,
-		String plutoVersion) throws Exception {
-
-		Constructor<?> constructor = productPortletApiImplClass.getConstructor(Product.class, Product.class);
-
-		return constructor.newInstance(new ProductLiferayPortalMockImpl(liferayPortalVersion),
-				new ProductPlutoMockImpl(plutoVersion));
-	}
-
-	private static <T> T invokeMethod(Class<?> clazz, Object object, String methodName) throws Exception {
-
-		Method isDetectedMethod = clazz.getMethod(methodName);
-
-		return (T) isDetectedMethod.invoke(object);
-	}
-
-	private static Class<?> loadPortletApiProductImplWithoutParentLoader(TestClassLoader testClassLoader)
-		throws ClassNotFoundException {
-
-		testClassLoader.loadClassWithoutParentLoader(ProductInfo.class);
-		testClassLoader.loadClassWithoutParentLoader(ProductBase.class);
-
-		return testClassLoader.loadClassWithoutParentLoader(ProductPortletApiImpl.class);
-	}
-
-	private static Class<?> loadPortletApiWithInfoFromJar(String pathToJarProperty, ClassLoader parentClassLoader)
+	private static ClassLoader getPortletApiJarClassLoader(String pathToJarProperty, ClassLoader parentClassLoader)
 		throws Exception {
-		return loadPortletApiWithInfoFromJar(pathToJarProperty, parentClassLoader, null);
+		return getPortletApiJarClassLoader(pathToJarProperty, parentClassLoader, null);
 	}
 
-	private static Class<?> loadPortletApiWithInfoFromJar(String pathToJarProperty, ClassLoader parentClassLoader,
+	private static ClassLoader getPortletApiJarClassLoader(String pathToJarProperty, ClassLoader parentClassLoader,
 		String overriddenPortletApiVersion) throws Exception {
 
 		String pathToJar = System.getProperty(pathToJarProperty);
@@ -129,7 +96,7 @@ public class ProductTest {
 
 		Assert.assertFalse(PortletContext.class.equals(portletContextClass));
 
-		return loadPortletApiProductImplWithoutParentLoader(classLoader);
+		return classLoader;
 	}
 
 	@Test
@@ -150,37 +117,39 @@ public class ProductTest {
 			// continue
 		}
 
-		Class<?> productPortletApiImplClass = loadPortletApiProductImplWithoutParentLoader(utilOnlyClassLoader);
-		Object productPortletApiImpl = createPortletApiImplObject(productPortletApiImplClass, null, null);
-		boolean portletApiDetected = ProductTest.<Boolean>invokeMethod(productPortletApiImplClass,
-				productPortletApiImpl, "isDetected");
-		Assert.assertFalse(portletApiDetected);
+		Thread.currentThread().setContextClassLoader(utilOnlyClassLoader);
+
+		Product productLiferayPortalUndetected = new ProductLiferayPortalMockImpl(null);
+		Product productPlutoUndetected = new ProductPlutoMockImpl(null);
+		ProductPortletApiImpl productPortletApiImpl = new ProductPortletApiImpl(productLiferayPortalUndetected,
+				productPlutoUndetected);
+		Assert.assertFalse(productPortletApiImpl.isDetected());
 
 		// Ensure that the Portlet API version is correctly detected when the Portlet 2.0 API jar is on the classpath.
-		productPortletApiImplClass = loadPortletApiWithInfoFromJar("javax.portlet_portlet-api_jar", parentClassLoader);
-		assertPortletApiMajorMinorVersionDetected(2, 0, productPortletApiImplClass, null, "2.0");
-		assertPortletApiMajorMinorVersionDetected(2, 0, productPortletApiImplClass, "6.2.4", null);
+		ClassLoader portletApiJarClassLoader = getPortletApiJarClassLoader("javax.portlet_portlet-api_jar",
+				parentClassLoader);
+		assertPortletApiMajorMinorVersionDetected(2, 0, portletApiJarClassLoader, null, "2.0");
+		assertPortletApiMajorMinorVersionDetected(2, 0, portletApiJarClassLoader, "6.2.4", null);
 
 		// Ensure that the Portlet API version is correctly detected when a Portlet API jar with invalid version
 		// information is on the classpath. This is accomplished by using the Portlet 2.0 API jar, but overriding any
 		// versions found in the MANIFEST.MF with "" (the empty string).
-		productPortletApiImplClass = loadPortletApiWithInfoFromJar("javax.portlet_portlet-api_jar", parentClassLoader,
-				"");
-		assertPortletApiMajorMinorVersionDetected(2, 0, productPortletApiImplClass, "6.2.5", null);
-		assertPortletApiMajorMinorVersionDetected(2, 0, productPortletApiImplClass, "7.0.3", null);
+		portletApiJarClassLoader = getPortletApiJarClassLoader("javax.portlet_portlet-api_jar", parentClassLoader, "");
+		assertPortletApiMajorMinorVersionDetected(2, 0, portletApiJarClassLoader, "6.2.5", null);
+		assertPortletApiMajorMinorVersionDetected(2, 0, portletApiJarClassLoader, "7.0.3", null);
 
 		// Ensure that the Portlet API version is correctly detected when the Portlet 2.1 API jar is on the classpath.
-		productPortletApiImplClass = loadPortletApiWithInfoFromJar("org.apache.portals_portlet-api_2.1.0_spec_jar",
+		portletApiJarClassLoader = getPortletApiJarClassLoader("org.apache.portals_portlet-api_2.1.0_spec_jar",
 				parentClassLoader);
-		assertPortletApiMajorMinorVersionDetected(2, 1, productPortletApiImplClass, "7.0.4", null);
+		assertPortletApiMajorMinorVersionDetected(2, 1, portletApiJarClassLoader, "7.0.4", null);
 
 		// Ensure that the Portlet API version is correctly detected when the Portlet 3.0 API jar is on the classpath.
 		// This is accomplished by using the Portlet 2.0 API jar, but overriding any versions found in the MANIFEST.MF
 		// with 3.0.0.
-		productPortletApiImplClass = loadPortletApiWithInfoFromJar("javax.portlet_portlet-api_jar", parentClassLoader,
+		portletApiJarClassLoader = getPortletApiJarClassLoader("javax.portlet_portlet-api_jar", parentClassLoader,
 				"3.0.0");
-		assertPortletApiMajorMinorVersionDetected(3, 0, productPortletApiImplClass, null, "3.0");
-		assertPortletApiMajorMinorVersionDetected(3, 0, productPortletApiImplClass, "7.1.0", null);
+		assertPortletApiMajorMinorVersionDetected(3, 0, portletApiJarClassLoader, null, "3.0");
+		assertPortletApiMajorMinorVersionDetected(3, 0, portletApiJarClassLoader, "7.1.0", null);
 	}
 
 	@Test

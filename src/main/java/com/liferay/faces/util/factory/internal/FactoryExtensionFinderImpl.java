@@ -25,6 +25,7 @@ import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.config.ConfiguredElement;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
+import com.liferay.faces.util.internal.TCCLUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -79,7 +80,7 @@ public class FactoryExtensionFinderImpl extends FactoryExtensionFinder {
 
 			try {
 
-				ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+				ClassLoader classLoader = TCCLUtil.getThreadContextClassLoaderOrDefault(getClass());
 				Class<?> factoryExtensionClass = classLoader.loadClass(factoryClassFQCN);
 				Class<?> baseFactoryExtensionClass = getBaseFactoryExtensionClass(factoryExtensionClass);
 				Object existingFactoryInstance = getFactoryInstance(externalContext, baseFactoryExtensionClass);

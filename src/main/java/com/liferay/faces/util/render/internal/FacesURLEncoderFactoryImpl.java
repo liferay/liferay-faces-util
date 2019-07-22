@@ -19,6 +19,7 @@ import java.io.Serializable;
 import java.io.Writer;
 import java.lang.reflect.Method;
 
+import com.liferay.faces.util.internal.TCCLUtil;
 import com.liferay.faces.util.render.FacesURLEncoder;
 import com.liferay.faces.util.render.FacesURLEncoderFactory;
 
@@ -42,7 +43,7 @@ public class FacesURLEncoderFactoryImpl extends FacesURLEncoderFactory implement
 		try {
 
 			final String MOJARRA_ENCODER_FQCN = "com.sun.faces.util.HtmlUtils";
-			Class<?> mojarraHtmlUtilsClass = Class.forName(MOJARRA_ENCODER_FQCN);
+			Class<?> mojarraHtmlUtilsClass = TCCLUtil.loadClassFromContext(getClass(), MOJARRA_ENCODER_FQCN);
 			final String MOJARRA_WRITE_URL_METHOD_NAME = "writeURL";
 			mojarraMethodWriteURL = mojarraHtmlUtilsClass.getMethod(MOJARRA_WRITE_URL_METHOD_NAME,
 					new Class[] { Writer.class, String.class, char[].class, String.class });
@@ -52,7 +53,7 @@ public class FacesURLEncoderFactoryImpl extends FacesURLEncoderFactory implement
 			try {
 
 				final String MYFACES_ENCODER_FQCN = "org.apache.myfaces.shared.renderkit.html.util.HTMLEncoder";
-				Class<?> myFacesHTMLEncoderClass = Class.forName(MYFACES_ENCODER_FQCN);
+				Class<?> myFacesHTMLEncoderClass = TCCLUtil.loadClassFromContext(getClass(), MYFACES_ENCODER_FQCN);
 				final String MYFACES_ENCODE_URI_ATTRIBUTE_METHOD_NAME = "encodeURIAtributte";
 				myFacesMethodEncodeURIAtribute = myFacesHTMLEncoderClass.getMethod(
 						MYFACES_ENCODE_URI_ATTRIBUTE_METHOD_NAME, new Class[] { String.class, String.class });
