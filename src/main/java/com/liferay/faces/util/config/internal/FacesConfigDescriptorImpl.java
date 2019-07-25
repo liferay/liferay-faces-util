@@ -80,6 +80,11 @@ public class FacesConfigDescriptorImpl implements FacesConfigDescriptor, Seriali
 	}
 
 	@Override
+	public boolean hasAbsoluteOrdering() {
+		return isWebInfFacesConfig && (absoluteOrdering != null);
+	}
+
+	@Override
 	public boolean isWebInfFacesConfig() {
 		return isWebInfFacesConfig;
 	}
@@ -91,5 +96,4 @@ public class FacesConfigDescriptorImpl implements FacesConfigDescriptor, Seriali
 	public void setOrdering(Ordering ordering) {
 		this.ordering = ordering;
 	}
-
 }

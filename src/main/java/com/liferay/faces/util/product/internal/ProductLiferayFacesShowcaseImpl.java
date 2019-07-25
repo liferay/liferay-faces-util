@@ -21,6 +21,7 @@ package com.liferay.faces.util.product.internal;
 public class ProductLiferayFacesShowcaseImpl extends ProductBase {
 
 	public ProductLiferayFacesShowcaseImpl() {
-		super(ProductInfo.newInstance("Showcase Common", "com.liferay.faces.showcase.dto.ShowcaseComponent"));
+		super(ProductInfo.newInstance("Showcase Common", "com.liferay.faces.showcase.dto.ShowcaseComponent",
+				"META-INF/maven/com.liferay.faces.demo/com.liferay.faces.demo.showcase.common/pom.properties"));
 	}
 }

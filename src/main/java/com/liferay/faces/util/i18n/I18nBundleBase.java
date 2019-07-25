@@ -28,10 +28,10 @@ import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.cache.Cache;
 import com.liferay.faces.util.cache.CacheFactory;
-import com.liferay.faces.util.i18n.internal.UTF8Control;
 import com.liferay.faces.util.internal.TCCLUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.osgi.internal.ResourceBundleUtil;
 
 
 /**
@@ -49,8 +49,8 @@ public abstract class I18nBundleBase extends I18nWrapper implements Serializable
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(I18nBundleBase.class);
 
-	// Private Data Members
-	private I18n wrappedI18n;
+	// Private Final Data Members
+	private final I18n wrappedI18n;
 
 	public I18nBundleBase(I18n i18n) {
 
@@ -98,7 +98,8 @@ public abstract class I18nBundleBase extends I18nWrapper implements Serializable
 
 		ExternalContext externalContext = facesContext.getExternalContext();
 		Map<String, Object> applicationMap = externalContext.getApplicationMap();
-		Cache<String, String> messageCache = (Cache<String, String>) applicationMap.get(getClass().getName());
+		Class<? extends I18nBundleBase> clazz = getClass();
+		Cache<String, String> messageCache = (Cache<String, String>) applicationMap.get(clazz.getName());
 
 		if ((messageCache != null) && messageCache.containsKey(key)) {
 
@@ -114,14 +115,14 @@ public abstract class I18nBundleBase extends I18nWrapper implements Serializable
 
 			try {
 				String bundleKey = getBundleKey();
-				ClassLoader classLoader = TCCLUtil.getThreadContextClassLoaderOrDefault(getClass());
 
 				if (locale == null) {
-					resourceBundle = ResourceBundle.getBundle(bundleKey, Locale.getDefault(), classLoader,
-							new UTF8Control());
+					resourceBundle = ResourceBundleUtil.getUTF8ResourceBundleInOSGiEnvironment(bundleKey,
+							Locale.getDefault(), clazz);
 				}
 				else {
-					resourceBundle = ResourceBundle.getBundle(bundleKey, locale, classLoader, new UTF8Control());
+					resourceBundle = ResourceBundleUtil.getUTF8ResourceBundleInOSGiEnvironment(bundleKey, locale,
+							clazz);
 				}
 			}
 			catch (MissingResourceException e) {

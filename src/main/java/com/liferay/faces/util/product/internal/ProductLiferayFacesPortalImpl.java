@@ -21,6 +21,7 @@ package com.liferay.faces.util.product.internal;
 public class ProductLiferayFacesPortalImpl extends ProductBase {
 
 	public ProductLiferayFacesPortalImpl() {
-		super(ProductInfo.newInstance("Liferay Faces Portal", "com.liferay.faces.portal.context.LiferayFacesContext"));
+		super(ProductInfo.newInstance("Liferay Faces Portal", "com.liferay.faces.portal.context.LiferayFacesContext",
+				"META-INF/maven/com.liferay.faces/com.liferay.faces.portal/pom.properties"));
 	}
 }

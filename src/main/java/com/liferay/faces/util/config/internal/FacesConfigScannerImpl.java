@@ -20,12 +20,16 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Enumeration;
+import java.util.Collections;
 import java.util.List;
 
 import javax.faces.application.ViewHandler;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.faces.webapp.FacesServlet;
 import javax.xml.parsers.SAXParser;
+
+import org.osgi.framework.Bundle;
 
 import com.liferay.faces.util.config.ConfiguredServlet;
 import com.liferay.faces.util.config.ConfiguredServletMapping;
@@ -34,8 +38,10 @@ import com.liferay.faces.util.config.WebConfig;
 import com.liferay.faces.util.internal.CloseableUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.util.product.Product;
+import com.liferay.faces.util.osgi.internal.FacesBundlesHandlerBase;
+import com.liferay.faces.util.osgi.internal.FacesBundlesHandlerResourceProviderOSGiImpl;
 import com.liferay.faces.util.product.internal.ProductMojarraImpl;
+import com.liferay.faces.util.resource.internal.ResourceProviderUtil;
 
 
 /**
@@ -47,11 +53,11 @@ public class FacesConfigScannerImpl implements FacesConfigScanner {
 	private static final Logger logger = LoggerFactory.getLogger(FacesConfigScannerImpl.class);
 
 	// Private Constants
-	private static final String FACES_CONFIG_META_INF_PATH = "META-INF/faces-config.xml";
+	private static final String FACES_CONFIG_META_INF_PATH = ResourceProviderUtil.META_INF_PATH + "faces-config.xml";
 	private static final String FACES_CONFIG_WEB_INF_PATH = "/WEB-INF/faces-config.xml";
 	private static final String FACES_SERVLET = "Faces Servlet";
 	private static final String FACES_SERVLET_FQCN = FacesServlet.class.getName();
-	private static final String MOJARRA_CONFIG_PATH = "com/sun/faces/jsf-ri-runtime.xml";
+	private static final String MOJARRA_CONFIG_PATH = "/com/sun/faces/jsf-ri-runtime.xml";
 
 	// Private Data Members
 	private ClassLoader classLoader;
@@ -144,119 +150,86 @@ public class FacesConfigScannerImpl implements FacesConfigScanner {
 
 		try {
 
-			FacesConfigDescriptorParser facesConfigDescriptorParser = newFacesConfigDescriptorParser();
-
 			// Parse the WEB-INF/faces-config.xml descriptor. Gathering absolute-ordering, if any.
-			FacesConfigDescriptor webInfFacesConfigDescriptor;
-			inputStream = resourceReader.getResourceAsStream(FACES_CONFIG_WEB_INF_PATH);
-			webInfFacesConfigDescriptor = facesConfigDescriptorParser.parse(inputStream, FACES_CONFIG_WEB_INF_PATH);
-			inputStream.close();
-
-			// First, parse the Mojarra configuration found in the classpath.
-			Enumeration<URL> mojarraConfigURLs = classLoader.getResources(MOJARRA_CONFIG_PATH);
-
-			// Since the FactoryExtensionFinder has not been initialized, create a new Mojarra Product manually,
-			// to determine if Mojarra is present.
-			final Product MOJARRA = new ProductMojarraImpl();
-
-			if (MOJARRA.isDetected() && ((mojarraConfigURLs == null) || !mojarraConfigURLs.hasMoreElements())) {
-				logger.warn("{0} not found.", MOJARRA_CONFIG_PATH);
-			}
-
-			if (mojarraConfigURLs != null) {
-
-				boolean processedMojarraConfig = false;
-
-				while (mojarraConfigURLs.hasMoreElements()) {
-					URL mojarraConfigURL = mojarraConfigURLs.nextElement();
-
-					if (processedMojarraConfig) {
-						logger.debug("Skipping Mojarra config: [{0}]", mojarraConfigURL);
-					}
-					else {
-						logger.debug("Processing Mojarra config: [{0}]", mojarraConfigURL);
-
-						FacesConfigParser mojarraConfigParser = new FacesConfigParserImpl(saxParser, resolveEntities);
-						inputStream = mojarraConfigURL.openStream();
-
-						try {
-							facesConfig = mojarraConfigParser.parse(inputStream, facesConfig);
-						}
-						catch (IOException e) {
-							logger.error(e);
-						}
-
-						inputStream.close();
-						processedMojarraConfig = true;
-					}
-				}
-			}
-
+			FacesConfigDescriptor mojarraConfigDescriptor = null;
+			FacesConfigDescriptor webInfFacesConfigDescriptor = null;
+			FacesConfigDescriptorParser facesConfigDescriptorParser = newFacesConfigDescriptorParser();
 			FacesConfigParser facesConfigParser = newFacesConfigParser();
 
-			// Next, parse all of the META-INF/faces-config.xml files found in the classpath.
-			Enumeration<URL> facesConfigURLs = classLoader.getResources(FACES_CONFIG_META_INF_PATH);
+			// Parse all of the faces-config.xml files found in the classpath.
+			List<URL> facesConfigURLs = getFacesConfigURLs(classLoader);
 			List<FacesConfigDescriptor> facesConfigDescriptors = new ArrayList<FacesConfigDescriptor>();
 
-			if (facesConfigURLs != null) {
+			for (URL facesConfigURL : facesConfigURLs) {
 
-				// Build up a semi-sorted list of faces-config.xml descriptor files, ensuring that
-				// liferay-faces-bridge-impl.jar!META-INF/faces-config.xml is ordered first and that
-				// liferay-faces-util.jar!META-INF/faces-config.xml is ordered second.
-				// (Note that the JSF 2.0 <ordering> element is not yet supported.)
-				while (facesConfigURLs.hasMoreElements()) {
+				logger.debug("Pre-processing faces-config: [{0}]", facesConfigURL);
+				inputStream = facesConfigURL.openStream();
 
-					URL facesConfigURL = facesConfigURLs.nextElement();
-					logger.debug("Pre-processing faces-config: [{0}]", facesConfigURL);
-					inputStream = facesConfigURL.openStream();
+				String facesConfigPath = facesConfigURL.getPath();
 
+				if (facesConfigPath.endsWith(MOJARRA_CONFIG_PATH)) {
+
+					// Parse the com/sun/faces/jsf-ri-runtime.xml descriptor.
+					mojarraConfigDescriptor = facesConfigDescriptorParser.parse(inputStream, facesConfigURL);
+				}
+				else if (facesConfigPath.endsWith(FACES_CONFIG_WEB_INF_PATH)) {
+
+					// Parse the WEB-INF/faces-config.xml descriptor. Gathering absolute-ordering, if any.
+					webInfFacesConfigDescriptor = facesConfigDescriptorParser.parse(inputStream, facesConfigURL);
+				}
+				else {
+
+					// Parse any META-INF/faces-config.xml files found in the classpath.
 					FacesConfigDescriptor facesConfigDescriptor = facesConfigDescriptorParser.parse(inputStream,
 							facesConfigURL);
-
 					facesConfigDescriptors.add(facesConfigDescriptor);
-
-					inputStream.close();
 				}
 
-				// Sort the faces configuration files in accord with
-				// javax.faces-api-2.2-FINAL_JSF_20130320_11.4.8_Ordering_of_Artifacts
-				List<FacesConfigDescriptor> orderedConfigs = getOrderedConfigs(facesConfigDescriptors,
-						webInfFacesConfigDescriptor);
-
-				for (FacesConfigDescriptor config : orderedConfigs) {
-
-					String urlString = config.getURL();
-					URL url = new URL(urlString);
-					logger.debug("Post-processing faces-config: [{0}]", url);
-
-					inputStream = url.openStream();
-
-					try {
-						facesConfig = facesConfigParser.parse(inputStream, facesConfig);
-					}
-					catch (IOException e) {
-						logger.error(e);
-					}
-
-					inputStream.close();
-
-					try {
-						saxParser.reset();
-					}
-					catch (Exception e) {
-						logger.error(e);
-					}
-				}
+				inputStream.close();
 			}
 
-			// Second, parse the WEB-INF/faces-config.xml descriptor. Any entries made here will take
-			// precedence over those found previously.
-			inputStream = resourceReader.getResourceAsStream(FACES_CONFIG_WEB_INF_PATH);
+			final boolean MOJARRA_DETECTED = new ProductMojarraImpl().isDetected();
 
-			if (inputStream != null) {
-				logger.debug("Processing faces-config: [{0}]", FACES_CONFIG_WEB_INF_PATH);
-				facesConfig = facesConfigParser.parse(inputStream, facesConfig);
+			if (MOJARRA_DETECTED && (mojarraConfigDescriptor == null)) {
+				logger.warn("{0} not found." + MOJARRA_CONFIG_PATH);
+			}
+
+			// Sort the faces configuration files in accord with
+			// javax.faces-api-2.2-FINAL_JSF_20130320_11.4.8_Ordering_of_Artifacts
+			List<FacesConfigDescriptor> orderedConfigs = OrderingUtil.getOrderedFacesConfigDescriptors(
+					mojarraConfigDescriptor, facesConfigDescriptors, webInfFacesConfigDescriptor);
+
+			for (FacesConfigDescriptor config : orderedConfigs) {
+
+				String urlString = config.getURL();
+				URL url = new URL(urlString);
+				logger.debug("Post-processing faces-config: [{0}]", url);
+
+				inputStream = url.openStream();
+
+				try {
+
+					if (urlString.contains(MOJARRA_CONFIG_PATH)) {
+
+						FacesConfigParser mojarraConfigParser = new FacesConfigParserImpl(saxParser, resolveEntities);
+						mojarraConfigParser.parse(inputStream, facesConfig);
+					}
+					else {
+						facesConfig = facesConfigParser.parse(inputStream, facesConfig);
+					}
+				}
+				catch (IOException e) {
+					logger.error(e);
+				}
+
 				inputStream.close();
+
+				try {
+					saxParser.reset();
+				}
+				catch (Exception e) {
+					logger.error(e);
+				}
 			}
 		}
 		catch (Exception e) {
@@ -269,27 +242,6 @@ public class FacesConfigScannerImpl implements FacesConfigScanner {
 		return facesConfig;
 	}
 
-	protected List<FacesConfigDescriptor> getOrderedConfigs(List<FacesConfigDescriptor> facesConfigDescriptors,
-		FacesConfigDescriptor webInfFacesConfig) throws Exception {
-
-		if (facesConfigDescriptors.size() > 1) {
-
-			List<String> absoluteOrdering = webInfFacesConfig.getAbsoluteOrdering();
-
-			if (absoluteOrdering == null) {
-				logger.debug("Ordering faces-config descriptors");
-				facesConfigDescriptors = OrderingUtil.getRelativeOrderedFacesConfigDescriptors(facesConfigDescriptors);
-			}
-			else {
-				logger.debug("Ordering faces-config descriptors: absoluteOrdering=[{0}]", absoluteOrdering);
-				facesConfigDescriptors = OrderingUtil.getAbsoluteOrderedFacesConfigDescriptors(facesConfigDescriptors,
-						absoluteOrdering);
-			}
-		}
-
-		return facesConfigDescriptors;
-	}
-
 	protected SAXParser getSAXParser() {
 		return saxParser;
 	}
@@ -300,5 +252,70 @@ public class FacesConfigScannerImpl implements FacesConfigScanner {
 
 	protected FacesConfigParser newFacesConfigParser() {
 		return new FacesConfigParserImpl(saxParser, resolveEntities);
+	}
+
+	private List<URL> getFacesConfigURLs(ClassLoader classLoader) throws IOException {
+
+		List<URL> facesConfigURLs = new ArrayList<URL>();
+		FacesContext initFacesContext = FacesContext.getCurrentInstance();
+
+		if (FacesBundlesHandlerBase.isCurrentWarThinWab()) {
+
+			FacesBundlesHandlerBase<List<URL>> facesBundlesHandler = new FacesBundlesHandlerFacesConfigScannerImpl(
+					ResourceProviderUtil.META_INF_PATH, ResourceProviderUtil.ALL_FACES_CONFIG_PATTERN);
+			facesConfigURLs.addAll(facesBundlesHandler.handleFacesBundles(initFacesContext));
+		}
+		else {
+
+			URL mojarraConfigURL = classLoader.getResource(MOJARRA_CONFIG_PATH);
+
+			if (mojarraConfigURL != null) {
+				facesConfigURLs.add(mojarraConfigURL);
+			}
+
+			ResourceProviderUtil.addAllEnumerationURLsToList(classLoader.getResources(FACES_CONFIG_META_INF_PATH),
+				facesConfigURLs);
+
+			// Obtain all *.faces-config.xml files as well.
+			FacesBundlesHandlerBase<List<URL>> facesBundlesHandler = new FacesBundlesHandlerResourceProviderOSGiImpl(
+					ResourceProviderUtil.META_INF_PATH, ResourceProviderUtil.FACES_CONFIG_EXTENSION_PATTERN);
+			facesConfigURLs.addAll(facesBundlesHandler.handleFacesBundles(initFacesContext));
+
+			// TODO Unfortunately, the above method of searching for *.faces-config.xml files returns an empty list in
+			// non-OSGi enviroments. In the future, we should ensure that searching for *.faces-config.xml files works
+			// in all environments. But since the *.faces-config.xml feature is rarely used and our supported
+			// environment (Liferay Portal) is an OSGi environment and searching for class path resources is non-trivial
+			// outside of OSGi, we can wait to support this.
+		}
+
+		ExternalContext externalContext = initFacesContext.getExternalContext();
+		URL webInfFacesConfigURL = externalContext.getResource(FACES_CONFIG_WEB_INF_PATH);
+
+		if (webInfFacesConfigURL != null) {
+			facesConfigURLs.add(webInfFacesConfigURL);
+		}
+
+		return Collections.unmodifiableList(facesConfigURLs);
+	}
+
+	private static final class FacesBundlesHandlerFacesConfigScannerImpl
+		extends FacesBundlesHandlerResourceProviderOSGiImpl {
+
+		public FacesBundlesHandlerFacesConfigScannerImpl(String path, String facesBundleFilePattern) {
+			super(path, facesBundleFilePattern);
+		}
+
+		@Override
+		protected void handleFacesBundle(Bundle bundle, ReturnValueReference<List<URL>> returnValueReference) {
+
+			List<URL> resourceURLs = returnValueReference.get();
+			URL mojarraConfigURL = bundle.getEntry(MOJARRA_CONFIG_PATH);
+
+			if (mojarraConfigURL != null) {
+				resourceURLs.add(mojarraConfigURL);
+			}
+
+			super.handleFacesBundle(bundle, returnValueReference);
+		}
 	}
 }

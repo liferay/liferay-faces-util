@@ -21,12 +21,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -48,15 +48,6 @@ public final class OrderingUtil {
 		throw new AssertionError();
 	}
 
-	/**
-	 * This method returns an ordered version of the specified list of faces-config.xml descriptors, taking the
-	 * specified absolute ordering into account.
-	 */
-	public static List<FacesConfigDescriptor> getAbsoluteOrderedFacesConfigDescriptors(
-		List<FacesConfigDescriptor> configs, List<String> absoluteOrder) {
-		return getAbsoluteOrderedFacesConfigDescriptors_(configs, absoluteOrder);
-	}
-
 	public static Map<String, FacesConfigDescriptor> getConfigMap(List<FacesConfigDescriptor> facesConfigDescriptors) {
 
 		Map<String, FacesConfigDescriptor> configMap = new HashMap<String, FacesConfigDescriptor>();
@@ -69,14 +60,23 @@ public final class OrderingUtil {
 		return configMap;
 	}
 
-	/**
-	 * This method returns an ordered version of the specified list of faces-config.xml descriptors and assumes that
-	 * there is no absolute ordering.
-	 */
-	public static List<FacesConfigDescriptor> getRelativeOrderedFacesConfigDescriptors(
-		List<FacesConfigDescriptor> configList) throws OrderingBeforeAndAfterException,
-		OrderingCircularDependencyException, OrderingMaxAttemptsException {
-		return getRelativeOrderedFacesConfigDescriptors_(configList);
+	public static List<FacesConfigDescriptor> getOrderedFacesConfigDescriptors(
+		FacesConfigDescriptor mojarraConfigDescriptor, List<FacesConfigDescriptor> facesConfigDescriptors,
+		FacesConfigDescriptor webInfFacesConfigDescriptor) throws Exception {
+
+		if (facesConfigDescriptors.size() > 1) {
+
+			if ((webInfFacesConfigDescriptor != null) && webInfFacesConfigDescriptor.hasAbsoluteOrdering()) {
+				facesConfigDescriptors = OrderingUtil.getAbsoluteOrderedFacesConfigDescriptors(mojarraConfigDescriptor,
+						facesConfigDescriptors, webInfFacesConfigDescriptor);
+			}
+			else {
+				facesConfigDescriptors = OrderingUtil.getRelativeOrderedFacesConfigDescriptors(mojarraConfigDescriptor,
+						facesConfigDescriptors, webInfFacesConfigDescriptor);
+			}
+		}
+
+		return facesConfigDescriptors;
 	}
 
 	private static String[] appendAndSort(String[]... groups) {
@@ -205,30 +205,47 @@ public final class OrderingUtil {
 		return names;
 	}
 
-	private static List<FacesConfigDescriptor> getAbsoluteOrderedFacesConfigDescriptors_(
-		List<FacesConfigDescriptor> configs, List<String> absoluteOrder) {
+	/**
+	 * This method returns an ordered version of the specified list of faces-config.xml descriptors, taking the
+	 * specified absolute ordering into account.
+	 */
+	private static List<FacesConfigDescriptor> getAbsoluteOrderedFacesConfigDescriptors(
+		FacesConfigDescriptor mojarraConfigDescriptor, List<FacesConfigDescriptor> configList,
+		FacesConfigDescriptor webInfFacesConfigDescriptor) {
 
-		List<FacesConfigDescriptor> orderedList = new ArrayList<FacesConfigDescriptor>();
+		List<String> absoluteOrdering = webInfFacesConfigDescriptor.getAbsoluteOrdering();
 
-		List<FacesConfigDescriptor> configList = new CopyOnWriteArrayList<FacesConfigDescriptor>();
-		configList.addAll(configs);
+		logger.debug("Ordering faces-config descriptors: absoluteOrdering=[{0}]", absoluteOrdering);
 
-		for (String name : absoluteOrder) {
+		List<FacesConfigDescriptor> orderedConfigList = new ArrayList<FacesConfigDescriptor>();
+
+		if (mojarraConfigDescriptor != null) {
+			orderedConfigList.add(mojarraConfigDescriptor);
+		}
+
+		configList = new ArrayList<FacesConfigDescriptor>(configList);
+
+		for (String name : absoluteOrdering) {
 
 			if (Ordering.OTHERS.equals(name)) {
 				continue;
 			}
 
 			boolean found = false;
+			Iterator<FacesConfigDescriptor> iterator = configList.iterator();
 
-			for (FacesConfigDescriptor config : configList) {
+			while (iterator.hasNext()) {
+
+				FacesConfigDescriptor config = iterator.next();
 
 				if (!found && name.equals(config.getName())) {
+
 					found = true;
-					orderedList.add(config);
-					configList.remove(config);
+					orderedConfigList.add(config);
+					iterator.remove();
 				}
 				else if (found && name.equals(config.getName())) {
+
 					logger.warn("name=[{0}] found more than once", name);
 
 					break;
@@ -240,21 +257,30 @@ public final class OrderingUtil {
 			}
 		}
 
-		int othersIndex = absoluteOrder.indexOf(Ordering.OTHERS);
+		int othersIndex = absoluteOrdering.indexOf(Ordering.OTHERS);
 
 		if (othersIndex != -1) {
 
 			for (FacesConfigDescriptor config : configList) {
-				orderedList.add(othersIndex, config);
+				orderedConfigList.add(othersIndex, config);
 			}
 		}
 
-		return orderedList;
+		orderedConfigList.add(webInfFacesConfigDescriptor);
+
+		return orderedConfigList;
 	}
 
-	private static List<FacesConfigDescriptor> getRelativeOrderedFacesConfigDescriptors_(
-		List<FacesConfigDescriptor> configList) throws OrderingBeforeAndAfterException,
+	/**
+	 * This method returns an ordered version of the specified list of faces-config.xml descriptors and assumes that
+	 * there is no absolute ordering.
+	 */
+	private static List<FacesConfigDescriptor> getRelativeOrderedFacesConfigDescriptors(
+		FacesConfigDescriptor mojarraConfigDescriptor, List<FacesConfigDescriptor> configList,
+		FacesConfigDescriptor webInfFacesConfigDescriptor) throws OrderingBeforeAndAfterException,
 		OrderingCircularDependencyException, OrderingMaxAttemptsException {
+
+		logger.debug("Ordering faces-config descriptors");
 
 		if (logger.isTraceEnabled()) {
 
@@ -317,6 +343,7 @@ public final class OrderingUtil {
 			}
 		}
 
+		//J-
 		// Sort the documents such that specified ordering will be considered.
 		//
 		// It turns out that some of the specified ordering, if it was not discovered by the sort routine
@@ -325,9 +352,11 @@ public final class OrderingUtil {
 		// This preSort method puts all of the documents with specified ordering as early on in the
 		// list of documents as possible for to consider it quickly, and be
 		// able to use its ordering algorithm to the best of its ability to achieve the specified ordering.
+		//J+
 		configList = preSort(configList);
 
-		FacesConfigDescriptor[] configs = configList.toArray(new FacesConfigDescriptor[configList.size()]);
+		int size = configList.size();
+		FacesConfigDescriptor[] configs = configList.toArray(new FacesConfigDescriptor[size]);
 
 		// This is a multiple pass sorting routine which gets the documents close to the order they need to be in
 		innerSort(configs);
@@ -337,7 +366,19 @@ public final class OrderingUtil {
 		// others left as necessary.
 		postSort(configs);
 
-		return new ArrayList<FacesConfigDescriptor>(Arrays.asList(configs));
+		ArrayList<FacesConfigDescriptor> orderedConfigList = new ArrayList<FacesConfigDescriptor>();
+
+		if (mojarraConfigDescriptor != null) {
+			orderedConfigList.add(mojarraConfigDescriptor);
+		}
+
+		orderedConfigList.addAll(Arrays.asList(configs));
+
+		if (webInfFacesConfigDescriptor != null) {
+			orderedConfigList.add(webInfFacesConfigDescriptor);
+		}
+
+		return orderedConfigList;
 	}
 
 	private static int innerSort(FacesConfigDescriptor[] configs) throws OrderingMaxAttemptsException {

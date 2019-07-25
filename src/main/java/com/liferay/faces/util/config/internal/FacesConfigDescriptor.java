@@ -31,6 +31,8 @@ public interface FacesConfigDescriptor {
 
 	public String getURL();
 
+	public boolean hasAbsoluteOrdering();
+
 	public boolean isWebInfFacesConfig();
 
 }

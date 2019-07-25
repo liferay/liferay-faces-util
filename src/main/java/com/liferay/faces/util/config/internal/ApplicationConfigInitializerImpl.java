@@ -79,11 +79,7 @@ public class ApplicationConfigInitializerImpl implements ApplicationConfigInitia
 			return new ApplicationConfigImpl(contextPath, facesConfig, webConfig);
 		}
 		catch (Exception e) {
-
-			// Log the error before throwing since the developer will need to see the stacktrace and
-			// IOException(Throwable) wasn't added until Java 6.
-			logger.error(e);
-			throw new IOException(e.getMessage());
+			throw new IOException(e);
 		}
 	}
 
@@ -96,7 +92,7 @@ public class ApplicationConfigInitializerImpl implements ApplicationConfigInitia
 		FacesContext startupFacesContext = FacesContext.getCurrentInstance();
 		ExternalContext startupExternalContext = startupFacesContext.getExternalContext();
 
-		return new ResourceReaderExternalContextImpl(startupExternalContext);
+		return new ResourceReaderImpl(startupExternalContext);
 	}
 
 	protected WebConfigScanner newWebConfigScanner(ClassLoader classLoader, ResourceReader resourceReader,

@@ -21,7 +21,8 @@ package com.liferay.faces.util.product.internal;
 public class ProductLiferayFacesUtilImpl extends ProductBase {
 
 	public ProductLiferayFacesUtilImpl() {
-		super(new ProductInfo(getImplTitle(), getImplVersion()));
+		super(ProductInfo.newInstance(getImplTitle(), ProductLiferayFacesUtilImpl.class.getName(),
+				"META-INF/maven/com.liferay.faces/com.liferay.faces.util/pom.properties"));
 	}
 
 	private static String getImplTitle() {
@@ -34,12 +35,5 @@ public class ProductLiferayFacesUtilImpl extends ProductBase {
 		}
 
 		return implTitle;
-	}
-
-	private static String getImplVersion() {
-
-		Package _package = ProductLiferayFacesUtilImpl.class.getPackage();
-
-		return _package.getImplementationVersion();
 	}
 }

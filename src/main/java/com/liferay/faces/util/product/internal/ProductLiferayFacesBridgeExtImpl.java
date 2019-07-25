@@ -22,6 +22,7 @@ public class ProductLiferayFacesBridgeExtImpl extends ProductBase {
 
 	public ProductLiferayFacesBridgeExtImpl() {
 		super(ProductInfo.newInstance("Liferay Faces Bridge Ext",
-				"com.liferay.faces.bridge.ext.GenericLiferayFacesPortlet"));
+				"com.liferay.faces.bridge.ext.GenericLiferayFacesPortlet",
+				"META-INF/maven/com.liferay.faces/com.liferay.faces.bridge.ext/pom.properties"));
 	}
 }
