@@ -21,6 +21,7 @@ package com.liferay.faces.util.product.internal;
 public class ProductLiferayFacesClayImpl extends ProductBase {
 
 	public ProductLiferayFacesClayImpl() {
-		super(ProductInfo.newInstance("Liferay Faces Clay", "com.liferay.faces.clay.component.inputtext.InputText"));
+		super(ProductInfo.newInstance("Liferay Faces Clay", "com.liferay.faces.clay.component.inputtext.InputText",
+				"META-INF/maven/com.liferay.faces/com.liferay.faces.clay/pom.properties"));
 	}
 }

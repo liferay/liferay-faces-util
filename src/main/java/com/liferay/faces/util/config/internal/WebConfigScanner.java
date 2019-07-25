@@ -16,6 +16,8 @@
 package com.liferay.faces.util.config.internal;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.Enumeration;
 
 import com.liferay.faces.util.config.WebConfig;
 
@@ -25,5 +27,10 @@ import com.liferay.faces.util.config.WebConfig;
  */
 public interface WebConfigScanner {
 
+	// Public Constants
+	public static final String WEB_FRAGMENT_META_INF_PATH = "META-INF/web-fragment.xml";
+
 	public WebConfig scan() throws IOException;
+
+	public WebConfig scanWebFragments(Enumeration<URL> webFragmentURLs) throws IOException;
 }

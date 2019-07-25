@@ -39,7 +39,6 @@ public class WebConfigScannerImpl implements WebConfigScanner {
 	// Private Constants
 	private static final String WEB_XML_PATH = "/WEB-INF/web.xml";
 	private static final String WEB_XML_LIFERAY_PATH = "/WEB-INF/liferay-web.xml";
-	private static final String WEB_FRAGMENT_META_INF_PATH = "META-INF/web-fragment.xml";
 
 	// Private Data Members
 	private ClassLoader classLoader;
@@ -59,33 +58,10 @@ public class WebConfigScannerImpl implements WebConfigScanner {
 
 		// Parse the Servlet 3.0 META-INF/web-fragment.xml descriptor files found in the classpath.
 		Enumeration<URL> webFragmentURLs = classLoader.getResources(WEB_FRAGMENT_META_INF_PATH);
-
-		WebConfig webConfig = new WebConfigImpl();
-
-		InputStream inputStream = null;
-
-		if (webFragmentURLs != null) {
-
-			while (webFragmentURLs.hasMoreElements()) {
-				URL webFragmentURL = webFragmentURLs.nextElement();
-				inputStream = webFragmentURL.openStream();
-
-				WebConfigParser webConfigParser = newWebConfigParser();
-
-				try {
-					webConfig = webConfigParser.parse(inputStream, webConfig);
-				}
-				catch (Exception e) {
-					logger.error(e.getMessage());
-				}
-				finally {
-					CloseableUtil.close(inputStream);
-				}
-			}
-		}
+		WebConfig webConfig = scanWebFragments(webFragmentURLs);
 
 		// Parse the WEB-INF/web.xml descriptor.
-		inputStream = resourceReader.getResourceAsStream(WEB_XML_PATH);
+		InputStream inputStream = resourceReader.getResourceAsStream(WEB_XML_PATH);
 
 		if (inputStream != null) {
 			logger.debug("Processing web-app: [{0}]", WEB_XML_PATH);
@@ -115,6 +91,32 @@ public class WebConfigScannerImpl implements WebConfigScanner {
 			catch (IOException e) {
 				logger.error(e);
 				throw new IOException(e.getMessage());
+			}
+		}
+
+		return webConfig;
+	}
+
+	public WebConfig scanWebFragments(Enumeration<URL> webFragmentURLs) throws IOException {
+
+		WebConfig webConfig = new WebConfigImpl();
+
+		if (webFragmentURLs != null) {
+
+			while (webFragmentURLs.hasMoreElements()) {
+				URL webFragmentURL = webFragmentURLs.nextElement();
+				InputStream inputStream = webFragmentURL.openStream();
+				WebConfigParser webConfigParser = newWebConfigParser();
+
+				try {
+					webConfig = webConfigParser.parse(inputStream, webConfig);
+				}
+				catch (Exception e) {
+					logger.error(e.getMessage());
+				}
+				finally {
+					CloseableUtil.close(inputStream);
+				}
 			}
 		}
 

@@ -21,6 +21,7 @@ package com.liferay.faces.util.product.internal;
 public class ProductLiferayFacesAlloyImpl extends ProductBase {
 
 	public ProductLiferayFacesAlloyImpl() {
-		super(ProductInfo.newInstance("Liferay Faces Alloy", "com.liferay.faces.alloy.component.column.Column"));
+		super(ProductInfo.newInstance("Liferay Faces Alloy", "com.liferay.faces.alloy.component.column.Column",
+				"META-INF/maven/com.liferay.faces/com.liferay.faces.alloy/pom.properties"));
 	}
 }

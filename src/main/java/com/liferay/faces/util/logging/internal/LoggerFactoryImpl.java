@@ -34,7 +34,7 @@ public class LoggerFactoryImpl extends LoggerFactory {
 		boolean log4jAvailable;
 
 		try {
-			TCCLUtil.loadClassFromContext(LoggerFactoryImpl.class, CLASS_NAME_LOG4J_LOGGER);
+			Class.forName(CLASS_NAME_LOG4J_LOGGER);
 			log4jAvailable = true;
 
 			try {
