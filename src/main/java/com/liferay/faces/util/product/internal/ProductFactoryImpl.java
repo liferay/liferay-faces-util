@@ -100,7 +100,7 @@ public class ProductFactoryImpl extends ProductFactory {
 
 		ProductBase weld = new ProductWeldImpl();
 		productMap.put(Product.Name.WELD, weld);
-		productMap.put(Product.Name.CDI, new ProductSpecImpl("CDI", weld, openWebBeans));
+		productMap.put(Product.Name.CDI, new ProductSpecImpl("CDI", weld, openWebBeans, cdiApi));
 
 		ProductBase weblogic = new ProductWebLogicImpl();
 		productMap.put(Product.Name.WEBLOGIC, weblogic);
