@@ -38,7 +38,7 @@ import com.liferay.faces.util.el.internal.ELResolverWrapper;
 import com.liferay.faces.util.el.internal.I18nMap;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.ThreadSafeAccessor;
-import com.liferay.faces.util.osgi.internal.OnDemandBeanManagerKey;
+import com.liferay.faces.util.osgi.mojarra.spi.internal.OnDemandBeanManagerKey;
 
 
 /**

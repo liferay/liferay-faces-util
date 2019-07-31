@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.liferay.faces.util.osgi;
+package com.liferay.faces.util.servlet.internal;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Initialized;
@@ -22,13 +22,13 @@ import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.Extension;
 import javax.servlet.ServletContext;
 
-import com.liferay.faces.util.osgi.internal.OnDemandBeanManagerKey;
+import com.liferay.faces.util.osgi.mojarra.spi.internal.OnDemandBeanManagerKey;
 
 
 /**
  * @author  Kyle Stiemann
  */
-public class FacesThinWabExtension implements Extension {
+public class UtilExtension implements Extension {
 
 	public void initializeFacesBeanManager(@Observes
 		@Initialized(ApplicationScoped.class)
