@@ -1,1 +1,1 @@
-com.liferay.faces.util.osgi.FacesThinWabExtension
+com.liferay.faces.util.servlet.internal.UtilExtension
