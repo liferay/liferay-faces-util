@@ -13,13 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.liferay.faces.util.osgi;
+package com.liferay.faces.util.osgi.internal;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
@@ -41,10 +39,7 @@ import com.liferay.faces.util.config.internal.WebConfigScanner;
 import com.liferay.faces.util.config.internal.WebConfigScannerImpl;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.internal.TCCLUtil;
-import com.liferay.faces.util.osgi.internal.FacesBundlesHandlerBase;
 import com.liferay.faces.util.xml.ConcurrentSAXParserFactory;
-
-import com.sun.faces.config.FacesInitializer;
 
 
 /**
@@ -79,9 +74,6 @@ public final class FacesThinWabInitializer implements ServletContainerInitialize
 
 	@Override
 	public void onStartup(Set<Class<?>> classes, ServletContext servletContext) throws ServletException {
-
-		FacesInitializer facesInitializer = new FacesInitializer();
-		facesInitializer.onStartup(classes, servletContext);
 
 		// Obtain the current ClassLoader
 		ClassLoader classLoader = TCCLUtil.getThreadContextClassLoaderOrDefault(getClass());
