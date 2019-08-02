@@ -22,6 +22,7 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 
+import com.liferay.faces.util.osgi.internal.FacesBundleUtil;
 import com.liferay.faces.util.osgi.internal.FacesBundlesHandlerBase;
 import com.liferay.faces.util.osgi.internal.FacesBundlesHandlerResourceProviderOSGiImpl;
 import com.liferay.faces.util.resource.internal.ResourceProviderUtil;
@@ -47,7 +48,7 @@ public class FacesConfigResourceProviderOSGiImpl implements FacesConfigResourceP
 
 		FacesBundlesHandlerBase<List<URL>> facesBundlesHandler;
 
-		if (FacesBundlesHandlerBase.isCurrentWarThinWab()) {
+		if (FacesBundleUtil.isCurrentWarThinWab()) {
 
 			facesBundlesHandler = new FacesBundlesHandlerResourceProviderOSGiImpl(ResourceProviderUtil.META_INF_PATH,
 

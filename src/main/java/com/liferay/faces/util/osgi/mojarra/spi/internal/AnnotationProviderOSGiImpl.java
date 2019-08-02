@@ -40,6 +40,7 @@ import org.osgi.framework.wiring.BundleWiring;
 
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.osgi.internal.FacesBundleUtil;
 import com.liferay.faces.util.osgi.internal.FacesBundlesHandlerBase;
 
 import com.sun.faces.config.FacesInitializer;
@@ -100,7 +101,7 @@ public class AnnotationProviderOSGiImpl extends AnnotationProvider {
 		Map<Class<? extends Annotation>, Set<Class<?>>> annotatedClasses;
 
 		// Annotation scanning works correctly in thick wabs and wars.
-		if (FacesBundlesHandlerBase.isCurrentWarThinWab()) {
+		if (FacesBundleUtil.isCurrentWarThinWab()) {
 
 			FacesBundlesHandlerBase<Map<Class<? extends Annotation>, Set<Class<?>>>> facesBundlesHandler =
 				new FacesBundlesHandlerAnnotationProviderOSGiImpl();
@@ -164,7 +165,7 @@ public class AnnotationProviderOSGiImpl extends AnnotationProvider {
 
 				Collection<String> classFilePaths = bundleWiring.listResources("/", "*.class",
 						BundleWiring.LISTRESOURCES_RECURSE);
-				boolean wab = isWab(bundle);
+				boolean wab = FacesBundleUtil.isWab(bundle);
 
 				for (String classFilePath : classFilePaths) {
 
