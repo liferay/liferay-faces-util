@@ -129,10 +129,12 @@ public class AnnotationProviderOSGiImpl extends AnnotationProvider {
 			try {
 				clazz = bundle.loadClass(className);
 			}
-			catch (ClassNotFoundException e) {
+			catch (LinkageError e) {
 				// no-op
 			}
-			catch (LinkageError e) {
+
+			// Catch all exceptions since SPI-Fly may throw unexpected exceptions when attempting to load classes.
+			catch (Exception e) {
 				// no-op
 			}
 
