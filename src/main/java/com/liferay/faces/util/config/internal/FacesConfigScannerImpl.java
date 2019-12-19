@@ -21,6 +21,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.faces.application.ViewHandler;
@@ -40,7 +41,9 @@ import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.osgi.internal.FacesBundlesHandlerBase;
 import com.liferay.faces.util.osgi.internal.FacesBundlesHandlerResourceProviderOSGiImpl;
+import com.liferay.faces.util.product.Product;
 import com.liferay.faces.util.product.internal.ProductMojarraImpl;
+import com.liferay.faces.util.product.internal.ProductPlutoImpl;
 import com.liferay.faces.util.resource.internal.ResourceProviderUtil;
 
 
@@ -267,14 +270,31 @@ public class FacesConfigScannerImpl implements FacesConfigScanner {
 		}
 		else {
 
-			URL mojarraConfigURL = classLoader.getResource(MOJARRA_CONFIG_PATH);
+			Product pluto = new ProductPlutoImpl();
+
+			URL mojarraConfigURL;
+
+			if (pluto.isDetected()) {
+				mojarraConfigURL = classLoader.getResource(MOJARRA_CONFIG_PATH.substring(1));
+			}
+			else {
+				mojarraConfigURL = classLoader.getResource(MOJARRA_CONFIG_PATH);
+			}
 
 			if (mojarraConfigURL != null) {
 				facesConfigURLs.add(mojarraConfigURL);
 			}
 
-			ResourceProviderUtil.addAllEnumerationURLsToList(classLoader.getResources(FACES_CONFIG_META_INF_PATH),
-				facesConfigURLs);
+			Enumeration<URL> facesConfigResources;
+
+			if (pluto.isDetected()) {
+				facesConfigResources = classLoader.getResources(FACES_CONFIG_META_INF_PATH.substring(1));
+			}
+			else {
+				facesConfigResources = classLoader.getResources(FACES_CONFIG_META_INF_PATH);
+			}
+
+			ResourceProviderUtil.addAllEnumerationURLsToList(facesConfigResources, facesConfigURLs);
 
 			// Obtain all *.faces-config.xml files as well.
 			FacesBundlesHandlerBase<List<URL>> facesBundlesHandler = new FacesBundlesHandlerResourceProviderOSGiImpl(
