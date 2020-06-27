@@ -38,6 +38,7 @@ import com.liferay.faces.util.el.internal.ELResolverWrapper;
 import com.liferay.faces.util.el.internal.I18nMap;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.lang.ThreadSafeAccessor;
+import com.liferay.faces.util.osgi.internal.FacesBundleUtil;
 import com.liferay.faces.util.osgi.mojarra.spi.internal.OnDemandBeanManagerKey;
 
 
@@ -87,10 +88,9 @@ public class ApplicationStartupListener extends ApplicationStartupListenerCompat
 
 			UtilDependencyVerifier.verify(initExternalContext);
 			I18nMap.initMessageCache(initFacesContext);
-
 			BeanManager beanManager = (BeanManager) applicationMap.get(OnDemandBeanManagerKey.INSTANCE);
 
-			if (beanManager != null) {
+			if (beanManager != null && FacesBundleUtil.isCurrentWarThinWab()) {
 				application.addELResolver(beanManager.getELResolver());
 			}
 			else {
@@ -101,12 +101,11 @@ public class ApplicationStartupListener extends ApplicationStartupListenerCompat
 		}
 	}
 
-	private static final class BeanManagerELResolverAccessor extends ThreadSafeAccessor<ELResolver, Void> {
+	private static final class BeanManagerELResolverAccessor extends ThreadSafeAccessor<ELResolver, FacesContext> {
 
 		@Override
-		protected ELResolver computeValue(Void _void) {
+		protected ELResolver computeValue(FacesContext facesContext) {
 
-			FacesContext facesContext = FacesContext.getCurrentInstance();
 			ExternalContext externalContext = facesContext.getExternalContext();
 			Map<String, Object> applicationMap = externalContext.getApplicationMap();
 			BeanManager beanManager = (BeanManager) applicationMap.get(OnDemandBeanManagerKey.INSTANCE);
@@ -122,11 +121,14 @@ public class ApplicationStartupListener extends ApplicationStartupListenerCompat
 
 	private static final class ELResolverDeferredBeanManagerImpl extends ELResolverWrapper {
 
-		private final BeanManagerELResolverAccessor beanManagerELResolverAccessor = new BeanManagerELResolverAccessor();
+		private final BeanManagerELResolverAccessor beanManagerELResolverAccessor =
+			new BeanManagerELResolverAccessor();
 
 		@Override
 		public ELResolver getWrapped() {
-			return beanManagerELResolverAccessor.get(null);
+
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			return beanManagerELResolverAccessor.get(facesContext);
 		}
 	}
 }
