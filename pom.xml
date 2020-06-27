@@ -78,10 +78,10 @@
 		<faces.api.version>${faces.spec.version}</faces.api.version>
 		<faces.spec.version>2.3</faces.spec.version>
 		<full.version>${project.version} (${timestamp} AD)</full.version>
-		<jdk6.javac.executable>/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/bin/javac</jdk6.javac.executable>
+		<jdk7.javac.executable>/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/bin/javac</jdk7.javac.executable>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<surefire.version>2.12</surefire.version>
-		<use.jdk6.for.compile>false</use.jdk6.for.compile>
+		<use.jdk7.for.compile>false</use.jdk7.for.compile>
 	</properties>
 
 	<build>
@@ -94,9 +94,9 @@
 					<configuration>
 						<compilerVersion>1.6</compilerVersion>
 						<encoding>UTF-8</encoding>
-						<executable>${jdk6.javac.executable}</executable>
-						<forceJavacCompilerUse>${use.jdk6.for.compile}</forceJavacCompilerUse>
-						<fork>${use.jdk6.for.compile}</fork>
+						<executable>${jdk7.javac.executable}</executable>
+						<forceJavacCompilerUse>${use.jdk7.for.compile}</forceJavacCompilerUse>
+						<fork>${use.jdk7.for.compile}</fork>
 						<source>1.6</source>
 						<target>1.6</target>
 						<verbose>true</verbose>
@@ -234,6 +234,11 @@
 				<configuration>
 					<bnd>
 						<![CDATA[
+							# Avoid "service not found" errors on redeploys of this bundle by ensuring that this bundle
+							# is activated as soon as the service classes are loaded. For more details, see
+							# https://issues.apache.org/jira/browse/ARIES-957
+							Bundle-ActivationPolicy: \
+								lazy;includes="com.liferay.faces.util.osgi.mojarra.spi.internal"
 							# Consult individual package-info.java files to determine Export-Packages and versions.
 							-exportcontents: ${packages;VERSIONED}
 							# javax.el is automatically imported with the following versions:
@@ -241,10 +246,41 @@
 							Import-Package: \
 								!com.liferay.faces.util,\
 								!com.liferay.faces.util.*,\
+								com.sun.faces.util;version="[2.2.0,2.3.0)",\
 								javax.el;version="[2.2.0,4.0.0)",\
 								org.apache.commons.fileupload;version="[1.3.0,2)";resolution:=optional,\
 								org.apache.log4j;version="[1.2.0,2)",\
 								*
+							# Allow Util to load alternative FactoryExtensionFinder, LoggerFactory, and ProductFactory
+							# SPI implementations. Util provides the default implementations, so the capability is
+							# marked as optional.
+							Require-Capability: \
+								osgi.serviceloader;filter:="(osgi.serviceloader=com.liferay.faces.util.factory.FactoryExtensionFinder)";\
+								resolution:=optional;cardinality:=multiple,\
+								osgi.serviceloader;filter:="(osgi.serviceloader=com.liferay.faces.util.logging.LoggerFactory)";\
+								resolution:=optional;cardinality:=multiple,\
+								osgi.serviceloader;filter:="(osgi.serviceloader=com.liferay.faces.util.product.ProductFactory)";\
+								resolution:=optional;cardinality:=multiple,\
+								osgi.extender; filter:="(osgi.extender=osgi.serviceloader.processor)";\
+								resolution:=optional,\
+								osgi.extender; filter:="(osgi.extender=osgi.serviceloader.registrar)",\
+								osgi.extender;\
+									filter:="(&(osgi.extender=osgi.serviceloader.registrar)(version>=1.0.0)(!(version>=2.0.0)))",\
+								osgi.implementation;\
+									filter:="(&(osgi.implementation=osgi.cdi)(version>=1.0.0)(!(version>=2.0.0)))"
+							# Allow Util to provide SPI implementations to Mojarra.
+							Provide-Capability: \
+								osgi.serviceloader;osgi.serviceloader=com.sun.faces.spi.AnnotationProvider;\
+									uses:="com.sun.faces.spi",\
+								osgi.serviceloader;osgi.serviceloader=com.sun.faces.spi.FaceletConfigResourceProvider;\
+									uses:="com.sun.faces.spi",\
+								osgi.serviceloader;osgi.serviceloader=com.sun.faces.spi.FacesConfigResourceProvider;\
+									uses:="com.sun.faces.spi",\
+								osgi.serviceloader;osgi.serviceloader=javax.enterprise.inject.spi.Extension;\
+									osgi.cdi.extension="liferay.jsf";\
+									register:="com.liferay.faces.util.osgi.FacesCDIThinWabExtension";\
+									uses:="com.sun.faces,javax.enterprise.event,javax.enterprise.inject.spi,javax.inject,javax.servlet",\
+								osgi.cdi.extension;osgi.cdi.extension="liferay.jsf";version:Version="1.0.0"
 						]]>
 					</bnd>
 				</configuration>
@@ -281,10 +317,10 @@
 
 	<profiles>
 		<profile>
-			<id>compileWithJDK6Linux</id>
+			<id>compileWithJDK7Linux</id>
 			<activation>
 				<file>
-					<exists>${env.HOME}/Tools/jdk1.6.0_45/bin/javac</exists>
+					<exists>${env.HOME}/Tools/jdk1.7.0_80/bin/javac</exists>
 				</file>
 				<os>
 					<family>unix</family>
@@ -292,28 +328,28 @@
 				</os>
 			</activation>
 			<properties>
-				<jdk6.javac.executable>${env.HOME}/Tools/jdk1.6.0_45/bin/javac</jdk6.javac.executable>
-				<use.jdk6.for.compile>true</use.jdk6.for.compile>
+				<jdk7.javac.executable>${env.HOME}/Tools/jdk1.7.0_80/bin/javac</jdk7.javac.executable>
+				<use.jdk7.for.compile>true</use.jdk7.for.compile>
 			</properties>
 		</profile>
 		<profile>
-			<id>compileWithJDK6Mac</id>
+			<id>compileWithJDK7Mac</id>
 			<activation>
 				<file>
-					<exists>${use.jdk6.for.compile}</exists>
+					<exists>${use.jdk7.for.compile}</exists>
 				</file>
 				<os>
 					<family>mac</family>
 				</os>
 			</activation>
 			<properties>
-				<use.jdk6.for.compile>true</use.jdk6.for.compile>
+				<use.jdk7.for.compile>true</use.jdk7.for.compile>
 			</properties>
 		</profile>
 		<profile>
 			<id>release</id>
 			<properties>
-				<use.jdk6.for.compile>true</use.jdk6.for.compile>
+				<use.jdk7.for.compile>true</use.jdk7.for.compile>
 			</properties>
 			<build>
 				<plugins>
@@ -397,17 +433,17 @@
 		</dependency>
 		<!-- END: Only required for file upload -->
 		<dependency>
+			<groupId>javax.el</groupId>
+			<artifactId>javax.el-api</artifactId>
+			<version>2.2.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
 			<groupId>javax.enterprise</groupId>
 			<artifactId>cdi-api</artifactId>
 			<version>2.0</version>
 			<scope>provided</scope>
 			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>javax.el</groupId>
-			<artifactId>javax.el-api</artifactId>
-			<version>2.2.1</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>javax.faces</groupId>
