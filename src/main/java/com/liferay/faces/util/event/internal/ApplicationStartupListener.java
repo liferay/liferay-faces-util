@@ -88,9 +88,10 @@ public class ApplicationStartupListener extends ApplicationStartupListenerCompat
 
 			UtilDependencyVerifier.verify(initExternalContext);
 			I18nMap.initMessageCache(initFacesContext);
+
 			BeanManager beanManager = (BeanManager) applicationMap.get(OnDemandBeanManagerKey.INSTANCE);
 
-			if (beanManager != null && FacesBundleUtil.isCurrentWarThinWab()) {
+			if ((beanManager != null) && FacesBundleUtil.isCurrentWarThinWab()) {
 				application.addELResolver(beanManager.getELResolver());
 			}
 			else {
@@ -121,13 +122,13 @@ public class ApplicationStartupListener extends ApplicationStartupListenerCompat
 
 	private static final class ELResolverDeferredBeanManagerImpl extends ELResolverWrapper {
 
-		private final BeanManagerELResolverAccessor beanManagerELResolverAccessor =
-			new BeanManagerELResolverAccessor();
+		private final BeanManagerELResolverAccessor beanManagerELResolverAccessor = new BeanManagerELResolverAccessor();
 
 		@Override
 		public ELResolver getWrapped() {
 
 			FacesContext facesContext = FacesContext.getCurrentInstance();
+
 			return beanManagerELResolverAccessor.get(facesContext);
 		}
 	}
