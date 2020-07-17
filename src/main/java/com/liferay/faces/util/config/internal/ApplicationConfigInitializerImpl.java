@@ -28,6 +28,8 @@ import com.liferay.faces.util.config.WebConfig;
 import com.liferay.faces.util.internal.TCCLUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.faces.util.osgi.internal.FacesConfigScannerOSGiImpl;
+import com.liferay.faces.util.osgi.internal.OSGiEnvironment;
 import com.liferay.faces.util.xml.ConcurrentSAXParserFactory;
 
 
@@ -85,7 +87,13 @@ public class ApplicationConfigInitializerImpl implements ApplicationConfigInitia
 
 	protected FacesConfigScanner newFacesConfigScanner(ClassLoader classLoader, ResourceReader resourceReader,
 		SAXParser saxParser, boolean resolveEntities, WebConfig webConfig) {
-		return new FacesConfigScannerImpl(classLoader, resourceReader, saxParser, resolveEntities, webConfig);
+
+		if (OSGiEnvironment.isApiDetected()) {
+			return new FacesConfigScannerOSGiImpl(classLoader, saxParser, resolveEntities, webConfig);
+		}
+		else {
+			return new FacesConfigScannerImpl(classLoader, saxParser, resolveEntities, webConfig);
+		}
 	}
 
 	protected ResourceReader newResourceReader() {

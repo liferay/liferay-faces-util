@@ -18,6 +18,7 @@ package com.liferay.faces.util.osgi.internal;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Dictionary;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -48,42 +49,23 @@ public final class FacesBundleUtil {
 	private static final Logger logger = LoggerFactory.getLogger(FacesBundleUtil.class);
 
 	// Private Constants
-	private static final boolean OSGI_ENVIRONMENT_DETECTED;
+	private static final boolean CURRENT_BUNDLE_DETECTED;
 	private static final Long OSGI_FRAMEWORK_BUNDLE_ID = 0L;
 
 	static {
 
-		boolean frameworkUtilDetected = false;
+		boolean currentBundleDetected = false;
 
-		try {
-
-			Class.forName("org.osgi.framework.FrameworkUtil");
-			frameworkUtilDetected = true;
-		}
-		catch (ClassNotFoundException e) {
-			// Do nothing.
-		}
-		catch (NoClassDefFoundError e) {
-			// Do nothing.
-		}
-		catch (Throwable t) {
-
-			logger.error("An unexpected error occurred when attempting to detect OSGi:");
-			logger.error(t);
-		}
-
-		boolean osgiEnvironmentDetected = false;
-
-		if (frameworkUtilDetected) {
+		if (OSGiEnvironment.isApiDetected()) {
 
 			Bundle currentBundle = FrameworkUtil.getBundle(FacesBundleUtil.class);
 
 			if (currentBundle != null) {
-				osgiEnvironmentDetected = true;
+				currentBundleDetected = true;
 			}
 		}
 
-		OSGI_ENVIRONMENT_DETECTED = osgiEnvironmentDetected;
+		CURRENT_BUNDLE_DETECTED = currentBundleDetected;
 	}
 
 	private FacesBundleUtil() {
@@ -94,11 +76,13 @@ public final class FacesBundleUtil {
 
 		Map<Long, Bundle> facesBundles = null;
 
-		if (OSGI_ENVIRONMENT_DETECTED) {
+		if (CURRENT_BUNDLE_DETECTED) {
 
 			facesBundles = (Map<Long, Bundle>) getServletContextAttribute(context, FacesBundleUtil.class.getName());
 
 			if (facesBundles == null) {
+
+				facesBundles = new HashMap<Long, Bundle>();
 
 				Bundle wabBundle = getCurrentFacesWab(context);
 
@@ -140,7 +124,7 @@ public final class FacesBundleUtil {
 	}
 
 	public static boolean isCurrentWarThinWab() {
-		return OSGI_ENVIRONMENT_DETECTED && !isCurrentBundleThickWab();
+		return CURRENT_BUNDLE_DETECTED && !isCurrentBundleThickWab();
 	}
 
 	public static boolean isWab(Bundle bundle) {
@@ -206,10 +190,12 @@ public final class FacesBundleUtil {
 					// to the list of Faces bundles for a portlet which does not expect it, it can completely
 					// change the h:head renderer and add unnecessary front-end resources to every page causing
 					// performance issues and other bugs.
-					if (facesBundles.containsKey(key) ||
+					if (facesBundles.containsKey(key) || isIgnoredBundle(providerBundle.getSymbolicName()) ||
 							(isFacesLibraryBundle(key) && isDynamicDependency(bundleWire))) {
 						continue;
 					}
+
+					logger.debug("JSF module dependency: [{0}]", providerBundle.getSymbolicName());
 
 					facesBundles.put(key, providerBundle);
 
@@ -308,6 +294,11 @@ public final class FacesBundleUtil {
 			ServletContext servletContext = (ServletContext) context;
 			servletContextAttributeValue = servletContext.getAttribute(servletContextAttributeName);
 		}
+		else if (context instanceof Map) {
+
+			Map<String, Object> applicationMap = (Map<String, Object>) context;
+			servletContextAttributeValue = applicationMap.get(servletContextAttributeName);
+		}
 		else {
 			throwIllegalContextClassException(context);
 		}
@@ -350,6 +341,22 @@ public final class FacesBundleUtil {
 		return key < 0;
 	}
 
+	private static boolean isIgnoredBundle(String symbolicName) {
+
+		if (symbolicName.startsWith("com.liferay.portal") || symbolicName.startsWith("com.liferay.util") ||
+				symbolicName.equals("com.sun.el.javax.el") || symbolicName.startsWith("jboss-classfilewriter") ||
+				symbolicName.startsWith("javax.servlet") || symbolicName.startsWith("javax.validation") ||
+				symbolicName.startsWith("org.apache.commons") || symbolicName.startsWith("org.apache.felix") ||
+				symbolicName.startsWith("org.apache.geronimo.specs") || symbolicName.startsWith("org.jboss.logging") ||
+				symbolicName.startsWith("org.jboss.weld") || symbolicName.startsWith("org.jsoup") ||
+				symbolicName.startsWith("org.osgi")) {
+
+			return true;
+		}
+
+		return false;
+	}
+
 	private static void setServletContextAttribute(Object context, String servletContextAttributeName,
 		Object servletContextAttributeValue) {
 
@@ -375,6 +382,10 @@ public final class FacesBundleUtil {
 
 			ServletContext servletContext = (ServletContext) context;
 			servletContext.setAttribute(servletContextAttributeName, servletContextAttributeValue);
+		}
+		else if (context instanceof Map) {
+			Map<String, Object> applicationMap = (Map<String, Object>) context;
+			applicationMap.put(servletContextAttributeName, servletContextAttributeValue);
 		}
 		else {
 			throwIllegalContextClassException(context);

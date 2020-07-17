@@ -31,8 +31,8 @@ import com.liferay.faces.util.resource.internal.ResourceProviderUtil;
 
 
 /**
- * Note that this class uses a {@link List} of {@link URL}s rather than a {@link Set} of URLs (which would remove
- * duplicates) because Set's check for equality. Unfortunately {@link URL#equals(java.lang.Object)} and {@link
+ * Note that this class uses a {@link List} of {@link URL}s rather than a {@link java.util.Set} of URLs (which would
+ * remove duplicates) because Set's check for equality. Unfortunately {@link URL#equals(java.lang.Object)} and {@link
  * URL#hashCode()} may actually make blocking network requests before returning, so using a Set may cause serious
  * performance issues. For more information see this StackOverflow Q&A:
  * https://stackoverflow.com/questions/18280818/what-java-library-can-i-use-to-compare-two-urls-for-equality.
@@ -47,13 +47,13 @@ public class FacesBundlesHandlerResourceProviderOSGiImpl extends FacesBundlesHan
 	// Private Data Members
 	private final String currentFacesWabFilePattern;
 	private final String path;
-	private final String facesBunleFilePattern;
+	private final String facesBundleFilePattern;
 
 	public FacesBundlesHandlerResourceProviderOSGiImpl(String path, String facesBundleFilePattern) {
 
 		this.path = path;
 		this.currentFacesWabFilePattern = facesBundleFilePattern;
-		this.facesBunleFilePattern = facesBundleFilePattern;
+		this.facesBundleFilePattern = facesBundleFilePattern;
 	}
 
 	public FacesBundlesHandlerResourceProviderOSGiImpl(String path, String currentFacesWabFilePattern,
@@ -61,7 +61,7 @@ public class FacesBundlesHandlerResourceProviderOSGiImpl extends FacesBundlesHan
 
 		this.path = path;
 		this.currentFacesWabFilePattern = currentFacesWabFilePattern;
-		this.facesBunleFilePattern = facesBundleFilePattern;
+		this.facesBundleFilePattern = facesBundleFilePattern;
 	}
 
 	@Override
@@ -70,14 +70,21 @@ public class FacesBundlesHandlerResourceProviderOSGiImpl extends FacesBundlesHan
 	}
 
 	@Override
-	protected void handleCurrentFacesWab(Bundle currentFacesWab, ReturnValueReference<List<URL>> returnValueReference) {
+	protected void handleCurrentFacesWab(Bundle currentFacesWab, ReturnValueReference<List<URL>> returnValueReference,
+		boolean recurse) {
 
 		BundleWiring bundleWiring = currentFacesWab.adapt(BundleWiring.class);
 
 		if (bundleWiring != null) {
 
+			int options = BundleWiring.LISTRESOURCES_LOCAL;
+
+			if (recurse) {
+				options = BundleWiring.LISTRESOURCES_RECURSE;
+			}
+
 			Collection<String> resourceFilePaths = bundleWiring.listResources(path, currentFacesWabFilePattern,
-					BundleWiring.LISTRESOURCES_RECURSE);
+					options);
 
 			for (String resourceFilePath : resourceFilePaths) {
 
@@ -103,9 +110,10 @@ public class FacesBundlesHandlerResourceProviderOSGiImpl extends FacesBundlesHan
 	}
 
 	@Override
-	protected void handleFacesBundle(Bundle bundle, ReturnValueReference<List<URL>> returnValueReference) {
+	protected void handleFacesBundle(Bundle bundle, ReturnValueReference<List<URL>> returnValueReference,
+		boolean recurse) {
 
-		Enumeration<URL> resources = bundle.findEntries(path, facesBunleFilePattern, true);
+		Enumeration<URL> resources = bundle.findEntries(path, facesBundleFilePattern, recurse);
 		List<URL> urls = returnValueReference.get();
 		ResourceProviderUtil.addAllEnumerationURLsToList(resources, urls);
 	}
