@@ -105,7 +105,7 @@ public class AnnotationProviderOSGiImpl extends AnnotationProvider {
 
 			FacesBundlesHandlerBase<Map<Class<? extends Annotation>, Set<Class<?>>>> facesBundlesHandler =
 				new FacesBundlesHandlerAnnotationProviderOSGiImpl();
-			annotatedClasses = Collections.unmodifiableMap(facesBundlesHandler.handleFacesBundles(sc));
+			annotatedClasses = Collections.unmodifiableMap(facesBundlesHandler.handleFacesBundles(sc, true));
 		}
 		else {
 			annotatedClasses = wrappedAnnotationProvider.getAnnotatedClasses(set);
@@ -121,6 +121,23 @@ public class AnnotationProviderOSGiImpl extends AnnotationProvider {
 			return (bundle.getEntry(classFilePath) != null) ||
 				(wab && !classFilePath.startsWith(WEB_INF_CLASSES_PATH) &&
 					(bundle.getEntry(WEB_INF_CLASSES_PATH + classFilePath) != null));
+		}
+
+		private static boolean isIgnored(String classFilePath) {
+
+			if (classFilePath.startsWith("com/liferay/taglib/") || classFilePath.startsWith("com/liferay/util/") ||
+					classFilePath.startsWith("com/sun/el/") || classFilePath.startsWith("com/sun/faces/") ||
+					classFilePath.startsWith("javax/annotation/") || classFilePath.startsWith("javax/el/") ||
+					classFilePath.startsWith("javax/enterprise/") || classFilePath.startsWith("javax/faces/") ||
+					classFilePath.startsWith("javax/inject/") || classFilePath.startsWith("javax/portlet/") ||
+					classFilePath.startsWith("javax/servlet/") || classFilePath.startsWith("javax/validation/") ||
+					classFilePath.startsWith("org/apache/") || classFilePath.startsWith("org/jboss/weld/") ||
+					classFilePath.startsWith("org/osgi/") || classFilePath.endsWith("package-info.class")) {
+
+				return true;
+			}
+
+			return false;
 		}
 
 		private static Class<?> loadBundleClass(Bundle bundle, String className) {
@@ -157,19 +174,25 @@ public class AnnotationProviderOSGiImpl extends AnnotationProvider {
 
 		@Override
 		protected void handleFacesBundle(Bundle bundle,
-			ReturnValueReference<Map<Class<? extends Annotation>, Set<Class<?>>>> returnValueReference) {
+			ReturnValueReference<Map<Class<? extends Annotation>, Set<Class<?>>>> returnValueReference,
+			boolean recurse) {
 
 			BundleWiring bundleWiring = bundle.adapt(BundleWiring.class);
 
 			if (bundleWiring != null) {
 
-				Collection<String> classFilePaths = bundleWiring.listResources("/", "*.class",
-						BundleWiring.LISTRESOURCES_RECURSE);
+				int options = BundleWiring.LISTRESOURCES_LOCAL;
+
+				if (recurse) {
+					options = BundleWiring.LISTRESOURCES_RECURSE;
+				}
+
+				Collection<String> classFilePaths = bundleWiring.listResources("/", "*.class", options);
 				boolean wab = FacesBundleUtil.isWab(bundle);
 
 				for (String classFilePath : classFilePaths) {
 
-					if (!isClassInBundle(classFilePath, bundle, wab)) {
+					if (!isClassInBundle(classFilePath, bundle, wab) && isIgnored(classFilePath)) {
 						continue;
 					}
 
@@ -177,6 +200,14 @@ public class AnnotationProviderOSGiImpl extends AnnotationProvider {
 					Class<?> clazz = loadBundleClass(bundle, className);
 
 					if (clazz == null) {
+
+						// If FileEntryBridgeImpl.class fails to load, it means that ICEfaces is not deployed as an
+						// OSGi module. Don't log this as an error condition, since ICEfaces may not be required by the
+						// WAB.
+						if (!classFilePath.endsWith("FileEntryBridgeImpl.class")) {
+							logger.warn("Unable to load class for annotation scanning: {0}", classFilePath);
+						}
+
 						continue;
 					}
 

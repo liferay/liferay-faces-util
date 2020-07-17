@@ -100,7 +100,7 @@ public final class FacesThinWabInitializer implements ServletContainerInitialize
 					resolveEntities);
 			FacesBundlesHandlerBase<List<URL>> facesBundlesHandlerGetWebFragmentImpl =
 				new FacesBundlesHandlerGetWebFragmentImpl();
-			List<URL> webFragmentURLs = facesBundlesHandlerGetWebFragmentImpl.handleFacesBundles(servletContext);
+			List<URL> webFragmentURLs = facesBundlesHandlerGetWebFragmentImpl.handleFacesBundles(servletContext, true);
 			WebConfig webFragmentConfig = webConfigScanner.scanWebFragments(Collections.enumeration(webFragmentURLs));
 			Map<String, String> webFragmentContextParams = webFragmentConfig.getConfiguredContextParams();
 			Set<Map.Entry<String, String>> entrySet = webFragmentContextParams.entrySet();
@@ -135,9 +135,9 @@ public final class FacesThinWabInitializer implements ServletContainerInitialize
 
 		@Override
 		protected void handleCurrentFacesWab(Bundle currentFacesWab,
-			ReturnValueReference<List<URL>> returnValueReference) {
+			ReturnValueReference<List<URL>> returnValueReference, boolean recurse) {
 
-			super.handleCurrentFacesWab(currentFacesWab, returnValueReference);
+			super.handleCurrentFacesWab(currentFacesWab, returnValueReference, recurse);
 
 			URL webConfigURL = currentFacesWab.getEntry("WEB-INF/web.xml");
 
@@ -147,16 +147,16 @@ public final class FacesThinWabInitializer implements ServletContainerInitialize
 		}
 
 		@Override
-		protected void handleFacesBundle(Bundle bundle, ReturnValueReference<List<URL>> returnValueReference) {
-
-			collect(bundle, "META-INF", "*.web-fragment.xml", returnValueReference);
-			collect(bundle, "META-INF", "web-fragment.xml", returnValueReference);
+		protected void handleFacesBundle(Bundle bundle, ReturnValueReference<List<URL>> returnValueReference,
+			boolean recurse) {
+			collect(bundle, "META-INF", "*.web-fragment.xml", returnValueReference, recurse);
+			collect(bundle, "META-INF", "web-fragment.xml", returnValueReference, recurse);
 		}
 
 		private void collect(Bundle bundle, String directory, String pattern,
-			ReturnValueReference<List<URL>> returnValueReference) {
+			ReturnValueReference<List<URL>> returnValueReference, boolean recurse) {
 
-			Enumeration<URL> webFragmentURLs = bundle.findEntries(directory, pattern, false);
+			Enumeration<URL> webFragmentURLs = bundle.findEntries(directory, pattern, recurse);
 
 			while ((webFragmentURLs != null) && webFragmentURLs.hasMoreElements()) {
 				returnValueReference.get().add(webFragmentURLs.nextElement());

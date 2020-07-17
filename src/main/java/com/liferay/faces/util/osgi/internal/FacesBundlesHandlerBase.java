@@ -25,7 +25,7 @@ import org.osgi.framework.Bundle;
  */
 public abstract class FacesBundlesHandlerBase<ReturnValueType> {
 
-	public final ReturnValueType handleFacesBundles(Object context) {
+	public final ReturnValueType handleFacesBundles(Object context, boolean recurse) {
 
 		ReturnValueType returnValueObject = getInitialReturnValueObject();
 		ReturnValueReference<ReturnValueType> returnValueReference = new ReturnValueReference<ReturnValueType>(
@@ -33,14 +33,14 @@ public abstract class FacesBundlesHandlerBase<ReturnValueType> {
 
 		if (context != null) {
 
-			handleCurrentFacesWab(FacesBundleUtil.getCurrentFacesWab(context), returnValueReference);
+			handleCurrentFacesWab(FacesBundleUtil.getCurrentFacesWab(context), returnValueReference, recurse);
 
 			Collection<Bundle> facesBundles = FacesBundleUtil.getFacesBundles(context);
 
 			if (facesBundles != null) {
 
 				for (Bundle facesBundle : facesBundles) {
-					handleFacesBundle(facesBundle, returnValueReference);
+					handleFacesBundle(facesBundle, returnValueReference, recurse);
 				}
 			}
 		}
@@ -50,12 +50,12 @@ public abstract class FacesBundlesHandlerBase<ReturnValueType> {
 
 	protected abstract ReturnValueType getInitialReturnValueObject();
 
-	protected abstract void handleFacesBundle(Bundle bundle,
-		ReturnValueReference<ReturnValueType> returnValueReference);
+	protected abstract void handleFacesBundle(Bundle bundle, ReturnValueReference<ReturnValueType> returnValueReference,
+		boolean recurse);
 
 	protected void handleCurrentFacesWab(Bundle currentFacesWab,
-		ReturnValueReference<ReturnValueType> returnValueReference) {
-		handleFacesBundle(currentFacesWab, returnValueReference);
+		ReturnValueReference<ReturnValueType> returnValueReference, boolean recurse) {
+		handleFacesBundle(currentFacesWab, returnValueReference, recurse);
 	}
 
 	protected static final class ReturnValueReference<ReturnValueType> {

@@ -69,7 +69,7 @@ public class FacesConfigResourceProviderOSGiImpl implements FacesConfigResourceP
 					ResourceProviderUtil.FACES_CONFIG_EXTENSION_PATTERN);
 		}
 
-		List<URL> resourceURLs = facesBundlesHandler.handleFacesBundles(servletContext);
+		List<URL> resourceURLs = facesBundlesHandler.handleFacesBundles(servletContext, true);
 
 		return ResourceProviderUtil.getResourcesAsURIs(resourceURLs);
 	}

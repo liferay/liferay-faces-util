@@ -48,7 +48,7 @@ public class FaceletConfigResourceProviderOSGiImpl implements ConfigurationResou
 
 		FacesBundlesHandlerBase<List<URL>> facesBundlesHandler = new FacesBundlesHandlerResourceProviderOSGiImpl(
 				ResourceProviderUtil.META_INF_PATH, "*.taglib.xml");
-		List<URL> resourceURLs = facesBundlesHandler.handleFacesBundles(servletContext);
+		List<URL> resourceURLs = facesBundlesHandler.handleFacesBundles(servletContext, true);
 
 		return ResourceProviderUtil.getResourcesAsURIs(resourceURLs);
 	}
