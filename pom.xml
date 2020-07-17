@@ -240,6 +240,19 @@
 								lazy;includes="com.liferay.faces.util.osgi.mojarra.spi.internal"
 							# Consult individual package-info.java files to determine Export-Packages and versions.
 							-exportcontents: ${packages;VERSIONED}
+							Export-Package: \
+								com.liferay.faces.util.application.internal,\
+								com.liferay.faces.util.cache.internal,\
+								com.liferay.faces.util.client.internal,\
+								com.liferay.faces.util.context.internal,\
+								com.liferay.faces.util.el.internal,\
+								com.liferay.faces.util.event.internal,\
+								com.liferay.faces.util.i18n.internal,\
+								com.liferay.faces.util.model.internal,\
+								com.liferay.faces.util.osgi.internal,\
+								com.liferay.faces.util.osgi.mojarra.spi.internal,\
+								com.liferay.faces.util.product.internal,\
+								com.liferay.faces.util.render.internal
 							# javax.el is automatically imported with the following versions:
 							# javax.el;version="[2.2.0,3.0.0)", but versions 3.0.0+ are also valid.
 							Import-Package: \
