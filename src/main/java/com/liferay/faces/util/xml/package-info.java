@@ -13,5 +13,5 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@org.osgi.annotation.versioning.Version("3.3.1")
+@org.osgi.annotation.versioning.Version("3.4.0")
 package com.liferay.faces.util.xml;
