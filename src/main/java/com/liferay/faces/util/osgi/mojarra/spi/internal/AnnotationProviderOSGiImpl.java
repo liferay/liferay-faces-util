@@ -33,6 +33,7 @@ import javax.faces.event.NamedEvent;
 import javax.faces.render.FacesBehaviorRenderer;
 import javax.faces.render.FacesRenderer;
 import javax.faces.validator.FacesValidator;
+import javax.servlet.ServletContext;
 import javax.servlet.annotation.HandlesTypes;
 
 import org.osgi.framework.Bundle;
@@ -93,6 +94,11 @@ public class AnnotationProviderOSGiImpl extends AnnotationProvider {
 	}
 
 	public AnnotationProviderOSGiImpl() {
+	}
+
+	public AnnotationProviderOSGiImpl(ServletContext servletContext, AnnotationProvider annotationProvider) {
+		super(servletContext);
+		this.wrappedAnnotationProvider = annotationProvider;
 	}
 
 	@Override
