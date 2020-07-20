@@ -120,7 +120,7 @@ public class ApplicationOSGiCDIImpl extends ApplicationWrapper {
 					}
 				}
 				catch (IllegalStateException e) {
-					System.err.println(e.getMessage());
+					logger.error(e);
 				}
 			}
 		}
