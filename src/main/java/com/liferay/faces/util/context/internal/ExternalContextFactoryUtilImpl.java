@@ -22,7 +22,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.liferay.faces.util.osgi.internal.FacesBundleUtil;
 import com.liferay.faces.util.osgi.internal.OSGiEnvironment;
 
 
@@ -41,7 +40,7 @@ public class ExternalContextFactoryUtilImpl extends ExternalContextFactory {
 	@Override
 	public ExternalContext getExternalContext(Object context, Object request, Object response) throws FacesException {
 
-		if (OSGiEnvironment.isApiDetected() && FacesBundleUtil.isCurrentWarThinWab()) {
+		if (OSGiEnvironment.isApiDetected()) {
 
 			// The Trinidad ResourceServlet (ADF) calls this method outside of the portlet lifecycle. In this case,
 			// simply return the ExternalContext instance from the wrapped (Mojarra) factory.
