@@ -362,9 +362,6 @@
 		</profile>
 		<profile>
 			<id>release</id>
-			<properties>
-				<use.jdk7.for.compile>true</use.jdk7.for.compile>
-			</properties>
 			<build>
 				<plugins>
 					<plugin>
