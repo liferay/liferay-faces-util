@@ -143,13 +143,16 @@ public final class FacesBundleUtil {
 	/* package-private */ static Bundle getCurrentFacesWab(Object context) {
 
 		BundleContext bundleContext = (BundleContext) getServletContextAttribute(context, "osgi-bundlecontext");
-		Bundle bundle;
+		Bundle bundle = null;
 
-		try {
-			bundle = bundleContext.getBundle();
-		}
-		catch (IllegalStateException e) {
-			bundle = null;
+		if (bundleContext != null) {
+
+			try {
+				bundle = bundleContext.getBundle();
+			}
+			catch (IllegalStateException e) {
+				// Ignore
+			}
 		}
 
 		return bundle;
