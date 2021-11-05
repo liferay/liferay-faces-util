@@ -1,7 +1,7 @@
 # Liferay Faces Util
 
 This is a library that contains general purpose JSF utilities to support many of the sub-projects that comprise
-[Liferay Faces](http://www.liferay.com/community/liferay-projects/liferay-faces/overview).
+[Liferay Faces](https://liferay.dev/-/faces).
 
 ## License
 
@@ -20,9 +20,8 @@ Using [Maven](https://maven.apache.org/) 3.x:
 ## Documentation
 
 * [Official Documentation](http://www.liferay.com/community/liferay-projects/liferay-faces/documentation)
-* [Liferay Faces Wiki](http://www.liferay.com/community/wiki/-/wiki/Main/Liferay+Faces)
 
 ## Community Participation
 
-Please post questions in the [Liferay Faces Forum](http://www.liferay.com/community/forums/-/message_boards/category/13289027).
+Please post questions in the [Liferay Faces Forum](https://liferay.dev/ask/questions/tag/jsf).
 Defects and feature requests can be posted in the [Liferay Faces Issue Tracker](http://issues.liferay.com/browse/FACES).
