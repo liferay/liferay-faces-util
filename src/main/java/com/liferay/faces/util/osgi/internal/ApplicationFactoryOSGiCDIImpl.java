@@ -64,10 +64,11 @@ public class ApplicationFactoryOSGiCDIImpl extends ApplicationFactory {
 		if (application == null) {
 
 			if (requiresCapabilityCDI) {
-				application = new ApplicationOSGiCDIImpl(wrappedApplicationFactory.getApplication());
+				application = new ApplicationFACES3641Impl(new ApplicationOSGiCDIImpl(
+							wrappedApplicationFactory.getApplication()));
 			}
 			else {
-				application = wrappedApplicationFactory.getApplication();
+				application = new ApplicationFACES3641Impl(wrappedApplicationFactory.getApplication());
 			}
 		}
 
