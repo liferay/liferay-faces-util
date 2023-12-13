@@ -15,7 +15,6 @@
  */
 package com.liferay.faces.util.logging.internal;
 
-import com.liferay.faces.util.internal.TCCLUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -27,10 +26,13 @@ public class LoggerFactoryImpl extends LoggerFactory {
 
 	// Private Constants
 	private static final String CLASS_NAME_LOG4J_LOGGER = "org.apache.log4j.Logger";
+	private static final String CLASS_NAME_LOG4J2_LOGGER = "org.apache.logging.log4j.Logger";
 	private static final boolean LOG4J_AVAILABLE;
+	private static final boolean LOG4J2_AVAILABLE;
 
 	static {
 
+		// Log4J 1.x
 		boolean log4jAvailable;
 
 		try {
@@ -56,12 +58,42 @@ public class LoggerFactoryImpl extends LoggerFactory {
 		}
 
 		LOG4J_AVAILABLE = log4jAvailable;
+
+		// Log4J 2.x
+		boolean log4j2Available;
+
+		try {
+			Class.forName(CLASS_NAME_LOG4J2_LOGGER);
+			log4j2Available = true;
+
+			try {
+				new LoggerLog4J2Impl(CLASS_NAME_LOG4J2_LOGGER);
+			}
+
+			// LoggerLog4J2Impl catches all exceptions in its constructor. However, NoClassDefFoundError is an Error so
+			// it will not be caught in the constructor.
+			catch (NoClassDefFoundError e) {
+
+				System.err.println(LoggerFactory.class.getName() +
+					" (WARN): Incompatible version of log4j-core.jar in the classpath.");
+				System.err.println(e.getMessage());
+				log4j2Available = false;
+			}
+		}
+		catch (Exception e) {
+			log4j2Available = false;
+		}
+
+		LOG4J2_AVAILABLE = log4j2Available;
 	}
 
 	@Override
 	public Logger getLoggerImplementation(String name) {
 
-		if (LOG4J_AVAILABLE) {
+		if (LOG4J2_AVAILABLE) {
+			return new LoggerLog4J2Impl(name);
+		}
+		else if (LOG4J_AVAILABLE) {
 			return new LoggerLog4JImpl(name);
 		}
 		else {
