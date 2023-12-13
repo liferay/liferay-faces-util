@@ -111,7 +111,8 @@ public class AnnotationProviderOSGiImpl extends AnnotationProvider {
 
 			FacesBundlesHandlerBase<Map<Class<? extends Annotation>, Set<Class<?>>>> facesBundlesHandler =
 				new FacesBundlesHandlerAnnotationProviderOSGiImpl();
-			annotatedClasses = Collections.unmodifiableMap(facesBundlesHandler.handleFacesBundles(sc, true));
+			annotatedClasses =
+				Collections.unmodifiableMap(facesBundlesHandler.handleFacesBundles(servletContext, true));
 		}
 		else {
 			annotatedClasses = wrappedAnnotationProvider.getAnnotatedClasses(set);
