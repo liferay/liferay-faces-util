@@ -19,9 +19,8 @@ import com.liferay.faces.util.config.ApplicationConfig;
 import com.liferay.faces.util.config.FacesConfig;
 import com.liferay.faces.util.config.WebConfig;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class ApplicationConfigImpl implements ApplicationConfig {
 

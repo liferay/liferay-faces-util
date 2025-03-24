@@ -17,9 +17,8 @@ package com.liferay.faces.util.config.internal;
 
 import com.liferay.faces.util.config.ConfiguredManagedBean;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class ConfiguredManagedBeanImpl implements ConfiguredManagedBean {
 

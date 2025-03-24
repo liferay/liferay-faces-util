@@ -17,13 +17,11 @@ package com.liferay.faces.util.client;
 
 import org.osgi.annotation.versioning.ProviderType;
 
-
 /**
- * A Script which can be rendered on the client via {@link
- * com.liferay.faces.util.context.FacesContextHelperUtil#addScript(javax.faces.context.FacesContext,
- * com.liferay.faces.util.client.Script)}.
+ * A Script which can be rendered on the client via
+ * {@link com.liferay.faces.util.context.FacesContextHelperUtil#addScript(javax.faces.context.FacesContext, com.liferay.faces.util.client.Script)}.
  *
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 @ProviderType
 public interface Script {
@@ -31,7 +29,7 @@ public interface Script {
 	/**
 	 * The ModulesType is used to determine how to handle the Script's modules.
 	 *
-	 * @author  Kyle Stiemann
+	 * @author Kyle Stiemann
 	 */
 	public enum ModulesType {
 		ALLOY, ES6

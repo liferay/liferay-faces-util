@@ -21,15 +21,14 @@ import javax.faces.FacesWrapper;
 
 import org.osgi.annotation.versioning.ConsumerType;
 
-
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 @ConsumerType
 public abstract class CacheWrapper<K, V> implements Cache<K, V>, FacesWrapper<Cache<K, V>> {
 
 	/**
-	 * @see  Cache#containsKey(java.lang.Object)
+	 * @see Cache#containsKey(java.lang.Object)
 	 */
 	@Override
 	public boolean containsKey(K key) {
@@ -37,7 +36,7 @@ public abstract class CacheWrapper<K, V> implements Cache<K, V>, FacesWrapper<Ca
 	}
 
 	/**
-	 * @see  Cache#getKeys()
+	 * @see Cache#getKeys()
 	 */
 	@Override
 	public Set<K> getKeys() {
@@ -45,7 +44,7 @@ public abstract class CacheWrapper<K, V> implements Cache<K, V>, FacesWrapper<Ca
 	}
 
 	/**
-	 * @see  Cache#getSize()
+	 * @see Cache#getSize()
 	 */
 	@Override
 	public int getSize() {
@@ -53,7 +52,7 @@ public abstract class CacheWrapper<K, V> implements Cache<K, V>, FacesWrapper<Ca
 	}
 
 	/**
-	 * @see  Cache#getValue(java.lang.Object)
+	 * @see Cache#getValue(java.lang.Object)
 	 */
 	@Override
 	public V getValue(K key) {
@@ -61,7 +60,7 @@ public abstract class CacheWrapper<K, V> implements Cache<K, V>, FacesWrapper<Ca
 	}
 
 	/**
-	 * @see  Cache#putValueIfAbsent(java.lang.Object, java.lang.Object)
+	 * @see Cache#putValueIfAbsent(java.lang.Object, java.lang.Object)
 	 */
 	@Override
 	public V putValueIfAbsent(K key, V value) {
@@ -69,7 +68,7 @@ public abstract class CacheWrapper<K, V> implements Cache<K, V>, FacesWrapper<Ca
 	}
 
 	/**
-	 * @see  Cache#removeValue(java.lang.Object)
+	 * @see Cache#removeValue(java.lang.Object)
 	 */
 	@Override
 	public V removeValue(K key) {

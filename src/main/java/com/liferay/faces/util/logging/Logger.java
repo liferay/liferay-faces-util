@@ -17,9 +17,8 @@ package com.liferay.faces.util.logging;
 
 import org.osgi.annotation.versioning.ProviderType;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public interface Logger {

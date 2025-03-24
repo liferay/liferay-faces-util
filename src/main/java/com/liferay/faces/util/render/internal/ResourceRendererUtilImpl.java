@@ -36,12 +36,11 @@ import com.liferay.faces.util.application.ResourceVerifierFactory;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
-
 /**
  * This class wraps resources and uses {@link ResourceVerifier#isDependencySatisfied(FacesContext, UIComponent)} to
  * determine if the resources should be rendered.
  *
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 @ListenerFor(systemEventClass = PostAddToViewEvent.class)
 public class ResourceRendererUtilImpl extends RendererWrapper implements ComponentSystemEventListener, StateHolder {
@@ -56,10 +55,10 @@ public class ResourceRendererUtilImpl extends RendererWrapper implements Compone
 	/**
 	 * This zero-arg constructor is required by the {@link javax.faces.component.StateHolderSaver} class during the
 	 * RESTORE_VIEW phase of the JSF lifecycle. The reason why this class is involved in restoring state is because the
-	 * {@link javax.faces.component.UIComponent.ComponentSystemEventListenerAdapter} implements {@link
-	 * javax.faces.component.StateHolder} and will attempt to restore the state of any class in the restored view that
-	 * implements {@link ComponentSystemEventListener}. It does this first by instantiating the class with a zero-arg
-	 * constructor, and then calls the {@link #restoreState(FacesContext, Object)} method.
+	 * {@link javax.faces.component.UIComponent.ComponentSystemEventListenerAdapter} implements
+	 * {@link javax.faces.component.StateHolder} and will attempt to restore the state of any class in the restored view
+	 * that implements {@link ComponentSystemEventListener}. It does this first by instantiating the class with a
+	 * zero-arg constructor, and then calls the {@link #restoreState(FacesContext, Object)} method.
 	 */
 	public ResourceRendererUtilImpl() {
 
@@ -150,10 +149,10 @@ public class ResourceRendererUtilImpl extends RendererWrapper implements Compone
 	}
 
 	/**
-	 * Since the Mojarra {@link com.sun.faces.renderkit.html_basic.ScriptStyleBaseRenderer} class implements {@link
-	 * ComponentSystemEventListener}, this class must implement that interface too, since this is a wrapper type of
-	 * class. Mojarra uses this method to intercept {@link PostAddToViewEvent} in order to add script and link resources
-	 * to the head (if the target attribute has a value of "head").
+	 * Since the Mojarra {@link com.sun.faces.renderkit.html_basic.ScriptStyleBaseRenderer} class implements
+	 * {@link ComponentSystemEventListener}, this class must implement that interface too, since this is a wrapper type
+	 * of class. Mojarra uses this method to intercept {@link PostAddToViewEvent} in order to add script and link
+	 * resources to the head (if the target attribute has a value of "head").
 	 */
 	@Override
 	public void processEvent(ComponentSystemEvent event) throws AbortProcessingException {

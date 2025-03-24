@@ -35,13 +35,12 @@ import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.osgi.internal.ResourceBundleUtil;
 
-
 /**
- * This is an abstract class that provides a convenient base implementation for introducing an internationalized {@link
- * ResourceBundle} into the {@link I18n} delegation chain. For the sake of performance, lookups into the ResourceBundle
- * are cached by this class in a synchronized map.
+ * This is an abstract class that provides a convenient base implementation for introducing an internationalized
+ * {@link ResourceBundle} into the {@link I18n} delegation chain. For the sake of performance, lookups into the
+ * ResourceBundle are cached by this class in a synchronized map.
  *
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ConsumerType
 public abstract class I18nBundleBase extends I18nWrapper implements Serializable {
@@ -121,11 +120,11 @@ public abstract class I18nBundleBase extends I18nWrapper implements Serializable
 
 				if (locale == null) {
 					resourceBundle = ResourceBundleUtil.getUTF8ResourceBundleInOSGiEnvironment(bundleKey,
-							Locale.getDefault(), clazz);
+						Locale.getDefault(), clazz);
 				}
 				else {
-					resourceBundle = ResourceBundleUtil.getUTF8ResourceBundleInOSGiEnvironment(bundleKey, locale,
-							clazz);
+					resourceBundle =
+						ResourceBundleUtil.getUTF8ResourceBundleInOSGiEnvironment(bundleKey, locale, clazz);
 				}
 			}
 			catch (MissingResourceException e) {
@@ -182,7 +181,7 @@ public abstract class I18nBundleBase extends I18nWrapper implements Serializable
 	 * called from the constructor of I18nBundleBase, so this method must not cause side effects and should not expect
 	 * I18nBundleBase (or its subclass) to be fully initialized.
 	 *
-	 * @param  externalContext  The external context associated with the current {@link FacesContext}.
+	 * @param externalContext The external context associated with the current {@link FacesContext}.
 	 */
 	protected Cache<String, String> newConcurrentMessageCache(ExternalContext externalContext) {
 		return CacheFactory.getConcurrentCacheInstance(externalContext, 16);

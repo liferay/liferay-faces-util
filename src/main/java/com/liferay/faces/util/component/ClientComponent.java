@@ -17,12 +17,11 @@ package com.liferay.faces.util.component;
 
 import org.osgi.annotation.versioning.ProviderType;
 
-
 /**
  * This interface should be implemented by classes that extend {@link javax.faces.component.UIComponent} if they provide
  * the ability to access the value of a client-side UI component instance (Liferay Component) via JavaScript.
  *
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public interface ClientComponent {

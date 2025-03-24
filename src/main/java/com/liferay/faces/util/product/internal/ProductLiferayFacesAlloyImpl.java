@@ -16,12 +16,12 @@
 package com.liferay.faces.util.product.internal;
 
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class ProductLiferayFacesAlloyImpl extends ProductBase {
 
 	public ProductLiferayFacesAlloyImpl() {
 		super(ProductInfo.newInstance("Liferay Faces Alloy", "com.liferay.faces.alloy.component.column.Column",
-				"META-INF/maven/com.liferay.faces/com.liferay.faces.alloy/pom.properties"));
+			"META-INF/maven/com.liferay.faces/com.liferay.faces.alloy/pom.properties"));
 	}
 }

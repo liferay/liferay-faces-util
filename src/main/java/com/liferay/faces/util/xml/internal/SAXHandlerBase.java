@@ -26,9 +26,8 @@ import org.xml.sax.helpers.DefaultHandler;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public abstract class SAXHandlerBase extends DefaultHandler {
 

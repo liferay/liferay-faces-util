@@ -18,9 +18,8 @@ package com.liferay.faces.util.config.internal;
 import com.liferay.faces.util.config.ConfiguredServlet;
 import com.liferay.faces.util.config.MultiPartConfig;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class ConfiguredServletImpl implements ConfiguredServlet {
 

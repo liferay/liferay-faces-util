@@ -27,9 +27,8 @@ import com.liferay.faces.util.internal.CloseableUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class WebConfigScannerImpl implements WebConfigScanner {
 

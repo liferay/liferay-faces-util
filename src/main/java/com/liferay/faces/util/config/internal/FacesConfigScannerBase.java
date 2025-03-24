@@ -36,9 +36,8 @@ import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.product.internal.ProductMojarraImpl;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public abstract class FacesConfigScannerBase implements FacesConfigScanner {
 
@@ -120,8 +119,8 @@ public abstract class FacesConfigScannerBase implements FacesConfigScanner {
 
 			for (ConfiguredServletMapping explicitFacesServletMapping : facesServletMappings) {
 
-				if (explicitFacesServletMapping.isExtensionMapped() &&
-						explicitFacesServletMapping.getExtension().equals(configuredSuffix)) {
+				if (explicitFacesServletMapping.isExtensionMapped()
+					&& explicitFacesServletMapping.getExtension().equals(configuredSuffix)) {
 					found = true;
 
 					break;
@@ -130,8 +129,8 @@ public abstract class FacesConfigScannerBase implements FacesConfigScanner {
 
 			if (!found) {
 				String urlPattern = "*" + configuredSuffix;
-				ConfiguredServletMapping implicitFacesServletMapping = new ConfiguredServletMappingImpl(FACES_SERVLET,
-						urlPattern, true);
+				ConfiguredServletMapping implicitFacesServletMapping =
+					new ConfiguredServletMappingImpl(FACES_SERVLET, urlPattern, true);
 				facesServletMappings.add(implicitFacesServletMapping);
 				logger.debug("Added implicit extension-mapped servlet-mapping for urlPattern=[{0}]", urlPattern);
 			}
@@ -172,8 +171,8 @@ public abstract class FacesConfigScannerBase implements FacesConfigScanner {
 				else {
 
 					// Parse any META-INF/faces-config.xml files found in the classpath.
-					FacesConfigDescriptor facesConfigDescriptor = facesConfigDescriptorParser.parse(inputStream,
-							facesConfigURL);
+					FacesConfigDescriptor facesConfigDescriptor =
+						facesConfigDescriptorParser.parse(inputStream, facesConfigURL);
 					facesConfigDescriptors.add(facesConfigDescriptor);
 				}
 
@@ -191,7 +190,7 @@ public abstract class FacesConfigScannerBase implements FacesConfigScanner {
 			// Sort the faces configuration files in accord with
 			// javax.faces-api-2.2-FINAL_JSF_20130320_11.4.8_Ordering_of_Artifacts
 			List<FacesConfigDescriptor> orderedConfigs = OrderingUtil.getOrderedFacesConfigDescriptors(
-					mojarraConfigDescriptor, facesConfigDescriptors, webInfFacesConfigDescriptor);
+				mojarraConfigDescriptor, facesConfigDescriptors, webInfFacesConfigDescriptor);
 
 			for (FacesConfigDescriptor config : orderedConfigs) {
 

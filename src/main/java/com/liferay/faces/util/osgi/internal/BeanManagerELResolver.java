@@ -23,9 +23,8 @@ import javax.el.ELResolver;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.CDI;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class BeanManagerELResolver extends ELResolver {
 

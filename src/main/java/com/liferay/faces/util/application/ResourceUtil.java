@@ -26,9 +26,8 @@ import javax.faces.component.UIComponent;
 
 import org.osgi.annotation.versioning.ProviderType;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public final class ResourceUtil {
@@ -73,13 +72,13 @@ public final class ResourceUtil {
 	/**
 	 * Converts a String to an {@link InputStream}.
 	 *
-	 * @param   string    The string that is to be encoded and converted into an {@link InputStream}.
-	 * @param   encoding  The character set that is to be used for encoding the string prior to conversion.
+	 * @param string   The string that is to be encoded and converted into an {@link InputStream}.
+	 * @param encoding The character set that is to be used for encoding the string prior to conversion.
 	 *
-	 * @return  The {@link InputStream} representation of the specified string, after having first been encoded
-	 *          according to the specified character set.
+	 * @return The {@link InputStream} representation of the specified string, after having first been encoded according
+	 *         to the specified character set.
 	 *
-	 * @throws  UnsupportedEncodingException  If the specified encoding character set is not supported.
+	 * @throws UnsupportedEncodingException If the specified encoding character set is not supported.
 	 */
 	public static InputStream toInputStream(String string, String encoding) throws UnsupportedEncodingException {
 		return new ByteArrayInputStream(string.getBytes(encoding));
@@ -88,15 +87,15 @@ public final class ResourceUtil {
 	/**
 	 * Converts an {@link InputStream} to a String.
 	 *
-	 * @param   inputStream  The InputStream which contains some text.
-	 * @param   encoding     The encoding of the text of the InputStream.
-	 * @param   bufferSize   The size of the character buffer to be used when reading the file. If you do not want to
-	 *                       specify this value, use {@link ResourceUtil#toInputStream(java.lang.String,
-	 *                       java.lang.String)} which provides a default of 1024.
+	 * @param inputStream The InputStream which contains some text.
+	 * @param encoding    The encoding of the text of the InputStream.
+	 * @param bufferSize  The size of the character buffer to be used when reading the file. If you do not want to
+	 *                    specify this value, use {@link ResourceUtil#toInputStream(java.lang.String, java.lang.String)}
+	 *                    which provides a default of 1024.
 	 *
-	 * @return  The string content of the InputStream.
+	 * @return The string content of the InputStream.
 	 *
-	 * @throws  IOException  If an error occurs while reading the specified input stream.
+	 * @throws IOException If an error occurs while reading the specified input stream.
 	 */
 	public static String toString(InputStream inputStream, String encoding, int bufferSize) throws IOException {
 

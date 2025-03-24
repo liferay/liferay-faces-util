@@ -51,9 +51,8 @@ import javax.enterprise.inject.spi.ProducerFactory;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class BeanManagerStartupImpl implements BeanManager {
 
@@ -225,8 +224,8 @@ public class BeanManagerStartupImpl implements BeanManager {
 
 			if (typeTypeName.equals("com.sun.faces.cdi.CdiExtension")) {
 				Class<?> newInstanceClass = newInstance.getClass();
-				Method method = newInstanceClass.getMethod("setAddBeansForJSFImplicitObjects",
-						new Class[] { boolean.class });
+				Method method =
+					newInstanceClass.getMethod("setAddBeansForJSFImplicitObjects", new Class[] { boolean.class });
 				method.invoke(newInstance, new Object[] { facesConfigAnnotationPresent });
 			}
 

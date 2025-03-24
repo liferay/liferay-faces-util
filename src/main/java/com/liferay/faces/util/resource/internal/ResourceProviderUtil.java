@@ -27,9 +27,8 @@ import java.util.Set;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
-
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public final class ResourceProviderUtil {
 

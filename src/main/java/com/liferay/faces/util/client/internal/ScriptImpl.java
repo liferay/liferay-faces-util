@@ -21,9 +21,8 @@ import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
-
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public class ScriptImpl implements Script, Serializable {
 

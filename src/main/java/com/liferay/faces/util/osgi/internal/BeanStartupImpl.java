@@ -23,9 +23,8 @@ import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class BeanStartupImpl implements Bean {
 

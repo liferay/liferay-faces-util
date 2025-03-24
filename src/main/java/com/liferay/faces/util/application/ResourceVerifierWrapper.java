@@ -23,18 +23,17 @@ import javax.faces.context.FacesContext;
 
 import org.osgi.annotation.versioning.ConsumerType;
 
-
 /**
  * Provides a simple implementation of {@link ResourceVerifier} that can be subclassed in order to decorate another
  * instance of the same type.
  *
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 @ConsumerType
 public abstract class ResourceVerifierWrapper implements ResourceVerifier, FacesWrapper<ResourceVerifier> {
 
 	/**
-	 * @see  ResourceVerifier#isDependencySatisfied(FacesContext, javax.faces.component.UIComponent)
+	 * @see ResourceVerifier#isDependencySatisfied(FacesContext, javax.faces.component.UIComponent)
 	 */
 	@Override
 	public boolean isDependencySatisfied(FacesContext facesContext, UIComponent componentResource) {

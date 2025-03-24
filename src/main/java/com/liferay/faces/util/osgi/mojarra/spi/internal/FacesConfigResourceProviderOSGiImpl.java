@@ -29,19 +29,18 @@ import com.liferay.faces.util.resource.internal.ResourceProviderUtil;
 
 import com.sun.faces.spi.FacesConfigResourceProvider;
 
-
 /**
  * This class implements the Mojarra {@link com.sun.faces.spi.ConfigurationResourceProvider} SPI in order to enable the
  * discovery of resources within the OSGi bundle that match the "*.faces-config.xml" wildcard.
  *
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public class FacesConfigResourceProviderOSGiImpl implements FacesConfigResourceProvider {
 
 	/**
 	 * Returns the list of *.faces-config.xml resources (and *faces-config.xml resources if necessary) found in Faces
-	 * OSGi bundles. For more information, see {@link
-	 * com.sun.faces.spi.ConfigurationResourceProvider#getResources(ServletContext)}.
+	 * OSGi bundles. For more information, see
+	 * {@link com.sun.faces.spi.ConfigurationResourceProvider#getResources(ServletContext)}.
 	 */
 	@Override
 	public Collection<URI> getResources(ServletContext servletContext) {
@@ -52,21 +51,21 @@ public class FacesConfigResourceProviderOSGiImpl implements FacesConfigResourceP
 
 			facesBundlesHandler = new FacesBundlesHandlerResourceProviderOSGiImpl(ResourceProviderUtil.META_INF_PATH,
 
-					// Mojarra finds all the default META-INF/faces-config.xml files that are included inside each
-					// thin WAB so only search for *.faces-config.xml files in the thin WAB.
-					ResourceProviderUtil.FACES_CONFIG_EXTENSION_PATTERN,
+				// Mojarra finds all the default META-INF/faces-config.xml files that are included inside each
+				// thin WAB so only search for *.faces-config.xml files in the thin WAB.
+				ResourceProviderUtil.FACES_CONFIG_EXTENSION_PATTERN,
 
-					// Mojarra cannot find any of the META-INF/faces-config.xml files (or META-INF/*.faces-config.xml
-					// files) in external OSGi bundles so search for all types of faces-config.xml files in other
-					// bundles.
-					ResourceProviderUtil.ALL_FACES_CONFIG_PATTERN);
+				// Mojarra cannot find any of the META-INF/faces-config.xml files (or META-INF/*.faces-config.xml
+				// files) in external OSGi bundles so search for all types of faces-config.xml files in other
+				// bundles.
+				ResourceProviderUtil.ALL_FACES_CONFIG_PATTERN);
 		}
 		else {
 
 			// Mojarra finds all the default META-INF/faces-config.xml files that are included inside each
 			// thin WAB so only search for *.faces-config.xml files in the thin WAB.
 			facesBundlesHandler = new FacesBundlesHandlerResourceProviderOSGiImpl(ResourceProviderUtil.META_INF_PATH,
-					ResourceProviderUtil.FACES_CONFIG_EXTENSION_PATTERN);
+				ResourceProviderUtil.FACES_CONFIG_EXTENSION_PATTERN);
 		}
 
 		List<URL> resourceURLs = facesBundlesHandler.handleFacesBundles(servletContext, true);

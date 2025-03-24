@@ -16,13 +16,13 @@
 package com.liferay.faces.util.product.internal;
 
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class ProductLiferayFacesBridgeImpl extends ProductBase {
 
 	public ProductLiferayFacesBridgeImpl() {
 		super(ProductInfo.newInstance("Liferay Faces Bridge Impl",
-				"com.liferay.faces.bridge.servlet.BridgeSessionListener",
-				"META-INF/maven/com.liferay.faces/com.liferay.faces.bridge.impl/pom.properties"));
+			"com.liferay.faces.bridge.servlet.BridgeSessionListener",
+			"META-INF/maven/com.liferay.faces/com.liferay.faces.bridge.impl/pom.properties"));
 	}
 }

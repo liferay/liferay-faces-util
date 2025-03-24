@@ -19,18 +19,17 @@ import javax.faces.FacesWrapper;
 
 import org.osgi.annotation.versioning.ConsumerType;
 
-
 /**
  * Provides a simple implementation of {@link Script} that can be subclassed in order to decorate another instance of
  * the same type.
  *
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 @ConsumerType
 public abstract class ScriptWrapper implements Script, FacesWrapper<Script> {
 
 	/**
-	 * @see  Script#getModules()
+	 * @see Script#getModules()
 	 */
 	@Override
 	public String[] getModules() {
@@ -38,7 +37,7 @@ public abstract class ScriptWrapper implements Script, FacesWrapper<Script> {
 	}
 
 	/**
-	 * @see  Script#getModulesType()
+	 * @see Script#getModulesType()
 	 */
 	@Override
 	public ModulesType getModulesType() {
@@ -46,7 +45,7 @@ public abstract class ScriptWrapper implements Script, FacesWrapper<Script> {
 	}
 
 	/**
-	 * @see  Script#getSourceCode()
+	 * @see Script#getSourceCode()
 	 */
 	@Override
 	public String getSourceCode() {

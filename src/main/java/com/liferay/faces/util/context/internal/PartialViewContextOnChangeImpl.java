@@ -40,20 +40,23 @@ import javax.faces.event.PhaseId;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
-
 /**
- * <p>This class is a wrapper around the {@link PartialViewContext}. Its purpose is to provide a way to provide a way
- * for components to handle validation for required fields with "onchange" behavior rather than "onblur" behavior. For
+ * <p>
+ * This class is a wrapper around the {@link PartialViewContext}. Its purpose is to provide a way to provide a way for
+ * components to handle validation for required fields with "onchange" behavior rather than "onblur" behavior. For
  * example, the ICEfaces <a href="http://res.icesoft.org/docs/v3_latest/ace/tld/ace/textEntry.html">ace:textEntry</a>
- * component only suppors the "onblur" event when used with <a
- * href="http://res.icesoft.org/docs/v3_latest/ace/tld/ace/ajax.html">ace:ajax</a>. In the case of required="true", the
- * JSF PROCESS_VALIDATIONS phase will add a {@link EditableValueHolder#REQUIRED_MESSAGE_ID} {@link FacesMessage} when
- * the user tabs-out of the field. By specifying the following in the WEB-INF/faces-config.xml descriptor, the
- * FacesMessages will be removed which approximates the behavior of the "onchange" event:</p>
+ * component only suppors the "onblur" event when used with
+ * <a href="http://res.icesoft.org/docs/v3_latest/ace/tld/ace/ajax.html">ace:ajax</a>. In the case of required="true",
+ * the JSF PROCESS_VALIDATIONS phase will add a {@link EditableValueHolder#REQUIRED_MESSAGE_ID} {@link FacesMessage}
+ * when the user tabs-out of the field. By specifying the following in the WEB-INF/faces-config.xml descriptor, the
+ * FacesMessages will be removed which approximates the behavior of the "onchange" event:
+ * </p>
  *
- * <pre>&lt;partial-view-context-factory&gt;com.liferay.faces.util.context.PartialViewContextFactoryOnChangeImpl&lt;/partial-view-context-factory&gt;</pre>
+ * <pre>
+ * &lt;partial-view-context-factory&gt;com.liferay.faces.util.context.PartialViewContextFactoryOnChangeImpl&lt;/partial-view-context-factory&gt;
+ * </pre>
  *
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class PartialViewContextOnChangeImpl extends PartialViewContextWrapper {
 
@@ -84,8 +87,8 @@ public class PartialViewContextOnChangeImpl extends PartialViewContextWrapper {
 		// If processing a partial request during the "Apply Request Values" phase of the JSF lifecycle, then register
 		// a callback that will save-off the values of the components that are visited in the tree-walk.
 		if (phaseId == PhaseId.APPLY_REQUEST_VALUES) {
-			VisitContextFactory visitContextFactory = (VisitContextFactory) FactoryFinder.getFactory(
-					FactoryFinder.VISIT_CONTEXT_FACTORY);
+			VisitContextFactory visitContextFactory =
+				(VisitContextFactory) FactoryFinder.getFactory(FactoryFinder.VISIT_CONTEXT_FACTORY);
 
 			Collection<String> renderIds = wrappedPartialViewContext.getExecuteIds();
 			EnumSet<VisitHint> visitHints = EnumSet.of(VisitHint.EXECUTE_LIFECYCLE);
@@ -98,8 +101,8 @@ public class PartialViewContextOnChangeImpl extends PartialViewContextWrapper {
 		// register a callback that will remove extraneous FacesMessages for components that are visited in the
 		// tree-walk.
 		else if (phaseId == PhaseId.RENDER_RESPONSE) {
-			VisitContextFactory visitContextFactory = (VisitContextFactory) FactoryFinder.getFactory(
-					FactoryFinder.VISIT_CONTEXT_FACTORY);
+			VisitContextFactory visitContextFactory =
+				(VisitContextFactory) FactoryFinder.getFactory(FactoryFinder.VISIT_CONTEXT_FACTORY);
 			Collection<String> renderIds = wrappedPartialViewContext.getExecuteIds();
 			EnumSet<VisitHint> visitHints = EnumSet.of(VisitHint.EXECUTE_LIFECYCLE);
 			VisitContext visitContext = visitContextFactory.getVisitContext(facesContext, renderIds, visitHints);

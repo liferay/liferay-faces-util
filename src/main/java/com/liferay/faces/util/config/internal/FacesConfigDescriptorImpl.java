@@ -18,9 +18,8 @@ package com.liferay.faces.util.config.internal;
 import java.io.Serializable;
 import java.util.List;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class FacesConfigDescriptorImpl implements FacesConfigDescriptor, Serializable {
 

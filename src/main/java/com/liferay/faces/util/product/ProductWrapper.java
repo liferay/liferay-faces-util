@@ -19,9 +19,8 @@ import javax.faces.FacesWrapper;
 
 import org.osgi.annotation.versioning.ConsumerType;
 
-
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 @ConsumerType
 public abstract class ProductWrapper implements Product, FacesWrapper<Product> {

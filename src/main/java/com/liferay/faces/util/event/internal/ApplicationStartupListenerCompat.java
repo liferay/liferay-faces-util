@@ -26,11 +26,10 @@ import javax.faces.event.SystemEventListener;
 import com.liferay.faces.util.config.ApplicationConfig;
 import com.liferay.faces.util.event.PostConstructApplicationConfigEvent;
 
-
 /**
  * This class isolates differences between JSF1 <> JSF 2 in order to minimize diffs across branches.
  *
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public abstract class ApplicationStartupListenerCompat implements SystemEventListener {
 

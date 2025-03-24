@@ -20,9 +20,8 @@ import java.io.Serializable;
 import com.liferay.faces.util.context.FacesContextHelper;
 import com.liferay.faces.util.context.FacesContextHelperFactory;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class FacesContextHelperFactoryImpl extends FacesContextHelperFactory implements Serializable {
 

@@ -16,7 +16,7 @@
 package com.liferay.faces.util.client.internal;
 
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class LiferayPortalBrowserSnifferCompat {
 
@@ -26,9 +26,8 @@ public class LiferayPortalBrowserSnifferCompat {
 	protected static final String BROWSER_SNIFFER_REVISION = "BROWSER_SNIFFER_REVISION";
 	protected static final String BROWSER_SNIFFER_VERSION = "BROWSER_SNIFFER_VERSION";
 	protected static final char COLON = ':';
-	protected static final String[] FIREFOX_ALIASES = {
-			"firefox", "minefield", "granparadiso", "bonecho", "firebird", "phoenix", "camino"
-		};
+	protected static final String[] FIREFOX_ALIASES =
+		{ "firefox", "minefield", "granparadiso", "bonecho", "firebird", "phoenix", "camino" };
 	protected static final char FORWARD_SLASH = '/';
 	protected static final char SPACE = ' ';
 	protected static String[] REVISION_LEADINGS = { "rv", "it", "ra", "ie" };

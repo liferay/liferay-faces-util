@@ -30,9 +30,8 @@ import java.util.Map;
 import com.liferay.faces.util.internal.CloseableUtil;
 import com.liferay.faces.util.model.UploadedFile;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class UploadedFileImpl implements Serializable, UploadedFile {
 

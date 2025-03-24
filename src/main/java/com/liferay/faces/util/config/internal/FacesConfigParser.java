@@ -20,9 +20,8 @@ import java.io.InputStream;
 
 import com.liferay.faces.util.config.FacesConfig;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public interface FacesConfigParser {
 

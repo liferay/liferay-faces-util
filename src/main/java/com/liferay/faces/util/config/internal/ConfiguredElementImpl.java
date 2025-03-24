@@ -18,9 +18,8 @@ package com.liferay.faces.util.config.internal;
 import com.liferay.faces.util.config.ConfiguredElement;
 import com.liferay.faces.util.lang.NameValuePair;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class ConfiguredElementImpl extends NameValuePair<String, String> implements ConfiguredElement {
 

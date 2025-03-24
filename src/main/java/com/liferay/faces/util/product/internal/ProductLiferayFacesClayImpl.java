@@ -16,12 +16,12 @@
 package com.liferay.faces.util.product.internal;
 
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class ProductLiferayFacesClayImpl extends ProductBase {
 
 	public ProductLiferayFacesClayImpl() {
 		super(ProductInfo.newInstance("Liferay Faces Clay", "com.liferay.faces.clay.component.inputtext.InputText",
-				"META-INF/maven/com.liferay.faces/com.liferay.faces.clay/pom.properties"));
+			"META-INF/maven/com.liferay.faces/com.liferay.faces.clay/pom.properties"));
 	}
 }

@@ -29,9 +29,8 @@ import com.liferay.faces.util.internal.TCCLUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class FactoryExtensionFinderImpl extends FactoryExtensionFinder {
 
@@ -85,7 +84,7 @@ public class FactoryExtensionFinderImpl extends FactoryExtensionFinder {
 				Class<?> baseFactoryExtensionClass = getBaseFactoryExtensionClass(factoryExtensionClass);
 				Object existingFactoryInstance = getFactoryInstance(externalContext, baseFactoryExtensionClass);
 				Object factoryInstance = newFactoryInstance(classLoader, factoryExtensionClass,
-						baseFactoryExtensionClass, existingFactoryInstance);
+					baseFactoryExtensionClass, existingFactoryInstance);
 
 				Map<Class<?>, Object> factoryExtensionCache = getFactoryExtensionCache(externalContext);
 				factoryExtensionCache.put(baseFactoryExtensionClass, factoryInstance);
@@ -101,8 +100,8 @@ public class FactoryExtensionFinderImpl extends FactoryExtensionFinder {
 	public void releaseFactories(ExternalContext externalContext) {
 
 		Map<String, Object> applicationMap = externalContext.getApplicationMap();
-		Map<Class<?>, Object> factoryExtensionCache = (Map<Class<?>, Object>) applicationMap.get(
-				FACTORY_EXTENSION_CACHE);
+		Map<Class<?>, Object> factoryExtensionCache =
+			(Map<Class<?>, Object>) applicationMap.get(FACTORY_EXTENSION_CACHE);
 
 		if (factoryExtensionCache != null) {
 			factoryExtensionCache.clear();
@@ -127,8 +126,8 @@ public class FactoryExtensionFinderImpl extends FactoryExtensionFinder {
 	private Map<Class<?>, Object> getFactoryExtensionCache(ExternalContext externalContext) {
 
 		Map<String, Object> applicationMap = externalContext.getApplicationMap();
-		Map<Class<?>, Object> factoryExtensionCache = (Map<Class<?>, Object>) applicationMap.get(
-				FACTORY_EXTENSION_CACHE);
+		Map<Class<?>, Object> factoryExtensionCache =
+			(Map<Class<?>, Object>) applicationMap.get(FACTORY_EXTENSION_CACHE);
 
 		if (factoryExtensionCache == null) {
 			factoryExtensionCache = new HashMap<Class<?>, Object>();
@@ -153,8 +152,8 @@ public class FactoryExtensionFinderImpl extends FactoryExtensionFinder {
 				for (Constructor<?> constructor : constructors) {
 					Class<?>[] parameterTypes = constructor.getParameterTypes();
 
-					if ((parameterTypes != null) && (parameterTypes.length == 1) &&
-							(parameterTypes[0].getName().equals(baseFactoryExtensionClass.getName()))) {
+					if ((parameterTypes != null) && (parameterTypes.length == 1)
+						&& (parameterTypes[0].getName().equals(baseFactoryExtensionClass.getName()))) {
 						wrapperConstructor = constructor;
 					}
 				}

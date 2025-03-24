@@ -23,9 +23,8 @@ import com.liferay.faces.util.internal.CloseableUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
-
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public class PomProperties {
 

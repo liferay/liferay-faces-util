@@ -19,11 +19,10 @@ import java.util.Map;
 
 import org.osgi.annotation.versioning.ProviderType;
 
-
 /**
  * This interface defines a mutable {@link Map} of request parameters for a Faces request.
  *
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public interface FacesRequestParameterMap extends Map<String, String[]> {

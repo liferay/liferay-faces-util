@@ -20,12 +20,11 @@ import javax.faces.render.RenderKit;
 import javax.faces.render.RenderKitWrapper;
 import javax.faces.render.Renderer;
 
-
 /**
  * This class extends {@link RenderKitWrapper} in order to programmatically control the {@link RenderKit} delegation
  * chain and wrapping of renderers.
  *
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public class RenderKitUtilImpl extends RenderKitWrapper {
 
@@ -44,9 +43,8 @@ public class RenderKitUtilImpl extends RenderKitWrapper {
 		if (UIOutput.COMPONENT_FAMILY.equals(family) && "javax.faces.Body".equals(rendererType)) {
 			renderer = new BodyRendererUtilImpl(renderer);
 		}
-		else if (UIOutput.COMPONENT_FAMILY.equals(family) &&
-				("javax.faces.resource.Script".equals(rendererType) ||
-					"javax.faces.resource.Stylesheet".equals(rendererType))) {
+		else if (UIOutput.COMPONENT_FAMILY.equals(family) && ("javax.faces.resource.Script".equals(rendererType)
+			|| "javax.faces.resource.Stylesheet".equals(rendererType))) {
 			renderer = new ResourceRendererUtilImpl(renderer);
 		}
 

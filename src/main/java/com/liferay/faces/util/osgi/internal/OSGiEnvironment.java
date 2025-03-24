@@ -18,9 +18,8 @@ package com.liferay.faces.util.osgi.internal;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public final class OSGiEnvironment {
 

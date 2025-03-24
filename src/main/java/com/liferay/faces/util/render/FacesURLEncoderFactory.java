@@ -23,20 +23,21 @@ import org.osgi.annotation.versioning.ProviderType;
 
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public abstract class FacesURLEncoderFactory implements FacesWrapper<FacesURLEncoderFactory> {
 
 	/**
-	 * @deprecated  Call {@link #getFacesURLEncoderInstance(ExternalContext)} instead.
+	 * @deprecated Call {@link #getFacesURLEncoderInstance(ExternalContext)} instead.
 	 *
-	 *              <p>Returns a stateless, thread-safe singleton instance of {@link FacesURLEncoder} from the {@link
-	 *              FacesURLEncoderFactory} found by the {@link FactoryExtensionFinder}. FacesURLEncoder is a stateless,
-	 *              thread-safe singleton because it is designed to be used by a {@link javax.faces.render.Renderer},
-	 *              which is a stateless, thread-safe singleton.</p>
+	 *             <p>
+	 *             Returns a stateless, thread-safe singleton instance of {@link FacesURLEncoder} from the
+	 *             {@link FacesURLEncoderFactory} found by the {@link FactoryExtensionFinder}. FacesURLEncoder is a
+	 *             stateless, thread-safe singleton because it is designed to be used by a
+	 *             {@link javax.faces.render.Renderer}, which is a stateless, thread-safe singleton.
+	 *             </p>
 	 */
 	@Deprecated
 	public static FacesURLEncoder getFacesURLEncoderInstance() {
@@ -44,22 +45,22 @@ public abstract class FacesURLEncoderFactory implements FacesWrapper<FacesURLEnc
 	}
 
 	/**
-	 * Returns a stateless, thread-safe singleton instance of {@link FacesURLEncoder} from the {@link
-	 * FacesURLEncoderFactory} found by the {@link FactoryExtensionFinder}. FacesURLEncoder is a stateless, thread-safe
-	 * singleton because it is designed to be used by a {@link javax.faces.render.Renderer}, which is a stateless,
-	 * thread-safe singleton.
+	 * Returns a stateless, thread-safe singleton instance of {@link FacesURLEncoder} from the
+	 * {@link FacesURLEncoderFactory} found by the {@link FactoryExtensionFinder}. FacesURLEncoder is a stateless,
+	 * thread-safe singleton because it is designed to be used by a {@link javax.faces.render.Renderer}, which is a
+	 * stateless, thread-safe singleton.
 	 *
-	 * @param  externalContext  The external context associated with the current faces context. It is needed in order
-	 *                          for the {@link FactoryExtensionFinder} to be able to find the factory.
+	 * @param externalContext The external context associated with the current faces context. It is needed in order for
+	 *                        the {@link FactoryExtensionFinder} to be able to find the factory.
 	 *
-	 * @since  3.1
-	 * @since  2.1
-	 * @since  1.1
+	 * @since 3.1
+	 * @since 2.1
+	 * @since 1.1
 	 */
 	public static FacesURLEncoder getFacesURLEncoderInstance(ExternalContext externalContext) {
 
-		FacesURLEncoderFactory facesURLEncoderFactory = (FacesURLEncoderFactory) FactoryExtensionFinder.getFactory(
-				externalContext, FacesURLEncoderFactory.class);
+		FacesURLEncoderFactory facesURLEncoderFactory =
+			(FacesURLEncoderFactory) FactoryExtensionFinder.getFactory(externalContext, FacesURLEncoderFactory.class);
 
 		return facesURLEncoderFactory.getFacesURLEncoder();
 	}

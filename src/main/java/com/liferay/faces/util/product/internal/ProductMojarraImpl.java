@@ -16,8 +16,8 @@
 package com.liferay.faces.util.product.internal;
 
 /**
- * @author  Neil Griffin
- * @author  Kyle Stiemann
+ * @author Neil Griffin
+ * @author Kyle Stiemann
  */
 public class ProductMojarraImpl extends ProductBase {
 
@@ -29,7 +29,7 @@ public class ProductMojarraImpl extends ProductBase {
 
 		String title = "Mojarra";
 		ProductInfo productInfo = ProductInfo.newInstance(title, "com.sun.faces.RIConstants",
-				"META-INF/maven/org.glassfish/javax.faces/pom.properties");
+			"META-INF/maven/org.glassfish/javax.faces/pom.properties");
 
 		// If running on WebLogic 12c (12.1.x), then the version typically looks like "1.0.0.0_2-1-20" or
 		// "2.0.0.0_2-1-20"
@@ -48,8 +48,8 @@ public class ProductMojarraImpl extends ProductBase {
 			stringValue = stringValue.substring(0, pos);
 		}
 
-		productInfo = new ProductInfo(productInfo.detected, title, version, stringValue, null, null, null,
-				productInfo.buildId);
+		productInfo =
+			new ProductInfo(productInfo.detected, title, version, stringValue, null, null, null, productInfo.buildId);
 
 		return productInfo;
 	}

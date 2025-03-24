@@ -23,18 +23,19 @@ import org.osgi.annotation.versioning.ProviderType;
 
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public abstract class FacesContextHelperFactory implements FacesWrapper<FacesContextHelperFactory> {
 
 	/**
-	 * @deprecated  Call {@link #getFacesContextHelperInstance(ExternalContext)} instead.
+	 * @deprecated Call {@link #getFacesContextHelperInstance(ExternalContext)} instead.
 	 *
-	 *              <p>Returns a stateless, thread-safe singleton instance of {@link FacesContextHelper} from the {@link
-	 *              FacesContextHelperFactory} found by the {@link FactoryExtensionFinder}.</p>
+	 *             <p>
+	 *             Returns a stateless, thread-safe singleton instance of {@link FacesContextHelper} from the
+	 *             {@link FacesContextHelperFactory} found by the {@link FactoryExtensionFinder}.
+	 *             </p>
 	 */
 	@Deprecated
 	public static FacesContextHelper getFacesContextHelperInstance() {
@@ -42,20 +43,21 @@ public abstract class FacesContextHelperFactory implements FacesWrapper<FacesCon
 	}
 
 	/**
-	 * Returns a stateless, thread-safe singleton instance of {@link FacesContextHelper} from the {@link
-	 * FacesContextHelperFactory} found by the {@link FactoryExtensionFinder}.
+	 * Returns a stateless, thread-safe singleton instance of {@link FacesContextHelper} from the
+	 * {@link FacesContextHelperFactory} found by the {@link FactoryExtensionFinder}.
 	 *
-	 * @param  externalContext  The external context associated with the current faces context. It is needed in order
-	 *                          for the {@link FactoryExtensionFinder} to be able to find the factory.
+	 * @param externalContext The external context associated with the current faces context. It is needed in order for
+	 *                        the {@link FactoryExtensionFinder} to be able to find the factory.
 	 *
-	 * @since  3.1
-	 * @since  2.1
-	 * @since  1.1
+	 * @since 3.1
+	 * @since 2.1
+	 * @since 1.1
 	 */
 	public static FacesContextHelper getFacesContextHelperInstance(ExternalContext externalContext) {
 
-		FacesContextHelperFactory facesContextHelperFactory = (FacesContextHelperFactory) FactoryExtensionFinder
-			.getFactory(externalContext, FacesContextHelperFactory.class);
+		FacesContextHelperFactory facesContextHelperFactory =
+			(FacesContextHelperFactory) FactoryExtensionFinder.getFactory(externalContext,
+				FacesContextHelperFactory.class);
 
 		return facesContextHelperFactory.getFacesContextHelper();
 	}

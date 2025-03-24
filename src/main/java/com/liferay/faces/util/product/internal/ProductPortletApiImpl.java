@@ -19,9 +19,8 @@ import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.product.Product;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class ProductPortletApiImpl extends ProductBase {
 
@@ -42,9 +41,9 @@ public class ProductPortletApiImpl extends ProductBase {
 
 		// Liferay 6.2.0 through 6.2.4 and Pluto 2.0 rely on the Portlet 2.0 API jar which does not contain the
 		// correct version information.
-		if ((liferayPortalDetected && (liferayPortalMajorVersion == 6) && (liferayPortalMinorVersion == 2) &&
-					(liferayPortal.getPatchVersion() < 5)) ||
-				(pluto.isDetected() && (pluto.getMajorVersion() == 2) && (pluto.getMinorVersion() == 0))) {
+		if ((liferayPortalDetected && (liferayPortalMajorVersion == 6) && (liferayPortalMinorVersion == 2)
+			&& (liferayPortal.getPatchVersion() < 5))
+			|| (pluto.isDetected() && (pluto.getMajorVersion() == 2) && (pluto.getMinorVersion() == 0))) {
 			productInfo = new ProductInfo(true, title, "2.0");
 		}
 		else {

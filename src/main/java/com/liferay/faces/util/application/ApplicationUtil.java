@@ -20,9 +20,8 @@ import javax.faces.context.FacesContext;
 
 import org.osgi.annotation.versioning.ProviderType;
 
-
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 @ProviderType
 public final class ApplicationUtil {

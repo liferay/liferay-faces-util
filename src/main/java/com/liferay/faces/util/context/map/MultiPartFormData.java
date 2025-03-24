@@ -22,12 +22,11 @@ import org.osgi.annotation.versioning.ProviderType;
 
 import com.liferay.faces.util.model.UploadedFile;
 
-
 /**
  * This interface represents a composition of request parameters and uploaded files submitted by an HTML form with
  * enctype="multipart/form-data".
  *
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public interface MultiPartFormData {

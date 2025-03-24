@@ -22,9 +22,8 @@ import java.util.Map;
 import com.liferay.faces.util.product.Product;
 import com.liferay.faces.util.product.ProductFactory;
 
-
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public class ProductFactoryImpl extends ProductFactory {
 

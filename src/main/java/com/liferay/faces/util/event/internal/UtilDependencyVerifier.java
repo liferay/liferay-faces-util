@@ -22,9 +22,8 @@ import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.product.Product;
 import com.liferay.faces.util.product.ProductFactory;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class UtilDependencyVerifier {
 

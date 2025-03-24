@@ -17,7 +17,6 @@ package com.liferay.faces.util.helper;
 
 import org.osgi.annotation.versioning.ProviderType;
 
-
 /**
  * This class provides additional methods that operate against the javax.lang.Short system class.
  */

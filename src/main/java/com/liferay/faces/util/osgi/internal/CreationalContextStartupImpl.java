@@ -17,9 +17,8 @@ package com.liferay.faces.util.osgi.internal;
 
 import javax.enterprise.context.spi.CreationalContext;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class CreationalContextStartupImpl<T> implements CreationalContext {
 

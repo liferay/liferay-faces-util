@@ -22,9 +22,8 @@ import java.util.logging.LogRecord;
 
 import com.liferay.faces.util.logging.Logger;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class LoggerDefaultImpl implements Logger {
 

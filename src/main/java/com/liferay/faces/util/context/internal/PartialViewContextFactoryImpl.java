@@ -21,9 +21,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.PartialViewContext;
 import javax.faces.context.PartialViewContextFactory;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class PartialViewContextFactoryImpl extends PartialViewContextFactory implements Serializable {
 
@@ -40,8 +39,8 @@ public class PartialViewContextFactoryImpl extends PartialViewContextFactory imp
 	@Override
 	public PartialViewContext getPartialViewContext(FacesContext facesContext) {
 
-		PartialViewContext wrappedPartialViewContext = wrappedPartialViewContextFactory.getPartialViewContext(
-				facesContext);
+		PartialViewContext wrappedPartialViewContext =
+			wrappedPartialViewContextFactory.getPartialViewContext(facesContext);
 
 		return new PartialViewContextImpl(wrappedPartialViewContext);
 	}

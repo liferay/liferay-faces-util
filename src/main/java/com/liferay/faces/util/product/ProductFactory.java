@@ -24,9 +24,8 @@ import org.osgi.annotation.versioning.ProviderType;
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 import com.liferay.faces.util.product.internal.ProductFactoryImpl;
 
-
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 @ProviderType
 public abstract class ProductFactory implements FacesWrapper<ProductFactory> {
@@ -36,10 +35,11 @@ public abstract class ProductFactory implements FacesWrapper<ProductFactory> {
 	 * from the {@link ProductFactory} found by the {@link FactoryExtensionFinder}. The returned instance is not
 	 * guaranteed to be {@link java.io.Serializable}.
 	 *
-	 * @param       productName  The name of the product.
+	 * @param productName The name of the product.
 	 *
-	 * @deprecated  Use {@link #getProductInstance(javax.faces.context.ExternalContext,
-	 *              com.liferay.faces.util.product.Product.Name)} instead.
+	 * @deprecated Use
+	 *             {@link #getProductInstance(javax.faces.context.ExternalContext, com.liferay.faces.util.product.Product.Name)}
+	 *             instead.
 	 */
 	@Deprecated
 	public static final Product getProduct(Product.Name productName) {
@@ -69,12 +69,12 @@ public abstract class ProductFactory implements FacesWrapper<ProductFactory> {
 	 * from the {@link ProductFactory} found by the {@link FactoryExtensionFinder}. The returned instance is not
 	 * guaranteed to be {@link java.io.Serializable}.
 	 *
-	 * @param  productName  The name of the product.
+	 * @param productName The name of the product.
 	 */
 	public static Product getProductInstance(ExternalContext externalContext, Product.Name productName) {
 
-		ProductFactory productFactory = (ProductFactory) FactoryExtensionFinder.getFactory(externalContext,
-				ProductFactory.class);
+		ProductFactory productFactory =
+			(ProductFactory) FactoryExtensionFinder.getFactory(externalContext, ProductFactory.class);
 
 		return productFactory.getProductInfo(productName);
 	}
@@ -83,7 +83,7 @@ public abstract class ProductFactory implements FacesWrapper<ProductFactory> {
 	 * Returns the thread-safe singleton instance of {@link Product} associated with the specified {@link Product.Name}.
 	 * The returned instance is not guaranteed to be {@link java.io.Serializable}.
 	 *
-	 * @param  productName  The name of the product.
+	 * @param productName The name of the product.
 	 */
 	public abstract Product getProductInfo(Product.Name productName);
 
@@ -94,9 +94,9 @@ public abstract class ProductFactory implements FacesWrapper<ProductFactory> {
 	 * Returns the thread-safe singleton instance of {@link Product} associated with the specified {@link Product.Name}.
 	 * The returned instance is not guaranteed to be {@link java.io.Serializable}.
 	 *
-	 * @param       productName
+	 * @param productName
 	 *
-	 * @deprecated  Use {@link #getProductInfo(com.liferay.faces.util.product.Product.Name)} instead.
+	 * @deprecated Use {@link #getProductInfo(com.liferay.faces.util.product.Product.Name)} instead.
 	 */
 	@Deprecated
 	public Product getProductImplementation(Product.Name productName) {

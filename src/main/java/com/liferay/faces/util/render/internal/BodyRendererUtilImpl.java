@@ -25,14 +25,13 @@ import javax.faces.render.RendererWrapper;
 
 import com.liferay.faces.util.context.FacesContextHelperUtil;
 
-
 /**
  * This class extends {@link RendererWrapper} in order to decorate body renderers provided by non-Liferay/3rd-Party
- * component suites like ICEfaces, PrimeFaces, and RichFaces. It ensures that scripts contained in {@link
- * FacesContextHelperUtil#getScripts(javax.faces.context.FacesContext)} are encoded before the closing <code>
+ * component suites like ICEfaces, PrimeFaces, and RichFaces. It ensures that scripts contained in
+ * {@link FacesContextHelperUtil#getScripts(javax.faces.context.FacesContext)} are encoded before the closing <code>
  * &lt;/body&gt;</code> element.
  *
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public class BodyRendererUtilImpl extends RendererWrapper {
 
@@ -51,8 +50,8 @@ public class BodyRendererUtilImpl extends RendererWrapper {
 
 		if (!ajaxRequest) {
 
-			BodyScriptEncodingResponseWriter bodyScriptEncodingResponseWriter = new BodyScriptEncodingResponseWriter(
-					responseWriter, facesContext);
+			BodyScriptEncodingResponseWriter bodyScriptEncodingResponseWriter =
+				new BodyScriptEncodingResponseWriter(responseWriter, facesContext);
 			facesContext.setResponseWriter(bodyScriptEncodingResponseWriter);
 		}
 

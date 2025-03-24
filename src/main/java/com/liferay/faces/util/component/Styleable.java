@@ -17,12 +17,11 @@ package com.liferay.faces.util.component;
 
 import org.osgi.annotation.versioning.ProviderType;
 
-
 /**
  * This interface should be implemented by classes that extend {@link javax.faces.component.UIComponent} if they render
  * HTML that is styleable with CSS class names.
  *
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public interface Styleable {

@@ -47,9 +47,8 @@ import com.liferay.faces.util.osgi.internal.FacesBundlesHandlerBase;
 import com.sun.faces.config.FacesInitializer;
 import com.sun.faces.spi.AnnotationProvider;
 
-
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public class AnnotationProviderOSGiImpl extends AnnotationProvider {
 
@@ -66,17 +65,17 @@ public class AnnotationProviderOSGiImpl extends AnnotationProvider {
 
 		try {
 
-			Class<?> annotationScanningServletContainerInitializerClass = Class.forName(FacesInitializer.class
-					.getName());
-			HandlesTypes handledTypes = annotationScanningServletContainerInitializerClass.getAnnotation(
-					HandlesTypes.class);
+			Class<?> annotationScanningServletContainerInitializerClass =
+				Class.forName(FacesInitializer.class.getName());
+			HandlesTypes handledTypes =
+				annotationScanningServletContainerInitializerClass.getAnnotation(HandlesTypes.class);
 			Class[] annotationsHandledByMojarraArray = handledTypes.value();
 			annotationsHandledByMojarra.addAll(Arrays.<Class<?>>asList(annotationsHandledByMojarraArray));
 
 			// This list of classes was obtained from the AnnotationProvider JavaDoc.
 			annotationsHandledByMojarra.addAll(Arrays.<Class<?>>asList(FacesComponent.class, FacesConverter.class,
-					FacesRenderer.class, FacesValidator.class, ManagedBean.class, NamedEvent.class, FacesBehavior.class,
-					FacesBehaviorRenderer.class));
+				FacesRenderer.class, FacesValidator.class, ManagedBean.class, NamedEvent.class, FacesBehavior.class,
+				FacesBehaviorRenderer.class));
 		}
 		catch (ClassNotFoundException e) {
 			logger.error(e);
@@ -125,21 +124,20 @@ public class AnnotationProviderOSGiImpl extends AnnotationProvider {
 		extends FacesBundlesHandlerBase<Map<Class<? extends Annotation>, Set<Class<?>>>> {
 
 		private static boolean isClassInBundle(String classFilePath, Bundle bundle, boolean wab) {
-			return (bundle.getEntry(classFilePath) != null) ||
-				(wab && !classFilePath.startsWith(WEB_INF_CLASSES_PATH) &&
-					(bundle.getEntry(WEB_INF_CLASSES_PATH + classFilePath) != null));
+			return (bundle.getEntry(classFilePath) != null) || (wab && !classFilePath.startsWith(WEB_INF_CLASSES_PATH)
+				&& (bundle.getEntry(WEB_INF_CLASSES_PATH + classFilePath) != null));
 		}
 
 		private static boolean isIgnored(String classFilePath) {
 
-			if (classFilePath.startsWith("com/liferay/taglib/") || classFilePath.startsWith("com/liferay/util/") ||
-					classFilePath.startsWith("com/sun/el/") || classFilePath.startsWith("com/sun/faces/") ||
-					classFilePath.startsWith("javax/annotation/") || classFilePath.startsWith("javax/el/") ||
-					classFilePath.startsWith("javax/enterprise/") || classFilePath.startsWith("javax/faces/") ||
-					classFilePath.startsWith("javax/inject/") || classFilePath.startsWith("javax/portlet/") ||
-					classFilePath.startsWith("javax/servlet/") || classFilePath.startsWith("javax/validation/") ||
-					classFilePath.startsWith("org/apache/") || classFilePath.startsWith("org/jboss/weld/") ||
-					classFilePath.startsWith("org/osgi/") || classFilePath.endsWith("package-info.class")) {
+			if (classFilePath.startsWith("com/liferay/taglib/") || classFilePath.startsWith("com/liferay/util/")
+				|| classFilePath.startsWith("com/sun/el/") || classFilePath.startsWith("com/sun/faces/")
+				|| classFilePath.startsWith("javax/annotation/") || classFilePath.startsWith("javax/el/")
+				|| classFilePath.startsWith("javax/enterprise/") || classFilePath.startsWith("javax/faces/")
+				|| classFilePath.startsWith("javax/inject/") || classFilePath.startsWith("javax/portlet/")
+				|| classFilePath.startsWith("javax/servlet/") || classFilePath.startsWith("javax/validation/")
+				|| classFilePath.startsWith("org/apache/") || classFilePath.startsWith("org/jboss/weld/")
+				|| classFilePath.startsWith("org/osgi/") || classFilePath.endsWith("package-info.class")) {
 
 				return true;
 			}

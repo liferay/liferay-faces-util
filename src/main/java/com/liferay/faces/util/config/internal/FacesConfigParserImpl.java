@@ -34,9 +34,8 @@ import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.xml.internal.SAXHandlerBase;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class FacesConfigParserImpl extends SAXHandlerBase implements FacesConfigParser {
 
@@ -108,8 +107,8 @@ public class FacesConfigParserImpl extends SAXHandlerBase implements FacesConfig
 			else if (parsingSystemEventListener) {
 
 				// NOTE: This has to appear last since system-event-listener is the surrounding element.
-				ConfiguredSystemEventListener configuredSystemEventListener = new ConfiguredSystemEventListenerImpl(
-						sourceClass, systemEventClass, systemEventListenerClass);
+				ConfiguredSystemEventListener configuredSystemEventListener =
+					new ConfiguredSystemEventListenerImpl(sourceClass, systemEventClass, systemEventListenerClass);
 				configuredSystemEventListeners.add(configuredSystemEventListener);
 				parsingSystemEventListener = false;
 			}
@@ -151,8 +150,8 @@ public class FacesConfigParserImpl extends SAXHandlerBase implements FacesConfig
 		}
 		else if (parsingManagedBeanScope) {
 			String managedBeanScope = content.toString().trim();
-			ConfiguredManagedBean configuredManagedBean = new ConfiguredManagedBeanImpl(managedBeanClass,
-					managedBeanName, managedBeanScope);
+			ConfiguredManagedBean configuredManagedBean =
+				new ConfiguredManagedBeanImpl(managedBeanClass, managedBeanName, managedBeanScope);
 			configuredManagedBeans.add(configuredManagedBean);
 			parsingManagedBeanScope = false;
 		}
@@ -171,8 +170,8 @@ public class FacesConfigParserImpl extends SAXHandlerBase implements FacesConfig
 		else if (parsingSystemEventListener) {
 
 			// NOTE: This has to appear last since system-event-listener is the surrounding element.
-			ConfiguredSystemEventListener configuredSystemEventListener = new ConfiguredSystemEventListenerImpl(
-					sourceClass, systemEventClass, systemEventListenerClass);
+			ConfiguredSystemEventListener configuredSystemEventListener =
+				new ConfiguredSystemEventListenerImpl(sourceClass, systemEventClass, systemEventListenerClass);
 			configuredSystemEventListeners.add(configuredSystemEventListener);
 			parsingSystemEventListener = false;
 		}
@@ -204,15 +203,15 @@ public class FacesConfigParserImpl extends SAXHandlerBase implements FacesConfig
 
 		List<ConfiguredSystemEventListener> configuredSystemEventListeners =
 			facesConfig.getConfiguredSystemEventListeners();
-		this.configuredSystemEventListeners = new ArrayList<ConfiguredSystemEventListener>(
-				configuredSystemEventListeners);
+		this.configuredSystemEventListeners =
+			new ArrayList<ConfiguredSystemEventListener>(configuredSystemEventListeners);
 
 		try {
 			saxParser.parse(inputStream, this);
 
 			facesConfig = new FacesConfigImpl(this.configuredApplicationExtensions, this.configuredFactoryExtensions,
-					this.configuredFacesServletMappings, this.configuredManagedBeans, this.configuredSuffixes,
-					this.configuredSystemEventListeners);
+				this.configuredFacesServletMappings, this.configuredManagedBeans, this.configuredSuffixes,
+				this.configuredSystemEventListeners);
 			saxParser.reset();
 
 			return facesConfig;

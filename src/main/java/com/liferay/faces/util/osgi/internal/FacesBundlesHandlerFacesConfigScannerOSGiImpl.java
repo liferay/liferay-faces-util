@@ -23,9 +23,8 @@ import org.osgi.framework.Bundle;
 import com.liferay.faces.util.config.internal.FacesConfigScanner;
 import com.liferay.faces.util.config.internal.FacesConfigScannerBase;
 
-
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public class FacesBundlesHandlerFacesConfigScannerOSGiImpl extends FacesBundlesHandlerResourceProviderOSGiImpl {
 

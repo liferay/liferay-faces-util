@@ -26,12 +26,11 @@ import com.liferay.faces.util.context.internal.FacesRequestContextFactoryOnDeman
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
-
 /**
  * This class defines the usage of static singleton that can be used to add scripts to a response.
  *
- * @deprecated  Please use {@link FacesContextHelperUtil} instead.
- * @author      Kyle Stiemann
+ * @deprecated Please use {@link FacesContextHelperUtil} instead.
+ * @author Kyle Stiemann
  */
 @Deprecated
 @ProviderType
@@ -43,7 +42,7 @@ public abstract class FacesRequestContext {
 	/**
 	 * Returns a static singleton instance of {@link FacesRequestContext}.
 	 *
-	 * @deprecated  No replacement available.
+	 * @deprecated No replacement available.
 	 */
 	@Deprecated
 	public static FacesRequestContext getCurrentInstance() {
@@ -53,11 +52,10 @@ public abstract class FacesRequestContext {
 	/**
 	 * This method has no effect.
 	 *
-	 * @deprecated  Please use {@link FacesContextHelperFactory} to decorate the response script functionality instead.
+	 * @deprecated Please use {@link FacesContextHelperFactory} to decorate the response script functionality instead.
 	 *
-	 * @param       facesRequestContext  If a non-null value is specified, then it will become the singleton value. If
-	 *                                   null is specified, then singleton value is removed from the ThreadLocal. is
-	 *                                   removed.
+	 * @param facesRequestContext If a non-null value is specified, then it will become the singleton value. If null is
+	 *                            specified, then singleton value is removed from the ThreadLocal. is removed.
 	 */
 	@Deprecated
 	public static void setCurrentInstance(FacesRequestContext facesRequestContext) {
@@ -68,8 +66,9 @@ public abstract class FacesRequestContext {
 	/**
 	 * Adds the specified {@link Script} to the list of scripts that are to be executed on the client.
 	 *
-	 * @deprecated  Call {@link FacesContextHelperUtil#addScript(javax.faces.context.FacesContext,
-	 *              com.liferay.faces.util.client.Script)} instead.
+	 * @deprecated Call
+	 *             {@link FacesContextHelperUtil#addScript(javax.faces.context.FacesContext, com.liferay.faces.util.client.Script)}
+	 *             instead.
 	 */
 	@Deprecated
 	public abstract void addScript(Script script);
@@ -77,10 +76,10 @@ public abstract class FacesRequestContext {
 	/**
 	 * Adds the specified script to the list of scripts that are to be executed on the client.
 	 *
-	 * @deprecated  Call {@link FacesContextHelperUtil#addScript(javax.faces.context.FacesContext, java.lang.String)}
-	 *              instead.
+	 * @deprecated Call {@link FacesContextHelperUtil#addScript(javax.faces.context.FacesContext, java.lang.String)}
+	 *             instead.
 	 *
-	 * @param       script  The script that is to be added.
+	 * @param script The script that is to be added.
 	 */
 	@Deprecated
 	public abstract void addScript(String script);
@@ -88,24 +87,24 @@ public abstract class FacesRequestContext {
 	/**
 	 * Adds the specified script to the list of scripts that are to be executed on the client.
 	 *
-	 * @deprecated  Call {@link FacesContextHelperUtil#addScript(javax.faces.context.FacesContext, java.lang.String)}
-	 *              instead.
+	 * @deprecated Call {@link FacesContextHelperUtil#addScript(javax.faces.context.FacesContext, java.lang.String)}
+	 *             instead.
 	 *
-	 * @param       facesContext  The current faces context.
-	 * @param       script        The script that is to be added.
+	 * @param facesContext The current faces context.
+	 * @param script       The script that is to be added.
 	 *
-	 * @since       3.1
-	 * @since       2.1
-	 * @since       1.1
+	 * @since 3.1
+	 * @since 2.1
+	 * @since 1.1
 	 */
 	@Deprecated
 	public abstract void addScript(FacesContext facesContext, String script);
 
 	/**
-	 * Returns an immutable list of scripts that were added via the {@link #addScript(Script)} or {@link
-	 * #addScript(FacesContext,String)} method.
+	 * Returns an immutable list of scripts that were added via the {@link #addScript(Script)} or
+	 * {@link #addScript(FacesContext,String)} method.
 	 *
-	 * @deprecated  Call {@link FacesContextHelperUtil#getScripts(javax.faces.context.FacesContext)} instead.
+	 * @deprecated Call {@link FacesContextHelperUtil#getScripts(javax.faces.context.FacesContext)} instead.
 	 */
 	@Deprecated
 	public abstract List<Script> getScripts();
@@ -113,7 +112,7 @@ public abstract class FacesRequestContext {
 	/**
 	 * Releases any resources that are associated with this {@link FacesRequestContext} instance.
 	 *
-	 * @deprecated  No replacement available.
+	 * @deprecated No replacement available.
 	 */
 	@Deprecated
 	public abstract void release();

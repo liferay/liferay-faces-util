@@ -16,12 +16,12 @@
 package com.liferay.faces.util.product.internal;
 
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public class ProductAngularBeansImpl extends ProductBase {
 
 	public ProductAngularBeansImpl() {
 		super(ProductInfo.newInstance("AngularBeans", "angularBeans.api.NGApp",
-				"META-INF/maven/com.github.bessemHmidi/angularBeans/pom.properties"));
+			"META-INF/maven/com.github.bessemHmidi/angularBeans/pom.properties"));
 	}
 }

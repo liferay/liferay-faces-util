@@ -41,9 +41,8 @@ import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.internal.TCCLUtil;
 import com.liferay.faces.util.xml.ConcurrentSAXParserFactory;
 
-
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public final class FacesThinWabInitializer implements ServletContainerInitializer {
 
@@ -92,12 +91,12 @@ public final class FacesThinWabInitializer implements ServletContainerInitialize
 			SAXParser saxParser = saxParserFactory.newSAXParser();
 			String resolveXMLEntitiesName = WebConfigParam.ResolveXMLEntities.getName();
 			String resolveXMLEntitiesAlternateName = WebConfigParam.ResolveXMLEntities.getAlternateName();
-			boolean resolveEntities = getBooleanValue(servletContext, resolveXMLEntitiesName,
-					resolveXMLEntitiesAlternateName, false);
+			boolean resolveEntities =
+				getBooleanValue(servletContext, resolveXMLEntitiesName, resolveXMLEntitiesAlternateName, false);
 
 			// Scan all the web-fragment.xml descriptors in bundles that this bundle depends on.
-			WebConfigScanner webConfigScanner = new WebConfigScannerImpl(classLoader, resourceReader, saxParser,
-					resolveEntities);
+			WebConfigScanner webConfigScanner =
+				new WebConfigScannerImpl(classLoader, resourceReader, saxParser, resolveEntities);
 			FacesBundlesHandlerBase<List<URL>> facesBundlesHandlerGetWebFragmentImpl =
 				new FacesBundlesHandlerGetWebFragmentImpl();
 			List<URL> webFragmentURLs = facesBundlesHandlerGetWebFragmentImpl.handleFacesBundles(servletContext, true);

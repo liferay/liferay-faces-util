@@ -31,16 +31,15 @@ import org.osgi.annotation.versioning.ConsumerType;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
-
 /**
  * This is a convenience base class that extends {@link ELResolver}. A subclasses must be designed to be instantiated as
  * a singleton because the JavaDoc for {@link Application#getELResolver()} indicates that an {@code ELResolver} should
  * be a singleton instance. This class implements the {@link Serializable} interface as a clue to subclasses that they
- * should implement a stateless, thread-safe singleton design. Subclasses should call the static {@link
- * #addFeatureDescriptor(String, Class)} method from a {@code static} block in order to add to the list of feature
- * descriptors.
+ * should implement a stateless, thread-safe singleton design. Subclasses should call the static
+ * {@link #addFeatureDescriptor(String, Class)} method from a {@code static} block in order to add to the list of
+ * feature descriptors.
  *
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ConsumerType
 public abstract class ELResolverBase extends ELResolver implements Serializable {
@@ -63,11 +62,11 @@ public abstract class ELResolverBase extends ELResolver implements Serializable 
 	}
 
 	/**
-	 * @param       featureName
-	 * @param       classType
+	 * @param featureName
+	 * @param classType
 	 *
-	 * @deprecated  Use {@link #newFeatureDescriptor(java.lang.String, java.lang.Class)} and {@link
-	 *              #ELResolverBase(java.beans.FeatureDescriptor...)} instead.
+	 * @deprecated Use {@link #newFeatureDescriptor(java.lang.String, java.lang.Class)} and
+	 *             {@link #ELResolverBase(java.beans.FeatureDescriptor...)} instead.
 	 */
 	@Deprecated
 	protected static void addFeatureDescriptor(String featureName, Class<?> classType) {

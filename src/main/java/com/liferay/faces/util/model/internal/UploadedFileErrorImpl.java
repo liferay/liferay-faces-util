@@ -16,7 +16,7 @@
 package com.liferay.faces.util.model.internal;
 
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class UploadedFileErrorImpl extends UploadedFileImpl {
 

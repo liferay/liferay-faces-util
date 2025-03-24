@@ -19,11 +19,10 @@ import javax.faces.application.Application;
 import javax.faces.application.ApplicationWrapper;
 import javax.faces.convert.Converter;
 
-
 /**
  * This class exists to workaround <a href="https://issues.liferay.com/browse/FACES-3641">FACES-3641</a>
  *
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class ApplicationFACES3641Impl extends ApplicationWrapper {
 

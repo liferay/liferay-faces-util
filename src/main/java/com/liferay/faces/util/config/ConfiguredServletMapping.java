@@ -17,11 +17,10 @@ package com.liferay.faces.util.config;
 
 import org.osgi.annotation.versioning.ProviderType;
 
-
 /**
  * This interface provides a representation of a servlet-mapping entry from a web-app descriptor.
  *
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public interface ConfiguredServletMapping {
@@ -54,9 +53,9 @@ public interface ConfiguredServletMapping {
 	public boolean isExtensionMapped();
 
 	/**
-	 * Flag indicating whether or not the servlet-mapping is implicit, meaning it is associated with {@link
-	 * javax.faces.application.ViewHandler#DEFAULT_SUFFIX} or {@link
-	 * javax.faces.application.ViewHandler#DEFAULT_SUFFIX_PARAM_NAME}.
+	 * Flag indicating whether or not the servlet-mapping is implicit, meaning it is associated with
+	 * {@link javax.faces.application.ViewHandler#DEFAULT_SUFFIX} or
+	 * {@link javax.faces.application.ViewHandler#DEFAULT_SUFFIX_PARAM_NAME}.
 	 */
 	public boolean isImplicit();
 

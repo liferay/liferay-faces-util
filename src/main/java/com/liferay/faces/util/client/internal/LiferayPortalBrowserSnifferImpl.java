@@ -27,7 +27,8 @@ import javax.servlet.http.HttpServletRequest;
  * @author Eduardo Lundgren
  * @author Nate Cavanaugh
  */
-public class LiferayPortalBrowserSnifferImpl extends LiferayPortalBrowserSnifferCompat implements LiferayPortalBrowserSniffer {
+public class LiferayPortalBrowserSnifferImpl extends LiferayPortalBrowserSnifferCompat
+	implements LiferayPortalBrowserSniffer {
 	@Override
 	public boolean acceptsGzip(HttpServletRequest request) {
 		String acceptEncoding = request.getHeader("Accept-Encoding");
@@ -60,15 +61,13 @@ public class LiferayPortalBrowserSnifferImpl extends LiferayPortalBrowserSniffer
 
 	@Override
 	public String getRevision(HttpServletRequest request) {
-		String revision = (String)request.getAttribute(
-			WebKeys.BROWSER_SNIFFER_REVISION);
+		String revision = (String) request.getAttribute(WebKeys.BROWSER_SNIFFER_REVISION);
 
 		if (revision != null) {
 			return revision;
 		}
 
-		revision = parseVersion(
-			getUserAgent(request), revisionLeadings, revisionSeparators);
+		revision = parseVersion(getUserAgent(request), revisionLeadings, revisionSeparators);
 
 		request.setAttribute(WebKeys.BROWSER_SNIFFER_REVISION, revision);
 
@@ -77,8 +76,7 @@ public class LiferayPortalBrowserSnifferImpl extends LiferayPortalBrowserSniffer
 
 	@Override
 	public String getVersion(HttpServletRequest request) {
-		String version = (String)request.getAttribute(
-			WebKeys.BROWSER_SNIFFER_VERSION);
+		String version = (String) request.getAttribute(WebKeys.BROWSER_SNIFFER_VERSION);
 
 		if (version != null) {
 			return version;
@@ -89,8 +87,7 @@ public class LiferayPortalBrowserSnifferImpl extends LiferayPortalBrowserSniffer
 		version = parseVersion(userAgent, versionLeadings, versionSeparators);
 
 		if (version.isEmpty()) {
-			version = parseVersion(
-				userAgent, revisionLeadings, revisionSeparators);
+			version = parseVersion(userAgent, revisionLeadings, revisionSeparators);
 		}
 
 		request.setAttribute(WebKeys.BROWSER_SNIFFER_VERSION, version);
@@ -168,8 +165,7 @@ public class LiferayPortalBrowserSnifferImpl extends LiferayPortalBrowserSniffer
 	public boolean isIeOnWin32(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
-		if (isIe(userAgent) &&
-			!(userAgent.contains("wow64") || userAgent.contains("win64"))) {
+		if (isIe(userAgent) && !(userAgent.contains("wow64") || userAgent.contains("win64"))) {
 
 			return true;
 		}
@@ -181,8 +177,7 @@ public class LiferayPortalBrowserSnifferImpl extends LiferayPortalBrowserSniffer
 	public boolean isIeOnWin64(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
-		if (isIe(userAgent) &&
-			(userAgent.contains("wow64") || userAgent.contains("win64"))) {
+		if (isIe(userAgent) && (userAgent.contains("wow64") || userAgent.contains("win64"))) {
 
 			return true;
 		}
@@ -227,8 +222,7 @@ public class LiferayPortalBrowserSnifferImpl extends LiferayPortalBrowserSniffer
 	public boolean isMobile(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
-		if (userAgent.contains("mobile") ||
-			(isAndroid(request) && userAgent.contains("nexus"))) {
+		if (userAgent.contains("mobile") || (isAndroid(request) && userAgent.contains("nexus"))) {
 
 			return true;
 		}
@@ -240,9 +234,7 @@ public class LiferayPortalBrowserSnifferImpl extends LiferayPortalBrowserSniffer
 	public boolean isMozilla(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
-		if (userAgent.contains("mozilla") &&
-			!(userAgent.contains("compatible") ||
-			  userAgent.contains("webkit"))) {
+		if (userAgent.contains("mozilla") && !(userAgent.contains("compatible") || userAgent.contains("webkit"))) {
 
 			return true;
 		}
@@ -350,19 +342,15 @@ public class LiferayPortalBrowserSnifferImpl extends LiferayPortalBrowserSniffer
 		return false;
 	}
 
-	protected static String parseVersion(
-		String userAgent, String[] leadings, char[] separators) {
+	protected static String parseVersion(String userAgent, String[] leadings, char[] separators) {
 
-		leading:
-		for (String leading : leadings) {
+		leading: for (String leading : leadings) {
 			int index = 0;
 
-			version:
-			while (true) {
+			version: while (true) {
 				index = userAgent.indexOf(leading, index);
 
-				if ((index < 0) ||
-					(((index += leading.length()) + 2) > userAgent.length())) {
+				if ((index < 0) || (((index += leading.length()) + 2) > userAgent.length())) {
 
 					continue leading;
 				}
@@ -457,8 +445,7 @@ public class LiferayPortalBrowserSnifferImpl extends LiferayPortalBrowserSniffer
 			return userAgent;
 		}
 
-		userAgent = String.valueOf(
-			request.getAttribute("User-Agent"));
+		userAgent = String.valueOf(request.getAttribute("User-Agent"));
 
 		if (Validator.isNotNull(userAgent)) {
 			return userAgent;
@@ -486,23 +473,17 @@ public class LiferayPortalBrowserSnifferImpl extends LiferayPortalBrowserSniffer
 		return false;
 	}
 
-	protected static final String[] revisionLeadings = {"rv", "it", "ra", "ie"};
+	protected static final String[] revisionLeadings = { "rv", "it", "ra", "ie" };
 	protected static final char[] revisionSeparators =
-		{CharPool.BACK_SLASH, CharPool.COLON, CharPool.SLASH, CharPool.SPACE};
-	protected static final String[] versionLeadings =
-		{"version", "firefox", "minefield", "chrome"};
-	protected static final char[] versionSeparators =
-		{CharPool.BACK_SLASH, CharPool.SLASH};
+		{ CharPool.BACK_SLASH, CharPool.COLON, CharPool.SLASH, CharPool.SPACE };
+	protected static final String[] versionLeadings = { "version", "firefox", "minefield", "chrome" };
+	protected static final char[] versionSeparators = { CharPool.BACK_SLASH, CharPool.SLASH };
 
-	private static final String[] _FIREFOX_ALIASES = {
-		"firefox", "minefield", "granparadiso", "bonecho", "firebird",
-		"phoenix", "camino"
-	};
+	private static final String[] _FIREFOX_ALIASES =
+		{ "firefox", "minefield", "granparadiso", "bonecho", "firebird", "phoenix", "camino" };
 
-	private static final String[] _WEBKIT_ALIASES = {"khtml", "applewebkit"};
+	private static final String[] _WEBKIT_ALIASES = { "khtml", "applewebkit" };
 
-	private static final String[] _WINDOWS_ALIASES = {
-		"windows", "win32", "16bit"
-	};
+	private static final String[] _WINDOWS_ALIASES = { "windows", "win32", "16bit" };
 }
 //J+

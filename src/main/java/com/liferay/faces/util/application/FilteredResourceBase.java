@@ -26,11 +26,10 @@ import org.osgi.annotation.versioning.ConsumerType;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
-
 /**
  * This class provides an extension point that allows developers to filter the text of a wrapped JSF resource.
  *
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 @ConsumerType
 public abstract class FilteredResourceBase extends ResourceWrapper {
@@ -57,9 +56,8 @@ public abstract class FilteredResourceBase extends ResourceWrapper {
 
 			// Only filter text resources. Content type prefixes were obtained from here:
 			// http://www.iana.org/assignments/media-types/media-types.xhtml
-			if ((contentType == null) ||
-					!(contentType.startsWith("audio") || contentType.startsWith("image") ||
-						contentType.startsWith("model") || contentType.startsWith("video"))) {
+			if ((contentType == null) || !(contentType.startsWith("audio") || contentType.startsWith("image")
+				|| contentType.startsWith("model") || contentType.startsWith("video"))) {
 
 				if ((contentType == null) || !contentType.startsWith("text")) {
 					logger.debug("Content-Type is \"{0}\" which may not be a filterable text content type.",
@@ -135,12 +133,12 @@ public abstract class FilteredResourceBase extends ResourceWrapper {
 	}
 
 	/**
-	 * This is an abstract method that allows developers to filter the contents of a resource (typically via {@link
-	 * String#replace(char, char)} etc.) before it is written to the response.
+	 * This is an abstract method that allows developers to filter the contents of a resource (typically via
+	 * {@link String#replace(char, char)} etc.) before it is written to the response.
 	 *
-	 * @param   resourceText  The string containing the text content of the resource.
+	 * @param resourceText The string containing the text content of the resource.
 	 *
-	 * @return  the filtered contents of the resource.
+	 * @return the filtered contents of the resource.
 	 */
 	protected abstract String filter(String resourceText);
 

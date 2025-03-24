@@ -23,9 +23,8 @@ import javax.faces.context.FacesContext;
 
 import org.osgi.framework.Bundle;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class ApplicationFactoryOSGiCDIImpl extends ApplicationFactory {
 
@@ -64,8 +63,8 @@ public class ApplicationFactoryOSGiCDIImpl extends ApplicationFactory {
 		if (application == null) {
 
 			if (requiresCapabilityCDI) {
-				application = new ApplicationFACES3641Impl(new ApplicationOSGiCDIImpl(
-							wrappedApplicationFactory.getApplication()));
+				application = new ApplicationFACES3641Impl(
+					new ApplicationOSGiCDIImpl(wrappedApplicationFactory.getApplication()));
 			}
 			else {
 				application = new ApplicationFACES3641Impl(wrappedApplicationFactory.getApplication());

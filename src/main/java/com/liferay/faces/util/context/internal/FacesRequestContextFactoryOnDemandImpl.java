@@ -27,9 +27,8 @@ import com.liferay.faces.util.context.FacesRequestContextFactory;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
-
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public class FacesRequestContextFactoryOnDemandImpl extends FacesRequestContextFactory implements Serializable {
 

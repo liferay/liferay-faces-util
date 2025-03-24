@@ -20,9 +20,8 @@ import com.liferay.faces.util.product.internal.ProductMojarraImpl;
 
 import com.sun.faces.RIConstants;
 
-
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public final class OnDemandBeanManagerKey {
 

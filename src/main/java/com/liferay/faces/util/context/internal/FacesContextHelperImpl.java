@@ -52,9 +52,8 @@ import com.liferay.faces.util.helper.LongHelper;
 import com.liferay.faces.util.i18n.I18n;
 import com.liferay.faces.util.i18n.I18nFactory;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class FacesContextHelperImpl implements FacesContextHelper, Serializable {
 
@@ -149,7 +148,7 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 	}
 
 	/**
-	 * @see  FacesContextHelper#addGlobalSuccessInfoMessage()
+	 * @see FacesContextHelper#addGlobalSuccessInfoMessage()
 	 */
 	@Override
 	public void addGlobalSuccessInfoMessage() {
@@ -157,7 +156,7 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 	}
 
 	/**
-	 * @see  FacesContextHelper#addGlobalSuccessInfoMessage()
+	 * @see FacesContextHelper#addGlobalSuccessInfoMessage()
 	 */
 	@Override
 	public void addGlobalSuccessInfoMessage(FacesContext facesContext) {
@@ -165,7 +164,7 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 	}
 
 	/**
-	 * @see  FacesContextHelper#addGlobalUnexpectedErrorMessage()
+	 * @see FacesContextHelper#addGlobalUnexpectedErrorMessage()
 	 */
 	@Override
 	public void addGlobalUnexpectedErrorMessage() {
@@ -173,7 +172,7 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 	}
 
 	/**
-	 * @see  FacesContextHelper#addGlobalUnexpectedErrorMessage()
+	 * @see FacesContextHelper#addGlobalUnexpectedErrorMessage()
 	 */
 	@Override
 	public void addGlobalUnexpectedErrorMessage(FacesContext facesContext) {
@@ -576,8 +575,8 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 	@Override
 	public void registerPhaseListener(PhaseListener phaseListener) throws IllegalStateException {
 
-		LifecycleFactory lifecycleFactory = (LifecycleFactory) FactoryFinder.getFactory(
-				FactoryFinder.LIFECYCLE_FACTORY);
+		LifecycleFactory lifecycleFactory =
+			(LifecycleFactory) FactoryFinder.getFactory(FactoryFinder.LIFECYCLE_FACTORY);
 
 		for (Iterator<String> lifecycleIds = lifecycleFactory.getLifecycleIds(); lifecycleIds.hasNext();) {
 			String lifecycleId = lifecycleIds.next();

@@ -17,17 +17,17 @@ package com.liferay.faces.util.lang;
 
 import org.osgi.annotation.versioning.ConsumerType;
 
-
 /**
  * This class represents a lazily initialized, effectively immutable value. The value is initialized in a thread-safe
  * way such that {@link #computeValue(java.lang.Object)} is only called once by a single thread.
  *
- * @param   <T>  The type that will be returned from the {@link #get(java.lang.Object)} and {@link
- *               #computeValue(java.lang.Object)} methods.
- * @param   <X>  The type of argument that will be passed to the {@link #get(java.lang.Object)} and {@link
- *               #computeValue(java.lang.Object)} methods in order to initialize the {@link ThreadSafeAccessor} value.
+ * @param <T> The type that will be returned from the {@link #get(java.lang.Object)} and
+ *            {@link #computeValue(java.lang.Object)} methods.
+ * @param <X> The type of argument that will be passed to the {@link #get(java.lang.Object)} and
+ *            {@link #computeValue(java.lang.Object)} methods in order to initialize the {@link ThreadSafeAccessor}
+ *            value.
  *
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 @ConsumerType
 public abstract class ThreadSafeAccessor<T, X> {
@@ -39,7 +39,7 @@ public abstract class ThreadSafeAccessor<T, X> {
 	 * Returns the {@link ThreadSafeAccessor} value. The value is lazily initialized by the first thread that attempts
 	 * to access it.
 	 *
-	 * @param  arg  The argument needed to initialize the {@link ThreadSafeAccessor} value.
+	 * @param arg The argument needed to initialize the {@link ThreadSafeAccessor} value.
 	 */
 	public final T get(X arg) {
 
@@ -67,7 +67,7 @@ public abstract class ThreadSafeAccessor<T, X> {
 	 * thread to obtain the initial value. Subclasses must override this method to provide the process necessary to
 	 * compute the initial value of the {@link ThreadSafeAccessor}.
 	 *
-	 * @param  args  The argument needed to initialize the {@link ThreadSafeAccessor} value.
+	 * @param args The argument needed to initialize the {@link ThreadSafeAccessor} value.
 	 */
 	protected abstract T computeValue(X args);
 }

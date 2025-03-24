@@ -23,9 +23,8 @@ import java.util.Set;
 
 import org.osgi.annotation.versioning.ProviderType;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public abstract class AbstractPropertyMap<V> implements Map<String, V> {

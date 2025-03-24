@@ -20,12 +20,11 @@ import java.util.ServiceLoader;
 
 import org.osgi.annotation.versioning.ProviderType;
 
-
 /**
  * In order to minimize dependencies, this class provides a layer of abstraction over different logging mechanisms
  * including Log4J and standard Java SE logging.
  *
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public abstract class LoggerFactory {
@@ -72,9 +71,9 @@ public abstract class LoggerFactory {
 	 * logging mechanism. NOTE: In the future, support should be added for detection of Apache Commons-Logging and
 	 * SLF4J.
 	 *
-	 * @param   name  The name associated with the logger.
+	 * @param name The name associated with the logger.
 	 *
-	 * @return  The logger associated with the specified name.
+	 * @return The logger associated with the specified name.
 	 */
 	public static final Logger getLogger(String name) {
 		return LOGGER_FACTORY.getLoggerImplementation(name);
@@ -85,9 +84,9 @@ public abstract class LoggerFactory {
 	 * logging mechanism. NOTE: In the future, support should be added for detection of Apache Commons-Logging and
 	 * SLF4J.
 	 *
-	 * @param   clazz  The class associated with the logger.
+	 * @param clazz The class associated with the logger.
 	 *
-	 * @return  The logger associated with the specified class.
+	 * @return The logger associated with the specified class.
 	 */
 	public static final Logger getLogger(Class<?> clazz) {
 		return getLogger(clazz.getName());

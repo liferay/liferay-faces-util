@@ -23,12 +23,11 @@ import javax.faces.context.ResponseWriterWrapper;
 
 import org.osgi.annotation.versioning.ProviderType;
 
-
 /**
  * This class is a {@link ResponseWriter} that is designed to intercept the encoding of a {@link HtmlInputText}
  * component. This class ensures that the "id" attribute is written correctly and that the "type" attribute is "hidden".
  *
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public class HiddenTextResponseWriter extends ResponseWriterWrapper {

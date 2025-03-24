@@ -16,7 +16,7 @@
 package com.liferay.faces.util.internal;
 
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public final class TCCLUtil {
 

@@ -22,17 +22,17 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import com.liferay.faces.util.cache.Cache;
 
-
 /**
  * A simple {@link Cache} which can be accessed/modified concurrently and limits the cache size by removing the least
  * recently used entry when a new value is added to the full cache. This implementation locks on writes in order to
- * ensure that the cache cannot grow infinitely. For more details, see {@link
- * #removeLeastRecentlyUsedCacheValueIfNecessary(java.lang.Object)}. A simple alternative would be to use {@link
- * java.util.Collections#synchronizedMap(java.util.Map)} on a {@link java.util.LinkedHashMap} with accessOrder set to
- * true. However, Collections.synchronizedMap() causes the map to lock on reads which is unacceptable for a cache. For
- * more details, see here: https://stackoverflow.com/questions/221525/how-would-you-implement-an-lru-cache-in-java
+ * ensure that the cache cannot grow infinitely. For more details, see
+ * {@link #removeLeastRecentlyUsedCacheValueIfNecessary(java.lang.Object)}. A simple alternative would be to use
+ * {@link java.util.Collections#synchronizedMap(java.util.Map)} on a {@link java.util.LinkedHashMap} with accessOrder
+ * set to true. However, Collections.synchronizedMap() causes the map to lock on reads which is unacceptable for a
+ * cache. For more details, see here:
+ * https://stackoverflow.com/questions/221525/how-would-you-implement-an-lru-cache-in-java
  *
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public class ConcurrentLRUCacheImpl<K, V> implements Cache<K, V>, Serializable {
 
@@ -163,11 +163,11 @@ public class ConcurrentLRUCacheImpl<K, V> implements Cache<K, V>, Serializable {
 	}
 
 	/**
-	 * This class tracks the last time a cached value was accessed in order to allow {@link
-	 * #removeLeastRecentlyUsedCacheValueIfNecessary(java.lang.Object)} to compare access times of values. The last
-	 * access time is updated on CacheValue creation and on calls to {@link #getValue()} using {@link
-	 * System#nanoTime()}. The last access time is stored inside a <a
-	 * href="https://stackoverflow.com/questions/3038203/is-there-any-point-in-using-a-volatile-long">
+	 * This class tracks the last time a cached value was accessed in order to allow
+	 * {@link #removeLeastRecentlyUsedCacheValueIfNecessary(java.lang.Object)} to compare access times of values. The
+	 * last access time is updated on CacheValue creation and on calls to {@link #getValue()} using
+	 * {@link System#nanoTime()}. The last access time is stored inside a
+	 * <a href="https://stackoverflow.com/questions/3038203/is-there-any-point-in-using-a-volatile-long">
 	 * <code>volatile</code> <code>long</code></a> to ensure that the value of the <code>long</code> is always read and
 	 * written to atomically. Although the last access time is guaranteed to be read and written to atomically, it is
 	 * not always guaranteed to be perfectly up to date. For example, if one thread is checking the last access time (in
@@ -181,9 +181,9 @@ public class ConcurrentLRUCacheImpl<K, V> implements Cache<K, V>, Serializable {
 		// Private Final Data Members
 		private final V value;
 
-		//J-
+		// J-
 		// Private Volatile Data Members
-		//J+
+		// J+
 
 		// Reads and writes to volatile long primitives are atmoic:
 		// https://stackoverflow.com/questions/3038203/is-there-any-point-in-using-a-volatile-long

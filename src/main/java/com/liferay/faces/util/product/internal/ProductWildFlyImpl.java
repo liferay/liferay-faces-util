@@ -21,9 +21,8 @@ import javax.management.MBeanServer;
 import javax.management.MBeanServerFactory;
 import javax.management.ObjectName;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class ProductWildFlyImpl extends ProductBase {
 

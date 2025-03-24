@@ -33,9 +33,8 @@ import com.liferay.faces.util.application.ResourceValidator;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class ResourceValidatorImpl implements ResourceValidator, Serializable {
 
@@ -46,11 +45,10 @@ public class ResourceValidatorImpl implements ResourceValidator, Serializable {
 	private static final Logger logger = LoggerFactory.getLogger(ResourceValidatorImpl.class);
 
 	// Private Constants
-	private static final Pattern BANNED_PATHS_PATTERN = Pattern.compile(".*/(?:META-INF|WEB-INF)/.*",
-			Pattern.CASE_INSENSITIVE);
-	private static final String[] BANNED_SEQUENCES = new String[] {
-			"//", "\\\\", "/\\", "\\/", "..", "./", ".\\", "%"
-		};
+	private static final Pattern BANNED_PATHS_PATTERN =
+		Pattern.compile(".*/(?:META-INF|WEB-INF)/.*", Pattern.CASE_INSENSITIVE);
+	private static final String[] BANNED_SEQUENCES =
+		new String[] { "//", "\\\\", "/\\", "\\/", "..", "./", ".\\", "%" };
 	private static final String LEGACY_FACELETS_VIEW_MAPPINGS_PARAM_NAME = "facelets.VIEW_MAPPINGS";
 
 	// Final Data Members
@@ -58,8 +56,8 @@ public class ResourceValidatorImpl implements ResourceValidator, Serializable {
 	private final List<Pattern> excludeLibraryPatterns;
 
 	/**
-	 * @param  excludeResourcePatterns  a {@link java.io.Serializable} {@link ArrayList} of excluded resource patterns.
-	 * @param  excludeLibraryPatterns   a {@link java.io.Serializable} {@link ArrayList} of excluded library patterns.
+	 * @param excludeResourcePatterns a {@link java.io.Serializable} {@link ArrayList} of excluded resource patterns.
+	 * @param excludeLibraryPatterns  a {@link java.io.Serializable} {@link ArrayList} of excluded library patterns.
 	 */
 	public ResourceValidatorImpl(ArrayList<Pattern> excludeResourcePatterns,
 		ArrayList<Pattern> excludeLibraryPatterns) {
@@ -150,7 +148,7 @@ public class ResourceValidatorImpl implements ResourceValidator, Serializable {
 		}
 
 		List<String> viewMappings = getViewMappings(externalContext, ViewHandler.FACELETS_VIEW_MAPPINGS_PARAM_NAME,
-				LEGACY_FACELETS_VIEW_MAPPINGS_PARAM_NAME);
+			LEGACY_FACELETS_VIEW_MAPPINGS_PARAM_NAME);
 
 		for (String viewMapping : viewMappings) {
 
@@ -261,15 +259,15 @@ public class ResourceValidatorImpl implements ResourceValidator, Serializable {
 	protected boolean isFaceletsVDL(String viewId) {
 
 		boolean faceletsVDL = false;
-		ViewDeclarationLanguageFactory viewDeclarationLanguageFactory = (ViewDeclarationLanguageFactory) FactoryFinder
-			.getFactory(FactoryFinder.VIEW_DECLARATION_LANGUAGE_FACTORY);
-		ViewDeclarationLanguage viewDeclarationLanguage = viewDeclarationLanguageFactory.getViewDeclarationLanguage(
-				viewId);
+		ViewDeclarationLanguageFactory viewDeclarationLanguageFactory =
+			(ViewDeclarationLanguageFactory) FactoryFinder.getFactory(FactoryFinder.VIEW_DECLARATION_LANGUAGE_FACTORY);
+		ViewDeclarationLanguage viewDeclarationLanguage =
+			viewDeclarationLanguageFactory.getViewDeclarationLanguage(viewId);
 
 		if (viewDeclarationLanguage != null) {
 
-			faceletsVDL = viewDeclarationLanguage.getId().equals(
-					ViewDeclarationLanguage.FACELETS_VIEW_DECLARATION_LANGUAGE_ID);
+			faceletsVDL =
+				viewDeclarationLanguage.getId().equals(ViewDeclarationLanguage.FACELETS_VIEW_DECLARATION_LANGUAGE_ID);
 
 			if (faceletsVDL) {
 				logger.trace("MATCHED FACELETS VDL viewId=[{0}]", viewId);

@@ -16,12 +16,12 @@
 package com.liferay.faces.util.product.internal;
 
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class ProductLiferayFacesPortalImpl extends ProductBase {
 
 	public ProductLiferayFacesPortalImpl() {
 		super(ProductInfo.newInstance("Liferay Faces Portal", "com.liferay.faces.portal.context.LiferayFacesContext",
-				"META-INF/maven/com.liferay.faces/com.liferay.faces.portal/pom.properties"));
+			"META-INF/maven/com.liferay.faces/com.liferay.faces.portal/pom.properties"));
 	}
 }

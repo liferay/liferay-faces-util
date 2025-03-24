@@ -29,15 +29,14 @@ import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.resource.internal.ResourceProviderUtil;
 
-
 /**
  * Note that this class uses a {@link List} of {@link URL}s rather than a {@link java.util.Set} of URLs (which would
- * remove duplicates) because Set's check for equality. Unfortunately {@link URL#equals(java.lang.Object)} and {@link
- * URL#hashCode()} may actually make blocking network requests before returning, so using a Set may cause serious
+ * remove duplicates) because Set's check for equality. Unfortunately {@link URL#equals(java.lang.Object)} and
+ * {@link URL#hashCode()} may actually make blocking network requests before returning, so using a Set may cause serious
  * performance issues. For more information see this StackOverflow Q&A:
  * https://stackoverflow.com/questions/18280818/what-java-library-can-i-use-to-compare-two-urls-for-equality.
  *
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public class FacesBundlesHandlerResourceProviderOSGiImpl extends FacesBundlesHandlerBase<List<URL>> {
 
@@ -83,8 +82,8 @@ public class FacesBundlesHandlerResourceProviderOSGiImpl extends FacesBundlesHan
 				options = BundleWiring.LISTRESOURCES_RECURSE;
 			}
 
-			Collection<String> resourceFilePaths = bundleWiring.listResources(path, currentFacesWabFilePattern,
-					options);
+			Collection<String> resourceFilePaths =
+				bundleWiring.listResources(path, currentFacesWabFilePattern, options);
 
 			for (String resourceFilePath : resourceFilePaths) {
 

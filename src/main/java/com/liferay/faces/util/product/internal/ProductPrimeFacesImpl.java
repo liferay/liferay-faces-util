@@ -17,9 +17,8 @@ package com.liferay.faces.util.product.internal;
 
 import com.liferay.faces.util.internal.TCCLUtil;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class ProductPrimeFacesImpl extends ProductBase {
 
@@ -34,8 +33,8 @@ public class ProductPrimeFacesImpl extends ProductBase {
 
 		try {
 
-			Class<?> constantsClass = TCCLUtil.loadClassFromContext(ProductPrimeFacesImpl.class,
-					"org.primefaces.util.Constants");
+			Class<?> constantsClass =
+				TCCLUtil.loadClassFromContext(ProductPrimeFacesImpl.class, "org.primefaces.util.Constants");
 			detected = true;
 
 			try {
@@ -43,8 +42,8 @@ public class ProductPrimeFacesImpl extends ProductBase {
 			}
 			catch (NoSuchFieldException e) {
 
-				PomProperties pomProperties = new PomProperties(constantsClass,
-						"META-INF/maven/org.primefaces/primefaces/pom.properties");
+				PomProperties pomProperties =
+					new PomProperties(constantsClass, "META-INF/maven/org.primefaces/primefaces/pom.properties");
 				version = pomProperties.getVersion();
 			}
 		}

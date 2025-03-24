@@ -22,9 +22,8 @@ import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.render.FacesURLEncoder;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class FacesURLEncoderImpl implements FacesURLEncoder, Serializable {
 

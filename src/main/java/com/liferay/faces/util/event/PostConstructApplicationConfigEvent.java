@@ -21,14 +21,15 @@ import org.osgi.annotation.versioning.ProviderType;
 
 import com.liferay.faces.util.config.ApplicationConfig;
 
-
 /**
- * <p>This event is published after all application configuration resources have been scanned, parsed, and processed at
- * startup. This provides the ability for listeners to safely call {@link
- * com.liferay.faces.util.factory.FactoryExtensionFinder#getFactory(Class)} or to get the application configuration by
- * calling {@link #getApplicationConfig()}.</p>
+ * <p>
+ * This event is published after all application configuration resources have been scanned, parsed, and processed at
+ * startup. This provides the ability for listeners to safely call
+ * {@link com.liferay.faces.util.factory.FactoryExtensionFinder#getFactory(Class)} or to get the application
+ * configuration by calling {@link #getApplicationConfig()}.
+ * </p>
  *
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public class PostConstructApplicationConfigEvent extends SystemEvent {

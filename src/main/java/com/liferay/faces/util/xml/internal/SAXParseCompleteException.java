@@ -17,9 +17,8 @@ package com.liferay.faces.util.xml.internal;
 
 import org.xml.sax.SAXException;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class SAXParseCompleteException extends SAXException {
 

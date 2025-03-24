@@ -19,17 +19,16 @@ import java.util.Collection;
 
 import org.osgi.framework.Bundle;
 
-
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public abstract class FacesBundlesHandlerBase<ReturnValueType> {
 
 	public final ReturnValueType handleFacesBundles(Object context, boolean recurse) {
 
 		ReturnValueType returnValueObject = getInitialReturnValueObject();
-		ReturnValueReference<ReturnValueType> returnValueReference = new ReturnValueReference<ReturnValueType>(
-				returnValueObject);
+		ReturnValueReference<ReturnValueType> returnValueReference =
+			new ReturnValueReference<ReturnValueType>(returnValueObject);
 
 		if (context != null) {
 

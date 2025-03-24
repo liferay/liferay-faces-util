@@ -23,9 +23,8 @@ import javax.servlet.http.HttpServletRequest;
 import com.liferay.faces.util.client.BrowserSniffer;
 import com.liferay.faces.util.client.BrowserSnifferFactory;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class BrowserSnifferFactoryImpl extends BrowserSnifferFactory implements Serializable {
 

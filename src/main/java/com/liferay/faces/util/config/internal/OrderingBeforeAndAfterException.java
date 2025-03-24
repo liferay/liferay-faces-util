@@ -16,7 +16,7 @@
 package com.liferay.faces.util.config.internal;
 
 /**
- * @author  Vernon Singleton
+ * @author Vernon Singleton
  */
 public class OrderingBeforeAndAfterException extends Exception {
 
