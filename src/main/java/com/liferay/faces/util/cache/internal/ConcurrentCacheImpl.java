@@ -21,9 +21,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import com.liferay.faces.util.cache.Cache;
 
-
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public class ConcurrentCacheImpl<K, V> implements Cache<K, V>, Serializable {
 

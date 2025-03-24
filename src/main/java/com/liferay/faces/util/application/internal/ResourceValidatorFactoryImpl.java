@@ -28,9 +28,8 @@ import com.liferay.faces.util.application.ResourceValidatorFactory;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class ResourceValidatorFactoryImpl extends ResourceValidatorFactory implements Serializable {
 

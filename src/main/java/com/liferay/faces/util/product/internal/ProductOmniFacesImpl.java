@@ -16,7 +16,7 @@
 package com.liferay.faces.util.product.internal;
 
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public class ProductOmniFacesImpl extends ProductBase {
 

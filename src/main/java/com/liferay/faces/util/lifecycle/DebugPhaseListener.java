@@ -25,9 +25,8 @@ import org.osgi.annotation.versioning.ProviderType;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public class DebugPhaseListener implements PhaseListener {

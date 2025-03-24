@@ -23,18 +23,19 @@ import org.osgi.annotation.versioning.ProviderType;
 
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public abstract class I18nFactory implements FacesWrapper<I18nFactory> {
 
 	/**
-	 * @deprecated  Call {@link #getI18nInstance(ExternalContext)} instead.
+	 * @deprecated Call {@link #getI18nInstance(ExternalContext)} instead.
 	 *
-	 *              <p>Returns a stateless, thread-safe singleton instance of {@link I18n} from the {@link I18nFactory}
-	 *              found by the {@link FactoryExtensionFinder}.</p>
+	 *             <p>
+	 *             Returns a stateless, thread-safe singleton instance of {@link I18n} from the {@link I18nFactory}
+	 *             found by the {@link FactoryExtensionFinder}.
+	 *             </p>
 	 */
 	@Deprecated
 	public static I18n getI18nInstance() {
@@ -45,12 +46,12 @@ public abstract class I18nFactory implements FacesWrapper<I18nFactory> {
 	 * Returns a stateless, thread-safe singleton instance of {@link I18n} from the {@link I18nFactory} found by the
 	 * {@link FactoryExtensionFinder}.
 	 *
-	 * @param  externalContext  The external context associated with the current faces context. It is needed in order
-	 *                          for the {@link FactoryExtensionFinder} to be able to find the factory.
+	 * @param externalContext The external context associated with the current faces context. It is needed in order for
+	 *                        the {@link FactoryExtensionFinder} to be able to find the factory.
 	 *
-	 * @since  3.1
-	 * @since  2.1
-	 * @since  1.1
+	 * @since 3.1
+	 * @since 2.1
+	 * @since 1.1
 	 */
 	public static I18n getI18nInstance(ExternalContext externalContext) {
 

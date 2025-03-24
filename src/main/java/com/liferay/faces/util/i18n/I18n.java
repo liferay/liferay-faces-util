@@ -22,12 +22,11 @@ import javax.faces.context.FacesContext;
 
 import org.osgi.annotation.versioning.ProviderType;
 
-
 /**
- * This interface defines a contract for obtaining internationalized messages of type {@link String} or {@link
- * FacesMessage}.
+ * This interface defines a contract for obtaining internationalized messages of type {@link String} or
+ * {@link FacesMessage}.
  *
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public interface I18n {
@@ -36,10 +35,10 @@ public interface I18n {
 	 * Creates (if necessary) and returns an internationalized {@link FacesMessage} based on the specified {@code
 	 * locale}, {@code severity}, and {@code messageId}.
 	 *
-	 * @param  facesContext  The current faces context.
-	 * @param  locale        The locale of the message.
-	 * @param  severity      The severity of the message.
-	 * @param  messageId     The id of the message.
+	 * @param facesContext The current faces context.
+	 * @param locale       The locale of the message.
+	 * @param severity     The severity of the message.
+	 * @param messageId    The id of the message.
 	 */
 	public FacesMessage getFacesMessage(FacesContext facesContext, Locale locale, FacesMessage.Severity severity,
 		String messageId);
@@ -49,12 +48,11 @@ public interface I18n {
 	 * locale}, {@code severity}, and {@code messageId}. If the message contains a {@link java.text.MessageFormat}
 	 * pattern then the specified {@code arguments} are inserted into the message accordingly.
 	 *
-	 * @param  facesContext  The current faces context.
-	 * @param  locale        The locale of the message.
-	 * @param  severity      The severity of the message.
-	 * @param  messageId     The id of the message.
-	 * @param  arguments     The values that are to be inserted according to the {@link java.text.MessageFormat}
-	 *                       pattern.
+	 * @param facesContext The current faces context.
+	 * @param locale       The locale of the message.
+	 * @param severity     The severity of the message.
+	 * @param messageId    The id of the message.
+	 * @param arguments    The values that are to be inserted according to the {@link java.text.MessageFormat} pattern.
 	 */
 	public FacesMessage getFacesMessage(FacesContext facesContext, Locale locale, FacesMessage.Severity severity,
 		String messageId, Object... arguments);
@@ -63,9 +61,9 @@ public interface I18n {
 	 * Creates (if necessary) and returns an internationalized {@link String} message based on the specified {@code
 	 * locale} and {@code messageId}.
 	 *
-	 * @param  facesContext  The current faces context.
-	 * @param  locale        The locale of the message.
-	 * @param  messageId     The id of the message.
+	 * @param facesContext The current faces context.
+	 * @param locale       The locale of the message.
+	 * @param messageId    The id of the message.
 	 */
 	public String getMessage(FacesContext facesContext, Locale locale, String messageId);
 
@@ -74,11 +72,10 @@ public interface I18n {
 	 * locale}, {@code messageId}. If the message contains a {@link java.text.MessageFormat} pattern then the specified
 	 * {@code arguments} are inserted into the message accordingly.
 	 *
-	 * @param  facesContext  The current faces context.
-	 * @param  locale        The locale of the message.
-	 * @param  messageId     The id of the message.
-	 * @param  arguments     The values that are to be inserted according to the {@link java.text.MessageFormat}
-	 *                       pattern.
+	 * @param facesContext The current faces context.
+	 * @param locale       The locale of the message.
+	 * @param messageId    The id of the message.
+	 * @param arguments    The values that are to be inserted according to the {@link java.text.MessageFormat} pattern.
 	 */
 	public String getMessage(FacesContext facesContext, Locale locale, String messageId, Object... arguments);
 }

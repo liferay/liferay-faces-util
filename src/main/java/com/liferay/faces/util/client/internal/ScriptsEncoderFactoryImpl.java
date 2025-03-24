@@ -20,9 +20,8 @@ import java.io.Serializable;
 import com.liferay.faces.util.client.ScriptsEncoder;
 import com.liferay.faces.util.client.ScriptsEncoderFactory;
 
-
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public class ScriptsEncoderFactoryImpl extends ScriptsEncoderFactory implements Serializable {
 

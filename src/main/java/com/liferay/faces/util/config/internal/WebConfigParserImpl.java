@@ -36,9 +36,8 @@ import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.xml.internal.SAXHandlerBase;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class WebConfigParserImpl extends SAXHandlerBase implements WebConfigParser {
 
@@ -118,8 +117,8 @@ public class WebConfigParserImpl extends SAXHandlerBase implements WebConfigPars
 			}
 
 			if (SERVLET.equals(qName)) {
-				ConfiguredServlet configuredServlet = new ConfiguredServletImpl(servletName, servletClass,
-						multiPartConfig);
+				ConfiguredServlet configuredServlet =
+					new ConfiguredServletImpl(servletName, servletClass, multiPartConfig);
 				configuredServlets.add(configuredServlet);
 				parsingServlet = false;
 			}
@@ -133,8 +132,8 @@ public class WebConfigParserImpl extends SAXHandlerBase implements WebConfigPars
 			else if (parsingUrlPattern) {
 
 				String urlPattern = content.toString().trim();
-				ConfiguredServletMapping configuredServletMapping = new ConfiguredServletMappingImpl(servletName,
-						urlPattern, false);
+				ConfiguredServletMapping configuredServletMapping =
+					new ConfiguredServletMappingImpl(servletName, urlPattern, false);
 				configuredServletMappings.add(configuredServletMapping);
 				logger.trace("Added servletName=[{0}] urlPattern=[{1}] to configuredServletMappings", servletName,
 					urlPattern);
@@ -184,7 +183,7 @@ public class WebConfigParserImpl extends SAXHandlerBase implements WebConfigPars
 		try {
 			saxParser.parse(inputStream, this);
 			webConfig = new WebConfigImpl(this.configuredContextParams, this.configuredServlets,
-					this.configuredServletMappings);
+				this.configuredServletMappings);
 			saxParser.reset();
 
 			return webConfig;

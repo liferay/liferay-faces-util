@@ -18,9 +18,8 @@ package com.liferay.faces.util.cache.internal;
 import com.liferay.faces.util.cache.Cache;
 import com.liferay.faces.util.cache.CacheFactory;
 
-
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public class CacheFactoryImpl extends CacheFactory {
 
@@ -52,16 +51,16 @@ public class CacheFactoryImpl extends CacheFactory {
 	private void validateInitialCapacity(int initialCapacity) {
 
 		if (initialCapacity < 0) {
-			throw new IllegalArgumentException("Invalid initialCapacity of " + initialCapacity +
-				". initialCapacity must be greater than -1.");
+			throw new IllegalArgumentException(
+				"Invalid initialCapacity of " + initialCapacity + ". initialCapacity must be greater than -1.");
 		}
 	}
 
 	private void validateMaxCapacity(int maxCapacity) {
 
 		if (maxCapacity < 1) {
-			throw new IllegalArgumentException("Invalid maxCapacity of " + maxCapacity +
-				". maxCapacity must be greater than 0.");
+			throw new IllegalArgumentException(
+				"Invalid maxCapacity of " + maxCapacity + ". maxCapacity must be greater than 0.");
 		}
 	}
 }

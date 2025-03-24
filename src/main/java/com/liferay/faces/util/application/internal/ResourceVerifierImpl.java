@@ -22,9 +22,8 @@ import javax.faces.context.FacesContext;
 
 import com.liferay.faces.util.application.ResourceVerifier;
 
-
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public class ResourceVerifierImpl implements ResourceVerifier, Serializable {
 

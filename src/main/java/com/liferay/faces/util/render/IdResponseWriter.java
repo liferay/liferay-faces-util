@@ -23,13 +23,12 @@ import javax.faces.context.ResponseWriterWrapper;
 
 import org.osgi.annotation.versioning.ProviderType;
 
-
 /**
  * This class is a {@link ResponseWriter} that ensures the "id" attribute is always written to a particular element.
  * There are two general use cases for this class: 1. Ensure that the id is always rendered for a specific element. 2.
  * Render a different id than the delegating renderer would normally render.
  *
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public class IdResponseWriter extends ResponseWriterWrapper {

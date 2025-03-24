@@ -20,9 +20,8 @@ import java.util.Map;
 
 import org.osgi.annotation.versioning.ProviderType;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public interface WebConfig {

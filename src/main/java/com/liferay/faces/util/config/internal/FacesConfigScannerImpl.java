@@ -28,9 +28,8 @@ import javax.xml.parsers.SAXParser;
 
 import com.liferay.faces.util.config.WebConfig;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class FacesConfigScannerImpl extends FacesConfigScannerBase {
 

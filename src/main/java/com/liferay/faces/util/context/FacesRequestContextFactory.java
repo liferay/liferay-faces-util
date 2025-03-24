@@ -20,10 +20,9 @@ import javax.faces.context.ExternalContext;
 
 import org.osgi.annotation.versioning.ProviderType;
 
-
 /**
- * @author      Kyle Stiemann
- * @deprecated  Please use {@link FacesContextHelperFactory} instead.
+ * @author Kyle Stiemann
+ * @deprecated Please use {@link FacesContextHelperFactory} instead.
  */
 @Deprecated
 @ProviderType
@@ -33,9 +32,9 @@ public abstract class FacesRequestContextFactory implements FacesWrapper<FacesRe
 	 * Returns the value of {@link FacesRequestContext#getCurrentInstance()}. The returned instance is designed to be
 	 * used during execution of a request thread, so it is not guaranteed to be {@link java.io.Serializable}.
 	 *
-	 * @deprecated  Call {@link
-	 *              FacesContextHelperFactory#getFacesContextHelperInstance(javax.faces.context.ExternalContext)}
-	 *              instead.
+	 * @deprecated Call
+	 *             {@link FacesContextHelperFactory#getFacesContextHelperInstance(javax.faces.context.ExternalContext)}
+	 *             instead.
 	 */
 	@Deprecated
 	public static FacesRequestContext getFacesRequestContextInstance() {
@@ -46,12 +45,12 @@ public abstract class FacesRequestContextFactory implements FacesWrapper<FacesRe
 	 * Returns the value of {@link FacesRequestContext#getCurrentInstance()}. The returned instance is designed to be
 	 * used during execution of a request thread, so it is not guaranteed to be {@link java.io.Serializable}.
 	 *
-	 * @deprecated  Call {@link
-	 *              FacesContextHelperFactory#getFacesContextHelperInstance(javax.faces.context.ExternalContext)}
-	 *              instead.
-	 * @since       3.1
-	 * @since       2.1
-	 * @since       1.1
+	 * @deprecated Call
+	 *             {@link FacesContextHelperFactory#getFacesContextHelperInstance(javax.faces.context.ExternalContext)}
+	 *             instead.
+	 * @since 3.1
+	 * @since 2.1
+	 * @since 1.1
 	 */
 	@Deprecated
 	public static FacesRequestContext getFacesRequestContextInstance(ExternalContext externalContext) {
@@ -62,7 +61,7 @@ public abstract class FacesRequestContextFactory implements FacesWrapper<FacesRe
 	 * Returns the value of {@link FacesRequestContext#getCurrentInstance()}. The returned instance is designed to be
 	 * used during execution of a request thread, so it is not guaranteed to be {@link java.io.Serializable}.
 	 *
-	 * @deprecated  Call {@link FacesContextHelperFactory#getFacesContextHelper()} instead.
+	 * @deprecated Call {@link FacesContextHelperFactory#getFacesContextHelper()} instead.
 	 */
 	@Deprecated
 	public abstract FacesRequestContext getFacesRequestContext();
@@ -70,7 +69,7 @@ public abstract class FacesRequestContextFactory implements FacesWrapper<FacesRe
 	/**
 	 * Returns the wrapped factory instance if this factory decorates another. Otherwise, this method returns null.
 	 *
-	 * @deprecated  No replacement available.
+	 * @deprecated No replacement available.
 	 */
 	@Deprecated
 	@Override

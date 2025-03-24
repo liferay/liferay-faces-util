@@ -18,9 +18,8 @@ package com.liferay.faces.util.product.internal;
 import com.liferay.faces.util.helper.IntegerHelper;
 import com.liferay.faces.util.internal.TCCLUtil;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class ProductICEfacesImpl extends ProductBase {
 
@@ -37,22 +36,22 @@ public class ProductICEfacesImpl extends ProductBase {
 			Class<?> productInfoClass;
 
 			try {
-				productInfoClass = TCCLUtil.loadClassFromContext(ProductICEfacesImpl.class,
-						"org.icefaces.application.ProductInfo");
+				productInfoClass =
+					TCCLUtil.loadClassFromContext(ProductICEfacesImpl.class, "org.icefaces.application.ProductInfo");
 			}
 			catch (ClassNotFoundException e) {
 				productInfoClass = TCCLUtil.loadClassFromContext(ProductICEfacesImpl.class,
-						"com.icesoft.faces.application.ProductInfo");
+					"com.icesoft.faces.application.ProductInfo");
 			}
 
-			int buildId = IntegerHelper.toInteger((String) productInfoClass.getDeclaredField("REVISION").get(
-						String.class));
-			int majorVersion = IntegerHelper.toInteger((String) productInfoClass.getDeclaredField("PRIMARY").get(
-						String.class));
-			int minorVersion = IntegerHelper.toInteger((String) productInfoClass.getDeclaredField("SECONDARY").get(
-						String.class));
-			int patchVersion = IntegerHelper.toInteger((String) productInfoClass.getDeclaredField("TERTIARY").get(
-						String.class));
+			int buildId =
+				IntegerHelper.toInteger((String) productInfoClass.getDeclaredField("REVISION").get(String.class));
+			int majorVersion =
+				IntegerHelper.toInteger((String) productInfoClass.getDeclaredField("PRIMARY").get(String.class));
+			int minorVersion =
+				IntegerHelper.toInteger((String) productInfoClass.getDeclaredField("SECONDARY").get(String.class));
+			int patchVersion =
+				IntegerHelper.toInteger((String) productInfoClass.getDeclaredField("TERTIARY").get(String.class));
 			String title = (String) productInfoClass.getDeclaredField("PRODUCT").get(String.class);
 
 			if (title == null) {

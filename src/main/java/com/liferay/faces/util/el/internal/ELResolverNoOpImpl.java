@@ -21,9 +21,8 @@ import java.util.Iterator;
 import javax.el.ELContext;
 import javax.el.ELResolver;
 
-
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public class ELResolverNoOpImpl extends ELResolver {
 

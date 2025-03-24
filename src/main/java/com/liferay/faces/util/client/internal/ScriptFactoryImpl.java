@@ -20,9 +20,8 @@ import java.io.Serializable;
 import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.client.ScriptFactory;
 
-
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public class ScriptFactoryImpl extends ScriptFactory implements Serializable {
 

@@ -21,9 +21,8 @@ import java.util.Map;
 
 import org.osgi.annotation.versioning.ProviderType;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public class PropertyMapEntrySet<V> extends HashSet<Map.Entry<String, V>> {

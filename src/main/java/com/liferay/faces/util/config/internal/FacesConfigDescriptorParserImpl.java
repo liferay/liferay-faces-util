@@ -33,9 +33,8 @@ import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.xml.internal.SAXHandlerBase;
 import com.liferay.faces.util.xml.internal.SAXParseCompleteException;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class FacesConfigDescriptorParserImpl extends SAXHandlerBase implements FacesConfigDescriptorParser {
 
@@ -139,9 +138,9 @@ public class FacesConfigDescriptorParserImpl extends SAXHandlerBase implements F
 							if (content != null) {
 
 								// TODO add {0} parameterization to warn
-								logger.warn("Stray content found when parsing FacesConfig named " + facesConfigName +
-									". -> Ordering -> before -> content found: " + content +
-									" ... probably belongs inside of a 'name' tag.");
+								logger.warn("Stray content found when parsing FacesConfig named " + facesConfigName
+									+ ". -> Ordering -> before -> content found: " + content
+									+ " ... probably belongs inside of a 'name' tag.");
 								logger.warn("Assuming '" + content + "' is a name ...");
 								beforeName = content.toString().trim();
 								beforeNames.add(beforeName);
@@ -180,9 +179,9 @@ public class FacesConfigDescriptorParserImpl extends SAXHandlerBase implements F
 							if (content != null) {
 
 								// TODO add {0} parameterization to warn
-								logger.warn("Stray content found when parsing FacesConfig named " + facesConfigName +
-									". -> Ordering -> after -> content found: " + content +
-									" ... probably belongs inside of a 'name' tag.");
+								logger.warn("Stray content found when parsing FacesConfig named " + facesConfigName
+									+ ". -> Ordering -> after -> content found: " + content
+									+ " ... probably belongs inside of a 'name' tag.");
 								logger.warn("Assuming '" + content + "' is a name ...");
 								afterName = content.toString().trim();
 								afterNames.add(afterName);
@@ -241,8 +240,8 @@ public class FacesConfigDescriptorParserImpl extends SAXHandlerBase implements F
 			if (ordering != null) {
 
 				EnumMap<Ordering.Path, String[]> routes = ordering.getRoutes();
-				EnumMap<Ordering.Path, String[]> routesToSet = new EnumMap<Ordering.Path, String[]>(
-						Ordering.Path.class);
+				EnumMap<Ordering.Path, String[]> routesToSet =
+					new EnumMap<Ordering.Path, String[]>(Ordering.Path.class);
 
 				if (beforeNames.size() > 0) {
 					String[] befores = beforeNames.toArray(new String[beforeNames.size()]);
@@ -277,8 +276,8 @@ public class FacesConfigDescriptorParserImpl extends SAXHandlerBase implements F
 				absoluteOrdering = null;
 			}
 
-			FacesConfigDescriptor facesConfigDescriptor = new FacesConfigDescriptorImpl(facesConfigName, path,
-					isWebInfFacesConfig, absoluteOrdering, ordering);
+			FacesConfigDescriptor facesConfigDescriptor =
+				new FacesConfigDescriptorImpl(facesConfigName, path, isWebInfFacesConfig, absoluteOrdering, ordering);
 
 			this.facesConfigName = null;
 			this.absoluteOrdering = null;
@@ -333,15 +332,15 @@ public class FacesConfigDescriptorParserImpl extends SAXHandlerBase implements F
 				parsingAbsoluteOrdering = true;
 			}
 			else {
-				logger.warn("endElement: found " + localName + " section in " + uri.toString() +
-					"\nTrying to ignore this section ...");
+				logger.warn("endElement: found " + localName + " section in " + uri.toString()
+					+ "\nTrying to ignore this section ...");
 			}
 		}
 		else if (localName.equals(ORDERING)) {
 
 			if (isWebInfFacesConfig()) {
-				logger.warn("endElement: found " + localName + " section in " + uri.toString() +
-					"\nTrying to ignore this section ...");
+				logger.warn("endElement: found " + localName + " section in " + uri.toString()
+					+ "\nTrying to ignore this section ...");
 			}
 			else {
 				parsingOrdering = true;

@@ -20,9 +20,8 @@ import java.io.Serializable;
 import com.liferay.faces.util.i18n.I18n;
 import com.liferay.faces.util.i18n.I18nFactory;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class I18nFactoryImpl extends I18nFactory implements Serializable {
 

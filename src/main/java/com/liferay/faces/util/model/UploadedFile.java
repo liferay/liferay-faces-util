@@ -22,15 +22,14 @@ import java.util.Map;
 
 import org.osgi.annotation.versioning.ProviderType;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public interface UploadedFile {
 
 	/**
-	 * @author  Neil Griffin
+	 * @author Neil Griffin
 	 */
 	public static enum Status {
 		ERROR, FILE_SIZE_LIMIT_EXCEEDED, FILE_INVALID_NAME_PATTERN, FILE_SAVED, REQUEST_SIZE_LIMIT_EXCEEDED

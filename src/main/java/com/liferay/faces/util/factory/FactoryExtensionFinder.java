@@ -25,12 +25,11 @@ import org.osgi.annotation.versioning.ProviderType;
 
 import com.liferay.faces.util.config.ConfiguredElement;
 
-
 /**
  * This class provides a factory lookup mechanism similar to the {@link javax.faces.FactoryFinder} in the JSF API.
  * Factory instances are stored as attributes in the {@link ExternalContext#getApplicationMap()}.
  *
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public abstract class FactoryExtensionFinder {
@@ -39,12 +38,14 @@ public abstract class FactoryExtensionFinder {
 	private static FactoryExtensionFinder instance;
 
 	/**
-	 * @deprecated  Call {@link #getFactory(ExternalContext, Class)} instead.
+	 * @deprecated Call {@link #getFactory(ExternalContext, Class)} instead.
 	 *
-	 *              <p>Returns the factory instance associated with the specified factory class from the external
-	 *              context associated with the current faces context.</p>
+	 *             <p>
+	 *             Returns the factory instance associated with the specified factory class from the external context
+	 *             associated with the current faces context.
+	 *             </p>
 	 *
-	 * @param       factoryClass  The factory {@link java.lang.Class}.
+	 * @param factoryClass The factory {@link java.lang.Class}.
 	 */
 	@Deprecated
 	@SuppressWarnings("deprecation")
@@ -55,8 +56,8 @@ public abstract class FactoryExtensionFinder {
 	/**
 	 * Returns the factory instance associated with the specified factory class from the specified external context.
 	 *
-	 * @param  externalContext  The external context associated with the current faces context.
-	 * @param  factoryClass     The factory {@link java.lang.Class}.
+	 * @param externalContext The external context associated with the current faces context.
+	 * @param factoryClass    The factory {@link java.lang.Class}.
 	 */
 	public static Object getFactory(ExternalContext externalContext, Class<?> factoryClass) {
 		return getInstance().getFactoryInstance(externalContext, factoryClass);
@@ -65,7 +66,7 @@ public abstract class FactoryExtensionFinder {
 	/**
 	 * Returns the thread-safe Singleton instance of the factory extension finder.
 	 *
-	 * @throws  FacesException  When the factory extension finder cannot be discovered.
+	 * @throws FacesException When the factory extension finder cannot be discovered.
 	 */
 	public static FactoryExtensionFinder getInstance() throws FacesException {
 
@@ -89,8 +90,8 @@ public abstract class FactoryExtensionFinder {
 					try {
 
 						// FACES-2966 Netbeans auto completion fails for Liferay Faces components
-						Class<?> clazz = Class.forName(
-								"com.liferay.faces.util.factory.internal.FactoryExtensionFinderImpl");
+						Class<?> clazz =
+							Class.forName("com.liferay.faces.util.factory.internal.FactoryExtensionFinderImpl");
 						instance = (FactoryExtensionFinder) clazz.newInstance();
 					}
 					catch (Exception e) {
@@ -100,8 +101,8 @@ public abstract class FactoryExtensionFinder {
 				}
 			}
 			else {
-				throw new FacesException("Unable to acquire ServiceLoader for " +
-					FactoryExtensionFinder.class.getName());
+				throw new FacesException(
+					"Unable to acquire ServiceLoader for " + FactoryExtensionFinder.class.getName());
 			}
 		}
 
@@ -109,12 +110,14 @@ public abstract class FactoryExtensionFinder {
 	}
 
 	/**
-	 * @deprecated  Call {@link #getFactoryInstance(ExternalContext, Class)} instead.
+	 * @deprecated Call {@link #getFactoryInstance(ExternalContext, Class)} instead.
 	 *
-	 *              <p>Returns the factory instance associated with the specified factory class from the external
-	 *              context associated with the current faces context.</p>
+	 *             <p>
+	 *             Returns the factory instance associated with the specified factory class from the external context
+	 *             associated with the current faces context.
+	 *             </p>
 	 *
-	 * @param       factoryClass  The factory {@link java.lang.Class}.
+	 * @param factoryClass The factory {@link java.lang.Class}.
 	 */
 	@Deprecated
 	public abstract Object getFactoryInstance(Class<?> factoryClass);
@@ -122,36 +125,40 @@ public abstract class FactoryExtensionFinder {
 	/**
 	 * Returns the factory instance associated with the specified factory class from the specified external context.
 	 *
-	 * @param  externalContext  The external context associated with the current faces context.
-	 * @param  factoryClass     The factory {@link java.lang.Class}.
+	 * @param externalContext The external context associated with the current faces context.
+	 * @param factoryClass    The factory {@link java.lang.Class}.
 	 */
 	public abstract Object getFactoryInstance(ExternalContext externalContext, Class<?> factoryClass);
 
 	/**
-	 * @deprecated  Call {@link #registerFactory(ExternalContext, ConfiguredElement)} instead.
+	 * @deprecated Call {@link #registerFactory(ExternalContext, ConfiguredElement)} instead.
 	 *
-	 *              <p>Registers the specified configured factory extension by storing it as an attribute in the {@link
-	 *              ExternalContext#getApplicationMap()} associated with the current faces context. Since this method is
-	 *              designed to be called during application initialization, it is not guaranteed to be thread-safe.</p>
+	 *             <p>
+	 *             Registers the specified configured factory extension by storing it as an attribute in the
+	 *             {@link ExternalContext#getApplicationMap()} associated with the current faces context. Since this
+	 *             method is designed to be called during application initialization, it is not guaranteed to be
+	 *             thread-safe.
+	 *             </p>
 	 *
-	 * @param       configuredFactoryExtension  The configured factory extension.
+	 * @param configuredFactoryExtension The configured factory extension.
 	 */
 	@Deprecated
 	public abstract void registerFactory(ConfiguredElement configuredFactoryExtension);
 
 	/**
-	 * Registers the specified configured factory extension by storing it as an attribute in the specified {@link
-	 * ExternalContext#getApplicationMap()}. Since this method is designed to be called during application
+	 * Registers the specified configured factory extension by storing it as an attribute in the specified
+	 * {@link ExternalContext#getApplicationMap()}. Since this method is designed to be called during application
 	 * initialization, it is not guaranteed to be thread-safe.
 	 *
-	 * @param  externalContext             The external context associated with the current faces context.
-	 * @param  configuredFactoryExtension  The configured factory extension.
+	 * @param externalContext            The external context associated with the current faces context.
+	 * @param configuredFactoryExtension The configured factory extension.
 	 */
 	public abstract void registerFactory(ExternalContext externalContext, ConfiguredElement configuredFactoryExtension);
 
 	/**
-	 * Releases all of the factories that were registered via the {@link #registerFactory(ExternalContext,
-	 * ConfiguredElement)} method. It is designed to be called when a webapp context is destroyed.
+	 * Releases all of the factories that were registered via the
+	 * {@link #registerFactory(ExternalContext, ConfiguredElement)} method. It is designed to be called when a webapp
+	 * context is destroyed.
 	 */
 	public abstract void releaseFactories(ExternalContext externalContext);
 }

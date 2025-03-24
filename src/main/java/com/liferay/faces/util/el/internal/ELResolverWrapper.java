@@ -22,9 +22,8 @@ import javax.el.ELContext;
 import javax.el.ELResolver;
 import javax.faces.FacesWrapper;
 
-
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public abstract class ELResolverWrapper extends ELResolver implements FacesWrapper<ELResolver> {
 

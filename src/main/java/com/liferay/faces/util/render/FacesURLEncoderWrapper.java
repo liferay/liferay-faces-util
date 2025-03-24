@@ -19,9 +19,8 @@ import javax.faces.FacesWrapper;
 
 import org.osgi.annotation.versioning.ConsumerType;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ConsumerType
 public abstract class FacesURLEncoderWrapper implements FacesURLEncoder, FacesWrapper<FacesURLEncoder> {

@@ -23,9 +23,8 @@ import javax.faces.context.FacesContext;
 
 import org.osgi.framework.Bundle;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class ApplicationFactoryOSGiCDIImpl extends ApplicationFactory {
 

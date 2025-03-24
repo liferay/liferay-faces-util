@@ -30,9 +30,8 @@ import java.util.ServiceLoader;
 import com.liferay.faces.util.i18n.internal.UTF8Control;
 import com.liferay.faces.util.internal.TCCLUtil;
 
-
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public class ResourceBundleUtil {
 
@@ -41,8 +40,8 @@ public class ResourceBundleUtil {
 	private static final Method GET_CONTROL_METHOD;
 	private static final List RESOURCE_BUNDLE_CONTROL_PROVIDERS;
 	private static final ResourceBundle.Control UTF8_CONTROL = new UTF8Control();
-	private static final ResourceBundle.Control OSGI_FRIENDLY_UTF8_CONTROL = new OSGiFriendlyControl(UTF8_CONTROL,
-			ResourceBundleUtil.class);
+	private static final ResourceBundle.Control OSGI_FRIENDLY_UTF8_CONTROL =
+		new OSGiFriendlyControl(UTF8_CONTROL, ResourceBundleUtil.class);
 
 	static {
 
@@ -75,8 +74,8 @@ public class ResourceBundleUtil {
 	}
 
 	/**
-	 * @see  OSGiClassLoaderUtil#getResourceBundle(java.lang.String, java.util.Locale, java.lang.ClassLoader,
-	 *       java.lang.Class)
+	 * @see OSGiClassLoaderUtil#getResourceBundle(java.lang.String, java.util.Locale, java.lang.ClassLoader,
+	 *      java.lang.Class)
 	 */
 	public static ResourceBundle getResourceBundleInOSGiEnvironment(String baseName, Locale targetLocale,
 		ClassLoader threadContextClassLoader, Class<?> callingClass) throws MissingResourceException {
@@ -87,8 +86,8 @@ public class ResourceBundleUtil {
 	}
 
 	/**
-	 * @see  OSGiClassLoaderUtil#getResourceBundle(java.lang.String, java.util.Locale, java.lang.ClassLoader,
-	 *       java.util.ResourceBundle.Control, java.lang.Class)
+	 * @see OSGiClassLoaderUtil#getResourceBundle(java.lang.String, java.util.Locale, java.lang.ClassLoader,
+	 *      java.util.ResourceBundle.Control, java.lang.Class)
 	 */
 	public static ResourceBundle getResourceBundleInOSGiEnvironment(String baseName, Locale targetLocale,
 		ClassLoader threadContextClassLoader, ResourceBundle.Control control, Class<?> callingClass)

@@ -17,9 +17,8 @@ package com.liferay.faces.util.config.internal;
 
 import java.util.List;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public interface FacesConfigDescriptor {
 

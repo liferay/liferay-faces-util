@@ -34,13 +34,12 @@ import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.osgi.internal.FacesBundlesHandlerBase;
 import com.liferay.faces.util.osgi.internal.FacesBundlesHandlerResourceProviderOSGiImpl;
 
-
 /**
  * This class provides the ability for {@link com.sun.faces.application.resource.WebappResourceHelper} to discover JSF
- * resources (such as primefaces/jquery/jquery.js) that are contained in other OSGi bundles. The reason why {@link
- * ExternalContext} is used as an extension point is because Mojarra does not have a resource provider API.
+ * resources (such as primefaces/jquery/jquery.js) that are contained in other OSGi bundles. The reason why
+ * {@link ExternalContext} is used as an extension point is because Mojarra does not have a resource provider API.
  *
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class ExternalContextUtilOSGiImpl extends ExternalContextWrapper {
 
@@ -83,8 +82,8 @@ public class ExternalContextUtilOSGiImpl extends ExternalContextWrapper {
 			fileSpec = path.substring(pos + 1);
 		}
 
-		FacesBundlesHandlerBase<List<URL>> facesBundlesHandler = new FacesBundlesHandlerResourceProviderOSGiImpl(
-				pathDir, fileSpec);
+		FacesBundlesHandlerBase<List<URL>> facesBundlesHandler =
+			new FacesBundlesHandlerResourceProviderOSGiImpl(pathDir, fileSpec);
 		List<URL> urls = facesBundlesHandler.handleFacesBundles(applicationMap, false);
 
 		if ((urls != null) && !urls.isEmpty()) {
@@ -143,8 +142,8 @@ public class ExternalContextUtilOSGiImpl extends ExternalContextWrapper {
 			return resourcePaths;
 		}
 
-		FacesBundlesHandlerBase<List<URL>> facesBundlesHandler = new FacesBundlesHandlerResourceProviderOSGiImpl(path,
-				"*");
+		FacesBundlesHandlerBase<List<URL>> facesBundlesHandler =
+			new FacesBundlesHandlerResourceProviderOSGiImpl(path, "*");
 		List<URL> urls = facesBundlesHandler.handleFacesBundles(applicationMap, false);
 
 		if ((urls != null) && !urls.isEmpty()) {

@@ -23,9 +23,8 @@ import javax.faces.context.ResponseWriter;
 
 import org.osgi.annotation.versioning.ProviderType;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public interface DelegatingClientComponentRenderer extends DelegatingRenderer, ClientComponentRenderer {

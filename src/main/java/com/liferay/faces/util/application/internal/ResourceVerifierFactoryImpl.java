@@ -20,9 +20,8 @@ import java.io.Serializable;
 import com.liferay.faces.util.application.ResourceVerifier;
 import com.liferay.faces.util.application.ResourceVerifierFactory;
 
-
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public class ResourceVerifierFactoryImpl extends ResourceVerifierFactory implements Serializable {
 

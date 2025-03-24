@@ -39,9 +39,8 @@ import org.osgi.framework.wiring.BundleWiring;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
-
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public final class FacesBundleUtil {
 
@@ -193,8 +192,8 @@ public final class FacesBundleUtil {
 					// to the list of Faces bundles for a portlet which does not expect it, it can completely
 					// change the h:head renderer and add unnecessary front-end resources to every page causing
 					// performance issues and other bugs.
-					if (facesBundles.containsKey(key) || isIgnoredBundle(providerBundle.getSymbolicName()) ||
-							(isFacesLibraryBundle(key) && isDynamicDependency(bundleWire))) {
+					if (facesBundles.containsKey(key) || isIgnoredBundle(providerBundle.getSymbolicName())
+						|| (isFacesLibraryBundle(key) && isDynamicDependency(bundleWire))) {
 						continue;
 					}
 
@@ -346,13 +345,13 @@ public final class FacesBundleUtil {
 
 	private static boolean isIgnoredBundle(String symbolicName) {
 
-		if (symbolicName.startsWith("com.liferay.portal") || symbolicName.startsWith("com.liferay.util") ||
-				symbolicName.equals("com.sun.el.javax.el") || symbolicName.startsWith("jboss-classfilewriter") ||
-				symbolicName.startsWith("javax.servlet") || symbolicName.startsWith("javax.validation") ||
-				symbolicName.startsWith("org.apache.commons") || symbolicName.startsWith("org.apache.felix") ||
-				symbolicName.startsWith("org.apache.geronimo.specs") || symbolicName.startsWith("org.jboss.logging") ||
-				symbolicName.startsWith("org.jboss.weld") || symbolicName.startsWith("org.jsoup") ||
-				symbolicName.startsWith("org.osgi")) {
+		if (symbolicName.startsWith("com.liferay.portal") || symbolicName.startsWith("com.liferay.util")
+			|| symbolicName.equals("com.sun.el.javax.el") || symbolicName.startsWith("jboss-classfilewriter")
+			|| symbolicName.startsWith("javax.servlet") || symbolicName.startsWith("javax.validation")
+			|| symbolicName.startsWith("org.apache.commons") || symbolicName.startsWith("org.apache.felix")
+			|| symbolicName.startsWith("org.apache.geronimo.specs") || symbolicName.startsWith("org.jboss.logging")
+			|| symbolicName.startsWith("org.jboss.weld") || symbolicName.startsWith("org.jsoup")
+			|| symbolicName.startsWith("org.osgi")) {
 
 			return true;
 		}
@@ -403,8 +402,8 @@ public final class FacesBundleUtil {
 			contextClassName = context.getClass().getName();
 		}
 
-		throw new IllegalArgumentException("context [" + contextClassName + "] is not an instance of " +
-			FacesContext.class.getName() + " or " + ExternalContext.class.getName() + " or " +
-			ServletContext.class.getName());
+		throw new IllegalArgumentException(
+			"context [" + contextClassName + "] is not an instance of " + FacesContext.class.getName() + " or "
+				+ ExternalContext.class.getName() + " or " + ServletContext.class.getName());
 	}
 }

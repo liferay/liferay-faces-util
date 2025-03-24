@@ -21,9 +21,8 @@ import java.util.Enumeration;
 
 import com.liferay.faces.util.config.WebConfig;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public interface WebConfigScanner {
 

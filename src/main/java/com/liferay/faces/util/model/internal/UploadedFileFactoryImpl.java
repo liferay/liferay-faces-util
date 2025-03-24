@@ -29,9 +29,8 @@ import org.apache.commons.fileupload.InvalidFileNameException;
 import com.liferay.faces.util.model.UploadedFile;
 import com.liferay.faces.util.model.UploadedFileFactory;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class UploadedFileFactoryImpl extends UploadedFileFactory implements Serializable {
 
@@ -63,7 +62,7 @@ public class UploadedFileFactoryImpl extends UploadedFileFactory implements Seri
 		String contentType, Map<String, List<String>> headers, String id, String message, String name, long size,
 		UploadedFile.Status status) {
 		return new UploadedFileImpl(absolutePath, attributes, charSet, contentType, headers, id, message, name, size,
-				status);
+			status);
 	}
 
 	@Override
@@ -102,12 +101,12 @@ public class UploadedFileFactoryImpl extends UploadedFileFactory implements Seri
 			UploadedFile uploadedFile;
 
 			if (fileUploadException instanceof SizeLimitExceededException) {
-				uploadedFile = new UploadedFileErrorImpl(fileUploadException,
-						UploadedFile.Status.REQUEST_SIZE_LIMIT_EXCEEDED);
+				uploadedFile =
+					new UploadedFileErrorImpl(fileUploadException, UploadedFile.Status.REQUEST_SIZE_LIMIT_EXCEEDED);
 			}
 			else if (fileUploadException instanceof FileSizeLimitExceededException) {
-				uploadedFile = new UploadedFileErrorImpl(fileUploadException,
-						UploadedFile.Status.FILE_SIZE_LIMIT_EXCEEDED);
+				uploadedFile =
+					new UploadedFileErrorImpl(fileUploadException, UploadedFile.Status.FILE_SIZE_LIMIT_EXCEEDED);
 			}
 			else if (t instanceof InvalidFileNameException) {
 				uploadedFile = new UploadedFileErrorImpl(t, UploadedFile.Status.FILE_INVALID_NAME_PATTERN);

@@ -23,22 +23,23 @@ import org.osgi.annotation.versioning.ProviderType;
 
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public abstract class ResourceValidatorFactory implements FacesWrapper<ResourceValidatorFactory> {
 
 	/**
-	 * @deprecated  Call {@link #getResourceValidatorInstance(ExternalContext)} instead.
+	 * @deprecated Call {@link #getResourceValidatorInstance(ExternalContext)} instead.
 	 *
-	 *              <p>Returns a stateless, thread-safe singleton instance of {@link ResourceValidator} from the {@link
-	 *              ResourceValidatorFactory} found by the {@link FactoryExtensionFinder}. ResourceValidator is a
-	 *              stateless, thread-safe singleton because it is designed to be used by a {@link
-	 *              javax.faces.application.ResourceHandler}, which is a <a
-	 *              href="https://javaserverfaces.java.net/nonav/docs/2.2/javadocs/javax/faces/application/Application.html#getResourceHandler()">
-	 *              stateless, thread-safe singleton</a>.</p>
+	 *             <p>
+	 *             Returns a stateless, thread-safe singleton instance of {@link ResourceValidator} from the
+	 *             {@link ResourceValidatorFactory} found by the {@link FactoryExtensionFinder}. ResourceValidator is a
+	 *             stateless, thread-safe singleton because it is designed to be used by a
+	 *             {@link javax.faces.application.ResourceHandler}, which is a <a href=
+	 *             "https://javaserverfaces.java.net/nonav/docs/2.2/javadocs/javax/faces/application/Application.html#getResourceHandler()">
+	 *             stateless, thread-safe singleton</a>.
+	 *             </p>
 	 */
 	@Deprecated
 	public static ResourceValidator getResourceValidatorInstance() {
@@ -46,24 +47,25 @@ public abstract class ResourceValidatorFactory implements FacesWrapper<ResourceV
 	}
 
 	/**
-	 * Returns a stateless, thread-safe singleton instance of {@link ResourceValidator} from the {@link
-	 * ResourceValidatorFactory} found by the {@link FactoryExtensionFinder}. ResourceValidator is a stateless,
+	 * Returns a stateless, thread-safe singleton instance of {@link ResourceValidator} from the
+	 * {@link ResourceValidatorFactory} found by the {@link FactoryExtensionFinder}. ResourceValidator is a stateless,
 	 * thread-safe singleton because it is designed to be used by a {@link javax.faces.application.ResourceHandler},
-	 * which is a <a
-	 * href="https://javaserverfaces.java.net/nonav/docs/2.2/javadocs/javax/faces/application/Application.html#getResourceHandler()">
+	 * which is a <a href=
+	 * "https://javaserverfaces.java.net/nonav/docs/2.2/javadocs/javax/faces/application/Application.html#getResourceHandler()">
 	 * stateless, thread-safe singleton</a>.
 	 *
-	 * @param  externalContext  The external context associated with the current faces context. It is needed in order
-	 *                          for the {@link FactoryExtensionFinder} to be able to find the factory.
+	 * @param externalContext The external context associated with the current faces context. It is needed in order for
+	 *                        the {@link FactoryExtensionFinder} to be able to find the factory.
 	 *
-	 * @since  3.1
-	 * @since  2.1
-	 * @since  1.1
+	 * @since 3.1
+	 * @since 2.1
+	 * @since 1.1
 	 */
 	public static ResourceValidator getResourceValidatorInstance(ExternalContext externalContext) {
 
-		ResourceValidatorFactory resourceValidatorFactory = (ResourceValidatorFactory) FactoryExtensionFinder
-			.getFactory(externalContext, ResourceValidatorFactory.class);
+		ResourceValidatorFactory resourceValidatorFactory =
+			(ResourceValidatorFactory) FactoryExtensionFinder.getFactory(externalContext,
+				ResourceValidatorFactory.class);
 
 		return resourceValidatorFactory.getResourceValidator();
 	}
@@ -71,8 +73,8 @@ public abstract class ResourceValidatorFactory implements FacesWrapper<ResourceV
 	/**
 	 * Returns a stateless, thread-safe singleton instance of {@link ResourceValidator}. ResourceValidator is stateless,
 	 * thread-safe singleton because it is designed to be used by a {@link javax.faces.application.ResourceHandler},
-	 * which is a <a
-	 * href="https://javaserverfaces.java.net/nonav/docs/2.2/javadocs/javax/faces/application/Application.html#getResourceHandler()">
+	 * which is a <a href=
+	 * "https://javaserverfaces.java.net/nonav/docs/2.2/javadocs/javax/faces/application/Application.html#getResourceHandler()">
 	 * stateless, thread-safe singleton</a>.
 	 */
 	public abstract ResourceValidator getResourceValidator();

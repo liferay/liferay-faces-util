@@ -24,15 +24,13 @@ import javax.servlet.ServletContext;
 
 import com.liferay.faces.util.osgi.mojarra.spi.internal.OnDemandBeanManagerKey;
 
-
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public class UtilExtension implements Extension {
 
-	public void initializeFacesBeanManager(@Observes
-		@Initialized(ApplicationScoped.class)
-		ServletContext servletContext, BeanManager beanManager) {
+	public void initializeFacesBeanManager(
+		@Observes @Initialized(ApplicationScoped.class) ServletContext servletContext, BeanManager beanManager) {
 
 		if (servletContext.getAttribute(OnDemandBeanManagerKey.INSTANCE) == null) {
 			servletContext.setAttribute(OnDemandBeanManagerKey.INSTANCE, beanManager);

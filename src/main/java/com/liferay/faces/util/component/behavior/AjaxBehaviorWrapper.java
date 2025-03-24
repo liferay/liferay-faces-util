@@ -31,9 +31,8 @@ import javax.faces.event.BehaviorEvent;
 
 import org.osgi.annotation.versioning.ConsumerType;
 
-
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 @ConsumerType
 public abstract class AjaxBehaviorWrapper extends AjaxBehavior implements FacesWrapper<AjaxBehavior> {

@@ -17,9 +17,8 @@ package com.liferay.faces.util.product.internal;
 
 import com.liferay.faces.util.product.Product;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public abstract class ProductBase implements Product {
 

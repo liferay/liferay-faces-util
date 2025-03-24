@@ -24,9 +24,8 @@ import com.liferay.faces.util.config.ConfiguredServlet;
 import com.liferay.faces.util.config.ConfiguredServletMapping;
 import com.liferay.faces.util.config.WebConfig;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class WebConfigImpl implements WebConfig {
 

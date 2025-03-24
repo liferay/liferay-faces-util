@@ -26,13 +26,12 @@ import com.liferay.faces.util.internal.CloseableUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
-
 /**
- * This class is designed to work-around a problem with JBoss AS such that the {@link
- * Class#getPackage()#getImplementationVersion()} method returns null during WAR application deployment. For more
+ * This class is designed to work-around a problem with JBoss AS such that the
+ * {@link Class#getPackage()#getImplementationVersion()} method returns null during WAR application deployment. For more
  * information, see: http://issues.liferay.com/browse/FACES-1296
  *
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class PackageManifest {
 

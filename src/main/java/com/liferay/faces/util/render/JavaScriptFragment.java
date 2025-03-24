@@ -19,12 +19,11 @@ import java.io.Serializable;
 
 import org.osgi.annotation.versioning.ProviderType;
 
-
 /**
  * This is a simple marker class that wraps a String. It marks the fact that the wrapped string is a fragment of
  * JavaScript code.
  *
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public final class JavaScriptFragment implements Serializable {

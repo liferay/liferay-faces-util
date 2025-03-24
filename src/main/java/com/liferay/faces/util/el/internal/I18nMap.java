@@ -35,9 +35,8 @@ import com.liferay.faces.util.i18n.I18nFactory;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class I18nMap implements Map<String, Object>, Serializable {
 
@@ -50,11 +49,11 @@ public class I18nMap implements Map<String, Object>, Serializable {
 	/**
 	 * This method initializes the message cache for I18nMap. The initialization cannot be performed in the constructor
 	 * since this class is created by {@link UtilELResolver} before the {@link CacheFactory} has been created. This
-	 * method is called in {@link
-	 * com.liferay.faces.util.event.internal.ApplicationStartupListener#processSystemEvent(java.util.EventObject)} to
-	 * ensure that the CacheFactory has been created.
+	 * method is called in
+	 * {@link com.liferay.faces.util.event.internal.ApplicationStartupListener#processSystemEvent(java.util.EventObject)}
+	 * to ensure that the CacheFactory has been created.
 	 *
-	 * @param  facesContext
+	 * @param facesContext
 	 */
 	public static void initMessageCache(FacesContext facesContext) {
 
@@ -67,8 +66,8 @@ public class I18nMap implements Map<String, Object>, Serializable {
 			int maxCacheCapacity = WebConfigParam.I18nELMapMaxCacheCapacity.getIntegerValue(externalContext);
 
 			if (maxCacheCapacity > -1) {
-				messageCache = CacheFactory.getConcurrentLRUCacheInstance(externalContext, initialCacheCapacity,
-						maxCacheCapacity);
+				messageCache =
+					CacheFactory.getConcurrentLRUCacheInstance(externalContext, initialCacheCapacity, maxCacheCapacity);
 			}
 			else {
 				messageCache = CacheFactory.getConcurrentCacheInstance(externalContext, initialCacheCapacity);
@@ -186,10 +185,10 @@ public class I18nMap implements Map<String, Object>, Serializable {
 	 * This method is primarily meant to be called via EL, providing the implementation supports passing parameters
 	 * (like JBoss EL).
 	 *
-	 * @param   messageId  The message key.
-	 * @param   arg1       The first argument, assuming that the messageId has a {0} token.
+	 * @param messageId The message key.
+	 * @param arg1      The first argument, assuming that the messageId has a {0} token.
 	 *
-	 * @return  The internationalized message.
+	 * @return The internationalized message.
 	 */
 	public String replace(String messageId, String arg1) {
 
@@ -213,11 +212,11 @@ public class I18nMap implements Map<String, Object>, Serializable {
 	 * This method is primarily meant to be called via EL, providing the implementation supports passing parameters
 	 * (like JBoss EL).
 	 *
-	 * @param   messageId  The message key.
-	 * @param   arg1       The first argument, assuming that the messageId has a {0} token.
-	 * @param   arg2       The second argument, assuming that the messageId has a {1} token.
+	 * @param messageId The message key.
+	 * @param arg1      The first argument, assuming that the messageId has a {0} token.
+	 * @param arg2      The second argument, assuming that the messageId has a {1} token.
 	 *
-	 * @return  The internationalized message.
+	 * @return The internationalized message.
 	 */
 	public String replace(String messageId, String arg1, String arg2) {
 
@@ -241,12 +240,12 @@ public class I18nMap implements Map<String, Object>, Serializable {
 	 * This method is primarily meant to be called via EL, providing the implementation supports passing parameters
 	 * (like JBoss EL).
 	 *
-	 * @param   messageId  The message key.
-	 * @param   arg1       The first argument, assuming that the messageId has a {0} token.
-	 * @param   arg2       The second argument, assuming that the messageId has a {1} token.
-	 * @param   arg3       The third argument, assuming that the messageId has a {2} token.
+	 * @param messageId The message key.
+	 * @param arg1      The first argument, assuming that the messageId has a {0} token.
+	 * @param arg2      The second argument, assuming that the messageId has a {1} token.
+	 * @param arg3      The third argument, assuming that the messageId has a {2} token.
 	 *
-	 * @return  The internationalized message.
+	 * @return The internationalized message.
 	 */
 	public String replace(String messageId, String arg1, String arg2, String arg3) {
 
@@ -270,13 +269,13 @@ public class I18nMap implements Map<String, Object>, Serializable {
 	 * This method is primarily meant to be called via EL, providing the implementation supports passing parameters
 	 * (like JBoss EL).
 	 *
-	 * @param   messageId  The message key.
-	 * @param   arg1       The first argument, assuming that the messageId has a {0} token.
-	 * @param   arg2       The second argument, assuming that the messageId has a {1} token.
-	 * @param   arg3       The third argument, assuming that the messageId has a {2} token.
-	 * @param   arg4       The fourth argument, assuming that the messageId has a {3} token.
+	 * @param messageId The message key.
+	 * @param arg1      The first argument, assuming that the messageId has a {0} token.
+	 * @param arg2      The second argument, assuming that the messageId has a {1} token.
+	 * @param arg3      The third argument, assuming that the messageId has a {2} token.
+	 * @param arg4      The fourth argument, assuming that the messageId has a {3} token.
 	 *
-	 * @return  The internationalized message.
+	 * @return The internationalized message.
 	 */
 	public String replace(String messageId, String arg1, String arg2, String arg3, String arg4) {
 

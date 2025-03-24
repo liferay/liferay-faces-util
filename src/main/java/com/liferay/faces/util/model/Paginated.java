@@ -17,7 +17,6 @@ package com.liferay.faces.util.model;
 
 import org.osgi.annotation.versioning.ProviderType;
 
-
 /**
  * Defines a contract for paginated data.
  */

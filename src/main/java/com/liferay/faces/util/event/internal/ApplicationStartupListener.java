@@ -41,9 +41,8 @@ import com.liferay.faces.util.lang.ThreadSafeAccessor;
 import com.liferay.faces.util.osgi.internal.FacesBundleUtil;
 import com.liferay.faces.util.osgi.mojarra.spi.internal.OnDemandBeanManagerKey;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class ApplicationStartupListener extends ApplicationStartupListenerCompat_2_2 {
 
@@ -62,8 +61,8 @@ public class ApplicationStartupListener extends ApplicationStartupListenerCompat
 			boolean resolveEntities = WebConfigParam.ResolveXMLEntities.getBooleanValue(initExternalContext);
 
 			String contextPath = getApplicationContextPath(initExternalContext);
-			ApplicationConfigInitializer applicationConfigInitializer = new ApplicationConfigInitializerImpl(
-					contextPath, resolveEntities);
+			ApplicationConfigInitializer applicationConfigInitializer =
+				new ApplicationConfigInitializerImpl(contextPath, resolveEntities);
 
 			try {
 				applicationConfig = applicationConfigInitializer.initialize();

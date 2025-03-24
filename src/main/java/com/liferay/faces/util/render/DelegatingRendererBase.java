@@ -26,24 +26,23 @@ import javax.faces.render.Renderer;
 
 import org.osgi.annotation.versioning.ProviderType;
 
-
 /**
  * This is an abstract class that implements the {@link DelegatingRenderer} interface in order to provide base
  * functionality for delegating the responsibility of rendering a {@link UIComponent} to a different renderer.
  *
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public abstract class DelegatingRendererBase extends Renderer implements DelegatingRenderer {
 
 	/**
-	 * @see  DelegatingRenderer#getDelegateComponentFamily()
+	 * @see DelegatingRenderer#getDelegateComponentFamily()
 	 */
 	@Override
 	public abstract String getDelegateComponentFamily();
 
 	/**
-	 * @see  DelegatingRenderer#getDelegateRendererType()
+	 * @see DelegatingRenderer#getDelegateRendererType()
 	 */
 	@Override
 	public abstract String getDelegateRendererType();
@@ -64,7 +63,7 @@ public abstract class DelegatingRendererBase extends Renderer implements Delegat
 	}
 
 	/**
-	 * @see  DelegatingRenderer#encodeAll(javax.faces.context.FacesContext, javax.faces.component.UIComponent)
+	 * @see DelegatingRenderer#encodeAll(javax.faces.context.FacesContext, javax.faces.component.UIComponent)
 	 */
 	@Override
 	public void encodeAll(FacesContext facesContext, UIComponent uiComponent) throws IOException {
@@ -76,8 +75,8 @@ public abstract class DelegatingRendererBase extends Renderer implements Delegat
 	}
 
 	/**
-	 * @see  DelegatingRenderer#encodeAll(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
-	 *       javax.faces.context.ResponseWriter)
+	 * @see DelegatingRenderer#encodeAll(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
+	 *      javax.faces.context.ResponseWriter)
 	 */
 	@Override
 	public void encodeAll(FacesContext facesContext, UIComponent uiComponent, ResponseWriter delegationResponseWriter)
@@ -101,8 +100,8 @@ public abstract class DelegatingRendererBase extends Renderer implements Delegat
 	}
 
 	/**
-	 * @see  DelegatingRenderer#encodeBegin(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
-	 *       javax.faces.context.ResponseWriter)
+	 * @see DelegatingRenderer#encodeBegin(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
+	 *      javax.faces.context.ResponseWriter)
 	 */
 	@Override
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent, ResponseWriter delegationResponseWriter)
@@ -124,8 +123,8 @@ public abstract class DelegatingRendererBase extends Renderer implements Delegat
 	}
 
 	/**
-	 * @see  DelegatingRenderer#encodeChildren(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
-	 *       javax.faces.context.ResponseWriter)
+	 * @see DelegatingRenderer#encodeChildren(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
+	 *      javax.faces.context.ResponseWriter)
 	 */
 	@Override
 	public void encodeChildren(FacesContext facesContext, UIComponent uiComponent,
@@ -147,8 +146,8 @@ public abstract class DelegatingRendererBase extends Renderer implements Delegat
 	}
 
 	/**
-	 * @see  DelegatingRenderer#encodeEnd(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
-	 *       javax.faces.context.ResponseWriter)
+	 * @see DelegatingRenderer#encodeEnd(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
+	 *      javax.faces.context.ResponseWriter)
 	 */
 	@Override
 	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent, ResponseWriter delegationResponseWriter)
@@ -173,7 +172,7 @@ public abstract class DelegatingRendererBase extends Renderer implements Delegat
 	}
 
 	/**
-	 * @see  DelegatingRenderer#getDelegateRenderer(javax.faces.context.FacesContext)
+	 * @see DelegatingRenderer#getDelegateRenderer(javax.faces.context.FacesContext)
 	 */
 	@Override
 	public Renderer getDelegateRenderer(FacesContext facesContext) {

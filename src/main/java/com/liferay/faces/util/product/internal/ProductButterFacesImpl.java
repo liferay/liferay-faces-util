@@ -16,12 +16,12 @@
 package com.liferay.faces.util.product.internal;
 
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public class ProductButterFacesImpl extends ProductBase {
 
 	public ProductButterFacesImpl() {
 		super(ProductInfo.newInstance("ButterFaces", "de.larmic.butterfaces.component.partrenderer.Constants",
-				"META-INF/maven/de.larmic.butterfaces/components/pom.properties"));
+			"META-INF/maven/de.larmic.butterfaces/components/pom.properties"));
 	}
 }

@@ -33,14 +33,13 @@ import com.liferay.faces.util.client.ScriptsEncoder;
 import com.liferay.faces.util.client.ScriptsEncoderFactory;
 import com.liferay.faces.util.context.FacesContextHelperUtil;
 
-
 /**
  * The purpose of this class is to render target="body" scripts, external Library scripts (e.g. PrimeFaces
  * RequestContext scripts), and {@link FacesContextHelperUtil} scripts before the closing &lt;body&gt; tag in a single
  * &lt;script&gt; tag. All other functionality is delegated to the wrapped {@link ResponseWriter}, so all other content
  * will be rendered normally.
  *
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public class BodyScriptEncodingResponseWriter extends ResponseWriterWrapper {
 

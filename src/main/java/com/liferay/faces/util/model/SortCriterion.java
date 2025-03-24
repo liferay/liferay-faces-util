@@ -17,15 +17,14 @@ package com.liferay.faces.util.model;
 
 import org.osgi.annotation.versioning.ConsumerType;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ConsumerType
 public class SortCriterion {
 
 	/**
-	 * @author  Neil Griffin
+	 * @author Neil Griffin
 	 */
 	public enum Order {
 		ASCENDING, DESCENDING, NONE

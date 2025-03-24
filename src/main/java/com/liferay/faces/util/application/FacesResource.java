@@ -17,9 +17,8 @@ package com.liferay.faces.util.application;
 
 import org.osgi.annotation.versioning.ProviderType;
 
-
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 @ProviderType
 public class FacesResource {

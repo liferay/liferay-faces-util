@@ -24,12 +24,11 @@ import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.helper.IntegerHelper;
 import com.liferay.faces.util.helper.LongHelper;
 
-
 /**
  * This is a utility class that provides static utility methods for getting values from {@link ServletContext}
  * init-param values.
  *
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public class WebConfigParamUtil {

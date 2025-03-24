@@ -33,9 +33,8 @@ import com.liferay.faces.util.product.Product;
 import com.liferay.faces.util.product.internal.ProductPlutoImpl;
 import com.liferay.faces.util.resource.internal.ResourceProviderUtil;
 
-
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public class FacesConfigScannerOSGiImpl extends FacesConfigScannerBase {
 
@@ -54,7 +53,7 @@ public class FacesConfigScannerOSGiImpl extends FacesConfigScannerBase {
 		if (FacesBundleUtil.isCurrentWarThinWab()) {
 
 			FacesBundlesHandlerBase<List<URL>> facesBundlesHandler = new FacesBundlesHandlerFacesConfigScannerOSGiImpl(
-					ResourceProviderUtil.META_INF_PATH, ResourceProviderUtil.ALL_FACES_CONFIG_PATTERN);
+				ResourceProviderUtil.META_INF_PATH, ResourceProviderUtil.ALL_FACES_CONFIG_PATTERN);
 			facesConfigURLs.addAll(facesBundlesHandler.handleFacesBundles(initFacesContext, true));
 		}
 		else {
@@ -71,7 +70,7 @@ public class FacesConfigScannerOSGiImpl extends FacesConfigScannerBase {
 
 			// Obtain all *.faces-config.xml files as well.
 			FacesBundlesHandlerBase<List<URL>> facesBundlesHandler = new FacesBundlesHandlerResourceProviderOSGiImpl(
-					ResourceProviderUtil.META_INF_PATH, ResourceProviderUtil.FACES_CONFIG_EXTENSION_PATTERN);
+				ResourceProviderUtil.META_INF_PATH, ResourceProviderUtil.FACES_CONFIG_EXTENSION_PATTERN);
 			facesConfigURLs.addAll(facesBundlesHandler.handleFacesBundles(initFacesContext, true));
 
 			// TODO Unfortunately, the above method of searching for *.faces-config.xml files returns an empty list in

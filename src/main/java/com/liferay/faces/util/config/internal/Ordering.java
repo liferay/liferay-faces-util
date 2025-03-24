@@ -17,14 +17,13 @@ package com.liferay.faces.util.config.internal;
 
 import java.util.EnumMap;
 
-
 /**
- * @author  Vernon Singleton
+ * @author Vernon Singleton
  */
 public interface Ordering {
 
 	/**
-	 * @author  Vernon Singleton
+	 * @author Vernon Singleton
 	 */
 	public enum Path {
 		BEFORE, AFTER

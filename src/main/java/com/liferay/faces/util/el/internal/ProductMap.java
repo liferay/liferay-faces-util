@@ -24,9 +24,8 @@ import java.util.Set;
 import com.liferay.faces.util.product.Product;
 import com.liferay.faces.util.product.ProductFactory;
 
-
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public class ProductMap implements Map<Product.Name, Product>, Serializable {
 

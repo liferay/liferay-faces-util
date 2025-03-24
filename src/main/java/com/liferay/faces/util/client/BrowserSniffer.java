@@ -17,11 +17,10 @@ package com.liferay.faces.util.client;
 
 import org.osgi.annotation.versioning.ProviderType;
 
-
 /**
  * See http://www.zytrax.com/tech/web/browser_ids.htm for examples.
  *
- * @author  Brian Wing Shun Chan
+ * @author Brian Wing Shun Chan
  */
 @ProviderType
 public interface BrowserSniffer {

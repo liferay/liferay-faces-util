@@ -20,9 +20,8 @@ import java.io.InputStream;
 
 import com.liferay.faces.util.config.WebConfig;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public interface WebConfigParser {
 

@@ -19,14 +19,13 @@ import java.util.Set;
 
 import org.osgi.annotation.versioning.ProviderType;
 
-
 /**
  * This class contains a minimal set of methods required to manipulate a cache of key+value pairs.
  *
- * @author  Kyle Stiemann
- * @since   3.1
- * @since   2.1
- * @since   1.1
+ * @author Kyle Stiemann
+ * @since 3.1
+ * @since 2.1
+ * @since 1.1
  */
 @ProviderType
 public interface Cache<K, V> {
@@ -34,7 +33,7 @@ public interface Cache<K, V> {
 	/**
 	 * Returns true if the key (and therefor a corresponding value) is present in the cache or false otherwise.
 	 *
-	 * @param  key  The key that the value is mapped to.
+	 * @param key The key that the value is mapped to.
 	 */
 	public boolean containsKey(K key);
 
@@ -51,7 +50,7 @@ public interface Cache<K, V> {
 	/**
 	 * Returns the cached value that is mapped to this key or null if the value is not in the cache.
 	 *
-	 * @param  key  The key that the value is mapped to.
+	 * @param key The key that the value is mapped to.
 	 */
 	public V getValue(K key);
 
@@ -60,15 +59,15 @@ public interface Cache<K, V> {
 	 * already added to the cache, this method returns the passed value for convenience. Otherwise this method returns
 	 * the value associated with the key from the cache.
 	 *
-	 * @param  key    The key that the value is mapped to.
-	 * @param  value  The value to be cached.
+	 * @param key   The key that the value is mapped to.
+	 * @param value The value to be cached.
 	 */
 	public V putValueIfAbsent(K key, V value);
 
 	/**
 	 * Removes an entry from the cache. Returns the value of the removed key-value pair.
 	 *
-	 * @param  key  The key that the value is mapped to.
+	 * @param key The key that the value is mapped to.
 	 */
 	public V removeValue(K key);
 }

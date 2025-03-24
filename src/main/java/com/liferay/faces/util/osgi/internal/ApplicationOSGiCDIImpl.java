@@ -30,14 +30,13 @@ import javax.faces.event.SystemEvent;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
-
 /**
  * This class provides the ability for Mojarra to integrate with the OSGI CDI Integration feature of Liferay Portal. It
  * does this by by adding an {@link javax.el.ELResolver} that can resolve CDI beans found in JSP EL Expressions, and
  * also enables the Mojarra {@link com.sun.faces.util.getCdiBeanManager(FacesContext)} method to find the current CDI
  * bean manager.
  *
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class ApplicationOSGiCDIImpl extends ApplicationWrapper {
 

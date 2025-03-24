@@ -18,9 +18,8 @@ package com.liferay.faces.util.logging.internal;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
-
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public class LoggerFactoryImpl extends LoggerFactory {
 
@@ -47,8 +46,8 @@ public class LoggerFactoryImpl extends LoggerFactory {
 			// it will not be caught in the constructor.
 			catch (NoClassDefFoundError e) {
 
-				System.err.println(LoggerFactory.class.getName() +
-					" (WARN): Incompatible version of log4j.jar in the classpath. If you are using JBoss/Wildfly Server, add WEB-INF/lib/log4j.jar to activate Log4J logging.");
+				System.err.println(LoggerFactory.class.getName()
+					+ " (WARN): Incompatible version of log4j.jar in the classpath. If you are using JBoss/Wildfly Server, add WEB-INF/lib/log4j.jar to activate Log4J logging.");
 				System.err.println(e.getMessage());
 				log4jAvailable = false;
 			}
@@ -74,8 +73,8 @@ public class LoggerFactoryImpl extends LoggerFactory {
 			// it will not be caught in the constructor.
 			catch (NoClassDefFoundError e) {
 
-				System.err.println(LoggerFactory.class.getName() +
-					" (WARN): Incompatible version of log4j-core.jar in the classpath.");
+				System.err.println(LoggerFactory.class.getName()
+					+ " (WARN): Incompatible version of log4j-core.jar in the classpath.");
 				System.err.println(e.getMessage());
 				log4j2Available = false;
 			}

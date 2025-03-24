@@ -30,9 +30,8 @@ import org.osgi.annotation.versioning.ConsumerType;
 
 import com.liferay.faces.util.client.Script;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ConsumerType
 public abstract class FacesContextHelperWrapper implements FacesContextHelper, FacesWrapper<FacesContextHelper> {

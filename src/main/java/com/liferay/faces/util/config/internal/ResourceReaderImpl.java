@@ -20,9 +20,8 @@ import java.io.InputStream;
 import javax.faces.context.ExternalContext;
 import javax.servlet.ServletContext;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class ResourceReaderImpl implements ResourceReader {
 

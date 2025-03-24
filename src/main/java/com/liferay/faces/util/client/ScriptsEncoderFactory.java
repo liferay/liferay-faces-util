@@ -23,20 +23,21 @@ import org.osgi.annotation.versioning.ProviderType;
 
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public abstract class ScriptsEncoderFactory implements FacesWrapper<ScriptsEncoderFactory> {
 
 	/**
-	 * @deprecated  Call {@link #getScriptsEncoderInstance(ExternalContext)} instead.
+	 * @deprecated Call {@link #getScriptsEncoderInstance(ExternalContext)} instead.
 	 *
-	 *              <p>Returns a stateless, thread-safe singleton instance of {@link ScriptsEncoder} from the {@link
-	 *              ScriptsEncoderFactory} found by the {@link FactoryExtensionFinder}. ScriptsEncoder is a stateless,
-	 *              thread-safe (and potentially singleton) because it is designed to be used by a {@link
-	 *              javax.faces.render.Renderer}, which is stateless and thread-safe singleton.</p>
+	 *             <p>
+	 *             Returns a stateless, thread-safe singleton instance of {@link ScriptsEncoder} from the
+	 *             {@link ScriptsEncoderFactory} found by the {@link FactoryExtensionFinder}. ScriptsEncoder is a
+	 *             stateless, thread-safe (and potentially singleton) because it is designed to be used by a
+	 *             {@link javax.faces.render.Renderer}, which is stateless and thread-safe singleton.
+	 *             </p>
 	 */
 	@Deprecated
 	public static ScriptsEncoder getScriptsEncoderInstance() {
@@ -44,22 +45,22 @@ public abstract class ScriptsEncoderFactory implements FacesWrapper<ScriptsEncod
 	}
 
 	/**
-	 * Returns a stateless, thread-safe singleton instance of {@link ScriptsEncoder} from the {@link
-	 * ScriptsEncoderFactory} found by the {@link FactoryExtensionFinder}. ScriptsEncoder is a stateless, thread-safe
-	 * (and potentially singleton) because it is designed to be used by a {@link javax.faces.render.Renderer}, which is
-	 * stateless and thread-safe singleton.
+	 * Returns a stateless, thread-safe singleton instance of {@link ScriptsEncoder} from the
+	 * {@link ScriptsEncoderFactory} found by the {@link FactoryExtensionFinder}. ScriptsEncoder is a stateless,
+	 * thread-safe (and potentially singleton) because it is designed to be used by a
+	 * {@link javax.faces.render.Renderer}, which is stateless and thread-safe singleton.
 	 *
-	 * @param  externalContext  The external context associated with the current faces context. It is needed in order
-	 *                          for the {@link FactoryExtensionFinder} to be able to find the factory.
+	 * @param externalContext The external context associated with the current faces context. It is needed in order for
+	 *                        the {@link FactoryExtensionFinder} to be able to find the factory.
 	 *
-	 * @since  3.1
-	 * @since  2.1
-	 * @since  1.1
+	 * @since 3.1
+	 * @since 2.1
+	 * @since 1.1
 	 */
 	public static ScriptsEncoder getScriptsEncoderInstance(ExternalContext externalContext) {
 
-		ScriptsEncoderFactory scriptsEncoderFactory = (ScriptsEncoderFactory) FactoryExtensionFinder.getFactory(
-				externalContext, ScriptsEncoderFactory.class);
+		ScriptsEncoderFactory scriptsEncoderFactory =
+			(ScriptsEncoderFactory) FactoryExtensionFinder.getFactory(externalContext, ScriptsEncoderFactory.class);
 
 		return scriptsEncoderFactory.getScriptsEncoder();
 	}

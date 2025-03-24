@@ -23,34 +23,39 @@ import javax.faces.render.RenderKitFactory;
 
 import com.liferay.faces.util.application.ApplicationUtil;
 
-
 /**
- * <p>Since liferay-faces-util.jar!META-INF/faces-config.xml specifies <code>
+ * <p>
+ * Since liferay-faces-util.jar!META-INF/faces-config.xml specifies <code>
  * &lt;before&gt;&lt;others/&gt;&lt;/before&gt;</code>, the factories in this module can only decorate those provided by
  * the JSF implementation. As a result, factories registered by Non-Liferay/3rd-Party component suites like ICEfaces,
- * PrimeFaces, and RichFaces will end up decorating the factories registered by this module.</p>
+ * PrimeFaces, and RichFaces will end up decorating the factories registered by this module.
+ * </p>
  *
- * <p>However, in order to ensure that scripts contained in {@link
- * FacesContextHelperUtil#getScripts(javax.faces.context.FacesContext)} are encoded before the closing <code>
+ * <p>
+ * However, in order to ensure that scripts contained in
+ * {@link FacesContextHelperUtil#getScripts(javax.faces.context.FacesContext)} are encoded before the closing <code>
  * &lt;/body&gt;</code> element, {@link BodyRendererUtilImpl} needs to decorate body renderers provided by any of the
  * aforementioned component suites. This could be accomplished in one of two ways:
  *
  * <ol>
- *   <li>The {@link RenderKitUtilImpl} class from this module could exist in a separate module that specifies
- *     &lt;after&gt;&lt;others/&gt;&lt;/after&gt;</code> and the separate module would register an HTML_BASIC <code>
+ * <li>The {@link RenderKitUtilImpl} class from this module could exist in a separate module that specifies
+ * &lt;after&gt;&lt;others/&gt;&lt;/after&gt;</code> and the separate module would register an HTML_BASIC <code>
  *     render-kit</code>.</li>
- *   <li>The {@link RenderKitUtilImpl} class could remain in this module, but this module would have to register a
- *     <code>render-kit-factory</code> in order to programatically control the {@link RenderKit} delegation chain and
- *     wrapping of renderers. But the only reason why this works is because <strong>none</strong> of the aforementioned
- *     component suites register a <code>render-kit-factory</code>.</li>
+ * <li>The {@link RenderKitUtilImpl} class could remain in this module, but this module would have to register a
+ * <code>render-kit-factory</code> in order to programatically control the {@link RenderKit} delegation chain and
+ * wrapping of renderers. But the only reason why this works is because <strong>none</strong> of the aforementioned
+ * component suites register a <code>render-kit-factory</code>.</li>
  * </ol>
  *
- * For the sake of minimizing the number of modules, the second option has been implemented.</p>
+ * For the sake of minimizing the number of modules, the second option has been implemented.
+ * </p>
  *
- * <p><strong>Note:</strong> liferay-faces-bridge-impl.jar!META-INF/faces-config.xml also specifies a <code>
- * render-kit-factory</code> that will decorate this one.</p>
+ * <p>
+ * <strong>Note:</strong> liferay-faces-bridge-impl.jar!META-INF/faces-config.xml also specifies a <code>
+ * render-kit-factory</code> that will decorate this one.
+ * </p>
  *
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public class RenderKitFactoryUtilImpl extends RenderKitFactory {
 

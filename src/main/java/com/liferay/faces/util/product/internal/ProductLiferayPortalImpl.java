@@ -19,9 +19,8 @@ import java.lang.reflect.Method;
 
 import com.liferay.faces.util.internal.TCCLUtil;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class ProductLiferayPortalImpl extends ProductBase {
 
@@ -37,7 +36,7 @@ public class ProductLiferayPortalImpl extends ProductBase {
 		try {
 
 			Class<?> releaseInfoClass = TCCLUtil.loadClassFromContext(ProductLiferayPortalImpl.class,
-					"com.liferay.portal.kernel.util.ReleaseInfo");
+				"com.liferay.portal.kernel.util.ReleaseInfo");
 			Class<?>[] emptyClassArray = new Class[] {};
 			Object[] emptyObjectArray = new Object[] {};
 			Method method = releaseInfoClass.getMethod("getBuildNumber", emptyClassArray);

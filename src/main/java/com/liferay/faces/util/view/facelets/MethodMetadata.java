@@ -26,9 +26,8 @@ import javax.faces.view.facelets.TagAttributeException;
 
 import org.osgi.annotation.versioning.ProviderType;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public class MethodMetadata extends Metadata {

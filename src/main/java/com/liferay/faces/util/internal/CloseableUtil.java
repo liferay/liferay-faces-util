@@ -18,9 +18,8 @@ package com.liferay.faces.util.internal;
 import java.io.Closeable;
 import java.io.IOException;
 
-
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public final class CloseableUtil {
 

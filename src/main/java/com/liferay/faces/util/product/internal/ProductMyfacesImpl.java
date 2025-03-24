@@ -16,8 +16,8 @@
 package com.liferay.faces.util.product.internal;
 
 /**
- * @author  Neil Griffin
- * @author  Kyle Stiemann
+ * @author Neil Griffin
+ * @author Kyle Stiemann
  */
 public class ProductMyfacesImpl extends ProductBase {
 

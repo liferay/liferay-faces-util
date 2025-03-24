@@ -26,20 +26,19 @@ import java.util.ResourceBundle;
 
 import org.osgi.annotation.versioning.ProviderType;
 
-
 /**
  * Control for getting resource bundles with UTF-8 encoding.
  *
- * @deprecated  No replacement available.
- * @author      Juan Gonzalez
+ * @deprecated No replacement available.
+ * @author Juan Gonzalez
  */
 @Deprecated
 @ProviderType
 public class UTF8Control extends ResourceBundle.Control {
 
 	/**
-	 * @see  java.util.ResourceBundle.Control#newBundle(java.lang.String, java.util.Locale, java.lang.String,
-	 *       java.lang.ClassLoader, boolean)
+	 * @see java.util.ResourceBundle.Control#newBundle(java.lang.String, java.util.Locale, java.lang.String,
+	 *      java.lang.ClassLoader, boolean)
 	 */
 	@Override
 	public ResourceBundle newBundle(String baseName, Locale locale, String format, ClassLoader classLoader,

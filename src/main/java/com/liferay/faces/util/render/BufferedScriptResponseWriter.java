@@ -27,12 +27,11 @@ import org.osgi.annotation.versioning.ProviderType;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
-
 /**
  * This class is designed to write scripts to a string to be rendered to the response later. This class suppresses all
  * html markup.
  *
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public class BufferedScriptResponseWriter extends ResponseWriter {

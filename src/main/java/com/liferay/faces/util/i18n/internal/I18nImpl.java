@@ -37,9 +37,8 @@ import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.osgi.internal.ResourceBundleUtil;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class I18nImpl implements I18n, Serializable {
 
@@ -63,12 +62,12 @@ public class I18nImpl implements I18n, Serializable {
 			int maxCacheCapacity = WebConfigParam.I18nMaxCacheCapacity.getIntegerValue(externalContext);
 
 			if (maxCacheCapacity > -1) {
-				facesResourceBundleCache = CacheFactory.getConcurrentLRUCacheInstance(externalContext,
-						initialCacheCapacity, maxCacheCapacity);
+				facesResourceBundleCache =
+					CacheFactory.getConcurrentLRUCacheInstance(externalContext, initialCacheCapacity, maxCacheCapacity);
 			}
 			else {
-				facesResourceBundleCache = CacheFactory.getConcurrentCacheInstance(externalContext,
-						initialCacheCapacity);
+				facesResourceBundleCache =
+					CacheFactory.getConcurrentCacheInstance(externalContext, initialCacheCapacity);
 			}
 
 			Map<String, Object> applicationMap = externalContext.getApplicationMap();
@@ -141,8 +140,8 @@ public class I18nImpl implements I18n, Serializable {
 
 		ExternalContext externalContext = facesContext.getExternalContext();
 		Map<String, Object> applicationMap = externalContext.getApplicationMap();
-		Cache<Locale, ResourceBundle> facesResourceBundleCache = (Cache<Locale, ResourceBundle>) applicationMap.get(
-				I18nImpl.class.getName());
+		Cache<Locale, ResourceBundle> facesResourceBundleCache =
+			(Cache<Locale, ResourceBundle>) applicationMap.get(I18nImpl.class.getName());
 
 		ResourceBundle facesResourceBundle = null;
 

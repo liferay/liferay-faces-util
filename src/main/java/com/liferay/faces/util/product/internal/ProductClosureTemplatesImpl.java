@@ -16,12 +16,12 @@
 package com.liferay.faces.util.product.internal;
 
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public class ProductClosureTemplatesImpl extends ProductBase {
 
 	public ProductClosureTemplatesImpl() {
 		super(ProductInfo.newInstance("Closure Templates", "com.google.template.soy.SoyUtils",
-				"META-INF/maven/com.google.template/soy/pom.properties"));
+			"META-INF/maven/com.google.template/soy/pom.properties"));
 	}
 }

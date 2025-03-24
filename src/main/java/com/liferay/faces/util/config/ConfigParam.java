@@ -17,11 +17,10 @@ package com.liferay.faces.util.config;
 
 import org.osgi.annotation.versioning.ProviderType;
 
-
 /**
  * This is a generic interface that defines the contract for getting configuration param values.
  *
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public interface ConfigParam<T> {
@@ -32,8 +31,8 @@ public interface ConfigParam<T> {
 	public String getAlternateName();
 
 	/**
-	 * Returns the boolean value of the config param. If not specified in the config file, then the value of {@link
-	 * #getDefaultBooleanValue()} is returned.
+	 * Returns the boolean value of the config param. If not specified in the config file, then the value of
+	 * {@link #getDefaultBooleanValue()} is returned.
 	 */
 	public boolean getBooleanValue(T config);
 
@@ -63,14 +62,14 @@ public interface ConfigParam<T> {
 	public String getDefaultStringValue();
 
 	/**
-	 * Returns the int value of the config param. If not specified in the config file, then the value of {@link
-	 * #getDefaultIntegerValue()} is returned.
+	 * Returns the int value of the config param. If not specified in the config file, then the value of
+	 * {@link #getDefaultIntegerValue()} is returned.
 	 */
 	public int getIntegerValue(T config);
 
 	/**
-	 * Returns the long value of the config param. If not specified in the config file, then the value of {@link
-	 * #getDefaultLongValue()} is returned.
+	 * Returns the long value of the config param. If not specified in the config file, then the value of
+	 * {@link #getDefaultLongValue()} is returned.
 	 */
 	public long getLongValue(T config);
 
@@ -80,8 +79,8 @@ public interface ConfigParam<T> {
 	public String getName();
 
 	/**
-	 * Returns the String value of the config param. If not specified in the config file, then the value of {@link
-	 * #getDefaultStringValue()} is returned.
+	 * Returns the String value of the config param. If not specified in the config file, then the value of
+	 * {@link #getDefaultStringValue()} is returned.
 	 */
 	public String getStringValue(T config);
 

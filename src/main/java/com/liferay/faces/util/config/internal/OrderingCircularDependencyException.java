@@ -19,9 +19,8 @@ import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 
-
 /**
- * @author  Vernon Singleton
+ * @author Vernon Singleton
  */
 public class OrderingCircularDependencyException extends Exception {
 

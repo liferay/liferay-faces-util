@@ -23,9 +23,8 @@ import com.liferay.faces.util.internal.TCCLUtil;
 import com.liferay.faces.util.render.FacesURLEncoder;
 import com.liferay.faces.util.render.FacesURLEncoderFactory;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class FacesURLEncoderFactoryImpl extends FacesURLEncoderFactory implements Serializable {
 
@@ -46,7 +45,7 @@ public class FacesURLEncoderFactoryImpl extends FacesURLEncoderFactory implement
 			Class<?> mojarraHtmlUtilsClass = TCCLUtil.loadClassFromContext(getClass(), MOJARRA_ENCODER_FQCN);
 			final String MOJARRA_WRITE_URL_METHOD_NAME = "writeURL";
 			mojarraMethodWriteURL = mojarraHtmlUtilsClass.getMethod(MOJARRA_WRITE_URL_METHOD_NAME,
-					new Class[] { Writer.class, String.class, char[].class, String.class });
+				new Class[] { Writer.class, String.class, char[].class, String.class });
 		}
 		catch (Exception e1) {
 
@@ -56,7 +55,7 @@ public class FacesURLEncoderFactoryImpl extends FacesURLEncoderFactory implement
 				Class<?> myFacesHTMLEncoderClass = TCCLUtil.loadClassFromContext(getClass(), MYFACES_ENCODER_FQCN);
 				final String MYFACES_ENCODE_URI_ATTRIBUTE_METHOD_NAME = "encodeURIAtributte";
 				myFacesMethodEncodeURIAtribute = myFacesHTMLEncoderClass.getMethod(
-						MYFACES_ENCODE_URI_ATTRIBUTE_METHOD_NAME, new Class[] { String.class, String.class });
+					MYFACES_ENCODE_URI_ATTRIBUTE_METHOD_NAME, new Class[] { String.class, String.class });
 			}
 			catch (Exception e2) {
 				// Ignore

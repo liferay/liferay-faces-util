@@ -25,9 +25,8 @@ import javax.faces.context.ResponseWriter;
 import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.client.ScriptsEncoder;
 
-
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 public class ScriptsEncoderImpl implements ScriptsEncoder, Serializable {
 

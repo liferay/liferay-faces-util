@@ -16,13 +16,13 @@
 package com.liferay.faces.util.product.internal;
 
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class ProductLiferayFacesUtilImpl extends ProductBase {
 
 	public ProductLiferayFacesUtilImpl() {
 		super(ProductInfo.newInstance(getImplTitle(), ProductLiferayFacesUtilImpl.class.getName(),
-				"META-INF/maven/com.liferay.faces/com.liferay.faces.util/pom.properties"));
+			"META-INF/maven/com.liferay.faces/com.liferay.faces.util/pom.properties"));
 	}
 
 	private static String getImplTitle() {

@@ -36,18 +36,16 @@ import com.liferay.faces.util.component.Styleable;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public class RendererUtil {
 
 	// Private Constants
 	private static final String JAVA_SCRIPT_HEX_PREFIX = "\\x";
-	private static final char[] _HEX_DIGITS = {
-			'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
-		};
+	private static final char[] _HEX_DIGITS =
+		{ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(RendererUtil.class);
@@ -56,18 +54,18 @@ public class RendererUtil {
 	 * Adds an Ajax behavior to the specified client behavior holder according to its default event. If the Ajax
 	 * behavior already exists, then this method takes no action.
 	 *
-	 * @param  clientBehaviorHolder  The client behavior holder for which to add an Ajax behavior.
-	 * @param  execute               Space delimited list of execute ids. Typically this is the value of the "execute"
-	 *                               attribute of a UI component.
-	 * @param  process               Space delimited list of process ids. Typically this is the value of the "process"
-	 *                               attribute of a UI component.
-	 * @param  defaultExecute        The value for execute in case both the execute and process parameters are <code>
+	 * @param clientBehaviorHolder The client behavior holder for which to add an Ajax behavior.
+	 * @param execute              Space delimited list of execute ids. Typically this is the value of the "execute"
+	 *                             attribute of a UI component.
+	 * @param process              Space delimited list of process ids. Typically this is the value of the "process"
+	 *                             attribute of a UI component.
+	 * @param defaultExecute       The value for execute in case both the execute and process parameters are <code>
 	 *                               null</code>.
-	 * @param  render                Space delimited list of render ids. Typically this is the value of the "render"
-	 *                               attribute of a UI component.
-	 * @param  update                Space delimited list of update ids. Typically thi sis the value of the "update"
-	 *                               attribute of a UI component.
-	 * @param  defaultRender         The value for render in case both the render and process parameters are <code>
+	 * @param render               Space delimited list of render ids. Typically this is the value of the "render"
+	 *                             attribute of a UI component.
+	 * @param update               Space delimited list of update ids. Typically thi sis the value of the "update"
+	 *                             attribute of a UI component.
+	 * @param defaultRender        The value for render in case both the render and process parameters are <code>
 	 *                               null</code>.
 	 */
 	public static void addDefaultAjaxBehavior(ClientBehaviorHolder clientBehaviorHolder, String execute, String process,
@@ -151,15 +149,15 @@ public class RendererUtil {
 
 	/**
 	 * Escapes JavaScript so that it can safely be rendered as string in the browser. This method escapes JS according
-	 * to the recommendations provided in <a
-	 * href="https://www.owasp.org/index.php/XSS_%28Cross_Site_Scripting%29_Prevention_Cheat_Sheet#RULE_.233_-_JavaScript_Escape_Before_Inserting_Untrusted_Data_into_JavaScript_Data_Values">
+	 * to the recommendations provided in <a href=
+	 * "https://www.owasp.org/index.php/XSS_%28Cross_Site_Scripting%29_Prevention_Cheat_Sheet#RULE_.233_-_JavaScript_Escape_Before_Inserting_Untrusted_Data_into_JavaScript_Data_Values">
 	 * OWASP's Cross Site Scripting (XSS) Prevention Cheat Sheet</a>. <strong>Note:</strong> escaped JS can only be
 	 * rendered into certain JS strings. If it is rendered anywhere else, the site will still be vulnerable to XSS. See
 	 * the link for more details.
 	 *
-	 * @param   javaScript  a JavaScript string which has not been escaped to prevent XSS.
+	 * @param javaScript a JavaScript string which has not been escaped to prevent XSS.
 	 *
-	 * @return  an escaped JavaScript string.
+	 * @return an escaped JavaScript string.
 	 */
 	public static String escapeJavaScript(String javaScript) {
 
@@ -196,12 +194,12 @@ public class RendererUtil {
 	 * Gets the Ajax behavior associated with the default event of the specified client behavior holder. If not found,
 	 * then returns <code>null</code>.
 	 *
-	 * @param  clientBehaviorHolder  The client behavior holder that potentially has an Ajax behavior associated with
-	 *                               its default event.
+	 * @param clientBehaviorHolder The client behavior holder that potentially has an Ajax behavior associated with its
+	 *                             default event.
 	 *
-	 * @since  1.1
-	 * @since  2.1
-	 * @since  3.1
+	 * @since 1.1
+	 * @since 2.1
+	 * @since 3.1
 	 */
 	public static AjaxBehavior getDefaultAjaxBehavior(ClientBehaviorHolder clientBehaviorHolder) {
 

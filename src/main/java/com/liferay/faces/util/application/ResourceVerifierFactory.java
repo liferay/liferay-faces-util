@@ -23,25 +23,27 @@ import org.osgi.annotation.versioning.ProviderType;
 
 import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
-
 /**
  * This class provides the contract for a factory that can create instances of {@link ResourceVerifier}. It implements
  * {@link FacesWrapper} in order to follow the standard factory delegation pattern found in the Faces API. If a concrete
- * implementation of this class has a one-arg constructor and the type of the argument is {@link
- * ResourceVerifierFactory} then the constructor will be called with the next factory instance in the delegation chain.
+ * implementation of this class has a one-arg constructor and the type of the argument is
+ * {@link ResourceVerifierFactory} then the constructor will be called with the next factory instance in the delegation
+ * chain.
  *
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 @ProviderType
 public abstract class ResourceVerifierFactory implements FacesWrapper<ResourceVerifierFactory> {
 
 	/**
-	 * @deprecated  Call {@link #getResourceVerifierInstance(ExternalContext)} instead.
+	 * @deprecated Call {@link #getResourceVerifierInstance(ExternalContext)} instead.
 	 *
-	 *              <p>Returns a stateless, thread-safe singleton instance of {@link ResourceVerifier} from the {@link
-	 *              ResourceVerifierFactory} found by the {@link FactoryExtensionFinder}. ResourceVerifier is a
-	 *              stateless, thread-safe singleton because it is designed to be used by a {@link
-	 *              javax.faces.render.Renderer}, which is a stateless, thread-safe singleton.</p>
+	 *             <p>
+	 *             Returns a stateless, thread-safe singleton instance of {@link ResourceVerifier} from the
+	 *             {@link ResourceVerifierFactory} found by the {@link FactoryExtensionFinder}. ResourceVerifier is a
+	 *             stateless, thread-safe singleton because it is designed to be used by a
+	 *             {@link javax.faces.render.Renderer}, which is a stateless, thread-safe singleton.
+	 *             </p>
 	 */
 	@Deprecated
 	public static ResourceVerifier getResourceVerifierInstance() {
@@ -49,22 +51,22 @@ public abstract class ResourceVerifierFactory implements FacesWrapper<ResourceVe
 	}
 
 	/**
-	 * Returns a stateless, thread-safe singleton instance of {@link ResourceVerifier} from the {@link
-	 * ResourceVerifierFactory} found by the {@link FactoryExtensionFinder}. ResourceVerifier is a stateless,
+	 * Returns a stateless, thread-safe singleton instance of {@link ResourceVerifier} from the
+	 * {@link ResourceVerifierFactory} found by the {@link FactoryExtensionFinder}. ResourceVerifier is a stateless,
 	 * thread-safe singleton because it is designed to be used by a {@link javax.faces.render.Renderer}, which is a
 	 * stateless, thread-safe singleton.
 	 *
-	 * @param  externalContext  The external context associated with the current faces context. It is needed in order
-	 *                          for the {@link FactoryExtensionFinder} to be able to find the factory.
+	 * @param externalContext The external context associated with the current faces context. It is needed in order for
+	 *                        the {@link FactoryExtensionFinder} to be able to find the factory.
 	 *
-	 * @since  3.1
-	 * @since  2.1
-	 * @since  1.1
+	 * @since 3.1
+	 * @since 2.1
+	 * @since 1.1
 	 */
 	public static ResourceVerifier getResourceVerifierInstance(ExternalContext externalContext) {
 
-		ResourceVerifierFactory resourceVerifierFactory = (ResourceVerifierFactory) FactoryExtensionFinder.getFactory(
-				externalContext, ResourceVerifierFactory.class);
+		ResourceVerifierFactory resourceVerifierFactory =
+			(ResourceVerifierFactory) FactoryExtensionFinder.getFactory(externalContext, ResourceVerifierFactory.class);
 
 		return resourceVerifierFactory.getResourceVerifier();
 	}

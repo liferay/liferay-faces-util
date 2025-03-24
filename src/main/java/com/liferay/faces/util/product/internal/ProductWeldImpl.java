@@ -17,10 +17,9 @@ package com.liferay.faces.util.product.internal;
 
 import com.liferay.faces.util.internal.TCCLUtil;
 
-
 /**
- * @author  Neil Griffin
- * @author  Kyle Stiemann
+ * @author Neil Griffin
+ * @author Kyle Stiemann
  */
 public class ProductWeldImpl extends ProductBase {
 

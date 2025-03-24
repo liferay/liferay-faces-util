@@ -24,9 +24,8 @@ import com.liferay.faces.util.config.ConfiguredServletMapping;
 import com.liferay.faces.util.config.ConfiguredSystemEventListener;
 import com.liferay.faces.util.config.FacesConfig;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class FacesConfigImpl implements FacesConfig {
 

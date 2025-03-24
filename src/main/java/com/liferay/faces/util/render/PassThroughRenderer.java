@@ -24,17 +24,15 @@ import javax.faces.render.Renderer;
 
 import org.osgi.annotation.versioning.ProviderType;
 
-
 /**
- * @author  Kyle Stiemann
+ * @author Kyle Stiemann
  */
 @ProviderType
 public class PassThroughRenderer extends Renderer {
 
 	// Protected Constants
-	protected static final String[] MOUSE_DOM_EVENTS = {
-			"onclick", "ondblclick", "onmousedown", "onmousemove", "onmouseout", "onmouseover", "onmouseup"
-		};
+	protected static final String[] MOUSE_DOM_EVENTS =
+		{ "onclick", "ondblclick", "onmousedown", "onmousemove", "onmouseout", "onmouseover", "onmouseup" };
 	protected static final String[] KEYBOARD_DOM_EVENTS = { "onkeydown", "onkeypress", "onkeyup" };
 
 	/**

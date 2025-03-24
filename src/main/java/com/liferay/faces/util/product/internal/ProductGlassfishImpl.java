@@ -16,13 +16,13 @@
 package com.liferay.faces.util.product.internal;
 
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class ProductGlassfishImpl extends ProductBase {
 
 	public ProductGlassfishImpl() {
 		super(ProductInfo.newInstance("Glassfish", "org.glassfish.api.web.Constants",
-				"META-INF/maven/org.glassfish.main.common/glassfish-api/pom.properties"));
+			"META-INF/maven/org.glassfish.main.common/glassfish-api/pom.properties"));
 	}
 
 }

@@ -16,12 +16,12 @@
 package com.liferay.faces.util.product.internal;
 
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class ProductLiferayFacesShowcaseImpl extends ProductBase {
 
 	public ProductLiferayFacesShowcaseImpl() {
 		super(ProductInfo.newInstance("Showcase Common", "com.liferay.faces.showcase.dto.ShowcaseComponent",
-				"META-INF/maven/com.liferay.faces.demo/com.liferay.faces.demo.showcase.common/pom.properties"));
+			"META-INF/maven/com.liferay.faces.demo/com.liferay.faces.demo.showcase.common/pom.properties"));
 	}
 }

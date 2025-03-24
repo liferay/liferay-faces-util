@@ -19,9 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.liferay.faces.util.client.BrowserSniffer;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class BrowserSnifferImpl extends LiferayPortalBrowserSnifferImpl implements BrowserSniffer {
 

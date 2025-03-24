@@ -30,9 +30,8 @@ import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.faces.util.product.Product;
 import com.liferay.faces.util.product.ProductFactory;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class UtilELResolver extends ELResolverBase {
 
@@ -106,8 +105,8 @@ public class UtilELResolver extends ELResolverBase {
 
 				FacesContext facesContext = FacesContext.getCurrentInstance();
 				ExternalContext externalContext = facesContext.getExternalContext();
-				ProductFactory productFactory = (ProductFactory) FactoryExtensionFinder.getFactory(externalContext,
-						ProductFactory.class);
+				ProductFactory productFactory =
+					(ProductFactory) FactoryExtensionFinder.getFactory(externalContext, ProductFactory.class);
 
 				value = new ProductMap(productFactory);
 			}

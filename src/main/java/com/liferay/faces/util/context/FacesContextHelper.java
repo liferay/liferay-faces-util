@@ -31,9 +31,8 @@ import org.osgi.annotation.versioning.ProviderType;
 
 import com.liferay.faces.util.client.Script;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public interface FacesContextHelper {
@@ -206,38 +205,38 @@ public interface FacesContextHelper {
 	/**
 	 * Adds the specified {@link Script} to the list of scripts that are to be executed on the client.
 	 *
-	 * @param  script  The script that is to be added.
+	 * @param script The script that is to be added.
 	 *
-	 * @since  3.2
+	 * @since 3.2
 	 */
 	public void addScript(Script script);
 
 	/**
 	 * Adds the specified script to the list of scripts that are to be executed on the client.
 	 *
-	 * @param  scriptString  The script that is to be added.
+	 * @param scriptString The script that is to be added.
 	 *
-	 * @since  3.2
+	 * @since 3.2
 	 */
 	public void addScript(String scriptString);
 
 	/**
 	 * Adds the specified {@link Script} to the list of scripts that are to be executed on the client.
 	 *
-	 * @param  facesContext  The current faces context.
-	 * @param  script        The script that is to be added.
+	 * @param facesContext The current faces context.
+	 * @param script       The script that is to be added.
 	 *
-	 * @since  3.2
+	 * @since 3.2
 	 */
 	public void addScript(FacesContext facesContext, Script script);
 
 	/**
 	 * Adds the specified script to the list of scripts that are to be executed on the client.
 	 *
-	 * @param  facesContext  The current faces context.
-	 * @param  scriptString  The script that is to be added.
+	 * @param facesContext The current faces context.
+	 * @param scriptString The script that is to be added.
 	 *
-	 * @since  3.2
+	 * @since 3.2
 	 */
 	public void addScript(FacesContext facesContext, String scriptString);
 
@@ -319,7 +318,7 @@ public interface FacesContextHelper {
 	/**
 	 * Returns the parent form of the given component or <code>null</code> if no parent form is found.
 	 *
-	 * @param  uiComponent  The component whose parent is to be found.
+	 * @param uiComponent The component whose parent is to be found.
 	 */
 	public UIForm getParentForm(final UIComponent uiComponent);
 
@@ -334,14 +333,14 @@ public interface FacesContextHelper {
 	public Object getRequestAttribute(FacesContext facesContext, String name);
 
 	/**
-	 * Returns The request context path. {@link FacesContext#getExternalContext()} {@link
-	 * ExternalContext#getRequestContextPath()}
+	 * Returns The request context path. {@link FacesContext#getExternalContext()}
+	 * {@link ExternalContext#getRequestContextPath()}
 	 */
 	public String getRequestContextPath();
 
 	/**
-	 * Returns The request context path. {@link FacesContext#getExternalContext()} {@link
-	 * ExternalContext#getRequestContextPath()}
+	 * Returns The request context path. {@link FacesContext#getExternalContext()}
+	 * {@link ExternalContext#getRequestContextPath()}
 	 */
 	public String getRequestContextPath(FacesContext facesContext);
 
@@ -400,14 +399,14 @@ public interface FacesContextHelper {
 	/**
 	 * Returns the map of request parameters from the ExternalContext.
 	 *
-	 * @see  ExternalContext#getRequestParameterMap()
+	 * @see ExternalContext#getRequestParameterMap()
 	 */
 	public Map<String, String> getRequestParameterMap();
 
 	/**
 	 * Returns the map of request parameters from the ExternalContext.
 	 *
-	 * @see  ExternalContext#getRequestParameterMap()
+	 * @see ExternalContext#getRequestParameterMap()
 	 */
 	public Map<String, String> getRequestParameterMap(FacesContext facesContext);
 
@@ -434,34 +433,34 @@ public interface FacesContextHelper {
 	public String getRequestQueryStringParameter(FacesContext facesContext, String name);
 
 	/**
-	 * Returns an immutable list of scripts that were added via the {@link #addScript(FacesContext,Script)} or {@link
-	 * #addScript(FacesContext,String)} method.
+	 * Returns an immutable list of scripts that were added via the {@link #addScript(FacesContext,Script)} or
+	 * {@link #addScript(FacesContext,String)} method.
 	 *
-	 * @since  3.2
+	 * @since 3.2
 	 */
 	public List<Script> getScripts();
 
 	/**
-	 * Returns an immutable list of scripts that were added via the {@link #addScript(FacesContext,Script)} or {@link
-	 * #addScript(FacesContext,String)} method.
+	 * Returns an immutable list of scripts that were added via the {@link #addScript(FacesContext,Script)} or
+	 * {@link #addScript(FacesContext,String)} method.
 	 *
-	 * @param  facesContext  The current faces context.
+	 * @param facesContext The current faces context.
 	 *
-	 * @since  3.2
+	 * @since 3.2
 	 */
 	public List<Script> getScripts(FacesContext facesContext);
 
 	/**
 	 * Returns the session object associated with the current FacesContext.
 	 *
-	 * @param  create  Flag indicating whether or not a session should be created if it doesn't yet exist.
+	 * @param create Flag indicating whether or not a session should be created if it doesn't yet exist.
 	 */
 	public Object getSession(boolean create);
 
 	/**
 	 * Returns the session object associated with the current FacesContext.
 	 *
-	 * @param  create  Flag indicating whether or not a session should be created if it doesn't yet exist.
+	 * @param create Flag indicating whether or not a session should be created if it doesn't yet exist.
 	 */
 	public Object getSession(FacesContext facesContext, boolean create);
 
@@ -502,32 +501,32 @@ public interface FacesContextHelper {
 	/**
 	 * Sets the current JSF navigation to the specified outcome.
 	 *
-	 * @param  fromAction  The "from action" as specified in a JSF navigation rule. Can be null to if no action is
-	 *                     specified in the rule.
-	 * @param  outcome     The "from outcome" as specified in a JSF navigation rule
+	 * @param fromAction The "from action" as specified in a JSF navigation rule. Can be null to if no action is
+	 *                   specified in the rule.
+	 * @param outcome    The "from outcome" as specified in a JSF navigation rule
 	 */
 	public void navigate(String fromAction, String outcome);
 
 	/**
 	 * Sets the current JSF navigation to the specified outcome.
 	 *
-	 * @param  fromAction  The "from action" as specified in a JSF navigation rule. Can be null to if no action is
-	 *                     specified in the rule.
-	 * @param  outcome     The "from outcome" as specified in a JSF navigation rule
+	 * @param fromAction The "from action" as specified in a JSF navigation rule. Can be null to if no action is
+	 *                   specified in the rule.
+	 * @param outcome    The "from outcome" as specified in a JSF navigation rule
 	 */
 	public void navigate(FacesContext facesContext, String fromAction, String outcome);
 
 	/**
 	 * Sets the current JSF navigation to the specified outcome.
 	 *
-	 * @param  outcome  The "from outcome" as specified in a JSF navigation rule
+	 * @param outcome The "from outcome" as specified in a JSF navigation rule
 	 */
 	public void navigateTo(String outcome);
 
 	/**
 	 * Sets the current JSF navigation to the specified outcome.
 	 *
-	 * @param  outcome  The "from outcome" as specified in a JSF navigation rule
+	 * @param outcome The "from outcome" as specified in a JSF navigation rule
 	 */
 	public void navigateTo(FacesContext facesContext, String outcome);
 
@@ -552,18 +551,18 @@ public interface FacesContextHelper {
 	public void registerPhaseListener(PhaseListener phaseListener);
 
 	/**
-	 * clear component tree since input fields will not be refreshed. See <a
-	 * href="http://wiki.apache.org/myfaces/ClearInputComponents">ClearInputComponents</a> for more information.
+	 * clear component tree since input fields will not be refreshed. See
+	 * <a href="http://wiki.apache.org/myfaces/ClearInputComponents">ClearInputComponents</a> for more information.
 	 *
-	 * @param  clientId  all children of the component with this id are cleared.
+	 * @param clientId all children of the component with this id are cleared.
 	 */
 	public void removeChildrenFromComponentTree(String clientId);
 
 	/**
-	 * clear component tree since input fields will not be refreshed. See <a
-	 * href="http://wiki.apache.org/myfaces/ClearInputComponents">ClearInputComponents</a> for more information.
+	 * clear component tree since input fields will not be refreshed. See
+	 * <a href="http://wiki.apache.org/myfaces/ClearInputComponents">ClearInputComponents</a> for more information.
 	 *
-	 * @param  clientId  all children of the component with this id are cleared.
+	 * @param clientId all children of the component with this id are cleared.
 	 */
 	public void removeChildrenFromComponentTree(FacesContext facesContext, String clientId);
 
@@ -619,14 +618,14 @@ public interface FacesContextHelper {
 	/**
 	 * Causes the current view's component tree to be discarded and re-rendered.
 	 *
-	 * @see  #resetView(boolean)
+	 * @see #resetView(boolean)
 	 */
 	public void resetView();
 
 	/**
 	 * Causes the current view's component tree to be discarded and re-rendered.
 	 *
-	 * @see  #resetView(boolean)
+	 * @see #resetView(boolean)
 	 */
 	public void resetView(FacesContext facesContext);
 
@@ -635,9 +634,9 @@ public interface FacesContextHelper {
 	 * action causes navigation back to the current view, but the data in the backing bean(s) has changed substantially.
 	 * The view is rendered as if the user is visiting for the first time.
 	 *
-	 * @param  renderResponse  causes the response to be rendered immediately if true.
+	 * @param renderResponse causes the response to be rendered immediately if true.
 	 *
-	 * @see    <a href="http://wiki.apache.org/myfaces/ClearInputComponents">ClearInputComponents</a>
+	 * @see <a href="http://wiki.apache.org/myfaces/ClearInputComponents">ClearInputComponents</a>
 	 */
 	public void resetView(boolean renderResponse);
 
@@ -646,9 +645,9 @@ public interface FacesContextHelper {
 	 * action causes navigation back to the current view, but the data in the backing bean(s) has changed substantially.
 	 * The view is rendered as if the user is visiting for the first time.
 	 *
-	 * @param  renderResponse  causes the response to be rendered immediately if true.
+	 * @param renderResponse causes the response to be rendered immediately if true.
 	 *
-	 * @see    <a href="http://wiki.apache.org/myfaces/ClearInputComponents">ClearInputComponents</a>
+	 * @see <a href="http://wiki.apache.org/myfaces/ClearInputComponents">ClearInputComponents</a>
 	 */
 	public void resetView(FacesContext facesContext, boolean renderResponse);
 

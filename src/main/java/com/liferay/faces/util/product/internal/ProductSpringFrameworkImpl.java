@@ -16,7 +16,7 @@
 package com.liferay.faces.util.product.internal;
 
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class ProductSpringFrameworkImpl extends ProductBase {
 
@@ -29,7 +29,7 @@ public class ProductSpringFrameworkImpl extends ProductBase {
 		String title = "Spring Framework";
 		ProductInfo productInfo = ProductInfo.newInstance(title, "org.springframework.core.SpringVersion");
 		productInfo = new ProductInfo(productInfo.detected, title, productInfo.version, null, productInfo.majorVersion,
-				productInfo.minorVersion, productInfo.patchVersion, productInfo.patchVersion);
+			productInfo.minorVersion, productInfo.patchVersion, productInfo.patchVersion);
 
 		return productInfo;
 	}

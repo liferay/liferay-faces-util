@@ -22,33 +22,33 @@ import org.osgi.annotation.versioning.ProviderType;
 import com.liferay.faces.util.helper.BooleanHelper;
 import com.liferay.faces.util.i18n.I18n;
 
-
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public enum WebConfigParam implements ConfigParam<ExternalContext> {
 
 	/**
 	 * Integer indicating the initial cache capacity for the message cache used by the i18n EL utility. The default
-	 * value of this param is 16. For more details, see {@link
-	 * com.liferay.faces.util.cache.CacheFactory#getConcurrentCache(int)} and {@link java.util.HashMap#HashMap()}.
+	 * value of this param is 16. For more details, see
+	 * {@link com.liferay.faces.util.cache.CacheFactory#getConcurrentCache(int)} and
+	 * {@link java.util.HashMap#HashMap()}.
 	 *
-	 * @since  1.1
-	 * @since  2.1
-	 * @since  3.1
+	 * @since 1.1
+	 * @since 2.1
+	 * @since 3.1
 	 */
 	I18nELMapInitialCacheCapacity("com.liferay.faces.util.el.i18n.INITIAL_CACHE_CAPACITY", 16),
 
 	/**
 	 * Integer indicating the default maximum cache capacity for the resource bundle cache used by the i18n EL utility.
 	 * The default value of this param is -1 which indicates that no maximum should be enforced. For more details, see
-	 * {@link com.liferay.faces.util.cache.CacheFactory#getConcurrentCache(int)} and {@link
-	 * java.util.HashMap#HashMap()}.
+	 * {@link com.liferay.faces.util.cache.CacheFactory#getConcurrentCache(int)} and
+	 * {@link java.util.HashMap#HashMap()}.
 	 *
-	 * @since  1.1
-	 * @since  2.1
-	 * @since  3.1
+	 * @since 1.1
+	 * @since 2.1
+	 * @since 3.1
 	 */
 	I18nInitialCacheCapacity(I18n.class.getName() + ".INITIAL_CACHE_CAPACITY", 16),
 
@@ -56,12 +56,12 @@ public enum WebConfigParam implements ConfigParam<ExternalContext> {
 	 * Integer indicating the default maximum cache capacity for the message cache used by the i18n EL utility. The
 	 * default value of this param is -1 which indicates that no maximum capacity should be enforced (in other words,
 	 * the cache will be obtained via {@link com.liferay.faces.util.cache.CacheFactory#getConcurrentCache(int)}).
-	 * Otherwise, an LRU cache with the specified maximum capacity will be obtained via {@link
-	 * com.liferay.faces.util.cache.CacheFactory#getConcurrentLRUCache(int, int)}.
+	 * Otherwise, an LRU cache with the specified maximum capacity will be obtained via
+	 * {@link com.liferay.faces.util.cache.CacheFactory#getConcurrentLRUCache(int, int)}.
 	 *
-	 * @since  1.1
-	 * @since  2.1
-	 * @since  3.1
+	 * @since 1.1
+	 * @since 2.1
+	 * @since 3.1
 	 */
 	I18nELMapMaxCacheCapacity("com.liferay.faces.util.el.i18n.MAX_CACHE_CAPACITY", -1),
 
@@ -69,12 +69,12 @@ public enum WebConfigParam implements ConfigParam<ExternalContext> {
 	 * Integer indicating the maximum cache capacity for the resource bundle cache used by the {@link I18n} utility. The
 	 * default value of this param is -1 which indicates that no maximum capacity should be enforced (in other words,
 	 * the cache will be obtained via {@link com.liferay.faces.util.cache.CacheFactory#getConcurrentCache(int)}).
-	 * Otherwise, an LRU cache with the specified maximum capacity will be obtained via {@link
-	 * com.liferay.faces.util.cache.CacheFactory#getConcurrentLRUCache(int, int)}.
+	 * Otherwise, an LRU cache with the specified maximum capacity will be obtained via
+	 * {@link com.liferay.faces.util.cache.CacheFactory#getConcurrentLRUCache(int, int)}.
 	 *
-	 * @since  1.1
-	 * @since  2.1
-	 * @since  3.1
+	 * @since 1.1
+	 * @since 2.1
+	 * @since 3.1
 	 */
 	I18nMaxCacheCapacity(I18n.class.getName() + ".MAX_CACHE_CAPACITY", -1),
 

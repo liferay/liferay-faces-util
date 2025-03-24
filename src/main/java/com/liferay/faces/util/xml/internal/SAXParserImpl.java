@@ -24,12 +24,11 @@ import org.xml.sax.SAXNotRecognizedException;
 import org.xml.sax.SAXNotSupportedException;
 import org.xml.sax.XMLReader;
 
-
 /**
  * This class is a thread-safe implementation of {@link SAXParser}. However, it does not fully implement all of the
  * functionality of the one provided by the JRE.
  *
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class SAXParserImpl extends SAXParser {
 

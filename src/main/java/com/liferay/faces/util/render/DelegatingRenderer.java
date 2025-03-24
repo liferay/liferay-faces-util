@@ -25,28 +25,27 @@ import javax.faces.render.Renderer;
 
 import org.osgi.annotation.versioning.ProviderType;
 
-
 /**
  * This interface defines a contract for a {@link Renderer} that has the ability to delegate to the corresponding
  * methods of a different renderer, as well as utilize an alternate {@link ResponseWriter} in order to control/filter
  * the encoding of elements and attributes.
  *
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 @ProviderType
 public interface DelegatingRenderer {
 
 	/**
 	 * Convenience method that calls the delegate renderer's {@link Renderer#encodeBegin(FacesContext, UIComponent)},
-	 * {@link Renderer#encodeChildren(FacesContext, UIComponent)}, and {@link Renderer#encodeEnd(FacesContext,
-	 * UIComponent)} methods.
+	 * {@link Renderer#encodeChildren(FacesContext, UIComponent)}, and
+	 * {@link Renderer#encodeEnd(FacesContext, UIComponent)} methods.
 	 */
 	public void encodeAll(FacesContext facesContext, UIComponent uiComponent) throws IOException;
 
 	/**
 	 * Convenience method that calls the delegate renderer's {@link Renderer#encodeBegin(FacesContext, UIComponent)},
-	 * {@link Renderer#encodeChildren(FacesContext, UIComponent)}, and {@link Renderer#encodeEnd(FacesContext,
-	 * UIComponent)} methods using the specified {@link ResponseWriter}.
+	 * {@link Renderer#encodeChildren(FacesContext, UIComponent)}, and
+	 * {@link Renderer#encodeEnd(FacesContext, UIComponent)} methods using the specified {@link ResponseWriter}.
 	 */
 	public void encodeAll(FacesContext facesContext, UIComponent uiComponent, ResponseWriter delegationResponseWriter)
 		throws IOException;

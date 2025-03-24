@@ -16,13 +16,13 @@
 package com.liferay.faces.util.product.internal;
 
 /**
- * @author  Neil Griffin
+ * @author Neil Griffin
  */
 public class ProductLiferayWabExtenderImpl extends ProductBase {
 
 	public ProductLiferayWabExtenderImpl(boolean detected, String version, int majorVersion, int minorVersion,
 		int patchVersion, int buildId) {
 		super(new ProductInfo(detected, "Liferay WAB Extender", version, null, majorVersion, minorVersion, patchVersion,
-				buildId));
+			buildId));
 	}
 }

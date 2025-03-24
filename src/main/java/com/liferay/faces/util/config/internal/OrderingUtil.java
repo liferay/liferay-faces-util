@@ -31,9 +31,8 @@ import java.util.Set;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
-
 /**
- * @author  Vernon Singleton
+ * @author Vernon Singleton
  */
 public final class OrderingUtil {
 
@@ -68,11 +67,11 @@ public final class OrderingUtil {
 
 			if ((webInfFacesConfigDescriptor != null) && webInfFacesConfigDescriptor.hasAbsoluteOrdering()) {
 				facesConfigDescriptors = OrderingUtil.getAbsoluteOrderedFacesConfigDescriptors(mojarraConfigDescriptor,
-						facesConfigDescriptors, webInfFacesConfigDescriptor);
+					facesConfigDescriptors, webInfFacesConfigDescriptor);
 			}
 			else {
 				facesConfigDescriptors = OrderingUtil.getRelativeOrderedFacesConfigDescriptors(mojarraConfigDescriptor,
-						facesConfigDescriptors, webInfFacesConfigDescriptor);
+					facesConfigDescriptors, webInfFacesConfigDescriptor);
 			}
 		}
 
@@ -180,10 +179,10 @@ public final class OrderingUtil {
 	private static <K, V extends Comparable<? super V>> Map<K, V> descendingByValue(Map<K, V> map) {
 		List<Map.Entry<K, V>> list = new LinkedList<Map.Entry<K, V>>(map.entrySet());
 		Collections.sort(list, new Comparator<Map.Entry<K, V>>() {
-				public int compare(Map.Entry<K, V> a, Map.Entry<K, V> b) {
-					return (b.getValue()).compareTo(a.getValue());
-				}
-			});
+			public int compare(Map.Entry<K, V> a, Map.Entry<K, V> b) {
+				return (b.getValue()).compareTo(a.getValue());
+			}
+		});
 
 		Map<K, V> result = new LinkedHashMap<K, V>();
 
@@ -277,8 +276,8 @@ public final class OrderingUtil {
 	 */
 	private static List<FacesConfigDescriptor> getRelativeOrderedFacesConfigDescriptors(
 		FacesConfigDescriptor mojarraConfigDescriptor, List<FacesConfigDescriptor> configList,
-		FacesConfigDescriptor webInfFacesConfigDescriptor) throws OrderingBeforeAndAfterException,
-		OrderingCircularDependencyException, OrderingMaxAttemptsException {
+		FacesConfigDescriptor webInfFacesConfigDescriptor)
+		throws OrderingBeforeAndAfterException, OrderingCircularDependencyException, OrderingMaxAttemptsException {
 
 		logger.debug("Ordering faces-config descriptors");
 
@@ -343,7 +342,7 @@ public final class OrderingUtil {
 			}
 		}
 
-		//J-
+		// J-
 		// Sort the documents such that specified ordering will be considered.
 		//
 		// It turns out that some of the specified ordering, if it was not discovered by the sort routine
@@ -352,7 +351,7 @@ public final class OrderingUtil {
 		// This preSort method puts all of the documents with specified ordering as early on in the
 		// list of documents as possible for to consider it quickly, and be
 		// able to use its ordering algorithm to the best of its ability to achieve the specified ordering.
-		//J+
+		// J+
 		configList = preSort(configList);
 
 		int size = configList.size();
@@ -432,8 +431,8 @@ public final class OrderingUtil {
 
 		if (config1Ordering.isOrdered() && !config2Ordering.isOrdered()) {
 
-			if ((config1Ordering.getRoutes().get(Ordering.Path.AFTER).length != 0) &&
-					!config1Ordering.isBeforeOthers()) {
+			if ((config1Ordering.getRoutes().get(Ordering.Path.AFTER).length != 0)
+				&& !config1Ordering.isBeforeOthers()) {
 				return true;
 			}
 		}
@@ -444,14 +443,14 @@ public final class OrderingUtil {
 		}
 
 		// config1 should be after others, but it is not
-		if (config1Ordering.isAfterOthers() && !config1Ordering.isBefore(config2Name) &&
-				!(config1Ordering.isAfterOthers() && config2Ordering.isAfterOthers())) {
+		if (config1Ordering.isAfterOthers() && !config1Ordering.isBefore(config2Name)
+			&& !(config1Ordering.isAfterOthers() && config2Ordering.isAfterOthers())) {
 			return true;
 		}
 
 		// config2 should be before others, but it is not
-		return config2Ordering.isBeforeOthers() && !config2Ordering.isAfter(config1Name) &&
-			!(config1Ordering.isBeforeOthers() && config2Ordering.isBeforeOthers());
+		return config2Ordering.isBeforeOthers() && !config2Ordering.isAfter(config1Name)
+			&& !(config1Ordering.isBeforeOthers() && config2Ordering.isBeforeOthers());
 	}
 
 	private static void mapRoutes(FacesConfigDescriptor config, Ordering.Path path,
@@ -493,12 +492,11 @@ public final class OrderingUtil {
 						}
 
 						if (Arrays.binarySearch(otherConfigOrderingRoutes.get(oppositePath), configName) < 0) {
-							EnumMap<Ordering.Path, String[]> routes = new EnumMap<Ordering.Path, String[]>(
-									Ordering.Path.class);
+							EnumMap<Ordering.Path, String[]> routes =
+								new EnumMap<Ordering.Path, String[]>(Ordering.Path.class);
 							routes.put(path, otherRoutePathNames);
-							routes.put(oppositePath,
-								appendAndSort(otherConfigOrderingRoutes.get(oppositePath),
-									new String[] { configName }));
+							routes.put(oppositePath, appendAndSort(otherConfigOrderingRoutes.get(oppositePath),
+								new String[] { configName }));
 							otherConfigOrdering.setRoutes(routes);
 						}
 
@@ -506,8 +504,8 @@ public final class OrderingUtil {
 						// others too. Similarly, if I am after them and they are after others, then I should be
 						// informed that I am after others too.
 						if (otherRoutePathNames.length > 0) {
-							EnumMap<Ordering.Path, String[]> routes = new EnumMap<Ordering.Path, String[]>(
-									Ordering.Path.class);
+							EnumMap<Ordering.Path, String[]> routes =
+								new EnumMap<Ordering.Path, String[]>(Ordering.Path.class);
 							routes.put(path, appendAndSort(routePathNames, otherRoutePathNames));
 							routes.put(oppositePath, configOrderingRoutes.get(oppositePath));
 							configOrdering.setRoutes(routes);
