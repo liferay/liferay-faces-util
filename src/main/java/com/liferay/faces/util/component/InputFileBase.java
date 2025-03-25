@@ -15,14 +15,14 @@
  */
 package com.liferay.faces.util.component;
 
-import javax.faces.component.html.HtmlInputFile;
+import jakarta.faces.component.html.HtmlInputFile;
 
 import org.osgi.annotation.versioning.ProviderType;
 
 /**
  * This abstract class serves as a compatibility layer for file upload components. For JSF 2.2+ this class extends
- * {@link javax.faces.component.html.HtmlInputFile}. For prior versions of JSF it extends
- * {@link javax.faces.component.html.HtmlInputText}.
+ * {@link jakarta.faces.component.html.HtmlInputFile}. For prior versions of JSF it extends
+ * {@link jakarta.faces.component.html.HtmlInputText}.
  *
  * @author Neil Griffin
  */

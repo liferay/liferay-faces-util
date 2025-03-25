@@ -17,11 +17,11 @@ package com.liferay.faces.util.render;
 
 import java.io.IOException;
 
-import javax.faces.component.UIComponent;
-import javax.faces.component.UINamingContainer;
-import javax.faces.context.FacesContext;
-import javax.faces.context.ResponseWriter;
-import javax.faces.render.Renderer;
+import jakarta.faces.component.UIComponent;
+import jakarta.faces.component.UINamingContainer;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.context.ResponseWriter;
+import jakarta.faces.render.Renderer;
 
 import org.osgi.annotation.versioning.ProviderType;
 
@@ -42,21 +42,21 @@ import com.liferay.faces.util.context.FacesContextHelperUtil;
 public abstract class ClientComponentRendererBase extends Renderer implements ClientComponentRenderer {
 
 	/**
-	 * @see ClientComponentRenderer#encodeJavaScript(javax.faces.context.FacesContext,
-	 *      javax.faces.component.UIComponent)
+	 * @see ClientComponentRenderer#encodeJavaScript(jakarta.faces.context.FacesContext,
+	 *      jakarta.faces.component.UIComponent)
 	 */
 	@Override
 	public abstract void encodeJavaScript(FacesContext facesContext, UIComponent uiComponent) throws IOException;
 
 	/**
-	 * @see ClientComponentRenderer#encodeMarkupBegin(javax.faces.context.FacesContext,
-	 *      javax.faces.component.UIComponent)
+	 * @see ClientComponentRenderer#encodeMarkupBegin(jakarta.faces.context.FacesContext,
+	 *      jakarta.faces.component.UIComponent)
 	 */
 	@Override
 	public abstract void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException;
 
 	/**
-	 * @see ClientComponentRenderer#encodeMarkupEnd(javax.faces.context.FacesContext, javax.faces.component.UIComponent)
+	 * @see ClientComponentRenderer#encodeMarkupEnd(jakarta.faces.context.FacesContext, jakarta.faces.component.UIComponent)
 	 */
 	@Override
 	public abstract void encodeMarkupEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException;
@@ -69,8 +69,8 @@ public abstract class ClientComponentRendererBase extends Renderer implements Cl
 	}
 
 	/**
-	 * @see ClientComponentRenderer#decodeClientState(javax.faces.context.FacesContext,
-	 *      javax.faces.component.UIComponent)
+	 * @see ClientComponentRenderer#decodeClientState(jakarta.faces.context.FacesContext,
+	 *      jakarta.faces.component.UIComponent)
 	 */
 	@Override
 	public void decodeClientState(FacesContext facesContext, UIComponent uiComponent) {
@@ -86,8 +86,8 @@ public abstract class ClientComponentRendererBase extends Renderer implements Cl
 	}
 
 	/**
-	 * @see ClientComponentRenderer#encodeClientState(javax.faces.context.FacesContext,
-	 *      javax.faces.context.ResponseWriter, javax.faces.component.UIComponent)
+	 * @see ClientComponentRenderer#encodeClientState(jakarta.faces.context.FacesContext,
+	 *      jakarta.faces.context.ResponseWriter, jakarta.faces.component.UIComponent)
 	 */
 	@Override
 	public void encodeClientState(FacesContext facesContext, ResponseWriter responseWriter, UIComponent uiComponent)

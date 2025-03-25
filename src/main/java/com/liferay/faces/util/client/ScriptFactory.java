@@ -15,9 +15,9 @@
  */
 package com.liferay.faces.util.client;
 
-import javax.faces.FacesWrapper;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
+import jakarta.faces.FacesWrapper;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
 
 import org.osgi.annotation.versioning.ProviderType;
 
@@ -25,7 +25,7 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
 
 /**
  * A factory for creating a {@link Script} which can be rendered on the client via
- * {@link com.liferay.faces.util.context.FacesContextHelperUtil#addScript(javax.faces.context.FacesContext, com.liferay.faces.util.client.Script)}.
+ * {@link com.liferay.faces.util.context.FacesContextHelperUtil#addScript(jakarta.faces.context.FacesContext, com.liferay.faces.util.client.Script)}.
  *
  * @author Kyle Stiemann
  */
@@ -116,9 +116,9 @@ public abstract class ScriptFactory implements FacesWrapper<ScriptFactory> {
 	 * Returns a new instance of {@link Script} with the specified source code. The returned instance is guaranteed to
 	 * be {@link java.io.Serializable} but not guaranteed to be thread-safe. The Script can be rendered on the client
 	 * via
-	 * {@link com.liferay.faces.util.context.FacesContextHelperUtil#addScript(javax.faces.context.FacesContext, com.liferay.faces.util.client.Script)}.
+	 * {@link com.liferay.faces.util.context.FacesContextHelperUtil#addScript(jakarta.faces.context.FacesContext, com.liferay.faces.util.client.Script)}.
 	 * As a convenience, it is possible to call
-	 * {@link com.liferay.faces.util.context.FacesContextHelperUtil#addScript(javax.faces.context.FacesContext, com.liferay.faces.util.client.Script)}
+	 * {@link com.liferay.faces.util.context.FacesContextHelperUtil#addScript(jakarta.faces.context.FacesContext, com.liferay.faces.util.client.Script)}
 	 * instead since it will create the Script and add it to the list of Scripts which will be rendered to the response.
 	 *
 	 * @param sourceCode The source code of the Script.
@@ -129,7 +129,7 @@ public abstract class ScriptFactory implements FacesWrapper<ScriptFactory> {
 	 * Returns a new instance of {@link Script} with the specified source code, modules, and type. The returned instance
 	 * is guaranteed to be {@link java.io.Serializable} but not guaranteed to be thread-safe. The Script can be rendered
 	 * on the client via
-	 * {@link com.liferay.faces.util.context.FacesContextHelperUtil#addScript(javax.faces.context.FacesContext, com.liferay.faces.util.client.Script)}.
+	 * {@link com.liferay.faces.util.context.FacesContextHelperUtil#addScript(jakarta.faces.context.FacesContext, com.liferay.faces.util.client.Script)}.
 	 *
 	 * @param sourceCode  The source code of the Script.
 	 * @param modules     The modules which the Script depends on.

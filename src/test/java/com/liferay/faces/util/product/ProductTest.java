@@ -19,7 +19,7 @@ import java.io.File;
 import java.net.URI;
 import java.net.URL;
 
-import javax.portlet.PortletContext;
+import jakarta.portlet.PortletContext;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -126,7 +126,7 @@ public class ProductTest {
 		Assert.assertFalse(productPortletApiImpl.isDetected());
 
 		// Ensure that the Portlet API version is correctly detected when the Portlet 2.0 API jar is on the classpath.
-		ClassLoader portletApiJarClassLoader = getPortletApiJarClassLoader("javax.portlet_portlet-api_jar",
+		ClassLoader portletApiJarClassLoader = getPortletApiJarClassLoader("jakarta.portlet_portlet-api_jar",
 				parentClassLoader);
 		assertPortletApiMajorMinorVersionDetected(2, 0, portletApiJarClassLoader, null, "2.0");
 		assertPortletApiMajorMinorVersionDetected(2, 0, portletApiJarClassLoader, "6.2.4", null);
@@ -134,7 +134,7 @@ public class ProductTest {
 		// Ensure that the Portlet API version is correctly detected when a Portlet API jar with invalid version
 		// information is on the classpath. This is accomplished by using the Portlet 2.0 API jar, but overriding any
 		// versions found in the MANIFEST.MF with "" (the empty string).
-		portletApiJarClassLoader = getPortletApiJarClassLoader("javax.portlet_portlet-api_jar", parentClassLoader, "");
+		portletApiJarClassLoader = getPortletApiJarClassLoader("jakarta.portlet_portlet-api_jar", parentClassLoader, "");
 		assertPortletApiMajorMinorVersionDetected(2, 0, portletApiJarClassLoader, "6.2.5", null);
 		assertPortletApiMajorMinorVersionDetected(2, 0, portletApiJarClassLoader, "7.0.3", null);
 
@@ -146,7 +146,7 @@ public class ProductTest {
 		// Ensure that the Portlet API version is correctly detected when the Portlet 3.0 API jar is on the classpath.
 		// This is accomplished by using the Portlet 2.0 API jar, but overriding any versions found in the MANIFEST.MF
 		// with 3.0.0.
-		portletApiJarClassLoader = getPortletApiJarClassLoader("javax.portlet_portlet-api_jar", parentClassLoader,
+		portletApiJarClassLoader = getPortletApiJarClassLoader("jakarta.portlet_portlet-api_jar", parentClassLoader,
 				"3.0.0");
 		assertPortletApiMajorMinorVersionDetected(3, 0, portletApiJarClassLoader, null, "3.0");
 		assertPortletApiMajorMinorVersionDetected(3, 0, portletApiJarClassLoader, "7.1.0", null);

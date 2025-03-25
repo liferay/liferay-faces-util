@@ -26,19 +26,19 @@
 		<view-handler>com.liferay.faces.bridge.application.ViewHandlerImpl</view-handler>
 	</application>
 	<component>
-		<component-type>javax.faces.HtmlMessage</component-type>
+		<component-type>jakarta.faces.HtmlMessage</component-type>
 		<component-class>com.liferay.faces.bridge.component.html.HtmlMessageBridgeImpl</component-class>
 		<component-extension>
-			<base-component-type>javax.faces.Message</base-component-type>
-			<renderer-type>javax.faces.Message</renderer-type>
+			<base-component-type>jakarta.faces.Message</base-component-type>
+			<renderer-type>jakarta.faces.Message</renderer-type>
 		</component-extension>
 	</component>
 	<component>
-		<component-type>javax.faces.HtmlMessages</component-type>
+		<component-type>jakarta.faces.HtmlMessages</component-type>
 		<component-class>com.liferay.faces.bridge.component.html.HtmlMessagesBridgeImpl</component-class>
 		<component-extension>
-			<base-component-type>javax.faces.Messages</base-component-type>
-			<renderer-type>javax.faces.Messages</renderer-type>
+			<base-component-type>jakarta.faces.Messages</base-component-type>
+			<renderer-type>jakarta.faces.Messages</renderer-type>
 		</component-extension>
 	</component>
 	<component>
@@ -115,23 +115,23 @@
 		<render-kit-class>com.liferay.faces.bridge.renderkit.html_basic.RenderKitBridgeImpl</render-kit-class>
 		<renderer>
 			<description>Overrides the BodyRenderer that comes with the JSF implementation</description>
-			<component-family>javax.faces.Output</component-family>
-			<renderer-type>javax.faces.Body</renderer-type>
+			<component-family>jakarta.faces.Output</component-family>
+			<renderer-type>jakarta.faces.Body</renderer-type>
 			<renderer-class>com.liferay.faces.bridge.renderkit.html_basic.BodyRendererBridgeImpl</renderer-class>
 		</renderer>
 	</render-kit>
 	<render-kit>
 		<renderer>
 			<description>HtmlInputFile Renderer</description>
-			<component-family>javax.faces.Input</component-family>
-			<renderer-type>javax.faces.File</renderer-type>
+			<component-family>jakarta.faces.Input</component-family>
+			<renderer-type>jakarta.faces.File</renderer-type>
 			<renderer-class>com.liferay.faces.bridge.component.inputfile.internal.HtmlInputFileRenderer</renderer-class>
 		</renderer>
 	</render-kit>
 	<render-kit>
 		<renderer>
 			<description>Default renderer for portlet:renderURL tag</description>
-			<component-family>javax.faces.Output</component-family>
+			<component-family>jakarta.faces.Output</component-family>
 			<renderer-type>com.liferay.faces.bridge.renderkit.portlet.RenderURLRenderer</renderer-type>
 			<renderer-class>com.liferay.faces.bridge.renderkit.portlet.RenderURLRenderer</renderer-class>
 		</renderer>
@@ -139,7 +139,7 @@
 	<render-kit>
 		<renderer>
 			<description>Default renderer for portlet:actionURL tag</description>
-			<component-family>javax.faces.Output</component-family>
+			<component-family>jakarta.faces.Output</component-family>
 			<renderer-type>com.liferay.faces.bridge.renderkit.portlet.ActionURLRenderer</renderer-type>
 			<renderer-class>com.liferay.faces.bridge.renderkit.portlet.ActionURLRenderer</renderer-class>
 		</renderer>
@@ -147,7 +147,7 @@
 	<render-kit>
 		<renderer>
 			<description>Default renderer for portlet:resourceURL tag</description>
-			<component-family>javax.faces.Output</component-family>
+			<component-family>jakarta.faces.Output</component-family>
 			<renderer-type>com.liferay.faces.bridge.renderkit.portlet.ResourceURLRenderer</renderer-type>
 			<renderer-class>com.liferay.faces.bridge.renderkit.portlet.ResourceURLRenderer</renderer-class>
 		</renderer>
@@ -155,7 +155,7 @@
 	<render-kit>
 		<renderer>
 			<description>Default renderer for portlet:namespace tag</description>
-			<component-family>javax.faces.Output</component-family>
+			<component-family>jakarta.faces.Output</component-family>
 			<renderer-type>com.liferay.faces.bridge.renderkit.portlet.NameSpaceRenderer</renderer-type>
 			<renderer-class>com.liferay.faces.bridge.renderkit.portlet.NameSpaceRenderer</renderer-class>
 		</renderer>

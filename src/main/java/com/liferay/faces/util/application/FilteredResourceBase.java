@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
-import javax.faces.application.ResourceWrapper;
+import jakarta.faces.application.ResourceWrapper;
 
 import org.osgi.annotation.versioning.ConsumerType;
 

@@ -54,8 +54,8 @@ public interface ConfiguredServletMapping {
 
 	/**
 	 * Flag indicating whether or not the servlet-mapping is implicit, meaning it is associated with
-	 * {@link javax.faces.application.ViewHandler#DEFAULT_SUFFIX} or
-	 * {@link javax.faces.application.ViewHandler#DEFAULT_SUFFIX_PARAM_NAME}.
+	 * {@link jakarta.faces.application.ViewHandler#DEFAULT_SUFFIX} or
+	 * {@link jakarta.faces.application.ViewHandler#DEFAULT_SUFFIX_PARAM_NAME}.
 	 */
 	public boolean isImplicit();
 

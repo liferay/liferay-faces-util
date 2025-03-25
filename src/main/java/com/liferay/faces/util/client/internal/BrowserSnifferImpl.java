@@ -15,7 +15,7 @@
  */
 package com.liferay.faces.util.client.internal;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import com.liferay.faces.util.client.BrowserSniffer;
 

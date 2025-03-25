@@ -15,11 +15,11 @@
  */
 package com.liferay.faces.util.el.internal;
 
-import javax.el.ELContext;
-import javax.el.ELException;
-import javax.el.PropertyNotWritableException;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
+import jakarta.el.ELContext;
+import jakarta.el.ELException;
+import jakarta.el.PropertyNotWritableException;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
 
 import com.liferay.faces.util.client.BrowserSniffer;
 import com.liferay.faces.util.client.BrowserSnifferFactory;

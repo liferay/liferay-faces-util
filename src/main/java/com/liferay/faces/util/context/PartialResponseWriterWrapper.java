@@ -18,7 +18,7 @@ package com.liferay.faces.util.context;
 import java.io.IOException;
 import java.util.Map;
 
-import javax.faces.context.PartialResponseWriter;
+import jakarta.faces.context.PartialResponseWriter;
 
 import org.osgi.annotation.versioning.ProviderType;
 

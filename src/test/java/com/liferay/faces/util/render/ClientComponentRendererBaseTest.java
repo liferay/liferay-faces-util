@@ -18,9 +18,9 @@ package com.liferay.faces.util.render;
 import java.io.IOException;
 import java.io.StringWriter;
 
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
-import javax.faces.context.ResponseWriter;
+import jakarta.faces.component.UIComponent;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.context.ResponseWriter;
 
 import org.junit.Assert;
 import org.junit.Test;

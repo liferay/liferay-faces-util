@@ -15,7 +15,7 @@
  */
 package com.liferay.faces.util.client;
 
-import javax.faces.FacesWrapper;
+import jakarta.faces.FacesWrapper;
 
 import org.osgi.annotation.versioning.ConsumerType;
 

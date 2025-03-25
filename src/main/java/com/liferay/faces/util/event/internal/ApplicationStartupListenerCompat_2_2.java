@@ -15,7 +15,7 @@
  */
 package com.liferay.faces.util.event.internal;
 
-import javax.faces.context.ExternalContext;
+import jakarta.faces.context.ExternalContext;
 
 /**
  * This class provides a compatibility layer that isolates differences related to JSF 2.2.

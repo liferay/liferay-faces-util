@@ -18,7 +18,7 @@ package com.liferay.faces.util.context.internal;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.context.FacesContext;
+import jakarta.faces.context.FacesContext;
 
 import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.context.FacesContextHelperUtil;

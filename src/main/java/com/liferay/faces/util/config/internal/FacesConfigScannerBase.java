@@ -22,9 +22,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.faces.application.ViewHandler;
-import javax.faces.context.FacesContext;
-import javax.faces.webapp.FacesServlet;
+import jakarta.faces.application.ViewHandler;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.webapp.FacesServlet;
 import javax.xml.parsers.SAXParser;
 
 import com.liferay.faces.util.config.ConfiguredServlet;
@@ -188,7 +188,7 @@ public abstract class FacesConfigScannerBase implements FacesConfigScanner {
 			}
 
 			// Sort the faces configuration files in accord with
-			// javax.faces-api-2.2-FINAL_JSF_20130320_11.4.8_Ordering_of_Artifacts
+			// jakarta.faces-api-2.2-FINAL_JSF_20130320_11.4.8_Ordering_of_Artifacts
 			List<FacesConfigDescriptor> orderedConfigs = OrderingUtil.getOrderedFacesConfigDescriptors(
 				mojarraConfigDescriptor, facesConfigDescriptors, webInfFacesConfigDescriptor);
 

@@ -15,7 +15,7 @@
  */
 package com.liferay.faces.util.config;
 
-import javax.faces.context.ExternalContext;
+import jakarta.faces.context.ExternalContext;
 
 import org.osgi.annotation.versioning.ProviderType;
 

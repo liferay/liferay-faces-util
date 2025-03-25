@@ -15,10 +15,10 @@
  */
 package com.liferay.faces.util.render.internal;
 
-import javax.faces.component.UIOutput;
-import javax.faces.render.RenderKit;
-import javax.faces.render.RenderKitWrapper;
-import javax.faces.render.Renderer;
+import jakarta.faces.component.UIOutput;
+import jakarta.faces.render.RenderKit;
+import jakarta.faces.render.RenderKitWrapper;
+import jakarta.faces.render.Renderer;
 
 /**
  * This class extends {@link RenderKitWrapper} in order to programmatically control the {@link RenderKit} delegation
@@ -40,11 +40,11 @@ public class RenderKitUtilImpl extends RenderKitWrapper {
 
 		Renderer renderer = super.getRenderer(family, rendererType);
 
-		if (UIOutput.COMPONENT_FAMILY.equals(family) && "javax.faces.Body".equals(rendererType)) {
+		if (UIOutput.COMPONENT_FAMILY.equals(family) && "jakarta.faces.Body".equals(rendererType)) {
 			renderer = new BodyRendererUtilImpl(renderer);
 		}
-		else if (UIOutput.COMPONENT_FAMILY.equals(family) && ("javax.faces.resource.Script".equals(rendererType)
-			|| "javax.faces.resource.Stylesheet".equals(rendererType))) {
+		else if (UIOutput.COMPONENT_FAMILY.equals(family) && ("jakarta.faces.resource.Script".equals(rendererType)
+			|| "jakarta.faces.resource.Stylesheet".equals(rendererType))) {
 			renderer = new ResourceRendererUtilImpl(renderer);
 		}
 

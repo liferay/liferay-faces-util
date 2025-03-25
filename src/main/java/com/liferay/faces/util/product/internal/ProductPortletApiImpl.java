@@ -50,7 +50,7 @@ public class ProductPortletApiImpl extends ProductBase {
 
 			try {
 
-				productInfo = ProductInfo.newInstance(title, "javax.portlet.PortletContext", false);
+				productInfo = ProductInfo.newInstance(title, "jakarta.portlet.PortletContext", false);
 
 				if (liferayPortalDetected) {
 

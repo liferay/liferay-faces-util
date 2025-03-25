@@ -15,9 +15,9 @@
  */
 package com.liferay.faces.util.osgi.internal;
 
-import javax.faces.application.Application;
-import javax.faces.application.ApplicationWrapper;
-import javax.faces.convert.Converter;
+import jakarta.faces.application.Application;
+import jakarta.faces.application.ApplicationWrapper;
+import jakarta.faces.convert.Converter;
 
 /**
  * This class exists to workaround <a href="https://issues.liferay.com/browse/FACES-3641">FACES-3641</a>

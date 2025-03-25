@@ -17,9 +17,9 @@ package com.liferay.faces.util.application;
 
 import java.util.Map;
 
-import javax.faces.FacesWrapper;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
+import jakarta.faces.FacesWrapper;
+import jakarta.faces.component.UIComponent;
+import jakarta.faces.context.FacesContext;
 
 import org.osgi.annotation.versioning.ConsumerType;
 
@@ -33,7 +33,7 @@ import org.osgi.annotation.versioning.ConsumerType;
 public abstract class ResourceVerifierWrapper implements ResourceVerifier, FacesWrapper<ResourceVerifier> {
 
 	/**
-	 * @see ResourceVerifier#isDependencySatisfied(FacesContext, javax.faces.component.UIComponent)
+	 * @see ResourceVerifier#isDependencySatisfied(FacesContext, jakarta.faces.component.UIComponent)
 	 */
 	@Override
 	public boolean isDependencySatisfied(FacesContext facesContext, UIComponent componentResource) {

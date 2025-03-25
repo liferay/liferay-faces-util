@@ -15,9 +15,9 @@
  */
 package com.liferay.faces.util.product;
 
-import javax.faces.FacesWrapper;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
+import jakarta.faces.FacesWrapper;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
 
 import org.osgi.annotation.versioning.ProviderType;
 
@@ -38,7 +38,7 @@ public abstract class ProductFactory implements FacesWrapper<ProductFactory> {
 	 * @param productName The name of the product.
 	 *
 	 * @deprecated Use
-	 *             {@link #getProductInstance(javax.faces.context.ExternalContext, com.liferay.faces.util.product.Product.Name)}
+	 *             {@link #getProductInstance(jakarta.faces.context.ExternalContext, com.liferay.faces.util.product.Product.Name)}
 	 *             instead.
 	 */
 	@Deprecated

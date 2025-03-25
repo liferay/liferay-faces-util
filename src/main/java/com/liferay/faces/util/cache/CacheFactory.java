@@ -15,8 +15,8 @@
  */
 package com.liferay.faces.util.cache;
 
-import javax.faces.FacesWrapper;
-import javax.faces.context.ExternalContext;
+import jakarta.faces.FacesWrapper;
+import jakarta.faces.context.ExternalContext;
 
 import org.osgi.annotation.versioning.ProviderType;
 

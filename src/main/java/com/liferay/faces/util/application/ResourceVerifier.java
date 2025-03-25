@@ -15,9 +15,9 @@
  */
 package com.liferay.faces.util.application;
 
-import javax.faces.application.ResourceDependency;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
+import jakarta.faces.application.ResourceDependency;
+import jakarta.faces.component.UIComponent;
+import jakarta.faces.context.FacesContext;
 
 import org.osgi.annotation.versioning.ProviderType;
 
@@ -25,10 +25,10 @@ import org.osgi.annotation.versioning.ProviderType;
  * This interface provides a contract for verifying whether or not a resource dependency is already satisfied.
  *
  * <p>
- * Resource dependencies are added to the Faces view automatically when a {@link javax.faces.render.Renderer} is
+ * Resource dependencies are added to the Faces view automatically when a {@link jakarta.faces.render.Renderer} is
  * annotated with @{@link ResourceDependency}. They can also be added manually by calling
- * {@link javax.faces.component.UIViewRoot#addComponentResource(FacesContext, UIComponent)} or
- * {@link javax.faces.component.UIViewRoot#addComponentResource(FacesContext, UIComponent, String)}.
+ * {@link jakarta.faces.component.UIViewRoot#addComponentResource(FacesContext, UIComponent)} or
+ * {@link jakarta.faces.component.UIViewRoot#addComponentResource(FacesContext, UIComponent, String)}.
  * </p>
  *
  * <p>

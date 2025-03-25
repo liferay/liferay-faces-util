@@ -5,7 +5,7 @@
 	version="3.0">
 
 	<context-param>
-		<param-name>javax.faces.ALWAYS_PERFORM_VALIDATION_WHEN_REQUIRED_IS_TRUE</param-name>
+		<param-name>jakarta.faces.ALWAYS_PERFORM_VALIDATION_WHEN_REQUIRED_IS_TRUE</param-name>
 		<param-value>true</param-value>
 	</context-param>
 

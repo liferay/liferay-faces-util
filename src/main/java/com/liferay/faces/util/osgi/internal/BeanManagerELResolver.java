@@ -18,10 +18,10 @@ package com.liferay.faces.util.osgi.internal;
 import java.beans.FeatureDescriptor;
 import java.util.Iterator;
 
-import javax.el.ELContext;
-import javax.el.ELResolver;
-import javax.enterprise.inject.spi.BeanManager;
-import javax.enterprise.inject.spi.CDI;
+import jakarta.el.ELContext;
+import jakarta.el.ELResolver;
+import jakarta.enterprise.inject.spi.BeanManager;
+import jakarta.enterprise.inject.spi.CDI;
 
 /**
  * @author Neil Griffin

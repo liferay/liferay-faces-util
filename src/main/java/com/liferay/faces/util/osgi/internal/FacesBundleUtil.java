@@ -24,9 +24,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-import javax.servlet.ServletContext;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
+import jakarta.servlet.ServletContext;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
@@ -347,7 +347,7 @@ public final class FacesBundleUtil {
 
 		if (symbolicName.startsWith("com.liferay.portal") || symbolicName.startsWith("com.liferay.util")
 			|| symbolicName.equals("com.sun.el.javax.el") || symbolicName.startsWith("jboss-classfilewriter")
-			|| symbolicName.startsWith("javax.servlet") || symbolicName.startsWith("javax.validation")
+			|| symbolicName.startsWith("jakarta.servlet") || symbolicName.startsWith("javax.validation")
 			|| symbolicName.startsWith("org.apache.commons") || symbolicName.startsWith("org.apache.felix")
 			|| symbolicName.startsWith("org.apache.geronimo.specs") || symbolicName.startsWith("org.jboss.logging")
 			|| symbolicName.startsWith("org.jboss.weld") || symbolicName.startsWith("org.jsoup")

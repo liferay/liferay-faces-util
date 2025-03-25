@@ -20,22 +20,22 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.el.ELContext;
-import javax.faces.application.Application;
-import javax.faces.application.FacesMessage;
-import javax.faces.application.ProjectStage;
-import javax.faces.component.UIComponent;
-import javax.faces.component.UIForm;
-import javax.faces.component.UIViewRoot;
-import javax.faces.context.ExceptionHandler;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-import javax.faces.context.PartialViewContext;
-import javax.faces.context.ResponseStream;
-import javax.faces.context.ResponseWriter;
-import javax.faces.event.PhaseId;
-import javax.faces.event.PhaseListener;
-import javax.faces.render.RenderKit;
+import jakarta.el.ELContext;
+import jakarta.faces.application.Application;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.application.ProjectStage;
+import jakarta.faces.component.UIComponent;
+import jakarta.faces.component.UIForm;
+import jakarta.faces.component.UIViewRoot;
+import jakarta.faces.context.ExceptionHandler;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.context.PartialViewContext;
+import jakarta.faces.context.ResponseStream;
+import jakarta.faces.context.ResponseWriter;
+import jakarta.faces.event.PhaseId;
+import jakarta.faces.event.PhaseListener;
+import jakarta.faces.render.RenderKit;
 
 import org.osgi.annotation.versioning.ProviderType;
 
@@ -57,7 +57,7 @@ public abstract class ExtFacesContext extends FacesContext implements FacesConte
 	private static final Logger logger = LoggerFactory.getLogger(ExtFacesContext.class);
 
 	/**
-	 * Returns the implementation {@link javax.faces.bean.ApplicationScoped} instance.
+	 * Returns the implementation {@link jakarta.faces.bean.ApplicationScoped} instance.
 	 */
 	public static ExtFacesContext getInstance() {
 
@@ -72,7 +72,7 @@ public abstract class ExtFacesContext extends FacesContext implements FacesConte
 	}
 
 	/**
-	 * Sets the implementation {@link javax.faces.bean.ApplicationScoped} instance.
+	 * Sets the implementation {@link jakarta.faces.bean.ApplicationScoped} instance.
 	 */
 	public static void setInstance(ExtFacesContext extFacesContext) {
 

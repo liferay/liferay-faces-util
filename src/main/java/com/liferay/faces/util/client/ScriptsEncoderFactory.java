@@ -15,9 +15,9 @@
  */
 package com.liferay.faces.util.client;
 
-import javax.faces.FacesWrapper;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
+import jakarta.faces.FacesWrapper;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
 
 import org.osgi.annotation.versioning.ProviderType;
 
@@ -36,7 +36,7 @@ public abstract class ScriptsEncoderFactory implements FacesWrapper<ScriptsEncod
 	 *             Returns a stateless, thread-safe singleton instance of {@link ScriptsEncoder} from the
 	 *             {@link ScriptsEncoderFactory} found by the {@link FactoryExtensionFinder}. ScriptsEncoder is a
 	 *             stateless, thread-safe (and potentially singleton) because it is designed to be used by a
-	 *             {@link javax.faces.render.Renderer}, which is stateless and thread-safe singleton.
+	 *             {@link jakarta.faces.render.Renderer}, which is stateless and thread-safe singleton.
 	 *             </p>
 	 */
 	@Deprecated
@@ -48,7 +48,7 @@ public abstract class ScriptsEncoderFactory implements FacesWrapper<ScriptsEncod
 	 * Returns a stateless, thread-safe singleton instance of {@link ScriptsEncoder} from the
 	 * {@link ScriptsEncoderFactory} found by the {@link FactoryExtensionFinder}. ScriptsEncoder is a stateless,
 	 * thread-safe (and potentially singleton) because it is designed to be used by a
-	 * {@link javax.faces.render.Renderer}, which is stateless and thread-safe singleton.
+	 * {@link jakarta.faces.render.Renderer}, which is stateless and thread-safe singleton.
 	 *
 	 * @param externalContext The external context associated with the current faces context. It is needed in order for
 	 *                        the {@link FactoryExtensionFinder} to be able to find the factory.
@@ -67,7 +67,7 @@ public abstract class ScriptsEncoderFactory implements FacesWrapper<ScriptsEncod
 
 	/**
 	 * Returns a stateless, thread-safe singleton instance of {@link ScriptsEncoder}. ScriptsEncoder is a stateless,
-	 * thread-safe singleton because it is designed to be used by a {@link javax.faces.render.Renderer}, which is
+	 * thread-safe singleton because it is designed to be used by a {@link jakarta.faces.render.Renderer}, which is
 	 * stateless and thread-safe singleton.
 	 */
 	public abstract ScriptsEncoder getScriptsEncoder();

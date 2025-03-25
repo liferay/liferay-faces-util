@@ -15,9 +15,9 @@
  */
 package com.liferay.faces.util.application;
 
-import javax.faces.FacesWrapper;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
+import jakarta.faces.FacesWrapper;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
 
 import org.osgi.annotation.versioning.ProviderType;
 
@@ -42,7 +42,7 @@ public abstract class ResourceVerifierFactory implements FacesWrapper<ResourceVe
 	 *             Returns a stateless, thread-safe singleton instance of {@link ResourceVerifier} from the
 	 *             {@link ResourceVerifierFactory} found by the {@link FactoryExtensionFinder}. ResourceVerifier is a
 	 *             stateless, thread-safe singleton because it is designed to be used by a
-	 *             {@link javax.faces.render.Renderer}, which is a stateless, thread-safe singleton.
+	 *             {@link jakarta.faces.render.Renderer}, which is a stateless, thread-safe singleton.
 	 *             </p>
 	 */
 	@Deprecated
@@ -53,7 +53,7 @@ public abstract class ResourceVerifierFactory implements FacesWrapper<ResourceVe
 	/**
 	 * Returns a stateless, thread-safe singleton instance of {@link ResourceVerifier} from the
 	 * {@link ResourceVerifierFactory} found by the {@link FactoryExtensionFinder}. ResourceVerifier is a stateless,
-	 * thread-safe singleton because it is designed to be used by a {@link javax.faces.render.Renderer}, which is a
+	 * thread-safe singleton because it is designed to be used by a {@link jakarta.faces.render.Renderer}, which is a
 	 * stateless, thread-safe singleton.
 	 *
 	 * @param externalContext The external context associated with the current faces context. It is needed in order for
@@ -74,7 +74,7 @@ public abstract class ResourceVerifierFactory implements FacesWrapper<ResourceVe
 	/**
 	 * Returns a stateless, thread-safe singleton instance of {@link ResourceVerifier}. The returned ResourceVerifier is
 	 * the first member of a delegation chain. ResourceVerifier is a stateless, thread-safe (and potentially singleton)
-	 * because it is designed to be used by a {@link javax.faces.render.Renderer}, which is a stateless, thread-safe
+	 * because it is designed to be used by a {@link jakarta.faces.render.Renderer}, which is a stateless, thread-safe
 	 * singleton.
 	 */
 	public abstract ResourceVerifier getResourceVerifier();
