@@ -250,14 +250,11 @@
 								com.liferay.faces.util.osgi.mojarra.spi.internal,\
 								com.liferay.faces.util.product.internal,\
 								com.liferay.faces.util.render.internal
-							# jakarta.el is automatically imported with the following versions:
-							# jakarta.el;version="[2.2.0,3.0.0)", but versions 3.0.0+ are also valid.
 							Import-Package: \
 								!com.liferay.faces.util,\
 								!com.liferay.faces.util.*,\
-								com.sun.faces.util;version="[2.3.0,2.4.0)",\
-								jakarta.el;version="[2.2.0,4.0.0)",\
-								org.apache.commons.fileupload;version="[1.3.0,2)";resolution:=optional,\
+								com.sun.faces.util;version="[4.0.0,4.1.0)",\
+								jakarta.el;version="[5.0.0,6.0.0)",\
 								org.apache.log4j;version="[1.2.0,3)",\
 								org.jboss.weld.module.web.el,\
 								*
