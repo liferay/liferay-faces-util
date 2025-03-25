@@ -162,10 +162,6 @@
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>${surefire.version}</version>
 					<configuration>
-						<systemProperties>
-							<jakarta.portlet_portlet-api_jar>${jakarta.portlet:portlet-api:jar}</jakarta.portlet_portlet-api_jar>
-							<org.apache.portals_portlet-api_2.1.0_spec_jar>${org.apache.portals:portlet-api_2.1.0_spec:jar}</org.apache.portals_portlet-api_2.1.0_spec_jar>
-						</systemProperties>
 						<useFile>false</useFile>
 					</configuration>
 				</plugin>
@@ -526,12 +522,6 @@
 			<groupId>com.liferay.jakarta.portlet</groupId>
 			<artifactId>jakarta.portlet-api</artifactId>
 			<version>4.0.0</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.portals</groupId>
-			<artifactId>portlet-api_2.1.0_spec</artifactId>
-			<version>1.0</version>
 			<scope>test</scope>
 		</dependency>
 		<!-- END Test dependencies -->
