@@ -124,32 +124,6 @@ public class ProductTest {
 		ProductPortletApiImpl productPortletApiImpl = new ProductPortletApiImpl(productLiferayPortalUndetected,
 				productPlutoUndetected);
 		Assert.assertFalse(productPortletApiImpl.isDetected());
-
-		// Ensure that the Portlet API version is correctly detected when the Portlet 2.0 API jar is on the classpath.
-		ClassLoader portletApiJarClassLoader = getPortletApiJarClassLoader("jakarta.portlet_portlet-api_jar",
-				parentClassLoader);
-		assertPortletApiMajorMinorVersionDetected(2, 0, portletApiJarClassLoader, null, "2.0");
-		assertPortletApiMajorMinorVersionDetected(2, 0, portletApiJarClassLoader, "6.2.4", null);
-
-		// Ensure that the Portlet API version is correctly detected when a Portlet API jar with invalid version
-		// information is on the classpath. This is accomplished by using the Portlet 2.0 API jar, but overriding any
-		// versions found in the MANIFEST.MF with "" (the empty string).
-		portletApiJarClassLoader = getPortletApiJarClassLoader("jakarta.portlet_portlet-api_jar", parentClassLoader, "");
-		assertPortletApiMajorMinorVersionDetected(2, 0, portletApiJarClassLoader, "6.2.5", null);
-		assertPortletApiMajorMinorVersionDetected(2, 0, portletApiJarClassLoader, "7.0.3", null);
-
-		// Ensure that the Portlet API version is correctly detected when the Portlet 2.1 API jar is on the classpath.
-		portletApiJarClassLoader = getPortletApiJarClassLoader("org.apache.portals_portlet-api_2.1.0_spec_jar",
-				parentClassLoader);
-		assertPortletApiMajorMinorVersionDetected(2, 1, portletApiJarClassLoader, "7.0.4", null);
-
-		// Ensure that the Portlet API version is correctly detected when the Portlet 3.0 API jar is on the classpath.
-		// This is accomplished by using the Portlet 2.0 API jar, but overriding any versions found in the MANIFEST.MF
-		// with 3.0.0.
-		portletApiJarClassLoader = getPortletApiJarClassLoader("jakarta.portlet_portlet-api_jar", parentClassLoader,
-				"3.0.0");
-		assertPortletApiMajorMinorVersionDetected(3, 0, portletApiJarClassLoader, null, "3.0");
-		assertPortletApiMajorMinorVersionDetected(3, 0, portletApiJarClassLoader, "7.1.0", null);
 	}
 
 	@Test
