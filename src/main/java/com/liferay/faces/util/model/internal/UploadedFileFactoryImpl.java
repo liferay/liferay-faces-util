@@ -19,13 +19,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.fileupload.FileUploadBase;
-import org.apache.commons.fileupload.FileUploadBase.FileSizeLimitExceededException;
-import org.apache.commons.fileupload.FileUploadBase.FileUploadIOException;
-import org.apache.commons.fileupload.FileUploadBase.SizeLimitExceededException;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.InvalidFileNameException;
-
 import com.liferay.faces.util.model.UploadedFile;
 import com.liferay.faces.util.model.UploadedFileFactory;
 
@@ -39,17 +32,7 @@ public class UploadedFileFactoryImpl extends UploadedFileFactory implements Seri
 
 	@Override
 	public UploadedFile getUploadedFile(Exception e) {
-
-		UploadedFile uploadedFile;
-
-		if (e.getClass().getName().startsWith("org.apache.commons.fileupload.")) {
-			uploadedFile = CommonsFileUploadErrorUtil.getUploadedFile(e);
-		}
-		else {
-			uploadedFile = new UploadedFileErrorImpl(e);
-		}
-
-		return uploadedFile;
+		return new UploadedFileErrorImpl(e);
 	}
 
 	@Override
@@ -72,53 +55,4 @@ public class UploadedFileFactoryImpl extends UploadedFileFactory implements Seri
 		return null;
 	}
 
-	private static final class CommonsFileUploadErrorUtil {
-
-		private CommonsFileUploadErrorUtil() {
-			throw new AssertionError();
-		}
-
-		private static UploadedFile getUploadedFile(Throwable t) {
-
-			FileUploadException fileUploadException = null;
-
-			if ((t instanceof FileUploadBase.IOFileUploadException) || (t instanceof FileUploadIOException)) {
-
-				Throwable causeThrowable = t.getCause();
-
-				if (causeThrowable != null) {
-					t = causeThrowable;
-				}
-
-				if (t instanceof FileUploadException) {
-					fileUploadException = (FileUploadException) t;
-				}
-			}
-			else if (t instanceof FileUploadException) {
-				fileUploadException = (FileUploadException) t;
-			}
-
-			UploadedFile uploadedFile;
-
-			if (fileUploadException instanceof SizeLimitExceededException) {
-				uploadedFile =
-					new UploadedFileErrorImpl(fileUploadException, UploadedFile.Status.REQUEST_SIZE_LIMIT_EXCEEDED);
-			}
-			else if (fileUploadException instanceof FileSizeLimitExceededException) {
-				uploadedFile =
-					new UploadedFileErrorImpl(fileUploadException, UploadedFile.Status.FILE_SIZE_LIMIT_EXCEEDED);
-			}
-			else if (t instanceof InvalidFileNameException) {
-				uploadedFile = new UploadedFileErrorImpl(t, UploadedFile.Status.FILE_INVALID_NAME_PATTERN);
-			}
-			else if (fileUploadException != null) {
-				uploadedFile = new UploadedFileErrorImpl(fileUploadException);
-			}
-			else {
-				uploadedFile = new UploadedFileErrorImpl(t);
-			}
-
-			return uploadedFile;
-		}
-	}
 }

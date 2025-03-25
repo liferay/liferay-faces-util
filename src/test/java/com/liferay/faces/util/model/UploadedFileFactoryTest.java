@@ -21,10 +21,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 
-import org.apache.commons.fileupload.FileUploadBase;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.InvalidFileNameException;
-
 import org.junit.Test;
 
 import com.liferay.faces.util.model.internal.UploadedFileFactoryImpl;
@@ -49,16 +45,6 @@ public final class UploadedFileFactoryTest {
 		UploadedFile uploadedFile = uploadedFileFactory.getUploadedFile(e);
 		Assert.assertEquals(expectedStatus, uploadedFile.getStatus());
 		Assert.assertEquals(expectedMessage, uploadedFile.getMessage());
-
-		if ((e instanceof FileUploadException) && !(e instanceof FileUploadBase.IOFileUploadException)) {
-
-			FileUploadException fileUploadException = (FileUploadException) e;
-			FileUploadBase.FileUploadIOException fileUploadIOException = new FileUploadBase.FileUploadIOException(
-					fileUploadException);
-			uploadedFile = uploadedFileFactory.getUploadedFile(fileUploadIOException);
-			Assert.assertEquals(expectedStatus, uploadedFile.getStatus());
-			Assert.assertEquals(expectedMessage, uploadedFile.getMessage());
-		}
 	}
 
 	private static boolean isCommonsClassNotFound(Throwable t) {
@@ -100,20 +86,6 @@ public final class UploadedFileFactoryTest {
 	public void testGetUploadedFileCommonsExceptionStatusTest() {
 
 		String expectedMessage = "test";
-		assertCorrectUploadedFileStatusAndMessageObtainedFromException(UploadedFile.Status.FILE_SIZE_LIMIT_EXCEEDED,
-			new FileUploadBase.FileSizeLimitExceededException(expectedMessage, 0, 1));
-		assertCorrectUploadedFileStatusAndMessageObtainedFromException(UploadedFile.Status.REQUEST_SIZE_LIMIT_EXCEEDED,
-			new FileUploadBase.SizeLimitExceededException(expectedMessage, 0, 1));
-		assertCorrectUploadedFileStatusAndMessageObtainedFromException(UploadedFile.Status.FILE_INVALID_NAME_PATTERN,
-			new InvalidFileNameException("\\\\", "test"));
-		assertCorrectUploadedFileStatusAndMessageObtainedFromException(UploadedFile.Status.ERROR, expectedMessage,
-			new FileUploadBase.IOFileUploadException("", new IOException(expectedMessage)));
-		assertCorrectUploadedFileStatusAndMessageObtainedFromException(UploadedFile.Status.ERROR,
-			new FileUploadBase.InvalidContentTypeException(expectedMessage));
-		assertCorrectUploadedFileStatusAndMessageObtainedFromException(UploadedFile.Status.ERROR,
-			new FileUploadBase.UnknownSizeException(expectedMessage));
-		assertCorrectUploadedFileStatusAndMessageObtainedFromException(UploadedFile.Status.ERROR,
-			new FileUploadException(expectedMessage));
 		assertCorrectUploadedFileStatusAndMessageObtainedFromException(UploadedFile.Status.ERROR,
 			new RuntimeException(expectedMessage));
 	}

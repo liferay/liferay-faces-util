@@ -431,20 +431,6 @@
 	</profiles>
 
 	<dependencies>
-		<!-- BEGIN: Only required for file upload -->
-		<dependency>
-			<groupId>commons-fileupload</groupId>
-			<artifactId>commons-fileupload</artifactId>
-			<version>1.5</version>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>2.9.0</version>
-			<optional>true</optional>
-		</dependency>
-		<!-- END: Only required for file upload -->
 		<dependency>
 			<groupId>jakarta.el</groupId>
 			<artifactId>jakarta.el-api</artifactId>
