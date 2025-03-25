@@ -37,7 +37,7 @@ import com.sun.faces.RIConstants;
 
 /**
  * This class provides the ability for Mojarra to integrate with the OSGi CDI Integration feature of Liferay Portal. It
- * does this by by adding an {@link javax.el.ELResolver} that can resolve CDI beans found in JSP EL Expressions, and
+ * does this by adding an {@link jakarta.el.ELResolver} that can resolve CDI beans found in JSP EL Expressions, and
  * also enables the Mojarra {@link com.sun.faces.util.getCdiBeanManager(FacesContext)} method to find the current CDI
  * bean manager at startup.
  *

@@ -150,7 +150,7 @@ public final class UploadedFileFactoryTest {
 				throw new CommonsClassNotFoundException(className);
 			}
 
-			if (className.startsWith("java.") || className.startsWith("javax.")) {
+			if (className.startsWith("java.") || className.startsWith("jakarta.")) {
 				return super.loadClass(className);
 			}
 			else {
