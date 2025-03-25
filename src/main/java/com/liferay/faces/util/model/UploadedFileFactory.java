@@ -33,22 +33,6 @@ import com.liferay.faces.util.factory.FactoryExtensionFinder;
 public abstract class UploadedFileFactory implements FacesWrapper<UploadedFileFactory> {
 
 	/**
-	 * @deprecated Call {@link #getUploadedFileInstance(ExternalContext, Exception)} instead.
-	 *
-	 *             <p>
-	 *             Returns a new instance of {@link UploadedFile} from the {@link UploadedFileFactory} found by the
-	 *             {@link FactoryExtensionFinder}. The returned instance is guaranteed to be
-	 *             {@link java.io.Serializable} but not guaranteed to be thread-safe.
-	 *             </p>
-	 *
-	 * @param e The exception associated with the failed file upload.
-	 */
-	@Deprecated
-	public static UploadedFile getUploadedFileInstance(Exception e) {
-		return getUploadedFileInstance(FacesContext.getCurrentInstance().getExternalContext(), e);
-	}
-
-	/**
 	 * Returns a new instance of {@link UploadedFile} from the {@link UploadedFileFactory} found by the
 	 * {@link FactoryExtensionFinder}. The returned instance is guaranteed to be {@link java.io.Serializable} but not
 	 * guaranteed to be thread-safe.
@@ -88,36 +72,6 @@ public abstract class UploadedFileFactory implements FacesWrapper<UploadedFileFa
 			(UploadedFileFactory) FactoryExtensionFinder.getFactory(externalContext, UploadedFileFactory.class);
 
 		return uploadedFileFactory.getUploadedFile(e, uploadedFileStatus);
-	}
-
-	/**
-	 * @deprecated Call
-	 *             {@link #getUploadedFileInstance(ExternalContext, String, Map, String, String, Map, String, String, String, long, UploadedFile.Status)}
-	 *             instead.
-	 *
-	 *             <p>
-	 *             Returns a new instance of {@link UploadedFile} from the {@link UploadedFileFactory} found by the
-	 *             {@link FactoryExtensionFinder}. The returned instance is guaranteed to be
-	 *             {@link java.io.Serializable} but not guaranteed to be thread-safe.
-	 *             </p>
-	 *
-	 * @param absolutePath The absolute path of the uploaded file.
-	 * @param attributes   The map of attributes associated with the uploaded file.
-	 * @param charSet      The character set of the uploaded file.
-	 * @param contentType  The content type of the uploaded file.
-	 * @param headers      The map of headers associated with the uploaded file.
-	 * @param id           The unique identifier of the uploaded file.
-	 * @param message      The message associated with the file upload.
-	 * @param name         The name of the uploaded file.
-	 * @param size         The size (in bytes) of the uploaded file.
-	 * @param status       The {@link UploadedFile.Status} of the uploaded file.
-	 */
-	@Deprecated
-	public static UploadedFile getUploadedFileInstance(String absolutePath, Map<String, Object> attributes,
-		String charSet, String contentType, Map<String, List<String>> headers, String id, String message, String name,
-		long size, UploadedFile.Status status) {
-		return getUploadedFileInstance(FacesContext.getCurrentInstance().getExternalContext(), absolutePath, attributes,
-			charSet, contentType, headers, id, message, name, size, status);
 	}
 
 	/**
