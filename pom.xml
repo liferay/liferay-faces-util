@@ -335,36 +335,6 @@
 
 	<profiles>
 		<profile>
-			<id>compileWithJDK7Linux</id>
-			<activation>
-				<file>
-					<exists>${env.HOME}/Tools/jdk1.7.0_80/bin/javac</exists>
-				</file>
-				<os>
-					<family>unix</family>
-					<name>Linux</name>
-				</os>
-			</activation>
-			<properties>
-				<jdk7.javac.executable>${env.HOME}/Tools/jdk1.7.0_80/bin/javac</jdk7.javac.executable>
-				<use.jdk7.for.compile>true</use.jdk7.for.compile>
-			</properties>
-		</profile>
-		<profile>
-			<id>compileWithJDK7Mac</id>
-			<activation>
-				<file>
-					<exists>${use.jdk7.for.compile}</exists>
-				</file>
-				<os>
-					<family>mac</family>
-				</os>
-			</activation>
-			<properties>
-				<use.jdk7.for.compile>true</use.jdk7.for.compile>
-			</properties>
-		</profile>
-		<profile>
 			<id>release</id>
 			<build>
 				<plugins>
