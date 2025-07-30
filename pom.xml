@@ -256,7 +256,8 @@
 								com.sun.faces.util;version="[2.3.0,2.4.0)",\
 								javax.el;version="[2.2.0,4.0.0)",\
 								org.apache.commons.fileupload;version="[1.3.0,2)";resolution:=optional,\
-								org.apache.log4j;version="[1.2.0,3)",\
+								org.apache.log4j;version="[1.2,2)";resolution:=optional,\
+								org.apache.logging.log4j;version="[2.17,3)",\
 								org.jboss.weld.module.web.el,\
 								*
 							# Allow Util to load alternative FactoryExtensionFinder, LoggerFactory, and ProductFactory
