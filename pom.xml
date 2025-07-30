@@ -250,7 +250,8 @@
 								!com.liferay.faces.util.*,\
 								com.sun.faces.util;version="[4.0.0,4.1.0)",\
 								jakarta.el;version="[5.0.0,6.0.0)",\
-								org.apache.log4j;version="[1.2.0,3)",\
+								org.apache.log4j;version="[1.2,2)";resolution:=optional,\
+								org.apache.logging.log4j;version="[2.17,3)",\
 								org.jboss.weld.module.web.el,\
 								*
 							# Allow Util to load alternative FactoryExtensionFinder, LoggerFactory, and ProductFactory
