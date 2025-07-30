@@ -246,7 +246,8 @@
 								com.liferay.faces.util.osgi.internal,\
 								com.liferay.faces.util.osgi.mojarra.spi.internal,\
 								com.liferay.faces.util.product.internal,\
-								com.liferay.faces.util.render.internal
+								com.liferay.faces.util.render.internal,\
+								com.liferay.faces.util.servlet.internal
 							# javax.el is automatically imported with the following versions:
 							# javax.el;version="[2.2.0,3.0.0)", but versions 3.0.0+ are also valid.
 							Import-Package: \
