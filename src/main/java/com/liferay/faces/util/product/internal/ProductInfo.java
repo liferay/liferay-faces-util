@@ -113,7 +113,7 @@ public class ProductInfo {
 	}
 
 	public static ProductInfo newInstance(String expectedTitle, String className) {
-		return newInstance(expectedTitle, className, null);
+		return newInstance(expectedTitle, className, (String) null);
 	}
 
 	public static ProductInfo newInstance(String expectedTitle, Class<?> clazz) {
@@ -124,8 +124,12 @@ public class ProductInfo {
 		return newInstance(expectedTitle, className, pomPropertiesFile, null, true);
 	}
 
+	public static ProductInfo newInstance(String expectedTitle, String className, String[] pomPropertiesFiles) {
+		return newInstance(expectedTitle, className, pomPropertiesFiles, null, true);
+	}
+
 	public static ProductInfo newInstance(String expectedTitle, String className, boolean warnOnFail) {
-		return newInstance(expectedTitle, className, null, null, warnOnFail);
+		return newInstance(expectedTitle, className, (String) null, null, warnOnFail);
 	}
 
 	private static int getSubVersion(String[] versionParts, int index) {
@@ -141,6 +145,11 @@ public class ProductInfo {
 
 	private static ProductInfo newInstance(String expectedTitle, String className, String pomPropertiesFile,
 		Integer buildId, boolean warnOnFail) {
+		return newInstance(expectedTitle, className, new String[] { pomPropertiesFile }, buildId, warnOnFail);
+	}
+
+	private static ProductInfo newInstance(String expectedTitle, String className, String[] pomPropertiesFiles,
+		Integer buildId, boolean warnOnFail) {
 
 		ProductInfo productInfo = null;
 		boolean detected = false;
@@ -150,7 +159,13 @@ public class ProductInfo {
 
 			Class<?> clazz = TCCLUtil.loadClassFromContext(ProductInfo.class, className);
 			detected = true;
-			productInfo = newInstance(detected, title, clazz, pomPropertiesFile, buildId, warnOnFail);
+
+			for (String pomPropertiesFile : pomPropertiesFiles) {
+				productInfo = newInstance(detected, title, clazz, pomPropertiesFile, buildId, warnOnFail);
+				if (productInfo.majorVersion != 0 || productInfo.minorVersion != 0 || productInfo.patchVersion != 0) {
+					break;
+				}
+			}
 		}
 		catch (Exception e) {
 			// Ignore -- product likely not present.

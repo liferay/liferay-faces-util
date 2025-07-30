@@ -21,7 +21,9 @@ package com.liferay.faces.util.product.internal;
 public class ProductCDIApiImpl extends ProductBase {
 
 	public ProductCDIApiImpl() {
-		super(ProductInfo.newInstance("CDI API", "javax.enterprise.context.SessionScoped",
-			"META-INF/maven/javax.enterprise/cdi-api/pom.properties"));
+		super(ProductInfo
+			.newInstance("CDI API", "javax.enterprise.context.SessionScoped",
+				new String[] { "META-INF/maven/com.liferay/jakarta.enterprise.cdi/pom.properties",
+					"META-INF/maven/javax.enterprise/cdi-api/pom.properties" }));
 	}
 }
