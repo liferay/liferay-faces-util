@@ -16,6 +16,8 @@
 package com.liferay.faces.util.osgi.internal;
 
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
 
 import jakarta.el.ELContextListener;
 import jakarta.el.ExpressionFactory;
@@ -47,6 +49,10 @@ public class ApplicationOSGiCDIImpl extends ApplicationWrapper {
 
 	// Private Constants
 	private static String WELD_EL_CONTEXT_LISTENER = "org.jboss.weld.module.web.el.WeldELContextListener";
+	private static final int MAX_ATTEMPTS = 20;
+	private static final long TIMEOUT_SECONDS = 5;
+	private static final long BASE_DELAY_MS = 50;
+	private static final long MAX_DELAY_MS = 750;
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(ApplicationOSGiCDIImpl.class);
@@ -62,7 +68,31 @@ public class ApplicationOSGiCDIImpl extends ApplicationWrapper {
 
 		if (currentCDI != null) {
 
-			BeanManager beanManager = currentCDI.getBeanManager();
+			// Attempts to obtain a CDI BeanManager up to MAX_ATTEMPTS with exponential backoff and staggered delay,
+			// honoring an overall time budget (approximately TIMEOUT_SECONDS seconds).
+			BeanManager beanManager = null;
+
+			// Overall time budget (approximately TIMEOUT_SECONDS seconds)
+			long timeBudgetNanos = System.nanoTime() + TimeUnit.SECONDS.toNanos(TIMEOUT_SECONDS);
+
+			for (int attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+				try {
+					logger.debug("Attempting to obtain CDI BeanManager, attempt #{}", attempt);
+					beanManager = currentCDI.getBeanManager();
+					break;
+				} catch (IllegalStateException illegalStateException) {
+					long nowNanos = System.nanoTime();
+
+					// Give up if final attempt or time budget exhausted
+					if (attempt == MAX_ATTEMPTS || nowNanos >= timeBudgetNanos) {
+						throw illegalStateException;
+					}
+
+					// FACES-3741: Race condition for CDI.current().getBeanManager() when deploying multiple JSF bean
+					// portlets simultaneously.
+					sleepHack(attempt, timeBudgetNanos, nowNanos);
+				}
+			}
 
 			// If the bean manager is not present, then that likely means we're running in Liferay and relying on
 			// CDI+OSGi integration. In this case, create a temporary "startup" bean manager that will satisfy the
@@ -76,6 +106,31 @@ public class ApplicationOSGiCDIImpl extends ApplicationWrapper {
 					applicationMap.put(RIConstants.CDI_BEAN_MANAGER, new BeanManagerStartupImpl(
 						new BeanManagerELResolver(), (applicationMap.get(FacesConfig.class.getName()) != null)));
 				}
+			}
+		}
+	}
+
+	private static void sleepHack(int attempt, long deadlineNanos, long nowNanos) {
+
+		// Exponential backoff with an added staggered delay: 50, 100, 200, ... ms (capped at MAX_DELAY_MS)
+		// in order to accommodate for different CPU execution speeds
+		long doublingFactor = (long) Math.pow(2, attempt - 1);
+		long baseDelayMs = Math.min(MAX_DELAY_MS, BASE_DELAY_MS * doublingFactor);
+		long staggeredDelayMs = ThreadLocalRandom.current().nextLong(baseDelayMs / 2 + 1);
+		long plannedMs = baseDelayMs + staggeredDelayMs;
+
+		// Do not exceed remaining time budget
+		long remainingNanos = deadlineNanos - nowNanos;
+		long sleepNanos = Math.min(TimeUnit.MILLISECONDS.toNanos(plannedMs), remainingNanos);
+
+		if (sleepNanos > 0) {
+			long milliSeconds = TimeUnit.NANOSECONDS.toMillis(sleepNanos);
+			int nanoSeconds = (int) (sleepNanos - TimeUnit.MILLISECONDS.toNanos(milliSeconds));
+			try {
+				logger.debug("Sleeping milliSeconds={} nanoSeconds={}", milliSeconds, nanoSeconds);
+				Thread.sleep(milliSeconds, nanoSeconds);
+			} catch (InterruptedException interruptedException) {
+				// Ignore
 			}
 		}
 	}
