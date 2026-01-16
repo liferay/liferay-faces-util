@@ -50,8 +50,8 @@ public class WebConfigScannerTest {
 		SAXParser saxParser = saxParserFactory.newSAXParser();
 
 		// Scan all the web.xml and web-fragment.xml descriptors in the classpath.
-		final ClassLoader CLASS_LOADER = new ClassLoaderGetResourceFromFolderImpl(Thread.currentThread()
-				.getContextClassLoader(), "web-config-scanner-test", "web-config-scanner-test/0",
+		final ClassLoader CLASS_LOADER = new ClassLoaderGetResourceFromFolderImpl(
+			WebConfigScannerTest.class.getClassLoader(), "web-config-scanner-test", "web-config-scanner-test/0",
 				"web-config-scanner-test/1");
 		WebConfigScanner webConfigScanner = new WebConfigScannerImpl(CLASS_LOADER,
 				new ResourceReaderTestImpl(CLASS_LOADER), saxParser, false);
