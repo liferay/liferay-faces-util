@@ -74,14 +74,12 @@
 	</scm>
 
 	<properties>
-		<bnd.version>4.1.0</bnd.version>
+		<bnd.version>5.3.0</bnd.version>
 		<faces.api.version>${faces.spec.version}</faces.api.version>
-		<faces.spec.version>2.3</faces.spec.version>
+		<faces.spec.version>2.3.21-JAKARTA</faces.spec.version>
 		<full.version>${project.version} (${timestamp} AD)</full.version>
-		<jdk7.javac.executable>/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/bin/javac</jdk7.javac.executable>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<surefire.version>2.12</surefire.version>
-		<use.jdk7.for.compile>false</use.jdk7.for.compile>
 	</properties>
 
 	<build>
@@ -92,13 +90,9 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.1</version>
 					<configuration>
-						<compilerVersion>1.6</compilerVersion>
 						<encoding>UTF-8</encoding>
-						<executable>${jdk7.javac.executable}</executable>
-						<forceJavacCompilerUse>${use.jdk7.for.compile}</forceJavacCompilerUse>
-						<fork>${use.jdk7.for.compile}</fork>
-						<source>1.6</source>
-						<target>1.6</target>
+						<source>11</source>
+						<target>11</target>
 						<verbose>true</verbose>
 					</configuration>
 				</plugin>
@@ -249,16 +243,15 @@
 								com.liferay.faces.util.osgi.internal,\
 								com.liferay.faces.util.osgi.mojarra.spi.internal,\
 								com.liferay.faces.util.product.internal,\
-								com.liferay.faces.util.render.internal
-							# jakarta.el is automatically imported with the following versions:
-							# jakarta.el;version="[2.2.0,3.0.0)", but versions 3.0.0+ are also valid.
+								com.liferay.faces.util.render.internal,\
+								com.liferay.faces.util.servlet.internal
 							Import-Package: \
 								!com.liferay.faces.util,\
 								!com.liferay.faces.util.*,\
-								com.sun.faces.util;version="[2.3.0,2.4.0)",\
-								jakarta.el;version="[2.2.0,4.0.0)",\
-								org.apache.commons.fileupload;version="[1.3.0,2)";resolution:=optional,\
-								org.apache.log4j;version="[1.2.0,3)",\
+								com.sun.faces.util;version="[2.0.0,4.0.0)",\
+								jakarta.el;version="[5.0.0,6.0.0)",\
+								org.apache.log4j;version="[1.2,2)";resolution:=optional,\
+								org.apache.logging.log4j;version="[2.17,3)",\
 								org.jboss.weld.module.web.el,\
 								*
 							# Allow Util to load alternative FactoryExtensionFinder, LoggerFactory, and ProductFactory
@@ -286,10 +279,6 @@
 									uses:="com.sun.faces.spi",\
 								osgi.serviceloader;osgi.serviceloader=com.sun.faces.spi.FacesConfigResourceProvider;\
 									uses:="com.sun.faces.spi",\
-								osgi.serviceloader;osgi.serviceloader=jakarta.enterprise.inject.spi.Extension;\
-									osgi.cdi.extension="liferay.jsf";\
-									register:="com.liferay.faces.util.osgi.FacesCDIThinWabExtension";\
-									uses:="com.sun.faces,jakarta.enterprise.event,jakarta.enterprise.inject.spi,jakarta.inject,jakarta.servlet",\
 								osgi.cdi.extension;osgi.cdi.extension="liferay.jsf";version:Version="1.0.0"
 						]]>
 					</bnd>
@@ -334,36 +323,6 @@
 	</build>
 
 	<profiles>
-		<profile>
-			<id>compileWithJDK7Linux</id>
-			<activation>
-				<file>
-					<exists>${env.HOME}/Tools/jdk1.7.0_80/bin/javac</exists>
-				</file>
-				<os>
-					<family>unix</family>
-					<name>Linux</name>
-				</os>
-			</activation>
-			<properties>
-				<jdk7.javac.executable>${env.HOME}/Tools/jdk1.7.0_80/bin/javac</jdk7.javac.executable>
-				<use.jdk7.for.compile>true</use.jdk7.for.compile>
-			</properties>
-		</profile>
-		<profile>
-			<id>compileWithJDK7Mac</id>
-			<activation>
-				<file>
-					<exists>${use.jdk7.for.compile}</exists>
-				</file>
-				<os>
-					<family>mac</family>
-				</os>
-			</activation>
-			<properties>
-				<use.jdk7.for.compile>true</use.jdk7.for.compile>
-			</properties>
-		</profile>
 		<profile>
 			<id>release</id>
 			<build>
@@ -436,13 +395,13 @@
 		<dependency>
 			<groupId>jakarta.el</groupId>
 			<artifactId>jakarta.el-api</artifactId>
-			<version>2.2.1</version>
+			<version>5.0.1</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>jakarta.enterprise</groupId>
-			<artifactId>cdi-api</artifactId>
-			<version>2.0</version>
+			<artifactId>jakarta.enterprise.cdi-api</artifactId>
+			<version>4.0.1</version>
 			<scope>provided</scope>
 			<optional>true</optional>
 		</dependency>
@@ -455,13 +414,13 @@
 		<dependency>
 			<groupId>jakarta.servlet</groupId>
 			<artifactId>jakarta.servlet-api</artifactId>
-			<version>3.0.1</version>
+			<version>6.0.0</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>jakarta.servlet.jsp</groupId>
 			<artifactId>jakarta.servlet.jsp-api</artifactId>
-			<version>2.2.1</version>
+			<version>3.1.1</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -481,7 +440,7 @@
 		<dependency>
 			<groupId>org.glassfish</groupId>
 			<artifactId>jakarta.faces</artifactId>
-			<version>2.3.21</version>
+			<version>2.3.21.LIFERAY-PATCHED-1-JAKARTA</version>
 			<scope>provided</scope>
 			<optional>true</optional>
 		</dependency>
@@ -525,9 +484,9 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>jakarta.portlet</groupId>
-			<artifactId>portlet-api</artifactId>
-			<version>2.0</version>
+			<groupId>com.liferay.jakarta.portlet</groupId>
+			<artifactId>com.liferay.jakarta.portlet-api</artifactId>
+			<version>4.0.0</version>
 			<scope>test</scope>
 		</dependency>
 		<!-- END Test dependencies -->
