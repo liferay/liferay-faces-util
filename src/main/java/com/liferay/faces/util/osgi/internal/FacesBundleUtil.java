@@ -346,7 +346,7 @@ public final class FacesBundleUtil {
 	private static boolean isIgnoredBundle(String symbolicName) {
 
 		if (symbolicName.startsWith("com.liferay.portal") || symbolicName.startsWith("com.liferay.util")
-			|| symbolicName.equals("com.sun.el.javax.el") || symbolicName.startsWith("jboss-classfilewriter")
+			|| symbolicName.equals("jakarta.el-api") || symbolicName.startsWith("jboss-classfilewriter")
 			|| symbolicName.startsWith("jakarta.servlet") || symbolicName.startsWith("jakarta.validation")
 			|| symbolicName.startsWith("org.apache.commons") || symbolicName.startsWith("org.apache.felix")
 			|| symbolicName.startsWith("org.apache.geronimo.specs") || symbolicName.startsWith("org.jboss.logging")
