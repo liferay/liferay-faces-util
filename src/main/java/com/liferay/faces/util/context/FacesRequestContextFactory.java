@@ -15,8 +15,8 @@
  */
 package com.liferay.faces.util.context;
 
-import javax.faces.FacesWrapper;
-import javax.faces.context.ExternalContext;
+import jakarta.faces.FacesWrapper;
+import jakarta.faces.context.ExternalContext;
 
 import org.osgi.annotation.versioning.ProviderType;
 
@@ -33,7 +33,7 @@ public abstract class FacesRequestContextFactory implements FacesWrapper<FacesRe
 	 * used during execution of a request thread, so it is not guaranteed to be {@link java.io.Serializable}.
 	 *
 	 * @deprecated Call
-	 *             {@link FacesContextHelperFactory#getFacesContextHelperInstance(javax.faces.context.ExternalContext)}
+	 *             {@link FacesContextHelperFactory#getFacesContextHelperInstance(jakarta.faces.context.ExternalContext)}
 	 *             instead.
 	 */
 	@Deprecated
@@ -46,7 +46,7 @@ public abstract class FacesRequestContextFactory implements FacesWrapper<FacesRe
 	 * used during execution of a request thread, so it is not guaranteed to be {@link java.io.Serializable}.
 	 *
 	 * @deprecated Call
-	 *             {@link FacesContextHelperFactory#getFacesContextHelperInstance(javax.faces.context.ExternalContext)}
+	 *             {@link FacesContextHelperFactory#getFacesContextHelperInstance(jakarta.faces.context.ExternalContext)}
 	 *             instead.
 	 * @since 3.1
 	 * @since 2.1

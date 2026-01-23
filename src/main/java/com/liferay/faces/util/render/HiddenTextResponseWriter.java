@@ -17,9 +17,9 @@ package com.liferay.faces.util.render;
 
 import java.io.IOException;
 
-import javax.faces.component.html.HtmlInputText;
-import javax.faces.context.ResponseWriter;
-import javax.faces.context.ResponseWriterWrapper;
+import jakarta.faces.component.html.HtmlInputText;
+import jakarta.faces.context.ResponseWriter;
+import jakarta.faces.context.ResponseWriterWrapper;
 
 import org.osgi.annotation.versioning.ProviderType;
 

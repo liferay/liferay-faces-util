@@ -20,7 +20,7 @@ import java.io.InputStream;
 import java.util.Collection;
 import java.util.Map;
 
-import javax.faces.FacesWrapper;
+import jakarta.faces.FacesWrapper;
 
 import org.osgi.annotation.versioning.ConsumerType;
 

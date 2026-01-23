@@ -19,13 +19,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.faces.application.FacesMessage.Severity;
-import javax.faces.component.UIComponent;
-import javax.faces.component.UIForm;
-import javax.faces.component.UIInput;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-import javax.faces.event.PhaseListener;
+import jakarta.faces.application.FacesMessage.Severity;
+import jakarta.faces.component.UIComponent;
+import jakarta.faces.component.UIForm;
+import jakarta.faces.component.UIInput;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.event.PhaseListener;
 
 import org.osgi.annotation.versioning.ProviderType;
 
@@ -39,118 +39,118 @@ public interface FacesContextHelper {
 
 	/**
 	 * Adds the specified key as a message to the FacesContext with severity <code>
-	 * javax.faces.application.FacesMessage.SEVERITY_ERROR</code>. The message will not be global, rather it will be
-	 * associated with the <code>javax.faces.component.UIComponent</code> that is associated with the specified
+	 * jakarta.faces.application.FacesMessage.SEVERITY_ERROR</code>. The message will not be global, rather it will be
+	 * associated with the <code>jakarta.faces.component.UIComponent</code> that is associated with the specified
 	 * clientId.
 	 */
 	public void addComponentErrorMessage(String clientId, String messageId);
 
 	/**
 	 * Adds the specified key as a message to the FacesContext with severity <code>
-	 * javax.faces.application.FacesMessage.SEVERITY_ERROR</code>. The message will not be global, rather it will be
-	 * associated with the <code>javax.faces.component.UIComponent</code> that is associated with the specified
+	 * jakarta.faces.application.FacesMessage.SEVERITY_ERROR</code>. The message will not be global, rather it will be
+	 * associated with the <code>jakarta.faces.component.UIComponent</code> that is associated with the specified
 	 * clientId.
 	 */
 	public void addComponentErrorMessage(FacesContext facesContext, String clientId, String messageId);
 
 	/**
 	 * Adds the specified key as a global message to the FacesContext with severity <code>
-	 * javax.faces.application.FacesMessage.SEVERITY_ERROR</code> and substitutes the specified argument(s) for the
+	 * jakarta.faces.application.FacesMessage.SEVERITY_ERROR</code> and substitutes the specified argument(s) for the
 	 * tokens in the specified key. The message will not be global, rather it will be associated with the <code>
-	 * javax.faces.component.UIComponent</code> that is associated with the specified clientId.
+	 * jakarta.faces.component.UIComponent</code> that is associated with the specified clientId.
 	 */
 	public void addComponentErrorMessage(String clientId, String messageId, Object... arguments);
 
 	/**
 	 * Adds the specified key as a global message to the FacesContext with severity <code>
-	 * javax.faces.application.FacesMessage.SEVERITY_ERROR</code> and substitutes the specified argument(s) for the
+	 * jakarta.faces.application.FacesMessage.SEVERITY_ERROR</code> and substitutes the specified argument(s) for the
 	 * tokens in the specified key. The message will not be global, rather it will be associated with the <code>
-	 * javax.faces.component.UIComponent</code> that is associated with the specified clientId.
+	 * jakarta.faces.component.UIComponent</code> that is associated with the specified clientId.
 	 */
 	public void addComponentErrorMessage(FacesContext facesContext, String clientId, String messageId,
 		Object... arguments);
 
 	/**
 	 * Adds the specified key as a message to the FacesContext with severity <code>
-	 * javax.faces.application.FacesMessage.SEVERITY_INFO</code>. The message will not be global, rather it will be
-	 * associated with the <code>javax.faces.component.UIComponent</code> that is associated with the specified
+	 * jakarta.faces.application.FacesMessage.SEVERITY_INFO</code>. The message will not be global, rather it will be
+	 * associated with the <code>jakarta.faces.component.UIComponent</code> that is associated with the specified
 	 * clientId.
 	 */
 	public void addComponentInfoMessage(String clientId, String messageId);
 
 	/**
 	 * Adds the specified key as a message to the FacesContext with severity <code>
-	 * javax.faces.application.FacesMessage.SEVERITY_INFO</code>. The message will not be global, rather it will be
-	 * associated with the <code>javax.faces.component.UIComponent</code> that is associated with the specified
+	 * jakarta.faces.application.FacesMessage.SEVERITY_INFO</code>. The message will not be global, rather it will be
+	 * associated with the <code>jakarta.faces.component.UIComponent</code> that is associated with the specified
 	 * clientId.
 	 */
 	public void addComponentInfoMessage(FacesContext facesContext, String clientId, String messageId);
 
 	/**
 	 * Adds the specified key as a global message to the FacesContext with severity <code>
-	 * javax.faces.application.FacesMessage.SEVERITY_INFO</code> and substitutes the specified argument(s) for the
+	 * jakarta.faces.application.FacesMessage.SEVERITY_INFO</code> and substitutes the specified argument(s) for the
 	 * tokens in the specified key. The message will not be global, rather it will be associated with the <code>
-	 * javax.faces.component.UIComponent</code> that is associated with the specified clientId.
+	 * jakarta.faces.component.UIComponent</code> that is associated with the specified clientId.
 	 */
 	public void addComponentInfoMessage(String clientId, String messageId, Object... arguments);
 
 	/**
 	 * Adds the specified key as a global message to the FacesContext with severity <code>
-	 * javax.faces.application.FacesMessage.SEVERITY_INFO</code> and substitutes the specified argument(s) for the
+	 * jakarta.faces.application.FacesMessage.SEVERITY_INFO</code> and substitutes the specified argument(s) for the
 	 * tokens in the specified key. The message will not be global, rather it will be associated with the <code>
-	 * javax.faces.component.UIComponent</code> that is associated with the specified clientId.
+	 * jakarta.faces.component.UIComponent</code> that is associated with the specified clientId.
 	 */
 	public void addComponentInfoMessage(FacesContext facesContext, String clientId, String messageId,
 		Object... arguments);
 
 	/**
 	 * Adds the specified key as a global message to the FacesContext with severity <code>
-	 * javax.faces.application.FacesMessage.SEVERITY_ERROR</code>.
+	 * jakarta.faces.application.FacesMessage.SEVERITY_ERROR</code>.
 	 */
 	public void addGlobalErrorMessage(String messageId);
 
 	/**
 	 * Adds the specified key as a global message to the FacesContext with severity <code>
-	 * javax.faces.application.FacesMessage.SEVERITY_ERROR</code>.
+	 * jakarta.faces.application.FacesMessage.SEVERITY_ERROR</code>.
 	 */
 	public void addGlobalErrorMessage(FacesContext facesContext, String messageId);
 
 	/**
 	 * Adds the specified key as a global message to the FacesContext with severity <code>
-	 * javax.faces.application.FacesMessage.SEVERITY_ERROR</code> and substitutes the specified argument(s) for the
+	 * jakarta.faces.application.FacesMessage.SEVERITY_ERROR</code> and substitutes the specified argument(s) for the
 	 * tokens in the specified key.
 	 */
 	public void addGlobalErrorMessage(String messageId, Object... arguments);
 
 	/**
 	 * Adds the specified key as a global message to the FacesContext with severity <code>
-	 * javax.faces.application.FacesMessage.SEVERITY_ERROR</code> and substitutes the specified argument(s) for the
+	 * jakarta.faces.application.FacesMessage.SEVERITY_ERROR</code> and substitutes the specified argument(s) for the
 	 * tokens in the specified key.
 	 */
 	public void addGlobalErrorMessage(FacesContext facesContext, String messageId, Object... arguments);
 
 	/**
 	 * Adds the specified key as a global message to the FacesContext with severity <code>
-	 * javax.faces.application.FacesMessage.SEVERITY_INFO</code>.
+	 * jakarta.faces.application.FacesMessage.SEVERITY_INFO</code>.
 	 */
 	public void addGlobalInfoMessage(String messageId);
 
 	/**
 	 * Adds the specified key as a global message to the FacesContext with severity <code>
-	 * javax.faces.application.FacesMessage.SEVERITY_INFO</code>.
+	 * jakarta.faces.application.FacesMessage.SEVERITY_INFO</code>.
 	 */
 	public void addGlobalInfoMessage(FacesContext facesContext, String messageId);
 
 	/**
 	 * Adds the specified key as a global message to the FacesContext with severity <code>
-	 * javax.faces.application.FacesMessage.SEVERITY_INFO</code> and substitutes the specified argument(s) for the
+	 * jakarta.faces.application.FacesMessage.SEVERITY_INFO</code> and substitutes the specified argument(s) for the
 	 * tokens in the specified key.
 	 */
 	public void addGlobalInfoMessage(String messageId, Object... arguments);
 
 	/**
 	 * Adds the specified key as a global message to the FacesContext with severity <code>
-	 * javax.faces.application.FacesMessage.SEVERITY_INFO</code> and substitutes the specified argument(s) for the
+	 * jakarta.faces.application.FacesMessage.SEVERITY_INFO</code> and substitutes the specified argument(s) for the
 	 * tokens in the specified key.
 	 */
 	public void addGlobalInfoMessage(FacesContext facesContext, String messageId, Object... arguments);
@@ -411,23 +411,23 @@ public interface FacesContextHelper {
 	public Map<String, String> getRequestParameterMap(FacesContext facesContext);
 
 	/**
-	 * Retrieves the value of the original "javax.servlet.forward.query_string" request attribute.
+	 * Retrieves the value of the original "jakarta.servlet.forward.query_string" request attribute.
 	 */
 	public String getRequestQueryString();
 
 	/**
-	 * Retrieves the value of the original "javax.servlet.forward.query_string" request attribute.
+	 * Retrieves the value of the original "jakarta.servlet.forward.query_string" request attribute.
 	 */
 	public String getRequestQueryString(FacesContext facesContext);
 
 	/**
-	 * Retrieves the value of the specified parameter name from the original "javax.servlet.forward.query_string"
+	 * Retrieves the value of the specified parameter name from the original "jakarta.servlet.forward.query_string"
 	 * request attribute.
 	 */
 	public String getRequestQueryStringParameter(String name);
 
 	/**
-	 * Retrieves the value of the specified parameter name from the original "javax.servlet.forward.query_string"
+	 * Retrieves the value of the specified parameter name from the original "jakarta.servlet.forward.query_string"
 	 * request attribute.
 	 */
 	public String getRequestQueryStringParameter(FacesContext facesContext, String name);

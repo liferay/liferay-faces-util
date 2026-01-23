@@ -23,24 +23,24 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.el.ELContext;
-import javax.el.ELResolver;
-import javax.faces.FactoryFinder;
-import javax.faces.application.Application;
-import javax.faces.application.FacesMessage;
-import javax.faces.application.FacesMessage.Severity;
-import javax.faces.application.NavigationHandler;
-import javax.faces.application.ViewHandler;
-import javax.faces.component.ActionSource;
-import javax.faces.component.EditableValueHolder;
-import javax.faces.component.UIComponent;
-import javax.faces.component.UIForm;
-import javax.faces.component.UIViewRoot;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-import javax.faces.event.PhaseListener;
-import javax.faces.lifecycle.LifecycleFactory;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.el.ELContext;
+import jakarta.el.ELResolver;
+import jakarta.faces.FactoryFinder;
+import jakarta.faces.application.Application;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.application.FacesMessage.Severity;
+import jakarta.faces.application.NavigationHandler;
+import jakarta.faces.application.ViewHandler;
+import jakarta.faces.component.ActionSource;
+import jakarta.faces.component.EditableValueHolder;
+import jakarta.faces.component.UIComponent;
+import jakarta.faces.component.UIForm;
+import jakarta.faces.component.UIViewRoot;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.event.PhaseListener;
+import jakarta.faces.lifecycle.LifecycleFactory;
+import jakarta.servlet.http.HttpServletRequest;
 
 import com.liferay.faces.util.client.Script;
 import com.liferay.faces.util.client.ScriptFactory;
@@ -440,7 +440,7 @@ public class FacesContextHelperImpl implements FacesContextHelper, Serializable 
 
 	@Override
 	public String getRequestQueryString(FacesContext facesContext) {
-		return (String) getRequestAttribute(facesContext, "javax.servlet.forward.query_string");
+		return (String) getRequestAttribute(facesContext, "jakarta.servlet.forward.query_string");
 	}
 
 	@Override

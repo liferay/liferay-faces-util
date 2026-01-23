@@ -22,8 +22,8 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
 import javax.xml.parsers.SAXParser;
 
 import com.liferay.faces.util.config.WebConfig;

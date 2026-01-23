@@ -62,7 +62,7 @@ public class WebConfigScannerTest {
 
 		ConfiguredServlet configuredServlet = configuredServlets.get(0);
 		Assert.assertEquals("Faces Servlet", configuredServlet.getServletName());
-		Assert.assertEquals("javax.faces.webapp.FacesServlet", configuredServlet.getServletClass());
+		Assert.assertEquals("jakarta.faces.webapp.FacesServlet", configuredServlet.getServletClass());
 		Assert.assertNull(configuredServlet.getMultiPartConfig());
 
 		List<ConfiguredServletMapping> configuredServletMappings = webConfig.getConfiguredServletMappings();
@@ -83,12 +83,12 @@ public class WebConfigScannerTest {
 		// FACES-3265 WebConfigParserImpl doesn't obtain context params
 		Map<String, String> configuredContextParams = webConfig.getConfiguredContextParams();
 		Assert.assertEquals("com.liferay.faces.alloy.tagdecorator.internal.TagDecoratorAlloyImpl",
-			configuredContextParams.get("javax.faces.FACELETS_DECORATORS"));
+			configuredContextParams.get("jakarta.faces.FACELETS_DECORATORS"));
 		Assert.assertEquals("true",
-			configuredContextParams.get("javax.faces.ALWAYS_PERFORM_VALIDATION_WHEN_REQUIRED_IS_TRUE"));
-		Assert.assertEquals("Production", configuredContextParams.get("javax.faces.PROJECT_STAGE"));
+			configuredContextParams.get("jakarta.faces.ALWAYS_PERFORM_VALIDATION_WHEN_REQUIRED_IS_TRUE"));
+		Assert.assertEquals("Production", configuredContextParams.get("jakarta.faces.PROJECT_STAGE"));
 		Assert.assertEquals("/WEB-INF/resources",
-			configuredContextParams.get("javax.faces.WEBAPP_RESOURCES_DIRECTORY"));
+			configuredContextParams.get("jakarta.faces.WEBAPP_RESOURCES_DIRECTORY"));
 		Assert.assertNull(configuredContextParams.get("asdf"));
 	}
 }

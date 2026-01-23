@@ -15,7 +15,7 @@
  */
 package com.liferay.faces.util.osgi.internal;
 
-import javax.enterprise.context.spi.CreationalContext;
+import jakarta.enterprise.context.spi.CreationalContext;
 
 /**
  * @author Neil Griffin

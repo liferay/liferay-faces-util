@@ -19,7 +19,7 @@ import java.io.File;
 import java.net.URI;
 import java.net.URL;
 
-import javax.portlet.PortletContext;
+import jakarta.portlet.PortletContext;
 
 import org.junit.Assert;
 import org.junit.Test;

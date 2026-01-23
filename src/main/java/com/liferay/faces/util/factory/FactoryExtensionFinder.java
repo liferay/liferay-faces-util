@@ -18,15 +18,15 @@ package com.liferay.faces.util.factory;
 import java.util.Iterator;
 import java.util.ServiceLoader;
 
-import javax.faces.FacesException;
-import javax.faces.context.ExternalContext;
+import jakarta.faces.FacesException;
+import jakarta.faces.context.ExternalContext;
 
 import org.osgi.annotation.versioning.ProviderType;
 
 import com.liferay.faces.util.config.ConfiguredElement;
 
 /**
- * This class provides a factory lookup mechanism similar to the {@link javax.faces.FactoryFinder} in the JSF API.
+ * This class provides a factory lookup mechanism similar to the {@link jakarta.faces.FactoryFinder} in the JSF API.
  * Factory instances are stored as attributes in the {@link ExternalContext#getApplicationMap()}.
  *
  * @author Neil Griffin

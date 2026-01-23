@@ -19,7 +19,7 @@ import org.osgi.annotation.versioning.ProviderType;
 
 /**
  * A Script which can be rendered on the client via
- * {@link com.liferay.faces.util.context.FacesContextHelperUtil#addScript(javax.faces.context.FacesContext, com.liferay.faces.util.client.Script)}.
+ * {@link com.liferay.faces.util.context.FacesContextHelperUtil#addScript(jakarta.faces.context.FacesContext, com.liferay.faces.util.client.Script)}.
  *
  * @author Kyle Stiemann
  */

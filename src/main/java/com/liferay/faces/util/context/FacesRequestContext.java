@@ -17,7 +17,7 @@ package com.liferay.faces.util.context;
 
 import java.util.List;
 
-import javax.faces.context.FacesContext;
+import jakarta.faces.context.FacesContext;
 
 import org.osgi.annotation.versioning.ProviderType;
 
@@ -67,7 +67,7 @@ public abstract class FacesRequestContext {
 	 * Adds the specified {@link Script} to the list of scripts that are to be executed on the client.
 	 *
 	 * @deprecated Call
-	 *             {@link FacesContextHelperUtil#addScript(javax.faces.context.FacesContext, com.liferay.faces.util.client.Script)}
+	 *             {@link FacesContextHelperUtil#addScript(jakarta.faces.context.FacesContext, com.liferay.faces.util.client.Script)}
 	 *             instead.
 	 */
 	@Deprecated
@@ -76,7 +76,7 @@ public abstract class FacesRequestContext {
 	/**
 	 * Adds the specified script to the list of scripts that are to be executed on the client.
 	 *
-	 * @deprecated Call {@link FacesContextHelperUtil#addScript(javax.faces.context.FacesContext, java.lang.String)}
+	 * @deprecated Call {@link FacesContextHelperUtil#addScript(jakarta.faces.context.FacesContext, java.lang.String)}
 	 *             instead.
 	 *
 	 * @param script The script that is to be added.
@@ -87,7 +87,7 @@ public abstract class FacesRequestContext {
 	/**
 	 * Adds the specified script to the list of scripts that are to be executed on the client.
 	 *
-	 * @deprecated Call {@link FacesContextHelperUtil#addScript(javax.faces.context.FacesContext, java.lang.String)}
+	 * @deprecated Call {@link FacesContextHelperUtil#addScript(jakarta.faces.context.FacesContext, java.lang.String)}
 	 *             instead.
 	 *
 	 * @param facesContext The current faces context.
@@ -104,7 +104,7 @@ public abstract class FacesRequestContext {
 	 * Returns an immutable list of scripts that were added via the {@link #addScript(Script)} or
 	 * {@link #addScript(FacesContext,String)} method.
 	 *
-	 * @deprecated Call {@link FacesContextHelperUtil#getScripts(javax.faces.context.FacesContext)} instead.
+	 * @deprecated Call {@link FacesContextHelperUtil#getScripts(jakarta.faces.context.FacesContext)} instead.
 	 */
 	@Deprecated
 	public abstract List<Script> getScripts();

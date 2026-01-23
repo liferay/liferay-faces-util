@@ -17,9 +17,9 @@ package com.liferay.faces.util.i18n;
 
 import java.util.Locale;
 
-import javax.faces.FacesWrapper;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
+import jakarta.faces.FacesWrapper;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 
 import org.osgi.annotation.versioning.ConsumerType;
 

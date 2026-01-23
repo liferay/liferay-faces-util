@@ -19,10 +19,10 @@ import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.faces.component.UIComponent;
-import javax.faces.component.UIViewRoot;
-import javax.faces.component.html.HtmlOutputLabel;
-import javax.faces.context.FacesContext;
+import jakarta.faces.component.UIComponent;
+import jakarta.faces.component.UIViewRoot;
+import jakarta.faces.component.html.HtmlOutputLabel;
+import jakarta.faces.context.FacesContext;
 
 import org.osgi.annotation.versioning.ProviderType;
 

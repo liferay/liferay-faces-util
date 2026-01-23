@@ -17,12 +17,12 @@ package com.liferay.faces.util.render;
 
 import java.io.IOException;
 
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
-import javax.faces.context.ResponseWriter;
-import javax.faces.convert.ConverterException;
-import javax.faces.render.RenderKit;
-import javax.faces.render.Renderer;
+import jakarta.faces.component.UIComponent;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.context.ResponseWriter;
+import jakarta.faces.convert.ConverterException;
+import jakarta.faces.render.RenderKit;
+import jakarta.faces.render.Renderer;
 
 import org.osgi.annotation.versioning.ProviderType;
 
@@ -62,7 +62,7 @@ public abstract class DelegatingClientComponentRendererBase extends ClientCompon
 	}
 
 	/**
-	 * @see DelegatingRenderer#encodeAll(javax.faces.context.FacesContext, javax.faces.component.UIComponent)
+	 * @see DelegatingRenderer#encodeAll(jakarta.faces.context.FacesContext, jakarta.faces.component.UIComponent)
 	 */
 	@Override
 	public void encodeAll(FacesContext facesContext, UIComponent uiComponent) throws IOException {
@@ -74,8 +74,8 @@ public abstract class DelegatingClientComponentRendererBase extends ClientCompon
 	}
 
 	/**
-	 * @see DelegatingRenderer#encodeAll(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
-	 *      javax.faces.context.ResponseWriter)
+	 * @see DelegatingRenderer#encodeAll(jakarta.faces.context.FacesContext, jakarta.faces.component.UIComponent,
+	 *      jakarta.faces.context.ResponseWriter)
 	 */
 	@Override
 	public void encodeAll(FacesContext facesContext, UIComponent uiComponent, ResponseWriter delegationResponseWriter)
@@ -100,8 +100,8 @@ public abstract class DelegatingClientComponentRendererBase extends ClientCompon
 	}
 
 	/**
-	 * @see DelegatingRenderer#encodeBegin(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
-	 *      javax.faces.context.ResponseWriter)
+	 * @see DelegatingRenderer#encodeBegin(jakarta.faces.context.FacesContext, jakarta.faces.component.UIComponent,
+	 *      jakarta.faces.context.ResponseWriter)
 	 */
 	@Override
 	public void encodeBegin(FacesContext facesContext, UIComponent uiComponent, ResponseWriter delegationResponseWriter)
@@ -124,8 +124,8 @@ public abstract class DelegatingClientComponentRendererBase extends ClientCompon
 	}
 
 	/**
-	 * @see DelegatingRenderer#encodeChildren(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
-	 *      javax.faces.context.ResponseWriter)
+	 * @see DelegatingRenderer#encodeChildren(jakarta.faces.context.FacesContext, jakarta.faces.component.UIComponent,
+	 *      jakarta.faces.context.ResponseWriter)
 	 */
 	@Override
 	public void encodeChildren(FacesContext facesContext, UIComponent uiComponent,
@@ -148,8 +148,8 @@ public abstract class DelegatingClientComponentRendererBase extends ClientCompon
 	}
 
 	/**
-	 * @see DelegatingRenderer#encodeEnd(javax.faces.context.FacesContext, javax.faces.component.UIComponent,
-	 *      javax.faces.context.ResponseWriter)
+	 * @see DelegatingRenderer#encodeEnd(jakarta.faces.context.FacesContext, jakarta.faces.component.UIComponent,
+	 *      jakarta.faces.context.ResponseWriter)
 	 */
 	@Override
 	public void encodeEnd(FacesContext facesContext, UIComponent uiComponent, ResponseWriter delegationResponseWriter)
@@ -165,8 +165,8 @@ public abstract class DelegatingClientComponentRendererBase extends ClientCompon
 	}
 
 	/**
-	 * @see ClientComponentRenderer#encodeMarkupBegin(javax.faces.context.FacesContext,
-	 *      javax.faces.component.UIComponent)
+	 * @see ClientComponentRenderer#encodeMarkupBegin(jakarta.faces.context.FacesContext,
+	 *      jakarta.faces.component.UIComponent)
 	 */
 	@Override
 	public void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent) throws IOException {
@@ -175,8 +175,8 @@ public abstract class DelegatingClientComponentRendererBase extends ClientCompon
 	}
 
 	/**
-	 * @see DelegatingClientComponentRenderer#encodeMarkupBegin(javax.faces.context.FacesContext,
-	 *      javax.faces.component.UIComponent, javax.faces.context.ResponseWriter)
+	 * @see DelegatingClientComponentRenderer#encodeMarkupBegin(jakarta.faces.context.FacesContext,
+	 *      jakarta.faces.component.UIComponent, jakarta.faces.context.ResponseWriter)
 	 */
 	@Override
 	public void encodeMarkupBegin(FacesContext facesContext, UIComponent uiComponent,
@@ -191,7 +191,7 @@ public abstract class DelegatingClientComponentRendererBase extends ClientCompon
 	}
 
 	/**
-	 * @see ClientComponentRenderer#encodeMarkupEnd(javax.faces.context.FacesContext, javax.faces.component.UIComponent)
+	 * @see ClientComponentRenderer#encodeMarkupEnd(jakarta.faces.context.FacesContext, jakarta.faces.component.UIComponent)
 	 */
 	@Override
 	public void encodeMarkupEnd(FacesContext facesContext, UIComponent uiComponent) throws IOException {
@@ -200,8 +200,8 @@ public abstract class DelegatingClientComponentRendererBase extends ClientCompon
 	}
 
 	/**
-	 * @see DelegatingClientComponentRenderer#encodeMarkupEnd(javax.faces.context.FacesContext,
-	 *      javax.faces.component.UIComponent, javax.faces.context.ResponseWriter)
+	 * @see DelegatingClientComponentRenderer#encodeMarkupEnd(jakarta.faces.context.FacesContext,
+	 *      jakarta.faces.component.UIComponent, jakarta.faces.context.ResponseWriter)
 	 */
 	@Override
 	public void encodeMarkupEnd(FacesContext facesContext, UIComponent uiComponent,
@@ -226,7 +226,7 @@ public abstract class DelegatingClientComponentRendererBase extends ClientCompon
 	}
 
 	/**
-	 * @see DelegatingRenderer#getDelegateRenderer(javax.faces.context.FacesContext)
+	 * @see DelegatingRenderer#getDelegateRenderer(jakarta.faces.context.FacesContext)
 	 */
 	@Override
 	public Renderer getDelegateRenderer(FacesContext facesContext) {

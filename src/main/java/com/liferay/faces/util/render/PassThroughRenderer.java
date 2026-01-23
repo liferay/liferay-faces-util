@@ -18,9 +18,9 @@ package com.liferay.faces.util.render;
 import java.io.IOException;
 import java.util.Map;
 
-import javax.faces.component.UIComponent;
-import javax.faces.context.ResponseWriter;
-import javax.faces.render.Renderer;
+import jakarta.faces.component.UIComponent;
+import jakarta.faces.context.ResponseWriter;
+import jakarta.faces.render.Renderer;
 
 import org.osgi.annotation.versioning.ProviderType;
 

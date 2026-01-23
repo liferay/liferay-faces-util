@@ -18,7 +18,7 @@ package com.liferay.faces.util.model;
 import java.util.Collection;
 import java.util.List;
 
-import javax.faces.model.DataModel;
+import jakarta.faces.model.DataModel;
 
 import org.osgi.annotation.versioning.ConsumerType;
 
@@ -67,7 +67,7 @@ public abstract class OnDemandDataModel<E> extends DataModel<E> implements Pagin
 	}
 
 	/**
-	 * @see javax.faces.model.DataModel#getRowCount()
+	 * @see jakarta.faces.model.DataModel#getRowCount()
 	 */
 	@Override
 	public int getRowCount() {
@@ -80,7 +80,7 @@ public abstract class OnDemandDataModel<E> extends DataModel<E> implements Pagin
 	}
 
 	/**
-	 * @see javax.faces.model.DataModel#getRowData()
+	 * @see jakarta.faces.model.DataModel#getRowData()
 	 */
 	@Override
 	public E getRowData() {
@@ -105,7 +105,7 @@ public abstract class OnDemandDataModel<E> extends DataModel<E> implements Pagin
 	}
 
 	/**
-	 * @see javax.faces.model.DataModel#getRowIndex()
+	 * @see jakarta.faces.model.DataModel#getRowIndex()
 	 */
 	@Override
 	public int getRowIndex() {
@@ -135,7 +135,7 @@ public abstract class OnDemandDataModel<E> extends DataModel<E> implements Pagin
 	}
 
 	/**
-	 * @see javax.faces.model.DataModel#getWrappedData()
+	 * @see jakarta.faces.model.DataModel#getWrappedData()
 	 */
 	@Override
 	public List<E> getWrappedData() {
@@ -156,7 +156,7 @@ public abstract class OnDemandDataModel<E> extends DataModel<E> implements Pagin
 	}
 
 	/**
-	 * @see javax.faces.model.DataModel#isRowAvailable()
+	 * @see jakarta.faces.model.DataModel#isRowAvailable()
 	 */
 	@Override
 	public boolean isRowAvailable() {
@@ -191,7 +191,7 @@ public abstract class OnDemandDataModel<E> extends DataModel<E> implements Pagin
 	}
 
 	/**
-	 * @see javax.faces.model.DataModel#setRowIndex(int)
+	 * @see jakarta.faces.model.DataModel#setRowIndex(int)
 	 */
 	@Override
 	public void setRowIndex(int rowIndex) {
@@ -247,7 +247,7 @@ public abstract class OnDemandDataModel<E> extends DataModel<E> implements Pagin
 	}
 
 	/**
-	 * @see javax.faces.model.DataModel#setWrappedData(Object)
+	 * @see jakarta.faces.model.DataModel#setWrappedData(Object)
 	 */
 	@Override
 	@SuppressWarnings("unchecked")

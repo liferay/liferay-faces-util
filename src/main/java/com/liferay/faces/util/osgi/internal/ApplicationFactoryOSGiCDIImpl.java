@@ -17,9 +17,9 @@ package com.liferay.faces.util.osgi.internal;
 
 import java.util.Dictionary;
 
-import javax.faces.application.Application;
-import javax.faces.application.ApplicationFactory;
-import javax.faces.context.FacesContext;
+import jakarta.faces.application.Application;
+import jakarta.faces.application.ApplicationFactory;
+import jakarta.faces.context.FacesContext;
 
 import org.osgi.framework.Bundle;
 

@@ -21,13 +21,13 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import javax.faces.application.Application;
-import javax.faces.component.UIComponent;
-import javax.faces.component.behavior.AjaxBehavior;
-import javax.faces.component.behavior.ClientBehavior;
-import javax.faces.component.behavior.ClientBehaviorHolder;
-import javax.faces.context.FacesContext;
-import javax.faces.context.ResponseWriter;
+import jakarta.faces.application.Application;
+import jakarta.faces.component.UIComponent;
+import jakarta.faces.component.behavior.AjaxBehavior;
+import jakarta.faces.component.behavior.ClientBehavior;
+import jakarta.faces.component.behavior.ClientBehaviorHolder;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.context.ResponseWriter;
 
 import org.osgi.annotation.versioning.ProviderType;
 
@@ -95,14 +95,14 @@ public class RendererUtil {
 			Map<String, List<ClientBehavior>> clientBehaviorMap = clientBehaviorHolder.getClientBehaviors();
 
 			Map<String, String> requestParameterMap = facesContext.getExternalContext().getRequestParameterMap();
-			String behaviorEvent = requestParameterMap.get("javax.faces.behavior.event");
+			String behaviorEvent = requestParameterMap.get("jakarta.faces.behavior.event");
 
 			if (behaviorEvent != null) {
 
 				List<ClientBehavior> clientBehaviors = clientBehaviorMap.get(behaviorEvent);
 
 				if (clientBehaviors != null) {
-					String source = requestParameterMap.get("javax.faces.source");
+					String source = requestParameterMap.get("jakarta.faces.source");
 
 					if (source != null) {
 						String clientId = uiComponent.getClientId(facesContext);

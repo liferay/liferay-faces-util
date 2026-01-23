@@ -17,8 +17,8 @@ package com.liferay.faces.util.config.internal;
 
 import java.io.InputStream;
 
-import javax.faces.context.ExternalContext;
-import javax.servlet.ServletContext;
+import jakarta.faces.context.ExternalContext;
+import jakarta.servlet.ServletContext;
 
 /**
  * @author Neil Griffin

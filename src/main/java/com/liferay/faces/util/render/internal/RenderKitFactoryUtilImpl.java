@@ -17,9 +17,9 @@ package com.liferay.faces.util.render.internal;
 
 import java.util.Iterator;
 
-import javax.faces.context.FacesContext;
-import javax.faces.render.RenderKit;
-import javax.faces.render.RenderKitFactory;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.render.RenderKit;
+import jakarta.faces.render.RenderKitFactory;
 
 import com.liferay.faces.util.application.ApplicationUtil;
 
@@ -33,7 +33,7 @@ import com.liferay.faces.util.application.ApplicationUtil;
  *
  * <p>
  * However, in order to ensure that scripts contained in
- * {@link FacesContextHelperUtil#getScripts(javax.faces.context.FacesContext)} are encoded before the closing <code>
+ * {@link FacesContextHelperUtil#getScripts(jakarta.faces.context.FacesContext)} are encoded before the closing <code>
  * &lt;/body&gt;</code> element, {@link BodyRendererUtilImpl} needs to decorate body renderers provided by any of the
  * aforementioned component suites. This could be accomplished in one of two ways:
  *

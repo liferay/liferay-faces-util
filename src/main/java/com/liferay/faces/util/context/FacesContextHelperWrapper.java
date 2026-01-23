@@ -19,12 +19,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.faces.FacesWrapper;
-import javax.faces.application.FacesMessage;
-import javax.faces.component.UIComponent;
-import javax.faces.component.UIForm;
-import javax.faces.context.FacesContext;
-import javax.faces.event.PhaseListener;
+import jakarta.faces.FacesWrapper;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.component.UIComponent;
+import jakarta.faces.component.UIForm;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.event.PhaseListener;
 
 import org.osgi.annotation.versioning.ConsumerType;
 

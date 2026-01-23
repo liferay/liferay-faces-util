@@ -17,7 +17,7 @@ package com.liferay.faces.util.cache;
 
 import java.util.Set;
 
-import javax.faces.FacesWrapper;
+import jakarta.faces.FacesWrapper;
 
 import org.osgi.annotation.versioning.ConsumerType;
 

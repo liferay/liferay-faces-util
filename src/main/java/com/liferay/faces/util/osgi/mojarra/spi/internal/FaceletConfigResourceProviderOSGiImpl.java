@@ -20,7 +20,7 @@ import java.net.URL;
 import java.util.Collection;
 import java.util.List;
 
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 
 import com.liferay.faces.util.osgi.internal.FacesBundlesHandlerBase;
 import com.liferay.faces.util.osgi.internal.FacesBundlesHandlerResourceProviderOSGiImpl;

@@ -15,9 +15,9 @@
  */
 package com.liferay.faces.util.render;
 
-import javax.faces.FacesWrapper;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
+import jakarta.faces.FacesWrapper;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
 
 import org.osgi.annotation.versioning.ProviderType;
 
@@ -36,7 +36,7 @@ public abstract class FacesURLEncoderFactory implements FacesWrapper<FacesURLEnc
 	 *             Returns a stateless, thread-safe singleton instance of {@link FacesURLEncoder} from the
 	 *             {@link FacesURLEncoderFactory} found by the {@link FactoryExtensionFinder}. FacesURLEncoder is a
 	 *             stateless, thread-safe singleton because it is designed to be used by a
-	 *             {@link javax.faces.render.Renderer}, which is a stateless, thread-safe singleton.
+	 *             {@link jakarta.faces.render.Renderer}, which is a stateless, thread-safe singleton.
 	 *             </p>
 	 */
 	@Deprecated
@@ -47,7 +47,7 @@ public abstract class FacesURLEncoderFactory implements FacesWrapper<FacesURLEnc
 	/**
 	 * Returns a stateless, thread-safe singleton instance of {@link FacesURLEncoder} from the
 	 * {@link FacesURLEncoderFactory} found by the {@link FactoryExtensionFinder}. FacesURLEncoder is a stateless,
-	 * thread-safe singleton because it is designed to be used by a {@link javax.faces.render.Renderer}, which is a
+	 * thread-safe singleton because it is designed to be used by a {@link jakarta.faces.render.Renderer}, which is a
 	 * stateless, thread-safe singleton.
 	 *
 	 * @param externalContext The external context associated with the current faces context. It is needed in order for
@@ -67,7 +67,7 @@ public abstract class FacesURLEncoderFactory implements FacesWrapper<FacesURLEnc
 
 	/**
 	 * Returns a stateless, thread-safe singleton instance of {@link FacesURLEncoder}. FacesURLEncoder is a stateless,
-	 * thread-safe singleton because it is designed to be used by a {@link javax.faces.render.Renderer}, which is
+	 * thread-safe singleton because it is designed to be used by a {@link jakarta.faces.render.Renderer}, which is
 	 * stateless and thread-safe singleton.
 	 */
 	public abstract FacesURLEncoder getFacesURLEncoder();

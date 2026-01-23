@@ -22,9 +22,9 @@ import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
 
 import org.osgi.annotation.versioning.ConsumerType;
 
@@ -176,7 +176,7 @@ public abstract class I18nBundleBase extends I18nWrapper implements Serializable
 
 	/**
 	 * Returns a new message cache to be used by {@link I18nBundleBase}. The default implementation returns a Cache
-	 * instance obtained from {@link CacheFactory#getConcurrentCacheInstance(javax.faces.context.ExternalContext, int)}
+	 * instance obtained from {@link CacheFactory#getConcurrentCacheInstance(jakarta.faces.context.ExternalContext, int)}
 	 * (passing 16 as the initial cache capacity). The cache will be stored in the application map. This method is
 	 * called from the constructor of I18nBundleBase, so this method must not cause side effects and should not expect
 	 * I18nBundleBase (or its subclass) to be fully initialized.

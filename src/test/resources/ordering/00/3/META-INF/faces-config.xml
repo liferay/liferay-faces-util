@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<faces-config version="2.3" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd"
+<faces-config version="2.3" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-facesconfig_2_3.xsd"
 	xmlns:util="http://www.liferay.com/xml/ns/liferay-faces-util-extension">
 	<name>LiferayFacesUtil</name>
 	<ordering>
@@ -21,7 +21,7 @@
 		<el-resolver>com.liferay.faces.util.el.internal.UtilELResolver</el-resolver>
 		<system-event-listener>
 			<system-event-listener-class>com.liferay.faces.util.event.internal.ApplicationStartupListener</system-event-listener-class>
-			<system-event-class>javax.faces.event.PostConstructApplicationEvent</system-event-class>
+			<system-event-class>jakarta.faces.event.PostConstructApplicationEvent</system-event-class>
 		</system-event-listener>
 	</application>
 	<factory>

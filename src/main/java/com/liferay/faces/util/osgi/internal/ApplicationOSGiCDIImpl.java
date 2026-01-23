@@ -17,18 +17,18 @@ package com.liferay.faces.util.osgi.internal;
 
 import java.util.Map;
 
-import javax.el.ELContextListener;
-import javax.el.ExpressionFactory;
-import javax.enterprise.inject.spi.BeanManager;
-import javax.enterprise.inject.spi.CDI;
-import javax.faces.annotation.FacesConfig;
-import javax.faces.application.Application;
-import javax.faces.application.ApplicationWrapper;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-import javax.faces.event.PostConstructApplicationEvent;
-import javax.faces.event.PostRestoreStateEvent;
-import javax.faces.event.SystemEvent;
+import jakarta.el.ELContextListener;
+import jakarta.el.ExpressionFactory;
+import jakarta.enterprise.inject.spi.BeanManager;
+import jakarta.enterprise.inject.spi.CDI;
+import jakarta.faces.annotation.FacesConfig;
+import jakarta.faces.application.Application;
+import jakarta.faces.application.ApplicationWrapper;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.event.PostConstructApplicationEvent;
+import jakarta.faces.event.PostRestoreStateEvent;
+import jakarta.faces.event.SystemEvent;
 
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -37,7 +37,7 @@ import com.sun.faces.RIConstants;
 
 /**
  * This class provides the ability for Mojarra to integrate with the OSGi CDI Integration feature of Liferay Portal. It
- * does this by by adding an {@link javax.el.ELResolver} that can resolve CDI beans found in JSP EL Expressions, and
+ * does this by by adding an {@link jakarta.el.ELResolver} that can resolve CDI beans found in JSP EL Expressions, and
  * also enables the Mojarra {@link com.sun.faces.util.getCdiBeanManager(FacesContext)} method to find the current CDI
  * bean manager at startup.
  *

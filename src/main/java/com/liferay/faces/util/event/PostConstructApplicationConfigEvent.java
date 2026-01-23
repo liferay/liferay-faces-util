@@ -15,7 +15,7 @@
  */
 package com.liferay.faces.util.event;
 
-import javax.faces.event.SystemEvent;
+import jakarta.faces.event.SystemEvent;
 
 import org.osgi.annotation.versioning.ProviderType;
 

@@ -25,16 +25,16 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.component.FacesComponent;
-import javax.faces.component.behavior.FacesBehavior;
-import javax.faces.convert.FacesConverter;
-import javax.faces.event.NamedEvent;
-import javax.faces.render.FacesBehaviorRenderer;
-import javax.faces.render.FacesRenderer;
-import javax.faces.validator.FacesValidator;
-import javax.servlet.ServletContext;
-import javax.servlet.annotation.HandlesTypes;
+import jakarta.faces.bean.ManagedBean;
+import jakarta.faces.component.FacesComponent;
+import jakarta.faces.component.behavior.FacesBehavior;
+import jakarta.faces.convert.FacesConverter;
+import jakarta.faces.event.NamedEvent;
+import jakarta.faces.render.FacesBehaviorRenderer;
+import jakarta.faces.render.FacesRenderer;
+import jakarta.faces.validator.FacesValidator;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.annotation.HandlesTypes;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.wiring.BundleWiring;
@@ -132,10 +132,10 @@ public class AnnotationProviderOSGiImpl extends AnnotationProvider {
 
 			if (classFilePath.startsWith("com/liferay/taglib/") || classFilePath.startsWith("com/liferay/util/")
 				|| classFilePath.startsWith("com/sun/el/") || classFilePath.startsWith("com/sun/faces/")
-				|| classFilePath.startsWith("javax/annotation/") || classFilePath.startsWith("javax/el/")
-				|| classFilePath.startsWith("javax/enterprise/") || classFilePath.startsWith("javax/faces/")
-				|| classFilePath.startsWith("javax/inject/") || classFilePath.startsWith("javax/portlet/")
-				|| classFilePath.startsWith("javax/servlet/") || classFilePath.startsWith("javax/validation/")
+				|| classFilePath.startsWith("jakarta/annotation/") || classFilePath.startsWith("jakarta/el/")
+				|| classFilePath.startsWith("jakarta/enterprise/") || classFilePath.startsWith("jakarta/faces/")
+				|| classFilePath.startsWith("jakarta/inject/") || classFilePath.startsWith("jakarta/portlet/")
+				|| classFilePath.startsWith("jakarta/servlet/") || classFilePath.startsWith("jakarta/validation/")
 				|| classFilePath.startsWith("org/apache/") || classFilePath.startsWith("org/jboss/weld/")
 				|| classFilePath.startsWith("org/osgi/") || classFilePath.endsWith("package-info.class")) {
 

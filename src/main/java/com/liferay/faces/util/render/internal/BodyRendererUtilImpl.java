@@ -17,18 +17,18 @@ package com.liferay.faces.util.render.internal;
 
 import java.io.IOException;
 
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
-import javax.faces.context.ResponseWriter;
-import javax.faces.render.Renderer;
-import javax.faces.render.RendererWrapper;
+import jakarta.faces.component.UIComponent;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.context.ResponseWriter;
+import jakarta.faces.render.Renderer;
+import jakarta.faces.render.RendererWrapper;
 
 import com.liferay.faces.util.context.FacesContextHelperUtil;
 
 /**
  * This class extends {@link RendererWrapper} in order to decorate body renderers provided by non-Liferay/3rd-Party
  * component suites like ICEfaces, PrimeFaces, and RichFaces. It ensures that scripts contained in
- * {@link FacesContextHelperUtil#getScripts(javax.faces.context.FacesContext)} are encoded before the closing <code>
+ * {@link FacesContextHelperUtil#getScripts(jakarta.faces.context.FacesContext)} are encoded before the closing <code>
  * &lt;/body&gt;</code> element.
  *
  * @author Kyle Stiemann
