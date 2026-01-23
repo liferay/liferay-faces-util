@@ -94,9 +94,4 @@ public class BeanStartupImpl implements Bean {
 	public boolean isAlternative() {
 		throw new UnsupportedOperationException();
 	}
-
-	@Override
-	public boolean isNullable() {
-		throw new UnsupportedOperationException();
-	}
 }

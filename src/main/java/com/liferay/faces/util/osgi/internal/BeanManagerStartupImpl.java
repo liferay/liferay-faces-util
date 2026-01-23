@@ -121,22 +121,12 @@ public class BeanManagerStartupImpl implements BeanManager {
 	}
 
 	@Override
-	public <T> InjectionTarget<T> createInjectionTarget(AnnotatedType<T> type) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
 	public Instance<Object> createInstance() {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public <T> InterceptionFactory<T> createInterceptionFactory(CreationalContext<T> ctx, Class<T> clazz) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public void fireEvent(Object event, Annotation... qualifiers) {
 		throw new UnsupportedOperationException();
 	}
 

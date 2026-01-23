@@ -36,8 +36,7 @@ public class BeanManagerExpressionFactory extends ExpressionFactory {
 	}
 
 	@Override
-	public Object coerceToType(Object o, Class<?> aClass) {
-
+	public <T> T coerceToType(Object o, Class<T> aClass) {
 		ExpressionFactory expressionFactory = getExpressionFactory();
 
 		return expressionFactory.coerceToType(o, aClass);
