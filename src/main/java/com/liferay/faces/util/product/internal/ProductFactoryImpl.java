@@ -107,9 +107,6 @@ public class ProductFactoryImpl extends ProductFactory {
 		ProductBase websphere = new ProductWebSphereImpl();
 		productMap.put(Product.Name.WEBSPHERE, websphere);
 
-		ProductBase wildfly = new ProductWildFlyImpl();
-		productMap.put(Product.Name.WILDFLY, wildfly);
-
 		if (liferayPortal.isDetected() && (liferayPortal.getMajorVersion() >= 7)) {
 			productMap.put(Product.Name.SERVLET_CONTAINER,
 				new ProductSpecImpl("Servlet",
@@ -119,7 +116,7 @@ public class ProductFactoryImpl extends ProductFactory {
 		}
 		else {
 			productMap.put(Product.Name.SERVLET_CONTAINER,
-				new ProductSpecImpl("Servlet", tomcat, wildfly, resin, glassfish, weblogic, websphere, jetty));
+				new ProductSpecImpl("Servlet", tomcat, resin, glassfish, weblogic, websphere, jetty));
 		}
 
 		this.productMap = Collections.unmodifiableMap(productMap);
