@@ -137,7 +137,8 @@ public class AnnotationProviderOSGiImpl extends AnnotationProvider {
 				|| classFilePath.startsWith("jakarta/inject/") || classFilePath.startsWith("jakarta/portlet/")
 				|| classFilePath.startsWith("jakarta/servlet/") || classFilePath.startsWith("jakarta/validation/")
 				|| classFilePath.startsWith("org/apache/") || classFilePath.startsWith("org/jboss/weld/")
-				|| classFilePath.startsWith("org/osgi/") || classFilePath.endsWith("package-info.class")) {
+				|| classFilePath.startsWith("org/osgi/") || classFilePath.endsWith("package-info.class")
+				|| classFilePath.startsWith("org/eclipse/tags/shaded/org/apache")) {
 
 				return true;
 			}
@@ -155,7 +156,6 @@ public class AnnotationProviderOSGiImpl extends AnnotationProvider {
 			catch (LinkageError e) {
 				// no-op
 			}
-
 			// Catch all exceptions since SPI-Fly may throw unexpected exceptions when attempting to load classes.
 			catch (Exception e) {
 				// no-op
