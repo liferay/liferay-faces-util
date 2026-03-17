@@ -45,12 +45,6 @@ public class ProductPrimeFacesImpl extends ProductBase {
 				PomProperties pomProperties =
 					new PomProperties(constantsClass, "META-INF/maven/org.primefaces/primefaces/pom.properties");
 				version = pomProperties.getVersion();
-
-				if (version == null) {
-					pomProperties =
-							new PomProperties(constantsClass, "META-INF/maven/com.liferay.faces/primefaces/pom.properties");
-					version = pomProperties.getVersion();
-				}
 			}
 		}
 		catch (Exception e) {
