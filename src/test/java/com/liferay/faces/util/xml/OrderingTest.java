@@ -63,7 +63,7 @@ public class OrderingTest {
 			SAXParser saxParser = saxParserFactory.newSAXParser();
 			FacesConfigDescriptorParser facesConfigDescriptorParser = new FacesConfigDescriptorParserImpl(saxParser,
 					false);
-			ClassLoader classLoader = OrderingTest.class.getClassLoader();
+			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 			Enumeration<URL> orderingUrls = classLoader.getResources(testCase);
 
 			if (orderingUrls.hasMoreElements()) {
