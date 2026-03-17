@@ -244,8 +244,7 @@
 								com.liferay.faces.util.osgi.internal,\
 								com.liferay.faces.util.osgi.mojarra.spi.internal,\
 								com.liferay.faces.util.product.internal,\
-								com.liferay.faces.util.render.internal,\
-								com.liferay.faces.util.servlet.internal
+								com.liferay.faces.util.render.internal
 							Import-Package: \
 								!com.liferay.faces.util,\
 								!com.liferay.faces.util.*,\
