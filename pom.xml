@@ -78,6 +78,7 @@
 		<faces.api.version>${faces.spec.version}</faces.api.version>
 		<faces.spec.version>4.0.1</faces.spec.version>
 		<full.version>${project.version} (${timestamp} AD)</full.version>
+		<jdk7.javac.executable>/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/bin/javac</jdk7.javac.executable>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<surefire.version>2.12</surefire.version>
 		<use.jdk7.for.compile>false</use.jdk7.for.compile>
@@ -91,9 +92,13 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.1</version>
 					<configuration>
+						<compilerVersion>1.6</compilerVersion>
 						<encoding>UTF-8</encoding>
-						<source>1.8</source>
-						<target>1.8</target>
+						<executable>${jdk7.javac.executable}</executable>
+						<forceJavacCompilerUse>${use.jdk7.for.compile}</forceJavacCompilerUse>
+						<fork>${use.jdk7.for.compile}</fork>
+						<source>1.6</source>
+						<target>1.6</target>
 						<verbose>true</verbose>
 					</configuration>
 				</plugin>
