@@ -17,9 +17,9 @@ package com.liferay.faces.util.context.internal;
 
 import java.io.Serializable;
 
-import jakarta.faces.context.FacesContext;
-import jakarta.faces.context.PartialViewContext;
-import jakarta.faces.context.PartialViewContextFactory;
+import javax.faces.context.FacesContext;
+import javax.faces.context.PartialViewContext;
+import javax.faces.context.PartialViewContextFactory;
 
 /**
  * @author Neil Griffin

@@ -18,8 +18,8 @@ package com.liferay.faces.util.el.internal;
 import java.beans.FeatureDescriptor;
 import java.util.Iterator;
 
-import jakarta.el.ELContext;
-import jakarta.el.ELResolver;
+import javax.el.ELContext;
+import javax.el.ELResolver;
 
 /**
  * @author Kyle Stiemann

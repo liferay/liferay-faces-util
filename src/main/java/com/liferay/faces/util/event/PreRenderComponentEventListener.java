@@ -15,8 +15,8 @@
  */
 package com.liferay.faces.util.event;
 
-import jakarta.faces.event.AbortProcessingException;
-import jakarta.faces.event.PreRenderComponentEvent;
+import javax.faces.event.AbortProcessingException;
+import javax.faces.event.PreRenderComponentEvent;
 
 import org.osgi.annotation.versioning.ProviderType;
 

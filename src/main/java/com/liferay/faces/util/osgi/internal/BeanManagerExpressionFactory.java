@@ -15,12 +15,12 @@
  */
 package com.liferay.faces.util.osgi.internal;
 
-import jakarta.el.ELContext;
-import jakarta.el.ExpressionFactory;
-import jakarta.el.MethodExpression;
-import jakarta.el.ValueExpression;
-import jakarta.enterprise.inject.spi.BeanManager;
-import jakarta.enterprise.inject.spi.CDI;
+import javax.el.ELContext;
+import javax.el.ExpressionFactory;
+import javax.el.MethodExpression;
+import javax.el.ValueExpression;
+import javax.enterprise.inject.spi.BeanManager;
+import javax.enterprise.inject.spi.CDI;
 
 /**
  * @author Neil Griffin
@@ -36,7 +36,8 @@ public class BeanManagerExpressionFactory extends ExpressionFactory {
 	}
 
 	@Override
-	public <T> T coerceToType(Object o, Class<T> aClass) {
+	public Object coerceToType(Object o, Class<?> aClass) {
+
 		ExpressionFactory expressionFactory = getExpressionFactory();
 
 		return expressionFactory.coerceToType(o, aClass);

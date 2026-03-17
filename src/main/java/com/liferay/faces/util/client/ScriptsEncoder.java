@@ -18,7 +18,7 @@ package com.liferay.faces.util.client;
 import java.io.IOException;
 import java.util.List;
 
-import jakarta.faces.context.FacesContext;
+import javax.faces.context.FacesContext;
 
 import org.osgi.annotation.versioning.ProviderType;
 
