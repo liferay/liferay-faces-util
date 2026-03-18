@@ -520,7 +520,7 @@
     <repository>
       <id>liferay-repo</id>
       <name>Liferay Repository</name>
-      <url>https://repository.liferay.com</url>
+      <url>https://repository.liferay.com/nexus/content/repositories/liferay-public-releases/</url>
     </repository>
   </repositories>
 
