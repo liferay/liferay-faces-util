@@ -523,9 +523,9 @@
       <url>https://repository.liferay.com/nexus/content/repositories/liferay-public-releases/</url>
     </repository>
     <repository>
-      <id>liferay-public-snapshots</id>
-      <name>Liferay Public Snapshots</name>
-      <url>https://repository.liferay.com/nexus/content/repositories/liferay-public-snapshots/</url>
+      <id>liferay-third-party</id>
+      <name>Liferay Third Party</name>
+      <url>https://repository.liferay.com/nexus/content/repositories/third-party/</url>
     </repository>
   </repositories>
 
