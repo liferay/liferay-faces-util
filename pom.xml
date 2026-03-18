@@ -518,9 +518,14 @@
 
    <repositories>
     <repository>
-      <id>liferay-repo</id>
-      <name>Liferay Repository</name>
+      <id>liferay-public-releases</id>
+      <name>Liferay Public Releases</name>
       <url>https://repository.liferay.com/nexus/content/repositories/liferay-public-releases/</url>
+    </repository>
+    <repository>
+      <id>liferay-public-snapshots</id>
+      <name>Liferay Public Snapshots</name>
+      <url>https://repository.liferay.com/nexus/content/repositories/liferay-public-snapshots/</url>
     </repository>
   </repositories>
 
