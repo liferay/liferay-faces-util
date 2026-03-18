@@ -516,4 +516,12 @@
 		</plugins>
 	</reporting>
 
+   <repositories>
+    <repository>
+      <id>liferay-repo</id>
+      <name>Liferay Repository</name>
+      <url>https://repository.liferay.com</url>
+    </repository>
+  </repositories>
+
 </project>
